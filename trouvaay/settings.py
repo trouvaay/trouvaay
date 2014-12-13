@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'members',
     'django_extensions',
     'goods',
+    'images',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -102,3 +103,6 @@ AUTH_USER_MODEL = 'members.AuthUser'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
