@@ -3,17 +3,28 @@ from merchants.models import Retailer, Store, Shipper
 
 
 class ShipperInline(admin.TabularInline):
-    model = Store.shipper.through
-
+    model = Shipper
 
 class StoreAdmin(admin.ModelAdmin):
 	model = Store
 	extra = 1
-	fields = ['retailer','store_num', 'street','street2','city',
-			'state','zipcd','description']
+	list_display = ['street', 'retailer', 'store_num', 'city']
+	
+	fieldsets = (
+		(None, {'fields': ('retailer','store_num')}),
+		('Location', {'fields': ('street', 'street2','city',
+			'state','zipcd')}),
+		(None, {'fields': ('description',)}),
+		(None, {'classes': ('collapse',),
+				'fields': ('shipper',)}
+		)
+	)
 	list_select_related = True
-	inline = [ShipperInline]
-	exclude = ['shipper']
+	
+
 # 	list_select_related = True
 
 admin.site.register(Store, StoreAdmin)
+admin.site.register(Retailer)
+admin.site.register(Shipper)
+

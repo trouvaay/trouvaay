@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from goods.models import Product, Segment, Style, Category, Subcategory, Material
 
+
 # class SegmentInline(admin.TabularInline):
 # 	model = Segment
 

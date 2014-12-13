@@ -3,7 +3,7 @@ from localflavor.us.models import (
 	)
 
 from django.db import models
-from helper import States, GeoCode
+from helper import States, GeoCode, AbstractImageModel
 
 
 class Retailer(models.Model):
@@ -15,6 +15,13 @@ class Retailer(models.Model):
 
 	def __str__(self):
 		return self.short_name
+
+class RetailerImage(AbstractImageModel):
+	retailer = models.ForeignKey('merchants.Retailer')
+	is_logo = models.BooleanField(default=False)
+
+	class Meta:
+		app_label = 'merchants'
 
 class Shipper(models.Model):
 	name = models.CharField(max_length=100, unique=True)

@@ -1,5 +1,16 @@
 #!/usr/bin/python
 import requests
+from django.db import models
+
+class AbstractImageModel(models.Model):
+	name = models.CharField(max_length=50, null=True, blank=True)
+	image = models.ImageField(upload_to='photos/%y/%m/%d/')
+	is_main = models.BooleanField(default=False)
+
+	class Meta:
+		abstract = True
+		app_label = 'goods'
+
 
 def MakeSlug(string,spaceChar='+',Maxlen=None):
             stringlst = string.split(" ")

@@ -1,7 +1,7 @@
 from django.db import models
 from djorm_pgarray.fields import IntegerArrayField
 # Create your models here.
-from helper import Attributes
+from helper import Attributes, AbstractImageModel
 
 
 class Segment(models.Model):
@@ -45,6 +45,12 @@ class Product(models.Model):
 
 	def __str__(self):
 		return self.short_name
+
+class ProductImage(AbstractImageModel):
+	product = models.ForeignKey('goods.Product')
+
+	class Meta:
+		app_label = 'goods'
 
 class ProductActivity(models.Model):
 	product = models.ForeignKey(Product)
