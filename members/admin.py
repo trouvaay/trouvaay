@@ -69,9 +69,9 @@ class AuthUserAdmin(UserAdmin):
 
     #change list
     fieldsets = (
-        (None, {'fields': ('email','password','first_name', 'last_name', 'is_merchant',
-                           'is_active')}),
-        ('Permissions', {'fields': ('is_superuser', 'is_admin')}),
+        (None, {'fields': ('email','password',('first_name', 'last_name'), ('is_merchant',
+                           'is_active'))}),
+        ('Permissions', {'fields': (('is_superuser', 'is_admin'),)}),
     )
 
     #add list

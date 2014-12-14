@@ -2,8 +2,11 @@ from django.contrib import admin
 from merchants.models import Retailer, Store, Shipper
 
 
-class ShipperInline(admin.TabularInline):
-    model = Shipper
+class ShipperAdmin(admin.ModelAdmin):
+    list_display = ['name', 'phone', 'email']
+
+class RetailerAdmin(admin.ModelAdmin):
+    list_display = ['legal_name', 'owner', 'website']
 
 class StoreAdmin(admin.ModelAdmin):
 	model = Store
@@ -12,8 +15,8 @@ class StoreAdmin(admin.ModelAdmin):
 	
 	fieldsets = (
 		(None, {'fields': ('retailer','store_num')}),
-		('Location', {'fields': ('street', 'street2','city',
-			'state','zipcd')}),
+		('Location', {'fields': (('street', 'street2'),('city',
+			'state','zipcd'))}),
 		(None, {'fields': ('description',)}),
 		(None, {'classes': ('collapse',),
 				'fields': ('shipper',)}
@@ -25,6 +28,6 @@ class StoreAdmin(admin.ModelAdmin):
 # 	list_select_related = True
 
 admin.site.register(Store, StoreAdmin)
-admin.site.register(Retailer)
-admin.site.register(Shipper)
+admin.site.register(Retailer, RetailerAdmin)
+admin.site.register(Shipper, ShipperAdmin)
 

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Trendy-ROOM</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" type="image/png" href="content/favicon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/flexslider.css">
+        <link rel="stylesheet" href="css/jquery.selectBoxIt.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-xs-4">
+                    <div class="btn-group language-selector">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <i class="flag en"></i> English <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><i class="flag it"></i> Italian</a></li>
+                            <li><a href="#"><i class="flag de"></i> German</a></li>
+                            <li><a href="#"><i class="flag fr"></i> French</a></li>
+                            <li><a href="#"><i class="flag es"></i> Spanish</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-xs-8">
+                    <div class="right-side">
+                        <div class="cart-info">
+                            <span class="counter">1 item</span>
+                            <span class="separator">/</span>
+                            <span class="value">202,00$</span>
+                        </div>
+                        <a class="btn btn-link" href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header col-sm-3">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                      <span class="inner">
+                          <img src="content/logo.png" alt="Logo"/>
+                      </span>
+                    </a>
+                </div>
+                <div class="col-sm-9 right-side">
+                    <div class="navbar-collapse collapse">
+                        <div class="row secondary-navigation-wrap">
+                            <address>
+                                365 516 6248 <br/>
+                                149 Gough St <br/>
+                                San Francisco, CA 94102 <br/>
+                            </address>
+                            <ul class="nav navbar-nav secondary-navigation">
+                                <li><a href="#">My account</a></li>
+                                <li><a href="#">Wish List (0)</a></li>
+                                <li><a href="#">Order History</a></li>
+                                <li><a href="#">Returns</a></li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 main-navigation">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="/">New Arrivals</a></li>
+                                    <li>
+                                        <a href="#" id="navbarDrop1" class="dropdown-toggle" data-toggle="dropdown">Products</a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDrop1">
+                                            <li><a href="#">Chairs</a></li>
+                                            <li><a href="#">Bedroom Storage</a></li>
+                                            <li><a href="#">Beds</a></li>
+                                            <li>
+                                                <a href="#">Decorations</a>
+                                                <ul>
+                                                    <li><a href="#">Outdoor</a></li>
+                                                    <li>
+                                                        <a href="#">Indoor</a>
+                                                        <ul>
+                                                            <li><a href="#">Bedroom Decorations</a></li>
+                                                            <li><a href="#">Kitchen Decorations</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Outdoor Furniture</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="our-story.html">Our Story</a></li>
+                                    <li><a href="articles.html">Articles</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="checkout-steps-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                    <div class="checkout-steps">
+                        <ul>
+                            <li>
+                                <div class="checkbox-wrap checked">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="checkout-step checked">Shipping Info</div>
+                            </li>
+                            <li>
+                                <div class="checkbox-wrap checked">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="checkout-step">Payment Info</div>
+                            </li>
+                            <li>
+                                <div class="checkbox-wrap"></div>
+                                <div class="checkout-step">Review Order</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                    <div class="payment-form">
+                        <form role="form">
+                            <input type="hidden" name="payment-type" id="payment-type" value="card-payment">
+                            <ul class="nav nav-tabs payment-tabs">
+                                <li class="active">
+                                    <a href="#card" class="radio-button checked" data-value="card-payment" data-toggle="tab">
+                                        <i class="fa fa-circle"></i>
+                                    </a>
+                                    <div class="radio-button-label">
+                                        <ul>
+                                            <li>
+                                                <img src="content/visa-electron.jpg" alt=""/>
+                                            </li>
+                                            <li>
+                                                <img src="content/mastercard.jpg" alt=""/>
+                                            </li>
+                                            <li>
+                                                <img src="content/maestro.jpg" alt=""/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#paypal" class="radio-button" data-value="paypal-payment" data-toggle="tab">
+                                        <i class="fa fa-circle"></i>
+                                    </a>
+                                    <div class="radio-button-label">
+                                        <ul>
+                                            <li>
+                                                <img src="content/paypal.jpg" alt=""/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="card">
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="card-number">Card Number</label>
+                                            <input type="text" class="form-control" id="card-number" name="card-number">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="card-name">Name on Card</label>
+                                            <input type="text" class="form-control" id="card-name" name="card-name">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="card-date">Expiry date(MM/YY)</label>
+                                            <input type="text" class="form-control" id="card-date" name="card-date">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <a href="#" data-toggle="tooltip" title="What is CVV">
+                                                <i class="fa fa-question"></i>
+                                            </a>
+                                            <label for="card-cvv">CVV</label>
+                                            <input type="text" class="form-control" id="card-cvv" name="card-cvv">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="paypal">
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="paypal-user">Paypal Username</label>
+                                            <input type="text" class="form-control" id="paypal-user" name="paypal-user">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="paypal-pass">Paypal Password</label>
+                                            <input type="password" class="form-control" id="paypal-pass" name="paypal-pass">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12">
+                                    <button type="submit" class="btn btn-default">Place your order</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="footer-widget">
+                        <h2>Search</h2>
+                        <div class="footer-search">
+                            <form action="">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="s">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#" class="social-icon twitter"></a></li>
+                            <li><a href="#" class="social-icon instagram"></a></li>
+                            <li><a href="#" class="social-icon facebook"></a></li>
+                            <li><a href="#" class="social-icon flickr"></a></li>
+                            <li><a href="#" class="social-icon dribble"></a></li>
+                            <li><a href="#" class="social-icon picasa"></a></li>
+                            <li><a href="#" class="social-icon googleplus"></a></li>
+                            <li><a href="#" class="social-icon rss"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="footer-widget">
+                        <h2>Products</h2>
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="#">Armchairs & Sofas</a></li>
+                                <li><a href="#">Office chairs</a></li>
+                                <li><a href="#">Beds</a></li>
+                                <li><a href="#">Living room Storage</a></li>
+                                <li><a href="#">TV & media furniture</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="footer-widget">
+                        <h2>Sitemap</h2>
+                        <div class="sitemap">
+                            <ul>
+                                <li><a href="#">New arrivals</a></li>
+                                <li><a href="#">Products</a></li>
+                                <li><a href="#">Our story</a></li>
+                                <li><a href="#">Articles</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Terms of Use</a></li>
+                                <li><a href="#">Affiliates</a></li>
+                                <li><a href="#">Privacy & Security</a></li>
+                                <li><a href="#">Returns</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="footer-widget">
+                        <h2>Payment&Shipping</h2>
+                        <div class="payment-icons">
+                            <ul>
+                                <li class="visa"></li>
+                                <li class="mastercard"></li>
+                                <li class="maestro"></li>
+                                <li class="ebay"></li>
+                                <li class="twoco"></li>
+                                <li class="paypal"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="final-line">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-6">
+                                <p>&copy; 2014 Trendy room. All Rights Reserved.</p>
+                            </div>
+                            <div class="col-sm-6 text-right col-xs-6">
+                                <p>Developed by <a href="http://teothemes.com" title="WordPress Themes">TeoThemes</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/vendor/jquery-1.10.1.min.js"></script>
+    <script src="js/vendor/jquery-ui-1.10.3.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/jquery.isotope.min.js"></script>
+    <script src="js/vendor/jquery.raty.min.js"></script>
+    <script src="js/vendor/jquery.flexslider.js"></script>
+    <script src="js/vendor/jquery.mousewheel.js"></script>
+    <script src="js/vendor/jquery.mCustomScrollbar.js"></script>
+    <script src="js/vendor/jquery.selectBoxIt.min.js"></script>
+    <script src="js/main.js"></script>
+    </body>
+</html>

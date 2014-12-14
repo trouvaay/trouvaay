@@ -11,6 +11,10 @@ class AbstractImageModel(models.Model):
 		abstract = True
 		app_label = 'goods'
 
+	def __str__(self):
+		return self.name
+
+
 
 def MakeSlug(string,spaceChar='+',Maxlen=None):
             stringlst = string.split(" ")

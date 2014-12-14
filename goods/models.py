@@ -6,19 +6,33 @@ from helper import Attributes, AbstractImageModel
 
 class Segment(models.Model):
 	description = models.CharField(max_length=50, choices=Attributes['segment'])
+	
+	def __str__(self):
+		return self.description
 
 class Style(models.Model):
 	description = models.CharField(max_length=50, choices=Attributes['style'])
 
+	def __str__(self):
+		return self.description
+
 class Category(models.Model):
 	description = models.CharField(max_length=50, choices=Attributes['category'])
+
+	def __str__(self):
+		return self.description
 
 class Subcategory(models.Model):
 	description = models.CharField(max_length=50, choices=Attributes['subcategory'])
 
+	def __str__(self):
+		return self.description
+
 class Material(models.Model):
 	description = models.CharField(max_length=50, choices=Attributes['material'])	
 
+	def __str__(self):
+		return self.description
 
 class Product(models.Model):
 	sku = models.CharField(max_length=25, null=True, blank=True)
@@ -34,11 +48,11 @@ class Product(models.Model):
 	weight = models.IntegerField(null=True, blank=True)
 	return_policy = models.TextField(null=True, blank=True)
 	color = models.CharField(max_length=20, null=True, blank=True)
-	segment = models.ManyToManyField(Segment)
-	style = models.ManyToManyField(Style)
-	category = models.ManyToManyField(Category)
-	subcategory = models.ManyToManyField(Subcategory)
-	material = models.ManyToManyField(Material)
+	segment = models.ManyToManyField(Segment, null=True, blank=True)
+	style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
+	category = models.ManyToManyField(Category, null=True, blank=True)
+	subcategory = models.ManyToManyField(Subcategory, null=True, blank=True)
+	material = models.ManyToManyField(Material, null=True, blank=True)
 	added_date = models.DateTimeField(auto_now_add=True)
 	pub_date = models.DateTimeField()
 	is_published = models.BooleanField(default=True)

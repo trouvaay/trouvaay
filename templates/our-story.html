@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Trendy-ROOM</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" type="image/png" href="content/favicon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/flexslider.css">
+        <link rel="stylesheet" href="css/jquery.selectBoxIt.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-xs-4">
+                    <div class="btn-group language-selector">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <i class="flag en"></i> English <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><i class="flag it"></i> Italian</a></li>
+                            <li><a href="#"><i class="flag de"></i> German</a></li>
+                            <li><a href="#"><i class="flag fr"></i> French</a></li>
+                            <li><a href="#"><i class="flag es"></i> Spanish</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-xs-8">
+                    <div class="right-side">
+                        <div class="cart-info">
+                            <span class="counter">1 item</span>
+                            <span class="separator">/</span>
+                            <span class="value">202,00$</span>
+                        </div>
+                        <a class="btn btn-link" href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header col-sm-3">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                      <span class="inner">
+                          <img src="content/logo.png" alt="Logo"/>
+                      </span>
+                    </a>
+                </div>
+                <div class="col-sm-9 right-side">
+                    <div class="navbar-collapse collapse">
+                        <div class="row secondary-navigation-wrap">
+                            <address>
+                                365 516 6248 <br/>
+                                149 Gough St <br/>
+                                San Francisco, CA 94102 <br/>
+                            </address>
+                            <ul class="nav navbar-nav secondary-navigation">
+                                <li><a href="#">My account</a></li>
+                                <li><a href="#">Wish List (0)</a></li>
+                                <li><a href="#">Order History</a></li>
+                                <li><a href="#">Returns</a></li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 main-navigation">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="/">New Arrivals</a></li>
+                                    <li>
+                                        <a href="#" id="navbarDrop1" class="dropdown-toggle" data-toggle="dropdown">Products</a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDrop1">
+                                            <li><a href="#">Chairs</a></li>
+                                            <li><a href="#">Bedroom Storage</a></li>
+                                            <li><a href="#">Beds</a></li>
+                                            <li>
+                                                <a href="#">Decorations</a>
+                                                <ul>
+                                                    <li><a href="#">Outdoor</a></li>
+                                                    <li>
+                                                        <a href="#">Indoor</a>
+                                                        <ul>
+                                                            <li><a href="#">Bedroom Decorations</a></li>
+                                                            <li><a href="#">Kitchen Decorations</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Outdoor Furniture</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="our-story.html">Our Story</a></li>
+                                    <li><a href="articles.html">Articles</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="top-quote" style="background-image: url('content/homepage-slider02.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="top-quote-text">
+                        <strong>We dress up a room</strong> as best we can.
+                        The clients are advised to tidy up, but <strong>we know</strong> what to look out for.
+                        Furniture moved back creates a <strong>feeling of space</strong>, newspapers are removed,
+                        children's toys tidied away and washing up put away.
+                    </div>
+                    <div class="top-quote-author">
+                        - John Williams
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="tab-container">
+        <div class="container">
+            <div class="row text-center">
+                <ul class="nav nav-tabs">
+                    <li><a href="#about" data-toggle="tab">About Trendy Room</a></li>
+                    <li><a href="#careers" data-toggle="tab">Carrers</a></li>
+                    <li><a href="#affiliates" data-toggle="tab">Affiliates</a></li>
+                    <li><a href="#returns" data-toggle="tab">Returns and Exchanges</a></li>
+                    <li><a href="#shipping" data-toggle="tab">Shipping Information</a></li>
+                </ul>
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                    <div class="tab-content">
+                        <div class="tab-pane text-editor active" id="about">
+                            <p>
+                                Vivamus suscipit, quam eu tempor hendrerit, metus nisl porttitor ante, sit amet congue nisl ipsum quis urna. Duis non nisl vitae risus fermentum malesuada. Ut tincidunt sagittis nulla in blandit.
+                            </p> 
+                            <p>
+                                Pellentesque viverra ligula ullamcorper, eleifend massa ultrices, porta lectus. Proin venenatis pellentesque nibh, in dignissim ipsum iaculis et. Aliquam pellentesque nulla elementum adipiscing tempus. Morbi lobortis ligula commodo, blandit sem ultrices, convallis libero. 
+                            </p>
+                            <p>
+                                Nam vitae augue ante. Aenean tellus purus, iaculis sed sapien ut, posuere ornare eros. Vestibulum laoreet arcu turpis, vel condimentum sapien accumsan sed. Donec in enim tempus, suscipit nunc in, pellentesque turpis. Nullam semper tempus odio, vel vehicula nunc. 
+                            </p>
+                            <h2>
+                                Morbi non ipsum arcu.
+                            </h2>
+                            <br />
+                            <p>
+                                 Maecenas vitae arcu nec dui rhoncus varius. Fusce at enim sollicitudin, tincidunt velit ut, blandit nisi. Nunc posuere, dolor ut porttitor imperdiet, nibh velit aliquet erat, a luctus quam ante eget massa. 
+                            </p>
+                            <p>
+                                 Mauris aliquam a ipsum id lacinia. Suspendisse neque ipsum, condimentum id lacinia non, luctus in dui. Praesent eu aliquam massa. Mauris blandit euismod lorem a suscipit. Phasellus a mauris diam. In posuere ipsum at tellus luctus pretium. 
+                            </p>
+                            <p>
+                                 Maecenas et dolor non lorem condimentum rutrum. Sed sodales, sem et ornare sodales, leo urna tincidunt mi, sed tincidunt velit elit eu velit. Maecenas consectetur dolor sed vulputate vulputate.  
+                                Aliquam ut congue leo, at auctor enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse ullamcorper sapien non justo rutrum, eu tempus erat tincidunt. Pellentesque fermentum, turpis ac consequat tempus, neque erat congue purus, et vehicula metus turpis a tellus. Suspendisse sodales, tortor at lobortis eleifend, erat nisi volutpat elit, et feugiat neque sapien at massa. 
+                            </p>
+                            <p>
+                                Nunc a feugiat neque, porta adipiscing urna. Integer ut congue nunc, quis imperdiet risus. Phasellus vestibulum hendrerit lectus nec malesuada. Etiam magna neque, rhoncus ac purus et, fermentum porttitor tortor. 
+                            </p>
+                        </div>
+                        <div class="tab-pane text-editor" id="careers">
+                            <p>
+                                 Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum porta ut ligula at congue. Maecenas venenatis ligula lectus, at viverra diam venenatis nec. Vestibulum luctus, turpis nec lobortis tempor, justo diam accumsan arcu, sed eleifend risus lorem ac felis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+                            </p>
+
+                            <p>
+                                Praesent ultricies vulputate dui. Nulla nibh est, gravida a elit non, bibendum sodales neque. Maecenas eu adipiscing augue. Nullam scelerisque vitae ligula ut porta. Aliquam dignissim felis leo, quis condimentum lorem molestie aliquet. Nulla malesuada cursus turpis scelerisque varius. Aenean pulvinar neque a nisl vestibulum iaculis. Pellentesque nunc nisl, venenatis sit amet augue in, vestibulum hendrerit ante. Sed consequat commodo risus, eget tincidunt est rhoncus id. Pellentesque at turpis ut ipsum rhoncus aliquam non pretium lectus. 
+                            </p>
+                            <h2>
+                                Integer eu gravida.
+                            </h2>
+                            <br />
+                            <p>
+                                 Donec volutpat posuere orci ac tincidunt. Praesent congue fermentum dolor, nec faucibus urna venenatis sed. Nullam ullamcorper, sapien eget mattis tempor, tortor eros blandit lacus, at gravida turpis urna vel arcu. Fusce pretium orci tortor, eget elementum leo mattis et. Aliquam erat volutpat. Suspendisse eleifend sollicitudin ligula, et vehicula diam faucibus ac. Fusce risus enim, convallis vel vulputate adipiscing, vehicula sit amet augue. Duis pretium lacus eu libero pretium pulvinar. 
+                            </p>
+                        </div>
+                        <div class="tab-pane text-editor" id="affiliates">
+                            <p>
+                                 Sed at pulvinar nisi, vel sollicitudin quam. Vestibulum quam nibh, vestibulum ac arcu in, varius pellentesque quam. Cras non euismod urna. Vestibulum vel diam ac justo fermentum placerat. Sed venenatis semper augue et molestie. Proin pretium purus nec eros consectetur tempor. Maecenas congue libero vehicula est iaculis, eget molestie ante bibendum. Cras eu pellentesque purus, at condimentum nisi. 
+                            </p>
+                            <h2>
+                                Vivamus vehicula nisi.
+                            </h2>
+                            <br />
+                            <p>
+                                 Nunc ligula massa, sollicitudin sed sagittis a, viverra eu lectus. Sed in tincidunt metus. Vestibulum sem odio, blandit quis egestas non, porta eget nisl. Proin porta tortor et velit dignissim tempus. Praesent eleifend vitae tellus eleifend aliquet. Duis tempus eros sed quam sodales aliquam. Nulla scelerisque ornare lorem, sit amet tempus nisi mollis sit amet. Morbi auctor erat sed lectus porta aliquam. Sed dignissim nunc ut metus tempus auctor. 
+                            </p>
+                            <p>
+                                 Aliquam iaculis dapibus tellus dignissim congue. Pellentesque et ullamcorper mi, ac commodo magna. Integer ut magna dolor. Aliquam rutrum egestas nisi vitae condimentum. Integer accumsan nisi tincidunt, vehicula diam id, feugiat tellus. Donec sollicitudin euismod mattis. Maecenas pretium non orci placerat pellentesque. Sed congue felis porta consequat auctor. Vivamus porttitor tempor pellentesque. Vivamus eget orci urna. Etiam non arcu a velit dapibus fringilla a consectetur quam. Quisque aliquet nulla eros, sit amet tempus lectus tempus vitae. Cras a tincidunt enim. Integer ultrices justo a tortor pretium, non accumsan nibh ullamcorper. 
+                            </p>
+                        </div>
+                        <div class="tab-pane text-editor" id="returns">
+                            <p>
+                                 In luctus, erat vitae fringilla fermentum, odio massa ullamcorper libero, cursus convallis quam justo vel elit. Morbi faucibus urna ac justo interdum, sit amet dignissim lorem accumsan. Sed et nisi lacus. Nam adipiscing convallis sodales. Vivamus ut velit nisl. Quisque ultrices porta accumsan. Nulla imperdiet elit sit amet leo dapibus, quis pulvinar ipsum varius. 
+                            </p>
+                            <h2>
+                                Aliquam euismod nisl.
+                            </h2>
+                            <br />
+                            <p>
+                                 Nunc nec consectetur massa. Morbi in nulla leo. Proin cursus quam nec rhoncus convallis. Proin blandit dui enim, eu tincidunt lacus mattis vitae. Sed aliquet tristique sagittis. Nunc sit amet tellus eros. Mauris nec erat mollis, dictum dolor vel, molestie risus. Duis vel justo ac justo egestas aliquam vel eu mauris. Vestibulum ultricies mi at tellus cursus gravida. Nulla vitae turpis enim. Phasellus aliquet et eros eu mollis. Vestibulum dictum purus non sodales lobortis. Mauris feugiat dui et molestie scelerisque. Vestibulum dapibus, libero malesuada lobortis tempus, felis erat rutrum enim, in imperdiet neque tortor ac neque. 
+                            </p>
+                            <p>
+                                 Suspendisse euismod tempor blandit. Proin eget placerat sapien. Vestibulum risus est, rhoncus ac placerat sed, pulvinar cursus ligula. Maecenas mollis non dui eget ultricies. Nam accumsan quam at nisl vulputate, laoreet dignissim lacus lacinia. Curabitur consequat ante erat, in mollis nisl pellentesque a. Quisque imperdiet eros et nulla pellentesque, non faucibus leo tincidunt. Suspendisse quis erat sit amet diam condimentum viverra vel eu justo. Duis consequat odio ac arcu dignissim tempus. Aenean a porta enim. 
+                            </p>
+                        </div>
+                        <div class="tab-pane text-editor" id="shipping">
+                            <p>
+                                  Suspendisse vel libero id leo ullamcorper placerat quis vitae est. Morbi sollicitudin nunc ac vulputate bibendum. Aliquam euismod nisl odio, a varius leo interdum malesuada. Aliquam nisi urna, viverra eget commodo sed, sagittis id orci. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas mollis, dui vel lobortis iaculis, lectus est interdum justo, vel tincidunt elit lacus sit amet velit. 
+                            </p>
+
+                            <p>
+                                Aliquam commodo ipsum lobortis nulla accumsan semper. Quisque semper, nisl quis molestie mattis, est magna pulvinar justo, sit amet faucibus mi elit eu diam. Nunc fringilla orci nec nunc tincidunt porttitor. Duis imperdiet odio in nisl mollis, ac fermentum eros vulputate. Vivamus ipsum ipsum, tempus sit amet sollicitudin at, rhoncus ut nulla. Phasellus et orci at quam pulvinar iaculis. Fusce imperdiet malesuada nisi vel luctus. Nam hendrerit sollicitudin purus, a molestie enim ullamcorper rutrum. 
+                            </p>
+                            <h2>
+                                Etiam nec malesuada.
+                            </h2>
+                            <br />
+                            <p>
+                                 Pellentesque adipiscing odio non interdum iaculis. Quisque et aliquet neque, at interdum est. Cras egestas elit eu enim convallis, ut placerat justo sodales. Donec nec hendrerit nisi. Praesent consectetur erat a enim iaculis, at mattis orci ultrices. Vivamus tempus elit sed mi pretium lacinia. Mauris sed odio bibendum, dapibus velit dignissim, dictum dolor. Cras justo mauris, bibendum vitae ante sed, sagittis malesuada orci. Morbi pellentesque sed lorem nec laoreet. Curabitur rutrum sagittis purus, ac tincidunt ligula pretium eget. Aenean faucibus vulputate risus. Vivamus varius sapien id libero sodales, a convallis mi vehicula. Nunc non tincidunt tortor. Maecenas sit amet enim dignissim, suscipit tellus ornare, malesuada mauris. Donec felis tellus, placerat at nibh et, pellentesque dignissim quam. Phasellus et mollis nibh. 
+                            </p>
+                            <p>
+                                 Duis a iaculis est. Nulla facilisi. Pellentesque tincidunt augue ipsum, sit amet dictum eros cursus non. Morbi in sodales mi. Praesent ante mi, fringilla vel condimentum quis, convallis eget metus. Vestibulum sodales quis augue ac tincidunt. Aliquam velit metus, auctor non eleifend sed, accumsan sed odio. Etiam nec malesuada neque. Quisque lobortis ipsum vitae orci mollis posuere. Morbi eleifend hendrerit leo at faucibus. Vivamus vehicula nisi quis magna malesuada, ac rutrum risus posuere. Donec rutrum eu velit id tincidunt. Sed ultricies, dui eget hendrerit imperdiet, lorem enim gravida nibh, id gravida lacus tellus eu nisl. Sed id mauris et nulla commodo lacinia. Praesent ultrices eu sem ut feugiat. 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="footer-widget">
+                        <h2>Search</h2>
+                        <div class="footer-search">
+                            <form action="">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="s">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#" class="social-icon twitter"></a></li>
+                            <li><a href="#" class="social-icon instagram"></a></li>
+                            <li><a href="#" class="social-icon facebook"></a></li>
+                            <li><a href="#" class="social-icon flickr"></a></li>
+                            <li><a href="#" class="social-icon dribble"></a></li>
+                            <li><a href="#" class="social-icon picasa"></a></li>
+                            <li><a href="#" class="social-icon googleplus"></a></li>
+                            <li><a href="#" class="social-icon rss"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="footer-widget">
+                        <h2>Products</h2>
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="#">Armchairs & Sofas</a></li>
+                                <li><a href="#">Office chairs</a></li>
+                                <li><a href="#">Beds</a></li>
+                                <li><a href="#">Living room Storage</a></li>
+                                <li><a href="#">TV & media furniture</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="footer-widget">
+                        <h2>Sitemap</h2>
+                        <div class="sitemap">
+                            <ul>
+                                <li><a href="#">New arrivals</a></li>
+                                <li><a href="#">Products</a></li>
+                                <li><a href="#">Our story</a></li>
+                                <li><a href="#">Articles</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Terms of Use</a></li>
+                                <li><a href="#">Affiliates</a></li>
+                                <li><a href="#">Privacy & Security</a></li>
+                                <li><a href="#">Returns</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="footer-widget">
+                        <h2>Payment&Shipping</h2>
+                        <div class="payment-icons">
+                            <ul>
+                                <li class="visa"></li>
+                                <li class="mastercard"></li>
+                                <li class="maestro"></li>
+                                <li class="ebay"></li>
+                                <li class="twoco"></li>
+                                <li class="paypal"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="final-line">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-6">
+                                <p>&copy; 2014 Trendy room. All Rights Reserved.</p>
+                            </div>
+                            <div class="col-sm-6 text-right col-xs-6">
+                                <p>Developed by <a href="http://teothemes.com" title="WordPress Themes">TeoThemes</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/vendor/jquery-1.10.1.min.js"></script>
+    <script src="js/vendor/jquery-ui-1.10.3.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/jquery.isotope.min.js"></script>
+    <script src="js/vendor/jquery.raty.min.js"></script>
+    <script src="js/vendor/jquery.flexslider.js"></script>
+    <script src="js/vendor/jquery.mousewheel.js"></script>
+    <script src="js/vendor/jquery.mCustomScrollbar.js"></script>
+    <script src="js/vendor/jquery.selectBoxIt.min.js"></script>
+    <script src="js/main.js"></script>
+    </body>
+</html>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from goods.models import Product, Segment, Style, Category, Subcategory, Material
+from goods.models import Product, Segment, Style, Category, Subcategory, Material, ProductImage
 
 
 # class SegmentInline(admin.TabularInline):
@@ -11,10 +11,20 @@ from goods.models import Product, Segment, Style, Category, Subcategory, Materia
 # @admin.register(Segment, Style, Category, Subcategory, Material)
 # class PersonAdmin(admin.ModelAdmin):
 #     pass
+class ProductImageInline(admin.StackedInline):
+	model = ProductImage
+	fields = (('name','image','is_main'),)
+	verbose_name = 'photo'
 
 class ProductAdmin(admin.ModelAdmin):
 	model = Product
-	list_select_related = True
-	filter_horizontal = ['segment', 'style', 'category', 'subcategory', 'material']
+	list_display = ['short_name', 'store', 'current_price', 'original_price']
+	fields = ['short_name', 'store', 'units',('original_price', 'current_price'), 'pub_date']
+	filter_vertical = ('style',)
+	inlines = [ProductImageInline]
+	search_fields = ['short_name', 'long_name','store']
+	list_filter = ['store']
+	
 
 admin.site.register(Product, ProductAdmin)
+
