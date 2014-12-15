@@ -6,6 +6,11 @@ from django.utils import timezone
 from goods.models import Product
 
 class HomeView(generic.ListView):
-	template_name = 'goods/home.html'
+	template_name = 'goods/home/home.html'
 	context_object_name = 'goods'
+	model = Product
+
+class DetailView(generic.DetailView):
+	template_name = 'goods/detail/detail.html'
+	context_object_name = 'product'
 	model = Product

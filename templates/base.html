@@ -21,17 +21,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3 col-xs-4">
-                    <div class="btn-group language-selector">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <i class="flag en"></i> English <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><i class="flag it"></i> Italian</a></li>
-                            <li><a href="#"><i class="flag de"></i> German</a></li>
-                            <li><a href="#"><i class="flag fr"></i> French</a></li>
-                            <li><a href="#"><i class="flag es"></i> Spanish</a></li>
-                        </ul>
-                    </div>
                 </div>
                 <div class="col-sm-9 col-xs-8">
                     <div class="right-side">
@@ -49,40 +38,34 @@
     <div class="navbar navbar-default">
         <div class="container">
             <div class="row">
-                <div class="navbar-header col-sm-3">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                <div class="navbar-header col-xs-3">
+                    
                     <a class="navbar-brand" href="/">
                       <span class="inner">
-                          <img src="content/logo.png" alt="Logo"/>
+                          {{ 'Rare Door' }}
+                          <!--<img src="content/logo.png" alt="Logo"/>-->
                       </span>
                     </a>
                 </div>
-                <div class="col-sm-9 right-side">
+                <div class="navbar-header col-xs-2">
+                    <a class="navbar-brand" href="http://instagram.com/raredoor/" target="_blank">
+                      <img src="{% static 'img/instagram-icon-sm.jpeg' %}"/>
+                    </a>
+                </div>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                </button>
+                <div class="col-sm-7 right-side">
                     <div class="navbar-collapse collapse">
-                        <div class="row secondary-navigation-wrap">
-                            <address>
-                                365 516 6248 <br/>
-                                149 Gough St <br/>
-                                San Francisco, CA 94102 <br/>
-                            </address>
-                            <ul class="nav navbar-nav secondary-navigation">
-                                <li><a href="#">My account</a></li>
-                                <li><a href="#">Wish List (0)</a></li>
-                                <li><a href="#">Order History</a></li>
-                                <li><a href="#">Returns</a></li>
-                            </ul>
-                        </div>
                         <div class="row">
                             <div class="col-sm-12 main-navigation">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="/">New Arrivals</a></li>
+                                    <li><a href="#">Discover</a></li>
                                     <li>
-                                        <a href="#" id="navbarDrop1" class="dropdown-toggle" data-toggle="dropdown">Products</a>
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDrop1">
+                                        <a href="#" id="navbarDrop1" class="dropdown-toggle" data-toggle="dropdown">Nearby</a>
+                                        <!-- orginal dropdown <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDrop1">
                                             <li><a href="#">Chairs</a></li>
                                             <li><a href="#">Bedroom Storage</a></li>
                                             <li><a href="#">Beds</a></li>
@@ -100,11 +83,11 @@
                                                 </ul>
                                             </li>
                                             <li><a href="#">Outdoor Furniture</a></li>
-                                        </ul>
+                                        </ul>-->
                                     </li>
-                                    <li><a href="our-story.html">Our Story</a></li>
-                                    <li><a href="articles.html">Articles</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="#">Loved it</a></li>
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#">Blog</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -119,78 +102,38 @@
     <footer class="main-footer">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="footer-widget">
-                        <h2>Search</h2>
-                        <div class="footer-search">
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="s">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                        <ul class="social-icons">
-                            <li><a href="#" class="social-icon twitter"></a></li>
-                            <li><a href="#" class="social-icon instagram"></a></li>
-                            <li><a href="#" class="social-icon facebook"></a></li>
-                            <li><a href="#" class="social-icon flickr"></a></li>
-                            <li><a href="#" class="social-icon dribble"></a></li>
-                            <li><a href="#" class="social-icon picasa"></a></li>
-                            <li><a href="#" class="social-icon googleplus"></a></li>
-                            <li><a href="#" class="social-icon rss"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="footer-widget">
-                        <h2>Products</h2>
                         <div class="footer-menu">
-                            <ul>
-                                <li><a href="#">Armchairs & Sofas</a></li>
-                                <li><a href="#">Office chairs</a></li>
-                                <li><a href="#">Beds</a></li>
-                                <li><a href="#">Living room Storage</a></li>
-                                <li><a href="#">TV & media furniture</a></li>
-                            </ul>
+                            <a href="#">About Us</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="footer-widget">
-                        <h2>Sitemap</h2>
-                        <div class="sitemap">
-                            <ul>
-                                <li><a href="#">New arrivals</a></li>
-                                <li><a href="#">Products</a></li>
-                                <li><a href="#">Our story</a></li>
-                                <li><a href="#">Articles</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                            <ul>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Terms of Use</a></li>
-                                <li><a href="#">Affiliates</a></li>
-                                <li><a href="#">Privacy & Security</a></li>
-                                <li><a href="#">Returns</a></li>
-                            </ul>
+                        <div class="footer-menu">
+                            <a href="#">FAQs</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="footer-widget">
-                        <h2>Payment&Shipping</h2>
-                        <div class="payment-icons">
-                            <ul>
-                                <li class="visa"></li>
-                                <li class="mastercard"></li>
-                                <li class="maestro"></li>
-                                <li class="ebay"></li>
-                                <li class="twoco"></li>
-                                <li class="paypal"></li>
-                            </ul>
+                        <div class="footer-menu">
+                            <a href="#">Shipping</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="footer-widget">
+                        <div class="footer-menu">
+                            <a href="#">Return Policy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="footer-widget">
+                        <div class="footer-menu">
+                            <a href="#">Terms & Conditions</a>
                         </div>
                     </div>
                 </div>
@@ -200,10 +143,7 @@
                     <div class="final-line">
                         <div class="row">
                             <div class="col-sm-6 col-xs-6">
-                                <p>&copy; 2014 Trendy room. All Rights Reserved.</p>
-                            </div>
-                            <div class="col-sm-6 text-right col-xs-6">
-                                <p>Developed by <a href="http://teothemes.com" title="WordPress Themes">TeoThemes</a></p>
+                                <p>&copy; 2014 Trouvaay, Inc.. All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>

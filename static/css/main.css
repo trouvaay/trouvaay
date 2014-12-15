@@ -27,12 +27,12 @@
 body {
   font-family: Quicksand;
   font-size: 14px;
-  background: #f4f4f4;
+  background: white;
 }
 .navbar-default {
-  background: white;
+  background: #f4f4f4;
   border: none;
-  border-bottom: solid 20px #f4f4f4;
+  border-bottom: solid 5px #f4f4f4;
   width: 100%;
   float: left;
   margin-bottom: 0;
@@ -52,7 +52,7 @@ body {
 .top-bar {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: white;
   padding: 10px 0;
 }
 .top-bar .right-side {
@@ -224,7 +224,7 @@ body {
 .tab-container .nav-tabs a:hover {
   background: transparent;
   color: #333333;
-  border-top: solid 2px #333333;
+  border-bottom: solid 2px #333333;
 }
 .text-editor p {
   width: 100%;
@@ -352,6 +352,7 @@ body {
   float: left;
   background: #f4f4f4;
   padding: 40px 0 40px;
+  border-top: 6px black solid;
 }
 .contact-info {
   width: 100%;
@@ -997,6 +998,11 @@ body {
 .product-presentation-tabs .nav-tabs a:hover {
   background: white;
 }
+.nav.nav-pills.prod-description {
+  width: 80%;
+  margin: 0 auto;
+  padding-left: 15%;
+}
 .feedback {
   width: 100%;
   float: left;
@@ -1265,10 +1271,10 @@ body {
   float: left;
   width: 100%;
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 .grid-product figure {
-  width: 100%;
+  width: 80%;
   float: left;
 }
 .grid-product figure img {
@@ -1277,14 +1283,27 @@ body {
 }
 .grid-product .overlay {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
   -webkit-transition: all .4s ease-in-out;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
 }
-.grid-product .overlay .price {
+.grid-product .overlay.distance {
+  bottom: 10px;
+  left: 10px;
+}
+
+.grid-product .overlay.store {
+  top: 10px;
+  right: 10px;
+}
+
+.grid-product .overlay.left {
+  bottom: 10px;
+  right: 10px;
+}
+
+.grid-product .overlay .item {
   font-family: "Quicksand", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
@@ -2504,10 +2523,10 @@ form .form-checkbox-wrap .checkbox-label {
 .main-footer {
   width: 100%;
   float: left;
-  background: white;
+  background: #f4f4f4;
 }
 .main-footer > .container {
-  border-top: solid 10px #cccccc;
+  border-top: black;
 }
 .footer-widget {
   width: 100%;
@@ -2699,12 +2718,12 @@ footer ul li a:hover {
 .homepage-quote {
   width: 100%;
   float: left;
-  padding: 90px 0;
-  background: white;
+  padding: 2% 0;
+  background: #f4f4f4;
 }
 .homepage-quote .text {
   font-family: Quicksand, Arial, sans-serif;
-  font-size: 36px;
+  font-size: 24px;
   line-height: 50px;
   font-weight: 300;
   color: #333333;
@@ -2715,6 +2734,11 @@ footer ul li a:hover {
   font-weight: bold;
   text-decoration: none;
   color: #333333;
+}
+.homepage-slider-container {
+  margin: 0;
+  width: 100%;
+  padding: 0;
 }
 .homepage-slider-wrap {
   width: 100%;
@@ -2774,7 +2798,7 @@ footer ul li a:hover {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  height: 550px;
+  height: 500px;
   position: relative;
   width: 100%;
   float: left;
@@ -2912,7 +2936,7 @@ footer ul li a:hover {
 }
 @media screen and (min-width: 1199px) {
   .grid-product figure {
-    width: 263px; 
+    width: 90%; 
     height: 265px;
   }
   .grid-product figure img {

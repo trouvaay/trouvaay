@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+<section class="main-container">
+        <div class="container">
+            <div class="row">
+            {% include 'goods/detail/_prod_descrip.html' %}
+            {% include 'goods/detail/_prod_details.html' %}
+            {% include 'goods/detail/_prod_sketch.html' %}
+            {% include 'goods/detail/_prod_comment.html' %}
+            <!--{% include 'goods/detail/_prod_recommended.html' %}-->
+            </div>
+        </div>
+    </section>
+ {% endblock content %}
