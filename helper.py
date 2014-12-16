@@ -128,12 +128,9 @@ Attributes = {
 		('dining', 'dining'),
 		('bedroom', 'bedroom'),
 		('office', 'office'),
-		('bathroom','bathroom'),
-		('outdoor','outdoor'),
-		('baby_children','baby_children'),
 		('lightning','lightning'),
-		('wall_decor','wall_decor'),
-		('general_decor','general_decor')
+		('decor','decor'),
+        ('other', 'other'),
 	],
 	'subcategory': [
 		('bar', 'bar'),

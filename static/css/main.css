@@ -947,6 +947,9 @@ body {
 .product-description .price-wrapper a .on-hover {
   display: none;
 }
+.container.product-detail {
+  background: #f4f4f4;
+}
 .product-presentation-tabs {
   width: 100%;
   float: left;
@@ -1018,10 +1021,10 @@ body {
 }
 .feedback {
   width: 100%;
+  margin-bottom: 2rem;
   float: left;
   background: white;
-  padding: 15px 0 0 40px;
-  margin-top: 40px;
+  padding: 15px;
   -webkit-transition: all .4s ease-in-out;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
@@ -1056,8 +1059,7 @@ body {
 .feedback .comment {
   width: 100%;
   float: left;
-  padding: 40px 100px 0 0;
-  margin-bottom: 40px;
+  padding: 10px 0px 0 0;
   border-top: solid 1px #ebebeb;
   position: relative;
 }
@@ -1076,8 +1078,8 @@ body {
   font-weight: 400;
   color: #bababa;
   margin-bottom: 15px;
-  margin-left: 95px;
   letter-spacing: 1.5px;
+  display:  inline-block;
 }
 .feedback .comment .user a {
   font-family: "Open Sans", Arial, sans-serif;
@@ -1090,7 +1092,7 @@ body {
   text-decoration: none;
 }
 .feedback .comment .content {
-  margin-left: 95px;
+  margin-left: 0px;
   font-family: "Courier New", Arial, sans-serif;
   font-size: 12px;
   line-height: 18px;
@@ -1109,9 +1111,9 @@ body {
   letter-spacing: 1.5px;
 }
 .feedback .comment .likes-wrapper {
-  position: absolute;
+  position: initial;
+  display:  inline-block;
   top: 60px;
-  right: 40px;
   width: 40px;
   height: 40px;
   -webkit-border-radius: 50%;
@@ -1135,7 +1137,6 @@ body {
   background-image: url('../content/dislike.png');
 }
 .widget {
-  margin-top: 40px;
   width: 100%;
   float: left;
 }
@@ -1167,7 +1168,6 @@ body {
 .widget.leave-feedback textarea.form-control {
   width: 100%;
   float: left;
-  height: 200px;
   background: white;
   font-family: "Courier New", Arial, sans-serif;
   font-size: 12px;
@@ -1178,7 +1178,6 @@ body {
   padding: 10px;
   border: solid 1px #e5e5e5;
   resize: none;
-  margin-top: 30px;
 }
 .widget.leave-feedback textarea.form-control:focus {
   -webkit-box-shadow: none;
@@ -3064,7 +3063,7 @@ footer ul li a:hover {
     width: 240px;
   }
   .main-container .product-presentation-tabs .tab-pane {
-    width: 440px;
+    /*width: 100%;*/
   }
   .main-container .product-presentation-tabs .nav-tabs a {
     width: 240px;

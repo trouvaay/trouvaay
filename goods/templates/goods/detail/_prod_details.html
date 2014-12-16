@@ -1,62 +1,59 @@
-<div class="col-sm-9 product-presentation-col">
-    <div class="product-presentation-tabs">
-        <div class="tab-content">
-            <div class="tab-pane active text-editor" id="product-info">
-                <p>
-                    Mauris aliquam a ipsum id lacinia. Suspendisse neque ipsum, condimentum id lacinia non, luctus in dui. Praesent eu aliquam massa. Mauris blandit euismod lorem a suscipit. Phasellus a mauris diam. In posuere ipsum at tellus luctus pretium. 
-                </p>
-                <ul>
-                    <li>Vestibulum ante ipsum primis in faucibus</li>
-                    <li>Nunc a feugiat neque, porta adipiscing urna</li>
-                    <li>Integer ut congue nunc, quis imperdiet risus</li>
-                    <li>Etiam magna neque, rhoncus ac purus et</li>
-                    <li>Cum sociis natoque penatibus et magnis dis</li>
-                    <li>Aliquam dignissim felis leo, quis condimentum</li>
-                </ul>
-            </div>
-            <div class="tab-pane text-editor" id="product-details">
-                <p>
-                    Vivamus suscipit, quam eu tempor hendrerit, metus nisl porttitor ante, sit amet congue nisl ipsum quis urna. Duis non nisl vitae risus fermentum malesuada. Ut tincidunt sagittis nulla in blandit.
-                </p>
-                <ul>
-                    <li>Pellentesque viverra ligula ullamcorper, eleifend</li>
-                    <li>Nam vitae augue ante. Aenean tellus purus</li>
-                    <li>Vestibulum laoreet arcu turpis, vel condimentum sapien</li>
-                    <li>Nullam semper tempus odio, vel vehicula nunc. </li>
-                    <li>Maecenas vitae arcu nec dui rhoncus varius.</li>
-                    <li>Nunc posuere, dolor ut porttitor imperdiet</li>
-                </ul>
-            </div>
-            <div class="tab-pane text-editor" id="delivery">
-                <p>
-                    Suspendisse eleifend sollicitudin ligula, et vehicula diam faucibus ac. Fusce risus enim, convallis vel vulputate adipiscing, vehicula sit amet augue. Duis pretium lacus eu libero pretium pulvinar.
-                </p>
-                <ul>
-                    <li>Suspendisse neque ipsum, condimentum id lacinia non, luctus in dui.</li>
-                    <li>Maecenas et dolor non lorem condimentum rutrum</li>
-                    <li>Cum sociis natoque penatibus et magnis dis parturient montes</li>
-                    <li>Nulla nibh est, gravida a elit non, bibendum sodales neque</li>
-                    <li>Donec volutpat posuere orci ac tincidunt</li>
-                    <li>Sed at pulvinar nisi, vel sollicitudin quam</li>
-                </ul>
-            </div>
-            <div class="tab-pane text-editor" id="rate">
-                <p>
-                    Proin pretium purus nec eros consectetur tempor. Maecenas congue libero vehicula est iaculis, eget molestie ante bibendum. Cras eu pellentesque purus, at condimentum nisi. 
-                </p>
-                <ul>
-                    <li>Vestibulum vel diam ac justo fermentum placerat.</li>
-                    <li>Nunc a feugiat neque, porta adipiscing urna</li>
-                    <li>Etiam magna neque, rhoncus ac purus et</li>
-                    <li>Phasellus vestibulum hendrerit lectus nec malesuada</li>
-                    <li>Cum sociis natoque penatibus et magnis dis parturient</li>
-                    <li>Maecenas vitae arcu nec dui rhoncus varius</li>
-                </ul>
+<section class="main-container">
+    <div class="container product-detail">
+        <div class="col-sm-6 product-presentation-col">
+            <div class="product-presentation-tabs">
+                <h4>A Quaint Chair...</h4>
+                <div class="tab-content">
+                    <div class="tab-pane active text-editor" id="product-info">
+                        <p>
+                            Mauris aliquam a ipsum id lacinia. Suspendisse neque ipsum, condimentum id lacinia non, luctus in dui. Praesent eu aliquam massa. Mauris blandit euismod lorem a suscipit. Phasellus a mauris diam. In posuere ipsum at tellus luctus pretium. 
+                        </p>
+                        <ul>
+                            <li>Vestibulum ante ipsum primis in faucibus</li>
+                            <li>Nunc a feugiat neque, porta adipiscing urna</li>
+                            <li>Integer ut congue nunc, quis imperdiet risus</li>
+                            <li>Etiam magna neque, rhoncus ac purus et</li>
+                            <li>Cum sociis natoque penatibus et magnis dis</li>
+                            <li>Aliquam dignissim felis leo, quis condimentum</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#product-info" data-toggle="tab">A Quaint Chair...</a></li>
-            <li><a href="#delivery" data-toggle="tab">Delivery and returns</a></li>
-        </ul>
+        <div class="col-sm-6 product-presentation-col">
+            <h4>Shoutouts</h4>
+                <div class="feedback">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <ul>
+                                <li class="comment">
+                                    <div class="user">
+                                        <a href="#">Jean Willes</a>
+                                        says 2 days ago:
+                                    </div>
+                                    <div class="content">
+                                        Thats kinda cool - if only they had it in blueeeee...
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>    
+                        <div class="col-sm-2">
+                            <div class="likes-wrapper">
+                                <div class="like">Sh</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>Leave feedback</h4>
+                <div class="widget leave-feedback">
+                    <form role="form">
+                        <textarea name="feedback" class="form-control"></textarea>
+                        <input id="likes" type="hidden" name="likes" />
+                        <a href="#" class="like"></a>
+                        <a href="#" class="dislike"></a>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+        </div>
     </div>
-</div>
+</section>
