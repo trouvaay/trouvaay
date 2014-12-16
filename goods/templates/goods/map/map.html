@@ -1,5 +1,54 @@
 {% extends '_base.html' %}
 
  {% block content %}
-    {% include 'goods/home/_home_slider.html' %}
+    {% include 'goods/map/_map-canvas.html' %}
+    {% include 'goods/map/_other_items.html' %}
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+          '{ Content Here }'
+        </div>
+    </div>
+	</div>
  {% endblock content %}
+ {% block endjs %}
+<script type="text/javascript" 
+	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
+</script>
+<script type="text/javascript">
+	function initialize () {    
+	    var center = new google.maps.LatLng(39.941063, -75.173192);
+	        		
+	    var mapOptions = {
+		    center: center,
+		    zoom: 14
+	    };
+
+	    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);	
+
+	    var homeMarker = new google.maps.Marker({
+			    position: center,
+			    map: map,
+			    title: 'Foodo HQ'
+		    });
+    
+    /*var i = 0;
+    var restLen = rests.length;
+    
+    for (i;i<restLen;i++) {
+	    var locale = new google.maps.LatLng(rests[i]['lat'], rests[i]['lng']);
+     	
+     	var homeMarker2 = new google.maps.Marker({
+        		position: locale,
+        		map: map,
+        		tite: rests[i]['name']
+	    });
+	}//end for*/
+    
+    }
+</script>
+<script type="text/javascript"> 
+	var userLoc = navigator.geolocation.getCurrentPosition(initialize);
+	initialize();
+</script>
+{% endblock %}

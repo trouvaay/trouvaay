@@ -1,20 +1,18 @@
 {% load staticfiles %}
-<div class="homepage-slider-wrap">
-        <div class="container homepage-slider-container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="homepage-slider">
-                        <ul class="slides">
-                            <!-- need to add for loop ie: {% for pic in slider %}{% endfor %} -->
-                            <li style="background-image: url('static/img/picsamps/chairish.jpeg');">
-                                <div class="overlay"></div>
-                            </li>
-                            <li style="background-image: url('img/homepage-slider01.jpg');">
-                                <div class="overlay"></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+<div class="container homepage-slider-container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="homepage-slider">
+                <ul class="slides">
+                    <!-- need to add for loop ie: {% for pic in slider %}{% endfor %} -->
+                    <li style="background-image: url('static/img/picsamps/chairish.jpeg');">
+                        <div class="overlay"></div>
+                    </li>
+                    <li style="background-image: url('img/homepage-slider01.jpg');">
+                        <div class="overlay"></div>
+                    </li>
+                </ul>
             </div>
         </div>
+    </div>
 </div>

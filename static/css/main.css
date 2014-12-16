@@ -53,7 +53,8 @@ body {
   width: 100%;
   float: left;
   background: white;
-  padding: 10px 0;
+  padding: 10px 20px;
+  border-bottom: 2.5px black solid;
 }
 .top-bar .right-side {
   text-align: right;
@@ -362,7 +363,6 @@ body {
   float: left;
   background: white;
   padding: 40px 0 40px;
-  border-top: 2.5px black solid;
 }
 .contact-info {
   width: 100%;
@@ -2835,6 +2835,9 @@ footer ul li a:hover {
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
+}
+#map-canvas {
+  height: 40rem;
 }
 .final-line {
   width: 100%;

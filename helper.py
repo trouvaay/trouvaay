@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import requests
 from django.db import models
+from django.conf import settings
 
 class AbstractImageModel(models.Model):
 	name = models.CharField(max_length=50, null=True, blank=True)
@@ -32,7 +33,7 @@ def GeoCode(street, city, state, zipcd, street2=None):
 		address = (street+city+state+zipcd)
     
 	geo_str = MakeSlug(address)    
-	key = "AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU"
+	key = settings.GOOG_MAP_KEY
 	final_url = base_url+"sensor=false"+"&address="+address+"&key="+key    
 	
 	try:

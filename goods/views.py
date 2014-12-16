@@ -16,7 +16,7 @@ class DetailView(generic.DetailView):
 	context_object_name = 'product'
 	model = Product
 
-class MapView(generic.ListView):
+class MapView(generic.DetailView):
 	template_name = 'goods/map/map.html'
-	context_object_name = 'stores'
+	context_object_name = 'product'
 	model = Store
