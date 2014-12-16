@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
-from members.models import AuthUser
+from members.models import AuthUser, AuthUserActivity
 from django import forms
 
 
@@ -59,6 +59,8 @@ class CustomUserChangeForm(UserChangeForm):
         # field does not have access to the initial value
         return self.initial["password"]
 
+class AuthUserActivityInline(admin.TabularInline):
+    model = AuthUserActivity
 
 class AuthUserAdmin(UserAdmin):
     form = CustomUserChangeForm
@@ -82,6 +84,7 @@ class AuthUserAdmin(UserAdmin):
         ),
     )
 
+    inlines = [AuthUserActivityInline,]
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)
