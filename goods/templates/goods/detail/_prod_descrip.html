@@ -1,41 +1,36 @@
-
 <div class="row">
-<div class="col-sm-12">
-    <div class="product-description">
-       <div class="product-slider">
-            <ul class="slides">
-                <li>
-                    <figure>
-                        <img src="{{ MEDIA_URL }}{{ product.productimage_set.first.image }}" alt=""/>
-                    </figure>
-                </li>
-            </ul>
-        </div>
-       <div class="name">{{ product.short_name }}</div>
-       <div class="description">{{ 'Living Room' }}</div>
-       <div class="info-block">
-           <h4>MADE OF</h4>
-           <div class="info">
-               {{ 'Leather' }}
-           </div>
-       </div>
-       <div class="info-block">
-           <h4>DIMENSIONS</h4>
-           <div class="info">
-               {{ '26.4W X 24.8D X 28H' }}
-           </div>
-       </div>
-       <div class="info-block">
-           <h4>COLOR</h4>
-           <div class="info">
-               {{ product.color }}
-           </div>
-       </div>
-        <div class="price-wrapper">
-            <div class="price">
-                ${{ product.current_price }}
-            </div>
-        </div>                   
+<div class="col-sm-7">
+   <div class="product-slider">
+        <figure style="width: 100%">
+            <img style="width: 100%" src="{{ MEDIA_URL }}{{ product.productimage_set.first.image }}" alt=""/>
+        </figure>
     </div>
+</div>
+<div class="col-sm-5 product-description">
+   <div class="name">{{ product.short_name }}</div>
+   <div class="description">{{ 'Living Room' }}</div>
+   <div class="info-block">
+       <h4>MADE OF</h4>
+       <div class="info">
+           {{ 'Leather' }}
+       </div>
+   </div>
+   <div class="info-block">
+       <h4>DIMENSIONS</h4>
+       <div class="info">
+           {{ '26.4W X 24.8D X 28H' }}
+       </div>
+   </div>
+   <div class="info-block">
+       <h4>COLOR</h4>
+       <div class="info">
+           {{ product.color }}
+       </div>
+   </div>
+    <div class="price-wrapper">
+        <div class="price">
+            ${{ product.current_price }}
+        </div>
+    </div>                   
 </div>
 </div>

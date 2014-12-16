@@ -797,9 +797,9 @@ body {
 }
 .product-description {
   background: white;
-  width: 100%;
   float: left;
   margin-bottom: 40px;
+  padding-top: 3rem;
 }
 .product-description .product-slider {
   position: relative;
@@ -1018,6 +1018,12 @@ body {
 .nav.nav-pills.prod-description {
   margin: 0 auto;
   font-size: 1.75rem
+}
+.heart {
+  color: red;
+}
+.black-link {
+  color: black;
 }
 .feedback {
   width: 100%;

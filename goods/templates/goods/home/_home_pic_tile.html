@@ -26,110 +26,38 @@
                                             <img src="{{ MEDIA_URL }}{{ piece.productimage_set.first.image }}" alt=""/>
                                         </a>
                                     </figure>
-                                    <!--<div class="overlay distance">
-                                        <div class="item">0.3mi</div>
-                                        <div class="background"></div>
-                                    </div>
-
-                                    <div class="overlay store">
-                                        <div class="item">EQT</div>
-                                        <div class="background"></div>
-                                    </div>
-                                    <div class="overlay left">
-                                        <div class="item">0.3mi</div>
-                                        <div class="background"></div>
-                                    </div>-->
                                     <a href="{{ piece.id }}" class="view-product">
                                         <div class="text">View product</div>
                                         <div class="background"></div>
                                     </a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-7">
-                                    <ul class="nav nav-pills prod-description">
-                                      <li role="presentation"><a href="#">${{ piece.current_price }}</a></li>
-                                      <li role="presentation"><a href="#">Pop-in</a></li>
-                                      <li role="presentation">
-                                        <a href="#">
-                                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                        </a>
-                                        </li>
-                                      <li role="presentation">
-                                        <a href="#">
-                                            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                                        </a>
-                                        </li>
-                                    </ul>
+                            <div class="row nav nav-pills prod-description store">
+                                <div class="col-xs-4" role="presentation">
+                                    ${{ piece.current_price }}
                                 </div>
-                                <div class="col-xs-4">
-                                    <ul class="nav nav-pills prod-description store">
-                                        <li role="presentation">
-                                            <a style="color: black" href="#">EQT</a>
-                                        </li>
-                                        <li role="presentation">
-                                            <a style="color: black" href="#">0.3mi</a>
-                                        </li>
-                                    </ul>
+                                <div class="col-xs-3" role="presentation">
+                                    <a href="#" class="heart">
+                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                                    </a>
                                 </div>
-                            </div> 
-                        </div>
-                        <div class="col-sm-6 col-xs-6">
-                            <div class="row">
-                                <div class="grid-product">
-                                    <figure>
-                                        <a href="">
-                                            <!-- Need to filter for main pic -->
-                                            <img src="{{ MEDIA_URL }}{{ piece.productimage_set.first.image }}" alt=""/>
-                                        </a>
-                                    </figure>
-                                    <!--<div class="overlay distance">
-                                        <div class="item">0.3mi</div>
-                                        <div class="background"></div>
-                                    </div>
-
-                                    <div class="overlay store">
-                                        <div class="item">EQT</div>
-                                        <div class="background"></div>
-                                    </div>
-                                    <div class="overlay left">
-                                        <div class="item">0.3mi</div>
-                                        <div class="background"></div>
-                                    </div>-->
-                                    <a href="{{ piece.id }}" class="view-product">
-                                        <div class="text">View product</div>
-                                        <div class="background"></div>
+                                <div class="col-xs-3" role="presentation">
+                                    <a href="#" class="black-link">
+                                        <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
                                     </a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-7">
-                                    <ul class="nav nav-pills prod-description">
-                                      <li role="presentation"><a href="#">${{ piece.current_price }}</a></li>
-                                      <li role="presentation"><a href="#">Pop-in</a></li>
-                                      <li role="presentation">
-                                        <a href="#">
-                                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                        </a>
-                                        </li>
-                                      <li role="presentation">
-                                        <a href="#">
-                                            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                                        </a>
-                                        </li>
-                                    </ul>
+                            <div class="row nav nav-pills prod-description store" style="color:#428bca">
+                                <div class="col-xs-4 text-left" role="presentation">
+                                    Avail. @{{ 'EQT' }}
                                 </div>
-                                <div class="col-xs-4">
-                                    <ul class="nav nav-pills prod-description store">
-                                        <li role="presentation">
-                                            <a style="color: black" href="#">EQT</a>
-                                        </li>
-                                        <li role="presentation">
-                                            <a style="color: black" href="#">0.3mi</a>
-                                        </li>
-                                    </ul>
+                                <div class="col-xs-3" role="presentation">
+                                    {{ '0.3mi' }}
                                 </div>
-                            </div> 
+                                <div class="col-xs-3" role="presentation">
+                                    <a href="#">Pop-in</a>
+                                </div>
+                            </div>   
                         </div>    
                     {% endfor %}
                     </div>
