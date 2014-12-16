@@ -19,4 +19,9 @@ class DetailView(generic.DetailView):
 class MapView(generic.DetailView):
 	template_name = 'goods/map/map.html'
 	context_object_name = 'product'
-	model = Store
+	model = Product
+
+	def get_context_data(self, **kwargs):
+		context = super(MapView, self).get_context_data(**kwargs)
+		context['store'] = self.object.store
+		return context

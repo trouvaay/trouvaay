@@ -1,0 +1,38 @@
+<div class="row">
+<div class="col-sm-7 product-description">
+   <div class="container">
+      <div class="row">
+          <div class="col-sm-12">
+              <div id="map-canvas"> </div>
+          </div>
+      </div>
+</div>
+</div>
+<div class="col-sm-5 product-description">
+   <div class="name map">{{ product.short_name }}</div>
+   <!--<figure style="width: 50%">
+    <img style="width: 100%" src="{{ MEDIA_URL }}{{ product.productimage_set.first.image }}" alt=""/>
+   </figure>-->
+   <div class="info-block">
+       <h4>AVAIALBE @ {{ store.retailer }}</h4>
+       <div class="info">
+           {{ store.street }}
+           {{ store.street2 }}</br>
+           {{ store.city }} {{ store.state }}, {{ store.zipcd }}
+       </div>
+   </div>
+   <div class="info-block">
+       <h4>A short story on Vandy...</h4>
+       <div class="info">
+           {{ store.description }}
+           {{ "Vandy is a great store.  they're balling out over there.  If you like cool shit - they're serving it up" }}
+       </div>
+   </div>
+   <div class="info-block">
+       <h5>No way to pickup?</h5>
+       <div class="info">
+           Purchase now for {{ '$15' }} delivery.
+       </div>
+   </div>         
+</div>
+</div>
