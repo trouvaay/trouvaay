@@ -362,7 +362,7 @@ body {
   float: left;
   background: white;
   padding: 40px 0 40px;
-  border-top: 6px black solid;
+  border-top: 2.5px black solid;
 }
 .contact-info {
   width: 100%;
@@ -2536,6 +2536,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   background: #f4f4f4;
+  border-top: black solid 2.5px;
 }
 .main-footer > .container {
   border-top: black;
@@ -2731,7 +2732,7 @@ footer ul li a:hover {
   width: 100%;
   float: left;
   padding: 2% 0;
-  background: #f4f4f4;
+  border-bottom: solid 2.5px;
 }
 .homepage-quote .text {
   font-family: Quicksand, Arial, sans-serif;
@@ -2751,6 +2752,7 @@ footer ul li a:hover {
   margin: 0;
   width: 100%;
   padding: 0;
+  border-top: 2.5px solid black;
 }
 .homepage-slider-wrap {
   width: 100%;
