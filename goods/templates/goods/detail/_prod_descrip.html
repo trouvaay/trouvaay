@@ -6,55 +6,34 @@
             <ul class="slides">
                 <li>
                     <figure>
-                        <img src="content/single-product01.jpg" />
-                    </figure>
-                </li>
-                <li>
-                    <figure>
-                        <img src="content/single-product02.jpg" />
-                    </figure>
-                </li>
-                <li>
-                    <figure>
-                        <img src="content/single-product03.jpg" />
-                    </figure>
-                </li>
-                <li>
-                    <figure>
-                        <img src="content/single-product04.jpg" />
+                        <img src="{{ MEDIA_URL }}{{ product.productimage_set.first.image }}" alt=""/>
                     </figure>
                 </li>
             </ul>
         </div>
-       <div class="name">Svelik</div>
-       <div class="description">Queen and King beds</div>
+       <div class="name">{{ product.short_name }}</div>
+       <div class="description">{{ 'Living Room' }}</div>
        <div class="info-block">
-           <h4>Combination</h4>
+           <h4>MADE OF</h4>
            <div class="info">
-               Frame: 11-454<br/>
-               Seat: 16-280<br/>
-               Bed dimensions: 200x190<br/>
+               {{ 'Leather' }}
            </div>
        </div>
-        <div class="info-block">
-            <h4>Colors</h4>
-            <div class="info">
-                <ul>
-                    <li>
-                        <span class="inner" style="background: #9b8d7c"/>
-                    </li>
-                    <li>
-                        <span class="inner" style="background: #993333"/>
-                    </li>
-                    <li>
-                        <span class="inner" style="background: #336666"/>
-                    </li>
-                </ul>
-            </div>
-        </div>
+       <div class="info-block">
+           <h4>DIMENSIONS</h4>
+           <div class="info">
+               {{ '26.4W X 24.8D X 28H' }}
+           </div>
+       </div>
+       <div class="info-block">
+           <h4>COLOR</h4>
+           <div class="info">
+               {{ product.color }}
+           </div>
+       </div>
         <div class="price-wrapper">
             <div class="price">
-                2500,00$
+                ${{ product.current_price }}
             </div>
         </div>                   
     </div>

@@ -58,6 +58,16 @@ body {
 .top-bar .right-side {
   text-align: right;
 }
+.logo {
+  margin-top: 17px;
+  font-size: 25px;
+}
+.insta-icon {
+  margin-right: 15rem;
+}
+.cart-info {
+  display: inline-block;
+}
 .top-bar .right-side .btn-link {
   padding: 2px 0;
   display: inline-block;
@@ -350,7 +360,7 @@ body {
 .main-container {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: white;
   padding: 40px 0 40px;
   border-top: 6px black solid;
 }
@@ -797,11 +807,10 @@ body {
   float: left;
 }
 .product-description .product-slider figure {
-  width: 845px;
+  /*width: 845px;*/
 }
 .product-description .product-slider figure img {
-  width: 100%;
-  height: auto;
+  height: 500px;
 }
 .product-description .product-slider .flex-control-paging {
   position: absolute;
@@ -837,11 +846,12 @@ body {
   float: left;
   width: 295px;
   font-family: "Quicksand", Arial, sans-serif;
-  font-size: 30px;
-  line-height: 60px;
+  font-size: 20px;
+  line-height: 30px;
   font-weight: 300;
   color: white;
   background: #333;
+  padding: 20px 0;
   padding-left: 35px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -941,6 +951,10 @@ body {
   width: 100%;
   float: left;
 }
+.product-presentation-col {
+  padding: 15px;
+  background: #f4f4f4;
+}
 .product-presentation-tabs .tab-pane {
   background: white;
   padding: 40px;
@@ -999,9 +1013,8 @@ body {
   background: white;
 }
 .nav.nav-pills.prod-description {
-  width: 80%;
   margin: 0 auto;
-  padding-left: 15%;
+  font-size: 1.75rem
 }
 .feedback {
   width: 100%;
