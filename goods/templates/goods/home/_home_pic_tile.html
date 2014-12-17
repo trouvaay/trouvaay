@@ -1,8 +1,13 @@
 {% load staticfiles %}
 <section class="hp-tabs">
-<div class="container">
+<div class="container-fluid tab-icons">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-2 col-sm-offset-1">
+            <div class="text">
+                What are you looking for? <br/>
+            </div>
+        </div>
+        <div class="col-sm-6">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/bed.png' %}" alt=""/></span></a></li>
                 <li><a href="#tab2" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/couch.png' %}" alt=""/></span></a></li>
@@ -11,13 +16,19 @@
                 <li><a href="#tab5" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/other.svg' %}" alt=""/></span></a></li>
                 <li><a href="#tab6" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/tab-img06.png' %}" alt=""/></span></a></li>
             </ul>
+        </div>
+    </div>
+</div>
+<div class="container">        
+    <div class="row">
+        <div class="col-sm-12">
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="tab1">
                 <!--OG temp had 6 tabs for each type of furniture -->
                     <div class="grid-products-wrapper">
                     <div class="row">
                     {% for piece in goods %}
-                        <div class="col-sm-6 col-xs-6">
+                        <div class="col-sm-4 col-xs-6">
                             <div class="row">
                                 <div class="grid-product">
                                     <figure>
@@ -32,76 +43,36 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="row nav nav-pills prod-description store">
-                                <div class="col-xs-4" role="presentation">
-                                    ${{ piece.current_price }}
+                            <div class="row nav nav-pills prod-description price">
+                                <div class="col-xs-4 text-left col-sm-offset-1" role="presentation">
+                                    <h4>${{ piece.current_price }}</h4>
                                 </div>
-                                <div class="col-xs-3" role="presentation">
+                            </div>
+                            <div class="row nav nav-pills prod-description">
+                                <div class="col-xs-6 text-left col-sm-offset-1" role="presentation">
+                                    {{ piece.store.retailer.short_name }}
+                                </div>
+                                <div class="col-xs-5" role="presentation">
+                                        {{ '0.3mi' }}
+                                </div>
+                            </div>
+                            <div class="row nav nav-pills prod-description">
+                                <div class="col-xs-6 text-left col-sm-offset-1" role="presentation">
+                                    <a href="#">
+                                        <span class="label label-default pop-in">{{ 'Pop-in' }}</span>
+                                    </a>
+                                </div>
+                                <div class="col-xs-2 heart text-right" role="presentation">
                                     <a href="#" class="heart">
                                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                                     </a>
                                 </div>
-                                <div class="col-xs-3" role="presentation">
-                                    <a href="#" class="black-link">
+                                <div class="col-xs-2 text-left" role="presentation">
+                                    <a href="#">
                                         <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
                                     </a>
                                 </div>
-                            </div>
-                            <div class="row nav nav-pills prod-description store" style="color:#428bca">
-                                <div class="col-xs-4 text-left" role="presentation">
-                                    Avail. @{{ 'EQT' }}
-                                </div>
-                                <div class="col-xs-3" role="presentation">
-                                    {{ '0.3mi' }}
-                                </div>
-                                <div class="col-xs-3" role="presentation">
-                                    <a href="#">Pop-in</a>
-                                </div>
-                            </div>   
-                        </div>    
-                    {% endfor %}
-                    {% for piece in goods %}
-                        <div class="col-sm-6 col-xs-6">
-                            <div class="row">
-                                <div class="grid-product">
-                                    <figure>
-                                        <a href="">
-                                            <!-- Need to filter for main pic -->
-                                            <img src="{{ MEDIA_URL }}{{ piece.productimage_set.first.image }}" alt=""/>
-                                        </a>
-                                    </figure>
-                                    <a href="{{ piece.id }}" class="view-product">
-                                        <div class="text">View product</div>
-                                        <div class="background"></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="row nav nav-pills prod-description store">
-                                <div class="col-xs-4" role="presentation">
-                                    ${{ piece.current_price }}
-                                </div>
-                                <div class="col-xs-3" role="presentation">
-                                    <a href="#" class="heart">
-                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                    </a>
-                                </div>
-                                <div class="col-xs-3" role="presentation">
-                                    <a href="#" class="black-link">
-                                        <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="row nav nav-pills prod-description store" style="color:#428bca">
-                                <div class="col-xs-4 text-left" role="presentation">
-                                    Avail. @{{ 'EQT' }}
-                                </div>
-                                <div class="col-xs-3" role="presentation">
-                                    {{ '0.3mi' }}
-                                </div>
-                                <div class="col-xs-3" role="presentation">
-                                    <a href="#">Pop-in</a>
-                                </div>
-                            </div>   
+                            </div></br>
                         </div>    
                     {% endfor %}
                     </div>
