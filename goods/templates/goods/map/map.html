@@ -9,39 +9,69 @@
 	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
 </script>
 <script type="text/javascript">
-	function initialize () {    
-	    var center = new google.maps.LatLng(39.941063, -75.173192);
-	        		
+	
+	var directionsDisplay;
+	var directionsService = new google.maps.DirectionsService();
+	var map
+
+	function initialize (storeloc, userloc) {    
+	    directionsDisplay = new google.maps.DirectionsRenderer();
+	    
+	    var storepos = new google.maps.LatLng(storeloc.lat, storeloc.lng);
+	    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+	    
 	    var mapOptions = {
-		    center: center,
-		    zoom: 14
+		    center: storepos,
+		    zoom: 12
 	    };
 
-	    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);	
+	    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	    directionsDisplay.setMap(map);
+	    
+		var request = {
+		    origin: userpos,
+		    destination: storepos,
+		    travelMode: google.maps.TravelMode.DRIVING
+		};
 
-	    var homeMarker = new google.maps.Marker({
-			    position: center,
-			    map: map,
-			    title: 'Foodo HQ'
-		    });
-    
-    /*var i = 0;
-    var restLen = rests.length;
-    
-    for (i;i<restLen;i++) {
-	    var locale = new google.maps.LatLng(rests[i]['lat'], rests[i]['lng']);
-     	
-     	var homeMarker2 = new google.maps.Marker({
-        		position: locale,
-        		map: map,
-        		tite: rests[i]['name']
-	    });
-	}//end for*/
-    
-    }
+		directionsService.route(request, function(result, status) {
+		    if (status == google.maps.DirectionsStatus.OK) {
+		      directionsDisplay.setDirections(result);
+		    }
+		  });
+		}
+
+	//     var StoreMarker = new google.maps.Marker({
+	// 		    position: storepos,
+	// 		    map: map,
+	// 		    title: store.name
+	// 	    });
+   
+ //     	var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+ //     	var UserMarker = new google.maps.Marker({
+ //        		position: userpos,
+ //        		map: map,
+ //       			title: 'You'
+	//     });
+	// }//end for
 </script>
 <script type="text/javascript"> 
-	var userLoc = navigator.geolocation.getCurrentPosition(initialize);
-	initialize();
+	// var outty = navigator.geolocation.getCurrentPosition(initialize);
+	var store = {
+		'lat': {{ store.lat }},
+		'lng': {{ store.lng }},
+	}
+	
+	function  getpoints (userloc) {
+		var userloc = {
+			'lat': userloc.coords.latitude,
+			'lng': userloc.coords.longitude,
+		}
+		initialize(store, userloc);
+		
+	}
+	
+	navigator.geolocation.getCurrentPosition(getpoints);
+	
 </script>
 {% endblock %}

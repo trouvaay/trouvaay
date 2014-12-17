@@ -5,6 +5,7 @@ from django.views import generic
 from django.utils import timezone
 from goods.models import Product
 from merchants.models import Store
+from django.core.serializers import serialize
 
 class HomeView(generic.ListView):
 	template_name = 'goods/home/home.html'
@@ -24,4 +25,6 @@ class MapView(generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(MapView, self).get_context_data(**kwargs)
 		context['store'] = self.object.store
+		context['store_json'] = serialize('json', [self.object.store])
+		print (context['store_json'])
 		return context

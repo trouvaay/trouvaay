@@ -52,6 +52,6 @@ class Store(models.Model):
 						self.state, self.zipcd,self.street2)
 
 	def save(self, *args, **kwargs):
-		if not (self.lat and self.lng):
-			self.lat, self.lng = self.geo_code()
+		### right now geocode is updated everytime model is save.  Needs to be updated###
+		self.lat, self.lng = self.geo_code()
 		super(Store, self).save(*args, **kwargs)	
