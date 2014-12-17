@@ -16,6 +16,7 @@
 
 	function initialize (storeloc, userloc) {    
 	    directionsDisplay = new google.maps.DirectionsRenderer();
+	    stepDisplay = new google.maps.InfoWindow();
 	    
 	    var storepos = new google.maps.LatLng(storeloc.lat, storeloc.lng);
 	    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
@@ -37,9 +38,21 @@
 		directionsService.route(request, function(result, status) {
 		    if (status == google.maps.DirectionsStatus.OK) {
 		      directionsDisplay.setDirections(result);
+		      showSteps(result);
 		    }
 		  });
 		}
+		function showSteps(directionResult) {
+  			var myDuration = directionResult.routes[0].legs[0].duration.text;
+  			var myDistance = directionResult.routes[0].legs[0].distance.text;
+  			var myinstructions = [ ]
+  			for ( i in directionResult.routes[0].legs[0].steps) {
+  				myinstructions[i] = directionResult.routes[0].legs[0].steps[i].instructions;	
+  			}
+  			var directionsPanel = document.getElementById("directions");
+  			directionsPanel.innerHTML = "<h5>" + myDuration + " - " + myDistance + "</h5></br>" + myinstructions; 
+  		}
+
 
 	//     var StoreMarker = new google.maps.Marker({
 	// 		    position: storepos,
@@ -61,7 +74,6 @@
 		'lat': {{ store.lat }},
 		'lng': {{ store.lng }},
 	}
-	
 	function  getpoints (userloc) {
 		var userloc = {
 			'lat': userloc.coords.latitude,
@@ -70,7 +82,6 @@
 		initialize(store, userloc);
 		
 	}
-	
 	navigator.geolocation.getCurrentPosition(getpoints);
 	
 </script>
