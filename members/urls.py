@@ -3,5 +3,5 @@ from members import views
 
 
 urlpatterns = patterns('',
-    url(r'^account/(?P<pk>\d+)$', views.ClosetView.as_view(), name='home'),
+    url(r'^account/(?P<pk>\d+)$', views.ClosetView.as_view(), name='closet'),
 )
