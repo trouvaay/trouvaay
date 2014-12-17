@@ -1,0 +1,43 @@
+{% extends 'goods/map/_map_main.html' %}
+{% load staticfiles %}
+{% block mainphoto %}
+      <div class="row">
+          <div class="col-sm-12">
+              <figure>
+                <img style="width: 100%" src="{% static 'img/GregoryMichaels.jpeg' %}" alt=""/>
+              </figure>
+          </div>
+      </div>
+{% endblock %}
+
+{% block mainphotodescrip %}
+       <div class="name map"><a href="/{{ product.id }}">{{ store.retailer }}</a></div>
+       <div class="info-block store-profile">
+           <div class="info">
+               {{ store.street }}
+               {{ store.street2 }}</br>
+               {{ store.city }} {{ store.state }}, {{ store.zipcd }}
+           </div>
+       </div>
+       <div class="info-block store-profile">
+          <div class="info">
+               {{ store.description }}
+          </div>
+       </div>    
+{% endblock %}
+{% block itemfeed %}
+<div class="row">
+  <div class="col-sm-12 product-description">
+   <div class="container-fluid" style="max-width: 100%">
+    <figure>
+      {% for piece in products %}
+        <a href="">
+            <!-- Need to filter for main pic -->
+            <img style="max-height: 200px; max-width: 200px" src="{{ MEDIA_URL }}{{ piece.productimage_set.first.image }}" alt=""/>
+        </a>
+      {% endfor %}
+    </figure>
+   </div>
+  </div>
+</div>
+{% endblock %}

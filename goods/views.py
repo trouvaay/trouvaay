@@ -26,5 +26,15 @@ class MapView(generic.DetailView):
 		context = super(MapView, self).get_context_data(**kwargs)
 		context['store'] = self.object.store
 		context['store_json'] = serialize('json', [self.object.store])
-		print (context['store_json'])
+		return context
+
+class StoreView(generic.DetailView):
+	template_name = 'goods/merchants/storeprofile.html'
+	context_object_name = 'store'
+	model = Store
+
+	def get_context_data(self, **kwargs):
+		context = super(StoreView, self).get_context_data(**kwargs)
+		context['products'] = self.object.product_set.all()
+		print (context['products'])
 		return context

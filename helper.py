@@ -146,6 +146,7 @@ Attributes = {
 		('dining_table','dining_table'),
 		('floor_lamp','floor_lamp'),
 		('kitchen_serving','kitchen_serving'),
+		('loveseat','loveseat'),
 		('media','media'),
 		('mirror','mirror'),
 		('nightstand','nightstand'),

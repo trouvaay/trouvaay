@@ -6,34 +6,46 @@
         </figure>
     </div>
 </div>
+
 <div class="col-sm-5 product-description">
-   <div class="name">{{ product.short_name }}</div>
-   <div class="description">{{ 'Living Room' }}</div>
-   <div class="info-block">
-       <h4>MADE OF</h4>
-       <div class="info">
-           {{ 'Leather' }}
+   <div class="row">
+    <div class="col-sm-12">
+       <div class="name">{{ product.short_name }}</div></br>
+       <div class="info-block">
+           <h4>{{ 'LoveSeat' }}/{{ 'New' }}</h4>
+       </div>  
+        <div class="info-block">
+           <h4>AVAIlABLE @ <a href="#">{{ product.store.retailer }}</a></h4>
+           <h5 class="get-in-store"> <a href="map">Get In-Store</a></h5>
+       </div>  
+       <div class="info-block">
+           <h4>MADE OF</h4>
+           <div class="info">
+               {{ 'Leather' }}
+           </div>
        </div>
-   </div>
-   <div class="info-block">
-       <h4>DIMENSIONS</h4>
-       <div class="info">
-           {{ '26.4W X 24.8D X 28H' }}
+       <div class="info-block">
+           <h4>DIMENSIONS</h4>
+           <div class="info">
+               {{ '26.4W X 24.8D X 28H' }}
+           </div>
        </div>
-   </div>
-   <div class="info-block">
-       <h4>COLOR</h4>
-       <div class="info">
-           {{ product.color }}
+       <div class="info-block">
+           <h4>COLOR</h4>
+           <div class="info">
+               {{ product.color }}
+           </div>
        </div>
-   </div>
-    <div class="price-wrapper">
+    </div>
+  </div><!--end row -->
+  <div class="row">
+    <div class="col-sm-12 price-wrapper">
         <div class="price">
             ${{ product.current_price }}
         </div>
     </div>
-    <div class="info-block">
-       <h4>AVAIlABLE @ <a href="map">{{ product.store.retailer }}</a></h4>
-   </div>                   
+  </div>
+</div>
+                    
 </div>
 </div>

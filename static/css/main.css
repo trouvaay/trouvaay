@@ -844,18 +844,21 @@ body {
 }
 .product-description .name {
   float: left;
-  width: 295px;
+  width: 90%;
   font-family: "Quicksand", Arial, sans-serif;
   font-size: 20px;
   line-height: 30px;
   font-weight: 300;
   color: white;
   background: #333;
-  padding: 20px 0;
-  padding-left: 35px;
+  margin-left: 2rem;
+  padding: 20px 10%;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+.get-in-store {
+    margin: 0px;
+  }
 .product-description .name.map {
   display: inline-block;
   padding-top: 5px;
@@ -879,6 +882,9 @@ body {
   padding-left: 35px;
   padding-bottom: 20px;
   letter-spacing: 1.5px;
+}
+.product-description .info-block.store-profile{
+  width: 90%;
 }
 .product-description .info-block h4 {
   font-family: "Quicksand", Arial, sans-serif;
@@ -915,14 +921,15 @@ body {
 .product-description .price-wrapper {
   float: left;
   width: 295px;
-  padding-left: 35px;
+  padding-left: 40px;
+  margin-top: 1rem;
 }
 .product-description .price-wrapper .price {
   float: left;
   letter-spacing: 1.5px;
   border: solid 2px #333;
   font-family: "Quicksand", Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 25px;
   font-weight: 700;
   padding: 0 10px;
@@ -3037,11 +3044,12 @@ footer ul li a:hover {
     width: 680px;
   }
   .main-container .product-description .name {
-    font-size: 25px;
-    line-height: 50px;
+    font-size: 20px;
+    line-height: 30px;
     padding-left: 25px;
-    width: 260px;
+    width: 80%;
   }
+
   .main-container .product-description .description {
     padding-left: 25px;
     line-height: 35px;
@@ -3050,7 +3058,7 @@ footer ul li a:hover {
   .main-container .product-description .info-block {
     padding-left: 25px;
     width: 260px;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
   }
   .main-container .product-description .price {
     padding-left: 25px;
