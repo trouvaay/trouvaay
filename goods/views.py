@@ -17,6 +17,10 @@ class DetailView(generic.DetailView):
 	context_object_name = 'product'
 	model = Product
 
+	def get_context_data(self, **kwargs):
+		context = super(DetailView, self).get_context_data(**kwargs)
+		context['comments'] = self.object.comment_set.all()
+		return context
 
 class NearbyView(generic.ListView):
 	template_name = 'goods/map/nearby.html'
@@ -42,5 +46,4 @@ class StoreView(generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(StoreView, self).get_context_data(**kwargs)
 		context['products'] = self.object.product_set.all()
-		print (context['products'])
 		return context

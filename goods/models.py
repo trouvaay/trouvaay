@@ -84,11 +84,10 @@ class VintageProductActivity(ProductActivity):
 class Comment(models.Model):
 	product = models.ForeignKey(Product)
 	authuser = models.ForeignKey('members.AuthUser')
-	Message = models.CharField(max_length=255)
+	message = models.CharField(max_length=255)
 	added_date = models.DateTimeField(auto_now_add=True)
-	last_comm_date = models.DateTimeField(auto_now=True)
 	is_published = models.BooleanField(default=True)
-	pub_date = models.DateTimeField()
+	pub_date = models.DateTimeField(null=True, blank=True)
 
 
 

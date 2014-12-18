@@ -27,13 +27,15 @@
                         <div class="col-sm-12">
                             <ul>
                                 <li class="comment">
+                                    {% for comment in comments %}
                                     <div class="user">
-                                        <a href="#">Jean Willes</a>
+                                        <a href="#"> {{ comment.authuser }}</a>
                                         says 2 days ago:
                                     </div>
                                     <div class="content">
-                                        Thats kinda cool - if only they had it in blueeeee...
+                                        {{ comment.message }}
                                     </div>
+                                    {% endfor %}
                                 </li>
                             </ul>
                         </div>    
@@ -43,8 +45,6 @@
                     <form role="form">
                         <textarea name="feedback" class="form-control"></textarea>
                         <input id="likes" type="hidden" name="likes" />
-                        <a href="#" class="like"></a>
-                        <a href="#" class="dislike"></a>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                 </div>
