@@ -17,6 +17,12 @@ class DetailView(generic.DetailView):
 	context_object_name = 'product'
 	model = Product
 
+
+class NearbyView(generic.ListView):
+	template_name = 'goods/map/nearby.html'
+	context_object_name = 'stores'
+	model = Store
+
 class MapView(generic.DetailView):
 	template_name = 'goods/map/map.html'
 	context_object_name = 'product'
