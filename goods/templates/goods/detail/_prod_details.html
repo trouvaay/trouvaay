@@ -1,53 +1,34 @@
-<section class="main-container">
-    <div class="container product-detail">
-        <div class="col-sm-6 product-presentation-col">
-            <div class="product-presentation-tabs">
-                <h4>A Quaint Chair...</h4>
-                <div class="tab-content">
-                    <div class="tab-pane active text-editor" id="product-info">
-                        <p>
-                            Mauris aliquam a ipsum id lacinia. Suspendisse neque ipsum, condimentum id lacinia non, luctus in dui. Praesent eu aliquam massa. Mauris blandit euismod lorem a suscipit. Phasellus a mauris diam. In posuere ipsum at tellus luctus pretium. 
-                        </p>
+<section class="main-container comment-block blueback">
+        <div class="col-sm-7 product-presentation-col">
+           <h4>Shoutouts</h4>
+            <div class="feedback">
+                <div class="row">
+                    <div class="col-sm-12">
                         <ul>
-                            <li>Vestibulum ante ipsum primis in faucibus</li>
-                            <li>Nunc a feugiat neque, porta adipiscing urna</li>
-                            <li>Integer ut congue nunc, quis imperdiet risus</li>
-                            <li>Etiam magna neque, rhoncus ac purus et</li>
-                            <li>Cum sociis natoque penatibus et magnis dis</li>
-                            <li>Aliquam dignissim felis leo, quis condimentum</li>
+                            <li class="comment">
+                                {% for comment in comments %}
+                                <div class="user">
+                                    <a href="#"> {{ comment.authuser }}</a>
+                                    says 2 days ago:
+                                </div>
+                                <div class="content">
+                                    {{ comment.message }}
+                                </div>
+                                {% endfor %}
+                            </li>
                         </ul>
-                    </div>
+                    </div>    
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 product-presentation-col">
-            <h4>Shoutouts</h4>
-                <div class="feedback">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <ul>
-                                <li class="comment">
-                                    {% for comment in comments %}
-                                    <div class="user">
-                                        <a href="#"> {{ comment.authuser }}</a>
-                                        says 2 days ago:
-                                    </div>
-                                    <div class="content">
-                                        {{ comment.message }}
-                                    </div>
-                                    {% endfor %}
-                                </li>
-                            </ul>
-                        </div>    
-                    </div>
-                </div>
-                <div class="widget leave-feedback">
-                    <form role="form">
-                        <textarea name="feedback" class="form-control"></textarea>
-                        <input id="likes" type="hidden" name="likes" />
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                </div>
+        <div class="col-sm-4 product-presentation-col">
+            <h4>What do you think?</h4>
+            <div class="widget leave-feedback">
+                <form action="{% url 'goods:detail' product.id %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
         </div>
-    </div>
 </section>

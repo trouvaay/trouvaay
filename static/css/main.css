@@ -377,6 +377,9 @@ a#logo:hover {
   background: white;
   padding: 40px 0 40px;
 }
+.main-container.comment-block {
+  padding-top: 20px 0 40px;
+}
 .contact-info {
   width: 100%;
   float: left;
@@ -910,6 +913,12 @@ a#logo:hover {
   padding-bottom: 20px;
   letter-spacing: 1.5px;
 }
+.product-description .info-block.story {
+  margin-top: 2rem;
+  width: 100%;
+  padding-right: 35px;
+}
+
 .product-description .info-block.store-profile{
   width: 90%;
 }
@@ -995,8 +1004,7 @@ a#logo:hover {
   float: left;
 }
 .product-presentation-col {
-  padding: 15px;
-  background: #f4f4f4;
+  padding: 2rem;
 }
 .product-presentation-tabs .tab-pane {
   background: white;
@@ -3017,6 +3025,9 @@ footer ul li a:hover {
 }
 .slides li {
   display: none;
+}
+.blueback {
+  background: #3094B2;
 }
 @media screen and (min-width: 1199px) {
   .grid-product figure {
