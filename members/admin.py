@@ -47,10 +47,14 @@ class CustomUserChangeForm(UserChangeForm):
     def __init__(self, *args, **kargs):
         super(CustomUserChangeForm, self).__init__(*args, **kargs)
         del self.fields['username']
-    
+        self.email_field = UserModel._meta.get_field(UserModel.USERNAME_FIELD)
+        if self.fields['email'].label is None:
+            self.fields['email'].label = capfirst(self.username_field.verbose_name)
+
+
     class Meta(UserChangeForm.Meta):
         model = AuthUser
-        fields = ('email', 'is_merchant') #May want to reduce fields
+        fields = ('email',) #May want to reduce fields
 
 
     def clean_password(self):

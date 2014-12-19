@@ -6,11 +6,18 @@ from django.utils import timezone
 from goods.models import Product
 from merchants.models import Store
 from django.core.serializers import serialize
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 class HomeView(generic.ListView):
 	template_name = 'goods/home/home.html'
 	context_object_name = 'goods'
 	model = Product
+
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super(HomeView, self).dispatch(*args, **kwargs)
 
 class DetailView(generic.DetailView):
 	template_name = 'goods/detail/detail.html'
