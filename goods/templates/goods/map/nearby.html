@@ -42,7 +42,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-          <div class="col-sm-12">
+          <div class="col-sm-12 product-description">
               <div id="map-canvas"> </div>
           </div>
       </div>
@@ -70,7 +70,7 @@
     		<td>Store</td>
     		<td>Distance</td>
     	</tr>
-    	{% for store in stores %}
+    	{% for product in products %}
 		<tr class="container"> 
 			<td>{{ store.retailer }}</td>
 			<td>{{ store.street }}</td>

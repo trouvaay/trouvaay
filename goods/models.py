@@ -2,6 +2,7 @@ from django.db import models
 from djorm_pgarray.fields import IntegerArrayField
 # Create your models here.
 from helper import Attributes, AbstractImageModel
+from math import ceil, acos, cos, radians, sin
 
 
 class Segment(models.Model):
@@ -51,9 +52,23 @@ class Product(models.Model):
 	added_date = models.DateTimeField(auto_now_add=True)
 	pub_date = models.DateTimeField()
 	is_published = models.BooleanField(default=True)
+	lat = models.FloatField(null=True, blank=True)
+	lng = models.FloatField(null=True, blank=True)
 
 	def __str__(self):
 		return self.short_name
+
+	def save(self, *args, **kwargs):
+		self.lat = self.store.lat
+		self.lng = self.store.lng
+		super(Product, self).save(*args, **kwargs)
+
+	def getdist(self, UserLat=39.94106319,UserLng=-75.173192):
+		dist = 3959 * acos(cos(radians(UserLat)) * cos(radians(self.lat)) \
+		* cos(radians(self.lng) - radians(UserLng)) + sin(radians(UserLat))*\
+		sin(radians(self.lat)))      
+    	
+		return round(dist,2)
 
 class ProductImage(AbstractImageModel):
 	product = models.ForeignKey('goods.Product')

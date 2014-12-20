@@ -17,10 +17,12 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/home/home.html'
 	context_object_name = 'goods'
 	model = Product
+	# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)
 
-	# @method_decorator(login_required)
-	# def dispatch(self, *args, **kwargs):
-	# 	return super(HomeView, self).dispatch(*args, **kwargs)
+	def get_context_data(self, **kwargs):
+		context = super(HomeView, self).get_context_data(**kwargs)
+		print (context['goods'])
+		return context
 
 class DetailView(LoginRequiredMixin, generic.DetailView):
 	template_name = 'goods/detail/detail.html'
@@ -69,8 +71,11 @@ class DetailRouteView(LoginRequiredMixin, generic.View):
 
 class NearbyView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/map/nearby.html'
-	context_object_name = 'stores'
-	model = Store
+	context_object_name = 'products'
+	model = Product
+
+	# def get_queryset(self):
+
 
 class MapView(LoginRequiredMixin, generic.DetailView):
 	template_name = 'goods/map/map.html'

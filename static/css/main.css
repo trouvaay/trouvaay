@@ -815,7 +815,7 @@ a#logo:hover {
   background: white;
   float: left;
   margin-bottom: 40px;
-  padding-top: 3rem;
+  /*padding-top: 3rem;*/
 }
 .product-description .product-slider {
   position: relative;
@@ -906,23 +906,23 @@ a#logo:hover {
   border: black solid 1px;
 }
 
-.product-description .info-block {
+.info-block {
   float: left;
   width: 295px;
   padding-left: 35px;
   padding-bottom: 20px;
   letter-spacing: 1.5px;
 }
-.product-description .info-block.story {
+.info-block.story {
   margin-top: 2rem;
   width: 100%;
   padding-right: 35px;
 }
 
-.product-description .info-block.store-profile{
+.info-block.store-profile{
   width: 90%;
 }
-.product-description .info-block h4 {
+.info-block h4 {
   font-family: "Quicksand", Arial, sans-serif;
   font-size: 14px;
   line-height: 50px;
@@ -939,28 +939,28 @@ a#logo:hover {
   font-weight: 400;
   color: #7a7a7a;
 }
-.product-description .info-block .info ul {
+.info-block .info ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.product-description .info-block .info li {
+.info-block .info li {
   float: left;
   margin-right: 10px;
 }
-.product-description .info-block .info .inner {
+.info-block .info .inner {
   float: left;
   width: 35px;
   height: 50px;
   border: dotted 2px white;
 }
-.product-description .price-wrapper {
+.price-wrapper {
   float: left;
   width: 295px;
   padding-left: 40px;
   margin-top: 1rem;
 }
-.product-description .price-wrapper .price {
+.price-wrapper .price {
   float: left;
   letter-spacing: 1.5px;
   border: solid 2px #333;
@@ -971,7 +971,7 @@ a#logo:hover {
   padding: 0 10px;
   color: #333;
 }
-.product-description .price-wrapper a {
+.price-wrapper a {
   float: left;
   letter-spacing: 1.5px;
   border: solid 2px #333;
@@ -984,16 +984,16 @@ a#logo:hover {
   text-decoration: none;
   text-transform: uppercase;
 }
-.product-description .price-wrapper a:hover .value {
+.price-wrapper a:hover .value {
   display: none;
 }
-.product-description .price-wrapper a:hover .on-hover {
+.price-wrapper a:hover .on-hover {
   display: block;
 }
-.product-description .price-wrapper a .value {
+.price-wrapper a .value {
   display: block;
 }
-.product-description .price-wrapper a .on-hover {
+.price-wrapper a .on-hover {
   display: none;
 }
 .container.product-detail {
@@ -3033,6 +3033,9 @@ footer ul li a:hover {
 }
 .bluebackbottom {
  border-bottom: #3094B2 4px solid; 
+}
+.detail-margin {
+  margin: 2rem 4rem;
 }
 
 @media screen and (min-width: 1199px) {
