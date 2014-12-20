@@ -54,7 +54,7 @@ body {
   float: left;
   background: white;
   padding: 10px 20px;
-  border-bottom: 2.5px black solid;
+  border-bottom: 4px #3094B2 solid;
 }
 .top-bar .right-side {
   text-align: right;
@@ -1282,7 +1282,7 @@ a#logo:hover {
   background-image: url('../content/dislike.png');
 }
 .widget.leave-feedback button {
-  float: right;
+  float: left;
   background: transparent;
   margin-top: 20px;
 }
@@ -2603,7 +2603,9 @@ form .form-checkbox-wrap .checkbox-label {
 .footer-widget {
   width: 100%;
   float: left;
-  padding: 35px 0;
+  padding: 20px;
+  height: 30px;
+  margin-bottom:  2rem;
 }
 .footer-widget h2 {
   font-family: Quicksand, Arial, sans-serif;
@@ -3029,6 +3031,10 @@ footer ul li a:hover {
 .blueback {
   background: #3094B2;
 }
+.bluebackbottom {
+ border-bottom: #3094B2 4px solid; 
+}
+
 @media screen and (min-width: 1199px) {
   .grid-product figure {
     width: 90%; 

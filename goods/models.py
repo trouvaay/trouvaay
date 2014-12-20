@@ -5,34 +5,29 @@ from helper import Attributes, AbstractImageModel
 
 
 class Segment(models.Model):
-	description = models.CharField(max_length=50, choices=Attributes['segment'])
-	
+	select = models.CharField(max_length=55, default='new', null=True, blank=True)	
 	def __str__(self):
-		return self.description
+		return self.select or 'none'
 
 class Style(models.Model):
-	description = models.CharField(max_length=50, choices=Attributes['style'])
-
+	select = models.CharField(max_length=55, default='modern', null=True, blank=True)	
 	def __str__(self):
-		return self.description
+		return self.select or 'none'
 
 class Category(models.Model):
-	description = models.CharField(max_length=50, choices=Attributes['category'])
-
+	select = models.CharField(max_length=55, default='living', null=True, blank=True)	
 	def __str__(self):
-		return self.description
+		return self.select or 'none'
 
 class Subcategory(models.Model):
-	description = models.CharField(max_length=50, choices=Attributes['subcategory'])
-
+	select = models.CharField(max_length=55, default='bar', null=True, blank=True)	
 	def __str__(self):
-		return self.description
+		return self.select or 'none'
 
 class Material(models.Model):
-	description = models.CharField(max_length=50, choices=Attributes['material'])	
-
+	select = models.CharField(max_length=55, default='leather', null=True, blank=True)	
 	def __str__(self):
-		return self.description
+		return self.select or 'none'
 
 class Product(models.Model):
 	sku = models.CharField(max_length=25, null=True, blank=True)

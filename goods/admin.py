@@ -8,9 +8,7 @@ from goods.models import Product, Segment, Style, Category, Subcategory, Materia
 
 # class MaterialInline(admin.TabularInline):
 # 	model = Material
-# @admin.register(Segment, Style, Category, Subcategory, Material)
-# class PersonAdmin(admin.ModelAdmin):
-#     pass
+
 class ProductImageInline(admin.StackedInline):
 	model = ProductImage
 	fields = (('name','image','is_main'),)
@@ -22,12 +20,14 @@ class CommentInline(admin.StackedInline):
 
 class ProductAdmin(admin.ModelAdmin):
 	model = Product
+	filter_vertical = ('style','segment')
 	list_display = ['short_name', 'store', 'current_price', 'original_price']
-	fields = ['short_name', 'store', 'units',('original_price', 'current_price'), 'pub_date']
-	filter_vertical = ('style',)
+	fields = ['short_name', 'store', 'units',('original_price', 'current_price'), 'pub_date','style','segment']
+	
 	inlines = [ProductImageInline, CommentInline]
 	search_fields = ['short_name', 'long_name','store']
 	list_filter = ['store']
+
 	
 
 admin.site.register(Product, ProductAdmin)

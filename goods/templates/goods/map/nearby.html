@@ -1,0 +1,95 @@
+{% extends '_base.html' %}
+{% load staticfiles %}
+{% block beginjs %}
+<script type="text/javascript" 
+	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
+</script>
+<script type="text/javascript">
+
+	function initialize (userloc) {    
+    var center = new google.maps.LatLng(userloc.lat, userloc.lng);
+        		
+    var mapOptions = {
+	    center: center,
+	    zoom: 14
+    };
+
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);	
+
+    var UserPin = new google.maps.Marker({
+		    position: center,
+		    map: map,
+		    title: 'Foodo HQ'
+	    });
+    
+ //    var i = 0;
+ //    var restLen = rests.length;
+    
+ //    for (i;i<restLen;i++) {
+	//     var locale = new google.maps.LatLng(rests[i]['lat'], rests[i]['lng']);
+     	
+ //     	var homeMarker2 = new google.maps.Marker({
+ //        		position: locale,
+ //        		map: map,
+ //        		tite: rests[i]['name']
+	//     });
+	// }//end for
+    
+    }
+
+</script>{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+          <div class="col-sm-12">
+              <div id="map-canvas"> </div>
+          </div>
+      </div>
+</div>
+<!-- <div class="container homepage-quote">
+    <div class="row">
+        <div class="col-sm-3 text">Item</div>
+        <div class="col-sm-5 text">Store</div>
+        <div class="col-sm-3 text">Distance</div>
+    </div>
+</div> -->
+<!-- <div class="container">
+    <div class="row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-3"></div>
+          <div class="col-sm-3"></div>
+
+          </div>
+      </div>
+</div> -->
+<div class="container">
+    <table class="table">
+    	<tr class="container blueback">
+    		<td>Item</td>
+    		<td>Store</td>
+    		<td>Distance</td>
+    	</tr>
+    	{% for store in stores %}
+		<tr class="container"> 
+			<td>{{ store.retailer }}</td>
+			<td>{{ store.street }}</td>
+			<td>{{ store.city }}{{ store.state }}</td>
+		</tr>
+		{% endfor %}
+    </table>
+</div>
+{% endblock %}
+{% block endjs %}
+<script type="text/javascript"> 
+	function  getpoints (userloc) {
+		var userloc = {
+			'lat': userloc.coords.latitude,
+			'lng': userloc.coords.longitude,
+		}
+		initialize(userloc);
+	}
+
+	navigator.geolocation.getCurrentPosition(getpoints);
+</script>
+{% endblock %}
