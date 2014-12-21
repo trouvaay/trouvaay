@@ -49,28 +49,28 @@
                                 </div>
                             </div>
                             <div class="row nav nav-pills prod-description">
-                                <div class="col-xs-6 text-left col-sm-offset-1" role="presentation">
-                                    {{ piece.store.retailer.short_name }}
+                                <div class="col-xs-7     text-left col-sm-offset-1" role="presentation">
+                                    {{ piece.store.retailer.short_name|truncatechars:19 }}
                                 </div>
-                                <div class="col-xs-5" role="presentation">
-                                        {{ '0.3mi' }}
-                                </div>
+                                <div class="col-xs-4 dist">0.3mi</div>
                             </div>
                             <div class="row nav nav-pills prod-description">
                                 <div class="col-xs-6 text-left col-sm-offset-1" role="presentation">
-                                    <a href="#">
-                                        <span class="label label-default pop-in">{{ 'Pop-in' }}</span>
-                                    </a>
+                                    <a href="{% url 'goods:popinmap' piece.store.id %}"><button type="button" class="btn btn-default btn-lg">
+                                        {{ 'Pop-in' }}
+                                    </button></a>
                                 </div>
                                 <div class="col-xs-2 heart text-right" role="presentation">
-                                    <a href="#" class="heart">
+                                    <button type="button" class="btn btn-default btn-lg glyphs">
                                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                    </a>
+                                    </button>
                                 </div>
                                 <div class="col-xs-2 text-left" role="presentation">
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                                    </a>
+                                    <button type="button" class="btn btn-default btn-lg glyphs">
+                                        <a href="#">
+                                            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                                        </a>
+                                    </button>
                                 </div>
                             </div></br>
                         </div>    

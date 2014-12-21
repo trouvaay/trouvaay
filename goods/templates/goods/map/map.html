@@ -49,17 +49,7 @@
   			directionsPanel.innerHTML = "<h5>" + myDuration + " - " + myDistance + "</h5></br>" + myinstructions; 
   		}
 
-  		function senduserloctoserver (userloc) {
-  			$.ajax({
-			  type: "POST",
-			  url: url,
-			  data: userloc,
-			  success: function () {
-			  	console.log('Coords sent to server!')
-			  },
-			  dataType: dataType
-			});
-  		}
+  		
 
 </script>
 <script type="text/javascript"> 
@@ -73,7 +63,7 @@
 			'lat': userloc.coords.latitude,
 			'lng': userloc.coords.longitude,
 		}
-		senduserloctoserver(userloc)
+		
 		initialize(store, userloc);
 		
 	}

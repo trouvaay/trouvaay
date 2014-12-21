@@ -1071,10 +1071,7 @@ a#logo:hover {
   margin: 0 auto;
   font-size: 1.75rem
 }
-.heart {
-  color: #428bca;
-  padding-right: 0;
-}
+
 .black-link {
   color: black;
 }
@@ -2225,7 +2222,7 @@ form .form-checkbox-wrap .checkbox-label {
   margin-left: 25px;
 }
 .btn.btn-default {
-  border: solid 3px #e5e5e5;
+ /* border: solid 3px #e5e5e5;
   -webkit-border-radius: 0px;
   -webkit-background-clip: padding-box;
   -moz-border-radius: 0px;
@@ -2239,10 +2236,23 @@ form .form-checkbox-wrap .checkbox-label {
   font-weight: 400;
   color: #333;
   letter-spacing: 1.5px;
-  padding: 10px;
+  padding: 10px;*/
+  background: #f4f4f4;
+  font-size:14px;
+  padding: 5px 12px;
+}
+.btn.btn-default.glyphs {
+  font-size:14px;
+  color: #3094B2;
+  /*color: pink;*/
+}
+.btn.btn-default.glyphs.active {
+  font-size:14px;
+  /*color: #3094B2;*/
+  color: pink;
 }
 .btn.btn-default:hover {
-  background: white;
+  background: gray;
 }
 .btn.btn-default:focus {
   -webkit-box-shadow: none;

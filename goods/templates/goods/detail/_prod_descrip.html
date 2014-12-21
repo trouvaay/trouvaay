@@ -21,7 +21,7 @@
        </div>  
         <div class="info-block">
            <h4>AVAIlABLE @ <a href="#">{{ product.store.retailer }}</a></h4>
-           <h5 class="get-in-store"> <a href="map">Get In-Store</a></h5>
+           <h5 class="get-in-store"> <a href="{% url 'goods:popinmap' product.store.id %}">Get In-Store</a></h5>
        </div>  
        <div class="info-block">
            <h4>MADE OF</h4>

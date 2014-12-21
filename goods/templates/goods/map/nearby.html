@@ -21,6 +21,17 @@
 		    map: map,
 		    title: 'Foodo HQ'
 	    });
+
+    function senduserloctoserver (userloc) {
+        $.ajax({
+        type: "POST",
+        url: '/',
+        data: userloc,
+        success: function () {
+          console.log('Coords sent to server!')
+        },
+        dataType: dataType
+      })
     
  //    var i = 0;
  //    var restLen = rests.length;
@@ -47,22 +58,7 @@
           </div>
       </div>
 </div>
-<!-- <div class="container homepage-quote">
-    <div class="row">
-        <div class="col-sm-3 text">Item</div>
-        <div class="col-sm-5 text">Store</div>
-        <div class="col-sm-3 text">Distance</div>
-    </div>
-</div> -->
-<!-- <div class="container">
-    <div class="row">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-3"></div>
-          <div class="col-sm-3"></div>
 
-          </div>
-      </div>
-</div> -->
 <div class="container">
     <table class="table">
     	<tr class="container blueback">
@@ -72,7 +68,7 @@
     	</tr>
     	{% for product in products %}
 		<tr class="container"> 
-			<td>{{ store.retailer }}</td>
+			<td>{{ product. }}</td>
 			<td>{{ store.street }}</td>
 			<td>{{ store.city }}{{ store.state }}</td>
 		</tr>
@@ -87,7 +83,8 @@
 			'lat': userloc.coords.latitude,
 			'lng': userloc.coords.longitude,
 		}
-		initialize(userloc);
+    senduserloctoserver(userloc)
+		initialize(store, userloc);
 	}
 
 	navigator.geolocation.getCurrentPosition(getpoints);

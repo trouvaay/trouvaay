@@ -139,8 +139,7 @@
     </footer>
 
     <!--closing js -->
-    {% block endjs %}
-    {% endblock %}
+    
     <div>
     	<script src="{% static 'js/vendor/jquery-1.10.1.min.js' %}"></script>
 	    <script src="{% static 'js/vendor/jquery-ui-1.10.3.min.js' %}"></script>
@@ -153,6 +152,8 @@
 	    <script src="{% static 'js/vendor/jquery.selectBoxIt.min.js' %}"></script>
 	    <script src="{% static 'js/main.js' %}"></script>
 	</div>
+    {% block endjs %}
+    {% endblock %}
 	</body>
 </html>
 

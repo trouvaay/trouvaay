@@ -21,7 +21,8 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
-		print (context['goods'])
+		context['products_json'] = serialize('json', context['goods'])
+		print(type(context['products_json']))
 		return context
 
 class DetailView(LoginRequiredMixin, generic.DetailView):
@@ -74,7 +75,10 @@ class NearbyView(LoginRequiredMixin, generic.ListView):
 	context_object_name = 'products'
 	model = Product
 
-	# def get_queryset(self):
+	# def get_context_data(self, **kwargs):
+	# 	context = super(StoreView, self).get_context_data(**kwargs)
+	# 	context['products_json'] = serialize('json', context['products'])
+	# 	return context
 
 
 class MapView(LoginRequiredMixin, generic.DetailView):
@@ -85,7 +89,7 @@ class MapView(LoginRequiredMixin, generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(MapView, self).get_context_data(**kwargs)
 		context['store'] = self.object.store
-		context['store_json'] = serialize('json', [self.object.store])
+		# context['store_json'] = serialize('json', [self.object.store])
 		return context
 
 class StoreView(LoginRequiredMixin, generic.DetailView):
