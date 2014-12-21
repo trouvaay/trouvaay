@@ -5,48 +5,48 @@
 	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
 </script>
 <script type="text/javascript">
-
-	function initialize (userloc) {    
-    var center = new google.maps.LatLng(userloc.lat, userloc.lng);
-        		
+  var directionsService = new google.maps.DirectionsService();
+	function initialize (products, userloc) {    
+    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+    
     var mapOptions = {
-	    center: center,
-	    zoom: 14
+	    center: userpos,
+	    zoom: 12
     };
 
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);	
 
     var UserPin = new google.maps.Marker({
-		    position: center,
+		    position: userpos,
 		    map: map,
-		    title: 'Foodo HQ'
+		    title: 'You'
 	    });
 
-    function senduserloctoserver (userloc) {
-        $.ajax({
-        type: "POST",
-        url: '/',
-        data: userloc,
-        success: function () {
-          console.log('Coords sent to server!')
-        },
-        dataType: dataType
-      })
+    for (i in products) {
+      
+      var productpos = new google.maps.LatLng(products[i].fields.lat, products[i].fields.lng);
+
+      var request = {
+          origin: userpos,
+          destination: productpos,
+          travelMode: google.maps.TravelMode.DRIVING
+      };
+
+      directionsService.route(request, function(result, status, i) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            console.log(result.routes[0].legs[0].distance.text);
+          }
+        });
+
+
+     	var homeMarker = new google.maps.Marker({
+        		position: productpos,
+        		map: map,
+        		tite: products[i].fields.short_name
+      });
+     };
+  };
     
- //    var i = 0;
- //    var restLen = rests.length;
-    
- //    for (i;i<restLen;i++) {
-	//     var locale = new google.maps.LatLng(rests[i]['lat'], rests[i]['lng']);
-     	
- //     	var homeMarker2 = new google.maps.Marker({
- //        		position: locale,
- //        		map: map,
- //        		tite: rests[i]['name']
-	//     });
-	// }//end for
-    
-    }
 
 </script>{% endblock %}
 
@@ -61,17 +61,20 @@
 
 <div class="container">
     <table class="table">
-    	<tr class="container blueback">
+    	<tr class="blueback">
     		<td>Item</td>
     		<td>Store</td>
     		<td>Distance</td>
     	</tr>
     	{% for product in products %}
-		<tr class="container"> 
-			<td>{{ product. }}</td>
-			<td>{{ store.street }}</td>
-			<td>{{ store.city }}{{ store.state }}</td>
-		</tr>
+  		<tr> 
+  			<td>{{ product.short_name }}</br>
+         <figure class="nearby">
+          <img src="{{ MEDIA_URL}}{{ product.productimage_set.first.image }}" alt=""/></figure>
+        </td>
+  			<td><a href="{% url 'goods:popinmap' product.store.id %}">{{ product.store }}</a></td>
+  			<td class="dist"></td>
+  		</tr>
 		{% endfor %}
     </table>
 </div>
@@ -79,14 +82,13 @@
 {% block endjs %}
 <script type="text/javascript"> 
 	function  getpoints (userloc) {
-		var userloc = {
-			'lat': userloc.coords.latitude,
-			'lng': userloc.coords.longitude,
-		}
-    senduserloctoserver(userloc)
-		initialize(store, userloc);
-	}
-
+    var products = {{ products_json|safe }};
+    var userloc = {
+     'lat': userloc.coords.latitude,
+     'lng': userloc.coords.longitude,
+    };
+     initialize(products, userloc); 
+    };
 	navigator.geolocation.getCurrentPosition(getpoints);
 </script>
 {% endblock %}

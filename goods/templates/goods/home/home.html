@@ -9,8 +9,12 @@
  <script type="text/javascript">
 	$(document).ready(function(){
 	    $(".btn.btn-default.glyphs").click(function() {
-	    	console.log('clicked the heart')
-	    	$(this).addClass("active");
+	   		if ($(this).hasClass("active")) {
+		    	$(this).removeClass("active");
+		    	}
+		    	else {
+		    		$(this).addClass("active");
+		    	}
 	    });
 	});
  </script>
@@ -42,7 +46,7 @@
 		    destination: storepos,
 		    travelMode: google.maps.TravelMode.DRIVING
 		};
-		var dist
+		// var dist
 
 		directionsService.route(request, function(result, status) {
 		    if (status == google.maps.DirectionsStatus.OK) {
@@ -63,20 +67,20 @@
 
 </script>
 <script type="text/javascript"> 
-	// function  getpoints (userloc) {
-	// 	var products = {{ products_json|safe }};
+	function  getpoints (userloc) {
+		var products = {{ products_json|safe }};
 
-	// 	var userloc = {
-	// 		'lat': userloc.coords.latitude,
-	// 		'lng': userloc.coords.longitude,
-	// 	};
-	// 	var distances = []
-	// 	for (i in products) {
-	// 		initialize(products[i].fields.lat, products[i].fields.lng, userloc, i);
-	// 		}	
-	// };
+		var userloc = {
+			'lat': userloc.coords.latitude,
+			'lng': userloc.coords.longitude,
+		};
+		var distances = []
+		for (i in products) {
+			initialize(products[i].fields.lat, products[i].fields.lng, userloc, i);
+			}	
+	};
  //    	// senduserloctoserver(userloc)
 
-	// navigator.geolocation.getCurrentPosition(getpoints);
+	navigator.geolocation.getCurrentPosition(getpoints);
 </script>
 {% endblock %}

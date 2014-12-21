@@ -10,6 +10,5 @@ urlpatterns = patterns('',
     
     url(r'^', include('goods.urls', namespace='goods')),
     url(r'^', include('members.urls', namespace='members')),
-    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

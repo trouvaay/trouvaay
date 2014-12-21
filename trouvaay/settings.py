@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'localflavor',
     'merchants',
     'members',
-    'django_extensions',
     'goods',
     # 'images',
 )
