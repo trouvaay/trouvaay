@@ -54,7 +54,7 @@ body {
   float: left;
   background: white;
   padding: 10px 20px;
-  border-bottom: 4px #3094B2 solid;
+  border-bottom: 12px #3094B2 solid;
 }
 .top-bar .right-side {
   text-align: right;
@@ -64,7 +64,7 @@ body {
   font-size: 25px;
   padding-left: 35px;
 }
-a {
+.main-footer a {
   color: #333;
 }
 a#logo {
@@ -1356,6 +1356,11 @@ a#logo:hover {
 .grid-product figure img {
   width: 100%;
   max-height: 350px;
+}
+.detail-image figure img {
+  max-width: 100%;
+  min-height: 450px;
+  max-height: 550px;
 }
 .nearby img {
   max-height: 300px;

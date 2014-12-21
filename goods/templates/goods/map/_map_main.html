@@ -18,7 +18,8 @@
     {% block mainphotodescrip %}
        <div class="name map"><a href="/{{ product.id }}">{{ product.short_name }}</a></div>
        <div class="info-block">
-           <h4>AVAIlABLE @ </br>{{ store.retailer }}</h4>
+           <h5>AVAIlABLE @</h5>
+           <h4><a href="{% url 'goods:storeprofile' store.id %}">{{ store.retailer }}</a></h4>
            <div class="info">
                {{ store.street }}
                {{ store.street2 }}</br>

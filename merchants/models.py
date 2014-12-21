@@ -45,7 +45,7 @@ class Store(models.Model):
 	shipper = models.ManyToManyField(Shipper, null=True, blank=True)
 
 	def __str__(self):
-		return (self.retailer.short_name+"-"+self.street+"-"+self.city)
+		return (self.retailer.short_name+" ("+self.street[:12]+")")
 	
 	def geo_code(self):
 		return GeoCode(self.street,self.city,

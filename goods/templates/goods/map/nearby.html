@@ -52,7 +52,7 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top: 40px;">
           <div class="col-sm-12 product-description">
               <div id="map-canvas"> </div>
           </div>
@@ -68,11 +68,11 @@
     	</tr>
     	{% for product in products %}
   		<tr> 
-  			<td>{{ product.short_name }}</br>
+  			<td><h4>{{ product.short_name }}</h4>
          <figure class="nearby">
           <img src="{{ MEDIA_URL}}{{ product.productimage_set.first.image }}" alt=""/></figure>
         </td>
-  			<td><a href="{% url 'goods:popinmap' product.store.id %}">{{ product.store }}</a></td>
+  			<td><h4><a href="{% url 'goods:popinmap' product.store.id %}">{{ product.store.retailer }}</a></h4>{{ product.store.street }}</td>
   			<td class="dist"></td>
   		</tr>
 		{% endfor %}

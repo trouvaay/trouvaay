@@ -58,7 +58,7 @@ class DetailCommentView(SingleObjectMixin, generic.FormView):
 		return reverse('goods:detail', kwargs={'pk': self.object.pk})
 
 
-class DetailRouteView(generic.View):
+class DetailRouteView(LoginRequiredMixin, generic.View):
 
 	def get(self, request, *args, **kwargs):
 		view = DetailView.as_view()
