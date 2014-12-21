@@ -913,6 +913,10 @@ a#logo:hover {
   padding-bottom: 20px;
   letter-spacing: 1.5px;
 }
+.info-block.image {
+  width: 35%;
+  padding-top: 1rem;
+}
 .info-block.story {
   margin-top: 2rem;
   width: 100%;
@@ -1064,7 +1068,7 @@ a#logo:hover {
   background: white;
 }
 .nav.nav-pills.prod-description {
-  margin: .7rem auto;
+  margin: .2rem auto;
   font-size: 1.75rem
 }
 .nav.nav-pills.prod-description.price {
@@ -1116,7 +1120,6 @@ a#logo:hover {
   width: 100%;
   float: left;
   padding: 10px 0px 0 0;
-  border-top: solid 1px #ebebeb;
   position: relative;
 }
 .feedback .comment figure {
@@ -1342,12 +1345,13 @@ a#logo:hover {
   margin-bottom: 15px;
 }
 .grid-product figure {
-  width: 80%;
-  float: left;
+  width: 90%;
+  margin-left: 5%;
+  height: 350px;
 }
 .grid-product figure img {
   width: 100%;
-  height: auto;
+  max-height: 350px;
 }
 .grid-product .overlay {
   position: absolute;
@@ -2249,7 +2253,7 @@ form .form-checkbox-wrap .checkbox-label {
 .btn.btn-default.glyphs.active {
   font-size:14px;
   /*color: #3094B2;*/
-  color: pink;
+  color: red;
 }
 .btn.btn-default:hover {
   background: gray;
@@ -2440,7 +2444,7 @@ form .form-checkbox-wrap .checkbox-label {
   -moz-background-clip: padding;
   border-radius: 0px;
   background-clip: padding-box;
-  height: 100px;
+  height: 80px;
   display: table;
   position: relative;
   width: 100%;
@@ -2828,6 +2832,10 @@ footer ul li a:hover {
   text-transform: none;
   text-align: center;
   font-weight: 500;
+  line-height: 30px;
+}
+.nav.nav-tabs img {
+  max-height: 30px;
 }
 
 .homepage-quote .text a {
@@ -3135,7 +3143,7 @@ footer ul li a:hover {
   }
   .main-container .product-description .info-block {
     padding-left: 25px;
-    width: 260px;
+    /*width: 260px;*/
     padding-bottom: 5px;
   }
   .main-container .product-description .price {
