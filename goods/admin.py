@@ -20,7 +20,7 @@ class CommentInline(admin.StackedInline):
 
 class ProductAdmin(admin.ModelAdmin):
 	model = Product
-	filter_vertical = ('style','segment')
+	filter_vertical = ('style','segment','category','subcategory','material')
 	list_display = ['short_name', 'store', 'current_price', 'original_price']
 	fields = ['short_name', 'store', 'units',('original_price', 'current_price'), 'pub_date','style','segment']
 	
