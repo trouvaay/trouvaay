@@ -33,9 +33,9 @@
                                 <span class="counter">1 item</span>
                             </div>
                             {% if user.is_authenticated %}
-                                <a class="btn btn-link" href="{% url 'members:logout' %}" data-toggle="modal" data-target="#login-modal">Logout</a>
+                                <a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a>
                             {% else %}
-                                <a class="btn btn-link" href="{% url 'members:login' %}" data-toggle="modal" data-target="#login-modal">Login</a>
+                                <a class="btn btn-link" href="{% url 'members:login' %}">Login</a>
                             {% endif %}
                         </div>
                     </div>

@@ -24,7 +24,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 		context['products_json'] = serialize('json', context['goods'])
 		return context
 
-class DetailView(LoginRequiredMixin, generic.DetailView):
+class DetailView(generic.DetailView):
 	template_name = 'goods/detail/detail.html'
 	context_object_name = 'product'
 	model = Product
@@ -35,7 +35,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
 		context['form'] = CommentForm()
 		return context
 
-class DetailCommentView(LoginRequiredMixin, SingleObjectMixin, generic.FormView):
+class DetailCommentView(SingleObjectMixin, generic.FormView):
 	template_name = 'goods/detail/detail.html'
 	form_class = CommentForm
 	model = Product
@@ -58,7 +58,7 @@ class DetailCommentView(LoginRequiredMixin, SingleObjectMixin, generic.FormView)
 		return reverse('goods:detail', kwargs={'pk': self.object.pk})
 
 
-class DetailRouteView(LoginRequiredMixin, generic.View):
+class DetailRouteView(generic.View):
 
 	def get(self, request, *args, **kwargs):
 		view = DetailView.as_view()
