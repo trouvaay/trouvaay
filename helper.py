@@ -3,6 +3,7 @@ import requests
 from django.db import models
 from django.conf import settings
 
+
 class AbstractImageModel(models.Model):
 	name = models.CharField(max_length=50, null=True, blank=True)
 	image = models.ImageField(upload_to='photos/%y/%m/%d/')
