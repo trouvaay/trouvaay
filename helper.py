@@ -2,13 +2,20 @@
 import requests
 from django.db import models
 from django.conf import settings
-
+import cloudinary
+cloudinary.config(
+  cloud_name = 'trouvaay',  
+  api_key = '239337878822387',  
+  api_secret = 'sYSwTRGE6LwUnEkb6MgHIlo-tAU'  
+)
+from cloudinary.models import CloudinaryField
 
 class AbstractImageModel(models.Model):
 	name = models.CharField(max_length=50, null=True, blank=True)
-	image = models.ImageField(upload_to='photos/%y/%m/%d/')
 	is_main = models.BooleanField(default=False)
-
+	image = CloudinaryField('image')
+	# size_type = models.Charfield()  need to add choices for thumb, tile, and large
+	
 	class Meta:
 		abstract = True
 		app_label = 'goods'

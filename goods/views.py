@@ -11,7 +11,9 @@ from django.utils.decorators import method_decorator
 from braces.views import LoginRequiredMixin
 from goods.forms import CommentForm
 from django.views.generic.detail import SingleObjectMixin
+from pprint import pprint as pp
 
+BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
 class HomeView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/home/home.html'
@@ -22,6 +24,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
 		context['products_json'] = serialize('json', context['goods'])
+		context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
 		return context
 
 class DetailView(generic.DetailView):

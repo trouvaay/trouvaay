@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'merchants',
     'members',
     'goods',
+    'cloudinary',
     # 'images',
 )
 
@@ -119,4 +120,8 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR,'templates')]
 
 # import dj_database_url
 # DATABASES['default'] =  dj_database_url.config()
-
+# CLOUDINARY = {
+#   'cloud_name': 'trouvaay',  
+#   'api_key': '239337878822387',  
+#   'api_secret': 'sYSwTRGE6LwUnEkb6MgHIlo-tAU',  
+# }
