@@ -20,7 +20,7 @@
         </div>
     </div>
 </div>
-<div class="container">        
+<div class="container-fluid">        
     <div class="row">
         <div class="col-sm-12">
             <div class="tab-content">
@@ -29,52 +29,42 @@
                     <div class="grid-products-wrapper">
                     <div class="row">
                     {% for piece in goods %}
-                        <div class="col-sm-4 col-xs-6">
-                            <div class="row">
-                                <div class="grid-product">
-                                    <figure>
-                                        <a href="">
+                        <div class="col-xs-12 col-sm-6 col-m-4" style="margin-bottom: 2rem">
+                            <div class="grid-product">
+                                <a href="">
                                             <!-- Need to filter for main pic.  Set size limits in css to width: 100%; max-height: 350px -->
-                                        {% cloudinary piece.productimage_set.first.image %}
-                                        </a>
-                                    </figure>
-                                    <a href="{{ piece.id }}" class="view-product">
-                                        <div class="text">View product</div>
-                                        <div class="background"></div>
-                                    </a>
-                                </div>
+                                        {% cloudinary piece.productimage_set.first.image width=325 height=325 crop="pad" %}
+                                        <!-- Need to update image rendering to below once we get consistent size original pics on Cloudinary -->
+                                        <!-- <img src="{{ BaseUrl }}{{ piece.productimage_set.first.image }}" class="img-responsive"> -->
+                                </a>
+                                
+                                <a href="{{ piece.id }}" class="view-product">
+                                    <div class="text">View product</div>
+                                    <div class="background"></div>
+                                </a>
                             </div>
-                            <div class="row nav nav-pills prod-description price">
-                                <div class="col-xs-5 text-left" role="presentation">
-                                    <h4>${{ piece.current_price }}</h4>
+                            <!-- <div class="row"> -->
+                                <div class="col-lg-12 pic-detail-home" style="text-align:left; margin-top: 3px; margin-bottom: 3px; border-bottom: 1px solid lightgray">
+                                    <p style="margin-bottom: 3px"><h5>{{ piece.short_name }}</h5></p>
+                                    <p style="margin-bottom: 3px">{{ piece.store.retailer.short_name|truncatechars:25 }}{{ ' (1.2mi)' }}</p>
                                 </div>
-                            </div>
-                            <div class="row nav nav-pills prod-description">
-                                <div class="col-xs-8 text-left" role="presentation">
-                                    {{ piece.store.retailer.short_name|truncatechars:19 }}
+                            <!-- </div> -->
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <em>${{ piece.current_price }}</em>
                                 </div>
-                                <div class="col-xs-4 dist"></div>
-                            </div>
-                            <div class="row nav nav-pills prod-description">
-                                <div class="col-xs-7 text-left" role="presentation">
-                                    <a href="{% url 'goods:popinmap' piece.id %}"><button type="button" class="btn btn-default btn-lg">
-                                        {{ 'Pop-in' }}
-                                    </button></a>
-                                </div>
-                                <div class="col-xs-2 heart text-right" role="presentation">
+                                <div class="col-xs-3">
                                     <button type="button" class="btn btn-default btn-lg glyphs">
                                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                                     </button>
                                 </div>
-                                <div class="col-xs-2 text-left" role="presentation">
-                                    <button type="button" class="btn btn-default btn-lg glyphs">
-                                        <a href="#">
-                                            <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                                        </a>
-                                    </button>
+                                <div class="col-xs-3">
+                                    <a href="{% url 'goods:popinmap' piece.id %}"><button type="button" class="btn btn-default btn-lg">
+                                        {{ 'Pop-in' }}
+                                    </button></a>
                                 </div>
-                            </div></br>
-                        </div>    
+                            </div>
+                            </div>  
                     {% endfor %}
                     </div>
                     </div>

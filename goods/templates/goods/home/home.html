@@ -67,20 +67,20 @@
 
 </script>
 <script type="text/javascript"> 
-	function  getpoints (userloc) {
-		var products = {{ products_json|safe }};
+	// function  getpoints (userloc) {
+	// 	var products = {{ products_json|safe }};
 
-		var userloc = {
-			'lat': userloc.coords.latitude,
-			'lng': userloc.coords.longitude,
-		};
-		var distances = []
-		for (i in products) {
-			initialize(products[i].fields.lat, products[i].fields.lng, userloc, i);
-			}	
-	};
- //    	// senduserloctoserver(userloc)
+	// 	var userloc = {
+	// 		'lat': userloc.coords.latitude,
+	// 		'lng': userloc.coords.longitude,
+	// 	};
+	// 	var distances = []
+	// 	for (i in products) {
+	// 		initialize(products[i].fields.lat, products[i].fields.lng, userloc, i);
+	// 		}	
+	// };
+ // //    	// senduserloctoserver(userloc)
 
-	navigator.geolocation.getCurrentPosition(getpoints);
+	// navigator.geolocation.getCurrentPosition(getpoints);
 </script>
 {% endblock %}

@@ -1,8 +1,9 @@
+{% load cloudinary %}
 <div class="row">
 <div class="col-sm-7">
    <div class="detail-image">
         <figure style="width: 100%">
-            <img src="{{ MEDIA_URL }}{{ product.productimage_set.first.image }}" alt=""/>
+            {% cloudinary product.productimage_set.first.image crop="fit" %}
         </figure>
     </div>
 </div>

@@ -25,6 +25,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 		context = super(HomeView, self).get_context_data(**kwargs)
 		context['products_json'] = serialize('json', context['goods'])
 		context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
+		context['BaseUrl'] = BASE_URL
 		return context
 
 class DetailView(generic.DetailView):

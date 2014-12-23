@@ -27,7 +27,7 @@
 body {
   font-family: Quicksand;
   font-size: 14px;
-  background: white;
+  background: #f4f4f4;
 }
 .navbar-default {
   background: #f4f4f4;
@@ -1343,24 +1343,24 @@ a#logo:hover {
   margin: 0 15px 40px 0;
 }
 .grid-product {
-  float: left;
   width: 100%;
+  height: 350px;
   position: relative;
-  margin-bottom: 15px;
+  /*margin: 2rem;*/
 }
 .grid-product figure {
-  width: 90%;
-  margin-left: 5%;
-  height: 350px;
+/*  width: 90%;*/
+  margin: 0 2.5%;
+  /*height: 350px;*/
 }
 .grid-product figure img {
-  width: 100%;
-  max-height: 350px;
+  /*width: 100%;
+  max-height: 350px;*/
 }
 .detail-image figure img {
-  max-width: 100%;
+ /* max-width: 100%;
   min-height: 450px;
-  max-height: 550px;
+  max-height: 550px;*/
 }
 .nearby img {
   max-height: 300px;
@@ -1411,7 +1411,8 @@ a#logo:hover {
   opacity: 0.7;
   z-index: 300;
 }
-.grid-product .view-product {
+
+.view-product {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -2255,7 +2256,7 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 10px;*/
   background: #f4f4f4;
   font-size:14px;
-  padding: 5px 12px;
+  padding: 2.5px 10px 0px;
 }
 .btn.btn-default.glyphs {
   font-size:14px;
@@ -2821,20 +2822,20 @@ footer ul li a:hover {
   background: #333;
   padding: 20px 0 0 0;
   border-bottom: solid 2.5px;
-  height: 130px;
+  height: 11rem;
 }
 .homepage-quote .text,
 .hp-tabs .text {
   font-family: Quicksand, Arial, sans-serif;
-  font-size: 24px;
-  line-height: 50px;
+  font-size: 2.5rem;
+  line-height: 4rem;
   font-weight: 300;
   color: white;
   text-transform: uppercase;
   text-align: center;
 }
 .container-fluid.tab-icons {
-  background: #f4f4f4;
+  background: white;
 }
 .container-fluid.tab-icons .row{
   padding: 1rem;
@@ -2919,7 +2920,7 @@ footer ul li a:hover {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  height: 500px;
+  height: 40rem;
   position: relative;
   width: 100%;
   float: left;
@@ -3067,15 +3068,24 @@ footer ul li a:hover {
 .detail-margin {
   margin: 2rem 4rem;
 }
-
+@media screen and (min-width: 992px) {
+  .col-sm-6 {
+    width: 33%;
+  }
+}
+@media screen and (min-width: 413px) and (max-width: 768px) {
+  .pic-detail-home {
+    margin-left: 10%;
+  }
+}  
 @media screen and (min-width: 1199px) {
   .grid-product figure {
-    width: 90%; 
-    height: 265px;
+    /*width: 90%; */
+    /*height: 265px;*/
   }
   .grid-product figure img {
-    width: 263px;
-    height: 263px;
+  /*  width: 263px;
+    height: 263px;*/
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -3330,7 +3340,7 @@ footer ul li a:hover {
 }
 @media screen and (min-width: 200px) and (max-width: 767px) {
   .grid-product {
-    width: 48%;
+    /*width: 48%;*/
     margin-right: 2%;
   }
   .widget.sketch figure img {
