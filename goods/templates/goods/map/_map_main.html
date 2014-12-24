@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-
+{% load cloudinary %}
 {% block content %}
 <div class="main-container">
 <div class="row">
@@ -27,9 +27,7 @@
            </div>
        </div>
        <div class="info-block image">
-        <figure style="width: 80%">
-          <img style="width: 100%" src="{{ MEDIA_URL }}{{ product.productimage_set.first.image }}" alt=""/>
-        </figure>
+          {% cloudinary product.productimage_set.first.image width=80 height=80 crop="fill" %}
         </div>
        <div class="info-block">
            <h4>Getting there...</h4>
