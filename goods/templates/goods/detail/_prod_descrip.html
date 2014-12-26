@@ -1,11 +1,9 @@
 {% load cloudinary %}
 <div class="row">
-<div class="col-sm-7">
+<div class="col-sm-7 col-xs-12">
    <div class="detail-image">
-        <figure style="width: 100%">
-            {% cloudinary product.productimage_set.first.image crop="fit" %}
-        </figure>
-    </div>
+      {% cloudinary product.productimage_set.first.image width=650 height=600 crop="fit" %}
+  </div>
 </div>
 
 <div class="col-sm-5 product-description">

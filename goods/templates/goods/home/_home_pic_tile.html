@@ -30,14 +30,15 @@
                     <div class="row">
                     {% for piece in goods %}
                         <div class="col-xs-12 col-sm-6 col-m-4" style="margin-bottom: 2rem">
-                            <div class="grid-product">
-                                <a href="">
+                            <div class="grid-product centered-parent">
+                                <div class="centered-child">
+                                <!-- <a href=""> -->
                                             <!-- Need to filter for main pic.  Set size limits in css to width: 100%; max-height: 350px -->
-                                        {% cloudinary piece.productimage_set.first.image width=325 height=350 crop="limit" %}
+                                        {% cloudinary piece.productimage_set.first.image width=350 height=300 crop="fit" %}
                                         <!-- Need to update image rendering to below once we get consistent size original pics on Cloudinary -->
                                         <!-- <img src="{{ BaseUrl }}{{ piece.productimage_set.first.image }}" class="img-responsive"> -->
-                                </a>
-                                
+                                <!-- </a> -->
+                                </div>
                                 <a href="{{ piece.id }}" class="view-product">
                                     <div class="text">View product</div>
                                     <div class="background"></div>
