@@ -1019,7 +1019,7 @@ a#logo:hover {
   float: left;
 }
 .product-presentation-col {
-  padding: 2rem;
+  padding: 1rem 1rem 0;
 }
 .product-presentation-tabs .tab-pane {
   background: white;
@@ -1095,7 +1095,8 @@ a#logo:hover {
   color: black;
 }
 .feedback {
-  width: 100%;
+  width: 90%;
+  max-width: 500px;
   margin-bottom: 2rem;
   float: left;
   background: white;
@@ -1370,8 +1371,14 @@ a#logo:hover {
   /*width: 100%;
   max-height: 350px;*/
 }
-.detail-image {
-  padding: 2.5%;
+.detail-image-large {
+  padding: 0% 7% 1%;
+}
+.detail-image-med {
+  display: none;
+}
+.detail-image-small {
+  display: none;
 }
 .nearby img {
   max-height: 300px;
@@ -2846,6 +2853,9 @@ footer ul li a:hover {
   text-align: center;
 }
 .container-fluid.tab-icons {
+  background: #f4f4f4;
+}
+.pic-tabs {
   background: white;
 }
 .container-fluid.tab-icons .row{
@@ -3077,7 +3087,7 @@ footer ul li a:hover {
  border-bottom: #3094B2 4px solid; 
 }
 .detail-margin {
-  margin: 2rem 4rem;
+  /*margin: 2rem 4rem;*/
 }
 @media screen and (min-width: 992px) {
   .col-sm-6 {
@@ -3097,6 +3107,11 @@ footer ul li a:hover {
 @media screen and (min-width: 413px) and (max-width: 768px) {
   .pic-detail-home {
     margin-left: 12%;
+  }
+  .detail-image-med {
+    display: block;
+    margin-left: 12.5%;
+    margin-bottom: 10%;
   }
 }  
 @media screen and (min-width: 1199px) {
@@ -3477,7 +3492,7 @@ footer ul li a:hover {
     width: 100%;
   }
   .homepage-quote {
-    padding: 30px 0;
+    padding: 1.5% 0;
   }
   .homepage-quote .text {
     font-size: 150%;
@@ -3664,6 +3679,10 @@ footer ul li a:hover {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
   }
+  .detail-image-large {
+  display: none;
+  }
+  
   .navbar-default .navbar-toggle:focus {
     outline: none;
     background: transparent;
@@ -3729,6 +3748,14 @@ footer ul li a:hover {
   .main-navigation .navbar-nav .dropdown-menu > li ul li > ul {
     padding-left: 20px;
   }
+}
+
+ @media (max-width: 413px) {
+  .detail-image-small {
+  display: block;
+  margin-bottom: 10%;
+  margin-left: 10%;
+  } 
 }
 .centered-child {
   position: relative;

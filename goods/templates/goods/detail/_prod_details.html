@@ -1,5 +1,7 @@
 <section class="main-container comment-block blueback">
-        <div class="col-sm-7 product-presentation-col">
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-12 product-presentation-col">
            <h4>Shoutouts</h4>
             <div class="feedback">
                 <div class="row">
@@ -21,14 +23,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 product-presentation-col">
-            <h4>What do you think?</h4>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 product-presentation-col">
             <div class="widget leave-feedback">
                 <form action="{% url 'goods:detail' product.id %}" method="post">
                     {% csrf_token %}
-                    {{ form }}</br>
+                    {{ form }}<br>
+                    <div class="col-sm-12">
                     <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
+    </div>
+    </div>
 </section>

@@ -1,11 +1,20 @@
 {% load cloudinary %}
 <div class="row">
 <div class="col-sm-7 col-xs-12">
-   <div class="detail-image">
-      {% cloudinary product.productimage_set.first.image width=650 height=600 crop="fit" %}
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="detail-image-large">
+          {% cloudinary product.productimage_set.first.image width=600 height=600 crop="fit" %}
+      </div>
+      <div class="detail-image-med">
+          {% cloudinary product.productimage_set.first.image width=400 height=400 crop="fit" %}
+      </div>
+      <div class="detail-image-small">
+          {% cloudinary product.productimage_set.first.image width=300 height=300 crop="fit" %}
+      </div>
+    </div>
   </div>
 </div>
-
 <div class="col-sm-5 product-description">
    <div class="row">
     <div class="col-sm-12">
