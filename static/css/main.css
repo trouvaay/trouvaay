@@ -56,6 +56,9 @@ body {
   padding: 10px 20px;
   border-bottom: 12px #3094B2 solid;
 }
+.top-bar-border {
+  border-top: 12px #3094B2 solid;
+}
 .top-bar .right-side {
   text-align: right;
 }
@@ -817,6 +820,15 @@ a#logo:hover {
   margin-bottom: 40px;
   /*padding-top: 3rem;*/
 }
+.similar-items {
+  background: white;
+  height: 5rem;
+  padding: 1% 5%;
+}
+.similar-items.descrip {
+  background: #f4f4f4;
+}
+
 .product-description .product-slider {
   position: relative;
   width: 845px;
@@ -925,6 +937,10 @@ a#logo:hover {
 
 .info-block.store-profile{
   width: 90%;
+  margin-bottom: 5%;
+}
+.store-addy {
+  margin-top: 5%;
 }
 .info-block h4 {
   font-family: "Quicksand", Arial, sans-serif;

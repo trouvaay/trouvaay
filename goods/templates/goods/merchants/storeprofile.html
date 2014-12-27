@@ -1,5 +1,6 @@
 {% extends 'goods/map/_map_main.html' %}
 {% load staticfiles %}
+{% load cloudinary %}
 {% block mainphoto %}
       <div class="row">
           <div class="col-sm-12">
@@ -8,17 +9,19 @@
               </figure>
           </div>
       </div>
+      <div class="store-addy">
+       {{ store.street }}
+       {{ store.street2 }}</br>
+       {{ store.city }} {{ store.state }}, {{ store.zipcd }}
+      </div>
 {% endblock %}
 
 {% block mainphotodescrip %}
-       <div class="name map"><a href="/{{ product.id }}">{{ store.retailer }}</a></div>
+       <!-- <div class="name map">{{ store.retailer }}</div> -->
        <div class="info-block store-profile">
-           <div class="info">
-               {{ store.street }}
-               {{ store.street2 }}</br>
-               {{ store.city }} {{ store.state }}, {{ store.zipcd }}
-           </div>
+        About {{ store.retailer }}...
        </div>
+       
        <div class="info-block store-profile">
           <div class="info">
                {{ store.description }}
@@ -26,19 +29,21 @@
        </div>    
 {% endblock %}
 {% block itemfeed %}
-<div class="row">
-  <div class="col-sm-12 product-description">
-   <div class="container-fluid" style="max-width: 100%">
-   {{ 'A few other items they carry...'}}
-    <figure>
-      {% for piece in products %}
-        <a href="">
-            <!-- Need to filter for main pic -->
-            <img style="max-height: 200px; max-width: 200px" src="{{ MEDIA_URL }}{{ piece.productimage_set.first.image }}" alt=""/>
-        </a>
-      {% endfor %}
-    </figure>
-   </div>
+<div class="container-fluid top-bar-border" style="max-width: 100%">
+  <div class="row">
+    <div class="col-sm-12 similar-items descrip">
+     {{ 'A few other items they carry...'}}
+    </div>
   </div>
 </div>
+<div class="container-fluid" style="max-width: 100%">
+  <div class="row similar-items">
+    {% for piece in products %}
+      <div class="col-sm-3 product-description">
+        <a href="{% url 'goods:detail' piece.id %}"> {% cloudinary piece.productimage_set.first.image width=150 height=150 crop="fit" %}</a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock %}

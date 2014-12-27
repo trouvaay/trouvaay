@@ -4,7 +4,7 @@
 <div class="main-container">
 <div class="row">
 <div class="col-sm-7 product-description">
-   <div class="container" style="max-width: 100%">
+   <div class="container" style="width: 95%">
       {% block mainphoto %}
       <div class="row">
           <div class="col-sm-12">
@@ -16,10 +16,9 @@
 </div>
 <div class="col-sm-5 product-description">
     {% block mainphotodescrip %}
-       <div class="name map"><a href="/{{ product.id }}">{{ product.short_name }}</a></div>
+       <div class="name map">{{ product.short_name }}</div>
        <div class="info-block">
-           <h5>AVAIlABLE @</h5>
-           <h4><a href="{% url 'goods:storeprofile' store.id %}">{{ store.retailer }}</a></h4>
+           <h5>AVAILABLE @ <a href="{% url 'goods:storeprofile' store.id %}">{{ store.retailer }}</a></h5>
            <div class="info">
                {{ store.street }}
                {{ store.street2 }}</br>
@@ -27,7 +26,7 @@
            </div>
        </div>
        <div class="info-block image">
-          {% cloudinary product.productimage_set.first.image width=80 height=80 crop="fill" %}
+          <a href="{% url 'goods:detail' product.id %}">{% cloudinary product.productimage_set.first.image width=80 height=80 crop="fill" %}</a>
         </div>
        <div class="info-block">
            <h4>Getting there...</h4>

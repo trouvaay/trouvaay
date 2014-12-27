@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
+{% load cloudinary %}
 {% block beginjs %}
 <script type="text/javascript" 
 	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
@@ -69,10 +70,9 @@
     	{% for product in products %}
   		<tr> 
   			<td><h4>{{ product.short_name }}</h4>
-         <figure class="nearby">
-          <img src="{{ MEDIA_URL}}{{ product.productimage_set.first.image }}" alt=""/></figure>
+          {% cloudinary product.productimage_set.first.image width=150 height=150 crop="fit" %}
         </td>
-  			<td><h4><a href="{% url 'goods:popinmap' product.store.id %}">{{ product.store.retailer }}</a></h4>{{ product.store.street }}</td>
+  			<td><h4><a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a></h4>{{ product.store.street }}</td>
   			<td class="dist"></td>
   		</tr>
 		{% endfor %}
