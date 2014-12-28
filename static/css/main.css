@@ -27,7 +27,7 @@
 body {
   font-family: Quicksand;
   font-size: 14px;
-  background: #f4f4f4;
+  background: white;
 }
 .navbar-default {
   background: #f4f4f4;
@@ -3496,7 +3496,7 @@ footer ul li a:hover {
     margin-bottom: 30px;
   }
   .hp-tabs {
-    padding: 40px 0 20px;
+    padding: 0px 0 20px;
   }
   .hp-tabs .nav-tabs > li {
     width: 16%;
@@ -3771,7 +3771,21 @@ footer ul li a:hover {
   display: block;
   margin-bottom: 10%;
   margin-left: 10%;
+  }
+  .container {
+    padding: 0;
+  }
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .info-block {
+    padding-left: 0;
+    padding-right: 0; 
   } 
+  .footer-widget {
+    margin-bottom: .5rem;
+  }
 }
 .centered-child {
   position: relative;
