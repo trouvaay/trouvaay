@@ -50,7 +50,15 @@ class DetailCommentView(SingleObjectMixin, generic.FormView):
 		if not request.user.is_authenticated():
 			return HttpResponseForbidden()
 		self.object = self.get_object()
-		return super(DetailCommentView, self).post(request, *args, **kwargs)
+		form_class = self.get_form_class()
+		form = self.get_form(form_class)
+		form.helper.form_action = reverse('goods:detail', args=[self.object.pk])
+		if form.is_valid():
+			return self.form_valid(form)
+		else:
+			return self.form_invalid(form)
+		
+		
 
 	def form_valid(self, form):
 		model_instance = form.save(commit=False)

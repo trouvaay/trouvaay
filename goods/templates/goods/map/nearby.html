@@ -69,7 +69,8 @@
     	{% for product in products %}
   		<tr> 
   			<td><h4>{{ product.short_name }}</h4>
-          {% cloudinary product.productimage_set.first.image width=150 height=150 crop="fit" %}
+          <a href="{% url 'goods:detail' product.id %}">
+            {% cloudinary product.productimage_set.first.image width=150 height=150 crop="fit" %}</a>
         </td>
   			<td class="dist"><h4><a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a></h4>{{ product.store.street }}</td>
   		</tr>
