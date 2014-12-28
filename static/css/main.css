@@ -3794,6 +3794,9 @@ footer ul li a:hover {
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+.centered-child img {
+  max-width: 100%;
+}
 .centered-parent {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;

@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'members',
     'goods',
     'cloudinary',
+    'debug_toolbar',
     # 'images',
 )
 
