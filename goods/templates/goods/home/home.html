@@ -16,7 +16,9 @@
 		    		$(this).addClass("active");
 		    	}
 	    });
+	    
 	});
+
  </script>
  
  <script type="text/javascript" src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
@@ -50,7 +52,8 @@
 
 		directionsService.route(request, function(result, status) {
 		    if (status == google.maps.DirectionsStatus.OK) {
-		     	$(".dist").eq(prodnum).html(result.routes[0].legs[0].distance.text);
+		    	console.log(result.routes[0].legs[0].distance.text);
+		     	$(".dist").eq(prodnum).append('('+result.routes[0].legs[0].distance.text+')');
 		    }
 		  });
 		}
@@ -69,7 +72,7 @@
 <script type="text/javascript"> 
 	// function  getpoints (userloc) {
 	// 	var products = {{ products_json|safe }};
-
+	// 	console.log(products);
 	// 	var userloc = {
 	// 		'lat': userloc.coords.latitude,
 	// 		'lng': userloc.coords.longitude,

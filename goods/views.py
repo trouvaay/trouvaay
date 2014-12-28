@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
-from goods.models import Product
+from goods.models import Product, Category
 from merchants.models import Store
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import login_required
@@ -23,8 +23,10 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
-		context['products_json'] = serialize('json', context['goods'])
-		context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
+		# context['products_json'] = serialize('json', context['goods'])
+		for room in Category.objects.all():
+			context[(str(room))] = self.model.objects.filter(category=room)
+		# context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
 		context['BaseUrl'] = BASE_URL
 		return context
 

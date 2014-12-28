@@ -10,12 +10,13 @@
         </div>
         <div class="col-sm-6">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab1" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/bed.png' %}" title="bedroom" alt=""/></span></a></li>
-                <li><a href="#tab2" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/couch.png' %}" title="livingroom" alt=""/></span></a></li>
-                <li><a href="#tab3" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/table2.svg' %}" title="dining room"alt=""/></span></a></li>
+                <li class="active"><a href="#tab1" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/couch.png' %}" title="livingroom" alt=""/></span></a></li>
+                <li><a href="#tab2" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/table2.svg' %}" title="dining room"alt=""/></span></a></li>
+                <li><a href="#tab3" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/bed.png' %}" title="bedroom" alt=""/></span></a></li>
                 <li><a href="#tab4" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/lamp.svg' %}" title="office" alt=""/></span></a></li>
                 <li><a href="#tab5" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/other.svg' %}" title="lighting" alt=""/></span></a></li>
                 <li><a href="#tab6" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/tab-img06.png' %}" title="other decor" alt=""/></span></a></li>
+                <li><a href="#tab7" data-toggle="tab"><span class="inner"><img src="{% static 'img/Room-icons/tab-img06.png' %}" title="other decor" alt=""/></span></a></li>
             </ul>
         </div>
     </div>
@@ -25,51 +26,68 @@
         <div class="col-sm-12">
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="tab1">
-                <!--OG temp had 6 tabs for each type of furniture -->
                     <div class="grid-products-wrapper">
-                    <div class="row">
-                    {% for piece in goods %}
-                        <div class="col-xs-12 col-sm-6 col-m-4" style="margin-bottom: 2rem">
-                            <div class="grid-product centered-parent">
-                                <div class="centered-child">
-                                <!-- <a href=""> -->
-                                            <!-- Need to filter for main pic.  Set size limits in css to width: 100%; max-height: 350px -->
-                                        {% cloudinary piece.productimage_set.first.image width=350 height=300 crop="fit" %}
-                                        <!-- Need to update image rendering to below once we get consistent size original pics on Cloudinary -->
-                                        <!-- <img src="{{ BaseUrl }}{{ piece.productimage_set.first.image }}" class="img-responsive"> -->
-                                <!-- </a> -->
-                                </div>
-                                <a href="{{ piece.id }}" class="view-product">
-                                    <div class="text">View product</div>
-                                    <div class="background"></div>
-                                </a>
-                            </div>
-                            <!-- <div class="row"> -->
-                                <div class="col-lg-12 pic-detail-home" style="text-align:left; margin-top: 3px; margin-bottom: 3px;">
-                                    <p style="margin-bottom: 3px"><h5>{{ piece.short_name }}</h5></p>
-                                    <p style="margin-bottom: 3px">{{ piece.store.retailer.short_name|truncatechars:25 }}{{ ' (1.2mi)' }}</p>
-                                </div>
-                            <!-- </div> -->
-                            <div>
-                                <div class="col-xs-3 pic-detail-home">
-                                    ${{ piece.current_price }}
-                                </div>
-                                <div class="col-xs-3">
-                                    <button type="button" class="btn btn-default btn-lg glyphs">
-                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                <div class="col-xs-3">
-                                    <a href="{% url 'goods:popinmap' piece.id %}"><button type="button" class="btn btn-default btn-lg">
-                                        {{ 'Pop-in' }}
-                                    </button></a>
-                                </div>
-                            </div>
-                            </div>  
-                    {% endfor %}
-                    </div>
+                        <div class="row">
+                            {% for piece in living %}
+                                {% include 'goods/home/_home_for_loop.html' %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div><!-- end tab1 -->
+                <div class="tab-pane fade in active" id="tab2">
+                    <div class="grid-products-wrapper">
+                        <div class="row">
+                            {% for piece in dining %}
+                                {% include 'goods/home/_home_for_loop.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div><!-- end tab2 -->
+                <div class="tab-pane fade in active" id="tab3">
+                    <div class="grid-products-wrapper">
+                        <div class="row">
+                            {% for piece in bedroom %}
+                                {% include 'goods/home/_home_for_loop.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div><!-- end tab3 -->
+                 <div class="tab-pane fade in active" id="tab4">
+                    <div class="grid-products-wrapper">
+                        <div class="row">
+                            {% for piece in office %}
+                                {% include 'goods/home/_home_for_loop.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div><!-- end tab4 -->
+                 <div class="tab-pane fade in active" id="tab5">
+                    <div class="grid-products-wrapper">
+                        <div class="row">
+                            {% for piece in lighting %}
+                                {% include 'goods/home/_home_for_loop.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div><!-- end tab5 -->
+                 <div class="tab-pane fade in active" id="tab6">
+                    <div class="grid-products-wrapper">
+                        <div class="row">
+                            {% for piece in decor %}
+                                {% include 'goods/home/_home_for_loop.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div><!-- end tab6 -->
+                <div class="tab-pane fade in active" id="tab7">
+                    <div class="grid-products-wrapper">
+                        <div class="row">
+                            {% for piece in other %}
+                                {% include 'goods/home/_home_for_loop.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div><!-- end tab7 -->
             </div>
         </div>
     </div>
