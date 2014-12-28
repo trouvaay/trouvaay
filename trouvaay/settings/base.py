@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'goods',
     'cloudinary',
     'debug_toolbar',
+    'crispy_forms'
     # 'images',
 )
 
@@ -116,6 +117,8 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR,'templates')]
 

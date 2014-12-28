@@ -65,15 +65,13 @@
     	<tr class="blueback">
     		<td>Item</td>
     		<td>Store</td>
-    		<td>Distance</td>
     	</tr>
     	{% for product in products %}
   		<tr> 
   			<td><h4>{{ product.short_name }}</h4>
           {% cloudinary product.productimage_set.first.image width=150 height=150 crop="fit" %}
         </td>
-  			<td><h4><a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a></h4>{{ product.store.street }}</td>
-  			<td class="dist"></td>
+  			<td class="dist"><h4><a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a></h4>{{ product.store.street }}</td>
   		</tr>
 		{% endfor %}
     </table>
