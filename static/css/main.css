@@ -3802,8 +3802,17 @@ footer ul li a:hover {
   .col-sm-7.product-description {
     width: 100%;
   }
+  .col-sm-5.product-description {
+    padding: 0;
+  }
   .info-block.image {
     margin-left: 25%;
+  }
+  .feedback {
+    width: 100%;
+  }
+  .feedback .comment .user {
+    margin-bottom: 5px;
   }
   .product-description .name {
     margin-left: 0;
