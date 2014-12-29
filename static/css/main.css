@@ -3712,6 +3712,7 @@ footer ul li a:hover {
   }
   .logo-div {
     padding-left: 10px;
+    margin-top: 0px;
   }
   a#logo {
     font-size: 25px;
