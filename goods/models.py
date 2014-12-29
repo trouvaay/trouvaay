@@ -3,6 +3,7 @@ from djorm_pgarray.fields import IntegerArrayField
 # Create your models here.
 from helper import Attributes, AbstractImageModel
 from math import ceil, acos, cos, radians, sin
+from django.utils import timezone
 
 
 class Segment(models.Model):
@@ -61,6 +62,8 @@ class Product(models.Model):
 	def save(self, *args, **kwargs):
 		self.lat = self.store.lat
 		self.lng = self.store.lng
+		if self.is_published == True and not self.pub_date:
+			self.pub_date = timezone.now()
 		super(Product, self).save(*args, **kwargs)
 
 	def getdist(self, UserLat=39.94106319,UserLng=-75.173192):
