@@ -3771,6 +3771,7 @@ footer ul li a:hover {
   display: block;
   margin-bottom: 10%;
   /*margin-left: 10%;*/
+  max-width: 100%;
   }
   .container {
     padding: 0;
