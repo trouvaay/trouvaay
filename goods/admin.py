@@ -25,8 +25,8 @@ class CommentInline(admin.StackedInline):
 
 class ProductAdmin(admin.ModelAdmin):
 	model = Product
-	list_display = ['short_name', 'store', 'current_price', 'original_price']
-	fields = ['short_name', 'store', 'units',('original_price', 'current_price'), 
+	list_display = ['short_name', 'store', 'current_price', 'original_price', 'is_published']
+	fields = [('short_name', 'is_published'), 'store', 'units',('original_price', 'current_price'), 
 				'pub_date', ('style','segment','category','subcategory','material')]
 	# filter_horizontal = ['style','segment','category','subcategory','material']
 	inlines = [ProductImageInline, CommentInline]

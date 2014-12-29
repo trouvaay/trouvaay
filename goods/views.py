@@ -21,11 +21,15 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 	model = Product
 	# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)
 
+	def get_queryset(self):
+		queryset = self.model.objects.filter(is_published=True)
+		return queryset
+
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
 		# context['products_json'] = serialize('json', context['goods'])
 		for room in Category.objects.all():
-			context[(str(room))] = self.model.objects.filter(category=room)
+			context[(str(room))] = self.model.objects.filter(category=room, is_published=True)
 		# context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
 		context['BaseUrl'] = BASE_URL
 		return context
@@ -88,8 +92,14 @@ class NearbyView(LoginRequiredMixin, generic.ListView):
 	context_object_name = 'products'
 	model = Product
 
+	def get_queryset(self):
+		queryset = self.model.objects.filter(is_published=True)
+		print('get query ran!')
+		return queryset
+
 	def get_context_data(self, **kwargs):
 		context = super(NearbyView, self).get_context_data(**kwargs)
+		# print (context['products'])
 		context['products_json'] = serialize('json', context['products'])
 		return context
 
