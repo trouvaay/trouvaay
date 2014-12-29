@@ -3511,7 +3511,7 @@ footer ul li a:hover {
     padding: 1.5% 0;
   }
   .homepage-quote .text {
-    font-size: 150%;
+    font-size: 130%;
     line-height: 30px;
   }
   .homepage-slider .slides li {
@@ -3770,7 +3770,7 @@ footer ul li a:hover {
   .detail-image-small {
   display: block;
   margin-bottom: 10%;
-  margin-left: 10%;
+  /*margin-left: 10%;*/
   }
   .container {
     padding: 0;
