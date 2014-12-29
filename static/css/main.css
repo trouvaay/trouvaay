@@ -3698,7 +3698,24 @@ footer ul li a:hover {
   .detail-image-large {
   display: none;
   }
-  
+  #main-menu {
+    display: none;
+  }
+  .collapse {
+    display: inline-block;
+  }
+  .icon-bar {
+    background: #7a7a7a;
+  }
+  .navbar-toggle {
+    border: 1px solid #7a7a7a;
+  }
+  .logo-div {
+    padding-left: 10px;
+  }
+  a#logo {
+    font-size: 25px;
+  }
   .navbar-default .navbar-toggle:focus {
     outline: none;
     background: transparent;
