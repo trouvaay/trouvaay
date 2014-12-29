@@ -35,15 +35,16 @@
 
       directionsService.route(request, function(result, status, i) {
           if (status == google.maps.DirectionsStatus.OK) {
-            console.log(result.routes[0].legs[0].distance.text);
           }
         });
 
-
+      
+      var pinCounter = parseInt(i)+1;
      	var homeMarker = new google.maps.Marker({
         		position: productpos,
         		map: map,
-        		tite: products[i].fields.short_name
+            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld='+pinCounter+'|FF0000|000000',
+        		title: products[i].fields.short_name
       });
      };
   };
@@ -68,7 +69,7 @@
     	</tr>
     	{% for product in products %}
   		<tr> 
-  			<td><h4>{{ product.short_name }}</h4>
+  			<td><h4><b>{{ forloop.counter }}{{ '. '}}</b>{{ product.short_name }}</h4>
           <a href="{% url 'goods:detail' product.id %}">
             {% cloudinary product.productimage_set.first.image width=150 height=150 crop="fit" %}</a>
         </td>
