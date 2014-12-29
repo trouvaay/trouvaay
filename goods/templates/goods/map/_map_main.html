@@ -26,7 +26,7 @@
            </div>
        </div>
        <div class="info-block image">
-          <a href="{% url 'goods:detail' product.id %}">{% cloudinary product.productimage_set.first.image width=80 height=80 crop="fill" %}</a>
+          <a href="{% url 'goods:detail' product.id %}">{% cloudinary product.productimage_set.first.image width=150 height=150 crop="fill" %}</a>
         </div>
        <div class="info-block">
            <h4>Getting there...</h4>

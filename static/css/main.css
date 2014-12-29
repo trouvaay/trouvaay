@@ -3786,6 +3786,16 @@ footer ul li a:hover {
   .footer-widget {
     margin-bottom: .5rem;
   }
+  .product-description .name.map {
+    margin: 0 auto 10px;
+    width: 100%;
+  }
+  .col-sm-7.product-description {
+    width: 100%;
+  }
+  .info-block.image {
+    margin-left: 25%;
+  }
 }
 .centered-child {
   position: relative;
