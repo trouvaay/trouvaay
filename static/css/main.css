@@ -3783,7 +3783,15 @@ footer ul li a:hover {
   .info-block {
     padding-left: 0;
     padding-right: 0; 
-  } 
+    padding-bottom: 2px;
+  }
+  .info-block h4 {
+   line-height: 45px;
+  }
+  .info-block.story {
+    padding-left: 0;
+    padding-right: 0; 
+  }
   .footer-widget {
     margin-bottom: .5rem;
   }
@@ -3796,6 +3804,13 @@ footer ul li a:hover {
   }
   .info-block.image {
     margin-left: 25%;
+  }
+  .product-description .name {
+    margin-left: 0;
+    font-size: 15px;
+    font-weight: 500;
+    width: 100%;
+    padding: 3% 10%;
   }
 }
 .centered-child {
