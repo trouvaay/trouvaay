@@ -141,7 +141,7 @@
         $("#mob-nav").on('click',function() {
                 if (!$('#mobil-nav').length ) {
                     console.log('yoyo');
-                  $(".container-fluid.top-bar").after("<div id='mobil-nav' class='navbar-collapse'><ul class='nav navbar-nav'><li class='divider'></li><li><a href='{% url 'goods:home' %}'>Discover</a></li><li><a href='{% url 'goods:nearby' %}'>Nearby</a></li><li><a href='#'>About</a></li><li class='divider'></li><li><a class='insta-icon' href='http://instagram.com/raredoor/' target='_blank'><img src='{% static 'img/instagram-icon32.png' %}'/></a></li><li><a class='insta-icon' href='https://twitter.com/RareDoor/' target='_blank'><img src='{% static 'img/twitter-icon.jpeg' %}' height='35px'/></a></li></ul></div>");
+                  $(".container-fluid.top-bar").after("<div id='mobil-nav' class='navbar-collapse'><ul class='nav navbar-nav'><li class='divider'></li><li><a href='{% url 'goods:home' %}'>Discover</a></li><li><a href='{% url 'goods:nearby' %}'>Nearby</a></li><li><a href='#'>About</a></li><li class='divider'></li><li><a style='display:inline-block' class='insta-icon' href='http://instagram.com/raredoor/' target='_blank'><img src='{% static 'img/instagram-icon32.png' %}'/></a><a style='display:inline-block' class='insta-icon' href='https://twitter.com/RareDoor/' target='_blank'><img src='{% static 'img/twitter-icon.jpeg' %}' height='35px'/></a></li></ul></div>");
                 } else {
                   $("#mobil-nav").remove();
                 }
