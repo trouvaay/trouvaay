@@ -7,11 +7,13 @@ from django.utils.text import capfirst
 
 class CustomAuthenticationForm(AuthenticationForm):
 
-	email = forms.EmailField(max_length=254)
+	email = forms.EmailField(max_length=254, widget=forms.TextInput(attrs={'placeholder':'email'}))
+	
 
 	def __init__(self, *args, **kargs):
 		super(CustomAuthenticationForm, self).__init__(*args, **kargs)
 		del self.fields['username']
+		self.fields['password'].widget.attrs['placeholder'] = 'password'
 		UserModel = get_user_model()
 		self.username_field = UserModel._meta.get_field(UserModel.USERNAME_FIELD)
 		if self.fields['email'].label is None:
