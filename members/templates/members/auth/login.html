@@ -9,7 +9,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
-	        <h4 class="modal-title">Welcome Back! Please login</h4>
+	        <h5 class="modal-title">Welcome! Please login</h5>
 	      </div>
 	      <div class="modal-body">
 	        {% if form.errors %}
@@ -19,8 +19,8 @@
 			{% csrf_token %}
 			<table>
 			<tr>
-			    <td>{{ form.email }}</td>
-			</tr>
+			    <td style="padding-bottom: 20px">{{ form.email }}</td>
+			</tr></br>
 			<tr>
 			    <td>{{ form.password }}</td>
 			</tr>
