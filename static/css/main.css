@@ -2466,14 +2466,14 @@ form .form-checkbox-wrap .checkbox-label {
   float: left;
 }
 .hp-tabs .nav-tabs > li.active > a {
-  background: #333333;
+  background: coral;
   border: none;
 }
 .hp-tabs .nav-tabs > li.active > a:after {
-  border-top-color: #333333;
+  border-top-color: coral;
 }
 .hp-tabs .nav-tabs > li.active > a:hover {
-  background: #333333;
+  background: coral;
 }
 .hp-tabs .nav-tabs > li > a {
   border: none;
