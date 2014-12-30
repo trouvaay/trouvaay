@@ -10,8 +10,12 @@
                             <li class="comment">
                                 {% for comment in comments %}
                                 <div class="user">
-                                    <a href="#"> {{ comment.authuser }}</a>
-                                    says 2 days ago:
+                                    <b>{{ comment.authuser }}</b> {{ ' said' }}
+                                    {% if comment.days_since_add %}
+                                        {{ comment.days_since_add }} days ago:
+                                    {% else %}
+                                        today:
+                                    {% endif %}
                                 </div>
                                 <div class="content">
                                     {{ comment.message }}

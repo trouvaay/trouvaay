@@ -102,6 +102,12 @@ class Comment(models.Model):
 	is_published = models.BooleanField(default=True)
 	pub_date = models.DateTimeField(null=True, blank=True)
 
+	def days_since_add(self):
+		delta = timezone.now() - self.added_date
+		time_lapse = delta.days
+
+		return int(time_lapse)
+
 
 
 
