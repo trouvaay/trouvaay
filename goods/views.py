@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.contrib.messages.views import SuccessMessageMixin
 from django.utils import timezone
 from goods.models import Product, Category
 from merchants.models import Store
@@ -45,10 +46,11 @@ class DetailView(generic.DetailView):
 		context['form'] = CommentForm()
 		return context
 
-class DetailCommentView(SingleObjectMixin, generic.FormView):
+class DetailCommentView(SingleObjectMixin, SuccessMessageMixin, generic.FormView):
 	template_name = 'goods/detail/detail.html'
 	form_class = CommentForm
 	model = Product
+	success_message = "comment was posted"
 
 	def post(self, request, *args, **kwargs):
 		if not request.user.is_authenticated():
