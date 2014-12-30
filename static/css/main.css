@@ -2312,7 +2312,7 @@ form .form-checkbox-wrap .checkbox-label {
   outline: none;
 }
 .modal {
-  max-width: 90%;
+  max-width: 95%;
   margin: auto;
 }
 .modal-dialog {
@@ -2324,22 +2324,13 @@ form .form-checkbox-wrap .checkbox-label {
   margin-left: -310px;
 }
 .modal-dialog .modal-body {
-  padding: 0;
+  padding: 20px 0;
 }
 .modal-dialog .modal-content {
   float: left;
-  padding: 20px;
+  padding: 10px;
   border: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  -webkit-border-radius: 0px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
-  -moz-background-clip: padding;
-  border-radius: 0px;
-  background-clip: padding-box;
-  outline: none;
+  max-width: 100%;
 }
 .modal-dialog .modal-content h3 {
   margin: 0;
