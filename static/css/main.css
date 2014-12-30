@@ -3808,7 +3808,8 @@ footer ul li a:hover {
   }
   .info-block.story {
     padding-left: 0;
-    padding-right: 0; 
+    padding-right: 0;
+    width:95%; 
   }
   .footer-widget {
     margin-bottom: .5rem;
@@ -3821,7 +3822,7 @@ footer ul li a:hover {
     width: 100%;
   }
   .col-sm-5.product-description {
-    padding: 0;
+    /*padding: 0;*/
   }
   .info-block.image {
     margin-left: 25%;
