@@ -3715,7 +3715,7 @@ footer ul li a:hover {
     margin-top: 0px;
   }
   a#logo {
-    font-size: 25px;
+    font-size: 20px;
   }
   .navbar-default .navbar-toggle:focus {
     outline: none;
@@ -3839,7 +3839,18 @@ footer ul li a:hover {
     width: 100%;
     padding: 3% 10%;
   }
+  .top-bar {
+    padding: 2px 20px;
+    border-bottom: 8px #3094B2 solid;
+  }
+  .navbar-toggle {
+    padding: 5px;
+  }
+  .hp-tabs .nav-tabs > li {
+    width: 25%;
+  }
 }
+
 .centered-child {
   position: relative;
   top: 50%;
