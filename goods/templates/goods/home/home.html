@@ -11,12 +11,18 @@
  <script type="text/javascript">
 	$(document).ready(function(){
 	    $(".btn.btn-default.glyphs").click(function() {
+	    	var like = 1;
+	    	var id = $(this).attr("id");
+	    	// var csrftoken = $.cookie('csrftoken');
+	    	var data = {'like': like, 'id': id};
 	   		if ($(this).hasClass("active")) {
 		    	$(this).removeClass("active");
+		    	like = -1; 
 		    	}
-		    	else {
-		    		$(this).addClass("active");
+		    else {
+		    	$(this).addClass("active");
 		    	}
+	    	$.post("{% url 'members:like' %}", data);
 	    });
 	    
 	});
@@ -87,5 +93,6 @@
  // //    	// senduserloctoserver(userloc)
 
 	// navigator.geolocation.getCurrentPosition(getpoints);
+	$
 </script>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.test import TestCase
-
+from django.contrib.auth.hashers import check_password
 from members.models import AuthUser
 from django.utils import timezone
 
@@ -33,7 +33,9 @@ class AuthUserTestCase(TestCase):
 		self.assertEqual(shopper.is_merchant, False)
 
 	def test_date_joined_field_for_new_added_member(self):
+		"""Test password reset method"""
 		shopper = AuthUser.objects.get(email='shopper@gmail.com')
-		self.assertEqual(shopper.date_joined, timezone.now())
+		shopper.set_password('pickle')
+		self.assertTrue(check_password('pickle',shopper.password))
 
 	

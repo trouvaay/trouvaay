@@ -29,7 +29,7 @@ class ProductAdmin(admin.ModelAdmin):
 	fields = [('short_name', 'is_published'), 'store', 'units',('original_price', 'current_price'), 
 				'pub_date', ('style','segment','category','subcategory','material')]
 	# filter_horizontal = ['style','segment','category','subcategory','material']
-	inlines = [ProductImageInline, CommentInline]
+	inlines = [ProductImageInline]
 	search_fields = ['short_name', 'long_name','store']
 	list_filter = ['store']
 

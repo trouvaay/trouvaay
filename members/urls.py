@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'members/auth/login.html', 'authentication_form' : CustomAuthenticationForm}, name='login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
     url(r'^signup/$', views.SignupView.as_view(), name='signup'),
+    url(r'^productlike/$', views.ProductLike, name='like'),
 
 )

@@ -3,6 +3,7 @@ from django.views import generic
 from members.models import AuthUserActivity, AuthUser
 from members.forms import CustomAuthenticationForm
 from django.contrib.auth import views
+from django.views.decorators.csrf import csrf_exempt
 
 class ClosetView(generic.ListView):
 	template_name = 'members/closet/closet.html'
@@ -26,3 +27,12 @@ class SignupView(generic.CreateView):
 	template_name = 'members/auth/signup.html'
 	model = AuthUser
 	form_class = CustomAuthenticationForm
+
+@csrf_exempt
+def ProductLike(request):
+
+	if request.method == "POST":
+		print("shit yall", request.user.email)
+	pass
+
+
