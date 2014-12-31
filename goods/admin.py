@@ -15,7 +15,7 @@ class TagAdmin(admin.ModelAdmin):
 
 class ProductImageInline(admin.StackedInline):
 	model = ProductImage
-	fields = (('name','image','is_main'),)
+	fields = (('image','is_main'),)
 	verbose_name = 'photo'
 
 class CommentInline(admin.StackedInline):

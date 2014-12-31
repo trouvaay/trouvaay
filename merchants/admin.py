@@ -7,7 +7,7 @@ class ShipperAdmin(admin.ModelAdmin):
 
 class RetailerImageInline(admin.StackedInline):
 	model = RetailerImage
-	fields = (('name','image','is_main'),)
+	fields = (('image','is_main'),)
 	verbose_name = 'photo'
 
 class RetailerAdmin(admin.ModelAdmin):
