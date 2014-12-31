@@ -1,12 +1,18 @@
 from django.contrib import admin
-from merchants.models import Retailer, Store, Shipper
+from merchants.models import Retailer, Store, Shipper, RetailerImage
 
 
 class ShipperAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone', 'email']
 
+class RetailerImageInline(admin.StackedInline):
+	model = RetailerImage
+	fields = (('name','image','is_main'),)
+	verbose_name = 'photo'
+
 class RetailerAdmin(admin.ModelAdmin):
     list_display = ['legal_name', 'owner', 'website']
+    inlines = [RetailerImageInline]
 
 class StoreAdmin(admin.ModelAdmin):
 	model = Store
