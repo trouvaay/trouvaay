@@ -90,3 +90,4 @@ class AuthUserAdmin(UserAdmin):
     filter_horizontal = ('groups', 'user_permissions',)
 
 admin.site.register(AuthUser, AuthUserAdmin)
+admin.site.register(AuthUserActivity)

@@ -81,3 +81,6 @@ class AuthUserActivity(models.Model):
 	authuser = models.ForeignKey(AuthUser)
 	saved_items = models.ManyToManyField('goods.Product')
 	style = models.ManyToManyField('goods.Style') #need to add other attrs
+
+	def __str__(self):
+		return ('user: '+self.authuser.email+' ;  items: ')

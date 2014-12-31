@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser
+from goods.models import Product
 from members.forms import CustomAuthenticationForm
 from django.contrib.auth import views
 from django.views.decorators.csrf import csrf_exempt
@@ -32,7 +33,12 @@ class SignupView(generic.CreateView):
 def ProductLike(request):
 
 	if request.method == "POST":
-		print("shit yall", request.user.email)
+		userinstance = request.user
+		product = Product.objects.get(pk=int(request.POST['id'][6:]))
+		u = AuthUserActivity(authuser=userinstance)
+		u.save()
+		u.saved_items.add(product)
+		print ('product added')
 	pass
 
 
