@@ -11,7 +11,6 @@ cloudinary.config(
 from cloudinary.models import CloudinaryField
 
 class AbstractImageModel(models.Model):
-	name = models.CharField(max_length=50, null=True, blank=True)
 	is_main = models.BooleanField(default=False)
 	image = CloudinaryField('image')
 	# size_type = models.Charfield()  need to add choices for thumb, tile, and large
@@ -19,10 +18,6 @@ class AbstractImageModel(models.Model):
 	class Meta:
 		abstract = True
 		app_label = 'goods'
-
-	def __str__(self):
-		return self.name
-
 
 
 def MakeSlug(string,spaceChar='+',Maxlen=None):

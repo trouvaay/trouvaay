@@ -79,6 +79,9 @@ class ProductImage(AbstractImageModel):
 	class Meta:
 		app_label = 'goods'
 
+	def __str__(self):
+		return self.product.short_name
+
 class ProductActivity(models.Model):
 	product = models.ForeignKey(Product)
 	likes = models.IntegerField(default=0)

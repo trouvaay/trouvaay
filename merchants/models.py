@@ -23,6 +23,9 @@ class RetailerImage(AbstractImageModel):
 	class Meta:
 		app_label = 'merchants'
 
+	def __str__(self):
+		return self.retailer.short_name
+
 class Shipper(models.Model):
 	name = models.CharField(max_length=100, unique=True)
 	phone = PhoneNumberField(max_length=12)
