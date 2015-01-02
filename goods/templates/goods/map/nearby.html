@@ -40,7 +40,7 @@
     };
       
       var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
-      initialize(products, userloc);
+      initializemap(products, userloc);
       for (i in products) {
         add_dists(userpos,products[i],i);
       } 
