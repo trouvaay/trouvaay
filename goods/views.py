@@ -95,8 +95,7 @@ class NearbyView(LoginRequiredMixin, generic.ListView):
 	model = Product
 
 	def get_queryset(self):
-		queryset = self.model.objects.filter(is_published=True)
-		print('get query ran!')
+		queryset = self.model.objects.filter(is_published=True)[:3]
 		return queryset
 
 	def get_context_data(self, **kwargs):

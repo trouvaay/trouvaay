@@ -6,48 +6,9 @@
 	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
 </script>
 <script type="text/javascript">
-  var directionsService = new google.maps.DirectionsService();
-	function initialize (products, userloc) {    
-    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
-    
-    var mapOptions = {
-	    center: userpos,
-	    zoom: 12
-    };
+  
 
-    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);	
-
-    var UserPin = new google.maps.Marker({
-		    position: userpos,
-		    map: map,
-		    title: 'You'
-	    });
-
-    for (i in products) {
-      
-      var productpos = new google.maps.LatLng(products[i].fields.lat, products[i].fields.lng);
-
-      var request = {
-          origin: userpos,
-          destination: productpos,
-          travelMode: google.maps.TravelMode.DRIVING
-      };
-
-      directionsService.route(request, function(result, status, i) {
-          if (status == google.maps.DirectionsStatus.OK) {
-          }
-        });
-
-      
-      var pinCounter = parseInt(i)+1;
-     	var homeMarker = new google.maps.Marker({
-        		position: productpos,
-        		map: map,
-            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld='+pinCounter+'|FF0000|000000',
-        		title: products[i].fields.short_name
-      });
-     };
-  };
+	
     
 
 </script>{% endblock %}
@@ -62,11 +23,8 @@
 </div>
 
 <div class="container">
+  <h4>A few local items you might like...</h4>
     <table class="table">
-    	<tr class="blueback">
-    		<td>Item</td>
-    		<td>Store</td>
-    	</tr>
     	{% for product in products %}
   		<tr> 
   			<td><h4><b>{{ forloop.counter }}{{ '. '}}</b>{{ product.short_name }}</h4>
@@ -87,7 +45,50 @@
      'lat': userloc.coords.latitude,
      'lng': userloc.coords.longitude,
     };
-     initialize(products, userloc); 
+      
+      var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+      initialize(products, userloc);
+      for (i in products) {
+        add_dists(userpos,products[i],i);
+      } 
+    };
+
+    function initialize (products, userpos) {        
+      var mapOptions = {
+        center: userpos,
+        zoom: 12
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions); 
+      var UserPin = new google.maps.Marker({
+          position: userpos,
+          map: map,
+          title: 'You'
+        });
+      for (i in products) {
+        var productpos = new google.maps.LatLng(products[i].fields.lat, products[i].fields.lng);
+        var pinCounter = parseInt(i)+1;
+        var homeMarker = new google.maps.Marker({
+              position: productpos,
+              map: map,
+              icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld='+pinCounter+'|FF0000|000000',
+              title: products[i].fields.short_name
+        });
+       };
+    };
+  
+    function add_dists(userpos, prod, prodnum) {
+      var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
+      var request = {
+            origin: userpos,
+            destination: productpos,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+      var directionsService = new google.maps.DirectionsService();
+      directionsService.route(request, function(result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+            }
+            $(".dist").eq(prodnum).append('</br>('+result.routes[0].legs[0].distance.text+')');
+          });
     };
 	navigator.geolocation.getCurrentPosition(getpoints);
 </script>
