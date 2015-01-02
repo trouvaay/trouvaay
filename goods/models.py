@@ -56,6 +56,7 @@ class Product(models.Model):
 	material = models.ManyToManyField(Material, null=True, blank=True)
 	added_date = models.DateTimeField(auto_now_add=True)
 	pub_date = models.DateTimeField()
+	is_sold = models.BooleanField(default=False)
 	is_published = models.BooleanField(default=True)
 	lat = models.FloatField(null=True, blank=True)
 	lng = models.FloatField(null=True, blank=True)
