@@ -35,8 +35,8 @@
            <h4>{% for subcategory in product.subcategory.all %}{{ subcategory }}{% endfor %} {% if product.segment.all %}({% for segment in product.segment.all %}{{ segment }}){% endfor %}{% endif %}</h4>
        </div>  
         <div class="info-block">
-           <h4>AVAIlABLE @ <a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a></h4>
-           <h5 class="get-in-store"> <a href="{% url 'goods:popinmap' product.id %}">Get In-Store</a></h5>
+           <h4>AVAIlABLE @ <br><a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a></h4>
+           <h5 class="get-in-store"> (<a href="{% url 'goods:popinmap' product.id %}">Get In-Store</a>)</h5>
        </div>  
        <div class="info-block">
            <h4>MADE OF</h4>

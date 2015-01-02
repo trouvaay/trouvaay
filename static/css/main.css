@@ -206,6 +206,7 @@ a#logo:hover {
 .sold {
   font-weight: 700;
   font-style: italic;
+  color: coral;
 }
 .tab-container .tab-content {
   width: 100%;
@@ -949,7 +950,7 @@ a#logo:hover {
 .info-block h4 {
   font-family: "Quicksand", Arial, sans-serif;
   font-size: 14px;
-  line-height: 50px;
+  line-height: 40px;
   font-weight: 700;
   color: #333;
   text-transform: uppercase;
