@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="detail-image-large">
-          {% cloudinary product.productimage_set.first.image width=600 height=600 crop="fit" %}
+          {% cloudinary product.productimage_set.first.image width=550 height=550 crop="fit" %}
       </div>
       <div class="detail-image-med">
           {% cloudinary product.productimage_set.first.image width=400 height=400 crop="fit" %}
@@ -25,7 +25,7 @@
         </p>
         </div>
        <div class="info-block">
-           <h4>{{ 'LoveSeat' }}/{{ 'New' }}</h4>
+           <h4>{% for subcategory in product.subcategory.all %}{{ subcategory }}{% endfor %} ({% for segment in product.segment.all %}{{ segment }}{% endfor %})</h4>
        </div>  
         <div class="info-block">
            <h4>AVAIlABLE @ <a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a></h4>
@@ -34,15 +34,17 @@
        <div class="info-block">
            <h4>MADE OF</h4>
            <div class="info">
-               {{ 'Leather' }}
+               {% for material in product.material.all %}{{ material }}{% endfor %}
            </div>
        </div>
+       {% if product.dimensions %}
        <div class="info-block">
            <h4>DIMENSIONS</h4>
            <div class="info">
-               {{ '26.4W X 24.8D X 28H' }}
+               
            </div>
        </div>
+       {% else %}{% endif %}
        <div class="info-block">
            <h4>COLOR</h4>
            <div class="info">
