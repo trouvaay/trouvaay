@@ -21,7 +21,7 @@
        <div class="name">{{ product.short_name }}</div></br>
        <div class=" info-block story">
         <p>
-          Mauris aliquam a ipsum id lacinia. Suspendisse neque ipsum, condimentum id lacinia non, luctus in dui. Praesent eu aliquam massa. Mauris blandit euismod lorem a suscipit. Phasellus a mauris diam. In posuere ipsum at tellus luctus pretium. 
+          <!-- Mauris aliquam a ipsum id lacinia. Suspendisse neque ipsum, condimentum id lacinia non, luctus in dui. Praesent eu aliquam massa. Mauris blandit euismod lorem a suscipit. Phasellus a mauris diam. In posuere ipsum at tellus luctus pretium.  -->
         </p>
         </div>
        <div class="info-block">
@@ -34,7 +34,7 @@
        <div class="info-block">
            <h4>MADE OF</h4>
            <div class="info">
-               {% for material in product.material.all %}{{ material }}{% endfor %}
+               {% for material in product.material.all %}<p>{{ material }}</p>{% endfor %}
            </div>
        </div>
        {% if product.dimensions %}
