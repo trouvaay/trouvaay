@@ -6,10 +6,10 @@
           <div class="col-sm-12">
               <div class="grid-product centered-parent">
                 <div class="centered-child detail-image-large">
-                        {% cloudinary retailer.retailerimage_set.first.image width=750 height=550 crop="fit" %}
+                        {% cloudinary retailer.retailerimage_set.first.image width=750 height=400 crop="fit" %}
                 </div>
                 <div class="centered-child detail-image-med">
-                        {% cloudinary retailer.retailerimage_set.first.image width=450 height=450 crop="fit" %}
+                        {% cloudinary retailer.retailerimage_set.first.image width=450 height=350 crop="fit" %}
                 </div>
                 <div class="centered-child detail-image-small">
                         {% cloudinary retailer.retailerimage_set.first.image width=275 height=275 crop="fit" %}
