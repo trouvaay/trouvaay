@@ -5,14 +5,7 @@
 <script type="text/javascript" 
 	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
 </script>
-<script type="text/javascript">
-  
-
-	
-    
-
-</script>{% endblock %}
-
+{% endblock %}
 {% block content %}
 <div class="container">
     <div class="row" style="margin-top: 40px;">
@@ -53,43 +46,43 @@
       } 
     };
 
-    function initialize (products, userpos) {        
-      var mapOptions = {
-        center: userpos,
-        zoom: 12
+  function initializemap (products, userpos) {        
+    var mapOptions = {
+      center: userpos,
+      zoom: 12
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions); 
+    var UserPin = new google.maps.Marker({
+        position: userpos,
+        map: map,
+        title: 'You'
+      });
+    for (i in products) {
+      var productpos = new google.maps.LatLng(products[i].fields.lat, products[i].fields.lng);
+      var pinCounter = parseInt(i)+1;
+      var homeMarker = new google.maps.Marker({
+            position: productpos,
+            map: map,
+            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld='+pinCounter+'|FF0000|000000',
+            title: products[i].fields.short_name
+      });
+     };
+  };
+
+  function add_dists(userpos, prod, prodnum) {
+    var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
+    var request = {
+          origin: userpos,
+          destination: productpos,
+          travelMode: google.maps.TravelMode.DRIVING
       };
-      var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions); 
-      var UserPin = new google.maps.Marker({
-          position: userpos,
-          map: map,
-          title: 'You'
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route(request, function(result, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+          }
+          $(".dist").eq(prodnum).append('</br>('+result.routes[0].legs[0].distance.text+')');
         });
-      for (i in products) {
-        var productpos = new google.maps.LatLng(products[i].fields.lat, products[i].fields.lng);
-        var pinCounter = parseInt(i)+1;
-        var homeMarker = new google.maps.Marker({
-              position: productpos,
-              map: map,
-              icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld='+pinCounter+'|FF0000|000000',
-              title: products[i].fields.short_name
-        });
-       };
-    };
-  
-    function add_dists(userpos, prod, prodnum) {
-      var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
-      var request = {
-            origin: userpos,
-            destination: productpos,
-            travelMode: google.maps.TravelMode.DRIVING
-        };
-      var directionsService = new google.maps.DirectionsService();
-      directionsService.route(request, function(result, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-            }
-            $(".dist").eq(prodnum).append('</br>('+result.routes[0].legs[0].distance.text+')');
-          });
-    };
+  };
 	navigator.geolocation.getCurrentPosition(getpoints);
 </script>
 {% endblock %}

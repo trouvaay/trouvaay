@@ -13,6 +13,7 @@ from braces.views import LoginRequiredMixin
 from goods.forms import CommentForm
 from django.views.generic.detail import SingleObjectMixin
 from pprint import pprint as pp
+from random import randint
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
@@ -95,7 +96,11 @@ class NearbyView(LoginRequiredMixin, generic.ListView):
 	model = Product
 
 	def get_queryset(self):
-		queryset = self.model.objects.filter(is_published=True)[:3]
+		# Temporary 'curation' of nearby products.  currently just taking first 4 items
+		#will eventually need to update to reflect likes of user
+		UserCatPrefNum = randint(0,Category.objects.count()-1)
+		UserCatPref = Category.objects.all()[UserCatPrefNum]
+		queryset = self.model.objects.filter(category=UserCatPref,is_published=True)[:4]
 		return queryset
 
 	def get_context_data(self, **kwargs):
