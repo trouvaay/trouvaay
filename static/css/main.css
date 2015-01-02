@@ -956,6 +956,9 @@ a#logo:hover {
   border-top: solid 1px #e5e5e5;
   margin: 0;
 }
+.info-block.first h4 {
+  border-top: none
+}
 .product-description .info-block .info {
   font-family: "Courier New", Arial, sans-serif;
   font-size: 14px;
@@ -983,6 +986,10 @@ a#logo:hover {
   width: 295px;
   padding-left: 40px;
   margin-top: 1rem;
+}
+.price-box {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .price-wrapper .price {
   float: left;
