@@ -23,7 +23,9 @@
     <!-- </div> -->
     <div>
         <div class="col-xs-3 pic-detail-home">
-            ${{ piece.current_price }}
+            {% if piece.is_sold %}<span class="sold">{{ 'Sold' }}</span>
+            {% else %} ${{ piece.current_price }}
+            {% endif %}
         </div>
         <div class="col-xs-3">
             <button type="button" class="btn btn-default btn-lg glyphs" id="heart_{{ piece.id }}">

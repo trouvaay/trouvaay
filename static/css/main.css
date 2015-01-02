@@ -203,6 +203,10 @@ a#logo:hover {
   background: #f4f4f4;
   padding-bottom: 75px;
 }
+.sold {
+  font-weight: 700;
+  font-style: italic;
+}
 .tab-container .tab-content {
   width: 100%;
   float: left;
