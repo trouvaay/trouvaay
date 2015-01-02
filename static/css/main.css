@@ -208,6 +208,9 @@ a#logo:hover {
   font-style: italic;
   color: coral;
 }
+.icon-label {
+  color: rgb(34, 34, 44);
+}
 .tab-container .tab-content {
   width: 100%;
   float: left;
