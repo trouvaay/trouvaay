@@ -27,7 +27,8 @@ class ProductAdmin(admin.ModelAdmin):
 	model = Product
 	list_display = ['short_name', 'id', 'store', 'current_price', 'original_price', 'is_published']
 	fields = [('short_name', 'is_published'), 'store', 'units',('original_price', 'current_price'), 
-				'pub_date', ('style','segment','category','subcategory','material','color','dimensions')]
+				'pub_date', ('style','segment','category','subcategory','material','color'),
+				'width','depth','height','seat_height','diameter','bed_size']
 	# filter_horizontal = ['style','segment','category','subcategory','material']
 	inlines = [ProductImageInline]
 	search_fields = ['short_name', 'long_name','store']
