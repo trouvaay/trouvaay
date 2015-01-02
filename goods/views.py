@@ -95,12 +95,14 @@ class NearbyView(LoginRequiredMixin, generic.ListView):
 	context_object_name = 'products'
 	model = Product
 
+	# Temporary 'curation' of nearby products.  currently just taking first 4 items
+	#will eventually need to update to reflect likes of user
+	UserCatPref = Category.objects.all()[randint(0,Category.objects.count()-1)]
+
 	def get_queryset(self):
-		# Temporary 'curation' of nearby products.  currently just taking first 4 items
-		#will eventually need to update to reflect likes of user
-		UserCatPrefNum = randint(0,Category.objects.count()-1)
-		UserCatPref = Category.objects.all()[UserCatPrefNum]
-		queryset = self.model.objects.filter(category=UserCatPref,is_published=True)[:4]
+		
+		
+		queryset = self.model.objects.filter(category=self.UserCatPref,is_published=True)[:4]
 		return queryset
 
 	def get_context_data(self, **kwargs):
