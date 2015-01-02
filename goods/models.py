@@ -1,5 +1,4 @@
 from django.db import models
-from djorm_pgarray.fields import IntegerArrayField
 # Create your models here.
 from helper import Attributes, AbstractImageModel
 from math import ceil, acos, cos, radians, sin
@@ -41,7 +40,6 @@ class Product(models.Model):
 	manufacturer = models.CharField(max_length=25, null=True, blank=True)
 	units = models.IntegerField(default=1)
 	care = models.TextField(null=True, blank=True)
-	dimensions = IntegerArrayField(dimension=3)
 	width = models.IntegerField(null=True, blank=True)
 	depth = models.IntegerField(null=True, blank=True)
 	height = models.IntegerField(null=True, blank=True)
