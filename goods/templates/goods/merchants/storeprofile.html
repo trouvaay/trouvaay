@@ -4,29 +4,36 @@
 {% block mainphoto %}
       <div class="row">
           <div class="col-sm-12">
-              <figure>
-                <img style="width: 100%" src="{% static 'img/GregoryMichaels.jpeg' %}" alt=""/>
-              </figure>
+              <div class="grid-product centered-parent">
+                <div class="centered-child detail-image-large">
+                        {% cloudinary retailer.retailerimage_set.first.image width=750 height=750 crop="fit" %}
+                </div>
+                <div class="centered-child detail-image-med">
+                        {% cloudinary retailer.retailerimage_set.first.image width=450 height=450 crop="fit" %}
+                </div>
+                <div class="centered-child detail-image-small">
+                        {% cloudinary retailer.retailerimage_set.first.image width=275 height=275 crop="fit" %}
+                </div>
+              </div>
           </div>
       </div>
-      <div class="store-addy">
-       {{ store.street }}
-       {{ store.street2 }}</br>
-       {{ store.city }} {{ store.state }}, {{ store.zipcd }}
-      </div>
+     
 {% endblock %}
 
 {% block mainphotodescrip %}
        <!-- <div class="name map">{{ store.retailer }}</div> -->
+        <div class="info-block store-addy">
+           {{ store.street }}
+           {{ store.street2 }}</br>
+           {{ store.city }} {{ store.state }}, {{ store.zipcd }}
+        </div> 
        <div class="info-block store-profile">
-        About {{ store.retailer }}...
-       </div>
-       
-       <div class="info-block store-profile">
+          About {{ retailer }}...
           <div class="info">
                {{ store.description }}
           </div>
-       </div>    
+       </div>
+
 {% endblock %}
 {% block itemfeed %}
 <div class="container-fluid top-bar-border" style="max-width: 100%">

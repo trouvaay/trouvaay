@@ -131,4 +131,5 @@ class StoreView(LoginRequiredMixin, generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(StoreView, self).get_context_data(**kwargs)
 		context['products'] = self.object.product_set.all()
+		context['retailer'] = self.object.retailer
 		return context
