@@ -10,12 +10,13 @@
         </div>
         <div class="col-sm-9">
             <ul class="nav nav-tabs pull-left">
-                <li class="active"><a href="#tab1" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bedroom128.png' %}" title="bedroom" alt=""/></span><span class="inner icon-label" style="display:list-item">living</span></a></li>
-                <li><a href="#tab2" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/diningroom128.png' %}" title="diningroom" alt=""/></span><span class="inner icon-label" style="display:list-item">dining</span></a></li>
-                <li><a href="#tab3" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bedroom128.png' %}" title="bedroom" alt=""/></span><span class="inner icon-label" style="display:list-item">bedroom</span></a></li>
-                <li><a href="#tab4" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/office128.png' %}" title="office" alt=""/></span><span class="inner icon-label" style="display:list-item">office</span></a></li>
-                <li><a href="#tab5" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a></li>
-                <li><a href="#tab6" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/other128.png' %}" title="decor" alt=""/></span><span class="inner icon-label" style="display:list-item">decor</span></a></li>
+                <li class="active first"><a href="#tab1" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">everything</span></a></li>
+                <li><a href="#tab2" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/livingroom128.png' %}" title="livingroom" alt=""/></span><span class="inner icon-label" style="display:list-item">living</span></a></li>
+                <li><a href="#tab3" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/diningroom128.png' %}" title="diningroom" alt=""/></span><span class="inner icon-label" style="display:list-item">dining</span></a></li>
+                <li><a href="#tab4" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bedroom128.png' %}" title="bedroom" alt=""/></span><span class="inner icon-label" style="display:list-item">bedroom</span></a></li>
+                <li><a href="#tab5" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/office128.png' %}" title="office" alt=""/></span><span class="inner icon-label" style="display:list-item">office</span></a></li>
+                <li><a href="#tab6" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a></li>
+                <li><a href="#tab7" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/other128.png' %}" title="decor" alt=""/></span><span class="inner icon-label" style="display:list-item">decor</span></a></li>
             </ul>
         </div>
     </div>
@@ -27,7 +28,7 @@
                 <div class="tab-pane fade in active" id="tab1">
                     <div class="grid-products-wrapper">
                         <div class="row">
-                            {% for piece in living %}
+                            {% for piece in goods %}
                                 {% include 'goods/home/_home_for_loop.html' %}
                             {% endfor %}
                         </div>
@@ -36,7 +37,7 @@
                 <div class="tab-pane fade in active" id="tab2">
                     <div class="grid-products-wrapper">
                         <div class="row">
-                            {% for piece in dining %}
+                            {% for piece in living %}
                                 {% include 'goods/home/_home_for_loop.html' %}
                             {% endfor %}
                         </div>
@@ -45,16 +46,16 @@
                 <div class="tab-pane fade in active" id="tab3">
                     <div class="grid-products-wrapper">
                         <div class="row">
-                            {% for piece in bedroom %}
+                            {% for piece in dining %}
                                 {% include 'goods/home/_home_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>
                 </div><!-- end tab3 -->
-                 <div class="tab-pane fade in active" id="tab4">
+                <div class="tab-pane fade in active" id="tab4">
                     <div class="grid-products-wrapper">
                         <div class="row">
-                            {% for piece in office %}
+                            {% for piece in bedroom %}
                                 {% include 'goods/home/_home_for_loop.html' %}
                             {% endfor %}
                         </div>
@@ -63,7 +64,7 @@
                  <div class="tab-pane fade in active" id="tab5">
                     <div class="grid-products-wrapper">
                         <div class="row">
-                            {% for piece in lighting %}
+                            {% for piece in office %}
                                 {% include 'goods/home/_home_for_loop.html' %}
                             {% endfor %}
                         </div>
@@ -72,21 +73,22 @@
                  <div class="tab-pane fade in active" id="tab6">
                     <div class="grid-products-wrapper">
                         <div class="row">
-                            {% for piece in decor %}
+                            {% for piece in lighting %}
                                 {% include 'goods/home/_home_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>
                 </div><!-- end tab6 -->
-                <div class="tab-pane fade in active" id="tab7">
+                 <div class="tab-pane fade in active" id="tab7">
                     <div class="grid-products-wrapper">
                         <div class="row">
-                            {% for piece in other %}
+                            {% for piece in decor %}
                                 {% include 'goods/home/_home_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>
                 </div><!-- end tab7 -->
+            
             </div>
         </div>
     </div>

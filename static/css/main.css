@@ -3524,13 +3524,13 @@ footer ul li a:hover {
     padding: 0px 0 20px;
   }
   .hp-tabs .nav-tabs > li {
-    width: 16%;
+    width: 25%;
   }
   .hp-tabs .nav-tabs > li a {
     height: 80px;
   }
   .hp-tabs .nav-tabs > li a .inner img {
-    width: 100%;
+    /*width: 100%;*/
   }
   .homepage-quote {
     padding: 1.5% 0;
@@ -3874,6 +3874,9 @@ footer ul li a:hover {
   }
   .hp-tabs .nav-tabs > li {
     width: 33%;
+  }
+  .hp-tabs .nav-tabs > li.first {
+    width: 100%;
   }
   .nav .nav-divider {
     border-bottom: #e5e5e5 2px solid;
