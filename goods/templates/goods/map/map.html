@@ -56,20 +56,18 @@
 	// var outty = navigator.geolocation.getCurrentPosition(initialize);
 	var store = {
 
-		// 'lat': {{ store.lat }},
-		// 'lng': {{ store.lng }},
-		'lat': 37.798530,
-		'lng': -122.417966,
+		'lat': {{ store.lat }},
+		'lng': {{ store.lng }},
 	}
-	function  getpoints (userloc) {
+	function  getpoints () {
 		var userloc = {
-			'lat': userloc.coords.latitude,
-			'lng': userloc.coords.longitude,
+			'lat': 37.798530,
+			'lng': -122.417966,
 		}
 		
 		initialize(store, userloc);
 		
-	}
+	};
 	navigator.geolocation.getCurrentPosition(getpoints);
 	
 </script>
