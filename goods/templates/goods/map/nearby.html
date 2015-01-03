@@ -35,8 +35,10 @@
 	function  getpoints (userloc) {
     var products = {{ products_json|safe }};
     var userloc = {
-     'lat': userloc.coords.latitude,
-     'lng': userloc.coords.longitude,
+     // 'lat': userloc.coords.latitude,
+     // 'lng': userloc.coords.longitude,
+     'lat': 37.798530,
+    'lng': -122.417966,
     };
       
       var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
