@@ -24,7 +24,8 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 	# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)
 
 	def get_queryset(self):
-		queryset = self.model.objects.filter(is_published=True)
+		queryset = self.model.objects.filter(is_published=True)[:6]
+		print (queryset)
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -34,6 +35,8 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 			context[(str(room))] = self.model.objects.filter(category=room, is_published=True)
 		# context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
 		context['BaseUrl'] = BASE_URL
+		print ('these are goods')
+		print(context['goods'])
 		return context
 
 class DetailView(generic.DetailView):
@@ -100,7 +103,6 @@ class NearbyView(LoginRequiredMixin, generic.ListView):
 	UserCatPref = Category.objects.all()[randint(0,Category.objects.count()-1)]
 
 	def get_queryset(self):
-		
 		
 		queryset = self.model.objects.filter(category=self.UserCatPref,is_published=True)[:4]
 		return queryset
