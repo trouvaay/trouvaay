@@ -883,6 +883,10 @@ a#logo:hover {
 .product-description .product-slider .flex-control-paging a:hover {
   background: #fd575f;
 }
+.container .row .col-sm-7.product-description,
+.container .row .col-sm-5.product-description {
+  margin-top: 20px;
+}
 .product-description .heading {
   float: left;
   width: 90%;
@@ -892,7 +896,7 @@ a#logo:hover {
   color: white;
   background: #333;
   margin-left: 2rem;
-  padding: 20px 10%;
+  padding: 12px 10%;
   letter-spacing: 2px;
 }
 .get-in-store {
@@ -3876,7 +3880,8 @@ footer ul li a:hover {
     width: 33%;
   }
   .hp-tabs .nav-tabs > li.first {
-    width: 100%;
+    width: 68%;
+    margin-left: 16%;
   }
   .nav .nav-divider {
     border-bottom: #e5e5e5 2px solid;
