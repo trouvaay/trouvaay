@@ -2871,7 +2871,7 @@ footer ul li a:hover {
 }
 .homepage-quote .text,
 .hp-tabs .text {
-  font-family: Quicksand, Arial, sans-serif;
+  font-family: "Avenir", Arial, sans-serif;
   font-size: 2rem;
   line-height: 4rem;
   font-weight: 300;
@@ -2888,6 +2888,21 @@ footer ul li a:hover {
 .container-fluid.tab-icons .row{
   padding: 1rem;
 }
+.heading {
+  color: #333;
+  text-transform: none;
+  text-align: center;
+  font-weight: 400;
+  line-height: 30px;
+  font-family: "Avenir";
+}
+.heading.main-quote {
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 130%;
+}
 .hp-tabs .text {
   color: #333;
   text-transform: none;
@@ -2899,7 +2914,7 @@ footer ul li a:hover {
   max-height: 30px;
 }
 
-.homepage-quote .text a {
+.homepage-quote .heading a {
   font-weight: bold;
   text-decoration: none;
   color: #333333;
