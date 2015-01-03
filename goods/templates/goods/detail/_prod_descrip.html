@@ -18,7 +18,7 @@
 <div class="col-sm-5 product-description">
   <div class="row">
     <div class="col-sm-12" style="width:90%">
-       <div class="name">{{ product.short_name }}</div></br>
+       <div class="heading">{{ product.short_name }}</div></br>
     </div>
   </div>
   <div class="row price-box">
@@ -35,25 +35,25 @@
            <h4>{% for subcategory in product.subcategory.all %}{{ subcategory }}{% endfor %} {% if product.segment.all %}({% for segment in product.segment.all %}{{ segment }}){% endfor %}{% endif %}</h4>
        </div>  
         <div class="info-block">
-           <h4>AVAIlABLE @ <br><a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a></h4>
-           <h5 class="get-in-store"> (<a href="{% url 'goods:popinmap' product.id %}">Get In-Store</a>)</h5>
+           <h4>Available @ </h4><a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a>
+           <p class="get-in-store"> (<a href="{% url 'goods:popinmap' product.id %}">Get In-Store</a>)</p>
        </div>  
        <div class="info-block">
-           <h4>MADE OF</h4>
+           <h4>Materials</h4>
            <div class="info">
                {% for material in product.material.all %}<p>{{ material }}</p>{% endfor %}
            </div>
        </div>
        {% if product.dimensions %}
        <div class="info-block">
-           <h4>DIMENSIONS</h4>
+           <h4>Dimensions</h4>
            <div class="info">
                
            </div>
        </div>
-       {% else %}{% endif %}
+       {% else %}poo{% endif %}
        <div class="info-block">
-           <h4>COLOR</h4>
+           <h4>Color</h4>
            <div class="info">
                {{ product.color }}
            </div>

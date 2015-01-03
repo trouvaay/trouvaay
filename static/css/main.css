@@ -29,6 +29,11 @@ body {
   font-size: 14px;
   background: white;
 }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Avenir";
+  font-weight: 600;
+  /*text-transform: ;*/
+}
 .navbar-default {
   background: #f4f4f4;
   border: none;
@@ -878,24 +883,22 @@ a#logo:hover {
 .product-description .product-slider .flex-control-paging a:hover {
   background: #fd575f;
 }
-.product-description .name {
+.product-description .heading {
   float: left;
   width: 90%;
-  font-family: "Quicksand", Arial, sans-serif;
-  font-size: 20px;
+  /*font-size: 20px;
   line-height: 30px;
-  font-weight: 300;
+  font-weight: 300;*/
   color: white;
   background: #333;
   margin-left: 2rem;
   padding: 20px 10%;
   letter-spacing: 2px;
-  text-transform: uppercase;
 }
 .get-in-store {
     margin: 0px;
   }
-.product-description .name.map {
+.product-description .heading.map {
   display: inline-block;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -951,7 +954,6 @@ a#logo:hover {
   margin-top: 5%;
 }
 .info-block h4 {
-  font-family: "Quicksand", Arial, sans-serif;
   font-size: 14px;
   line-height: 40px;
   font-weight: 700;
@@ -964,7 +966,6 @@ a#logo:hover {
   border-top: none
 }
 .product-description .info-block .info {
-  font-family: "Courier New", Arial, sans-serif;
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
@@ -1000,9 +1001,9 @@ a#logo:hover {
   letter-spacing: 1.5px;
   border: solid 2px #333;
   font-family: "Quicksand", Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 25px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 0 10px;
   color: #333;
 }
@@ -2255,11 +2256,9 @@ form .styled-select {
 form label {
   width: 100%;
   float: left;
-  font-family: "Courier New", Arial, sans-serif;
   font-size: 14px;
   line-height: 30px;
   font-weight: 400;
-  color: #969696;
   letter-spacing: 1.5px;
   margin-bottom: 0;
   height: 30px;
