@@ -1473,6 +1473,9 @@ a#logo:hover {
   -o-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
 }
+.view-product:hover {
+  text-decoration: none;
+}
 .grid-product .view-product .text {
   font-family: "Quicksand", Arial, sans-serif;
   font-size: 11px;
@@ -1489,6 +1492,7 @@ a#logo:hover {
   text-align: center;
   text-decoration: none;
 }
+
 .grid-product .view-product .background {
   position: absolute;
   top: 0;
