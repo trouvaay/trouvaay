@@ -1,0 +1,96 @@
+{% extends '_base.html' %}
+
+ {% block content %}
+    {% include 'goods/new/_new_pic_tile.html' %}
+
+ {% endblock content %}
+ {% block modal %}{% endblock %}
+ {% block endjs %}
+ <script type="text/javascript">
+	$(document).ready(function(){
+	    $(".btn.btn-default.glyphs").click(function() {
+	    	var like = 1;
+	    	var id = $(this).attr("id");
+	    	// var csrftoken = $.cookie('csrftoken');
+	    	var data = {'like': like, 'id': id};
+	   		if ($(this).hasClass("active")) {
+		    	$(this).removeClass("active");
+		    	like = -1; 
+		    	}
+		    else {
+		    	$(this).addClass("active");
+		    	}
+	    	$.post("{% url 'members:like' %}", data);
+	    });
+	    
+	});
+
+ </script>
+ 
+ <script type="text/javascript" src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
+</script>
+<script type="text/javascript">
+	
+	var directionsDisplay;
+	var directionsService = new google.maps.DirectionsService();
+	var map
+
+	function initialize (storelat, storelng, userloc, prodnum) {    
+	    // directionsDisplay = new google.maps.DirectionsRenderer();
+	    // stepDisplay = new google.maps.InfoWindow();
+	    var storepos = new google.maps.LatLng(storelat, storelng);
+	    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+	    
+	    // var mapOptions = {
+		   //  center: storepos,
+		   //  zoom: 12
+	    // };
+
+	    // map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	    // directionsDisplay.setMap(map);
+	    
+		var request = {
+		    origin: userpos,
+		    destination: storepos,
+		    travelMode: google.maps.TravelMode.DRIVING
+		};
+		// var dist
+
+		directionsService.route(request, function(result, status) {
+		    if (status == google.maps.DirectionsStatus.OK) {
+		    	console.log(result.routes[0].legs[0].distance.text);
+		     	$(".dist").eq(prodnum).append('('+result.routes[0].legs[0].distance.text+')');
+		    }
+		  });
+		}
+		// function showSteps(directionResult) {
+  // 			var myDuration = directionResult.routes[0].legs[0].duration.text;
+  // 			var myDistance = directionResult.routes[0].legs[0].distance.text;
+  // 			var myinstructions = [ ]
+  // 			for ( i in directionResult.routes[0].legs[0].steps) {
+  // 				myinstructions[i] = directionResult.routes[0].legs[0].steps[i].instructions;	
+  // 			}
+  // 			var directionsPanel = document.getElementById("directions");
+  // 			directionsPanel.innerHTML = "<h5>" + myDuration + " - " + myDistance + "</h5></br>" + myinstructions; 
+  		// }
+
+</script>
+<script type="text/javascript"> 
+	// function  getpoints (userloc) {
+	// 	var products = {{ products_json|safe }};
+	// 	console.log(products);
+	// 	var userloc = {
+	// 		'lat': userloc.coords.latitude,
+	// 		'lng': userloc.coords.longitude,
+	// 	};
+	// 	var distances = []
+	// 	for (i in products) {
+	// 		initialize(products[i].fields.lat, products[i].fields.lng, userloc, i);
+	// 		}	
+	// };
+ // //    	// senduserloctoserver(userloc)
+
+	// navigator.geolocation.getCurrentPosition(getpoints);
+	$
+</script>
+{% endblock %}

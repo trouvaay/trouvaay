@@ -1,98 +1,98 @@
 {% extends '_base.html' %}
-
- {% block content %}
-    {% include 'goods/home/_home_slider.html' %}
-    {% include 'goods/home/_home_quote.html' %}
-    {% include 'goods/home/_home_pic_tile.html' %}
-
- {% endblock content %}
- {% block modal %}{% endblock %}
- {% block endjs %}
- <script type="text/javascript">
-	$(document).ready(function(){
-	    $(".btn.btn-default.glyphs").click(function() {
-	    	var like = 1;
-	    	var id = $(this).attr("id");
-	    	// var csrftoken = $.cookie('csrftoken');
-	    	var data = {'like': like, 'id': id};
-	   		if ($(this).hasClass("active")) {
-		    	$(this).removeClass("active");
-		    	like = -1; 
-		    	}
-		    else {
-		    	$(this).addClass("active");
-		    	}
-	    	$.post("{% url 'members:like' %}", data);
-	    });
-	    
-	});
-
- </script>
- 
- <script type="text/javascript" src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
+{% load staticfiles %}
+{% load cloudinary %}
+{% block beginjs %}
+<script type="text/javascript" 
+	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
 </script>
-<script type="text/javascript">
-	
-	var directionsDisplay;
-	var directionsService = new google.maps.DirectionsService();
-	var map
+{% endblock %}
 
-	function initialize (storelat, storelng, userloc, prodnum) {    
-	    // directionsDisplay = new google.maps.DirectionsRenderer();
-	    // stepDisplay = new google.maps.InfoWindow();
-	    var storepos = new google.maps.LatLng(storelat, storelng);
-	    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
-	    
-	    // var mapOptions = {
-		   //  center: storepos,
-		   //  zoom: 12
-	    // };
+{% block modal %}{% endblock %}
 
-	    // map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-	    // directionsDisplay.setMap(map);
-	    
-		var request = {
-		    origin: userpos,
-		    destination: storepos,
-		    travelMode: google.maps.TravelMode.DRIVING
-		};
-		// var dist
+{% block content %}
+  {% include 'goods/home/_home_slider.html' %}
+  {% include 'goods/home/_home_quote.html' %}
+  <div class="container">
+      <div class="row" style="margin-top: 40px;">
+            <div class="col-sm-12 product-description" style="width:100%">
+                <div id="map-canvas"> </div>
+            </div>
+        </div>
+  </div>
 
-		directionsService.route(request, function(result, status) {
-		    if (status == google.maps.DirectionsStatus.OK) {
-		    	console.log(result.routes[0].legs[0].distance.text);
-		     	$(".dist").eq(prodnum).append('('+result.routes[0].legs[0].distance.text+')');
-		    }
-		  });
-		}
-		// function showSteps(directionResult) {
-  // 			var myDuration = directionResult.routes[0].legs[0].duration.text;
-  // 			var myDistance = directionResult.routes[0].legs[0].distance.text;
-  // 			var myinstructions = [ ]
-  // 			for ( i in directionResult.routes[0].legs[0].steps) {
-  // 				myinstructions[i] = directionResult.routes[0].legs[0].steps[i].instructions;	
-  // 			}
-  // 			var directionsPanel = document.getElementById("directions");
-  // 			directionsPanel.innerHTML = "<h5>" + myDuration + " - " + myDistance + "</h5></br>" + myinstructions; 
-  		// }
-
-</script>
+  <div class="container">
+    {% if products %}
+      <h4>A few local items you might like...</h4>
+        <table class="table">
+        	{% for product in products %}
+        		<tr> 
+        			<td><h4><b>{{ forloop.counter }}{{ '. '}}</b>{{ product.short_name }}</h4>
+                <a href="{% url 'goods:detail' product.id %}">
+                  {% cloudinary product.productimage_set.first.image width=150 height=150 crop="fit" %}</a>
+              </td>
+        			<td class="dist"><h4><a href="{% url 'goods:storeprofile' product.store.id %}">{{ product.store.retailer }}</a></h4>{{ product.store.street }}</td>
+        		</tr>
+    		  {% endfor %}
+        </table>
+      {% else %} Sorry we dont cover in stores in this vicinity yet
+      {% endif %}
+  </div>
+{% endblock %}
+{% block endjs %}
 <script type="text/javascript"> 
-	// function  getpoints (userloc) {
-	// 	var products = {{ products_json|safe }};
-	// 	console.log(products);
-	// 	var userloc = {
-	// 		'lat': userloc.coords.latitude,
-	// 		'lng': userloc.coords.longitude,
-	// 	};
-	// 	var distances = []
-	// 	for (i in products) {
-	// 		initialize(products[i].fields.lat, products[i].fields.lng, userloc, i);
-	// 		}	
-	// };
- // //    	// senduserloctoserver(userloc)
+	function  getpoints (userloc) {
+    var products = {{ products_json|safe }};
+    var userloc = {
+     // 'lat': userloc.coords.latitude,
+     // 'lng': userloc.coords.longitude,
+     'lat': 37.798530,
+    'lng': -122.417966,
+    };
+      
+      var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+      initializemap(products, userloc);
+      for (i in products) {
+        add_dists(userpos,products[i],i);
+      } 
+    };
 
-	// navigator.geolocation.getCurrentPosition(getpoints);
-	$
+  function initializemap (products, userpos) {        
+    var mapOptions = {
+      center: userpos,
+      zoom: 12
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions); 
+    var UserPin = new google.maps.Marker({
+        position: userpos,
+        map: map,
+        title: 'You'
+      });
+    for (i in products) {
+      var productpos = new google.maps.LatLng(products[i].fields.lat, products[i].fields.lng);
+      var pinCounter = parseInt(i)+1;
+      var homeMarker = new google.maps.Marker({
+            position: productpos,
+            map: map,
+            icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld='+pinCounter+'|FF0000|000000',
+            title: products[i].fields.short_name
+      });
+     };
+  };
+
+  function add_dists(userpos, prod, prodnum) {
+    var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
+    var request = {
+          origin: userpos,
+          destination: productpos,
+          travelMode: google.maps.TravelMode.DRIVING
+      };
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route(request, function(result, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+          }
+          $(".dist").eq(prodnum).append('</br>('+result.routes[0].legs[0].distance.text+')');
+        });
+  };
+	navigator.geolocation.getCurrentPosition(getpoints);
 </script>
 {% endblock %}
