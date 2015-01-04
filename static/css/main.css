@@ -59,10 +59,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   float: left;
   background: white;
   padding: 10px 20px;
-  border-bottom: 5px #3094B2 solid;
+  border-bottom: 3px #3094B2 solid;
 }
 .top-bar-border {
-  border-top: 12px #3094B2 solid;
+  border-top: 3px #3094B2 solid;
+  margin-bottom: 20px;
 }
 .top-bar .right-side {
   text-align: right;
@@ -1496,6 +1497,11 @@ a#logo:hover {
   margin-top: -15px;
   text-align: center;
   text-decoration: none;
+}
+.grid-product .view-product .text.sold {
+  font-size: 9px;
+  line-height: 30px;
+  margin-bottom:  10px;
 }
 
 .grid-product .view-product .background {

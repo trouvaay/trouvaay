@@ -19,7 +19,7 @@ BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
 class HomeView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/home/home.html'
-	context_object_name = 'products'
+	context_object_name = 'pieces'
 	model = Product
 
 	# Temporary 'curation' of nearby products.  currently just taking first 4 items
@@ -28,13 +28,21 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(category=self.UserCatPref,is_published=True)[:4]
+		queryset = self.model.objects.filter(is_published=True, is_sold=False)[:3]
 		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
 		# print (context['products'])
-		context['products_json'] = serialize('json', context['products'])
+		context['products_json'] = serialize('json', context['pieces'])
+		try:
+			context['sold_pieces'] = self.model.objects.filter(is_published=True, is_sold=True)[0]
+		except:
+			pass
+		try:
+			context['featured_pieces'] = self.model.objects.filter(is_published=True, is_sold=True)[0]
+		except:
+			pass
 		return context
 
 class NewView(LoginRequiredMixin, generic.ListView):
@@ -116,7 +124,7 @@ class DetailRouteView(LoginRequiredMixin, generic.View):
 
 
 class MapView(LoginRequiredMixin, generic.DetailView):
-	template_name = 'goods/map/map.html'
+	template_name = 'goods/home/map.html'
 	context_object_name = 'product'
 	model = Product
 
