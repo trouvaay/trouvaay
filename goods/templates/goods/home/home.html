@@ -39,7 +39,8 @@
         {% with sold_pieces as piece %}{% include 'goods/home/_home_sold.html' %}{% endwith %}
       </div>
       <div class="col-xs-12 col-sm-8 col-m-8" style="margin-bottom: 2rem">
-      {% with featured_pieces as piece %}
+      
+      {% if featured_pieces %}{% with featured_pieces as piece %}
         <div class="grid-products-wrapper">
           <div class="row">
             <div class="col-xs-8">
@@ -50,6 +51,9 @@
             </div>
           </div>
         {% endwith %}
+        {% else %}
+          <!--need to add image -->        
+        {% endif %}
         </div>
     </div>
   </div>
