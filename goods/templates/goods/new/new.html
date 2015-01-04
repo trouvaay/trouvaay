@@ -1,6 +1,15 @@
 {% extends '_base.html' %}
 
  {% block content %}
+ 	<div class="container-fluid homepage-quote">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="heading main-quote">
+                Your personal feed of item we think you might like.<br/>improve your feed by <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> the items you like. 
+            </div>
+        </div>
+    </div>
+	</div>
     {% include 'goods/new/_new_pic_tile.html' %}
 
  {% endblock content %}
