@@ -54,7 +54,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(is_published=True,segment=self.new)[:6]
+		queryset = self.model.objects.filter(is_published=True,segment=self.new)
 		return queryset
 
 	def get_context_data(self, **kwargs):
