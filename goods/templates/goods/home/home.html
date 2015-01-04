@@ -24,7 +24,7 @@
     <div class="grid-products-wrapper">
         <div class="row">
             {% for piece in pieces %}
-                {% include 'goods/new/_new_for_loop.html' %}
+                {% include 'goods/home/_home_for_loop.html' %}
             {% endfor %}
         </div>
     </div>
@@ -35,8 +35,22 @@
 </div>
   <div class="container">
     <div class="row">
-      {% with sold_pieces as piece %}{% include 'goods/home/_home_sold.html' %}{% endwith %}
-      {% with featured_pieces as piece %}{% include 'goods/home/_home_featured.html' %}{% endwith %}
+      <div class="col-xs-12 col-sm-4 col-m-4" style="margin-bottom: 2rem">
+        {% with sold_pieces as piece %}{% include 'goods/home/_home_sold.html' %}{% endwith %}
+      </div>
+      <div class="col-xs-12 col-sm-8 col-m-8" style="margin-bottom: 2rem">
+      {% with featured_pieces as piece %}
+        <div class="grid-products-wrapper">
+          <div class="row">
+            <div class="col-xs-8">
+              {% include 'goods/home/_home_featured.html' %}
+            </div>
+            <div class="col-xs-4 vcenter">
+              <div>{{ piece.description }}</div>
+            </div>
+          </div>
+        {% endwith %}
+        </div>
     </div>
   </div>
 {% endblock %}

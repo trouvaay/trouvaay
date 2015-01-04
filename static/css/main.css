@@ -1393,9 +1393,16 @@ a#logo:hover {
 }
 .grid-product {
   width: 100%;
-  height: 350px;
+  height: 300px;
   position: relative;
   
+  width: 100%;
+  /*margin: 2rem;*/
+}
+.grid-product.homepg {
+  width: 100%;
+  height: 275px;
+  position: relative;
   width: 100%;
   /*margin: 2rem;*/
 }
@@ -3909,4 +3916,9 @@ footer ul li a:hover {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }

@@ -40,7 +40,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 		except:
 			pass
 		try:
-			context['featured_pieces'] = self.model.objects.filter(is_published=True, is_sold=True)[0]
+			context['featured_pieces'] = self.model.objects.filter(is_published=True, is_featured=True)[0]
 		except:
 			pass
 		return context
