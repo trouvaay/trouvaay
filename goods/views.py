@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils import timezone
-from goods.models import Product, Category
+from goods.models import Product, Category, Segment
 from merchants.models import Store
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import login_required
@@ -19,24 +19,51 @@ BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
 class HomeView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/home/home.html'
-	context_object_name = 'goods'
+	context_object_name = 'pieces'
 	model = Product
-	# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)
+
+	# Temporary 'curation' of nearby products.  currently just taking first 4 items
+	#will eventually need to update to reflect likes of user
+	UserCatPref = Category.objects.all()[randint(0,Category.objects.count()-1)]
 
 	def get_queryset(self):
-		queryset = self.model.objects.filter(is_published=True)[:6]
-		print (queryset)
+		
+		queryset = self.model.objects.filter(is_published=True, is_sold=False)[:3]
 		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
+		# print (context['products'])
+		context['products_json'] = serialize('json', context['pieces'])
+		try:
+			context['sold_pieces'] = self.model.objects.filter(is_published=True, is_sold=True)[0]
+		except:
+			pass
+		try:
+			context['featured_pieces'] = self.model.objects.filter(is_published=True, is_featured=True)[0]
+		except:
+			pass
+		return context
+
+class NewView(LoginRequiredMixin, generic.ListView):
+	template_name = 'goods/new/new.html'
+	context_object_name = 'goods'
+	model = Product
+	new = Segment.objects.filter(select='new')[0]
+	# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)
+
+	def get_queryset(self):
+		
+		queryset = self.model.objects.filter(is_published=True,segment=self.new)
+		return queryset
+
+	def get_context_data(self, **kwargs):
+		context = super(NewView, self).get_context_data(**kwargs)
 		# context['products_json'] = serialize('json', context['goods'])
 		for room in Category.objects.all():
-			context[(str(room))] = self.model.objects.filter(category=room, is_published=True)
+			context[(str(room))] = self.model.objects.filter(category=room, is_published=True, segment=self.new)
 		# context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
 		context['BaseUrl'] = BASE_URL
-		print ('these are goods')
-		print(context['goods'])
 		return context
 
 class DetailView(generic.DetailView):
@@ -93,29 +120,11 @@ class DetailRouteView(LoginRequiredMixin, generic.View):
 		return view(request, *args, **kwargs)
 
 
-class NearbyView(LoginRequiredMixin, generic.ListView):
-	template_name = 'goods/map/nearby.html'
-	context_object_name = 'products'
-	model = Product
 
-	# Temporary 'curation' of nearby products.  currently just taking first 4 items
-	#will eventually need to update to reflect likes of user
-	UserCatPref = Category.objects.all()[randint(0,Category.objects.count()-1)]
-
-	def get_queryset(self):
-		
-		queryset = self.model.objects.filter(category=self.UserCatPref,is_published=True)[:4]
-		return queryset
-
-	def get_context_data(self, **kwargs):
-		context = super(NearbyView, self).get_context_data(**kwargs)
-		# print (context['products'])
-		context['products_json'] = serialize('json', context['products'])
-		return context
 
 
 class MapView(LoginRequiredMixin, generic.DetailView):
-	template_name = 'goods/map/map.html'
+	template_name = 'goods/home/map.html'
 	context_object_name = 'product'
 	model = Product
 

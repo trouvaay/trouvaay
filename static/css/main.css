@@ -59,10 +59,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   float: left;
   background: white;
   padding: 10px 20px;
-  border-bottom: 12px #3094B2 solid;
+  border-bottom: 3px #3094B2 solid;
 }
 .top-bar-border {
-  border-top: 12px #3094B2 solid;
+  border-top: 3px #3094B2 solid;
+  margin-bottom: 20px;
 }
 .top-bar .right-side {
   text-align: right;
@@ -1392,9 +1393,16 @@ a#logo:hover {
 }
 .grid-product {
   width: 100%;
-  height: 350px;
+  height: 300px;
   position: relative;
   
+  width: 100%;
+  /*margin: 2rem;*/
+}
+.grid-product.homepg {
+  width: 100%;
+  height: 275px;
+  position: relative;
   width: 100%;
   /*margin: 2rem;*/
 }
@@ -1496,6 +1504,11 @@ a#logo:hover {
   margin-top: -15px;
   text-align: center;
   text-decoration: none;
+}
+.grid-product .view-product .text.sold {
+  font-size: 9px;
+  line-height: 30px;
+  margin-bottom:  10px;
 }
 
 .grid-product .view-product .background {
@@ -3903,4 +3916,9 @@ footer ul li a:hover {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }

@@ -3,12 +3,12 @@
 <section class="hp-tabs">
 <div class="container-fluid tab-icons">
     <div class="row">
-        <div class="col-sm-offset-1 col-sm-2">
+        <div class="col-sm-offset-1 col-sm-2 col-md-offset-2 col-md-2">
             <div class="heading">
-                What are you looking for? <br/>
+                Refine by room <br/>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-9 col-md-8">
             <ul class="nav nav-tabs pull-left">
                 <li class="active first"><a href="#tab1" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">want it all</span></a></li>
                 <li><a href="#tab2" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/livingroom128.png' %}" title="livingroom" alt=""/></span><span class="inner icon-label" style="display:list-item">living</span></a></li>
@@ -29,7 +29,7 @@
                     <div class="grid-products-wrapper">
                         <div class="row">
                             {% for piece in goods %}
-                                {% include 'goods/home/_home_for_loop.html' %}
+                                {% include 'goods/new/_new_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                     <div class="grid-products-wrapper">
                         <div class="row">
                             {% for piece in living %}
-                                {% include 'goods/home/_home_for_loop.html' %}
+                                {% include 'goods/new/_new_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="grid-products-wrapper">
                         <div class="row">
                             {% for piece in dining %}
-                                {% include 'goods/home/_home_for_loop.html' %}
+                                {% include 'goods/new/_new_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     <div class="grid-products-wrapper">
                         <div class="row">
                             {% for piece in bedroom %}
-                                {% include 'goods/home/_home_for_loop.html' %}
+                                {% include 'goods/new/_new_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="grid-products-wrapper">
                         <div class="row">
                             {% for piece in office %}
-                                {% include 'goods/home/_home_for_loop.html' %}
+                                {% include 'goods/new/_new_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                     <div class="grid-products-wrapper">
                         <div class="row">
                             {% for piece in lighting %}
-                                {% include 'goods/home/_home_for_loop.html' %}
+                                {% include 'goods/new/_new_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                     <div class="grid-products-wrapper">
                         <div class="row">
                             {% for piece in decor %}
-                                {% include 'goods/home/_home_for_loop.html' %}
+                                {% include 'goods/new/_new_for_loop.html' %}
                             {% endfor %}
                         </div>
                     </div>

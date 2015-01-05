@@ -36,6 +36,7 @@ class Product(models.Model):
 	short_name = models.CharField(max_length=25)
 	original_price = models.DecimalField(max_digits=8, decimal_places=2)
 	current_price = models.DecimalField(max_digits=8, decimal_places=2)
+	description = models.TextField(null=True, blank=True)
 	store = models.ForeignKey('merchants.Store')
 	manufacturer = models.CharField(max_length=25, null=True, blank=True)
 	units = models.IntegerField(default=1)
@@ -58,6 +59,7 @@ class Product(models.Model):
 	pub_date = models.DateTimeField()
 	is_sold = models.BooleanField(default=False)
 	is_published = models.BooleanField(default=True)
+	is_featured = models.BooleanField(default=False)
 	lat = models.FloatField(null=True, blank=True)
 	lng = models.FloatField(null=True, blank=True)
 

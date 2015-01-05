@@ -1,8 +1,8 @@
 {% load cloudinary %}
-<div class="col-xs-12 col-sm-6 col-m-4" style="margin-bottom: 2rem">
+
     <div class="grid-product homepg centered-parent">
         <div class="centered-child detail-image-large">
-                {% cloudinary piece.productimage_set.first.image width=350 height=300 crop="fit" %}
+                {% cloudinary piece.productimage_set.first.image width=500 height=500 crop="fit" %}
         </div>
         <div class="centered-child detail-image-med">
                 {% cloudinary piece.productimage_set.first.image width=300 height=300 crop="fit" %}
@@ -38,4 +38,3 @@
             </button></a>
         </div>
     </div>
-</div> 

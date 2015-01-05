@@ -1,0 +1,18 @@
+{% load cloudinary %}
+    <div class="grid-product homepg centered-parent">
+        <div class="centered-child detail-image-large">
+                {% cloudinary piece.productimage_set.first.image width=350 height=300 crop="fit" %}
+        </div>
+        <div class="centered-child detail-image-med">
+                {% cloudinary piece.productimage_set.first.image width=300 height=300 crop="fit" %}
+        </div>
+        <div class="centered-child detail-image-small">
+                {% cloudinary piece.productimage_set.first.image width=275 height=275 crop="fit" %}
+        </div>
+        <a href="{{ piece.id }}" class="view-product">
+            <div class="text"><h5>{{ piece.short_name }}</h5></div>
+            <div class="text sold">from {{ piece.store.retailer.short_name|truncatechars:25 }}</div>
+            <div class="text"><h4>Sold</h4></div>
+            <div class="background"></div>
+        </a>
+    </div>
