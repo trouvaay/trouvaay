@@ -66,6 +66,27 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		context['BaseUrl'] = BASE_URL
 		return context
 
+class VintageView(LoginRequiredMixin, generic.ListView):
+	template_name = 'goods/new/new.html'
+	context_object_name = 'goods'
+	model = Product
+	vintage = Segment.objects.filter(select='vintage')[0]
+	# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)
+
+	def get_queryset(self):
+		
+		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)
+		return queryset
+
+	def get_context_data(self, **kwargs):
+		context = super(VintageView, self).get_context_data(**kwargs)
+		# context['products_json'] = serialize('json', context['goods'])
+		for room in Category.objects.all():
+			context[(str(room))] = self.model.objects.filter(category=room, is_published=True, segment=self.vintage)
+		# context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
+		context['BaseUrl'] = BASE_URL
+		return context
+		
 class DetailView(generic.DetailView):
 	template_name = 'goods/detail/detail.html'
 	context_object_name = 'product'
