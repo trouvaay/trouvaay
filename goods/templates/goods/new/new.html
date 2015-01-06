@@ -100,6 +100,17 @@
  // //    	// senduserloctoserver(userloc)
 
 	// navigator.geolocation.getCurrentPosition(getpoints);
-	$
+	var liked = {{ liked_items|safe }};
+	function addlikedhearts (liked) {
+		for (i in liked) {
+			var heartid = 'heart_';
+			heartid+=liked[i];
+			heart = document.getElementById(heartid);
+			console.log(heartid);
+			heart.className+=' active';
+
+		}
+	};
+	addlikedhearts(liked);
 </script>
 {% endblock %}

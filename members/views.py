@@ -33,6 +33,7 @@ class SignupView(generic.CreateView):
 def ProductLike(request):
 
 	if request.method == "POST":
+		print(request.POST['id'])
 		userinstance = request.user
 		product = Product.objects.get(pk=int(request.POST['id'][6:]))
 		useractivity = AuthUserActivity.objects.get(authuser=userinstance)

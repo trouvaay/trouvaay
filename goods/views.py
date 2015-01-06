@@ -5,6 +5,7 @@ from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils import timezone
 from goods.models import Product, Category, Segment
+from members.models import AuthUserActivity
 from merchants.models import Store
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import login_required
@@ -50,11 +51,13 @@ class NewView(LoginRequiredMixin, generic.ListView):
 	context_object_name = 'goods'
 	model = Product
 	new = Segment.objects.filter(select='new')[0]
-	# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)
+	#need to find out how to ref request.user when not a post request and /
+	#then update json of liked ids passed to template
+	
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(is_published=True,segment=self.new)
+		queryset = self.model.objects.filter(is_published=True,segment=self.new)[:10]
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -63,7 +66,13 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		for room in Category.objects.all():
 			context[(str(room))] = self.model.objects.filter(category=room, is_published=True, segment=self.new)
 		# context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
-		context['BaseUrl'] = BASE_URL
+		# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)		
+		context['BaseUrl'] = BASE_URL	
+		useractivity = AuthUserActivity.objects.get(authuser=self.request.user)
+		liked_list = useractivity.saved_items.filter(segment=self.new).all()
+		liked_ids = [prod.id for prod in liked_list]
+		print(liked_ids)
+		context['liked_items'] = liked_ids
 		return context
 
 class VintageView(LoginRequiredMixin, generic.ListView):
