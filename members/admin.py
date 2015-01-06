@@ -84,7 +84,6 @@ class AuthUserAdmin(UserAdmin):
         ),
     )
 
-    inlines = [AuthUserActivityInline,]
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)

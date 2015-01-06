@@ -35,10 +35,13 @@ def ProductLike(request):
 	if request.method == "POST":
 		userinstance = request.user
 		product = Product.objects.get(pk=int(request.POST['id'][6:]))
-		u = AuthUserActivity(authuser=userinstance)
-		u.save()
-		u.saved_items.add(product)
-		print ('product added')
-	pass
+		useractivity = AuthUserActivity.objects.get(authuser=userinstance)
+		if product in useractivity.saved_items.all():
+			useractivity.saved_items.remove(product)
+		else:
+			useractivity.saved_items.add(product)
+		useractivity.save()
+	else:
+		pass
 
 

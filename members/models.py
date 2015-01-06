@@ -70,6 +70,11 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 	def __str__(self):
 		return self.email
 
+	def save(self, *args, **kwargs):
+		super(AuthUser, self).save(*args, **kwargs)
+		useractivity = AuthUserActivity.objects.get_or_create(authuser=self)
+		useractivity[0].save()
+	
 	@property
 	def is_staff(self):
 		""" Is the user a member of staff?"""
@@ -78,9 +83,9 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 
 
 class AuthUserActivity(models.Model):
-	authuser = models.ForeignKey(AuthUser)
+	authuser = models.ForeignKey(AuthUser, unique=True)
 	saved_items = models.ManyToManyField('goods.Product')
 	style = models.ManyToManyField('goods.Style') #need to add other attrs
 
 	def __str__(self):
-		return ('user: '+self.authuser.email+' ;  items: ')
+		return ('user: '+self.authuser.email+' ;  items: '+str(self.saved_items.all()))

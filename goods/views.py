@@ -86,7 +86,7 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 		# context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
 		context['BaseUrl'] = BASE_URL
 		return context
-		
+
 class DetailView(generic.DetailView):
 	template_name = 'goods/detail/detail.html'
 	context_object_name = 'product'
@@ -139,9 +139,6 @@ class DetailRouteView(LoginRequiredMixin, generic.View):
 	def post(self, request, *args, **kwargs):
 		view = DetailCommentView.as_view()
 		return view(request, *args, **kwargs)
-
-
-
 
 
 class MapView(LoginRequiredMixin, generic.DetailView):
