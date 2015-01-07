@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     
     url(r'^', include('goods.urls', namespace='goods')),
+    url(r'^', include('checkout.urls', namespace='checkout')),
     url(r'^', include('members.urls', namespace='members')),
     url(r'^admin/', include(admin.site.urls)),
 )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
