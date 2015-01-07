@@ -16,9 +16,11 @@ def StripeView(request):
 		      currency="usd",
 		      card=token,
 		      description="payinguser@example.com",
-		      receipt_email="blakesadams@gmail.com"
+		      receipt_email="blakesadams@gmail.com",
+		      capture=False
 		  )
 		except stripe.CardError, e:
+			#TODO serve card_error text back to user
 		  print('card declined')
 		  pass
 
