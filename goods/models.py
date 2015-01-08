@@ -15,6 +15,11 @@ class Style(models.Model):
 	def __str__(self):
 		return self.select or 'none'
 
+class FurnitureType(models.Model):
+	select = models.CharField(max_length=55, default='seating', null=True, blank=True)	
+	def __str__(self):
+		return self.select or 'none'
+
 class Category(models.Model):
 	select = models.CharField(max_length=55, default='living', null=True, blank=True)	
 	def __str__(self):
@@ -52,6 +57,7 @@ class Product(models.Model):
 	color = models.CharField(max_length=20, null=True, blank=True)
 	segment = models.ManyToManyField(Segment, null=True, blank=True)
 	style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
+	furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
 	category = models.ManyToManyField(Category, null=True, blank=True)
 	subcategory = models.ManyToManyField(Subcategory, null=True, blank=True)
 	material = models.ManyToManyField(Material, null=True, blank=True)
