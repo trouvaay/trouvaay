@@ -8,7 +8,8 @@ from django.contrib.auth.models import (
 	BaseUserManager
 	)
 from django.db import models
-from helper import Attributes
+from django.conf import settings
+from helper import Attributes, States
 
 
 
@@ -81,9 +82,33 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 		# Simplest possible answer: All admins are staff
 		return self.is_admin
 
+class AuthUserStripe(models.Model):
+	authuser = models.OneToOneField(settings.AUTH_USER_MODEL)
+	stripe_id = models.CharField(max_length=120, null=True, blank=True)
+
+	def __unicode__(self):
+		return str(self.stripe_id)
+
+class AuthUserAddress(models.Model):
+	authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
+	street = models.CharField(max_length=50)
+	street2 = models.CharField(max_length=50, null=True, blank=True)
+	city = models.CharField(max_length=20)
+	state = models.CharField(max_length=2, choices=States)
+	zipcd = models.IntegerField()
+	phone =  models.CharField(max_length=120)
+	shipping = models.BooleanField(default=True)
+	billing = models.BooleanField(default=False)
+	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+	lat = models.FloatField(null=True, blank=True)
+	lng = models.FloatField(null=True, blank=True)
+
+	def __str__(self):
+		return ("{},{},{},{},{}".format(self.street,self.city,self.state,self.zipcd))
 
 class AuthUserActivity(models.Model):
-	authuser = models.ForeignKey(AuthUser, unique=True)
+	authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
 	saved_items = models.ManyToManyField('goods.Product')
 	recommended_items = models.ManyToManyField('goods.Product', related_name='recommended')
 	color = models.ManyToManyField('goods.Color')

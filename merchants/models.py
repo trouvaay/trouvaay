@@ -3,6 +3,7 @@ from localflavor.us.models import (
 	)
 
 from django.db import models
+from django.conf import settings
 from helper import States, GeoCode, AbstractImageModel
 
 
@@ -10,7 +11,7 @@ class Retailer(models.Model):
 	legal_name = models.CharField(max_length=255)
 	short_name = models.CharField(max_length=100)
 	organization_type = models.CharField(max_length=20, choices=[('indiv','individual'),('corp.','corporation')])
-	owner = models.ForeignKey('members.AuthUser', limit_choices_to={'is_merchant': True})
+	owner = models.ForeignKey(settings.AUTH_USER_MODEL, limit_choices_to={'is_merchant': True})
 	website = models.URLField()
 
 	def __str__(self):
