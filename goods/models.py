@@ -20,6 +20,11 @@ class FurnitureType(models.Model):
 	def __str__(self):
 		return self.select or 'none'
 
+class ValueTier(models.Model):
+	select = models.CharField(max_length=55, default='mid', null=True, blank=True)	
+	def __str__(self):
+		return self.select or 'none'
+
 class Category(models.Model):
 	select = models.CharField(max_length=55, default='living', null=True, blank=True)	
 	def __str__(self):
@@ -27,6 +32,11 @@ class Category(models.Model):
 
 class Subcategory(models.Model):
 	select = models.CharField(max_length=55, default='bar', null=True, blank=True)	
+	def __str__(self):
+		return self.select or 'none'
+
+class Color(models.Model):
+	select = models.CharField(max_length=55, default='blue', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
@@ -54,7 +64,7 @@ class Product(models.Model):
 	bed_size = models.CharField(max_length=10, null=True, blank=True)
 	weight = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
 	return_policy = models.TextField(null=True, blank=True)
-	color = models.CharField(max_length=20, null=True, blank=True)
+	color = models.ManyToManyField(Color, null=True, blank=True)
 	segment = models.ManyToManyField(Segment, null=True, blank=True)
 	style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
 	furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)

@@ -85,7 +85,11 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 class AuthUserActivity(models.Model):
 	authuser = models.ForeignKey(AuthUser, unique=True)
 	saved_items = models.ManyToManyField('goods.Product')
-	style = models.ManyToManyField('goods.Style') #need to add other attrs
+	recommended_items = models.ManyToManyField('goods.Product', related_name='recommended')
+	color = models.ManyToManyField('goods.Color')
+	style = models.ManyToManyField('goods.Style')
+	furnituretype = models.ManyToManyField('goods.FurnitureType')
+	value_tier = models.ManyToManyField('goods.ValueTier')
 
 	def __str__(self):
 		return ('user: '+self.authuser.email+' ;  items: '+str(self.saved_items.all()))
