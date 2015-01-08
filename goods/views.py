@@ -44,6 +44,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 			context['featured_pieces'] = self.model.objects.filter(is_published=True, is_featured=True)[0]
 		except:
 			pass
+		print(self.request.session.items())
 		return context
 
 class NewView(LoginRequiredMixin, generic.ListView):
