@@ -22,7 +22,7 @@
         </div>
     <!-- </div> -->
     <div>
-        <div class="col-xs-3 pic-detail-home">
+        <div class="col-xs-6 pic-detail-home">
             {% if piece.is_sold %}<span class="sold">{{ 'Sold' }}</span>
             {% else %}
             <button type="button" class="btn btn-default btn-lg buy" id="buy_{{ piece.id }}">
@@ -30,7 +30,7 @@
             </button>
             {% endif %}
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-2">
             <button type="button" class="btn btn-default btn-lg glyphs" id="heart_{{ piece.id }}">
                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
             </button>

@@ -86,7 +86,7 @@ a#logo:hover {
 }
 
 .insta-icon {
-  margin-right: 1rem;
+  margin-right: 0.5em;
 }
 .cart-info {
   display: inline-block;
@@ -111,6 +111,10 @@ a#logo:hover {
 .top-bar .cart-info .separator {
   margin: 0 5px;
 }
+.top-bar .cart-info .counter {
+  color: #7a7a7a;
+}
+
 .top-bar .cart-info .value {
   font-weight: bold;
 }
@@ -2336,6 +2340,9 @@ form .form-checkbox-wrap .checkbox-label {
   font-size:14px;
   /*color: #3094B2;*/
   color: red;
+}
+.btn.btn-default.btn-lg.buy.active {
+
 }
 .btn.btn-default:hover {
   background: gray;

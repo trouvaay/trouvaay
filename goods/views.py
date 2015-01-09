@@ -16,6 +16,7 @@ from django.views.generic.detail import SingleObjectMixin
 from pprint import pprint as pp
 from random import randint
 
+
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
 class HomeView(LoginRequiredMixin, generic.ListView):

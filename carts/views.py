@@ -8,7 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 #Need to add crsf token to frontend
 
 def AddCartProduct(request):
-
+	request.session.set_expiry(120000)
+	
 	if request.method == "POST":
 		try:
 			the_id = request.session['cart_id']
