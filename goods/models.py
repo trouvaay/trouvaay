@@ -51,6 +51,7 @@ class Product(models.Model):
 	short_name = models.CharField(max_length=25)
 	original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 	current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+	value_tier = models.ForeignKey(ValueTier, null=True, blank=True)
 	description = models.TextField(null=True, blank=True)
 	store = models.ForeignKey('merchants.Store')
 	manufacturer = models.CharField(max_length=25, null=True, blank=True)
