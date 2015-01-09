@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.http import JsonResponse 
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser
 from goods.models import Product
 from members.forms import CustomAuthenticationForm
 from django.contrib.auth import views
 from django.views.decorators.csrf import csrf_exempt
+
 
 class ClosetView(generic.ListView):
 	template_name = 'members/closet/closet.html'
@@ -29,7 +31,7 @@ class SignupView(generic.CreateView):
 	model = AuthUser
 	form_class = CustomAuthenticationForm
 
-@csrf_exempt
+# @csrf_exempt
 def ProductLike(request):
 
 	if request.method == "POST":
@@ -42,7 +44,8 @@ def ProductLike(request):
 		else:
 			useractivity.saved_items.add(product)
 		useractivity.save()
+		return JsonResponse('success', safe=False)
 	else:
-		pass
+		return JsonResponse('success', safe=False)
 
 

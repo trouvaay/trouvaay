@@ -11,5 +11,7 @@ urlpatterns = patterns('',
     url(r'^', include('goods.urls', namespace='goods')),
     url(r'^', include('checkout.urls', namespace='checkout')),
     url(r'^', include('members.urls', namespace='members')),
+    url(r'^', include('carts.urls', namespace='carts')),
+    url(r'^', include('checkout.urls', namespace='checkout')),
     url(r'^admin/', include(admin.site.urls)),
 )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

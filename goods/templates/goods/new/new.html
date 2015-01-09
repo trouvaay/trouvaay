@@ -18,22 +18,33 @@
  <script type="text/javascript">
 	$(document).ready(function(){
 	    $(".btn.btn-default.glyphs").click(function() {
-	    	var like = 1;
 	    	var id = $(this).attr("id");
 	    	// var csrftoken = $.cookie('csrftoken');
-	    	var data = {'like': like, 'id': id};
+	    	var data = {'id': id};
 	   		if ($(this).hasClass("active")) {
 		    	$(this).removeClass("active");
-		    	like = -1; 
 		    	}
 		    else {
 		    	$(this).addClass("active");
 		    	}
 	    	$.post("{% url 'members:like' %}", data);
 	    });
-	    
-	});
 
+	    $(".btn.btn-default.btn-lg.buy").click(function() {
+	    	var id = $(this).attr("id");
+	    	// var csrftoken = $.cookie('csrftoken');
+	    	var data = {'id': id};
+	   		if ($(this).hasClass("active")) {
+		    	$(this).removeClass("active");
+		    	}
+		    else {
+		    	$(this).addClass("active");
+		    	}
+	    	$.post("{% url 'carts:addtocart' %}", data, function(product) {
+	    		alert(product + ' added');
+	    	});
+	    }); 
+	});
  </script>
  
  <script type="text/javascript" src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
@@ -106,7 +117,6 @@
 			var heartid = 'heart_';
 			heartid+=liked[i];
 			heart = document.getElementById(heartid);
-			console.log(heartid);
 			heart.className+=' active';
 
 		}
