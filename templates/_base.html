@@ -42,7 +42,7 @@
                               <img src="{% static 'img/twitter-icon.jpeg' %}" height="35px"/>
                             </a>
                             <div class="cart-info">
-                                <a href="{% url 'members:checkout' %}"><span class="counter">{% if not request.session.items_total %} 0 items {% elif request.session.items_total == 1 %} 1 item {% else %}{{ request.session.items_total }} items {% endif%} </span>
+                                <a href="{% url 'members:checkout' %}"><span class="counter">items: <span class="value">{{ request.user.authusercart_set.first.get_item_count }}</span></span>
                                 </a>
                             </div>
                             {% if user.is_authenticated %}

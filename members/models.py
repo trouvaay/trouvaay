@@ -128,3 +128,7 @@ class AuthUserCart(models.Model):
 
 	def __str__(self):
 		return ('Cart for user: '+self.authuser.email+';  items: '+str(self.saved_items.all()))
+	
+	def get_item_count(self):
+		return self.saved_items.all().count()
+
