@@ -132,3 +132,11 @@ class AuthUserCart(models.Model):
 	def get_item_count(self):
 		return self.saved_items.all().count()
 
+	def get_cart_total(self):
+		total = 0
+		for product in self.saved_items.all():
+			total+=product.current_price
+		return total
+
+
+

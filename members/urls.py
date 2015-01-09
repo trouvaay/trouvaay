@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
     url(r'^signup/$', views.SignupView.as_view(), name='signup'),
     url(r'^productlike/$', views.ProductLike, name='like'),
-    url(r'^addtocart/$', views.AddToCart, name='addtocart'),
     url(r'^cart/$', views.CartView.as_view(), name='cart'),
-
+    url(r'^addtocart/$', views.AddToCart, name='addtocart'),
+    url(r'^removefromcart/$', views.RemoveFromCart, name='removefromcart'),
 )

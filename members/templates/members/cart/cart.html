@@ -19,15 +19,17 @@
 <tfoot>
 <tr>
 <td></td>
-<td>Total: 100</td>
+<td id="total"></td>
 </tr>
 </tfoot>
 
-<tr>
-<td>Beach wood Chair </td>
-<td>$1,200</td>
+{% for product in cart.saved_items.all %}
+<tr id="prodrow_{{ product.id }}">
+<td>{{ product.short_name }} </td>
+<td>{{ product.current_price }}</td>
 <td></td>
-<td><a href='#'>Remove</a></tr>
+<td><a class="btn btn-link" id="prodremove_{{ product.id}}" href='#'>Remove</a></tr>
+{% endfor %}
 
 </table>
 
@@ -35,4 +37,20 @@
 <a href='#'>Checkout</a>
 {% endif %}
 </div>
+{% endblock %}
+{% block endjs %}
+ <script type="text/javascript">
+ 	
+	$(document).ready(function(){
+		$(".btn.btn-link").click(function() {
+			var id = $(this).attr("id").substring(11);
+	    	var data = {'id': id};
+	    	$.post("{% url 'members:removefromcart' %}", data, function(productid) {
+		    		var row = 'prodrow_'+productid;
+		    		console.log(row);
+		    		document.getElementById(row).remove();
+	    		});
+		});
+	});
+</script>
 {% endblock %}

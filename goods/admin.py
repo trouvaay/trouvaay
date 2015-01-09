@@ -33,6 +33,7 @@ class ProductAdmin(admin.ModelAdmin):
 	inlines = [ProductImageInline]
 	search_fields = ['short_name', 'long_name','store']
 	list_filter = ['store']
+	prepopulated_fields = {"current_price": ("original_price",)}
 
 	
 
