@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from models import Cart, CartItem
+# from models import Cart, CartItem
 
-class CartItemInline(admin.StackedInline):
-	model = CartItem
+# class CartItemInline(admin.StackedInline):
+# 	model = CartItem
 
-class CartAdmin(admin.ModelAdmin):
-	model = Cart
-	inlines = [CartItemInline]
+# class CartAdmin(admin.ModelAdmin):
+# 	model = Cart
+# 	inlines = [CartItemInline]
 
-admin.site.register(Cart, CartAdmin)
+# admin.site.register(Cart, CartAdmin)
