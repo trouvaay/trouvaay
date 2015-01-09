@@ -24,7 +24,7 @@
     <body>
         <div class="container-fluid top-bar">
             <div class="row">
-                <div class="col-xs-7 logo-div"><h4><a id="logo" href="{% url 'goods:home' %}"> {{ 'Rare Door' }}</a></div></h4>
+                <div class="col-xs-7 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/keyhole_logo_web_RGB.png' %}"></a></div>
                 <div class="navbar-collapse collapse col-xs-5 right-side" style="padding: 0">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
                                 <span class="icon-bar"></span>
@@ -42,7 +42,7 @@
                               <img src="{% static 'img/twitter-icon.jpeg' %}" height="35px"/>
                             </a>
                             <div class="cart-info">
-                                <a href="{% url 'members:checkout' %}"><span class="counter">items: <span class="value">{{ request.user.authusercart_set.first.get_item_count }}</span></span>
+                                <a href="{% url 'members:cart' %}"><span class="counter">items: <span class="value">{{ request.user.authusercart_set.first.get_item_count }}</span></span>
                                 </a>
                             </div>
                             {% if user.is_authenticated %}

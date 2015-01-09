@@ -10,6 +10,6 @@ urlpatterns = patterns('',
     url(r'^signup/$', views.SignupView.as_view(), name='signup'),
     url(r'^productlike/$', views.ProductLike, name='like'),
     url(r'^addtocart/$', views.AddToCart, name='addtocart'),
-    url(r'^checkout/$', views.CheckoutView.as_view(), name='checkout'),
+    url(r'^cart/$', views.CartView.as_view(), name='cart'),
 
 )

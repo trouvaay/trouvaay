@@ -56,5 +56,5 @@ def AddToCart(request):
 	else:
 		return JsonResponse('success', safe=False)
 
-class CheckoutView(generic.TemplateView):
-	template_name = 'members/checkout/checkout.html'
+class CartView(generic.TemplateView):
+	template_name = 'members/cart/cart.html'
