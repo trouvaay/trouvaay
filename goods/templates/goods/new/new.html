@@ -39,7 +39,11 @@
 		    	}
 		    else {
 		    	$(this).addClass("active");
-	    }); 
+		    	$.post("{% url 'members:addtocart' %}", data, function(product) {
+		    		alert(product+' added');
+	    		});
+		    }
+	    }) 
 	});
  </script>
  

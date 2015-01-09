@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
-from members.models import AuthUser, AuthUserActivity
+from members.models import AuthUser, AuthUserActivity, AuthUserCart
 from django import forms
 
 
@@ -62,6 +62,9 @@ class CustomUserChangeForm(UserChangeForm):
 class AuthUserActivityInline(admin.TabularInline):
     model = AuthUserActivity
 
+class AuthUserCartInline(admin.TabularInline):
+    model = AuthUserCart
+
 class AuthUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
@@ -83,10 +86,11 @@ class AuthUserAdmin(UserAdmin):
             'fields': ('email','is_merchant', 'password1', 'password2')}
         ),
     )
-
+    inlines = [AuthUserActivityInline, AuthUserCartInline]
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)
 
 admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(AuthUserActivity)
+admin.site.register(AuthUserCart)

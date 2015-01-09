@@ -82,13 +82,6 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 		# Simplest possible answer: All admins are staff
 		return self.is_admin
 
-class AuthUserStripe(models.Model):
-	authuser = models.OneToOneField(settings.AUTH_USER_MODEL)
-	stripe_id = models.CharField(max_length=120, null=True, blank=True)
-
-	def __unicode__(self):
-		return str(self.stripe_id)
-
 class AuthUserAddress(models.Model):
 	authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
 	street = models.CharField(max_length=50)
@@ -109,12 +102,29 @@ class AuthUserAddress(models.Model):
 
 class AuthUserActivity(models.Model):
 	authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
-	saved_items = models.ManyToManyField('goods.Product')
+	saved_items = models.ManyToManyField('goods.Product', null=True, blank=True)
 	recommended_items = models.ManyToManyField('goods.Product', related_name='recommended')
-	color = models.ManyToManyField('goods.Color')
-	style = models.ManyToManyField('goods.Style')
-	furnituretype = models.ManyToManyField('goods.FurnitureType')
-	value_tier = models.ManyToManyField('goods.ValueTier')
+	color = models.ManyToManyField('goods.Color', null=True, blank=True)
+	style = models.ManyToManyField('goods.Style', null=True, blank=True)
+	furnituretype = models.ManyToManyField('goods.FurnitureType', null=True, blank=True)
+	value_tier = models.ManyToManyField('goods.ValueTier', null=True, blank=True)
 
 	def __str__(self):
 		return ('user: '+self.authuser.email+' ;  items: '+str(self.saved_items.all()))
+
+class AuthUserStripe(models.Model):
+	authuser = models.OneToOneField(settings.AUTH_USER_MODEL)
+	stripe_id = models.CharField(max_length=120, null=True, blank=True)
+
+	def __unicode__(self):
+		return str(self.stripe_id)
+
+class AuthUserCart(models.Model):
+	authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
+	saved_items = models.ManyToManyField('goods.Product')
+	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+	active = models.BooleanField(default=True)
+
+	def __str__(self):
+		return ('Cart for user: '+self.authuser.email+';  items: '+str(self.saved_items.all()))
