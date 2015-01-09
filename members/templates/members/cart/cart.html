@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-
+{% load cloudinary %}
 {% block content %}
 
 <div class='col-sm-8 col-sm-offset-2'>
@@ -13,6 +13,7 @@
 <table class='table'>
 <thead>
 <th>Item</th>
+<th></th>
 <th>Price</th>
 <th></th>
 </thead>
@@ -25,7 +26,8 @@
 
 {% for product in cart.saved_items.all %}
 <tr id="prodrow_{{ product.id }}">
-<td>{{ product.short_name }} </td>
+<td>{{ product.short_name }}</td> 
+<td>{% cloudinary product.productimage_set.first.image width=100 height=100 crop="fill" %} </td>
 <td>{{ product.current_price }}</td>
 <td></td>
 <td><a class="btn btn-link" id="prodremove_{{ product.id}}" href='#'>Remove</a></tr>
@@ -40,7 +42,7 @@
 {% endblock %}
 {% block endjs %}
  <script type="text/javascript">
- 	
+
 	$(document).ready(function(){
 		$(".btn.btn-link").click(function() {
 			var id = $(this).attr("id").substring(11);
