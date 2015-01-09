@@ -43,12 +43,10 @@ INSTALLED_APPS = (
     'merchants',
     'members',
     'goods',
-    'checkout',
     'cloudinary',
     'debug_toolbar',
     'crispy_forms',
     'stripe',
-    'carts',
     # 'images',
 )
 
