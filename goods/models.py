@@ -65,6 +65,7 @@ class Product(models.Model):
 	weight = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
 	return_policy = models.TextField(null=True, blank=True)
 	color = models.ManyToManyField(Color, null=True, blank=True)
+	color_description = models.CharField(max_length=100, null=True, blank=True)
 	segment = models.ManyToManyField(Segment, null=True, blank=True)
 	style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
 	furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
