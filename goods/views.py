@@ -56,7 +56,6 @@ class NewView(LoginRequiredMixin, generic.ListView):
 	#need to find out how to ref request.user when not a post request and /
 	#then update json of liked ids passed to template
 	
-
 	def get_queryset(self):
 		
 		queryset = self.model.objects.filter(is_published=True,segment=self.new)[:10]
@@ -108,38 +107,6 @@ class DetailView(generic.DetailView):
 		context['comments'] = self.object.comment_set.all()
 		context['form'] = CommentForm()
 		return context
-
-class DetailCommentView(SingleObjectMixin, SuccessMessageMixin, generic.FormView):
-	template_name = 'goods/detail/detail.html'
-	form_class = CommentForm
-	model = Product
-	success_message = "comment was posted"
-
-	def post(self, request, *args, **kwargs):
-		if not request.user.is_authenticated():
-			return HttpResponseForbidden()
-		self.object = self.get_object()
-		form_class = self.get_form_class()
-		form = self.get_form(form_class)
-		form.helper.form_action = reverse('goods:detail', args=[self.object.pk])
-		if form.is_valid():
-			return self.form_valid(form)
-		else:
-			return self.form_invalid(form)
-		
-		
-
-	def form_valid(self, form):
-		model_instance = form.save(commit=False)
-		model_instance.authuser = self.request.user
-		model_instance.product = self.object
-		model_instance.save()
-		# form.cleaned_data
-		return super(DetailCommentView, self).form_valid(form)
-
-	def get_success_url(self):
-		return reverse('goods:detail', kwargs={'pk': self.object.pk})
-
 
 class DetailRouteView(LoginRequiredMixin, generic.View):
 
