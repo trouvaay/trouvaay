@@ -55,6 +55,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 
 
 class VintageView(LoginRequiredMixin, generic.ListView):
+	# TODO: update view to reflect instagrammy feed.  Will mimic DetailView
 	template_name = 'goods/vintage/vintage.html'
 	context_object_name = 'products'
 	model = Product
@@ -67,10 +68,9 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super(VintageView, self).get_context_data(**kwargs)
-		# context['products_json'] = serialize('json', context['goods'])
-		for room in Category.objects.all():
-			context[(str(room))] = self.model.objects.filter(category=room, is_published=True, segment=self.vintage)
-		# context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
+		context['products_json'] = serialize('json', context['products'])
+		for furnituretype in FurnitureType.objects.all():
+			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.vintage)
 		context['BaseUrl'] = BASE_URL
 		return context
 
