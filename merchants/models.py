@@ -1,7 +1,4 @@
-from localflavor.us.models import (
-	PhoneNumberField,
-	)
-
+from localflavor.us.models import PhoneNumberField
 from django.db import models
 from django.conf import settings
 from helper import States, GeoCode, AbstractImageModel
@@ -51,11 +48,12 @@ class Store(models.Model):
 	def __str__(self):
 		return (self.retailer.short_name+" ("+self.street[:12]+")")
 	
-	def geo_code(self):
+	def _geo_code(self):
 		return GeoCode(self.street,self.city,
 						self.state, self.zipcd,self.street2)
 
 	def save(self, *args, **kwargs):
-		### right now geocode is updated everytime model is save.  Needs to be updated###
-		self.lat, self.lng = self.geo_code()
+		#updates lat/lng when saved
+		#TODO: update so lat/lng only updated when needed
+		self.lat, self.lng = self._geo_code()
 		super(Store, self).save(*args, **kwargs)	

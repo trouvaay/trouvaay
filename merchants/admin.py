@@ -30,9 +30,6 @@ class StoreAdmin(admin.ModelAdmin):
 	)
 	list_select_related = True
 	
-
-# 	list_select_related = True
-
 admin.site.register(Store, StoreAdmin)
 admin.site.register(Retailer, RetailerAdmin)
 admin.site.register(Shipper, ShipperAdmin)

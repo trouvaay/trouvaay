@@ -15,87 +15,28 @@
  {% endblock content %}
  {% block modal %}{% endblock %}
  {% block endjs %}
- <script type="text/javascript">
-	$(document).ready(function(){
-	    $(".btn.btn-default.glyphs").click(function() {
-	    	var id = $(this).attr("id").substring(6);
-	    	// var csrftoken = $.cookie('csrftoken');
-	    	var data = {'id': id};
-	   		if ($(this).hasClass("active")) {
-		    	$(this).removeClass("active");
-		    	}
-		    else {
-		    	$(this).addClass("active");
-		    	}
-	    	$.post("{% url 'members:like' %}", data);
-	    });
-
-	    $(".btn.btn-default.btn-lg.buy").click(function() {
-	    	var id = $(this).attr("id").substring(4);
-	    	// var csrftoken = $.cookie('csrftoken');
-	    	var data = {'id': id};
-	   		if ($(this).hasClass("active")) {
-		    	$(this).removeClass("active");
-		    	}
-		    else {
-		    	$(this).addClass("active");
-		    	$.post("{% url 'members:addtocart' %}", data, function(product) {
-		    		$(".counter .value").html(product.count.toString());
-	    		});
-		    }
-	    }) 
-	});
- </script>
- 
- <script type="text/javascript" src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
-</script>
+ <script type="text/javascript" src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true></script>
 <script type="text/javascript">
-	
-	var directionsDisplay;
-	var directionsService = new google.maps.DirectionsService();
-	var map
+	// var directionsDisplay;
+	// var directionsService = new google.maps.DirectionsService();
 
-	function initialize (storelat, storelng, userloc, prodnum) {    
-	    // directionsDisplay = new google.maps.DirectionsRenderer();
-	    // stepDisplay = new google.maps.InfoWindow();
-	    var storepos = new google.maps.LatLng(storelat, storelng);
-	    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+	// function initialize (storelat, storelng, userloc, prodnum) {    
+	//     var storepos = new google.maps.LatLng(storelat, storelng);
+	//     var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
 	    
-	    // var mapOptions = {
-		   //  center: storepos,
-		   //  zoom: 12
-	    // };
+	// 	var request = {
+	// 	    origin: userpos,
+	// 	    destination: storepos,
+	// 	    travelMode: google.maps.TravelMode.DRIVING
+	// 	};
 
-	    // map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-	    // directionsDisplay.setMap(map);
-	    
-		var request = {
-		    origin: userpos,
-		    destination: storepos,
-		    travelMode: google.maps.TravelMode.DRIVING
-		};
-		// var dist
-
-		directionsService.route(request, function(result, status) {
-		    if (status == google.maps.DirectionsStatus.OK) {
-		    	console.log(result.routes[0].legs[0].distance.text);
-		     	$(".dist").eq(prodnum).append('('+result.routes[0].legs[0].distance.text+')');
-		    }
-		  });
-		}
-		// function showSteps(directionResult) {
-  // 			var myDuration = directionResult.routes[0].legs[0].duration.text;
-  // 			var myDistance = directionResult.routes[0].legs[0].distance.text;
-  // 			var myinstructions = [ ]
-  // 			for ( i in directionResult.routes[0].legs[0].steps) {
-  // 				myinstructions[i] = directionResult.routes[0].legs[0].steps[i].instructions;	
-  // 			}
-  // 			var directionsPanel = document.getElementById("directions");
-  // 			directionsPanel.innerHTML = "<h5>" + myDuration + " - " + myDistance + "</h5></br>" + myinstructions; 
-  		// }
-
-</script>
-<script type="text/javascript"> 
+	// 	directionsService.route(request, function(result, status) {
+	// 	    if (status == google.maps.DirectionsStatus.OK) {
+	// 	    	console.log(result.routes[0].legs[0].distance.text);
+	// 	     	$(".dist").eq(prodnum).append('('+result.routes[0].legs[0].distance.text+')');
+	// 	    }
+	// 	  });
+	// 	}
 	// function  getpoints (userloc) {
 	// 	var products = {{ products_json|safe }};
 	// 	console.log(products);
@@ -108,19 +49,7 @@
 	// 		initialize(products[i].fields.lat, products[i].fields.lng, userloc, i);
 	// 		}	
 	// };
- // //    	// senduserloctoserver(userloc)
 
 	// navigator.geolocation.getCurrentPosition(getpoints);
-	var liked = {{ liked_items|safe }};
-	function addlikedhearts (liked) {
-		for (i in liked) {
-			var heartid = 'heart_';
-			heartid+=liked[i];
-			heart = document.getElementById(heartid);
-			heart.className+=' active';
-
-		}
-	};
-	addlikedhearts(liked);
 </script>
 {% endblock %}

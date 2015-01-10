@@ -1,37 +1,37 @@
-from django.shortcuts import render
 from django.http import JsonResponse 
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser, AuthUserCart
 from goods.models import Product
 from members.forms import CustomAuthenticationForm
-from django.contrib.auth import views
 from braces.views import LoginRequiredMixin	
+from django.contrib.auth.decorators import login_required
 
 class ClosetView(generic.ListView):
 	template_name = 'members/closet/closet.html'
 	context_object_name = 'saved_items'
 	model = AuthUserActivity
 
-class SignupView(generic.FormView):
-	template_name = 'members/auth/signup.html'
-	model = AuthUser
-	form_class = CustomAuthenticationForm
 
-	def post(self, request, *args, **kwargs):
-	    form_class = self.get_form_class()
-	    form = self.get_form(form_class)
-	    if form.is_valid():
-	        return self.form_valid(form)
-	    else:
-	        return self.form_invalid(form)
+# #Needs to be updated implemented with registration/signup modal
+# class SignupView(generic.FormView):
+# 	template_name = 'members/auth/signup.html'
+# 	model = AuthUser
+# 	form_class = CustomAuthenticationForm
 
-class SignupView(generic.CreateView):
-	template_name = 'members/auth/signup.html'
-	model = AuthUser
-	form_class = CustomAuthenticationForm
+# 	def post(self, request, *args, **kwargs):
+# 	    form_class = self.get_form_class()
+# 	    form = self.get_form(form_class)
+# 	    if form.is_valid():
+# 	        return self.form_valid(form)
+# 	    else:
+# 	        return self.form_invalid(form)
 
+@login_required
 def ProductLike(request):
-
+	"""Adds product instance to 'saved_items' field of 
+		AuthUserActivity model
+	"""
+	#
 	if request.method == "POST":
 		userinstance = request.user
 		product = Product.objects.get(pk=int(request.POST['id']))
@@ -45,6 +45,7 @@ def ProductLike(request):
 	else:
 		return JsonResponse('success', safe=False)
 
+@login_required
 def AddToCart(request):
 
 	if request.method == "POST" and request.is_ajax:
@@ -58,6 +59,7 @@ def AddToCart(request):
 	else:
 		return JsonResponse('success', safe=False)
 
+@login_required
 def RemoveFromCart(request):
 
 	if request.method == "POST" and request.is_ajax:
@@ -82,11 +84,11 @@ class CartView(LoginRequiredMixin, generic.DetailView):
 		context = super(CartView, self).get_context_data(**kwargs)
 		return context
 
-class CheckoutView(generic.TemplateView):
+class CheckoutView(LoginRequiredMixin, generic.TemplateView):
 	template_name = 'members/purchase/checkout.html'
 
-class ReviewView(generic.TemplateView):
+class ReviewView(LoginRequiredMixin, generic.TemplateView):
 	template_name = 'members/purchase/review.html'
 
-class PaymentView(generic.TemplateView):
+class PaymentView(LoginRequiredMixin, generic.TemplateView):
 	template_name = 'members/purchase/payment.html'
