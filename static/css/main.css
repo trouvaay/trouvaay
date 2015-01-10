@@ -59,10 +59,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   float: left;
   background: white;
   padding: 10px 20px;
-  border-bottom: 3px #3094B2 solid;
+  border-bottom: 3px rgb(0,128,183) solid;
 }
 .top-bar-border {
-  border-top: 3px #3094B2 solid;
+  border-top: 3px rgb(0,128,183) solid;
   margin-bottom: 20px;
 }
 .top-bar .right-side {
@@ -2332,7 +2332,7 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .btn.btn-default.glyphs {
   font-size:14px;
-  color: #3094B2;
+  color: rgb(0,128,183);
   /*color: pink;*/
 }
 .btn.btn-default.glyphs.active {
@@ -3145,10 +3145,10 @@ footer ul li a:hover {
   display: none;
 }
 .blueback {
-  background: #3094B2;
+  background: rgb(0,128,183);
 }
 .bluebackbottom {
- border-bottom: #3094B2 4px solid; 
+ border-bottom: rgb(0,128,183) 4px solid; 
 }
 .detail-margin {
   /*margin: 2rem 4rem;*/
