@@ -173,3 +173,6 @@ class StoreView(LoginRequiredMixin, generic.DetailView):
 		context['products'] = self.object.product_set.all()
 		context['retailer'] = self.object.retailer
 		return context
+
+class AboutView(generic.TemplateView):
+	template_name = 'goods/copy/about.html'

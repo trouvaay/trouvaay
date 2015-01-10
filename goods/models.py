@@ -1,6 +1,6 @@
 from django.db import models
 # Create your models here.
-from helper import Attributes, AbstractImageModel
+from helper import AbstractImageModel
 from math import ceil, acos, cos, radians, sin
 from django.utils import timezone
 

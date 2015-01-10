@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/map/$', views.MapView.as_view(), name='popinmap'),
     url(r'^$', views.HomeView.as_view(), name='home'),
     url(r'^store/(?P<pk>\d+)/$', views.StoreView.as_view(), name='storeprofile'),
-    url(r'^vintage/$', views.VintageView.as_view(), name='vintage'),  
+    url(r'^vintage/$', views.VintageView.as_view(), name='vintage'),
+    url(r'^about/$', views.AboutView.as_view(), name='about'),  
 )
