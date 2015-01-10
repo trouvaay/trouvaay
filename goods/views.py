@@ -26,7 +26,6 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
-		# print (context['products'])
 		context['products_json'] = serialize('json', context['pieces'])
 		try:
 			context['sold_pieces'] = self.model.objects.filter(is_published=True, is_sold=True)[0]
@@ -36,7 +35,6 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 			context['featured_pieces'] = self.model.objects.filter(is_published=True, is_featured=True)[0]
 		except:
 			pass
-		print(self.request.session.items())
 		return context
 
 
@@ -50,7 +48,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(is_published=True,segment=self.new)[:10]
+		queryset = self.model.objects.filter(is_published=True,segment=self.new)
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -64,7 +62,6 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		useractivity = AuthUserActivity.objects.get(authuser=self.request.user)
 		liked_list = useractivity.saved_items.filter(segment=self.new).all()
 		liked_ids = [prod.id for prod in liked_list]
-		print(liked_ids)
 		context['liked_items'] = liked_ids
 		return context
 
@@ -109,7 +106,7 @@ class DirectionsView(LoginRequiredMixin, generic.DetailView):
 	model = Product
 
 	def get_context_data(self, **kwargs):
-		context = super(MapView, self).get_context_data(**kwargs)
+		context = super(DirectionsView, self).get_context_data(**kwargs)
 		context['store'] = self.object.store
 		# context['store_json'] = serialize('json', [self.object.store])
 		return context
