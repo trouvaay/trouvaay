@@ -46,8 +46,7 @@ class Material(models.Model):
 
 class Product(models.Model):
 	sku = models.CharField(max_length=25, null=True, blank=True)
-	long_name = models.CharField(max_length=50, null=True, blank=True)
-	short_name = models.CharField(max_length=25)
+	short_name = models.CharField(max_length=50)
 	original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 	current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 	value_tier = models.ForeignKey(ValueTier, null=True, blank=True)
@@ -61,7 +60,7 @@ class Product(models.Model):
 	height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
 	seat_height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
 	diameter = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
-	bed_size = models.CharField(max_length=10, null=True, blank=True)
+	bed_size = models.CharField(max_length=50, null=True, blank=True)
 	weight = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
 	return_policy = models.TextField(null=True, blank=True)
 	color = models.ManyToManyField(Color, null=True, blank=True)
