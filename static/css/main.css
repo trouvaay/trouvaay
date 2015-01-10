@@ -59,7 +59,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   float: left;
   background: white;
   padding: 10px 20px;
-  border-bottom: 3px rgb(0,128,183) solid;
 }
 .top-bar-border {
   border-top: 3px rgb(0,128,183) solid;
@@ -1651,7 +1650,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .grid-products-wrapper {
   width: 100%;
   float: left;
-  background: white;
+  background: #f4f4f4;
+  margin-top: 20px;
 }
 .grid-products-wrapper .row {
   margin: 0 -15px;
@@ -2891,10 +2891,8 @@ footer ul li a:hover {
 .homepage-quote {
   width: 100%;
   float: left;
-  background: #333;
-  padding: 20px 0 0 0;
-  border-bottom: solid 2.5px;
-  height: 11rem;
+  padding: 20px 0 20px 0;
+  height: 100%;
 }
 .homepage-quote .text,
 .hp-tabs .text {
@@ -2922,12 +2920,12 @@ footer ul li a:hover {
   font-weight: 400;
   line-height: 30px;
   font-family: "Avenir";
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 .heading.main-quote {
   font-weight: bold;
   text-decoration: none;
-  color: white;
+  color: #7a7a7a;
   font-size: 130%;
 }
 .hp-tabs .text {
