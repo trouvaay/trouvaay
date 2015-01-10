@@ -3928,3 +3928,7 @@ footer ul li a:hover {
     vertical-align: middle;
     float: none;
 }
+.error {
+  font-size: 50px;
+  margin: 25% auto;
+}

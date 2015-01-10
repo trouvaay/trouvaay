@@ -26,13 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-
-
-# Application definition
-
 INSTALLED_APPS = (
-    # 'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +41,6 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'crispy_forms',
     'stripe',
-    # 'images',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -115,6 +108,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -124,11 +118,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = not DEBUG
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR,'templates')]
-
-# import dj_database_url
-# DATABASES['default'] =  dj_database_url.config()
-# CLOUDINARY = {
-#   'cloud_name': 'trouvaay',  
-#   'api_key': '239337878822387',  
-#   'api_secret': 'sYSwTRGE6LwUnEkb6MgHIlo-tAU',  
-# }

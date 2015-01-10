@@ -71,7 +71,7 @@ def RemoveFromCart(request):
 		return JsonResponse('success', safe=False)
 
 class CartView(LoginRequiredMixin, generic.DetailView):
-	template_name = 'members/cart/cart.html'
+	template_name = 'members/purchase/cart.html'
 	context_object_name = 'cart'
 	model = AuthUserCart
 
@@ -81,3 +81,12 @@ class CartView(LoginRequiredMixin, generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(CartView, self).get_context_data(**kwargs)
 		return context
+
+class CheckoutView(generic.TemplateView):
+	template_name = 'members/purchase/checkout.html'
+
+class ReviewView(generic.TemplateView):
+	template_name = 'members/purchase/review.html'
+
+class PaymentView(generic.TemplateView):
+	template_name = 'members/purchase/payment.html'

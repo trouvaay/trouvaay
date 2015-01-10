@@ -176,3 +176,12 @@ class StoreView(LoginRequiredMixin, generic.DetailView):
 
 class AboutView(generic.TemplateView):
 	template_name = 'goods/copy/about.html'
+
+class ContactView(generic.TemplateView):
+	template_name = 'goods/copy/contact.html'
+
+class BlogView(generic.TemplateView):
+	template_name = 'goods/copy/blog.html'
+
+class BlogPostView(generic.TemplateView):
+	template_name = 'goods/copy/blogpost.html'
