@@ -9,14 +9,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="icon" type="image/png" href="{% static 'img/standalone-R_web_RGB.png' %}">
-
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
-        <link rel="stylesheet" href="{% static 'css/jquery.selectBoxIt.css' %}">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
         <script src="{% static 'js/vendor/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
-        
         {% cloudinary_includes %}
         {% cloudinary_js_config %}
         {% block beginjs %}{% endblock %}
@@ -42,7 +39,10 @@
                               <img src="{% static 'img/twitter-icon.jpeg' %}" height="35px"/>
                             </a>
                             <div class="cart-info">
-                                <a href="{% url 'members:cart' %}"><span class="counter">items: <span class="value">{{ request.user.authusercart_set.first.get_item_count }}</span></span>
+                                <a href="{% url 'members:cart' %}">
+                                    <span class="counter">
+                                        <span class="value">{{ request.user.authusercart_set.first.get_item_count }}</span>
+                                    items</span>
                                 </a>
                             </div>
                             {% if user.is_authenticated %}
@@ -56,35 +56,23 @@
                         <div class="col-sm-12 main-navigation">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="{% url 'goods:vintage' %}">Vintage</a></li>
-                                <li>
-                                    <a href="{% url 'goods:new' %}">New</a>
-                                </li>
-                                <!--<li><a href="#">Loved it</a></li>-->
-                                <li><a href="#">About</a></li>
-                                <!--<li><a href="#">Blog</a></li>-->
+                                <li><a href="{% url 'goods:new' %}">New</a></li>
+                                <li><a href="#">Profile</a></li>
+                                <li><a href="{% url 'goods:blog' %}">Blog</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    {% block content %}
-  
-    {% endblock content %}
+    {% block content %}{% endblock content %}
     <footer class="main-footer">
         <div class="container">
             <div class="row" style="margin-bottom: 2rem">
-                <div class="col-xs-6 col-sm-2 col-sm-offset-1">
+                <div class="col-xs-6 col-sm-2 col-sm-offset-2">
                     <div class="footer-widget">
                         <div class="footer-menu">
                             <h2><a href="#">About Us</a></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-2">
-                    <div class="footer-widget">
-                        <div class="footer-menu">
-                            <h2><a href="#">FAQs</a></h2>
                         </div>
                     </div>
                 </div>
@@ -129,10 +117,8 @@
     <div>
         <script src="{% static 'js/vendor/jquery-1.10.1.min.js' %}"></script>
         <script src="{% static 'js/vendor/jquery-ui-1.10.3.min.js' %}"></script>
-        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/vendor/jquery.isotope.min.js' %}"></script>
         <script src="{% static 'js/vendor/jquery.raty.min.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.flexslider.js' %}"></script>
         <script src="{% static 'js/vendor/jquery.mousewheel.js' %}"></script>
         <script src="{% static 'js/vendor/jquery.mCustomScrollbar.js' %}"></script>
         <script src="{% static 'js/vendor/jquery.selectBoxIt.min.js' %}"></script>

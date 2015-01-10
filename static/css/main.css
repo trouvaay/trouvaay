@@ -76,6 +76,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .main-footer a {
   color: #333;
 }
+.row.footer {
+  margin-bottom: 1em;
+}
 #logo {
   width: 45%;
   min-width: 120px;
@@ -2697,9 +2700,9 @@ form .form-checkbox-wrap .checkbox-label {
 .footer-widget {
   width: 100%;
   float: left;
-  padding: 20px;
+  padding: 15px;
   height: 30px;
-  margin-bottom:  2rem;
+  margin-bottom:  1rem;
 }
 .footer-widget h2 {
   font-family: Quicksand, Arial, sans-serif;
@@ -3928,6 +3931,7 @@ footer ul li a:hover {
     vertical-align: middle;
     float: none;
 }
+
 .error {
   font-size: 50px;
   margin: 25% auto;
