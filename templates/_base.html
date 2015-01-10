@@ -22,6 +22,7 @@
     <body>
     {% block nav %}
         <div class="container-fluid top-bar">
+            {% block nav-all-else %}
             <div class="row">
                 <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/keyhole_logo_web_RGB.png' %}"></a></div>
                 <div class="navbar-collapse collapse col-xs-6 right-side" style="padding: 0">
@@ -73,6 +74,7 @@
                     </div>
                 </div>
             </div>
+            {% endblock nav-all-else %}
         </div>
     {% endblock nav %}
     {% block content %}{% endblock content %}
