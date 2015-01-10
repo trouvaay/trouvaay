@@ -40,11 +40,25 @@
         </div>
     </div>
   </div>
+   <div class="container-fluid">
+    <div class="grid-products-wrapper recommended">
+        <div class="row" style="margin:20px">
+          <div class="col-m-12">
+            <h5>Some things wed thought you'd like...</h5>
+          </div>
+        </div>
+        <div class="row">
+            {% for piece in recommended %}
+                {% include 'goods/home/_home_for_loop.html' %}
+            {% endfor %}
+        </div>
+    </div>
+  </div>
   <div class="container-fluid">
     <div class="grid-products-wrapper">
         <div class="row" style="margin:20px">
           <div class="col-m-12">
-            <h5>Some things wed thought you'd like...</h5>
+            <h5>Recent additions</h5>
           </div>
         </div>
         <div class="row">

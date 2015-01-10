@@ -24,6 +24,8 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 		context = super(HomeView, self).get_context_data(**kwargs)
 		#JSON sent to client to calc distance from user
 		context['products_json'] = serialize('json', context['pieces'])
+		#Recommeneded product logic still needs to be written.  Placeholder for template
+		context['recommended'] = self.model.objects.filter(is_published=True, is_sold=False).reverse()[:2]
 		return context
 
 
