@@ -20,8 +20,8 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 	UserCatPref = Category.objects.all()[randint(0,Category.objects.count()-1)]
 
 	def get_queryset(self):
-		
-		queryset = self.model.objects.filter(is_published=True, is_sold=False)[:3]
+		""" Show most recent six unsold items"""
+		queryset = self.model.objects.filter(is_published=True, is_sold=False)[:6]
 		return queryset
 
 	def get_context_data(self, **kwargs):

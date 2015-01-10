@@ -79,6 +79,9 @@ class Product(models.Model):
 	lat = models.FloatField(null=True, blank=True)
 	lng = models.FloatField(null=True, blank=True)
 
+	class Meta:
+		ordering = ['-pub_date']
+
 	def __str__(self):
 		return self.short_name
 
@@ -95,6 +98,8 @@ class Product(models.Model):
 		sin(radians(self.lat)))      
     	
 		return round(dist,2)
+
+
 
 class ProductImage(AbstractImageModel):
 	product = models.ForeignKey('goods.Product')
