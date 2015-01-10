@@ -1,5 +1,5 @@
 from django.views import generic
-from goods.models import Product, Category, Segment
+from goods.models import Product, Category, FurnitureType, Segment
 from members.models import AuthUserActivity
 from django.core.serializers import serialize
 from braces.views import LoginRequiredMixin
@@ -34,21 +34,19 @@ class NewView(LoginRequiredMixin, generic.ListView):
 	context_object_name = 'products'
 	model = Product
 	new = Segment.objects.filter(select='new')[0]
-	#need to find out how to ref request.user when not a post request and /
-	#then update json of liked ids passed to template
 
 	def get_queryset(self):
-		
 		queryset = self.model.objects.filter(is_published=True,segment=self.new)
 		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(NewView, self).get_context_data(**kwargs)
-		# context['products_json'] = serialize('json', context['goods'])
-		for room in Category.objects.all():
-			context[(str(room))] = self.model.objects.filter(category=room, is_published=True, segment=self.new)
-	
-		context['BaseUrl'] = BASE_URL	
+		#JSON sent to client to calc distance from user
+		context['products_json'] = serialize('json', context['products'])
+
+		for furnituretype in FurnitureType.objects.all():
+			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new)
+		context['BaseUrl'] = BASE_URL
 		useractivity = AuthUserActivity.objects.get(authuser=self.request.user)
 		liked_list = useractivity.saved_items.filter(segment=self.new).all()
 		liked_ids = [prod.id for prod in liked_list]
