@@ -33,24 +33,23 @@
 
                 <div id="main-menu" class="col-xs-5 right-side">
                     <div class="row">
-                        <div class="right-side">
-                            <a class="insta-icon" href="http://instagram.com/raredoor/" target="_blank">
-                              <img src="{% static 'img/instagram-icon32.png' %}"/></a>
-                            <a class="insta-icon" href="https://twitter.com/RareDoor/" target="_blank">
-                              <img src="{% static 'img/twitter-icon.jpeg' %}" height="35px"/>
-                            </a>
-                            <div class="cart-info">
-                                <a href="{% url 'members:cart' %}">
-                                    <span class="counter">
-                                        <span class="value">{{ request.user.authusercart_set.first.get_item_count }}</span>
-                                    items</span>
-                                </a>
-                            </div>
-                            {% if user.is_authenticated %}
-                                <a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a>
-                            {% else %}
-                                <a class="btn btn-link" href="{% url 'members:login' %}">Login</a>
-                            {% endif %}
+                        <div class="col-sm-12 main-navigation">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a class="insta-icon" href="http://instagram.com/raredoor/" target="_blank">
+                                    <img src="{% static 'img/instagram-icon32.png' %}"/></a></li>
+                                <li><a class="insta-icon" href="https://twitter.com/RareDoor/" target="_blank">
+                                    <img src="{% static 'img/twitter-icon.jpeg' %}" height="35px"/></a></li>
+                                <li><div class="cart-info">
+                                        <a href="{% url 'members:cart' %}">
+                                            <span class="counter">
+                                            <span class="value">{{ request.user.authusercart_set.first.get_item_count}}</span>items</span>
+                                        </a>
+                                    </div></li>
+                                <li>{% if user.is_authenticated %}
+                                    <a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a>
+                                {% else %}
+                                    <a class="btn btn-link" href="{% url 'members:login' %}">Login</a>
+                                {% endif %}</li>
                         </div>
                     </div>
                     <div class="row">
