@@ -20,7 +20,7 @@ class CommentInline(admin.StackedInline):
 
 class ProductAdmin(admin.ModelAdmin):
 	model = Product
-	list_display = ['short_name', 'id', 'store', 'current_price', 'original_price', 'is_published','pub_date','is_sold','is_featured']
+	list_display = ['short_name', 'id', 'store', 'current_price', 'is_published','pub_date','is_sold','is_featured']
 	fields = [('short_name', 'is_published','is_sold', 'is_featured'), 'store', 'units',('original_price', 'current_price', 'value_tier'), 
 				'pub_date', 'description',('style','color','segment','furnituretype','category','subcategory','material'),
 				'width','depth','height','seat_height','diameter','bed_size']
