@@ -58,7 +58,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 
 
 class VintageView(LoginRequiredMixin, generic.ListView):
-	template_name = 'goods/new/new.html'
+	template_name = 'goods/vintage/vintage.html'
 	context_object_name = 'goods'
 	model = Product
 	vintage = Segment.objects.filter(select='vintage')[0]
@@ -92,7 +92,7 @@ class DetailView(generic.DetailView):
 
 
 class DirectionsView(LoginRequiredMixin, generic.DetailView):
-	template_name = 'goods/home/map.html'
+	template_name = 'goods/detail/map.html'
 	context_object_name = 'product'
 	model = Product
 
