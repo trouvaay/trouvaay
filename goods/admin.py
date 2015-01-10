@@ -2,21 +2,16 @@ from django.contrib import admin
 
 from goods.models import Product, Color, Segment, Style, FurnitureType, ValueTier, Category, Subcategory, Material, ProductImage, Comment
 
-
-# class SegmentInline(admin.TabularInline):
-# 	model = Segment
-
-# class MaterialInline(admin.TabularInline):
-# 	model = Material
-
 @admin.register(Segment, Style, Color, FurnitureType, ValueTier, Category, Subcategory, Material)
 class TagAdmin(admin.ModelAdmin):
 	pass
+
 
 class ProductImageInline(admin.StackedInline):
 	model = ProductImage
 	fields = (('image','is_main'),)
 	verbose_name = 'photo'
+
 
 class CommentInline(admin.StackedInline):
 	model = Comment
@@ -36,6 +31,5 @@ class ProductAdmin(admin.ModelAdmin):
 	prepopulated_fields = {"current_price": ("original_price",)}
 
 	
-
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductImage)
