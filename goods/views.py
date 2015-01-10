@@ -15,10 +15,6 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 	context_object_name = 'pieces'
 	model = Product
 
-	# Temporary 'curation' of nearby products.  currently just taking first 4 items
-	#will eventually need to update to reflect likes of user
-	UserCatPref = Category.objects.all()[randint(0,Category.objects.count()-1)]
-
 	def get_queryset(self):
 		""" Show most recent six unsold items"""
 		queryset = self.model.objects.filter(is_published=True, is_sold=False)[:6]
@@ -26,15 +22,8 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
+		#JSON sent to client to calc distance from user
 		context['products_json'] = serialize('json', context['pieces'])
-		try:
-			context['sold_pieces'] = self.model.objects.filter(is_published=True, is_sold=True)[0]
-		except:
-			pass
-		try:
-			context['featured_pieces'] = self.model.objects.filter(is_published=True, is_featured=True)[0]
-		except:
-			pass
 		return context
 
 

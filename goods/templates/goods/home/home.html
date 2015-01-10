@@ -22,34 +22,6 @@
         </div>
     </div>
   </div>
-<div class="container top-bar-border" style="max-width: 100%">
-  <div class="row">
-  </div>
-</div>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4 col-m-4" style="margin-bottom: 2rem">
-        {% with sold_pieces as piece %}{% include 'goods/home/_home_sold.html' %}{% endwith %}
-      </div>
-      <div class="col-xs-12 col-sm-8 col-m-8" style="margin-bottom: 2rem">
-      
-      {% if featured_pieces %}{% with featured_pieces as piece %}
-        <div class="grid-products-wrapper">
-          <div class="row">
-            <div class="col-xs-8">
-              {% include 'goods/home/_home_featured.html' %}
-            </div>
-            <div class="col-xs-4 vcenter">
-              <div>{{ piece.description }}</div>
-            </div>
-          </div>
-        {% endwith %}
-        {% else %}
-          <!--need to add image -->        
-        {% endif %}
-        </div>
-    </div>
-  </div>
 {% endblock %}
 {% block endjs %}
 <script type="text/javascript"> 
