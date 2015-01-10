@@ -12,7 +12,7 @@ BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
 class HomeView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/home/home.html'
-	context_object_name = 'pieces'
+	context_object_name = 'products'
 	model = Product
 
 	def get_queryset(self):
@@ -23,7 +23,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
 		#JSON sent to client to calc distance from user
-		context['products_json'] = serialize('json', context['pieces'])
+		context['products_json'] = serialize('json', context['products'])
 		#Recommeneded product logic still needs to be written.  Placeholder for template
 		context['recommended'] = self.model.objects.filter(is_published=True, is_sold=False).reverse()[:2]
 		return context
@@ -31,7 +31,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 class NewView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/new/new.html'
-	context_object_name = 'goods'
+	context_object_name = 'products'
 	model = Product
 	new = Segment.objects.filter(select='new')[0]
 	#need to find out how to ref request.user when not a post request and /
@@ -47,8 +47,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		# context['products_json'] = serialize('json', context['goods'])
 		for room in Category.objects.all():
 			context[(str(room))] = self.model.objects.filter(category=room, is_published=True, segment=self.new)
-		# context['image'] = context['goods'].order_by('-id')[0].productimage_set.first()
-		# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)		
+	
 		context['BaseUrl'] = BASE_URL	
 		useractivity = AuthUserActivity.objects.get(authuser=self.request.user)
 		liked_list = useractivity.saved_items.filter(segment=self.new).all()
@@ -59,10 +58,9 @@ class NewView(LoginRequiredMixin, generic.ListView):
 
 class VintageView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/vintage/vintage.html'
-	context_object_name = 'goods'
+	context_object_name = 'products'
 	model = Product
 	vintage = Segment.objects.filter(select='vintage')[0]
-	# rest.dist = getDist(fromLat=session.lat,fromLng=session.lng,toLat=rest.lat,toLng=rest.lng)
 
 	def get_queryset(self):
 		
