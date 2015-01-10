@@ -17,9 +17,10 @@
         <script src="{% static 'js/vendor/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
         {% cloudinary_includes %}
         {% cloudinary_js_config %}
-        {% block beginjs %}{% endblock %}
+        {% block beginjs %}{% endblock beginjs %}
     </head>
     <body>
+    {% block nav %}
         <div class="container-fluid top-bar">
             <div class="row">
                 <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/keyhole_logo_web_RGB.png' %}"></a></div>
@@ -30,7 +31,6 @@
                                 <span class="icon-bar"></span>
                         </button></a> 
                 </div>
-
                 <div id="main-menu" class="col-xs-6 right-side">
                     <div class="row">
                         <div class="col-sm-12 main-navigation">
@@ -63,6 +63,7 @@
                 </div>
             </div>
         </div>
+    {% endblock nav %}
     {% block content %}{% endblock content %}
     <footer class="main-footer">
         <div class="container">
@@ -109,9 +110,7 @@
             </div>
         </div>
     </footer>
-
     <!--closing js -->
-    
     <div>
         <script src="{% static 'js/vendor/jquery-1.10.1.min.js' %}"></script>
         <script src="{% static 'js/vendor/jquery-ui-1.10.3.min.js' %}"></script>
@@ -126,7 +125,7 @@
         {% include 'custom.html' %}
     </div>
     {% block endjs %}
-    {% endblock %}
+    {% endblock endjs %}
     </body>
 </html>
 
