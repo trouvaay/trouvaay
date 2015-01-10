@@ -45,11 +45,9 @@
                                             <span class="value">{{ request.user.authusercart_set.first.get_item_count}}</span>items</span>
                                         </a>
                                     </div></li>
-                                <li>{% if user.is_authenticated %}
-                                    <a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a>
-                                {% else %}
-                                    <a class="btn btn-link" href="{% url 'members:login' %}">Login</a>
-                                {% endif %}</li>
+                                <li>
+                                    <a class="btn btn-link" style="padding-top:10px" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}logout{% endif %}</a>
+                                </li>
                         </div>
                     </div>
                     <div class="row">
