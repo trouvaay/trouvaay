@@ -1,23 +1,14 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
 from django.views import generic
-from django.contrib.messages.views import SuccessMessageMixin
-from django.utils import timezone
 from goods.models import Product, Category, Segment
 from members.models import AuthUserActivity
-from merchants.models import Store
 from django.core.serializers import serialize
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from braces.views import LoginRequiredMixin
 from goods.forms import CommentForm
-from django.views.generic.detail import SingleObjectMixin
-from pprint import pprint as pp
 from random import randint
 
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
+
 
 class HomeView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/home/home.html'
@@ -48,6 +39,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 		print(self.request.session.items())
 		return context
 
+
 class NewView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/new/new.html'
 	context_object_name = 'goods'
@@ -55,7 +47,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 	new = Segment.objects.filter(select='new')[0]
 	#need to find out how to ref request.user when not a post request and /
 	#then update json of liked ids passed to template
-	
+
 	def get_queryset(self):
 		
 		queryset = self.model.objects.filter(is_published=True,segment=self.new)[:10]
@@ -75,6 +67,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		print(liked_ids)
 		context['liked_items'] = liked_ids
 		return context
+
 
 class VintageView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/new/new.html'
@@ -97,6 +90,7 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 		context['BaseUrl'] = BASE_URL
 		return context
 
+
 class DetailView(generic.DetailView):
 	template_name = 'goods/detail/detail.html'
 	context_object_name = 'product'
@@ -108,18 +102,8 @@ class DetailView(generic.DetailView):
 		context['form'] = CommentForm()
 		return context
 
-class DetailRouteView(LoginRequiredMixin, generic.View):
 
-	def get(self, request, *args, **kwargs):
-		view = DetailView.as_view()
-		return view(request, *args, **kwargs)
-
-	def post(self, request, *args, **kwargs):
-		view = DetailCommentView.as_view()
-		return view(request, *args, **kwargs)
-
-
-class MapView(LoginRequiredMixin, generic.DetailView):
+class DirectionsView(LoginRequiredMixin, generic.DetailView):
 	template_name = 'goods/home/map.html'
 	context_object_name = 'product'
 	model = Product
@@ -130,25 +114,18 @@ class MapView(LoginRequiredMixin, generic.DetailView):
 		# context['store_json'] = serialize('json', [self.object.store])
 		return context
 
-class StoreView(LoginRequiredMixin, generic.DetailView):
-	template_name = 'goods/merchants/storeprofile.html'
-	context_object_name = 'store'
-	model = Store
-
-	def get_context_data(self, **kwargs):
-		context = super(StoreView, self).get_context_data(**kwargs)
-		context['products'] = self.object.product_set.all()
-		context['retailer'] = self.object.retailer
-		return context
 
 class AboutView(generic.TemplateView):
 	template_name = 'goods/copy/about.html'
 
+
 class ContactView(generic.TemplateView):
 	template_name = 'goods/copy/contact.html'
 
+
 class BlogView(generic.TemplateView):
 	template_name = 'goods/copy/blog.html'
+
 
 class BlogPostView(generic.TemplateView):
 	template_name = 'goods/copy/blogpost.html'
