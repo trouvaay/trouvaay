@@ -20,9 +20,14 @@
 <tfoot>
 <tr>
 <td></td>
-<td id="total"></td>
+<td></td>
+<td><a href="{% url 'members:checkout' %}">
+	<button type="button" class="btn btn-default">Checkout</button>
+</a></td>
+<td></td>
 </tr>
 </tfoot>
+
 
 {% for product in cart.saved_items.all %}
 <tr id="prodrow_{{ product.id }}">
@@ -32,11 +37,13 @@
 <td></td>
 <td><a class="btn btn-link" id="prodremove_{{ product.id}}" href='#'>Remove</a></tr>
 {% endfor %}
-
+<tr class="tfoot">
+<td></td>
+<td id="total">total</td>
+<td>1,000</td>
+<td></td>
+</tr>
 </table>
-
-<br/>
-<a href='#'>Checkout</a>
 {% endif %}
 </div>
 {% endblock %}

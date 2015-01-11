@@ -45,36 +45,36 @@ class Material(models.Model):
 	def __str__(self):
 		return self.select or 'none'
 
-subcategories = [
-		('bar', 'bar'),
-		('bar_stool','bar_stool'),
-		('bed','bed'),
-		('bedding','bedding'),
-		('bench','bench'),
-		('chair','chair'),
-		('chaise','chaise'),
-		('desk','desk'),
-		('desk_light','desk_light'),
-		('dining_table','dining_table'),
-		('dresser', 'dresser'),
-		('floor_lamp','floor_lamp'),
-		('kitchen_serving','kitchen_serving'),
-		('lighting - other', 'lighting - other'),
-		('loveseat','loveseat'),
-		('media','media'),
-		('mirror','mirror'),
-		('nightstand','nightstand'),
-		('ottoman','ottoman'),
-		('other_lighting','other_lighting'),
-		('other_decor ','other_decor '),
-		('pillow','pillow'),
-		('rug_throw','rug_throw'),
-		('table_lamp', 'table_lamp', )
-		('small_table','small_table'),
-		('sofa','sofa'),
-		('storage','storage'),
-		('wall_decor','wall_decor'),
-	]
+# subcategories = [
+# 		('bar', 'bar'),
+# 		('bar_stool','bar_stool'),
+# 		('bed','bed'),
+# 		('bedding','bedding'),
+# 		('bench','bench'),
+# 		('chair','chair'),
+# 		('chaise','chaise'),
+# 		('desk','desk'),
+# 		('desk_light','desk_light'),
+# 		('dining_table','dining_table'),
+# 		('dresser', 'dresser'),
+# 		('floor_lamp','floor_lamp'),
+# 		('kitchen_serving','kitchen_serving'),
+# 		('lighting - other', 'lighting - other'),
+# 		('loveseat','loveseat'),
+# 		('media','media'),
+# 		('mirror','mirror'),
+# 		('nightstand','nightstand'),
+# 		('ottoman','ottoman'),
+# 		('other_lighting','other_lighting'),
+# 		('other_decor ','other_decor '),
+# 		('pillow','pillow'),
+# 		('rug_throw','rug_throw'),
+# 		('table_lamp', 'table_lamp', )
+# 		('small_table','small_table'),
+# 		('sofa','sofa'),
+# 		('storage','storage'),
+# 		('wall_decor','wall_decor'),
+# 	]
 
 
 class Product(models.Model):

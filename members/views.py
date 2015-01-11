@@ -5,6 +5,8 @@ from goods.models import Product
 from members.forms import CustomAuthenticationForm
 from braces.views import LoginRequiredMixin	
 from django.contrib.auth.decorators import login_required
+import stripe
+from django.shortcuts import redirect
 
 class ClosetView(generic.ListView):
 	template_name = 'members/closet/closet.html'
@@ -87,8 +89,31 @@ class CartView(LoginRequiredMixin, generic.DetailView):
 class CheckoutView(LoginRequiredMixin, generic.TemplateView):
 	template_name = 'members/purchase/checkout.html'
 
+
+
+def SubmitCustomerPayment(request):
+	stripe.api_key = "sk_test_Ss8OxSVnDLbGv3qJ2HGUNNau"
+
+	if request.method == "POST":
+		token = request.POST['stripeToken']
+
+		try:
+		  charge = stripe.Charge.create(
+		      amount=1000, # amount in cents, again
+		      currency="usd",
+		      card=token,
+		      description="payinguser@example.com"
+		  )
+		except stripe.CardError, e:
+		  # The card has been declined
+		  pass
+		return redirect('members:review')
+	return JsonResponse('not a post request homes', safe=False)
+
+
+
 class ReviewView(LoginRequiredMixin, generic.TemplateView):
 	template_name = 'members/purchase/review.html'
 
-class PaymentView(LoginRequiredMixin, generic.TemplateView):
-	template_name = 'members/purchase/payment.html'
+# class PaymentView(LoginRequiredMixin, generic.TemplateView):
+# 	template_name = 'members/purchase/payment.html'

@@ -15,7 +15,6 @@
                         </li>
                         <li>
                             <div class="checkbox-wrap checked">
-                                <i class="fa fa-check"></i>
                             </div>
                             <div class="checkout-step">Payment Info</div>
                         </li>
@@ -109,7 +108,17 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-default">Place your order</button>
+                                    <form action="{% url 'members:payment' %}" method="POST">
+                                    {% csrf_token %}
+                                      <script
+                                        src=https://checkout.stripe.com/checkout.js class="stripe-button"
+                                        data-key="pk_test_LaznDX4YQ97iS5tAZBKGcRnN"
+                                        data-amount="2000"
+                                        data-name="Demo Site"
+                                        data-description="2 widgets ($20.00)"
+                                        data-image="/128x128.png">
+                                      </script>
+                                    </form>
                             </div>
                         </div>
                     </form>

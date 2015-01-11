@@ -15,5 +15,5 @@ urlpatterns = patterns('',
     url(r'^removefromcart/$', views.RemoveFromCart, name='removefromcart'),
     url(r'^checkout/$', views.CheckoutView.as_view(), name='checkout'),
     url(r'^review/$', views.ReviewView.as_view(), name='review'),
-    url(r'^payment/$', views.PaymentView.as_view(), name='payment'),
+    url(r'^payment/$', views.SubmitCustomerPayment, name='payment'),
 )

@@ -40,7 +40,7 @@
 				           <h4>{% for subcategory in product.subcategory.all %}{{ subcategory }}{% endfor %} {% if product.segment.all %}({% for segment in product.segment.all %}{{ segment }}){% endfor %}{% endif %}</h4>
 				       </div>  
 				        <div class="info-block">
-				           <h4>Available @ </h4><a href="#">{{ product.store.retailer }}</a>
+				           <h4>Available @ </h4>{{ product.store.retailer }}
 				           <p class="get-in-store"> (<a href="{% url 'goods:popinmap' product.id %}">Pop-in</a>)</p>
 				       </div>  
 				       <div class="info-block">
