@@ -63,7 +63,6 @@ class Material(models.Model):
 # 		('loveseat','loveseat'),
 # 		('media','media'),
 # 		('mirror','mirror'),
-# 		('nightstand','nightstand'),
 # 		('ottoman','ottoman'),
 # 		('other_lighting','other_lighting'),
 # 		('other_decor ','other_decor '),
