@@ -38,20 +38,20 @@
                             <ul class="nav navbar-nav navbar-right" style="border:none">
                                 <li class="socialicons">
                                     <a class="insta-icon" href="http://instagram.com/raredoor/" target="_blank">
-                                        <img src="{% static 'img/socialicons/instagram-icon32.png' %}"/>
+                                        <img src="{% static 'img/socialicons/instagram_gray32.png' %}"/>
                                     </a>
                                 </li>
                                 <li class="socialicons">
                                     <a class="insta-icon" href="https://www.facebook.com/RareDoor" target="_blank">
-                                        <img src="{% static 'img/socialicons/FB-f-Logo__blue_29.png' %}"/>
+                                        <img src="{% static 'img/socialicons/facebook_gray32.png' %}"/>
                                     </a>
                                 </li>
                                 <li class="socialicons">
                                     <a class="insta-icon" href="https://www.twitter.com/RareDoor" target="_blank">
-                                        <img src="{% static 'img/socialicons/twitter-icon.jpeg' %}" height="35px"/>
+                                        <img src="{% static 'img/socialicons/twitter_gray32.png' %}"/>
                                     </a>
                                 </li>
-                                <li class="socialicons"><div class="cart-info">
+                                <li><div class="cart-info">
                                         <a href="{% url 'members:cart' %}">
                                             <span class="counter">
                                             <span class="value">{{ request.user.authusercart_set.first.get_item_count}}</span>items</span>

@@ -3644,6 +3644,7 @@ footer ul li a:hover {
     color: #7a7a7a;
     text-transform: uppercase;
     font-weight: bold;
+    margin-bottom:5px;
   }
   .main-navigation .navbar-nav > li > a:hover {
     border-top: solid 2px #333333;
@@ -3954,10 +3955,11 @@ footer ul li a:hover {
 }
 #main-menu .col-sm-12.main-navigation.top-row li {
   width: 90px;
-  margin-left: 15px;
+  /*margin-left: 25px;*/
 }
 #main-menu .col-sm-12.main-navigation.top-row li.socialicons {
   width: 40px;
+  margin-left: 5px;
 }
 
 #main-menu .col-sm-12.main-navigation a {
