@@ -1,6 +1,15 @@
-{% extends 'base_nonhome.html' %}
+{% extends '_base.html' %}
 {% load cloudinary %}
 {% block content %}
+<div class="container-fluid page-quote">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="heading main-quote">
+                <h4 class="subheading">You can trial your new couch at {{ store.retailer }}</h4> 
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
 <div class="row">
 <div class="col-sm-7 product-description">
@@ -18,7 +27,7 @@
     {% block mainphotodescrip %}
        <div class="heading map">{{ product.short_name }}</div>
        <div class="info-block">
-           <h5>AVAILABLE @ <a href="#">{{ store.retailer }}</a></h5>
+           <h5>{{ store.retailer }}</h5>
            <div class="info">
                {{ store.street }}
                {{ store.street2 }}</br>
