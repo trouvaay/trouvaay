@@ -30,7 +30,8 @@ class Category(models.Model):
 		return self.select or 'none'
 
 class Subcategory(models.Model):
-	select = models.CharField(max_length=55, default='bar', null=True, blank=True)	
+	select = models.CharField(max_length=55, default='bar', null=True, blank=True)
+	trial_product = models.BooleanField(default=False)	
 	def __str__(self):
 		return self.select or 'none'
 
@@ -73,6 +74,7 @@ class Product(models.Model):
 	material = models.ManyToManyField(Material, null=True, blank=True)
 	added_date = models.DateTimeField(auto_now_add=True)
 	pub_date = models.DateTimeField()
+	has_trial = models.BooleanField(default=False)
 	is_sold = models.BooleanField(default=False)
 	is_published = models.BooleanField(default=True)
 	is_featured = models.BooleanField(default=False)
@@ -99,7 +101,8 @@ class Product(models.Model):
     	
 		return round(dist,2)
 
-
+	def does_product_have_trial(self):
+		trial_list = ['']
 
 class ProductImage(AbstractImageModel):
 	product = models.ForeignKey('goods.Product')
