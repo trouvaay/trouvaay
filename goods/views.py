@@ -95,7 +95,6 @@ class DirectionsView(LoginRequiredMixin, generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(DirectionsView, self).get_context_data(**kwargs)
 		context['store'] = self.object.store
-		# context['store_json'] = serialize('json', [self.object.store])
 		return context
 
 
