@@ -102,7 +102,11 @@ class Product(models.Model):
 		return round(dist,2)
 
 	def does_product_have_trial(self):
-		trial_list = ['']
+		trial_list = Subcategory.objects.filter(trial_product=True)
+		if self.current_price > 1000 or self.subcategory in trial_list:
+			return True
+		else:
+			return False
 
 class ProductImage(AbstractImageModel):
 	product = models.ForeignKey('goods.Product')
