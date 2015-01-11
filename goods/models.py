@@ -45,6 +45,38 @@ class Material(models.Model):
 	def __str__(self):
 		return self.select or 'none'
 
+subcategories = [
+		('bar', 'bar'),
+		('bar_stool','bar_stool'),
+		('bed','bed'),
+		('bedding','bedding'),
+		('bench','bench'),
+		('chair','chair'),
+		('chaise','chaise'),
+		('desk','desk'),
+		('desk_light','desk_light'),
+		('dining_table','dining_table'),
+		('dresser', 'dresser'),
+		('floor_lamp','floor_lamp'),
+		('kitchen_serving','kitchen_serving'),
+		('lighting - other', 'lighting - other'),
+		('loveseat','loveseat'),
+		('media','media'),
+		('mirror','mirror'),
+		('nightstand','nightstand'),
+		('ottoman','ottoman'),
+		('other_lighting','other_lighting'),
+		('other_decor ','other_decor '),
+		('pillow','pillow'),
+		('rug_throw','rug_throw'),
+		('table_lamp', 'table_lamp', )
+		('small_table','small_table'),
+		('sofa','sofa'),
+		('storage','storage'),
+		('wall_decor','wall_decor'),
+	]
+
+
 class Product(models.Model):
 	sku = models.CharField(max_length=25, null=True, blank=True)
 	short_name = models.CharField(max_length=50)
@@ -93,6 +125,8 @@ class Product(models.Model):
 		if self.is_published == True and not self.pub_date:
 			self.pub_date = timezone.now()
 		super(Product, self).save(*args, **kwargs)
+		self.does_product_have_trial()
+
 
 	def getdist(self, UserLat=39.94106319,UserLng=-75.173192):
 		dist = 3959 * acos(cos(radians(UserLat)) * cos(radians(self.lat)) \
@@ -102,11 +136,13 @@ class Product(models.Model):
 		return round(dist,2)
 
 	def does_product_have_trial(self):
+		"""if product is part of a subcategory that
+		is triable OR has a price above $1000, it is eligible for a trial
+		"""
+
 		trial_list = Subcategory.objects.filter(trial_product=True)
 		if self.current_price > 1000 or self.subcategory in trial_list:
-			return True
-		else:
-			return False
+			self.has_trial = True
 
 class ProductImage(AbstractImageModel):
 	product = models.ForeignKey('goods.Product')

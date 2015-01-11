@@ -8,7 +8,7 @@ class TagAdmin(admin.ModelAdmin):
 
 class SubcategoryAdmin(admin.ModelAdmin):
 	list_display =['select', 'trial_product']
-	list_editable = ['select', 'trial_product']
+	list_editable = ['trial_product']
 
 admin.site.register(Subcategory, SubcategoryAdmin)
 
