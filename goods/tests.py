@@ -15,9 +15,8 @@ class ProductTestCase(TestCase):
 		trial_subcategory = Subcategory.objects.create(select='sofa', trial_product=True)
 		nontrial_subcategory = Subcategory.objects.create(select='chair')
 		
-		
 	
-	def test_product_saves_as_has_trial(self):
+	def test_product_saves_as_has_trial_above_price(self):
 		"""product saves as trial when is either above 
 			price threshold or is in one of the trial
 			subcategories
@@ -35,6 +34,11 @@ class ProductTestCase(TestCase):
 		low_price_prod.save()
 		self.assertFalse(low_price_prod.has_trial)
 		
+	def test_product_saves_as_has_trial_when_in_trial_subcateogry(self):
+		"""If product is priced under $1,000 it should save as
+			has_trial when its tagged with a subcategory with
+			trial_product = True
+		"""
 		
 		#Test that product having a 'trial_product' ==True field triggers trial product
 		trial_subcat = Subcategory.objects.get(trial_product=True)

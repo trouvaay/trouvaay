@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from goods.models import Product, Color, Segment, Style, FurnitureType, ValueTier, Category, Subcategory, Material, ProductImage, Comment
+from goods.models import Product, Color, Segment, Style, FurnitureType, ValueTier, Category, Subcategory, Material, ProductImage
 
 @admin.register(Segment, Style, Color, FurnitureType, ValueTier, Category, Material)
 class TagAdmin(admin.ModelAdmin):
@@ -16,11 +16,6 @@ class ProductImageInline(admin.StackedInline):
 	model = ProductImage
 	fields = (('image','is_main'),)
 	verbose_name = 'photo'
-
-
-class CommentInline(admin.StackedInline):
-	model = Comment
-	fields = ('product','authuser','message')
 
 
 class ProductAdmin(admin.ModelAdmin):

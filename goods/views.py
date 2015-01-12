@@ -3,7 +3,7 @@ from goods.models import Product, Category, FurnitureType, Segment
 from members.models import AuthUserActivity
 from django.core.serializers import serialize
 from braces.views import LoginRequiredMixin
-from goods.forms import CommentForm
+# from goods.forms import CommentForm
 from random import randint
 
 
