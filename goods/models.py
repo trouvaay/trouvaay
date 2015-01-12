@@ -70,8 +70,8 @@ class Material(models.Model):
 		ordering = ['select']
 
 subcategories = [
-		('armoire', 'armoire'),
-		('bar', 'bar'),
+		# ('armoire', 'armoire'),
+		# ('bar', 'bar'),
 		('bar stool','bar stool'),
 		('bed','bed'),
 		('bedding','bedding'),
@@ -167,7 +167,7 @@ class Product(models.Model):
 		"""
 
 		trial_list = Subcategory.objects.filter(trial_product=True)
-		if self.current_price > 1000 or self.subcategory in trial_list:
+		if self.current_price >= 1000 or self.subcategory.first() in trial_list:
 			self.has_trial = True
 
 class ProductImage(AbstractImageModel):

@@ -9,7 +9,7 @@ class Retailer(models.Model):
 	short_name = models.CharField(max_length=100)
 	organization_type = models.CharField(max_length=20, choices=[('indiv','individual'),('corp.','corporation')])
 	owner = models.ForeignKey(settings.AUTH_USER_MODEL, limit_choices_to={'is_merchant': True})
-	website = models.URLField()
+	website = models.URLField(null=True, blank=True)
 
 	def __str__(self):
 		return self.short_name
