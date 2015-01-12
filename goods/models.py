@@ -9,25 +9,40 @@ class Segment(models.Model):
 	def __str__(self):
 		return self.select or 'none'
 
+	class Meta:
+		ordering = ['select']
+
 class Style(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='modern', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
+
+	class Meta:
+		ordering = ['select']
 
 class FurnitureType(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='seating', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
+	class Meta:
+		ordering = ['select']
+
 class ValueTier(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='mid', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
+	class Meta:
+		ordering = ['select']
+
 class Category(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='living', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
+
+	class Meta:
+		ordering = ['select']
 
 class Subcategory(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='bar', null=True, blank=True)
@@ -35,15 +50,24 @@ class Subcategory(models.Model):
 	def __str__(self):
 		return self.select or 'none'
 
+	class Meta:
+		ordering = ['select']
+
 class Color(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='blue', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
+	
+	class Meta:
+		ordering = ['select']
 
 class Material(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='leather', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
+	
+	class Meta:
+		ordering = ['select']
 
 subcategories = [
 		('armoire', 'armoire'),
