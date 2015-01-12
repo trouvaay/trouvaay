@@ -111,9 +111,5 @@ def SubmitCustomerPayment(request):
 	return JsonResponse('not a post request homes', safe=False)
 
 
-
 class ReviewView(LoginRequiredMixin, generic.TemplateView):
 	template_name = 'members/purchase/review.html'
-
-# class PaymentView(LoginRequiredMixin, generic.TemplateView):
-# 	template_name = 'members/purchase/payment.html'

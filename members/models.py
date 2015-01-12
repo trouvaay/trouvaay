@@ -102,7 +102,9 @@ class AuthUserAddress(models.Model):
 
 class AuthUserActivity(models.Model):
 	authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
+	# Items for which user has clicked on heart icon.
 	saved_items = models.ManyToManyField('goods.Product', null=True, blank=True)
+	# Items recommended by us to be associated with user
 	recommended_items = models.ManyToManyField('goods.Product', related_name='recommended')
 	color = models.ManyToManyField('goods.Color', null=True, blank=True)
 	style = models.ManyToManyField('goods.Style', null=True, blank=True)
@@ -111,6 +113,10 @@ class AuthUserActivity(models.Model):
 
 	def __str__(self):
 		return ('user: '+self.authuser.email+' ;  items: '+str(self.saved_items.all()))
+
+# class AuthUserDesiredObject(models.Model):
+# 	fur
+
 
 class AuthUserStripe(models.Model):
 	authuser = models.OneToOneField(settings.AUTH_USER_MODEL)
