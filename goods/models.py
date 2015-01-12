@@ -70,8 +70,8 @@ class Material(models.Model):
 		ordering = ['select']
 
 subcategories = [
-		# ('armoire', 'armoire'),
-		# ('bar', 'bar'),
+		('armoire', 'armoire'),
+		('bar', 'bar'),
 		('bar stool','bar stool'),
 		('bed','bed'),
 		('bedding','bedding'),

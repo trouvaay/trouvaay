@@ -80,12 +80,6 @@ class DetailView(generic.DetailView):
 	context_object_name = 'product'
 	model = Product
 	
-	def get_context_data(self, **kwargs):
-		context = super(DetailView, self).get_context_data(**kwargs)
-		context['comments'] = self.object.comment_set.all()
-		context['form'] = CommentForm()
-		return context
-
 
 class DirectionsView(LoginRequiredMixin, generic.DetailView):
 	template_name = 'goods/detail/map.html'
