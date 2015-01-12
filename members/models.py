@@ -48,6 +48,7 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 	last_name = models.CharField(max_length=30, null=True, blank=True)
 	is_merchant = models.BooleanField(default=False)
 	date_joined = models.DateTimeField(auto_now_add=True)
+	in_coverage_area = models.BooleanField(default=False)
 	is_active = models.BooleanField(default=True, null=False)
 	is_admin = models.BooleanField(default=False, null=False)
 

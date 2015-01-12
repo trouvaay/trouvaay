@@ -66,7 +66,10 @@ def GeoCode(street, city, state, zipcd, street2=None):
 			return(None,None)
 	except:
 		return(None,None)
-	
+
+# used to determine if AuthUser 'in_coverage_area' field should be set to True
+coverage_area = [94040]
+
 States = [
         ('AK', 'Alaska'),
         ('AL', 'Alabama'),
