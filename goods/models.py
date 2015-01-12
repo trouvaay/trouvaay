@@ -179,34 +179,35 @@ class ProductImage(AbstractImageModel):
 	def __str__(self):
 		return self.product.short_name
 
-class ProductActivity(models.Model):
-	product = models.ForeignKey(Product)
-	likes = models.IntegerField(default=0)
-	shares = models.IntegerField(default=0)
-	views = models.IntegerField(default=0)
 
-	class Meta:
-		abstract = True
+#FUTURE FEATURES
+# class ProductActivity(models.Model):
+# 	product = models.ForeignKey(Product)
+# 	likes = models.IntegerField(default=0)
+# 	shares = models.IntegerField(default=0)
+# 	views = models.IntegerField(default=0)
 
-class NewProductActivity(ProductActivity):
-	units_sold = models.IntegerField(default=0)
+# 	class Meta:
+# 		abstract = True
 
-class VintageProductActivity(ProductActivity):
-	time_to_sale = models.IntegerField(default=0)
+# class NewProductActivity(ProductActivity):
+# 	units_sold = models.IntegerField(default=0)
+# class VintageProductActivity(ProductActivity):
+# 	time_to_sale = models.IntegerField(default=0)
 
-class Comment(models.Model):
-	product = models.ForeignKey(Product)
-	authuser = models.ForeignKey('members.AuthUser')
-	message = models.CharField(max_length=255)
-	added_date = models.DateTimeField(auto_now_add=True)
-	is_published = models.BooleanField(default=True)
-	pub_date = models.DateTimeField(null=True, blank=True)
+# class Comment(models.Model):
+# 	product = models.ForeignKey(Product)
+# 	authuser = models.ForeignKey('members.AuthUser')
+# 	message = models.CharField(max_length=255)
+# 	added_date = models.DateTimeField(auto_now_add=True)
+# 	is_published = models.BooleanField(default=True)
+# 	pub_date = models.DateTimeField(null=True, blank=True)
 
-	def days_since_add(self):
-		delta = timezone.now() - self.added_date
-		time_lapse = delta.days
+# 	def days_since_add(self):
+# 		delta = timezone.now() - self.added_date
+# 		time_lapse = delta.days
 
-		return int(time_lapse)
+# 		return int(time_lapse)
 
 
 
