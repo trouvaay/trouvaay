@@ -3,7 +3,6 @@ from models import Product, Subcategory
 from merchants.models import Store, Retailer
 from members.models import AuthUser
 
-'testyt'
 
 class ProductTestCase(TestCase):
 	def setUp(self):
