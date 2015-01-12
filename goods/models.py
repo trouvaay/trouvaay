@@ -5,43 +5,43 @@ from django.utils import timezone
 
 
 class Segment(models.Model):
-	select = models.CharField(max_length=55, default='new', null=True, blank=True)	
+	select = models.CharField(unique=True, max_length=55, default='new', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
 class Style(models.Model):
-	select = models.CharField(max_length=55, default='modern', null=True, blank=True)	
+	select = models.CharField(unique=True, max_length=55, default='modern', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
 class FurnitureType(models.Model):
-	select = models.CharField(max_length=55, default='seating', null=True, blank=True)	
+	select = models.CharField(unique=True, max_length=55, default='seating', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
 class ValueTier(models.Model):
-	select = models.CharField(max_length=55, default='mid', null=True, blank=True)	
+	select = models.CharField(unique=True, max_length=55, default='mid', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
 class Category(models.Model):
-	select = models.CharField(max_length=55, default='living', null=True, blank=True)	
+	select = models.CharField(unique=True, max_length=55, default='living', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
 class Subcategory(models.Model):
-	select = models.CharField(max_length=55, default='bar', null=True, blank=True)
+	select = models.CharField(unique=True, max_length=55, default='bar', null=True, blank=True)
 	trial_product = models.BooleanField(default=False)	
 	def __str__(self):
 		return self.select or 'none'
 
 class Color(models.Model):
-	select = models.CharField(max_length=55, default='blue', null=True, blank=True)	
+	select = models.CharField(unique=True, max_length=55, default='blue', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
 class Material(models.Model):
-	select = models.CharField(max_length=55, default='leather', null=True, blank=True)	
+	select = models.CharField(unique=True, max_length=55, default='leather', null=True, blank=True)	
 	def __str__(self):
 		return self.select or 'none'
 
