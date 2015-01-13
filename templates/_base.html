@@ -18,7 +18,19 @@
         {% block beginjs %}{% endblock beginjs %}
     </head>
     <body>
-    {% block modal %}{% endblock %}
+    {% block modal %}
+        <div class="modal" id="addtocartmodal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert" style="margin-bottom:0">
+                        <p class="text-center">Added to cart <a href="{% url 'members:cart' %}" class="alert-link">checkout now</a></p>
+                    </div>
+                </div>  
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /. end login modal -->
+    {% endblock %}
     {% block nav %}
         <div class="container-fluid top-bar">
             {% block nav-all-else %}
