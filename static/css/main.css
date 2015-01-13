@@ -1409,7 +1409,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .grid-product.homepg {
   width: 100%;
-  height: 275px;
+  /*height: 275px;*/
   position: relative;
   width: 100%;
   /*margin: 2rem;*/
@@ -2333,9 +2333,10 @@ form .form-checkbox-wrap .checkbox-label {
   color: #333;
   letter-spacing: 1.5px;
   padding: 10px;*/
-  background: #f4f4f4;
-  font-size:14px;
-  padding: 2.5px 10px 0px;
+  background: rgb(229, 227, 227);
+  font-size: 14px;
+  padding: 6px 10px 6px;
+  border: black solid 1px;
 }
 .btn.btn-default.glyphs {
   font-size:14px;
@@ -2895,6 +2896,7 @@ footer ul li a:hover {
   float: left;
   padding: 25px 0 25px 0;
   height: 100%;
+  background-color: #f4f4f4;
 }
 .page-quote {
   background: #f4f4f4;
@@ -3178,7 +3180,7 @@ footer ul li a:hover {
 }
 
 .pic-detail-home {
-    margin-left: 3%;
+    margin-left: 10%;
     text-align: left;
   }
 @media screen and (min-width: 768px) and (max-width: 992px) {
