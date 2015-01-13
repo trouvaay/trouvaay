@@ -53,7 +53,18 @@
   </div>
 {% endblock %}
 {% block endjs %}
-<script type="text/javascript"> 
+<script type="text/javascript">
+          //add 'active' class to any heart of products user has liked
+    var liked = {{ liked_items|safe }};
+    function addlikedhearts (liked) {
+      for (i in liked) {
+        var heartid = 'heart_';
+        heartid+=liked[i];
+        heart = document.getElementById(heartid);
+        heart.className+=' active';
+      }
+    };
+    addlikedhearts(liked); 
 	// function  getpoints (userloc) {
  //    var products = {{ products_json|safe }};
  //    var userloc = {

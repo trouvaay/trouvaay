@@ -65,17 +65,7 @@ var trouvaay = {
 $(document).ready(function() {
     trouvaay.init();
 
-    //add 'active' class to any heart of products user has liked
-    var liked = {{ liked_items|safe }};
-	function addlikedhearts (liked) {
-		for (i in liked) {
-			var heartid = 'heart_';
-			heartid+=liked[i];
-			heart = document.getElementById(heartid);
-			heart.className+=' active';
-		}
-	};
-	addlikedhearts(liked);
+    
     
     //Django boilerplat to Automatically adds csrf token to template for $.POST Ajax
     function getCookie(name) {
