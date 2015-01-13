@@ -2914,7 +2914,10 @@ footer ul li a:hover {
   float: left;
   padding: 5px 0 5px 0;
   height: 100%;
-  margin-top: 100px;
+  
+}
+#first-content-after-nav {
+  padding-top: 78px;
 }
 .homepage-quote .text,
 .hp-tabs .text {
