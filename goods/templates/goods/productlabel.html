@@ -7,7 +7,7 @@
             {% if product.is_sold %}<span class="sold">{{ 'Sold' }}</span>
             {% else %}
             <button type="button" class="btn btn-default btn-lg buy" id="buy_{{ product.id }}">
-                ${{ product.current_price }}
+                {% if product.current_price %}${{ product.current_price }}{% else %}request price{% endif %}
             </button>
             {% endif %}
         </div>
