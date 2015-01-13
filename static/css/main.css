@@ -905,7 +905,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .container .row .col-sm-7.product-description,
 .container .row .col-sm-5.product-description {
-  margin-top: 20px;
+  /*margin-top: 20px;*/
 }
 .product-description .heading {
   float: left;
