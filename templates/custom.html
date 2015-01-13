@@ -57,7 +57,7 @@ var trouvaay = {
 		    else {
 		    	$(this).addClass("active");
 		    	$.post("{% url 'members:addtocart' %}", data, function(product) {
-		    		$(".counter .value").html(product.count.toString());
+		    		$(".cart-counter").html(product.count.toString());
 	    		});
 		    }
 	    })  

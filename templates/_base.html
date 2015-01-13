@@ -51,8 +51,7 @@
                                 </li>
                                 <li><div class="cart-info">
                                         <a href="{% url 'members:cart' %}">
-                                            <span class="counter">
-                                            <span class="value">{{ request.user.authusercart_set.first.get_item_count}}</span>items</span>
+                                            <img src="{% static 'img/shopping_cart24.png' %}"/><span class="badge cart-counter">{{ request.user.authusercart_set.first.get_item_count}}</span>
                                         </a>
                                     </div></li>
                                 <li>
