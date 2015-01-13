@@ -59,6 +59,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   float: left;
   background: white;
   padding: 10px 20px;
+  position: fixed;
+  z-index: 100;
 }
 .top-bar.non-white {
   background: #f4f4f4;
@@ -87,6 +89,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .insta-icon {
   margin-right: 0.4em;
+ 
+}
+.insta-icon > img {
+   max-height: 24px; 
 }
 .insta-icon.mobile {
   padding: 10px 5px;
@@ -2899,6 +2905,7 @@ footer ul li a:hover {
   padding: 25px 0 25px 0;
   height: 100%;
   background-color: #f4f4f4;
+  margin-top: 100px;
 }
 .page-quote {
   background: #f4f4f4;
@@ -2906,6 +2913,7 @@ footer ul li a:hover {
   float: left;
   padding: 5px 0 5px 0;
   height: 100%;
+  margin-top: 100px;
 }
 .homepage-quote .text,
 .hp-tabs .text {
@@ -3923,7 +3931,10 @@ footer ul li a:hover {
   }
   .top-bar {
     padding: 2px 5px;
-    border-bottom: 8px #3094B2 solid;
+    border-bottom: 4px rgb(0,128,183) solid;
+  }
+  .page-quote {
+    margin-top: 50px;
   }
   .navbar-toggle {
     padding: 5px;
@@ -3988,6 +3999,7 @@ footer ul li a:hover {
 #main-menu .col-sm-12.main-navigation a {
   padding-top: 0;
   padding-bottom: 0;
+  margin-bottom: 0;
 }
 .tfoot {
   font-weight: 800;
