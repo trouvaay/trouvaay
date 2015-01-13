@@ -58,7 +58,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   width: 100%;
   float: left;
   background: white;
-  padding: 10px 20px;
+  padding: 5px 5px;
   position: fixed;
   z-index: 100;
   border-bottom: 3px solid rgb(0,128,183);
@@ -74,7 +74,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   text-align: right;
 }
 .logo-div {
-  margin-top: 17px;
+  margin-top: 8px;
   font-size: 25px;
   padding-left: 35px;
 }
@@ -93,7 +93,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
  
 }
 .insta-icon > img {
-   max-height: 24px; 
+   max-height: 20px; 
 }
 .insta-icon.mobile {
   padding: 10px 5px;
@@ -2916,7 +2916,7 @@ footer ul li a:hover {
   
 }
 #first-content-after-nav {
-  padding-top: 78px;
+  padding-top: 62px;
 }
 .homepage-quote .text,
 .hp-tabs .text {
@@ -3667,7 +3667,6 @@ footer ul li a:hover {
   .main-navigation .navbar-nav > li > a {
     border-top: solid 2px transparent;
     color: #7a7a7a;
-    text-transform: uppercase;
     font-weight: bold;
     margin-bottom:5px;
   }
@@ -3999,7 +3998,7 @@ footer ul li a:hover {
   /*margin-left: 25px;*/
 }
 #main-menu .col-sm-12.main-navigation.top-row li.socialicons {
-  width: 40px;
+  width: 30px;
   margin-left: 5px;
 }
 
