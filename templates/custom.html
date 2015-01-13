@@ -27,7 +27,7 @@ var trouvaay = {
 
 		$("#mob-nav").on('click',function() {
                 if (!$('#mobil-nav').length ) {
-                  $(".container-fluid.top-bar").after(mobilemenu);
+                  $(".container-fluid.top-bar").append(mobilemenu);
                 
                 } else {
                   $("#mobil-nav").remove();

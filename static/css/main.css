@@ -2906,7 +2906,6 @@ footer ul li a:hover {
   padding: 25px 0 25px 0;
   height: 100%;
   background-color: #f4f4f4;
-  margin-top: 100px;
 }
 .page-quote {
   background: #f4f4f4;
@@ -3939,7 +3938,7 @@ footer ul li a:hover {
     border-bottom: 4px rgb(0,128,183) solid;
   }
   .page-quote {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
   }
   .navbar-toggle {
     padding: 5px;
@@ -3961,6 +3960,9 @@ footer ul li a:hover {
   .nav .nav-divider {
     border-bottom: #e5e5e5 2px solid;
     margin: 2px 0;
+  }
+  #first-content-after-nav {
+    padding-top: 45px;
   }
 }
 
