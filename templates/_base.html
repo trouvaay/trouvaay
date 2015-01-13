@@ -28,7 +28,13 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                        </button></a> 
+                        </button></a>
+                        <div class="cart-info navbar-toggle">
+                            <a href="{% url 'members:cart' %}">
+                                <img src="{% static 'img/shopping_cart24.png' %}"/><span class="badge mobile-cart-counter">{{ request.user.authusercart_set.first.get_item_count}}</span>
+                            </a>
+                        </div>
+
                 </div>
                 <div id="main-menu" class="col-xs-6 right-side">
                     <div class="row">
