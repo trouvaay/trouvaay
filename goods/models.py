@@ -46,7 +46,8 @@ class Category(models.Model):
 
 class Subcategory(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='bar', null=True, blank=True)
-	trial_product = models.BooleanField(default=False)	
+	trial_product = models.BooleanField(default=False)
+	shipping_charge	= models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, choices=[(5.00,5.00),(20.00,20.00),(50.00,50.00)])
 	def __str__(self):
 		return self.select or 'none'
 

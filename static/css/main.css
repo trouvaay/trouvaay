@@ -88,6 +88,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .insta-icon {
   margin-right: 0.4em;
 }
+.insta-icon.mobile {
+  padding: 10px 5px;
+}
 .cart-info {
   display: inline-block;
 }
@@ -1657,7 +1660,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   background: #f4f4f4;
 }
 .grid-products-wrapper .row {
-  margin: 0 -15px;
+  /*margin: 0 -15px;*/
 }
 .grid-products-wrapper .pagination-wrapper {
   padding: 0;
