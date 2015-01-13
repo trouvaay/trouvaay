@@ -2923,6 +2923,9 @@ footer ul li a:hover {
 .container.tab-icons {
   margin-top: 15px;
 }
+.container.tab-icons.mobile {
+  display: none;
+}
 .pic-tabs {
   background: white;
 }
@@ -3869,6 +3872,9 @@ footer ul li a:hover {
   .container {
     padding: 0;
   }
+  .subheading {
+    font-size: 15px;
+  }
   .row {
     margin-left: 0;
     margin-right: 0;
@@ -3928,6 +3934,13 @@ footer ul li a:hover {
   .hp-tabs .nav-tabs > li.first {
     width: 68%;
     margin-left: 16%;
+  }
+  .container.tab-icons {
+    display: none;
+  }
+  .container.tab-icons.mobile {
+    display: block;
+    margin-top: 10px;
   }
   .nav .nav-divider {
     border-bottom: #e5e5e5 2px solid;
