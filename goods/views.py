@@ -25,7 +25,11 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 		#JSON sent to client to calc distance from user
 		context['products_json'] = serialize('json', context['products'])
 		#Recommeneded product logic still needs to be written.  Placeholder for template
-		context['recommended'] = self.model.objects.filter(is_published=True, is_sold=False).reverse()[:2]
+		useractivity = AuthUserActivity.objects.get(authuser=self.request.user)
+		liked_list = useractivity.saved_items.all()
+		liked_ids = [prod.id for prod in liked_list]
+		context['liked_items'] = liked_ids
+		context['liked_items'] = liked_ids
 		return context
 
 
