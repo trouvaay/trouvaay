@@ -31,7 +31,6 @@ body {
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Avenir";
-  font-weight: 600;
   /*text-transform: ;*/
 }
 .navbar-default {
@@ -79,7 +78,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   padding-left: 35px;
 }
 .main-footer a {
-  color: #333;
+  color: #7a7a7a;
 }
 .row.footer {
   margin-bottom: 1em;
@@ -2333,25 +2332,9 @@ form .form-checkbox-wrap .checkbox-label {
   margin-left: 25px;
 }
 .btn.btn-default {
- /* border: solid 3px #e5e5e5;
-  -webkit-border-radius: 0px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
-  -moz-background-clip: padding;
-  border-radius: 0px;
-  background-clip: padding-box;
-  background: white;
-  font-family: "Courier New", Arial, sans-serif;
-  font-size: 14px;
-  line-height: 17px;
-  font-weight: 400;
-  color: #333;
-  letter-spacing: 1.5px;
-  padding: 10px;*/
   background: rgb(229, 227, 227);
   font-size: 14px;
   padding: 6px 10px 4px;
-  border: gray solid 1px;
 }
 .btn.btn-default.glyphs {
   font-size:16px;
@@ -2734,7 +2717,6 @@ form .form-checkbox-wrap .checkbox-label {
   font-weight: bold;
   color: #5e5e5e;
   margin: 0;
-  text-transform: uppercase;
   margin-bottom: 35px;
 }
 .footer-search {
