@@ -46,7 +46,8 @@ class Category(models.Model):
 
 class Subcategory(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='bar', null=True, blank=True)
-	trial_product = models.BooleanField(default=False)	
+	trial_product = models.BooleanField(default=False)
+	shipping_charge	= models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, choices=[(5.00,5.00),(20.00,20.00),(50.00,50.00)])
 	def __str__(self):
 		return self.select or 'none'
 
@@ -68,39 +69,6 @@ class Material(models.Model):
 	
 	class Meta:
 		ordering = ['select']
-
-subcategories = [
-		# ('armoire', 'armoire'),
-		# ('bar', 'bar'),
-		('bar stool','bar stool'),
-		('bed','bed'),
-		('bedding','bedding'),
-		('bench','bench'),
-		('chair','chair'),
-		('chaise','chaise'),
-		('decor - wall','decor - wall'),
-		('decor - table','decor - table'),
-		('decor - other','decor - other'),
-		('desk','desk'),
-		('desk light','desk light'),
-		('dining table','dining table'),
-		('dresser', 'dresser'),
-		('kitchen serving','kitchen serving'),
-		('lighting - floor','lighting - floor'),
-		('lighting - table', 'lighting - table'),
-		('lighting - other', 'lighting - other'),
-		('loveseat','loveseat'),
-		('media','media'),
-		('mirror','mirror'),
-		('ottoman','ottoman'),
-		('pillow','pillow'),
-		('rug throw','rug throw'),
-		('sofa','sofa'),
-		('storage','storage'),
-		('table - small','table - small'),
-		('trunk', 'trunk'),
-		('table', 'table'),
-	]
 
 
 class Product(models.Model):
@@ -208,6 +176,42 @@ class ProductImage(AbstractImageModel):
 # 		time_lapse = delta.days
 
 # 		return int(time_lapse)
+# subcategories = {
+# 		'armoire': [100, 200, 400],
+# 		'bar'
+# 		'bar stool'
+# 		'bed'
+# 		'bedding'
+# 		'bench':
+# 		'cabinet':
+# 		'chair - accent':
+# 		'chair - dining':
+# 		'chaise':
+# 		'decor - wall','decor - wall'),
+# 		'decor - table','decor - table'),
+# 		'decor - other','decor - other'),
+# 		('desk','desk'),
+# 		('desk light','desk light'),
+# 		('dining table','dining table'),
+# 		('dresser', 'dresser'),
+# 		('kitchen and serving','kitchen and serving'),
+# 		('lighting - floor','lighting - floor'),
+# 		('lighting - desk', 'lighting - desk'),
+# 		('lighting - other', 'lighting - other'),
+# 		('loveseat','loveseat'),
+# 		('media','media'),
+# 		('mirror','mirror'),
+# 		('ottoman','ottoman'),
+# 		('pillow','pillow'),
+# 		('rug','rug'),
+# 		('sofa','sofa'),
+# 		('storage','storage'),
+# 		('table - large','table - large'),
+# 		('table - small','table - small'),
+# 		('throw', 'throw'),
+# 		('trunk', 'trunk'),
+# 		('table', 'table'),
+# 	]
 
 
 

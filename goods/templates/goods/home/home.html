@@ -2,17 +2,14 @@
 {% load staticfiles %}
 {% load cloudinary %}
 {% block beginjs %}
-<script type="text/javascript" 
-	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
-</script>
 {% endblock %}
 
 {% block modal %}{% endblock %}
 
 {% block content %}
-  <div class="container homepage-slider-container">
+  <div class="container homepage-slider-container" id="first-content-after-nav">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
             <div class="homepage-slider">
                 <ul class="slides">
                     <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1420784696/ibzftnjjrln3iqdugnkb.jpg');">
@@ -40,26 +37,9 @@
         </div>
     </div>
   </div>
-   <div class="container-fluid">
-    <div class="grid-products-wrapper recommended">
-        <div class="row" style="margin:20px">
-          <div class="col-m-12">
-            <h5>Some things wed thought you'd like...</h5>
-          </div>
-        </div>
-        <div class="row">
-            {% for product in recommended %}
-                {% include 'goods/home/_home_for_loop.html' %}
-            {% endfor %}
-        </div>
-    </div>
-  </div>
   <div class="container-fluid">
     <div class="grid-products-wrapper">
         <div class="row" style="margin:20px">
-          <div class="col-m-12">
-            <h5>Recent additions</h5>
-          </div>
         </div>
         <div class="row">
             {% for product in products %}
@@ -70,37 +50,48 @@
   </div>
 {% endblock %}
 {% block endjs %}
-<script type="text/javascript"> 
-	function  getpoints (userloc) {
-    var products = {{ products_json|safe }};
-    var userloc = {
-     // 'lat': userloc.coords.latitude,
-     // 'lng': userloc.coords.longitude,
-     'lat': 37.798530,
-    'lng': -122.417966,
+<script type="text/javascript">
+          //add 'active' class to any heart of products user has liked
+    var liked = {{ liked_items|safe }};
+    function addlikedhearts (liked) {
+      for (i in liked) {
+        var heartid = 'heart_';
+        heartid+=liked[i];
+        heart = document.getElementById(heartid);
+        heart.className+=' active';
+      }
     };
+    addlikedhearts(liked); 
+	// function  getpoints (userloc) {
+ //    var products = {{ products_json|safe }};
+ //    var userloc = {
+ //     // 'lat': userloc.coords.latitude,
+ //     // 'lng': userloc.coords.longitude,
+ //     'lat': 37.798530,
+ //    'lng': -122.417966,
+ //    };
       
-      var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
-      initializemap(products, userloc);
-      for (i in products) {
-        add_dists(userpos,products[i],i);
-      } 
-    };
+ //      var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+ //      initializemap(products, userloc);
+ //      for (i in products) {
+ //        add_dists(userpos,products[i],i);
+ //      } 
+ //    };
 
-  function add_dists(userpos, prod, prodnum) {
-    var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
-    var request = {
-          origin: userpos,
-          destination: productpos,
-          travelMode: google.maps.TravelMode.DRIVING
-      };
-    var directionsService = new google.maps.DirectionsService();
-    directionsService.route(request, function(result, status) {
-          if (status == google.maps.DirectionsStatus.OK) {
-          }
-          $(".dist").eq(prodnum).append('</br>('+result.routes[0].legs[0].distance.text+')');
-        });
-  };
-	navigator.geolocation.getCurrentPosition(getpoints);
+ //  function add_dists(userpos, prod, prodnum) {
+ //    var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
+ //    var request = {
+ //          origin: userpos,
+ //          destination: productpos,
+ //          travelMode: google.maps.TravelMode.DRIVING
+ //      };
+ //    var directionsService = new google.maps.DirectionsService();
+ //    directionsService.route(request, function(result, status) {
+ //          if (status == google.maps.DirectionsStatus.OK) {
+ //          }
+ //          $(".dist").eq(prodnum).append('</br>('+result.routes[0].legs[0].distance.text+')');
+ //        });
+ //  };
+	// navigator.geolocation.getCurrentPosition(getpoints);
 </script>
 {% endblock %}

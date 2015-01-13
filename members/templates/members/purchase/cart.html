@@ -2,7 +2,7 @@
 {% load cloudinary %}
 {% block content %}
 
-<div class='col-sm-8 col-sm-offset-2'>
+<div class='col-sm-8 col-sm-offset-2' id="first-content-after-nav" style="margin-top:30px">
 {% if empty %}
 
 <h1 style='text-align:center;'>{{ empty_message }}</h1>
@@ -39,8 +39,8 @@
 {% endfor %}
 <tr class="tfoot">
 <td></td>
-<td id="total">total</td>
-<td>1,000</td>
+<td>Total</td>
+<td id="total">{{ cart.get_cart_total }}</td>
 <td></td>
 </tr>
 </table>
@@ -54,10 +54,12 @@
 		$(".btn.btn-link").click(function() {
 			var id = $(this).attr("id").substring(11);
 	    	var data = {'id': id};
-	    	$.post("{% url 'members:removefromcart' %}", data, function(productid) {
-		    		var row = 'prodrow_'+productid;
+	    	$.post("{% url 'members:removefromcart' %}", data, function(product) {
+		    		var row = 'prodrow_'+product.id;
 		    		console.log(row);
 		    		document.getElementById(row).remove();
+		    		$("#total").html(product.total.toString());
+		    		$(".counter .value").html(product.count.toString());
 	    		});
 		});
 	});

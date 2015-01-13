@@ -70,7 +70,9 @@ def RemoveFromCart(request):
 		usercart = AuthUserCart.objects.get(authuser=userinstance)
 		usercart.saved_items.remove(product)
 		usercart.save()
-		return JsonResponse(product.id, safe=False)
+		count = usercart.get_item_count()
+		total = usercart.get_cart_total()
+		return JsonResponse({'count': count, 'total': total, 'id':product.id})
 	else:
 		return JsonResponse('success', safe=False)
 

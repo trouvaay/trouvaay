@@ -1,11 +1,11 @@
 {% extends '_base.html' %}
 
  {% block content %}
- 	<div class="container-fluid page-quote">
+ 	<div class="container-fluid page-quote" id="first-content-after-nav">
     <div class="row">
         <div class="col-sm-12">
             <div class="heading main-quote">
-                <h4 class="subheading">If vintage isn't your thing here's some new items that bring style to your home. Improve your feed by <span style="color:#3094B2" class="glyphicon glyphicon-heart" aria-hidden="true"></span> the items you like.</h4> 
+                <h4 class="subheading">If vintage isn't your thing here's some new items that bring style to your home. Improve your feed by <span style="color:rgb(0,128,183)" class="glyphicon glyphicon-heart" aria-hidden="true"></span> the items you like.</h4> 
             </div>
         </div>
     </div>
@@ -17,6 +17,17 @@
  {% block endjs %}
  <script type="text/javascript" src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true></script>
 <script type="text/javascript">
+    //add 'active' class to any heart of products user has liked
+    var liked = {{ liked_items|safe }};
+	function addlikedhearts (liked) {
+		for (i in liked) {
+			var heartid = 'heart_';
+			heartid+=liked[i];
+			heart = document.getElementById(heartid);
+			heart.className+=' active';
+		}
+	};
+	addlikedhearts(liked);
 	// var directionsDisplay;
 	// var directionsService = new google.maps.DirectionsService();
 

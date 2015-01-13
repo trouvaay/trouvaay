@@ -14,18 +14,20 @@ var trouvaay = {
 						"<li class='nav-divider'></li>" +
 						"<li><a href='{% url 'goods:vintage' %}'>Vintage</a></li>" +
 						"<li><a href='{% url 'goods:new' %}'>New</a></li>" +
-						"<li><a href='#'>About</a></li>" +
+						"<li><a href='{% url 'goods:about' %}'>About</a></li>" +
 						"<li class='nav-divider'></li>" +
-						"<li><a style='display:inline-block' class='insta-icon' href='http://instagram.com/raredoor/' target='_blank'>" +
-								"<img src='{% static 'img/instagram-icon32.png' %}'/></a>" +
-							"<a style='display:inline-block'class='insta-icon'href='https://twitter.com/RareDoor/' target='_blank'>" +
-					 			"<img src='{% static 'img/twitter-icon.jpeg' %}' height='35px'/></a>" +
+						"<li><a style='display:inline-block' class='insta-icon mobile' href='http://instagram.com/raredoor/' target='_blank'>" +
+								"<img src='{% static 'img/socialicons/instagram_gray32.png' %}'/></a>" +
+							"<a style='display:inline-block' class='insta-icon mobile' href='https://www.facebook.com/RareDoor' target='_blank'>" +
+								"<img src='{% static 'img/socialicons/facebook_gray32.png' %}'/></a>" +
+							"<a style='display:inline-block'class='insta-icon mobile' href='https://twitter.com/RareDoor/' target='_blank'>" +
+					 			"<img src='{% static 'img/socialicons/twitter_gray32.png' %}'/></a>" +
 					 	"</li>" +
 					 "</ul></div>";
 
 		$("#mob-nav").on('click',function() {
                 if (!$('#mobil-nav').length ) {
-                  $(".container-fluid.top-bar").after(mobilemenu);
+                  $(".container-fluid.top-bar").append(mobilemenu);
                 
                 } else {
                   $("#mobil-nav").remove();
@@ -65,17 +67,7 @@ var trouvaay = {
 $(document).ready(function() {
     trouvaay.init();
 
-    //add 'active' class to any heart of products user has liked
-    var liked = {{ liked_items|safe }};
-	function addlikedhearts (liked) {
-		for (i in liked) {
-			var heartid = 'heart_';
-			heartid+=liked[i];
-			heart = document.getElementById(heartid);
-			heart.className+=' active';
-		}
-	};
-	addlikedhearts(liked);
+    
     
     //Django boilerplat to Automatically adds csrf token to template for $.POST Ajax
     function getCookie(name) {

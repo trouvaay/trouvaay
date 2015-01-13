@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<section class="checkout-steps-wrapper">
+<section class="checkout-steps-wrapper"  id="first-content-after-nav">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
@@ -33,92 +33,41 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                 <div class="payment-form">
-                    <form role="form">
-                        <input type="hidden" name="payment-type" id="payment-type" value="card-payment">
-                        <ul class="nav nav-tabs payment-tabs">
-                            <li class="active">
-                                <a href="#card" class="radio-button checked" data-value="card-payment" data-toggle="tab">
-                                    <i class="fa fa-circle"></i>
-                                </a>
-                                <div class="radio-button-label">
-                                    <ul>
-                                        <li>
-                                            <img src="content/visa-electron.jpg" alt=""/>
-                                        </li>
-                                        <li>
-                                            <img src="content/mastercard.jpg" alt=""/>
-                                        </li>
-                                        <li>
-                                            <img src="content/maestro.jpg" alt=""/>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#paypal" class="radio-button" data-value="paypal-payment" data-toggle="tab">
-                                    <i class="fa fa-circle"></i>
-                                </a>
-                                <div class="radio-button-label">
-                                    <ul>
-                                        <li>
-                                            <img src="content/paypal.jpg" alt=""/>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="card">
-                                <div class="row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="card-number">Card Number</label>
-                                        <input type="text" class="form-control" id="card-number" name="card-number">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="card-name">Name on Card</label>
-                                        <input type="text" class="form-control" id="card-name" name="card-name">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="card-date">Expiry date(MM/YY)</label>
-                                        <input type="text" class="form-control" id="card-date" name="card-date">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <a href="#" data-toggle="tooltip" title="What is CVV">
-                                            <i class="fa fa-question"></i>
-                                        </a>
-                                        <label for="card-cvv">CVV</label>
-                                        <input type="text" class="form-control" id="card-cvv" name="card-cvv">
-                                    </div>
-                                </div>
+                    <form role="form" id="shipping-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="card-number">Name</label>
+                                <input type="text" class="form-control" id="name" name="name">
                             </div>
-                            <div class="tab-pane" id="paypal">
-                                <div class="row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="paypal-user">Paypal Username</label>
-                                        <input type="text" class="form-control" id="paypal-user" name="paypal-user">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="paypal-pass">Paypal Password</label>
-                                        <input type="password" class="form-control" id="paypal-pass" name="paypal-pass">
-                                    </div>
-                                </div>
+                            <div class="form-group col-sm-6">
+                                <label for="card-name">Street</label>
+                                <input type="text" class="form-control" id="street" name="street">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-xs-12">
-                                    <form action="{% url 'members:payment' %}" method="POST">
-                                    {% csrf_token %}
-                                      <script
-                                        src=https://checkout.stripe.com/checkout.js class="stripe-button"
-                                        data-key="pk_test_LaznDX4YQ97iS5tAZBKGcRnN"
-                                        data-amount="2000"
-                                        data-name="Demo Site"
-                                        data-description="2 widgets ($20.00)"
-                                        data-image="/128x128.png">
-                                      </script>
-                                    </form>
+                            <div class="form-group col-sm-6">
+                                <label for="card-date">City</label>
+                                <input type="text" class="form-control" id="city" name="city">
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="card-cvv">State</label>
+                                <input type="text" class="form-control" id="state" name="state">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="card-cvv">Zip Code</label>
+                                <input type="text" class="form-control" id="zipcd" name="zipcd">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="card-cvv">Phone</label>
+                                <input type="text" class="form-control" id="phone" name="phone">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" class="btn btn-default" id="submit">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -128,3 +77,11 @@
     </div>
 </section>
 {% endblock %}
+{% block endjs %}
+<script type="text/javascript">
+    $("#submit").click(function() {
+        $(this).hide();
+        console.log('adding strip button');
+    })
+</script>
+{% endblock endjs %}
