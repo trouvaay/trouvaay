@@ -5,15 +5,18 @@
     <div>
         <div class="col-xs-3 pic-detail-home">
             
-            <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
+            
                 {% if product.is_sold %}
                     <span class="sold">{{ 'Sold' }}</span>
                 {% elif product.current_price %}
-                    ${{ product.current_price|floatformat:"0" }}
+                    <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
+                        ${{ product.current_price|floatformat:"0" }}
+                    </button>
                 {% else %}
+                    <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
                     Request Price
+                    </button>
                 {% endif %}
-            </button>
         </div>
         <div class="col-xs-3 pull-right" style="margin-right:8%">
             <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
