@@ -55,7 +55,7 @@ var trouvaay = {
 		    	$(this).removeClass("active");
 		    	}
 		    else {
-		    	$("#addtocartmodal").show().delay(4000).fadeOut();
+		    	$("#addtocartmodal").show().delay(3000).fadeOut();
 		    	$.post("{% url 'members:addtocart' %}", data, function(product) {
 		    		$(".cart-count").html(product.count.toString());
 	    		});
