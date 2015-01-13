@@ -2387,6 +2387,9 @@ form .form-checkbox-wrap .checkbox-label {
 .modal-dialog .modal-body {
   padding: 20px 0;
 }
+#addtocartmodal .modal-dialog .modal-body {
+  padding: 5px 0;
+}
 .modal-dialog .modal-content {
   float: left;
   padding: 10px;
