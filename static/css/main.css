@@ -235,7 +235,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .sold {
   font-weight: 700;
   font-style: italic;
-  color: coral;
+  color: #d9534f;
 }
 .icon-label {
   color: rgb(34, 34, 44);
