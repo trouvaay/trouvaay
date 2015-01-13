@@ -148,12 +148,12 @@ class Product(models.Model):
 		else:
 			return True
 
-	def get_dimension(self, dimension):
-		""" Appends '"Wx to approapriate dimension for 
-		template rendering.  Ie 10 --> 10"W
-		"""
-		appendterm = dimension[0].uppercase()
-		return str(dimension)+:
+	# def get_dimension(self, dimension):
+	# 	""" Appends '"Wx to approapriate dimension for 
+	# 	template rendering.  Ie 10 --> 10"W
+	# 	"""
+	# 	appendterm = dimension[0].uppercase()
+	# 	return str(dimension)+:
 
 
 
