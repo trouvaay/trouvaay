@@ -3953,6 +3953,8 @@ footer ul li a:hover {
     margin-right: 2px;
     padding-right: 0px;
     margin-top: 3px;
+  }
+  .top-bar .cart-info.navbar-toggle {
     display: block;
   }
   .badge.mobile-cart-counter {
