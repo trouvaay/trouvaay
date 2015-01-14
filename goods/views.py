@@ -17,7 +17,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		""" Show most recent six unsold items"""
-		queryset = self.model.objects.filter(is_published=True, is_sold=False)[:6]
+		queryset = self.model.objects.filter(is_published=True, is_featured=True)[:6]
 		return queryset
 
 	def get_context_data(self, **kwargs):

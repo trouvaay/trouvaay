@@ -138,6 +138,25 @@ class Product(models.Model):
 		if self.current_price >= 1000 or self.subcategory.first() in trial_list:
 			self.has_trial = True
 
+	def has_dimensions(self):
+		"""Checks to see if any of dimension fields are not null/blank
+		"""
+		dimensions = [self.width, self.height, self.depth, self.seat_height, 
+						self.diameter, self.bed_size]
+		if all(dimen is None for dimen in dimensions):
+			return False
+		else:
+			return True
+
+	# def get_dimension(self, dimension):
+	# 	""" Appends '"Wx to approapriate dimension for 
+	# 	template rendering.  Ie 10 --> 10"W
+	# 	"""
+	# 	appendterm = dimension[0].uppercase()
+	# 	return str(dimension)+:
+
+
+
 class ProductImage(AbstractImageModel):
 	product = models.ForeignKey('goods.Product')
 

@@ -1,19 +1,16 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<section class="top-quote" style="background-image: url('{{ STATIC_URL }}/img/picsamps/chairish.jpeg');" id="first-content-after-nav">
+<section class="top-quote" style="background-image: url('{{ STATIC_URL }}/img/picsamps/chairish.jpeg'); padding-top:300px">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div class="top-quote-text">
-                    <strong>We dress up a room</strong> as best we can.
-                    The clients are advised to tidy up, but <strong>we know</strong> what to look out for.
-                    Furniture moved back creates a <strong>feeling of space</strong>, newspapers are removed,
-                    children's toys tidied away and washing up put away.
+                <!-- <div class="top-quote-text">
+                    live well, live much, laugh often.
                 </div>
                 <div class="top-quote-author">
-                    - John Williams
-                </div>
+                    - Elisabeth-Anne "Bessie" Anderson Stanley
+                </div> -->
             </div>
         </div>
     </div>
@@ -25,51 +22,31 @@
                 <li><a href="#about" data-toggle="tab">About Rare Door</a></li>
                 <li><a href="#shipping" data-toggle="tab">Shipping</a></li>
                 <li><a href="#returns" data-toggle="tab">Returns & Exchanges</a></li>
-                <li><a href="#" data-toggle="tab">Careers</a></li>
+                <li><a href="#careers" data-toggle="tab">Careers</a></li>
             </ul>
             <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                 <div class="tab-content">
                     <div class="tab-pane text-editor active" id="about">
                         <p>
-                            ABOUT Vivamus suscipit, quam eu tempor hendrerit, metus nisl porttitor ante, sit amet congue nisl ipsum quis urna. Duis non nisl vitae risus fermentum malesuada. Ut tincidunt sagittis nulla in blandit.
+                            Founded in 2014, in the heart of Silicon Valley, our mission is to make it easier for people to find home furnishings that are aligned with their unique tastes. Today, Rare Door carries home decor from independent retailers in the Bay, enabling you to find that one of kind piece without having to wander from store to store, sifting through inventory. Better yet, once you’ve found that piece, you don’t have to be concerned about getting it home.
                         </p> 
                         <p>
-                            Pellentesque viverra ligula ullamcorper, eleifend massa ultrices, porta lectus. Proin venenatis pellentesque nibh, in dignissim ipsum iaculis et. Aliquam pellentesque nulla elementum adipiscing tempus. Morbi lobortis ligula commodo, blandit sem ultrices, convallis libero. 
+                            So why the name ‘Rare Door'? Door is derived from d’or, which is French for gold. Let us introduce you to rare gold. More treasure, less hunting.
                         </p>
-                        <p>
-                            Nam vitae augue ante. Aenean tellus purus, iaculis sed sapien ut, posuere ornare eros. Vestibulum laoreet arcu turpis, vel condimentum sapien accumsan sed. Donec in enim tempus, suscipit nunc in, pellentesque turpis. Nullam semper tempus odio, vel vehicula nunc. 
-                        </p>
-                        <h2>
-                            Morbi non ipsum arcu.
-                        </h2>
-                        <br/>
                     </div>
                     <div class="tab-pane text-editor" id="shipping">
                         <p>
-                             SHIPPING - Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum porta ut ligula at congue. Maecenas venenatis ligula lectus, at viverra diam venenatis nec. Vestibulum luctus, turpis nec lobortis tempor, justo diam accumsan arcu, sed eleifend risus lorem ac felis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+                             We know that once you find an item, getting it home can be a pain. That’s why we take care of the shipping for you. Once you purchase, we’ll call you and coordinate a delivery time that is convenient for you.
                         </p>
-
-                        <p>
-                            Praesent ultricies vulputate dui. Nulla nibh est, gravida a elit non, bibendum sodales neque. Maecenas eu adipiscing augue. Nullam scelerisque vitae ligula ut porta. Aliquam dignissim felis leo, quis condimentum lorem molestie aliquet. Nulla malesuada cursus turpis scelerisque varius. Aenean pulvinar neque a nisl vestibulum iaculis. Pellentesque nunc nisl, venenatis sit amet augue in, vestibulum hendrerit ante. Sed consequat commodo risus, eget tincidunt est rhoncus id. Pellentesque at turpis ut ipsum rhoncus aliquam non pretium lectus. 
-                        </p>
-                        <h2>
-                            Integer eu gravida.
-                        </h2>
-                        <br />
                     </div>
                     <div class="tab-pane text-editor" id="returns">
                         <p>
-                             RETURNS - Sed at pulvinar nisi, vel sollicitudin quam. Vestibulum quam nibh, vestibulum ac arcu in, varius pellentesque quam. Cras non euismod urna. Vestibulum vel diam ac justo fermentum placerat. Sed venenatis semper augue et molestie. Proin pretium purus nec eros consectetur tempor. Maecenas congue libero vehicula est iaculis, eget molestie ante bibendum. Cras eu pellentesque purus, at condimentum nisi. 
+                             We do not offer returns because each piece is unique, and it is expected that vintage items have some wear. However, if you have questions about a particular item, feel free to contact us before purchasing.
                         </p>
-                        <h2>
-                            Vivamus vehicula nisi.
-                        </h2>
-                        <br />
+                    </div>
+                    <div class="tab-pane text-editor" id="careers">
                         <p>
-                             Nunc ligula massa, sollicitudin sed sagittis a, viverra eu lectus. Sed in tincidunt metus. Vestibulum sem odio, blandit quis egestas non, porta eget nisl. Proin porta tortor et velit dignissim tempus. Praesent eleifend vitae tellus eleifend aliquet. Duis tempus eros sed quam sodales aliquam. Nulla scelerisque ornare lorem, sit amet tempus nisi mollis sit amet. Morbi auctor erat sed lectus porta aliquam. Sed dignissim nunc ut metus tempus auctor. 
-                        </p>
-                        <p>
-                             Aliquam iaculis dapibus tellus dignissim congue. Pellentesque et ullamcorper mi, ac commodo magna. Integer ut magna dolor. Aliquam rutrum egestas nisi vitae condimentum. Integer accumsan nisi tincidunt, vehicula diam id, feugiat tellus. Donec sollicitudin euismod mattis. Maecenas pretium non orci placerat pellentesque. Sed congue felis porta consequat auctor. Vivamus porttitor tempor pellentesque. Vivamus eget orci urna. Etiam non arcu a velit dapibus fringilla a consectetur quam. Quisque aliquet nulla eros, sit amet tempus lectus tempus vitae. Cras a tincidunt enim. Integer ultrices justo a tortor pretium, non accumsan nibh ullamcorper. 
+                             We're changing the sleepy home decor to make finding that perfect piece.  Shoot us an <a href="mailto:careers@raredoor.com">email</a> if you'd like to join the mission!
                         </p>
                     </div>
                 </div>

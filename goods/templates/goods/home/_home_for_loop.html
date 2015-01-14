@@ -2,7 +2,7 @@
 <div class="col-xs-12 col-sm-6 col-m-4" style="margin-bottom: 2rem">
     <div class="grid-product homepg centered-parent">
         <div class="centered-child detail-image-large">
-                {% cloudinary product.productimage_set.first.image width=350 height=300 crop="fill" %}
+                {% cloudinary product.productimage_set.first.image width=350 height=300 crop="fit" %}
         </div>
         <div class="centered-child detail-image-med">
                 {% cloudinary product.productimage_set.first.image width=300 height=300 crop="fit" %}

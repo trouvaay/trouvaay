@@ -1,5 +1,4 @@
 {% extends '_base.html' %}
-
  {% block content %}
  	<div class="container-fluid page-quote" id="first-content-after-nav">
     <div class="row">
@@ -10,10 +9,10 @@
         </div>
     </div>
 	</div>
+	
     {% include 'goods/new/_new_pic_tile.html' %}
 
  {% endblock content %}
- {% block modal %}{% endblock %}
  {% block endjs %}
  <script type="text/javascript" src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true></script>
 <script type="text/javascript">
@@ -28,6 +27,9 @@
 		}
 	};
 	addlikedhearts(liked);
+	// $('#signup').on('click', function () {
+	//     	$('#addtocartmodal').modal({"show": true});
+	// });
 	// var directionsDisplay;
 	// var directionsService = new google.maps.DirectionsService();
 

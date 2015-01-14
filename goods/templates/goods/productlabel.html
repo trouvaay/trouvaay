@@ -4,15 +4,22 @@
     </div>
     <div>
         <div class="col-xs-3 pic-detail-home">
-            {% if product.is_sold %}<span class="sold">{{ 'Sold' }}</span>
-            {% else %}
-            <button type="button" class="btn btn-default btn-lg buy" id="buy_{{ product.id }}">
-                ${{ product.current_price }}
-            </button>
-            {% endif %}
+            
+            
+                {% if product.is_sold %}
+                    <span class="sold">{{ 'Sold' }}</span>
+                {% elif product.current_price %}
+                    <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
+                        ${{ product.current_price|floatformat:"0" }}
+                    </button>
+                {% else %}
+                    <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
+                    Request Price
+                    </button>
+                {% endif %}
         </div>
         <div class="col-xs-3 pull-right" style="margin-right:8%">
-            <button type="button" class="btn btn-default btn-lg glyphs" id="heart_{{ product.id }}">
+            <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
             </button>
         </div>

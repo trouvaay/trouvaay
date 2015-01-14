@@ -2,14 +2,14 @@
 {% load cloudinary %}
 
  {% block content %}
-<section class="main-container" id="first-content-after-nav">
-        <div class="container detail-margin">
+<section class="main-container">
+        <div class="container detail-margin" id="first-content-after-nav">
             <div class="row">
 				<div class="col-sm-7 col-xs-12">
 				  <div class="row">
 				    <div class="col-xs-12">
 				      <div class="detail-image-large">
-				          {% cloudinary product.productimage_set.first.image width=550 height=550 crop="fit" %}
+				          {% cloudinary product.productimage_set.first.image width=450 height=550 crop="fit" %}
 				      </div>
 				      <div class="detail-image-med">
 				          {% cloudinary product.productimage_set.first.image width=400 height=400 crop="fit" %}
@@ -22,7 +22,7 @@
 				</div>
 				<div class="col-sm-5 product-description">
 				  <div class="row">
-				    <div class="col-sm-12" style="width:90%">
+				    <div class="col-sm-12">
 				       <div class="heading">{{ product.short_name }}</div></br>
 				    </div>
 				  </div>
@@ -36,30 +36,22 @@
 				    </div>
 				  </div>
 				  <div class="row">
-				       <div class="info-block first">
-				           <h4>{% for subcategory in product.subcategory.all %}{{ subcategory }}{% endfor %} {% if product.segment.all %}({% for segment in product.segment.all %}{{ segment }}){% endfor %}{% endif %}</h4>
-				       </div>  
-				        <div class="info-block">
-				           <h4>Available @ </h4>{{ product.store.retailer }}
-				           <p class="get-in-store"> (<a href="{% url 'goods:popinmap' product.id %}">Pop-in</a>)</p>
-				       </div>  
 				       <div class="info-block">
-				           <h4>Materials</h4>
+				           <h4>Made of</h4>
 				           <div class="info">
 				               {% for material in product.material.all %}<p>{{ material }}</p>{% endfor %}
 				           </div>
 				       </div>
-				       {% if product.dimensions %}
+				       {% if product.has_dimensions %}
 				       <div class="info-block">
 				           <h4>Dimensions</h4>
-				           <div class="info">
-				               
-				           </div>
+
 				       </div>
 				       {% else %}{% endif %}
 				       <div class="info-block">
 				           <h4>Color</h4>
 				           <div class="info" style="text-transform: lowercase">
+				           		{% for color in product.color.all %}{{ color }}{% endfor %}
 				           </div>
 				       </div>
 				    </div>

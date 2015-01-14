@@ -22,7 +22,7 @@
 <td></td>
 <td></td>
 <td><a href="{% url 'members:checkout' %}">
-	<button type="button" class="btn btn-default">Checkout</button>
+	<button type="button" class="btn btn-success">Checkout</button>
 </a></td>
 <td></td>
 </tr>
@@ -59,7 +59,7 @@
 		    		console.log(row);
 		    		document.getElementById(row).remove();
 		    		$("#total").html(product.total.toString());
-		    		$(".counter .value").html(product.count.toString());
+		    		$(".badge.cart-counter").html(product.count.toString());
 	    		});
 		});
 	});
