@@ -36,16 +36,20 @@
 				    </div>
 				  </div>
 				  <div class="row">
+				  	{% if product.material.all %}
 				       <div class="info-block">
 				           <h4>Made of</h4>
 				           <div class="info">
 				               {% for material in product.material.all %}<p>{{ material }}</p>{% endfor %}
 				           </div>
 				       </div>
+				      {% else %}{% endif %}
 				       {% if product.has_dimensions %}
 				       <div class="info-block">
 				           <h4>Dimensions</h4>
-
+				           <div class="info">
+				               {{ product.get_dimension_str }}
+				           </div>
 				       </div>
 				       {% else %}{% endif %}
 				       <div class="info-block">

@@ -148,12 +148,26 @@ class Product(models.Model):
 		else:
 			return True
 
-	# def get_dimension(self, dimension):
-	# 	""" Appends '"Wx to approapriate dimension for 
-	# 	template rendering.  Ie 10 --> 10"W
-	# 	"""
-	# 	appendterm = dimension[0].uppercase()
-	# 	return str(dimension)+:
+	def get_dimension(self, dimension):
+		""" Appends '"Wx to approapriate dimension for 
+		template rendering.  Ie 10 --> 10"W
+		"""
+		try:
+			value = round(getattr(self,dimension),1)
+			appendterm = dimension[0].upper()
+			return (str(value)+'"'+appendterm)
+		except:
+			pass
+		
+
+	def get_dimension_str(self):
+		dimension_list = ['width','height','depth']
+		dimension_str = ""
+		for dimension in dimension_list:
+			if self.get_dimension(dimension):
+				dimension_str+= (self.get_dimension(dimension)+' x ')
+		return dimension_str[:-3]
+
 
 
 
