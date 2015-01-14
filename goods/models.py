@@ -141,8 +141,7 @@ class Product(models.Model):
 	def has_dimensions(self):
 		"""Checks to see if any of dimension fields are not null/blank
 		"""
-		dimensions = [self.width, self.height, self.depth, self.seat_height, 
-						self.diameter, self.bed_size]
+		dimensions = [self.width, self.height, self.depth]
 		if all(dimen is None for dimen in dimensions):
 			return False
 		else:
