@@ -26,74 +26,81 @@
 				       <div class="heading">{{ product.short_name }}</div></br>
 				    </div>
 				  </div>
-				  <div class="row price-box">
-				    <div class="col-sm-12 price-wrapper">
-				        <div class="price sold">
-				            {% if product.is_sold %}{{ 'Sold'}}
-				            {% else %} ${{ product.current_price|floatformat:"0" }}
-				            {% endif %}
-				        </div>
-				    </div>
-				  </div>
-				  <div class="row">
+				  <div class="row row-attrs">
 				  	<div class="col-sm-12">
 				  	{% if product.material.all %}
-				       <div class="info-block">
-				           <h4>Made of</h4>{% for material in product.material.all %}<p>{{ material }}</p>{% endfor %}
+				  	<div class="row">
+				  	   <div id="first" class="col-xs-5 attr label">
+				           Made of
 				       </div>
-				    {% else %}{% endif %}
-			        {% if product.has_dimensions %}	
-				       <div class="info-block">
-				           <h4>Dimensions</h4>
-				           <div class="info">
-				               {{ product.get_dimension_str }}
-				           </div>
-				       </div>
-				    {% else %}{% endif %}
-				    {% if product.seat_height %}
-				       <div class="info-block">
-				           <h4>Seat Height</h4>
-				           <div class="info">
-				               {{ product.seat_height }}
-				           </div>
-				       </div>
-			       {% else %}{% endif %}
-			       {% if product.diameter %}
-				       <div class="info-block">
-				           <h4>Diameter</h4>
-				           <div class="info">
-				               {{ product.diameter }}
-				           </div>
-				       </div>
-			       {% else %}{% endif %}
-			       {% if product.bed_size %}
-				       <div class="info-block">
-				           <h4>Bed Size</h4>
-				           <div class="info">
-				               {{ product.bed_size }}
-				           </div>
-				       </div>
-			       {% else %}{% endif %}
-			       {% if product.weight %}
-				       <div class="info-block">
-				           <h4>Bed Size</h4>
-				           <div class="info">
-				               {{ product.weight }}
-				           </div>
-				       </div>
-				    {% else %}{% endif %}
-				       <div class="info-block">
-				           <h4>Color</h4>
-				           <div class="info" style="text-transform: lowercase">
-				           		{% for color in product.color.all %}{{ color }}{% endfor %}
-				           </div>
+				       <div id="first" class="col-xs-7 attr">
+				       	{% for material in product.material.all %}  {{ material }}{% endfor %}
 				       </div>
 				    </div>
+				    {% else %}{% endif %}
+			        {% if product.has_dimensions %}	
+				    <div class="row">
+				  	   <div class="col-xs-5 attr label">
+				        Dimensions
+				       </div>
+				       <div class="col-xs-7 attr">
+				        {{ product.get_dimension_str }}
+				        </div>
+				    </div>
+				    {% else %}{% endif %}
+				    {% if product.seat_height %}
+				    <div class="row">
+				  	   <div class="col-xs-5 attr label">
+				       Seat Height
+				       </div>
+				       <div class="col-xs-7 attr">
+		               {{ product.seat_height }}
+				       </div>
+				    </div>
+			       {% else %}{% endif %}
+			       {% if product.diameter %}
+				    <div class="row">
+				  	   <div class="col-xs-5 attr label">
+				        Diameter
+				        </div>
+				       <div class="col-xs-7 attr">
+				        {{ product.diameter }}
+				       </div>
+				    </div>
+			       {% else %}{% endif %}
+			       {% if product.bed_size %}
+				    <div class="row">
+				  	   <div class="col-xs-5 attr label">
+				       Bed Size
+				       </div>
+				       <div class="col-xs-7 attr">  
+		               {{ product.bed_size }}
+				       </div>
+				    </div>
+			       {% else %}{% endif %}
+			       {% if product.weight %}
+				    <div class="row">
+				  	   <div class="col-xs-5 attr label">
+			           Weight
+			           </div>
+				       <div class="col-xs-7 attr">
+			           {{ product.weight }}
+			           </div>
+				    </div>
+				    {% else %}{% endif %}
+				    <div class="row">
+				  	   <div class="col-xs-5 attr label">
+					    Color
+					   </div>
+				       <div class="col-xs-7 attr">
+					    {% for color in product.color.all %}{{ color }}{% endfor %}	
+					   </div>
+				    </div>
+				    </div>
 				  </div><!--end row -->
-				  <div class="row">
+				  <div class="row" style="margin-top:5%">
 				  	<div>
-				        <div class="col-xs-3 pic-detail-home">
-				            
+				        <div class="col-xs-5 pic-detail-home">
 				                {% if product.is_sold %}
 				                    <span class="sold">{{ 'Sold' }}</span>
 				                {% elif product.current_price %}
@@ -106,7 +113,7 @@
 				                    </button>
 				                {% endif %}
 				        </div>
-				        <div class="col-xs-3 pull-right" style="margin-right:8%">
+				        <div class="col-xs-3" style="margin-right:8%">
 				            <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
 				                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
 				            </button>

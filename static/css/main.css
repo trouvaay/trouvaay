@@ -913,12 +913,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .product-description .heading {
   float: left;
-  /*font-size: 20px;
-  line-height: 30px;
-  font-weight: 300;*/
   color: white;
+  width: 100%;
   background: rgb(0,128,183);
-  margin-left: 2rem;
   padding: 12px 10%;
   letter-spacing: 2px;
 }
@@ -979,6 +976,26 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .store-addy {
   margin-top: 5%;
+}
+.attr {
+font-size: 14px;
+line-height: 40px;
+color: #333;
+border-top: solid 1px #e5e5e5;
+margin: 0;
+}
+.attr.label {
+font-size: 14px;
+line-height: 65px;
+font-weight: 700;
+color: #333;
+text-transform: uppercase;
+border-top: solid 1px #e5e5e5;
+margin: 0;
+text-align: left;
+}
+.attr#first {
+  border-top:none;
 }
 .info-block h4 {
   font-size: 14px;
@@ -1431,14 +1448,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   /*width: 100%;
   max-height: 350px;*/
 }
-.detail-image-large {
-  padding: 0% 12% 1%;
-}
 .detail-image-med {
   display: none;
 }
 .detail-image-small {
   display: none;
+}
+.row-attrs {
+    margin-top: 5%;
 }
 .nearby img {
   max-height: 300px;
@@ -3181,7 +3198,6 @@ footer ul li a:hover {
 }
 
 .pic-detail-home {
-    margin-left: 10%;
     text-align: left;
   }
 @media screen and (min-width: 768px) and (max-width: 992px) {
@@ -3886,6 +3902,9 @@ footer ul li a:hover {
     padding-left: 0;
     padding-right: 0;
     width:95%; 
+  }
+  .attr.label {
+    line-height: 40px;
   }
   .footer-widget {
     margin-bottom: .5rem;
