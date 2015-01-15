@@ -1419,14 +1419,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   position: relative;
   width: 100%;
   /*margin: 2rem;*/
+  text-align: center;
 }
-.grid-product.homepg {
-  width: 100%;
-  /*height: 275px;*/
-  position: relative;
-  width: 100%;
-  /*margin: 2rem;*/
-}
+
 .grid-product figure {
 /*  width: 90%;*/
   margin: 0 2.5%;
