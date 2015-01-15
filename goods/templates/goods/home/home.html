@@ -1,8 +1,6 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
 {% load cloudinary %}
-{% block beginjs %}
-{% endblock %}
 
 {% block content %}
   <div class="container homepage-slider-container" id="first-content-after-nav">
@@ -10,8 +8,8 @@
         <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
             <div class="homepage-slider">
                 <ul class="slides">
-                    <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1420784952/ntzplqwftcxnqxierk4g.jpg');">
-                    </li>
+                    <!-- <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1420784952/ntzplqwftcxnqxierk4g.jpg');">
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -48,16 +46,7 @@
 {% block endjs %}
 <script type="text/javascript">
           //add 'active' class to any heart of products user has liked
-    var liked = {{ liked_items|safe }};
-    function addlikedhearts (liked) {
-      for (i in liked) {
-        var heartid = 'heart_';
-        heartid+=liked[i];
-        heart = document.getElementById(heartid);
-        heart.className+=' active';
-      }
-    };
-    addlikedhearts(liked); 
+
 	// function  getpoints (userloc) {
  //    var products = {{ products_json|safe }};
  //    var userloc = {

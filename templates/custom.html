@@ -66,6 +66,18 @@ var trouvaay = {
 
 $(document).ready(function() {
     trouvaay.init();
+    var liked = {{ liked_items|safe }};
+    function addlikedhearts (liked) {
+      for (i in liked) {
+        var heartid = 'heart_';
+        heartid+=liked[i];
+        heart = document.getElementById(heartid);
+        if (heart) {
+        heart.className+=' active';
+        }
+      }
+    };
+    addlikedhearts(liked);
 
     //Django boilerplat to Auto add csrf token to template for $.POST Ajax
     function getCookie(name) {

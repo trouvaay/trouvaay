@@ -106,7 +106,7 @@ class AuthUserActivity(models.Model):
 	# Items for which user has clicked on heart icon.
 	saved_items = models.ManyToManyField('goods.Product', null=True, blank=True)
 	# Items recommended by us to be associated with user
-	recommended_items = models.ManyToManyField('goods.Product', related_name='recommended')
+	recommended_items = models.ManyToManyField('goods.Product', related_name='recommended', null=True, blank=True)
 	color = models.ManyToManyField('goods.Color', null=True, blank=True)
 	style = models.ManyToManyField('goods.Style', null=True, blank=True)
 	furnituretype = models.ManyToManyField('goods.FurnitureType', null=True, blank=True)
