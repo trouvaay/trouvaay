@@ -7,7 +7,7 @@
         <div class="centered-child detail-image-med">
                 {% cloudinary product.productimage_set.first.image width=300 height=300 crop="fit" %}
         </div>
-        <div class="centered-child detail-image-small">
+        <div class="centered-child detail-image-small" style="padding-left:2.5%">
                 {% cloudinary product.productimage_set.first.image width=275 height=275 crop="fit" %}
         </div>
         <a href="{{ product.id }}" class="view-product">

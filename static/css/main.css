@@ -2341,7 +2341,6 @@ form .form-checkbox-wrap .checkbox-label {
   /*color: pink;*/
 }
 .btn.btn-default.glyphs.active {
-  font-size:14px;
   /*color: #3094B2;*/
   color: red;
 }
@@ -2349,7 +2348,7 @@ form .form-checkbox-wrap .checkbox-label {
 
 }
 .btn.btn-default:hover {
-  background: gray;
+  background: lightgray;
 }
 .btn.btn-default:focus {
   -webkit-box-shadow: none;
