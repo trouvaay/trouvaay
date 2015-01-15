@@ -913,7 +913,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .product-description .heading {
   float: left;
-  width: 90%;
   /*font-size: 20px;
   line-height: 30px;
   font-weight: 300;*/
@@ -960,6 +959,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .info-block {
   float: left;
   width: 295px;
+  max-width:100%;
   padding-left: 35px;
   padding-bottom: 20px;
   letter-spacing: 1.5px;
@@ -3576,7 +3576,7 @@ footer ul li a:hover {
     /*width: 100%;*/
   }
   .homepage-quote {
-    padding: 1.5% 0;
+    padding: 5% 0;
   }
   .homepage-quote .text {
     font-size: 130%;
@@ -3959,6 +3959,9 @@ footer ul li a:hover {
   }
   #first-content-after-nav {
     padding-top: 45px;
+  }
+  .price-wrapper .price {
+    margin-left: 30%;
   }
 }
 
