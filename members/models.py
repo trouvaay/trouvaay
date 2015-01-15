@@ -115,9 +115,11 @@ class AuthUserActivity(models.Model):
 	def __str__(self):
 		return ('user: '+self.authuser.email+' ;  items: '+str(self.saved_items.all()))
 
+	class Meta:
+		ordering = ['authuser']
+
 # class AuthUserDesiredObject(models.Model):
 # 	fur
-
 
 class AuthUserStripe(models.Model):
 	authuser = models.OneToOneField(settings.AUTH_USER_MODEL)
