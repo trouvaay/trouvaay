@@ -854,7 +854,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .product-description {
   background: white;
   float: left;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   /*padding-top: 3rem;*/
 }
 .similar-items {
@@ -979,7 +979,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .attr {
 font-size: 14px;
-line-height: 65px;
+line-height: 50px;
 color: #333;
 border-top: solid 1px #e5e5e5;
 margin: 0;
@@ -3905,8 +3905,10 @@ footer ul li a:hover {
     padding-right: 0;
     width:95%; 
   }
+  .attr.label,
   .attr {
     line-height: 40px;
+    font-size: 12px;
   }
   .footer-widget {
     margin-bottom: .5rem;
