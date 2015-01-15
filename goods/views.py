@@ -28,7 +28,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		""" Show most recent six unsold items"""
-		queryset = self.model.objects.filter(is_published=True, is_featured=True)
+		queryset = self.model.objects.filter(is_published=True, is_featured=True)[:6]
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -46,7 +46,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 	new = Segment.objects.filter(select='new')[0]
 
 	def get_queryset(self):
-		queryset = self.model.objects.filter(is_published=True,segment=self.new)
+		queryset = self.model.objects.filter(is_published=True,segment=self.new)[:6]
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -70,7 +70,7 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)
+		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)[:6]
 		return queryset
 
 	def get_context_data(self, **kwargs):

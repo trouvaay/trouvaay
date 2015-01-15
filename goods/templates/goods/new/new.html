@@ -17,7 +17,8 @@
 
  {% endblock content %}
  {% block endjs %}
-<script type="text/javascript">
+ {% include 'js/addlikeditems.html' %}
+<!--<script type="text/javascript">
 	// $('#signup').on('click', function () {
 	//     	$('#addtocartmodal').modal({"show": true});
 	// });
@@ -55,5 +56,5 @@
 	// };
 
 	// navigator.geolocation.getCurrentPosition(getpoints);
-</script>
+</script>-->
 {% endblock %}
