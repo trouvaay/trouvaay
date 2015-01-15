@@ -979,14 +979,13 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .attr {
 font-size: 14px;
-line-height: 40px;
+line-height: 65px;
 color: #333;
 border-top: solid 1px #e5e5e5;
 margin: 0;
 }
 .attr.label {
 font-size: 14px;
-line-height: 65px;
 font-weight: 700;
 color: #333;
 text-transform: uppercase;
@@ -2347,6 +2346,12 @@ form .form-checkbox-wrap .checkbox-label {
   font-size: 14px;
   padding: 6px 10px 4px;
 }
+.btn.btn-primary.request {
+  width: 120px;
+}
+.btn.btn-primary.buy {
+  width: 70px;
+}
 .btn.btn-default.glyphs {
   font-size:16px;
   color: rgb(0,128,183);
@@ -2355,9 +2360,6 @@ form .form-checkbox-wrap .checkbox-label {
 .btn.btn-default.glyphs.active {
   /*color: #3094B2;*/
   color: red;
-}
-.btn.btn-default.btn-lg.buy.active {
-
 }
 .btn.btn-default:hover {
   background: lightgray;
@@ -3903,7 +3905,7 @@ footer ul li a:hover {
     padding-right: 0;
     width:95%; 
   }
-  .attr.label {
+  .attr {
     line-height: 40px;
   }
   .footer-widget {

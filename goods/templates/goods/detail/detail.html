@@ -30,10 +30,16 @@
 				  	<div class="col-sm-12">
 				  	{% if product.material.all %}
 				  	<div class="row">
-				  	   <div id="first" class="col-xs-5 attr label">
+				  	   <div id="first" class="col-xs-12 attr label">
+				           {{ product.description }}
+				       </div>
+				    </div>
+				  	{% if product.material.all %}
+				  	<div class="row">
+				  	   <div class="col-xs-5 attr label">
 				           Made of
 				       </div>
-				       <div id="first" class="col-xs-7 attr">
+				       <div class="col-xs-7 attr">
 				       	{% for material in product.material.all %}  {{ material }}{% endfor %}
 				       </div>
 				    </div>
