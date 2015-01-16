@@ -1,8 +1,6 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
 {% load cloudinary %}
-{% block beginjs %}
-{% endblock %}
 
 {% block content %}
   <div class="container homepage-slider-container" id="first-content-after-nav">
@@ -10,8 +8,8 @@
         <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
             <div class="homepage-slider">
                 <ul class="slides">
-                    <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1420784952/ntzplqwftcxnqxierk4g.jpg');">
-                    </li>
+                    <!-- <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1420784952/ntzplqwftcxnqxierk4g.jpg');">
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -37,59 +35,47 @@
   </div>
   <div class="container-fluid">
     <div class="grid-products-wrapper">
-        <div class="row" style="margin:20px">
-        </div>
         <div class="row">
             {% for product in products %}
-                {% include 'goods/home/_home_for_loop.html' %}
+                {% include 'goods/_product_for_loop.html' %}
             {% endfor %}
         </div>
     </div>
   </div>
-{% endblock %}
-{% block endjs %}
-<script type="text/javascript">
+{% endblock content %}
+{% block endjs %}{% include 'js/addlikeditems.html' %}{% endblock endjs %}
+<!--<script type="text/javascript">
           //add 'active' class to any heart of products user has liked
-    var liked = {{ liked_items|safe }};
-    function addlikedhearts (liked) {
-      for (i in liked) {
-        var heartid = 'heart_';
-        heartid+=liked[i];
-        heart = document.getElementById(heartid);
-        heart.className+=' active';
-      }
-    };
-    addlikedhearts(liked); 
-	// function  getpoints (userloc) {
- //    var products = {{ products_json|safe }};
- //    var userloc = {
- //     // 'lat': userloc.coords.latitude,
- //     // 'lng': userloc.coords.longitude,
- //     'lat': 37.798530,
- //    'lng': -122.417966,
- //    };
-      
- //      var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
- //      initializemap(products, userloc);
- //      for (i in products) {
- //        add_dists(userpos,products[i],i);
- //      } 
- //    };
 
- //  function add_dists(userpos, prod, prodnum) {
- //    var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
- //    var request = {
- //          origin: userpos,
- //          destination: productpos,
- //          travelMode: google.maps.TravelMode.DRIVING
- //      };
- //    var directionsService = new google.maps.DirectionsService();
- //    directionsService.route(request, function(result, status) {
- //          if (status == google.maps.DirectionsStatus.OK) {
- //          }
- //          $(".dist").eq(prodnum).append('</br>('+result.routes[0].legs[0].distance.text+')');
- //        });
- //  };
-	// navigator.geolocation.getCurrentPosition(getpoints);
-</script>
-{% endblock %}
+	function  getpoints (userloc) {
+    var products = {{ products_json|safe }};
+    var userloc = {
+     // 'lat': userloc.coords.latitude,
+     // 'lng': userloc.coords.longitude,
+     'lat': 37.798530,
+    'lng': -122.417966,
+    };
+      
+      var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+      initializemap(products, userloc);
+      for (i in products) {
+        add_dists(userpos,products[i],i);
+      } 
+    };
+
+  function add_dists(userpos, prod, prodnum) {
+    var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
+    var request = {
+          origin: userpos,
+          destination: productpos,
+          travelMode: google.maps.TravelMode.DRIVING
+      };
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route(request, function(result, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+          }
+          $(".dist").eq(prodnum).append('</br>('+result.routes[0].legs[0].distance.text+')');
+        });
+  };
+	navigator.geolocation.getCurrentPosition(getpoints);
+</script>-->

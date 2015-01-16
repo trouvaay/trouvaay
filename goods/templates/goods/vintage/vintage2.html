@@ -1,8 +1,10 @@
 {% extends '_base.html' %}
+{% load staticfiles %}
 {% load cloudinary %}
 
- {% block content %}
-<section class="main-container">
+{% block content %}
+{% for product in products %}
+<section class="main-container vintage">
         <div class="container detail-margin" id="first-content-after-nav">
             <div class="row">
 				<div class="col-sm-7 col-xs-12" style="text-align:center">
@@ -125,7 +127,6 @@
 				</div>
         </div>
     </section>
- {% endblock content %}
- {% block endjs %}
- 	{% include 'js/addlikeditems.html' %}
- {% endblock endjs %}
+{% endfor %}
+
+{% endblock content %}

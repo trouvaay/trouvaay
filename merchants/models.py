@@ -44,6 +44,10 @@ class Store(models.Model):
 	lng = models.FloatField(null=True, blank=True)
 	description = models.TextField(null=True, blank=True)
 	shipper = models.ManyToManyField(Shipper, null=True, blank=True)
+	is_featured = models.BooleanField(default=False)
+
+	class Meta:
+		ordering = ['retailer', 'street']
 
 	def __str__(self):
 		return (self.retailer.short_name+" ("+self.street[:12]+")")

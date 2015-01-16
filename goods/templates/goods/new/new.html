@@ -1,4 +1,7 @@
 {% extends '_base.html' %}
+{% block beginjs %}
+
+{% endblock beginjs %}
  {% block content %}
  	<div class="container-fluid page-quote" id="first-content-after-nav">
     <div class="row">
@@ -14,19 +17,8 @@
 
  {% endblock content %}
  {% block endjs %}
- <script type="text/javascript" src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true></script>
-<script type="text/javascript">
-    //add 'active' class to any heart of products user has liked
-    var liked = {{ liked_items|safe }};
-	function addlikedhearts (liked) {
-		for (i in liked) {
-			var heartid = 'heart_';
-			heartid+=liked[i];
-			heart = document.getElementById(heartid);
-			heart.className+=' active';
-		}
-	};
-	addlikedhearts(liked);
+ {% include 'js/addlikeditems.html' %}
+<!--<script type="text/javascript">
 	// $('#signup').on('click', function () {
 	//     	$('#addtocartmodal').modal({"show": true});
 	// });
@@ -64,5 +56,5 @@
 	// };
 
 	// navigator.geolocation.getCurrentPosition(getpoints);
-</script>
+</script>-->
 {% endblock %}

@@ -9,6 +9,17 @@ from random import randint
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
+def get_liked_items(user):
+	""" Creates list of user's liked items for json
+	Obj passed to addlikehearts js script
+	"""
+
+	useractivity = AuthUserActivity.objects.get(authuser=user)
+	liked_list = useractivity.saved_items.all()
+	liked_ids = [prod.id for prod in liked_list]
+	print('printing ids',liked_ids)
+	return liked_ids
+
 
 class HomeView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/home/home.html'
@@ -17,19 +28,14 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		""" Show most recent six unsold items"""
-		queryset = self.model.objects.filter(is_published=True, is_featured=True)[:6]
+		queryset = self.model.objects.filter(is_published=True, is_featured=True)
 		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
 		#JSON sent to client to calc distance from user
 		context['products_json'] = serialize('json', context['products'])
-		#Recommeneded product logic still needs to be written.  Placeholder for template
-		useractivity = AuthUserActivity.objects.get(authuser=self.request.user)
-		liked_list = useractivity.saved_items.all()
-		liked_ids = [prod.id for prod in liked_list]
-		context['liked_items'] = liked_ids
-		context['liked_items'] = liked_ids
+		context['liked_items'] = get_liked_items(self.request.user)
 		return context
 
 
@@ -51,23 +57,20 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		for furnituretype in FurnitureType.objects.all():
 			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new)
 		context['BaseUrl'] = BASE_URL
-		useractivity = AuthUserActivity.objects.get(authuser=self.request.user)
-		liked_list = useractivity.saved_items.filter(segment=self.new).all()
-		liked_ids = [prod.id for prod in liked_list]
-		context['liked_items'] = liked_ids
+		context['liked_items'] = get_liked_items(self.request.user)
 		return context
 
 
 class VintageView(LoginRequiredMixin, generic.ListView):
 	# TODO: update view to reflect instagrammy feed.  Will mimic DetailView
-	template_name = 'goods/vintage/vintage.html'
+	template_name = 'goods/vintage/vintage2.html'
 	context_object_name = 'products'
 	model = Product
 	vintage = Segment.objects.filter(select='vintage')[0]
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)
+		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)[:6]
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -76,14 +79,20 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 		for furnituretype in FurnitureType.objects.all():
 			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.vintage)
 		context['BaseUrl'] = BASE_URL
+		context['liked_items'] = get_liked_items(self.request.user)
 		return context
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/detail/detail.html'
 	context_object_name = 'product'
 	model = Product
-	
+
+	def get_context_data(self, **kwargs):
+		context = super(DetailView, self).get_context_data(**kwargs)
+		context['liked_items'] = get_liked_items(self.request.user)
+		return context
+
 
 class DirectionsView(LoginRequiredMixin, generic.DetailView):
 	template_name = 'goods/detail/map.html'
