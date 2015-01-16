@@ -63,14 +63,14 @@ class NewView(LoginRequiredMixin, generic.ListView):
 
 class VintageView(LoginRequiredMixin, generic.ListView):
 	# TODO: update view to reflect instagrammy feed.  Will mimic DetailView
-	template_name = 'goods/vintage/vintage.html'
+	template_name = 'goods/vintage/vintage2.html'
 	context_object_name = 'products'
 	model = Product
 	vintage = Segment.objects.filter(select='vintage')[0]
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)
+		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)[:6]
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -83,7 +83,7 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 		return context
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/detail/detail.html'
 	context_object_name = 'product'
 	model = Product

@@ -132,6 +132,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .top-bar .cart-info .counter {
   color: #7a7a7a;
 }
+.main-container.vintage {
+  border-bottom: lightgray 1px solid;
+}
 
 .top-bar .cart-info .value {
   font-weight: bold;
