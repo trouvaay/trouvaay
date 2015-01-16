@@ -83,7 +83,7 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 		return context
 
 
-class DetailView(LoginRequiredMixin, generic.ListView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
 	template_name = 'goods/detail/detail.html'
 	context_object_name = 'product'
 	model = Product
