@@ -70,7 +70,7 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)[:6]
+		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)
 		return queryset
 
 	def get_context_data(self, **kwargs):

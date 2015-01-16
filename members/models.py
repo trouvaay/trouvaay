@@ -162,8 +162,6 @@ class AuthUserOrder(models.Model):
 			total+=ordered_item.sell_price
 		return total
 
-		return 
-
 	def get_item_count(self):
 		return self.authuserorderitem_set.all().count()
 
@@ -172,6 +170,9 @@ class AuthUserOrder(models.Model):
 		for ordered_item in self.authuserorderitem_set.all():
 			total+=ordered_item.sell_price
 		return total
+
+	def __str__(self):
+		return('user: '+self.authuser.email+' ;  items: '+str(self.authuserorderitem_set.all()))
 
 class AuthUserOrderItem(models.Model):
 	"""Unique product-order pair"""

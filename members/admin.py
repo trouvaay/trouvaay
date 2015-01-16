@@ -5,6 +5,7 @@ from members.models import AuthUser, AuthUserActivity, AuthUserCart, AuthUserOrd
 from django import forms
 
 
+
 class CustomUserCreationForm(UserCreationForm):
     """ A form for creating new users. Includes all the required fields, plus a repeated password. """
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -62,11 +63,10 @@ class CustomUserChangeForm(UserChangeForm):
 class AuthUserActivityInline(admin.TabularInline):
     model = AuthUserActivity
 
-class AuthUserOrderInline(admin.TabularInline):
-    model = AuthUserOrder
 
 class AuthUserCartInline(admin.TabularInline):
     model = AuthUserCart
+
 
 class AuthUserAdmin(UserAdmin):
     form = CustomUserChangeForm
@@ -89,13 +89,24 @@ class AuthUserAdmin(UserAdmin):
             'fields': ('email','is_merchant', 'password1', 'password2')}
         ),
     )
-    inlines = [AuthUserActivityInline, AuthUserCartInline, AuthUserOrderInline]
+    inlines = [AuthUserActivityInline, AuthUserCartInline]
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)
 
+
+class AuthUserOrderItemInline(admin.TabularInline):
+    model = AuthUserOrderItem
+
+
+class AuthUserOrderAdmin(admin.ModelAdmin):
+    model = AuthUserOrder
+    list_display = ['authuser','timestamp','updated']
+    # fields = ['authuser','timestamp','updated']
+    inlines = [AuthUserOrderItemInline]
+
 admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(AuthUserActivity)
 admin.site.register(AuthUserCart)
-admin.site.register(AuthUserOrder)
+admin.site.register(AuthUserOrder, AuthUserOrderAdmin)
 admin.site.register(AuthUserOrderItem)
