@@ -148,4 +148,34 @@ class AuthUserCart(models.Model):
 		return total
 
 
+class AuthUserOrderItem(models.Model):
+	product = models.ForeignKey('goods.Product')
+	sell_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+	captured = models.BooleanField(default=True)
+	#for buy-and-trial items, time at which transaction will be captured
+	capture_time = models.DateTimeField(null=True, blank=True)
+
+	#for now we only have purchase quantities of one but in the future will allow
+	#for purchase of multiple of same item
+	quantity = models.IntegerField(default=1)
+	
+
+class AuthUserOrder(models.Model):
+	authuser = models.ForeignKey(settings.AUTH_USER_MODEL)
+	order_items = models.ManyToManyField(AuthUserOrderItem)
+	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+	captured = models.BooleanField(default=True)
+
+	def get_item_count(self):
+		return self.saved_items.all().count()
+
+	def get_order_total(self):
+		total = 0
+		for ordered_item in self.ordered_items.all():
+			total+=ordered_item.sell_price
+		return total
+
+
+
 
