@@ -80,6 +80,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .main-footer a {
   color: #7a7a7a;
 }
+#mobile-footer {
+  display: none;
+}
 .row.footer {
   margin-bottom: 1em;
 }
@@ -3802,6 +3805,7 @@ footer ul li a:hover {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
   }
+  #main-footer,
   #main-menu {
     display: none;
   }
@@ -3925,6 +3929,16 @@ footer ul li a:hover {
   }
   .footer-widget {
     margin-bottom: .5rem;
+  }
+  #mobile-footer {
+  padding: 10px;
+  position: fixed;
+  z-index: 100;
+  bottom: 0px;
+  background: white;
+  border-top: black solid 1px;
+  width: 100%;
+  display: block;
   }
   .product-description .name.map {
     margin: 0 auto 10px;
