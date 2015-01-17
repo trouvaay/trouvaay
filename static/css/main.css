@@ -2357,10 +2357,10 @@ form .form-checkbox-wrap .checkbox-label {
   width: 70px;
 }
 .btn.btn-primary.buy.try {
-  width: 120px;
+  width: 110px;
 }
-.btn.btn-primary.dist {
-  width: 60px;
+.btn.btn-success.dist {
+  width: 65px;
 }
 .btn.btn-default.glyphs {
   font-size:16px;
