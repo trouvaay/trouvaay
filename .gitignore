@@ -1,3 +1,7 @@
 trouvaay/lib/*
+trouvaay/bin/*
+trouvaay/include/*
 latest.dump
 *.pyc
+*.log
+dev_settings.py

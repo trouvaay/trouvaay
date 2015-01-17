@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 {% load cloudinary %}
+{% load staticfiles %}
 {% block content %}
 
 <div class='col-sm-8 col-sm-offset-2' id="first-content-after-nav" style="margin-top:30px">
@@ -21,13 +22,17 @@
 <tr>
 <td></td>
 <td></td>
-<td><a href="{% url 'members:checkout' %}">
-	<button type="button" class="btn btn-success">Checkout</button>
-</a></td>
+<td>
+{% if cart.get_item_count > 0 %}
+	<button class="btn btn-success" id="stripe-buy">Checkout to Buy</button>
+	{% if cart.has_trial_products %}
+	<button class="btn btn-success" id="stripe-buy-and-try">Checkout to {{ FEATURE_NAME_BUYANDTRY }}</button>
+	{% endif %}
+{% endif %}
+</td>
 <td></td>
 </tr>
 </tfoot>
-
 
 {% for product in cart.saved_items.all %}
 <tr id="prodrow_{{ product.id }}">
@@ -46,6 +51,9 @@
 </table>
 {% endif %}
 </div>
+
+
+
 {% endblock %}
 {% block endjs %}
  <script type="text/javascript">
@@ -64,4 +72,60 @@
 		});
 	});
 </script>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<script>
+
+	var checkoutType = '';
+	var handler = StripeCheckout.configure({
+		key: '{{ STRIPE_PUBLISHABLE_KEY }}',
+		image: "{% static "img/logos/standalone-R_web_RGB.png" %}",
+    	name: '{{ site_name }}',
+    	description: "{{ cart.get_item_count }} item{{ cart.get_item_count|pluralize }} (${{ cart.get_cart_total }})",
+		amount: "{{ cart.get_cart_total_in_cents }}",
+		billingAddress: "true",
+		shippingAddress: "true",
+		token: function(token, args) {
+			$.ajax({
+				type: "POST",
+				url: {% url "members:checkoutcallback" %},
+				data: {
+					token: token,
+					args: args,
+					total_amount: "{{ cart.get_cart_total_in_cents }}",
+					order_type: checkoutType
+				},
+				success: function(data){
+				  	if(data['status'] == "ok"){
+				  	  	location.reload();
+				  	}
+				},
+				dataType: "json"
+			});
+		}
+	});
+
+	$('#stripe-buy').on('click', function(e) {
+		checkoutType = 'buy';
+	  	handler.open({
+			panelLabel: 'Buy'
+		});
+	    e.preventDefault();
+  	});
+  	
+  	{% if cart.has_trial_products %}
+	$('#stripe-buy-and-try').on('click', function(e) {
+		checkoutType = 'buy-and-try';
+	  	handler.open({
+			panelLabel: '{{ FEATURE_NAME_BUYANDTRY }}'
+		});
+	    e.preventDefault();
+  	});
+  	{% endif %}  	
+  	// Close Checkout on page navigation
+	$(window).on('popstate', function() {
+    	handler.close();
+  	});
+	</script>
 {% endblock %}
