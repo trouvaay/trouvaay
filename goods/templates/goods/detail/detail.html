@@ -36,6 +36,9 @@
 				    <div class="row" style="margin-bottom: 8%">
 		              {% include 'goods/_productlabel.html' %}
 				  	</div>
+				  	{% if product.store.is_featured %}
+				  		{{ product.store }}
+				  	{% endif %}
 				  	{% if product.material.all %}
 				  	<div class="row">
 				  	   <div class="col-xs-5 attr-label">
@@ -98,7 +101,6 @@
 				    {% else %}{% endif %}
 				    </div><!--end col -->
 				  </div><!--end row -->
-				  
 				</div>                   
 				</div>
 				</div>

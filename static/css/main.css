@@ -2351,16 +2351,17 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 6px 10px 4px;
 }
 .btn.btn-primary.request {
-  width: 110px;
+  width: 105px;
 }
 .btn.btn-primary.buy {
   width: 70px;
 }
 .btn.btn-primary.buy.try {
-  width: 110px;
+  width: 105px;
 }
 .btn.btn-success.dist {
-  width: 65px;
+  width: 60px;
+  padding: 6px 10px;
 }
 .btn.btn-default.glyphs {
   font-size:16px;
