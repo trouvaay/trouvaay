@@ -2,6 +2,7 @@ from django.db import models
 from helper import AbstractImageModel
 from math import acos, cos, radians, sin
 from django.utils import timezone
+from django.db.models.signals import post_save, m2m_changed
 
 
 class Segment(models.Model):
@@ -118,10 +119,8 @@ class Product(models.Model):
 		self.lng = self.store.lng
 		if self.is_published == True and not self.pub_date:
 			self.pub_date = timezone.now()
-		self.does_product_have_trial()	
 		super(Product, self).save(*args, **kwargs)
 		
-
 
 	def getdist(self, UserLat=39.94106319,UserLng=-75.173192):
 		dist = 3959 * acos(cos(radians(UserLat)) * cos(radians(self.lat)) \
@@ -169,7 +168,23 @@ class Product(models.Model):
 		return dimension_str[:-3]
 
 
+def does_product_have_trial(sender, instance, **kwargs):
+		"""if has a price above $1000, it is eligible for a trial
+		"""
+		if instance.current_price >= 1000:
+			Product.objects.filter(id=instance.id).update(has_trial=True)
 
+def does_product_have_trial_subcat(sender, instance, **kwargs):
+		"""if product is part of a subcategory that
+		is triable it is eligible for a trial
+		"""
+		trial_list = Subcategory.objects.filter(trial_product=True)
+		if instance.subcategory.first() in trial_list:
+			Product.objects.filter(id=instance.id).update(has_trial=True)
+
+#post_save methods for Product model to determin is product eligible for buy-and-try
+post_save.connect(does_product_have_trial, sender=Product)
+m2m_changed.connect(does_product_have_trial_subcat, sender=Product.subcategory.through)
 
 class ProductImage(AbstractImageModel):
 	product = models.ForeignKey('goods.Product')
