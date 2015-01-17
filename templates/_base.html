@@ -46,19 +46,13 @@
             {% block nav-all-else %}
             <div class="row">
                 <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/keyhole_logo_web_RGB.png' %}"></a></div>
-                <div class="navbar-collapse collapse col-xs-6 right-side" style="padding: 0">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                        </button></a>
-                        <div class="cart-info navbar-toggle">
-                            <a href="{% url 'members:cart' %}">
-                                <img src="{% static 'img/shopping_cart24.png' %}"/>
-                                <span class="badge mobile-cart-counter">{{ request.user.authusercart_set.first.get_item_count }}</span>
-                            </a>
-                        </div>
-
+                <div class="navbar-collapse collapse col-xs-3" style="margin-top:10px"></div>
+                <div class="navbar-collapse collapse col-xs-3 right-side" style="padding: 0">        
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                    </button><!-- </a> -->
                 </div>
                 <div id="main-menu" class="col-xs-6 right-side">
                     <div class="row">
@@ -106,49 +100,68 @@
     {% endblock nav %}
     {% block content %}{% endblock content %}
     <footer class="main-footer">
-        <div class="container">
-            <div class="row" style="margin-bottom: 2rem">
-                <div class="col-xs-offset-2 col-xs-12 col-sm-3">
-                    <div class="footer-widget">
-                        <div class="footer-menu">
-                            <h2><a href="{% url 'goods:about' %}">Shipping</a></h2>
-                        </div>
-                    </div>
+        <div class="container">'
+            <div id="mobile-footer" class="row" style="padding-bottom:10px">
+                <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
+                    <a href="{% url 'goods:vintage' %}">Vintg</a>
                 </div>
-                <div class="col-xs-offset-2 col-xs-12 col-sm-3">
-                    <div class="footer-widget">
-                        <div class="footer-menu">
-                            <h2><a href="{% url 'goods:about' %}">Return Policy</a></h2>
-                        </div>
-                    </div>
+                <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
+                    <a href="{% url 'goods:new' %}">New</a>
                 </div>
-                <div class="col-xs-offset-2 col-xs-12 col-sm-3">
-                    <div class="footer-widget">
-                        <div class="footer-menu">
-                            <h2>415.000.000</h2>
-                        </div>
-                    </div>
+                <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
+                    <a href="#">Profle</a>
                 </div>
-                <div class="col-xs-offset-2 col-xs-12 col-sm-3">
-                    <div class="footer-widget">
-                        <div class="footer-menu">
-                            <h2><a href="mailto:helpraredoor.com">help@raredoor.com</a></h2>
-                        </div>
-                    </div>
+                <div class="navbar-collapse collapse col-xs-3" style="padding: 0">
+                    <a href="{% url 'members:cart' %}">
+                        <img src="{% static 'img/shopping_cart24.png' %}"/>
+                        <span class="badge mobile-cart-counter">{{ request.user.authusercart_set.first.get_item_count }}</span>
+                    </a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="final-line">
-                        <div class="row">
-                            <div class="col-xs-offset-2 col-xs-12 col-sm-6 col-sm-offset-0">
-                                <p>&copy; 2014 Trouvaay, Inc. All Rights Reserved.</p>
+            <div id="main-footer">
+                <div class="row" style="margin-bottom: 2rem">
+                    <div class="col-xs-offset-2 col-xs-12 col-sm-3">
+                        <div class="footer-widget">
+                            <div class="footer-menu">
+                                <h2><a href="{% url 'goods:about' %}">Shipping</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-2 col-xs-12 col-sm-3">
+                        <div class="footer-widget">
+                            <div class="footer-menu">
+                                <h2><a href="{% url 'goods:about' %}">Return Policy</a></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-2 col-xs-12 col-sm-3">
+                        <div class="footer-widget">
+                            <div class="footer-menu">
+                                <h2>415.000.000</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-2 col-xs-12 col-sm-3">
+                        <div class="footer-widget">
+                            <div class="footer-menu">
+                                <h2><a href="mailto:helpraredoor.com">help@raredoor.com</a></h2>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="final-line">
+                            <div class="row">
+                                <div class="col-xs-offset-2 col-xs-12 col-sm-6 col-sm-offset-0">
+                                    <p>&copy; 2014 Trouvaay, Inc. All Rights Reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
+    </div>
     </footer>
     <!--closing js -->
     <div>

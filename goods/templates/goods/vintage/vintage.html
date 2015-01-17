@@ -1,1 +1,132 @@
-{% extends 'goods/new/new.html' %}
+{% extends '_base.html' %}
+{% load staticfiles %}
+{% load cloudinary %}
+
+{% block content %}
+{% for product in products %}
+<section class="main-container vintage">
+        <div class="container detail-margin" id="first-content-after-nav">
+            <div class="row">
+				<div class="col-sm-7 col-xs-12" style="text-align:center">
+				  <!-- <div class="row">
+				    <div class="col-xs-12"> -->
+				      <div class="detail-image-large">
+				          {% cloudinary product.productimage_set.first.image width=450 height=550 crop="fit" %}
+				      </div>
+				      <div class="detail-image-med">
+				          {% cloudinary product.productimage_set.first.image width=400 height=400 crop="fit" %}
+				      </div>
+				      <div class="detail-image-small">
+				          {% cloudinary product.productimage_set.first.image width=275 height=350 crop="fit" %}
+				      </div>
+				    <!-- </div>
+				  </div> -->
+				</div>
+				<div class="col-sm-5 col-xs-12 product-description">
+				  <div class="row">
+				    <div class="col-sm-12">
+				       <div class="heading">{{ product.short_name }}</div></br>
+				    </div>
+				  </div>
+				  <div class="row row-attrs">
+				  <div class="col-sm-12">
+				  	<div class="row">
+				  	   <div id="first" class="col-xs-12 product-description">
+				           {{ product.description }}
+				       </div>
+				    </div>
+				    <div class="row" style="margin-bottom: 8%">
+		                {% if product.is_sold %}
+		                	<div class="col-xs-3">
+		                    	<span class="sold">{{ 'Sold' }}</span>
+		                    </div>
+		                {% elif product.current_price %}
+		                	<div class="col-xs-3">
+			                    <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
+			                        ${{ product.current_price|floatformat:"0" }}
+			                    </button>
+		                    </div>
+		                {% else %}
+		                <div class="col-xs-5">
+		                    <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
+		                    Request Price
+		                    </button>
+		                </div>
+		                {% endif %}
+				        <div class="col-xs-3 pull-right">
+				            <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
+				                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+				            </button>
+				        </div>
+				  	</div>
+				  	{% if product.material.all %}
+				  	<div class="row">
+				  	   <div class="col-xs-5 attr-label">
+				           Made of
+				       </div>
+				       <div class="col-xs-7 attr">
+				       	{% for material in product.material.all %}  {{ material }}{% endfor %}
+				       </div>
+				    </div>
+				    {% else %}{% endif %}
+			        {% if product.has_dimensions %}	
+				    <div class="row">
+				  	   <div class="col-xs-5 attr-label">
+				        Dimensions
+				       </div>
+				       <div class="col-xs-7 attr">
+				        {{ product.get_dimension_str }}
+				        </div>
+				    </div>
+				    {% else %}{% endif %}
+				    {% if product.seat_height %}
+				    <div class="row">
+				  	   <div class="col-xs-5 attr-label">
+				       Seat Height
+				       </div>
+				       <div class="col-xs-7 attr">
+		               {{ product.seat_height }}
+				       </div>
+				    </div>
+			       {% else %}{% endif %}
+			       {% if product.diameter %}
+				    <div class="row">
+				  	   <div class="col-xs-5 attr-label">
+				        Diameter
+				        </div>
+				       <div class="col-xs-7 attr">
+				        {{ product.diameter }}
+				       </div>
+				    </div>
+			       {% else %}{% endif %}
+			       {% if product.bed_size %}
+				    <div class="row">
+				  	   <div class="col-xs-5 attr-label">
+				       Bed Size
+				       </div>
+				       <div class="col-xs-7 attr">  
+		               {{ product.bed_size }}
+				       </div>
+				    </div>
+			       {% else %}{% endif %}
+			       {% if product.weight %}
+				    <div class="row">
+				  	   <div class="col-xs-5 attr-label">
+			           Weight
+			           </div>
+				       <div class="col-xs-7 attr">
+			           {{ product.weight }}
+			           </div>
+				    </div>
+				    {% else %}{% endif %}
+				    </div><!--end col -->
+				  </div><!--end row -->
+				  
+				</div>                   
+				</div>
+				</div>
+        </div>
+    </section>
+{% endfor %}
+
+{% endblock content %}
