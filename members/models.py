@@ -147,6 +147,15 @@ class AuthUserCart(models.Model):
 			total+=product.current_price
 		return total
 
+	def get_cart_total_in_cents(self):
+		return int(self.get_cart_total() * 100)
+
+	def has_trial_products(self):
+		for product in self.saved_items.all():
+			if(product.has_trial):
+				return True
+		return False
+
 
 class AuthUserOrder(models.Model):
 	"""Unique User-Order pair"""

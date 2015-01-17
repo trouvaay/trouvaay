@@ -117,4 +117,78 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = not DEBUG
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR,'templates')]
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
+FEATURE_NAME_BUYANDTRY = "Buy-and-Try"
+
+SITE_ID = 1
+SITE_NAME = 'Rare Door'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+        'null': {
+            'class': 'logging.NullHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'raredoor-django.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'django.db': {
+            'handlers': ['console', 'file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'trouvaay': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+        },
+    }
+}
+
+STRIPE_SECRET_KEY = ''
+STRIPE_PUBLISHABLE_KEY = ''
+
+PROJECT_ENV = os.getenv('PROJECT_ENV', None)
+if(PROJECT_ENV == 'dev'):
+    # each developer will have their own dev_settings.py which is in .gitignore
+    # this way we won't overwrite each other local settings
+    # dev_settings.py will contain for example STRIPE_SECRET_KEY and DATABASES
+    from dev_settings import *
