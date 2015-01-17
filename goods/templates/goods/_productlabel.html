@@ -9,9 +9,15 @@
                 {% if product.is_sold %}
                     <span class="sold">{{ 'Sold' }}</span>
                 {% elif product.current_price %}
-                    <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
-                        ${{ product.current_price|floatformat:"0" }}
-                    </button>
+                    {% if product.has_trial %}
+                        <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+                            ${{ product.current_price|floatformat:"0" }} (Try)
+                        </button>
+                    {% else %}
+                        <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
+                            ${{ product.current_price|floatformat:"0" }} 
+                        </button>
+                    {% endif %}
                 {% else %}
                     <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
                     Request Price

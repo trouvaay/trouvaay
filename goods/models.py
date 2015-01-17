@@ -118,8 +118,9 @@ class Product(models.Model):
 		self.lng = self.store.lng
 		if self.is_published == True and not self.pub_date:
 			self.pub_date = timezone.now()
+		self.does_product_have_trial()	
 		super(Product, self).save(*args, **kwargs)
-		self.does_product_have_trial()
+		
 
 
 	def getdist(self, UserLat=39.94106319,UserLng=-75.173192):
