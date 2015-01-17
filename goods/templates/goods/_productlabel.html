@@ -3,22 +3,33 @@
         <p style="margin-bottom: 3px"><h5>{{ product.short_name }}</h5></p>
     </div>
     <div>
-        <div class="col-xs-3 pic-detail-home">
-            
-            
+        <div class="col-xs-9 pic-detail-home">
                 {% if product.is_sold %}
                     <span class="sold">{{ 'Sold' }}</span>
                 {% elif product.current_price %}
-                    <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
-                        ${{ product.current_price|floatformat:"0" }}
-                    </button>
+                    {% if product.has_trial %}
+                        <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+                            ${{ product.current_price|floatformat:"0" }} (Try)
+                        </button>
+                        {% if product.store.is_featured %}
+                            <button type="button" class="btn btn-success dist" id="dist_{{ product.id }}">
+                                    10.3mi
+                            </button>
+                        {% else %}
+                            <b style="margin-left:5px"><em>10.3mi</em></b>
+                        {% endif %}
+                    {% else %}
+                        <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
+                            ${{ product.current_price|floatformat:"0" }} 
+                        </button>
+                    {% endif %}
                 {% else %}
                     <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
                     Request Price
                     </button>
                 {% endif %}
         </div>
-        <div class="col-xs-3 pull-right" style="margin-right:8%">
+        <div class="col-xs-2 pull-right" style="margin-right:8%">
             <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
             </button>

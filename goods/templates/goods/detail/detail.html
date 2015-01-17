@@ -34,29 +34,11 @@
 				       </div>
 				    </div>
 				    <div class="row" style="margin-bottom: 8%">
-		                {% if product.is_sold %}
-		                	<div class="col-xs-3">
-		                    	<span class="sold">{{ 'Sold' }}</span>
-		                    </div>
-		                {% elif product.current_price %}
-		                	<div class="col-xs-3">
-			                    <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
-			                        ${{ product.current_price|floatformat:"0" }}
-			                    </button>
-		                    </div>
-		                {% else %}
-		                <div class="col-xs-5">
-		                    <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
-		                    Request Price
-		                    </button>
-		                </div>
-		                {% endif %}
-				        <div class="col-xs-3">
-				            <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
-				                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-				            </button>
-				        </div>
+		              {% include 'goods/_productlabel.html' %}
 				  	</div>
+				  	{% if product.store.is_featured %}
+				  		{{ product.store }}
+				  	{% endif %}
 				  	{% if product.material.all %}
 				  	<div class="row">
 				  	   <div class="col-xs-5 attr-label">
@@ -119,7 +101,6 @@
 				    {% else %}{% endif %}
 				    </div><!--end col -->
 				  </div><!--end row -->
-				  
 				</div>                   
 				</div>
 				</div>
