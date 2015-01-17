@@ -28,7 +28,8 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		""" Show most recent six unsold items"""
-		queryset = self.model.objects.filter(is_published=True, is_featured=True)
+		#Should limited Query set by featured items
+		queryset = self.model.objects.filter(is_published=True).exclude(description="")[:6]
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -46,7 +47,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 	new = Segment.objects.filter(select='new')[0]
 
 	def get_queryset(self):
-		queryset = self.model.objects.filter(is_published=True,segment=self.new)
+		queryset = self.model.objects.filter(is_published=True,segment=self.new).exclude(description="")
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -55,7 +56,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		context['products_json'] = serialize('json', context['products'])
 
 		for furnituretype in FurnitureType.objects.all():
-			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new)
+			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new).exclude(description="")
 		context['BaseUrl'] = BASE_URL
 		context['liked_items'] = get_liked_items(self.request.user)
 		return context
@@ -70,7 +71,7 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)
+		queryset = self.model.objects.filter(is_published=True,segment=self.vintage).exclude(description="")
 		return queryset
 
 	def get_context_data(self, **kwargs):
