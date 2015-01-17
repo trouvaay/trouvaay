@@ -97,7 +97,8 @@ class Product(models.Model):
 	style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
 	furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
 	category = models.ManyToManyField(Category, null=True, blank=True)
-	subcategory = models.ManyToManyField(Subcategory, null=True, blank=True)
+	# subcategory is required to determine if product has trial
+	subcategory = models.ManyToManyField(Subcategory)
 	material = models.ManyToManyField(Material, null=True, blank=True)
 	added_date = models.DateTimeField(auto_now_add=True)
 	pub_date = models.DateTimeField()
