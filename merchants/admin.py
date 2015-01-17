@@ -17,10 +17,10 @@ class RetailerAdmin(admin.ModelAdmin):
 class StoreAdmin(admin.ModelAdmin):
 	model = Store
 	extra = 1
-	list_display = ['street', 'retailer', 'store_num', 'city']
+	list_display = ['street', 'retailer', 'store_num', 'city', 'is_featured']
 	
 	fieldsets = (
-		(None, {'fields': ('retailer','store_num')}),
+		(None, {'fields': ('retailer','is_featured', 'store_num')}),
 		('Location', {'fields': (('street', 'street2'),('city',
 			'state','zipcd'))}),
 		(None, {'fields': ('description',)}),
@@ -29,6 +29,7 @@ class StoreAdmin(admin.ModelAdmin):
 		)
 	)
 	list_select_related = True
+	list_editable =['is_featured']
 	
 admin.site.register(Store, StoreAdmin)
 admin.site.register(Retailer, RetailerAdmin)
