@@ -76,6 +76,7 @@ var trouvaay = {
 		    	$("#addtocartmodal").show().delay(2000).fadeOut();
 		    	$.post("{% url 'members:addtocart' %}", data, function(product) {
 		    		$(".badge.cart-counter").html(product.count.toString());
+		    		$(".badge.mobile-cart-counter").html(product.count.toString());
 	    		});
 		    }
 	    })  
