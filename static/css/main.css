@@ -967,6 +967,13 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   padding-bottom: 20px;
   letter-spacing: 1.5px;
 }
+.directions-block {
+  float: left;
+  width: 100%;
+  padding-left: 35px;
+  padding-bottom: 20px;
+  font-size: 12px;
+}
 .info-block.image {
   padding-top: 1rem;
 }

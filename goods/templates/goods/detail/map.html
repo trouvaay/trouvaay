@@ -22,6 +22,10 @@
       </div>
       {% endblock %}
   </div>
+  <div class="directions-block">
+           <h4>Getting there...</h4>
+           <div id="directions"></div>
+  </div>
 </div>
 <div class="col-sm-5 product-description">
     {% block mainphotodescrip %}
@@ -37,10 +41,7 @@
        <div class="info-block image">
           <a href="{% url 'goods:detail' product.id %}">{% cloudinary product.productimage_set.first.image width=150 height=150 crop="fill" %}</a>
         </div>
-       <div class="info-block">
-           <h4>Getting there...</h4>
-           <div class="info" id="directions"></div>
-       </div>
+       
        <!-- <div class="info-block">
            <h5>No way to pickup?</h5>
            <div class="info">
@@ -97,11 +98,12 @@
   			var myDuration = directionResult.routes[0].legs[0].duration.text;
   			var myDistance = directionResult.routes[0].legs[0].distance.text;
   			var myinstructions = [ ]
-  			for ( i in directionResult.routes[0].legs[0].steps) {
-  				myinstructions[i] = directionResult.routes[0].legs[0].steps[i].instructions;	
+        var directionsPanel = document.getElementById("directions");
+  			directionsPanel.innerHTML = "<h5>" + myDuration + " - " + myDistance + "</h5>"
+        for ( i in directionResult.routes[0].legs[0].steps) {
+          console.log(directionResult.routes[0].legs[0].steps[i].instructions);
+  				directionsPanel.insertAdjacentHTML('beforeEnd', ' - '+directionResult.routes[0].legs[0].steps[i].instructions+'</br>');	
   			}
-  			var directionsPanel = document.getElementById("directions");
-  			directionsPanel.innerHTML = "<h5>" + myDuration + " - " + myDistance + "</h5></br>" + myinstructions; 
   		}
 
   		
