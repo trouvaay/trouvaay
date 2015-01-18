@@ -102,16 +102,16 @@
     <footer class="main-footer">
         <div class="container">'
             <div id="mobile-footer" class="row" style="padding-bottom:10px;background-color:#f4f4f4">
-                <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
+                <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
                     <a href="{% url 'goods:vintage' %}">Vintage</a>
                 </div>
-                <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
+                <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
                     <a href="{% url 'goods:new' %}">New</a>
                 </div>
-                <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
+              <!--   <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
                     <a href="#">Profile</a>
-                </div>
-                <div class="navbar-collapse collapse col-xs-3" style="padding: 0">
+                </div> -->
+                <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
                     <a href="{% url 'members:cart' %}">
                         <img src="{% static 'img/shopping_cart24.png' %}"/>
                         <span class="badge mobile-cart-counter">{{ request.user.authusercart_set.first.get_item_count }}</span>
