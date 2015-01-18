@@ -3900,6 +3900,20 @@ footer ul li a:hover {
   .heading {
     line-height: 20px;
   }
+  #mobile-footer {
+  padding: 10px;
+  position: fixed;
+  z-index: 100;
+  bottom: 0px;
+  background: #DAD8D8;
+  border-top: rgb(0,128,183) solid 4px;
+  width: 100%;
+  display: block;
+  }
+  #mobile-footer a {
+    color: rgb(0,128,183);
+    font-weight: 600;
+  }
 }
 
  @media (max-width: 413px) {
@@ -3939,20 +3953,6 @@ footer ul li a:hover {
   }
   .footer-widget {
     margin-bottom: .5rem;
-  }
-  #mobile-footer {
-  padding: 10px;
-  position: fixed;
-  z-index: 100;
-  bottom: 0px;
-  background: #DAD8D8;
-  border-top: rgb(0,128,183) solid 4px;
-  width: 100%;
-  display: block;
-  }
-  #mobile-footer a {
-    color: rgb(0,128,183);
-    font-weight: 600;
   }
   .product-description .name.map {
     margin: 0 auto 10px;
