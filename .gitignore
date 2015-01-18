@@ -5,3 +5,4 @@ latest.dump
 *.pyc
 *.log
 dev_settings.py
+trouvaay.json

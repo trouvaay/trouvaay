@@ -2539,7 +2539,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   text-align: center;
-  padding: 0px 0 40px;
+  padding: 80px 0 40px;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
@@ -2732,6 +2732,8 @@ form .form-checkbox-wrap .checkbox-label {
   float: left;
   background: #f4f4f4;
   border-top: black solid 2.5px;
+  position: fixed;
+  bottom: 0;
 }
 .main-footer > .container {
   border-top: black;
@@ -3603,7 +3605,7 @@ footer ul li a:hover {
     margin-bottom: 30px;
   }
   .hp-tabs {
-    padding: 0px 0 20px;
+    padding: 50px 0 20px;
   }
   .hp-tabs .nav-tabs > li {
     width: 25%;
