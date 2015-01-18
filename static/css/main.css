@@ -2734,6 +2734,7 @@ form .form-checkbox-wrap .checkbox-label {
   border-top: black solid 2.5px;
   position: fixed;
   bottom: 0;
+  height: 95px;
 }
 .main-footer > .container {
   border-top: black;
