@@ -37,7 +37,17 @@
 		              {% include 'goods/_productlabel.html' %}
 				  	</div>
 				  	{% if product.store.is_featured %}
-				  		{{ product.store }}
+				  	<div class="row" style="margin-bottom:15px">
+				  		<div class="col-xs-8">
+				  			<b>{{ product.store.retailer }}</b></br>
+				  			{{ product.store.street }}
+				  		</div>
+				  		<div class="col-xs-3">
+				  			<button type="button" class="btn btn-default">
+                                {{ 'pop-in' }}
+                            </button>
+				  		</div>
+				  	</div>
 				  	{% endif %}
 				  	{% if product.material.all %}
 				  	<div class="row">
