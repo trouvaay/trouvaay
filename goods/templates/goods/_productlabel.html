@@ -12,7 +12,7 @@
                 {% elif product.current_price %}
                     {% if product.has_trial %}
                         {% if product.store.is_featured %}
-                            <button type="button" class="btn btn-success buy try" id="dist_{{ product.id }}">
+                            <button type="button" class="btn btn-warning buy try" id="dist_{{ product.id }}">
                                 {{ 'buy&try  (10.0mi)' }}
                             </button>
                         {% else %}

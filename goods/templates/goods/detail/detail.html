@@ -43,9 +43,9 @@
 				  			{{ product.store.street }}
 				  		</div>
 				  		<div class="col-xs-3">
-				  			<button type="button" class="btn btn-default">
+				  			<a href="{% url 'goods:popinmap' product.id %}"><button type="button" class="btn btn-default">
                                 {{ 'pop-in' }}
-                            </button>
+                            </button></a>
 				  		</div>
 				  	</div>
 				  	{% endif %}

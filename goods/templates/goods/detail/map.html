@@ -110,18 +110,16 @@
 <script type="text/javascript"> 
 	// var outty = navigator.geolocation.getCurrentPosition(initialize);
 	var store = {
+		'lat': 37.76,
+		'lng': -122.41,
+	};
 
-		'lat': {{ store.lat }},
-		'lng': {{ store.lng }},
-	}
 	function  getpoints () {
 		var userloc = {
-			'lat': 37.798530,
-			'lng': -122.417966,
-		}
-		
-		initialize(store, userloc);
-		
+			'lat': 37.386345,
+			'lng': -122.067241,
+		};
+		initialize(store, userloc);	
 	};
 	navigator.geolocation.getCurrentPosition(getpoints);
 	

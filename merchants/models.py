@@ -53,8 +53,8 @@ class Store(models.Model):
 		return (self.retailer.short_name+" ("+self.street[:12]+")")
 	
 	def _geo_code(self):
-		return GeoCode(self.street,self.city,
-						self.state, self.zipcd,self.street2)
+		print( GeoCode(self.street,self.city,
+						self.state, self.zipcd,self.street2))
 
 	def save(self, *args, **kwargs):
 		#updates lat/lng when saved

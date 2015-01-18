@@ -21,7 +21,7 @@ class StoreAdmin(admin.ModelAdmin):
 	
 	fieldsets = (
 		(None, {'fields': ('retailer','is_featured', 'store_num')}),
-		('Location', {'fields': (('street', 'street2'),('city',
+		('Location', {'fields': (('lat', 'lng'),('street', 'street2'),('city',
 			'state','zipcd'))}),
 		(None, {'fields': ('description',)}),
 		(None, {'classes': ('collapse',),
