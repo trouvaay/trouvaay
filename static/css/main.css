@@ -4020,6 +4020,9 @@ footer ul li a:hover {
   .price-wrapper .price {
     margin-left: 30%;
   }
+  .hp-tabs .tab-content {
+    margin-top: 0;
+  }
 }
 
 .centered-child {
