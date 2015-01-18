@@ -967,6 +967,13 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   padding-bottom: 20px;
   letter-spacing: 1.5px;
 }
+.directions-block {
+  float: left;
+  width: 100%;
+  padding-left: 35px;
+  padding-bottom: 20px;
+  font-size: 12px;
+}
 .info-block.image {
   padding-top: 1rem;
 }
@@ -3938,7 +3945,7 @@ footer ul li a:hover {
   position: fixed;
   z-index: 100;
   bottom: 0px;
-  background: #f4f4f4;
+  background: #DAD8D8;
   border-top: rgb(0,128,183) solid 4px;
   width: 100%;
   display: block;
