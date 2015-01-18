@@ -52,13 +52,12 @@ def GeoCode(street, city, state, zipcd, street2=None):
 	#TODO: convert to google API key to evrion var 
 	key = settings.GOOG_MAP_KEY
 	final_url = base_url+"sensor=false"+"&address="+address+"&key="+key    
-	
 	try:
 		r = requests.get(final_url) 
 		location_object =  r.json()
 		num_results = len(location_object["results"])
 		# if response is 200 status and they arent too many results       
-		if location_object['status'] == "OK" and numResults <= 4:
+		if location_object['status'] == "OK" and num_results <= 4:
 			lat = location_object["results"][0]["geometry"]["location"]["lat"]
 			lng = location_object["results"][0]["geometry"]["location"]["lng"]
 			return(lat,lng)

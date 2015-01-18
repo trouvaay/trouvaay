@@ -109,15 +109,15 @@
 </script>
 <script type="text/javascript"> 
 	// var outty = navigator.geolocation.getCurrentPosition(initialize);
-	var store = {
-		'lat': 37.76,
-		'lng': -122.41,
+	
+  var store = {
+		'lat': {{ store.lat }},
+		'lng': {{ store.lng }},
 	};
-
-	function  getpoints () {
+	function  getpoints (userloco) {
 		var userloc = {
-			'lat': 37.386345,
-			'lng': -122.067241,
+			'lat': userloco.coords.latitude,
+			'lng': userloco.coords.longitude,
 		};
 		initialize(store, userloc);	
 	};
