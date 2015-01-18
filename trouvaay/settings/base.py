@@ -146,7 +146,7 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
         },
@@ -174,14 +174,27 @@ LOGGING = {
         'django.db': {
             'handlers': ['console', 'file'],
             'propagate': True,
-            'level':'DEBUG',
+            'level':'INFO',
         },
-        'trouvaay': {
+        'goods': {
             'handlers': ['console', 'file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'members': {
+            'handlers': ['console', 'file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'merchants': {
+            'handlers': ['console', 'file'],
+            'propagate': True,
             'level': 'DEBUG',
         },
     }
 }
+
+STRIPE_CAPTURE_TRANSACTION_TIME = 48  # hours
 
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''

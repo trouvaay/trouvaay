@@ -1,15 +1,16 @@
-from django.http import JsonResponse 
+from django.http import JsonResponse
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser, \
 	AuthUserCart, AuthUserOrder, AuthUserOrderItem, AuthUserAddress
 from goods.models import Product
 from members.forms import CustomAuthenticationForm
-from braces.views import LoginRequiredMixin	
+from braces.views import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import stripe
 from django.shortcuts import redirect
 from django.conf import settings
 import logging
+from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +60,7 @@ def AddToCart(request):
 		userinstance = request.user
 		product = Product.objects.get(pk=int(request.POST['id']))
 		usercart, created = AuthUserCart.objects.get_or_create(authuser=userinstance)
-		usercart.saved_items.add(product)	
+		usercart.saved_items.add(product)
 		usercart.save()
 		count = usercart.get_item_count()
 		return JsonResponse({'count': count, 'message':'success'})
@@ -124,6 +125,9 @@ class CartCheckoutCallbackView(LoginRequiredMixin, generic.DetailView):
 
 			cart = self.get_object()
 
+			order_type = request.POST['order_type'].strip().lower()
+			capture_order = (order_type == 'buy')
+
 			# create charge with stripe,
 			try:
 				token_id = request.POST['token[id]']
@@ -146,6 +150,7 @@ class CartCheckoutCallbackView(LoginRequiredMixin, generic.DetailView):
 									amount=total_amount_in_cents,
 									currency="usd",
 									card=token_id,
+									capture=capture_order,
 									metadata={
 											'order_id': order.id,
 											'order_type': order_type
@@ -186,8 +191,11 @@ class CartCheckoutCallbackView(LoginRequiredMixin, generic.DetailView):
 				order_item.product = product
 				order_item.order = order
 				order_item.sell_price = product.current_price
-				order_item.captured = False
-				order_item.capture_time = None
+				order_item.captured = capture_order
+				if(capture_order):
+					order_item.capture_time = datetime.now()
+				else:
+					order_item.capture_time = datetime.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
 				order_item.quantity = 1
 				order_item.save()
 			logger.debug('Added items to order')
@@ -197,7 +205,7 @@ class CartCheckoutCallbackView(LoginRequiredMixin, generic.DetailView):
 			# which we don't keep track of right now anywhere
 			for product in cart.saved_items.all():
 				cart.saved_items.remove(product)
-				print 'removing from cart', order_item.product
+				logger.debug('removing from cart %s' % str(order_item.product))
 			cart.save()
 			logger.debug('Removed items from cart')
 
@@ -216,7 +224,7 @@ def SubmitCustomerPayment(request):
 
 		try:
 		  charge = stripe.Charge.create(
-		      amount=1000, # amount in cents, again
+		      amount=1000,  # amount in cents, again
 		      currency="usd",
 		      card=token,
 		      description="payinguser@example.com"

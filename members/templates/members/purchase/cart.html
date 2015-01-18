@@ -23,10 +23,7 @@
 <td></td>
 <td>
 {% if cart.get_item_count > 0 %}
-	<button class="btn btn-success" id="stripe-buy">Checkout to Buy</button>
-	<!-- {% if cart.has_trial_products %}
-	<button class="btn btn-success" id="stripe-buy-and-try">Checkout to {{ FEATURE_NAME_BUYANDTRY }}</button>
-	{% endif %} -->
+<button class="btn btn-success" id="stripe-checkout">Checkout</button>
 {% endif %}
 </td>
 </tr>
@@ -81,7 +78,6 @@
     	name: '{{ site_name }}',
     	description: "{{ cart.get_item_count }} item{{ cart.get_item_count|pluralize }} (${{ cart.get_cart_total }})",
 		amount: "{{ cart.get_cart_total_in_cents }}",
-		billingAddress: "true",
 		shippingAddress: "true",
 		token: function(token, args) {
 			$.ajax({
@@ -103,23 +99,14 @@
 		}
 	});
 
-	$('#stripe-buy').on('click', function(e) {
-		checkoutType = 'buy';
+	$('#stripe-checkout').on('click', function(e) {
+		checkoutType = {% if cart.has_trial_products %}'buy-and-try'{% else %}'buy'{% endif %};
 	  	handler.open({
-			panelLabel: 'Buy'
+			panelLabel: {% if cart.has_trial_products %}'{{ FEATURE_NAME_BUYANDTRY }}'{% else %}'Buy'{% endif %}
 		});
 	    e.preventDefault();
   	});
-  	
-  	{% if cart.has_trial_products %}
-	$('#stripe-buy-and-try').on('click', function(e) {
-		checkoutType = 'buy-and-try';
-	  	handler.open({
-			panelLabel: '{{ FEATURE_NAME_BUYANDTRY }}'
-		});
-	    e.preventDefault();
-  	});
-  	{% endif %}  	
+
   	// Close Checkout on page navigation
 	$(window).on('popstate', function() {
     	handler.close();
