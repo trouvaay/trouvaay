@@ -25,7 +25,6 @@
   float: left;
 }
 body {
-  font-family: Quicksand;
   font-size: 14px;
   background: white;
 }
@@ -57,7 +56,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   width: 100%;
   float: left;
   background: white;
-  padding: 5px 5px;
+  padding: 5px 15px;
   position: fixed;
   z-index: 100;
   border-bottom: 3px solid rgb(0,128,183);
@@ -267,7 +266,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .tab-container .nav-tabs li.active a {
   background: transparent;
   color: #333333;
-  border-top: solid 2px #333333;
   border-left: none;
   border-right: none;
   border-bottom: none;
@@ -1443,6 +1441,10 @@ text-align: left;
   letter-spacing: 2px;
   margin: 0 15px 40px 0;
 }
+.grid-products-wrapper .product {
+
+	padding: 0px;
+}
 .grid-product {
   width: 100%;
   height: 350px;
@@ -1450,6 +1452,36 @@ text-align: left;
   width: 100%;
   /*margin: 2rem;*/
   text-align: center;
+}
+
+
+@media screen and (min-width: 768px) {
+.product.col-sm-6 {
+	width: 48%;
+	margin-right: 4%;
+}
+
+.product.col-sm-6:nth-child(2n) {
+	margin-right: 0%;
+}
+
+
+}
+
+
+@media screen and (min-width: 992px) {
+.product.col-md-4 {
+	width: 30%;
+	margin-right: 5%;
+}
+
+.product.col-sm-6:nth-child(2n) {
+	margin-right: 5%;
+}
+
+.product.col-md-4:nth-child(3n) {
+	margin-right: 0%;
+}
 }
 
 .grid-product figure {
@@ -2361,7 +2393,6 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 6px 10px 4px;
 }
 .btn.btn-primary.request {
-  width: 105px;
 }
 .btn.btn-primary.buy {
   width: 70px;
@@ -2395,10 +2426,44 @@ form .form-checkbox-wrap .checkbox-label {
   max-width: 95%;
   margin: auto;
 }
+
+#loginmodal .btn {
+  width: 100%;
+}
+
+#loginmodal h5 {
+  font-size: 18px;
+}
+
+#loginmodal .modal-content .col-md-6 {
+  text-align: center;
+}
+
+#loginmodal .modal-content .col-md-6:first-child {
+  border-right: 1px solid #eee;
+
+
+}
+
+#loginmodal .login form {
+  margin-bottom: 20px;
+}
+
+#loginmodal .login .btn-primary {
+  background-color: #999;
+  border: 1px solid #999;
+
+}
+
+.modal-footer {
+  border-top: 0px;
+}
 .modal-dialog {
   width: 630px;
   position: fixed;
-  left: 35%;
+  margin: 0px auto;
+  top: 50%;
+  margin-top: -130px;
 }
 .modal-dialog .modal-body {
   padding: 20px 0;
@@ -2408,9 +2473,10 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .modal-dialog .modal-content {
   float: left;
-  padding: 10px;
+  padding: 20px 0px;
   border: 0;
   max-width: 100%;
+  width: 100%;
 }
 .modal-dialog .modal-content h3 {
   margin: 0;
@@ -2425,8 +2491,6 @@ form .form-checkbox-wrap .checkbox-label {
   margin-bottom: 20px;
 }
 .modal-dialog .modal-content button {
-  float: right;
-  margin-top: 10px;
 }
 .modal-dialog .modal-content button:hover {
   border-color: #c7c7c7;
@@ -2924,6 +2988,33 @@ footer ul li a:hover {
 .payment-icons ul li.paypal {
   background-position: center -182px;
 }
+.how-it-works {
+  background-color: #f4f4f4;
+  font-family: "Avenir";
+}
+.how-it-works h2 {
+  margin-bottom: 60px;
+}
+.how-it-works .statement {
+  margin-bottom: 30px;
+}
+.how-it-works .row-fluid div {
+  font-size: 18px;
+  text-align: center;
+}
+.how-it-works .row-fluid div img {
+  height: 60px;
+  display: block;
+  margin: 0 auto 20px;
+}
+.how-it-works .row-fluid div.main-quote {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.how-it-works .row-fluid div.main-quote div {
+  font-size: 24px;
+}
 .homepage-quote {
   width: 100%;
   float: left;
@@ -3090,6 +3181,19 @@ footer ul li a:hover {
   -o-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
 }
+
+.homepage-slider .slides h2 {
+  position: absolute;
+  width: 50%;
+  bottom: 20px;
+  color: #FFF;
+  font-weight: bold;
+  left: 50%;
+  padding-right: 30px;
+
+
+
+}
 #map-canvas {
   height: 30rem;
 }
@@ -3225,12 +3329,10 @@ footer ul li a:hover {
   }
 @media screen and (min-width: 768px) and (max-width: 992px) {
   .pic-detail-home {
-    margin-left: 7%;
   }
 }
 @media screen and (min-width: 413px) and (max-width: 992px) {
   .pic-detail-home {
-    margin-left: 12%;
   }
   .detail-image-med {
     display: table;
@@ -3656,14 +3758,15 @@ footer ul li a:hover {
   }
 }
 @media (min-width: 768px) {
+  .main-navigation.top-row {
+	  padding-right: 30px;
+  }
   .main-navigation .navbar-nav {
-    border-top: solid 1px #cccccc;
   }
   .navbar-nav > li a {
     font-size: 13px;
   }
   .main-navigation .navbar-nav > li:hover > a {
-    border-top: solid 2px #333333;
     background: transparent;
   }
   .main-navigation .navbar-nav > li:hover > ul {
@@ -3694,7 +3797,6 @@ footer ul li a:hover {
     margin-bottom:5px;
   }
   .main-navigation .navbar-nav > li > a:hover {
-    border-top: solid 2px #333333;
     background: transparent;
   }
   .main-navigation.top-row .navbar-nav > li > a:hover {
@@ -4058,7 +4160,7 @@ footer ul li a:hover {
   margin: 25% auto;
 }
 #main-menu .col-sm-12.main-navigation li {
-  width: 100px;
+	padding: 6px 12px;
 }
 #main-menu .col-sm-12.main-navigation.top-row li {
   width: 90px;
@@ -4066,7 +4168,11 @@ footer ul li a:hover {
 }
 #main-menu .col-sm-12.main-navigation.top-row li.socialicons {
   width: 30px;
-  margin-left: 5px;
+  margin-right: 15px;
+}
+
+li.socialicons a {
+	padding: 0px;
 }
 
 #main-menu .col-sm-12.main-navigation a {
@@ -4076,4 +4182,10 @@ footer ul li a:hover {
 }
 .tfoot {
   font-weight: 800;
+}
+
+
+.layer {
+  overflow: auto;
+  padding: 0px 30px;
 }

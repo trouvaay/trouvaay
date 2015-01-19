@@ -4,19 +4,37 @@
 
 {% block content %}
   <div class="container homepage-slider-container" id="first-content-after-nav">
-    <div class="row">
+    <div class="row-fluid">
         <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
             <div class="homepage-slider">
                 <ul class="slides">
-                    <!-- <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1420784952/ntzplqwftcxnqxierk4g.jpg');">
-                    </li> -->
+                    <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1420784952/ntzplqwftcxnqxierk4g.jpg');">
+		    <h2>Find unique home décor in local SF stores</h2>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
   </div>
-  <div class="container-fluid homepage-quote">
-    <div class="row">
+  <div class="container-fluid layer">
+    <div class="grid-products-wrapper">
+	<div class="row-fluid">
+		<h2>Featured items</h2>
+	</div>
+        <div class="row-fluid">
+            {% for product in products %}
+                {% include 'goods/_product_for_loop.html' %}
+            {% endfor %}
+        </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid how-it-works layer">
+    <div class="row-fluid">
+	<h2>How it works</h2>
+	<div class="col-md-4 statement"><img src="{% static 'img/magnifying_glass.svg' %}">New or vintage, we do the hunting for you</div>
+	<div class="col-md-4 statement"><img src="{% static 'img/delivery_truck.svg' %} " height="70">Once you buy, we deliver – white gloves and all – for low to no cost.</div>
+	<div class="col-md-4 statement"><img src="{% static 'img/calendar.svg' %}">New or vintage, we do the hunting for you</div>
         <div class="col-sm-12">
             <div class="heading main-quote">
               <div class="row">
@@ -24,21 +42,7 @@
                 More treasure less hunting
               </div>
               </div>
-              <div class="row">
-              <div class="col-sm-10">
-                <h4 class="subheading">Find one of a kind home goods in stores near you. New or vintage, tell us what you’re looking for and we’ll do the hunting for you. New pieces posted daily. Check in before they’re gone.</h4>
-                </div>
-                </div> 
             </div>
-        </div>
-    </div>
-  </div>
-  <div class="container-fluid">
-    <div class="grid-products-wrapper">
-        <div class="row">
-            {% for product in products %}
-                {% include 'goods/_product_for_loop.html' %}
-            {% endfor %}
         </div>
     </div>
   </div>

@@ -73,6 +73,7 @@
                                         <img src="{% static 'img/socialicons/twitter_gray32.png' %}"/>
                                     </a>
                                 </li>
+				<!--
                                 <li><div class="cart-info">
                                         <a href="{% url 'members:cart' %}">
                                             <img src="{% static 'img/shopping_cart24.png' %}"/><span class="badge cart-counter">{{ request.user.authusercart_set.first.get_item_count}}</span>
@@ -81,6 +82,7 @@
                                 <li>
                                     <a class="btn btn-link" style="padding-top:5px" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}{% endif %}</a>
                                 </li>
+				-->
                         </div>
                     </div>
                     <div class="row">
@@ -89,6 +91,7 @@
                                 <li><a href="{% url 'goods:vintage' %}">Vintage</a></li>
                                 <li><a href="{% url 'goods:new' %}">New</a></li>
                                 <li><a href="{% url 'goods:about' %}">About</a></li>
+				<li><a class="btn btn-link" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}{% endif %}</a></li>
                                 <!-- <li><a href="{% url 'goods:blog' %}">Blog</a></li> -->
                             </ul>
                         </div>
