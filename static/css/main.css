@@ -2402,19 +2402,23 @@ form .form-checkbox-wrap .checkbox-label {
   max-width: 95%;
   margin: auto;
 }
-.modal-dialog {
-  width: 630px;
+#loginmodal .modal-dialog {
+  width: 40%;
   position: fixed;
-  left: 35%;
+  left: 30%;
 }
 .modal-dialog .modal-body {
   padding: 20px 0;
+}
+#addtocartmodal {
+  top: 15%;
+  /*left: 25%;*/
 }
 #addtocartmodal .modal-dialog .modal-body {
   padding: 5px 0;
 }
 .modal-dialog .modal-content {
-  float: left;
+  /*float: none;*/
   padding: 10px;
   border: 0;
   max-width: 100%;
@@ -3969,6 +3973,11 @@ footer ul li a:hover {
   }
   .footer-widget {
     margin-bottom: .5rem;
+  }
+  #loginmodal .modal-dialog {
+    width: 80%;
+    position: fixed;
+    left: 10%;
   }
   .product-description .name.map {
     margin: 0 auto 10px;
