@@ -120,8 +120,10 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 FEATURE_NAME_BUYANDTRY = "Buy-and-Try"
-RETURN_POLICY = 'Can be returned for Rare Door credit within 14 days'
-
+RETURN_POLICY = {
+    'allowed' : 'Can be returned for Rare Door credit within 14 days',
+    'not_allowed' : 'This is a final sale item'
+}
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
 

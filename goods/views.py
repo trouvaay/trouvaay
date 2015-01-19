@@ -5,6 +5,7 @@ from django.core.serializers import serialize
 from braces.views import LoginRequiredMixin
 # from goods.forms import CommentForm
 from random import randint
+from django.conf import settings
 
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
@@ -93,6 +94,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(DetailView, self).get_context_data(**kwargs)
 		context['liked_items'] = get_liked_items(self.request.user)
+		context['returns'] = settings.RETURN_POLICY
 		return context
 
 
