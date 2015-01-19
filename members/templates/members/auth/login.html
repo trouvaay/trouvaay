@@ -1,64 +1,83 @@
 {% extends "goods/home/home.html" %}
 
+{% block modal %}
+{{ block.super }}
 
+<!-- Login modal -->
+<div class="modal fade" id="loginmodal">
+  <div class="modal-dialog">
+    <div class="modal-content container-fluid">
+
+      <div class="row-fluid">
+	<div class="col-sm-6">
+	  <h5 class="modal-title">Create an account</h5>
+	  <div class="modal-body">
+	    <!-- Error -->
+	    
+	    <form action="post" action="/">
+	      {% csrf_token %}
+	      <input type="email" class="form-control" name="email" placeholder="Email address" />
+	      <input type="password" class="form-control" name="password" placeholder="Password" />
+	      <input type="password" class="form-control" name="confirm-password" placeholder="Confirm password" />
+	      
+	    
+	    
+	      <button type="submit" value="login" class="btn btn-primary">Submit</button>
+	    </form>
+	  </div>
+
+	
+	</div>
+	<div class="col-sm-6 login">
+	  <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+	  <h5 class="modal-title">Already a member? Log in</h5>
+	  <div class="modal-body">
+	    {% if form.errors %}
+	    <p>Your username and password didn't match. Please try again.</p>
+	    {% endif %}
+	    <form method="post" action="{% url 'members:login' %}">
+	      {% csrf_token %}
+	      {{ form.email }}
+	      {{ form.password }}
+	  
+	      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+	      <button type="submit" value="login" class="btn btn-primary">Login</button>
+	      <!-- <button type="button" id="signup" value="signup" class="btn btn-primary">Signup</button> -->
+	      <input type="hidden" name="next" value="{{ next }}" />
+	    </form>
+	    <a href="#">Forgot your password?</a>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div><!-- /.modal-dialog -->
+</div><!-- /. end login modal -->
+{% endblock %}
 {% block content %}
-	{{ block.super }}
-	<!-- Login modal -->
-	<div class="modal fade" id="loginmodal">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
-	        <h4> {{ 'Rare Door' }}
-	        <h5 class="modal-title">Welcome! Please login</h5>
-	      </div>
-	      <div class="modal-body">
-	        {% if form.errors %}
-			<p>Your username and password didn't match. Please try again.</p>
-			{% endif %}
-		<form method="post" action="{% url 'members:login' %}">
-			{% csrf_token %}
-			<table>
-			<tr>
-			    <td style="padding-bottom: 20px">{{ form.email }}</td>
-			</tr></br>
-			<tr>
-			    <td>{{ form.password }}</td>
-			</tr>
-			</table>
-	      </div>
-	      <div class="modal-footer">
-	        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-	        <button type="submit" value="login" class="btn btn-primary">Login</button>
-	        <!-- <button type="button" id="signup" value="signup" class="btn btn-primary">Signup</button> -->
-	        <input type="hidden" name="next" value="{{ next }}" />
-	      </div>
-	      </form>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
-	</div><!-- /. end login modal -->
+
+{{ block.super }}
 
 {% endblock %}
 {% block endjs %}
-	{{ block.super }}
-	<script type="text/javascript">
-		$(document).ready(function () {
-			// var options = {
-			// 	"show" : true,
-			// };
-			$('#loginmodal').modal({"show": true});
-		});
-		
-		$('#signup').on('click', function () {
-	    	$('#signupmodal').modal({"show": true});
-	    	$('#loginmodal').modal({"show": false});
-	    });
+{{ block.super }}
+<script type="text/javascript">
+$(document).ready(function () {
+    // var options = {
+    // 	"show" : true,
+    // };
+    $('#loginmodal').modal({"show": true});
+    });
 
-	    $('#login').on('click', function () {
-	    	$('#loginmodal').modal({"show": true});
-	    	$('#signupmodal').modal({"show": false});
-	    });
-	
-	</script>
+$('#signup').on('click', function () {
+    $('#signupmodal').modal({"show": true});
+    $('#loginmodal').modal({"show": false});
+    });
+
+$('#login').on('click', function () {
+    $('#loginmodal').modal({"show": true});
+    $('#signupmodal').modal({"show": false});
+    });
+
+</script>
 
 {% endblock %}
