@@ -8,17 +8,18 @@ from random import randint
 
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
-RETURN_POLICY = 'Can be returned for Rare Door credit within 14 days'
+
 
 def get_liked_items(user):
 	""" Creates list of user's liked items for json
 	Obj passed to addlikehearts js script
 	"""
 
-	useractivity = AuthUserActivity.objects.get(authuser=user)
+	useractivity, new = AuthUserActivity.objects.get_or_create(authuser=user)
+	if new:
+		useractivity.save()
 	liked_list = useractivity.saved_items.all()
 	liked_ids = [prod.id for prod in liked_list]
-	print('printing ids',liked_ids)
 	return liked_ids
 
 
@@ -55,7 +56,6 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		context = super(NewView, self).get_context_data(**kwargs)
 		#JSON sent to client to calc distance from user
 		context['products_json'] = serialize('json', context['products'])
-
 		for furnituretype in FurnitureType.objects.all():
 			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new).exclude(description="")
 		context['BaseUrl'] = BASE_URL
