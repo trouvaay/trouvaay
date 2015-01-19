@@ -17,6 +17,7 @@
         <div class="container detail-margin" id="first-content-after-nav">
             <div class="row">
 				<div class="col-sm-7 col-xs-12" style="text-align:center">
+					<div>{{ product.pub_date }}</div>
 				      <div class="detail-image-large">
 				          {% cloudinary product.productimage_set.first.image width=450 height=550 crop="fit" %}
 				      </div>
