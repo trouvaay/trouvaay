@@ -57,10 +57,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   width: 100%;
   float: left;
   background: white;
-  padding: 5px 15px;
+  padding: 0px 15px;
   position: fixed;
   z-index: 100;
   border-bottom: 3px solid rgb(0,128,183);
+  
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 .top-bar.non-white {
   background: #f4f4f4;
@@ -73,9 +78,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   text-align: right;
 }
 .logo-div {
-  margin-top: 8px;
+  padding-top: 10px;
   font-size: 25px;
   padding-left: 35px;
+  height: 72px;
 }
 .main-footer a {
   color: #7a7a7a;
@@ -90,8 +96,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 1em;
 }
 #logo {
-  width: 45%;
-  min-width: 120px;
+  /*width: 45%;*/
+  /*min-width: 120px;*/
+  max-width: 100%;
 }
 .insta-icon {
   margin-right: 0.4em;
@@ -2404,6 +2411,10 @@ form .form-checkbox-wrap .checkbox-label {
   font-size: 14px;
   padding: 6px 10px 4px;
 }
+.btn.btn-primary {
+  background-color: #0080b7;
+  border-color: #0080b7;
+}
 .btn.btn-primary.request {
 }
 .btn.btn-primary.buy {
@@ -2467,6 +2478,8 @@ form .form-checkbox-wrap .checkbox-label {
 }
 
 #loginmodal.in + .top-bar {
+  background: transparent;
+  border-color: transparent;
 }
 #loginmodal.in + .top-bar .row {
 }
@@ -2485,6 +2498,12 @@ form .form-checkbox-wrap .checkbox-label {
   margin-top: -130px;
   left: 0px;
   right: 0px;
+}
+
+.modal-dialog button.close {
+  position: absolute;
+  right: 13px;
+  top: 10px;
 }
 .modal-dialog .modal-body {
   padding: 20px 0;
@@ -3931,10 +3950,17 @@ footer ul li a:hover {
     color: #7a7a7a;
   }
 }
-@media (max-width: 991px) {
+
+@media (max-width: 992px) {
+  
   .detail-image-large {
     display: none;
     }
+
+  .logo-div {
+    padding-top: 10px;
+    height: 72px;
+  }
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-toggle {
@@ -3956,6 +3982,8 @@ footer ul li a:hover {
   .logo-div {
     padding-left: 10px;
     margin-top: 0px;
+    padding-top: 3px;
+    height: auto;
   }
   a#logo {
     font-size: 20px;
@@ -4207,6 +4235,7 @@ footer ul li a:hover {
 #main-menu .col-sm-12.main-navigation.top-row li.socialicons {
   width: 30px;
   margin-right: 10px;
+  padding: 0px;
 }
 
 #main-menu .bottom-row .navbar-nav {
