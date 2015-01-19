@@ -8,8 +8,8 @@
         <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
             <div class="homepage-slider">
                 <ul class="slides">
-                    <!-- <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1420784952/ntzplqwftcxnqxierk4g.jpg');">
-                    </li> -->
+                    <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1420784952/ntzplqwftcxnqxierk4g.jpg');">
+                    </li>
                 </ul>
             </div>
         </div>
@@ -37,11 +37,27 @@
     <div class="grid-products-wrapper">
         <div class="row">
             {% for product in products %}
-                {% include 'goods/_product_for_loop.html' %}
+            <div class="col-xs-12 col-sm-6 col-m-4" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
+                <div class="grid-product centered-parent">
+                    <div class="centered-child detail-image-large">
+                            {% cloudinary product.productimage_set.first.image width=350 height=300 crop="fit" %}
+                    </div>
+                    <div class="centered-child detail-image-med">
+                            {% cloudinary product.productimage_set.first.image width=300 height=300 crop="fit" %}
+                    </div>
+                    <div class="centered-child detail-image-small">
+                            {% cloudinary product.productimage_set.first.image width=275 height=275 crop="fit" %}
+                    </div>
+                    <a href="{% url 'goods:detail' product.id  %}" class="view-product">
+                        <div class="text">View product</div>
+                        <div class="background"></div>
+                    </a>
+                </div>
+            </div>
             {% endfor %}
         </div>
+      </div>
     </div>
-  </div>
 {% endblock content %}
 {% block endjs %}{% include 'js/addlikeditems.html' %}{% endblock endjs %}
 <!--<script type="text/javascript">

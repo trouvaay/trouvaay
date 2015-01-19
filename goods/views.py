@@ -5,19 +5,22 @@ from django.core.serializers import serialize
 from braces.views import LoginRequiredMixin
 # from goods.forms import CommentForm
 from random import randint
+from django.conf import settings
 
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
+
 
 def get_liked_items(user):
 	""" Creates list of user's liked items for json
 	Obj passed to addlikehearts js script
 	"""
 
-	useractivity = AuthUserActivity.objects.get(authuser=user)
+	useractivity, new = AuthUserActivity.objects.get_or_create(authuser=user)
+	if new:
+		useractivity.save()
 	liked_list = useractivity.saved_items.all()
 	liked_ids = [prod.id for prod in liked_list]
-	print('printing ids',liked_ids)
 	return liked_ids
 
 
@@ -29,7 +32,7 @@ class HomeView(LoginRequiredMixin, generic.ListView):
 	def get_queryset(self):
 		""" Show most recent six unsold items"""
 		#Should limited Query set by featured items
-		queryset = self.model.objects.filter(is_published=True).exclude(description="")[:6]
+		queryset = self.model.objects.filter(is_published=True, is_featured=True)[:3]
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -54,7 +57,6 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		context = super(NewView, self).get_context_data(**kwargs)
 		#JSON sent to client to calc distance from user
 		context['products_json'] = serialize('json', context['products'])
-
 		for furnituretype in FurnitureType.objects.all():
 			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new).exclude(description="")
 		context['BaseUrl'] = BASE_URL
@@ -71,7 +73,7 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 
 	def get_queryset(self):
 		
-		queryset = self.model.objects.filter(is_published=True,segment=self.vintage).exclude(description="")
+		queryset = self.model.objects.filter(is_published=True,segment=self.vintage)
 		return queryset
 
 	def get_context_data(self, **kwargs):
@@ -92,6 +94,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(DetailView, self).get_context_data(**kwargs)
 		context['liked_items'] = get_liked_items(self.request.user)
+		context['returns'] = settings.RETURN_POLICY
 		return context
 
 
