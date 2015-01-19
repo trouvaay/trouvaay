@@ -99,7 +99,7 @@ class AuthUserAddress(models.Model):
 	lng = models.FloatField(null=True, blank=True)
 
 	def __str__(self):
-		return ("{},{},{},{},{}".format(self.street,self.city,self.state,self.zipcd))
+		return ("{},{},{},{}".format(self.street,self.city,self.state,self.zipcd))
 
 class AuthUserActivity(models.Model):
 	authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
