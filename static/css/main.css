@@ -145,6 +145,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .top-bar .cart-info .value {
   font-weight: bold;
 }
+.vintage-hours {
+  text-align: left;
+  font-weight: 600;
+}
 .top-bar .language-selector > .btn {
   border: none;
   padding: 3px 10px 2px;
@@ -2953,7 +2957,7 @@ footer ul li a:hover {
   
 }
 #first-content-after-nav {
-  padding-top: 62px;
+  padding-top: 75px;
 }
 .homepage-quote .text,
 .hp-tabs .text {

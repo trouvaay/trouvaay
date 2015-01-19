@@ -16,8 +16,10 @@
 <section class="main-container vintage">
         <div class="container detail-margin" id="first-content-after-nav">
             <div class="row">
+            	<div class="col-xs-12 col-sm-1" style="text-align:center">
+            		<div><p class="vintage-hours">{{ product.hours_since_add }} hours</p></div>
+            	</div>
 				<div class="col-sm-7 col-xs-12" style="text-align:center">
-					<div>{{ product.hours_since_add }}</div>
 				      <div class="detail-image-large">
 				          {% cloudinary product.productimage_set.first.image width=450 height=550 crop="fit" %}
 				      </div>
@@ -28,7 +30,7 @@
 				          {% cloudinary product.productimage_set.first.image width=275 height=350 crop="fit" %}
 				      </div>
 				</div>
-				<div class="col-sm-5 col-xs-12 product-description">
+				<div class="col-sm-4 col-xs-12 product-description">
 				  <div class="row">
 				    <div class="col-sm-12">
 				       <div class="heading">{{ product.short_name }}</div></br>

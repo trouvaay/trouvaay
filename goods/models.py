@@ -124,7 +124,7 @@ class Product(models.Model):
 		
 	def hours_since_add(self):
 		delta = timezone.now() - self.pub_date
-		time_lapse = delta.minutes
+		time_lapse = delta.total_seconds() // 3600
 		return int(time_lapse)
 
 	def has_returns(self):
