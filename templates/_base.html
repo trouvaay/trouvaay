@@ -86,12 +86,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12 main-navigation">
+                        <div class="col-sm-12 main-navigation bottom-row">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="{% url 'goods:vintage' %}">Vintage</a></li>
                                 <li><a href="{% url 'goods:new' %}">New</a></li>
-                                <li><a href="{% url 'goods:about' %}">About</a></li>
-				<li><a class="btn btn-link" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}{% endif %}</a></li>
+				<li><a class="btn btn-link" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}Login{% endif %}</a></li>
                                 <!-- <li><a href="{% url 'goods:blog' %}">Blog</a></li> -->
                             </ul>
                         </div>

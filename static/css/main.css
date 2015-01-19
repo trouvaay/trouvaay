@@ -27,6 +27,7 @@
 body {
   font-size: 14px;
   background: white;
+  font-family: 'Quicksand';
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Avenir";
@@ -2442,7 +2443,6 @@ form .form-checkbox-wrap .checkbox-label {
 #loginmodal .modal-content .col-md-6:first-child {
   border-right: 1px solid #eee;
 
-
 }
 
 #loginmodal .login form {
@@ -2455,6 +2455,14 @@ form .form-checkbox-wrap .checkbox-label {
 
 }
 
+#loginmodal.in + .top-bar {
+}
+#loginmodal.in + .top-bar .row {
+}
+#loginmodal.in + .top-bar .main-navigation {
+	opacity: 0;
+}
+
 .modal-footer {
   border-top: 0px;
 }
@@ -2464,6 +2472,8 @@ form .form-checkbox-wrap .checkbox-label {
   margin: 0px auto;
   top: 50%;
   margin-top: -130px;
+  left: 0px;
+  right: 0px;
 }
 .modal-dialog .modal-body {
   padding: 20px 0;
@@ -3157,7 +3167,7 @@ footer ul li a:hover {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  height: 40rem;
+  height: 55rem;
   position: relative;
   width: 100%;
   float: left;
@@ -3184,12 +3194,12 @@ footer ul li a:hover {
 
 .homepage-slider .slides h2 {
   position: absolute;
-  width: 50%;
+  width: 100%;
   bottom: 20px;
   color: #FFF;
   font-weight: bold;
-  left: 50%;
-  padding-right: 30px;
+  padding: 0px 30px;
+  text-align: right;
 
 
 
@@ -4160,7 +4170,7 @@ footer ul li a:hover {
   margin: 25% auto;
 }
 #main-menu .col-sm-12.main-navigation li {
-	padding: 6px 12px;
+	padding: 6px 0px;
 }
 #main-menu .col-sm-12.main-navigation.top-row li {
   width: 90px;
@@ -4168,7 +4178,11 @@ footer ul li a:hover {
 }
 #main-menu .col-sm-12.main-navigation.top-row li.socialicons {
   width: 30px;
-  margin-right: 15px;
+  margin-right: 10px;
+}
+
+#main-menu .bottom-row .navbar-nav {
+	margin-right: 0px;
 }
 
 li.socialicons a {

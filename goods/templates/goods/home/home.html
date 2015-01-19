@@ -16,6 +16,25 @@
         </div>
     </div>
   </div>
+  
+  
+  <div class="container-fluid how-it-works layer">
+    <div class="row-fluid">
+	<h2>How it works</h2>
+	<div class="col-md-4 statement"><img src="{% static 'img/magnifying_glass.svg' %}">New or vintage, we do the hunting for you</div>
+	<div class="col-md-4 statement"><img src="{% static 'img/delivery_truck.svg' %} " height="70">Once you buy, we deliver – white gloves and all – for low to no cost.</div>
+	<div class="col-md-4 statement"><img src="{% static 'img/calendar.svg' %}">New pieces posted daily. Check in before they’re gone.</div>
+        <div class="col-sm-12">
+            <div class="heading main-quote">
+              <div class="row">
+              <div class="col-sm-12">
+                More treasure less hunting
+              </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
   <div class="container-fluid layer">
     <div class="grid-products-wrapper">
 	<div class="row-fluid">
@@ -25,24 +44,6 @@
             {% for product in products %}
                 {% include 'goods/_product_for_loop.html' %}
             {% endfor %}
-        </div>
-    </div>
-  </div>
-  
-  <div class="container-fluid how-it-works layer">
-    <div class="row-fluid">
-	<h2>How it works</h2>
-	<div class="col-md-4 statement"><img src="{% static 'img/magnifying_glass.svg' %}">New or vintage, we do the hunting for you</div>
-	<div class="col-md-4 statement"><img src="{% static 'img/delivery_truck.svg' %} " height="70">Once you buy, we deliver – white gloves and all – for low to no cost.</div>
-	<div class="col-md-4 statement"><img src="{% static 'img/calendar.svg' %}">New or vintage, we do the hunting for you</div>
-        <div class="col-sm-12">
-            <div class="heading main-quote">
-              <div class="row">
-              <div class="col-sm-12">
-                More treasure less hunting
-              </div>
-              </div>
-            </div>
         </div>
     </div>
   </div>

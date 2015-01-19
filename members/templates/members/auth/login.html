@@ -1,7 +1,8 @@
 {% extends "goods/home/home.html" %}
 
-{% block content %}
+{% block modal %}
 {{ block.super }}
+
 <!-- Login modal -->
 <div class="modal fade" id="loginmodal">
   <div class="modal-dialog">
@@ -51,6 +52,10 @@
     </div>
   </div><!-- /.modal-dialog -->
 </div><!-- /. end login modal -->
+{% endblock %}
+{% block content %}
+
+{{ block.super }}
 
 {% endblock %}
 {% block endjs %}
