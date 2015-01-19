@@ -8,6 +8,7 @@ from random import randint
 
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
+RETURN_POLICY = 'Can be returned for Rare Door credit within 14 days'
 
 def get_liked_items(user):
 	""" Creates list of user's liked items for json

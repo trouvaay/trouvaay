@@ -3917,6 +3917,10 @@ footer ul li a:hover {
   display: block;
   }
   #mobile-footer a {
+    color: white;
+    font-weight: 500;
+  }
+  #mobile-footer a.active {
     color: rgb(0,128,183);
     font-weight: 600;
   }

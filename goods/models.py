@@ -122,7 +122,9 @@ class Product(models.Model):
 			self.pub_date = timezone.now()
 		super(Product, self).save(*args, **kwargs)
 		
-
+	def has_returns(self):
+		return self.store.has_returns
+		
 	def getdist(self, UserLat=39.94106319,UserLng=-75.173192):
 		dist = 3959 * acos(cos(radians(UserLat)) * cos(radians(self.lat)) \
 		* cos(radians(self.lng) - radians(UserLng)) + sin(radians(UserLat))*\

@@ -34,7 +34,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="alert alert-info" role="alert" style="margin-bottom:0">
-                        <p class="text-center">Added to cart <a href="{% url 'members:cart' %}" class="alert-link">checkout now</a></p>
+                        <p class="text-center">Added to cart</br><a href="{% url 'members:cart' %}" class="alert-link">checkout now</a></p>
                     </div>
                 </div>  
             </div><!-- /.modal-content -->
@@ -106,7 +106,7 @@
                     <a href="{% url 'goods:vintage' %}">Vintage</a>
                 </div>
                 <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
-                    <a href="{% url 'goods:new' %}">New</a>
+                    <a class="active" href="{% url 'goods:new' %}">New</a>
                 </div>
               <!--   <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
                     <a href="#">Profile</a>
