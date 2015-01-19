@@ -122,10 +122,11 @@ class Product(models.Model):
 			self.pub_date = timezone.now()
 		super(Product, self).save(*args, **kwargs)
 		
-	def days_since_add(self):
-		delta = timezone.now() - pub_date
-		time_lapse = delta.days
-		
+	def hours_since_add(self):
+		delta = timezone.now() - self.pub_date
+		time_lapse = delta.minutes
+		return int(time_lapse)
+
 	def has_returns(self):
 		return self.store.has_returns
 		
