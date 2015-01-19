@@ -2436,7 +2436,7 @@ form .form-checkbox-wrap .checkbox-label {
   font-size: 18px;
 }
 
-#loginmodal .modal-content .col-md-6 {
+#loginmodal .modal-content .col-sm-6 {
   text-align: center;
 }
 
@@ -3330,7 +3330,6 @@ footer ul li a:hover {
 }
 @media screen and (min-width: 992px) {
   .col-sm-6 {
-    width: 33%;
   }
 }
 
