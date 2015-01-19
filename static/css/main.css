@@ -267,6 +267,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+ul.nav.navbar-nav.navbar-right > li > a.current {
+  color: rgb(0,128,183);
+  font-weight: 600;
+}
 .tab-container .nav-tabs li.active a {
   background: transparent;
   color: #333333;
@@ -3919,7 +3923,10 @@ footer ul li a:hover {
     color: white;
     font-weight: 500;
   }
-  #mobile-footer a.active {
+  #mobile-footer a:active {
+    text-decoration: none
+  }
+  #mobile-footer a.current {
     color: rgb(0,128,183);
     font-weight: 600;
   }
