@@ -2481,40 +2481,44 @@ form .form-checkbox-wrap .checkbox-label {
   margin: auto;
 }
 
-#loginmodal .btn {
+#signup-login-modal .btn {
   width: 100%;
 }
 
-#loginmodal h5 {
+#signup-login-modal h5 {
   font-size: 18px;
 }
 
-#loginmodal .modal-content .col-sm-6 {
+#signup-login-modal .modal-content {
+	padding: 0px 20px;
+}
+
+#signup-login-modal .modal-content .col-sm-6 {
   text-align: center;
 }
 
-#loginmodal .modal-content .col-md-6:first-child {
+#signup-login-modal .modal-content .col-md-6:first-child {
   border-right: 1px solid #eee;
 
 }
 
-#loginmodal .login form {
+#signup-login-modal .login form {
   margin-bottom: 20px;
 }
 
-#loginmodal .login .btn-primary {
+#signup-login-modal .login .btn-primary {
   background-color: #999;
   border: 1px solid #999;
 
 }
 
-#loginmodal.in + .top-bar {
+#signup-login-modal.in + .top-bar {
   background: transparent;
   border-color: transparent;
 }
-#loginmodal.in + .top-bar .row {
+#signup-login-modal.in + .top-bar .row {
 }
-#loginmodal.in + .top-bar .main-navigation {
+#signup-login-modal.in + .top-bar .main-navigation {
 	opacity: 0;
 }
 
