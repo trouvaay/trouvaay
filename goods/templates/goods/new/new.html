@@ -8,39 +8,39 @@
 <script type="text/javascript" 
 	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
 </script>
-<script type="text/javascript">
-	function  getpoints (userloc) {
-	    var products = {{ products_json|safe }};
-	    var userloc = {
-	     'lat': userloc.coords.latitude,
-	     'lng': userloc.coords.longitude,
-	    };
+// <script type="text/javascript">
+// 	function  getpoints (userloc) {
+// 	    var products = {{ products_json|safe }};
+// 	    var userloc = {
+// 	     'lat': userloc.coords.latitude,
+// 	     'lng': userloc.coords.longitude,
+// 	    };
 	      
-      	var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
-      	for (i in products) {
-      		console.log(products[i]);
-        	add_dists(userpos,products[i],i);
-      	} 
-    };
+//       	var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+//       	for (i in products) {
+//       		console.log(products[i]);
+//         	add_dists(userpos,products[i],i);
+//       	} 
+//     };
 
-	function add_dists(userpos, prod, prodnum) {
-		var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
-		var request = {
-		      origin: userpos,
-		      destination: productpos,
-		      travelMode: google.maps.TravelMode.DRIVING
-		  };
-		var directionsService = new google.maps.DirectionsService();
-		directionsService.route(request, function(result, status) {
-		      if (status == google.maps.DirectionsStatus.OK) {
-		      	var id = "buy_"+prod.pk;
-		      	console.log(id);
-		      	$(id).append(result.routes[0].legs[0].distance.text);
-		      } 
-		    });
-	};
+// 	function add_dists(userpos, prod, prodnum) {
+// 		var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
+// 		var request = {
+// 		      origin: userpos,
+// 		      destination: productpos,
+// 		      travelMode: google.maps.TravelMode.DRIVING
+// 		  };
+// 		var directionsService = new google.maps.DirectionsService();
+// 		directionsService.route(request, function(result, status) {
+// 		      if (status == google.maps.DirectionsStatus.OK) {
+// 		      	var id = "buy_"+prod.pk;
+// 		      	console.log(id);
+// 		      	$(id).append(result.routes[0].legs[0].distance.text);
+// 		      } 
+// 		    });
+// 	};
 
-	navigator.geolocation.getCurrentPosition(getpoints);
+// 	navigator.geolocation.getCurrentPosition(getpoints);
 	
-</script>
+// </script>
 {% endblock %}
