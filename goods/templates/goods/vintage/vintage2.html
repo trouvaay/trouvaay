@@ -18,16 +18,16 @@
             <div class="row">
             	{% for product in products %}
 	            	<div class="col-sm-6 col-xs-12" style="text-align:center; padding-bottom: 3rem;">
-	            		<div class="grid-products-wrapper" style="border-bottom: lightgray 1px solid;">
+	            		<div class="grid-products-wrapper">
 		            		<div class="row">
-								<div class="col-xs-8 product-description">
+								<div class="col-xs-10 product-description">
 							       <div class="heading">{{ product.short_name }}</div></br>
 							    </div>
-							    <div class="col-xs-4 product-description hours"><div class="heading">{{ product.hours_since_add }} hrs ago</div></div>
+							    <div class="col-xs-2 product-description hours"><div class="heading">{{ product.hours_since_add }}</br>hrs</div></div>
 							</div>
 		            		<div class="row">
 		            			<div class="col-xs-12" style="text-align:center">
-								   <div class="grid-product vintage centered-parent">
+								   <div class="grid-product vintage centered-parent" style="border: lightgray 1px solid;">
 								      <div class="centered-child detail-image-large">
 								          {% cloudinary product.productimage_set.first.image width=350 height=400 crop="fit" %}
 								      </div>
