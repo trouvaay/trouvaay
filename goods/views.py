@@ -40,7 +40,10 @@ class NewView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/new/new.html'
 	context_object_name = 'products'
 	model = Product
-	new = Segment.objects.filter(select='new')[0]
+	try:
+		new = Segment.objects.filter(select='new')[0]
+	except:
+		new = None
 
 	def get_queryset(self):
 		queryset = self.model.objects.filter(is_published=True,segment=self.new).exclude(description="")
