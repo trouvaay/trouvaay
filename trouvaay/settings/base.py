@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'members',
     'goods',
     'cloudinary',
-#     'debug_toolbar',
+    'debug_toolbar',
     'crispy_forms',
     'stripe',
 )

@@ -1,11 +1,41 @@
 from django.forms import ModelForm
 from members.models import AuthUser
-from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, \
+	SetPasswordForm
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.utils.text import capfirst
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Fieldset, ButtonHolder, Submit, Div, Button
+from crispy_forms.layout import Layout, Field, Fieldset, ButtonHolder, Submit, Div, Button, HTML
+import logging
+
+logger = logging.getLogger(__name__)
+
+class CustomSetPasswordForm(SetPasswordForm):
+	def __init__(self, *args, **kargs):
+		super(CustomSetPasswordForm, self).__init__(*args, **kargs)
+		
+		self.helper = FormHelper()
+		self.helper.form_show_labels = False
+		self.helper.form_show_errors = True
+		self.helper.form_method = 'post'
+# 		self.helper.form_action = 'auth_password_reset'
+		self.helper.form_id = 'form-reset-password'
+
+		self.helper.layout = Layout(
+			Fieldset(
+				'Enter your new password below to reset your password:',
+				Div(
+					Field('new_password1', placeholder='New password'),
+					Field('new_password2', placeholder='New password Confirmation'),
+					Submit('button-reset-password', 'Set password', css_class="btn-primary"),
+					css_class = 'col-xs-10 col-xs-offset-1'
+				)
+			),
+		)
+		
+	class Meta:
+		fields = ('new_password1','new_password2')
 
 class CustomPasswordResetForm(PasswordResetForm):
 	def __init__(self, *args, **kargs):
@@ -15,15 +45,18 @@ class CustomPasswordResetForm(PasswordResetForm):
 		self.helper.form_show_labels = False
 		self.helper.form_show_errors = True
 		self.helper.form_method = 'post'
-		self.helper.form_action = 'password_reset'
+		self.helper.form_action = 'auth_password_reset'
 		self.helper.form_id = 'form-reset-password'
 
 		self.helper.layout = Layout(
 			Fieldset(
 				'Forgot your password?',
-				Div("Enter your email in the form below and we'll send you instructions for creating a new one."),
-				Field('email', placeholder='Email address'),
-				Submit('button-reset-password', 'Reset password', css_class="btn-primary"),
+				Div(
+					HTML("Enter your email in the form below and we'll send you instructions for creating a new one."),
+					Field('email', placeholder='Email address'),
+					Submit('button-reset-password', 'Reset password', css_class="btn-primary"),
+					css_class = 'col-xs-10 col-xs-offset-1'
+				)
 			),
 		)
 		
