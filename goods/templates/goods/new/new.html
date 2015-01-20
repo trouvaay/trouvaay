@@ -1,49 +1,46 @@
 {% extends '_base.html' %}
-{% block beginjs %}
 
-{% endblock beginjs %}
- {% block content %}
-    {% include 'goods/new/_new_pic_tile.html' %}
- {% endblock content %}
- {% block endjs %}
- {% include 'js/addlikeditems.html' %}
+{% block content %}
+{% include 'goods/new/_new_pic_tile.html' %}
+{% endblock content %}
+{% block endjs %}
+{% include 'js/addlikeditems.html' %}
+<script type="text/javascript" 
+	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
+</script>
 <script type="text/javascript">
-	$('#signup').on('click', function () {
-	    	$('#addtocartmodal').modal({"show": true});
-	});
-	var directionsDisplay;
-	var directionsService = new google.maps.DirectionsService();
-
-	function initialize (storelat, storelng, userloc, prodnum) {    
-	    var storepos = new google.maps.LatLng(storelat, storelng);
-	    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
-	    
-		var request = {
-		    origin: userpos,
-		    destination: storepos,
-		    travelMode: google.maps.TravelMode.DRIVING
-		};
-
-		directionsService.route(request, function(result, status) {
-		    if (status == google.maps.DirectionsStatus.OK) {
-		    	console.log(result.routes[0].legs[0].distance.text);
-		     	$(".dist").eq(prodnum).append('('+result.routes[0].legs[0].distance.text+')');
-		    }
-		  });
-		}
 	function  getpoints (userloc) {
-		var products = {{ products_json|safe }};
-		console.log(products);
-		var userloc = {
-			'lat': userloc.coords.latitude,
-			'lng': userloc.coords.longitude,
-		};
-		var distances = []
-		for (i in products) {
-			initialize(products[i].fields.lat, products[i].fields.lng, userloc, i);
-			}	
+	    var products = {{ products_json|safe }};
+	    var userloc = {
+	     'lat': userloc.coords.latitude,
+	     'lng': userloc.coords.longitude,
+	    };
+	      
+      	var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+      	for (i in products) {
+      		console.log(products[i]);
+        	add_dists(userpos,products[i],i);
+      	} 
+    };
+
+	function add_dists(userpos, prod, prodnum) {
+		var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
+		var request = {
+		      origin: userpos,
+		      destination: productpos,
+		      travelMode: google.maps.TravelMode.DRIVING
+		  };
+		var directionsService = new google.maps.DirectionsService();
+		directionsService.route(request, function(result, status) {
+		      if (status == google.maps.DirectionsStatus.OK) {
+		      	var id = "buy_"+prod.pk;
+		      	console.log(id);
+		      	$(id).append(result.routes[0].legs[0].distance.text);
+		      } 
+		    });
 	};
 
 	navigator.geolocation.getCurrentPosition(getpoints);
+	
 </script>
 {% endblock %}
