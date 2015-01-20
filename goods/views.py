@@ -40,7 +40,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/new/new.html'
 	context_object_name = 'products'
 	model = Product
-	try
+	try:
 		new = Segment.objects.filter(select='new')[0]
 	except:
 		new = None
