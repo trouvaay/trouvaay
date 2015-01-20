@@ -1,3 +1,3 @@
 from .staging import *
 
-DEBUG = False
+DEBUG = True
