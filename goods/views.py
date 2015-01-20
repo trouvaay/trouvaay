@@ -59,7 +59,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 
 class VintageView(LoginRequiredMixin, generic.ListView):
 	# TODO: update view to reflect instagrammy feed.  Will mimic DetailView
-	template_name = 'goods/vintage/vintage.html'
+	template_name = 'goods/vintage/vintage2.html'
 	context_object_name = 'products'
 	model = Product
 	vintage = Segment.objects.filter(select='vintage')[0]
