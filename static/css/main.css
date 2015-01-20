@@ -30,7 +30,7 @@ body {
   font-family: 'Quicksand';
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Avenir";
+  font-family: chalkduster;
   /*text-transform: ;*/
 }
 .navbar-default {
@@ -81,7 +81,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   padding-top: 10px;
   font-size: 25px;
   padding-left: 35px;
-  height: 72px;
+  height: 60px;
 }
 .main-footer a {
   color: #7a7a7a;
@@ -96,7 +96,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 1em;
 }
 #logo {
-  /*width: 45%;*/
+  width: 45%;
   /*min-width: 120px;*/
   max-width: 100%;
 }
@@ -3038,6 +3038,9 @@ footer ul li a:hover {
   background-color: #f4f4f4;
   font-family: "Avenir";
 }
+.how-it-works h3 {
+  text-align: center;
+}
 .how-it-works h2 {
   margin-bottom: 60px;
 }
@@ -3056,6 +3059,7 @@ footer ul li a:hover {
 .how-it-works .row-fluid div.main-quote {
   margin-top: 30px;
   margin-bottom: 30px;
+  font-family: chalkduster;
 }
 
 .how-it-works .row-fluid div.main-quote div {
@@ -3117,6 +3121,7 @@ footer ul li a:hover {
   font-weight: bold;
   text-decoration: none;
   color: #7a7a7a;
+  color:rgb(201, 177, 62);
   font-size: 130%;
 }
 .heading.main-quote .subheading {
@@ -3203,7 +3208,7 @@ footer ul li a:hover {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
-  height: 55rem;
+  height: 65rem;
   position: relative;
   width: 100%;
   float: left;
@@ -3228,17 +3233,15 @@ footer ul li a:hover {
   transition: all .4s ease-in-out;
 }
 
-.homepage-slider .slides h2 {
+.homepage-slider .slides h3 {
   position: absolute;
   width: 100%;
-  bottom: 20px;
-  color: #FFF;
+  top: 80px;
+  color: #656161;
   font-weight: bold;
+  font-family: chalkduster;
   padding: 0px 30px;
-  text-align: right;
-
-
-
+  text-align: left;
 }
 #map-canvas {
   height: 30rem;
@@ -3837,7 +3840,7 @@ footer ul li a:hover {
   .main-navigation .navbar-nav > li > a {
     border-top: solid 2px transparent;
     color: #7a7a7a;
-    font-size: 12px;
+    font-size: 13px;
     /*font-weight: bold;*/
     margin-bottom:5px;
   }
@@ -4053,9 +4056,6 @@ footer ul li a:hover {
   .main-navigation .navbar-nav .dropdown-menu > li ul li > ul {
     padding-left: 20px;
   }
-  .heading {
-    line-height: 20px;
-  }
   #mobile-footer {
   padding: 10px;
   position: fixed;
@@ -4085,6 +4085,9 @@ footer ul li a:hover {
   margin-bottom: 10%;
   /*margin-left: 10%;*/
   max-width: 100%;
+  }
+  .homepage-slider h2{
+    font-size: 20px;
   }
   .container {
     padding: 0;
@@ -4226,7 +4229,7 @@ footer ul li a:hover {
   margin: 25% auto;
 }
 #main-menu .col-sm-12.main-navigation li {
-	padding: 6px 0px;
+	padding: 0px 0px;
 }
 #main-menu .col-sm-12.main-navigation.top-row li {
   width: 90px;

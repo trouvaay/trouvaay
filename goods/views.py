@@ -1,5 +1,5 @@
 from django.views import generic
-from goods.models import Product, Category, FurnitureType, Segment
+from goods.models import Product, Category, FurnitureType, Segment, ProductImage
 from members.models import AuthUserActivity
 from django.core.serializers import serialize
 from braces.views import LoginRequiredMixin
@@ -24,22 +24,15 @@ def get_liked_items(user):
 	return liked_ids
 
 
-class HomeView(LoginRequiredMixin, generic.ListView):
+class HomeView(LoginRequiredMixin, generic.TemplateView):
 	template_name = 'goods/home/home.html'
-	context_object_name = 'products'
-	model = Product
-
-	def get_queryset(self):
-		""" Show most recent six unsold items"""
-		#Should limited Query set by featured items
-		queryset = self.model.objects.filter(is_published=True, is_featured=True)[:3]
-		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
-		#JSON sent to client to calc distance from user
-		context['products_json'] = serialize('json', context['products'])
-		context['liked_items'] = get_liked_items(self.request.user)
+		context_product = Product.objects.get(short_name='HomepgFeatured')
+		context_imgs = ProductImage.objects.filter(product=context_product).all()
+		context['vintage'] = context_imgs[0]
+		context['new'] = context_imgs[1]
 		return context
 
 
