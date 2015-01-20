@@ -36,19 +36,6 @@
 				    <div class="row" style="margin-bottom: 8%">
 		              {% include 'goods/_productlabel.html' %}
 				  	</div>
-				  	{% if product.store.is_featured %}
-				  	<div class="row" style="margin-bottom:15px">
-				  		<div class="col-xs-8">
-				  			<b>{{ product.store.retailer }}</b></br>
-				  			{{ product.store.street }}
-				  		</div>
-				  		<div class="col-xs-3">
-				  			<a href="{% url 'goods:popinmap' product.id %}"><button type="button" class="btn btn-default">
-                                {{ 'pop-in' }}
-                            </button></a>
-				  		</div>
-				  	</div>
-				  	{% endif %}
 				  	{% if product.material.all %}
 				  	<div class="row">
 				  	   <div class="col-xs-5 attr-label">

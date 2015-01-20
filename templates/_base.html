@@ -56,38 +56,14 @@
                 </div>
                 <div id="main-menu" class="col-xs-6 right-side">
                     <div class="row">
-                        <div class="col-sm-12 main-navigation top-row">
-                            <ul class="nav navbar-nav navbar-right" style="border:none">
-                                <li class="socialicons">
-                                    <a class="insta-icon" href="http://instagram.com/raredoor/" target="_blank">
-                                        <img src="{% static 'img/socialicons/instagram_gray32.png' %}"/>
-                                    </a>
-                                </li>
-                                <li class="socialicons">
-                                    <a class="insta-icon" href="https://www.facebook.com/RareDoor" target="_blank">
-                                        <img src="{% static 'img/socialicons/facebook_gray32.png' %}"/>
-                                    </a>
-                                </li>
-                                <li class="socialicons">
-                                    <a class="insta-icon" href="https://www.twitter.com/RareDoor" target="_blank">
-                                        <img src="{% static 'img/socialicons/twitter_gray32.png' %}"/>
-                                    </a>
-                                </li>
-				<!--
+                        <div class="col-sm-12 main-navigation bottom-row">
+                            <ul class="nav navbar-nav navbar-right">
                                 <li><div class="cart-info">
                                         <a href="{% url 'members:cart' %}">
                                             <img src="{% static 'img/shopping_cart24.png' %}"/><span class="badge cart-counter">{{ request.user.authusercart_set.first.get_item_count}}</span>
                                         </a>
-                                    </div></li>
-                                <li>
-                                    <a class="btn btn-link" style="padding-top:5px" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}{% endif %}</a>
+                                    </div>
                                 </li>
-				-->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 main-navigation bottom-row">
-                            <ul class="nav navbar-nav navbar-right">
                                 <li><a href="{% url 'goods:vintage' %}">Vintage</a></li>
                                 <li><a href="{% url 'goods:new' %}">New</a></li>
 				<li><a class="btn btn-link" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}Login{% endif %}</a></li>
@@ -122,7 +98,28 @@
             </div>
             <div id="main-footer">
                 <div class="row">
-                    <div class="col-xs-offset-2 col-xs-12 col-sm-2">
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="footer-widget">
+                            <ul class="nav navbar-nav navbar-right" style="border:none">
+                                <li class="socialicons">
+                                    <a class="insta-icon" href="http://instagram.com/raredoor/" target="_blank">
+                                        <img src="{% static 'img/socialicons/instagram_gray32.png' %}"/>
+                                    </a>
+                                </li>
+                                <li class="socialicons">
+                                    <a class="insta-icon" href="https://www.facebook.com/RareDoor" target="_blank">
+                                        <img src="{% static 'img/socialicons/facebook_gray32.png' %}"/>
+                                    </a>
+                                </li>
+                                <li class="socialicons">
+                                    <a class="insta-icon" href="https://www.twitter.com/RareDoor" target="_blank">
+                                        <img src="{% static 'img/socialicons/twitter_gray32.png' %}"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-12 col-sm-2">
                         <div class="footer-widget">
                             <div class="footer-menu">
                                 <h2><a href="{% url 'goods:about' %}">Shipping</a></h2>
@@ -139,7 +136,7 @@
                     <div class="col-xs-offset-0 col-xs-12 col-sm-2">
                         <div class="footer-widget">
                             <div class="footer-menu">
-                                <h2>415.000.000</h2>
+                                <h2>650.603.0386</h2>
                             </div>
                         </div>
                     </div>
