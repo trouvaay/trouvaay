@@ -1027,6 +1027,9 @@ color: #333;
 border-top: solid 1px #e5e5e5;
 margin: 0;
 }
+.attr.return {
+line-height: inherit;
+}
 .attr-label {
 font-size: 14px;
 line-height: 50px;
