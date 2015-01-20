@@ -27,7 +27,7 @@ def get_liked_items(user):
 	liked_ids = [prod.id for prod in liked_list]
 	return liked_ids
 
-class HomeView(LoginRequiredMixin, generic.TemplateView):
+class HomeView(generic.TemplateView):
 	template_name = 'goods/home/home.html'
 
 	def get_context_data(self, **kwargs):
@@ -39,7 +39,7 @@ class HomeView(LoginRequiredMixin, generic.TemplateView):
 		return context
 
 
-class NewView(LoginRequiredMixin, generic.ListView):
+class NewView(generic.ListView):
 	template_name = 'goods/new/new.html'
 	context_object_name = 'products'
 	model = Product
@@ -63,7 +63,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 		return context
 
 
-class VintageView(LoginRequiredMixin, generic.ListView):
+class VintageView(generic.ListView):
 	# TODO: update view to reflect instagrammy feed.  Will mimic DetailView
 	template_name = 'goods/vintage/vintage.html'
 	context_object_name = 'products'
@@ -85,7 +85,7 @@ class VintageView(LoginRequiredMixin, generic.ListView):
 		return context
 
 
-class DetailView(LoginRequiredMixin, generic.DetailView):
+class DetailView(generic.DetailView):
 	template_name = 'goods/detail/detail.html'
 	context_object_name = 'product'
 	model = Product
