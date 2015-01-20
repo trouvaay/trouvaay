@@ -51,6 +51,14 @@ var trouvaay = {
                   $("#mobil-nav").remove();
                 }
         });
+        //Highlights link of current page
+        $(function(){
+		  $('a').each(function() {
+		    if ($(this).prop('href') == window.location.href) {
+		      $(this).addClass('current');
+		    }
+		  });
+		});
 
 		//product-like AJAX post
         $(".btn.btn-default.glyphs").click(function() {
@@ -74,7 +82,7 @@ var trouvaay = {
 	    });
 
         //Addtocart AJAX post
-	    $(".btn.btn-primary.buy").click(function() {
+	    $(".btn.buy").click(function() {
 	    	var id = $(this).attr("id").substring(4);
 	    	var data = {'id': id};
 	   		if ($(this).hasClass("active")) {
@@ -84,6 +92,7 @@ var trouvaay = {
 		    	$("#addtocartmodal").show().delay(2000).fadeOut();
 		    	$.post("{% url 'members:addtocart' %}", data, function(product) {
 		    		$(".badge.cart-counter").html(product.count.toString());
+		    		$(".badge.mobile-cart-counter").html(product.count.toString());
 	    		});
 		    }
 	    })  
@@ -92,6 +101,15 @@ var trouvaay = {
 
 $(document).ready(function() {
     trouvaay.init();
+ //    function() {
+	//   console.log('currentlink script running');
+	//   $('a').each(function() {
+	//     if ($(this).prop('href') == window.location.href) {
+	//       $(this).addClass('current');
+	//     }
+	//   });
+	// }
+
     //Django boilerplat to Auto add csrf token to template for $.POST Ajax
     function getCookie(name) {
             var cookieValue = null;

@@ -1,0 +1,56 @@
+{% extends '_base.html' %}
+{% load staticfiles %}
+{% load cloudinary %}
+
+{% block content %}
+<div class="container-fluid page-quote" id="first-content-after-nav">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="heading main-quote">
+                <h4 class="subheading">These items are truly one of a kind and move fast.</h4> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="main-container vintage">
+        <div class="container detail-margin" id="first-content-after-nav">
+            <div class="row">
+            	{% for product in products %}
+	            	<div class="col-sm-6 col-xs-12" style="text-align:center; padding-bottom: 3rem;">
+	            		<div class="grid-products-wrapper">
+		            		<div class="row">
+								<div class="col-xs-12 col-s-10 product-description">
+							       <div class="heading">{{ product.short_name }}</div></br>
+							    </div>
+							    <div class="col-xs-12 col-s-2 product-description hours"><div class="heading">{{ product.hours_since_add }}hrs</div></div>
+							</div>
+		            		<div class="row">
+		            			<div class="col-xs-12" style="text-align:center">
+								   <div class="grid-product vintage centered-parent">
+								      <div class="centered-child detail-image-large">
+								          {% cloudinary product.productimage_set.first.image width=350 height=400 crop="fit" %}
+								      </div>
+								      <div class="centered-child detail-image-med">
+								          {% cloudinary product.productimage_set.first.image width=400 height=400 crop="fit" %}
+								      </div>
+								      <div class="centered-child detail-image-small">
+								          {% cloudinary product.productimage_set.first.image width=275 height=350 crop="fit" %}
+								      </div>
+								       <a href="{% url 'goods:detail' product.id  %}" class="view-product">
+							            <div class="text">{{ product.description }}</div>
+							            <div class="background"></div>
+								       </a>
+								    </div>
+								</div>
+							</div><!--end image row -->
+						</div><!-- end grid-products-wrapper -->
+					</div>
+				{% endfor %}
+				</div>
+        	</div>
+    </section>
+{% endblock content %}
+{% block endjs %}
+ {% include 'js/addlikeditems.html' %}
+{% endblock %}

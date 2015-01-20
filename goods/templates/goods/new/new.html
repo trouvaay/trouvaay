@@ -3,18 +3,7 @@
 
 {% endblock beginjs %}
  {% block content %}
- 	<div class="container-fluid page-quote" id="first-content-after-nav">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="heading main-quote">
-                <h4 class="subheading">If vintage isn't your thing here's some new items that bring style to your home. Improve your feed by <span style="color:rgb(0,128,183)" class="glyphicon glyphicon-heart" aria-hidden="true"></span> the items you like.</h4> 
-            </div>
-        </div>
-    </div>
-	</div>
-	
     {% include 'goods/new/_new_pic_tile.html' %}
-
  {% endblock content %}
  {% block endjs %}
  {% include 'js/addlikeditems.html' %}

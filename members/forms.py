@@ -71,6 +71,11 @@ class CustomAuthenticationForm(AuthenticationForm):
 		super(CustomAuthenticationForm, self).__init__(*args, **kargs)
 		del self.fields['username']
 		self.fields['password'].widget.attrs['placeholder'] = 'password'
+
+                # Adding classes to fields
+		self.fields['password'].widget.attrs['class'] = 'form-control'
+		self.fields['email'].widget.attrs['class'] = 'form-control'
+
 		UserModel = get_user_model()
 		self.username_field = UserModel._meta.get_field(UserModel.USERNAME_FIELD)
 		if self.fields['email'].label is None:

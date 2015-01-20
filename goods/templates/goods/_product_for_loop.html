@@ -1,11 +1,11 @@
 {% load cloudinary %}
-<div class="col-xs-12 col-sm-6 col-m-4" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
+<div class="col-xs-12 col-sm-6 col-md-4 product" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
     <div class="grid-product centered-parent">
         <div class="centered-child detail-image-large">
                 {% cloudinary product.productimage_set.first.image width=350 height=300 crop="fit" %}
         </div>
         <div class="centered-child detail-image-med">
-                {% cloudinary product.productimage_set.first.image width=300 height=300 crop="fit" %}
+                {% cloudinary product.productimage_set.first.image width=300 height=275 crop="fit" %}
         </div>
         <div class="centered-child detail-image-small">
                 {% cloudinary product.productimage_set.first.image width=275 height=275 crop="fit" %}

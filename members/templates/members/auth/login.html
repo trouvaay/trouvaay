@@ -1,7 +1,7 @@
 {% extends "goods/home/home.html" %}
 {% load crispy_forms_tags %}
 
-{% block content %}
+{% block modal %}
 {{ block.super }}
 
 <!-- Signup modal -->
@@ -57,5 +57,4 @@
 	    	$('#signupmodal').modal({"show": false});
 	    });
 	</script>
-
 {% endblock %}

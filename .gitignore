@@ -6,3 +6,4 @@ latest.dump
 *.log
 *.orig
 dev_settings.py
+trouvaay.json

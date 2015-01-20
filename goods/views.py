@@ -1,15 +1,17 @@
 from django.views import generic
-from goods.models import Product, Category, FurnitureType, Segment
+from goods.models import Product, Category, FurnitureType, Segment, ProductImage
 from members.models import AuthUserActivity
 from django.core.serializers import serialize
 from braces.views import LoginRequiredMixin
 # from goods.forms import CommentForm
 from random import randint
 import logging
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
+
 
 def get_liked_items(user):
 	""" Creates list of user's liked items for json
@@ -17,27 +19,23 @@ def get_liked_items(user):
 	"""
 	if(not user.is_authenticated()):
 		return []
-	useractivity = AuthUserActivity.objects.get(authuser=user)
+
+	useractivity, new = AuthUserActivity.objects.get_or_create(authuser=user)
+	if new:
+		useractivity.save()
 	liked_list = useractivity.saved_items.all()
 	liked_ids = [prod.id for prod in liked_list]
-	print('printing ids',liked_ids)
 	return liked_ids
 
-class HomeView(LoginRequiredMixin, generic.ListView):
+class HomeView(LoginRequiredMixin, generic.TemplateView):
 	template_name = 'goods/home/home.html'
-	context_object_name = 'products'
-	model = Product
-
-	def get_queryset(self):
-		""" Show most recent six unsold items"""
-		queryset = self.model.objects.filter(is_published=True, is_featured=True)
-		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
-		#JSON sent to client to calc distance from user
-		context['products_json'] = serialize('json', context['products'])
-		context['liked_items'] = get_liked_items(self.request.user)
+		context_product = Product.objects.get(short_name='HomepgFeatured')
+		context_imgs = ProductImage.objects.filter(product=context_product).all()
+		context['vintage'] = context_imgs[0]
+		context['new'] = context_imgs[1]
 		return context
 
 
@@ -48,16 +46,15 @@ class NewView(LoginRequiredMixin, generic.ListView):
 	new = Segment.objects.filter(select='new')[0]
 
 	def get_queryset(self):
-		queryset = self.model.objects.filter(is_published=True,segment=self.new)
+		queryset = self.model.objects.filter(is_published=True,segment=self.new).exclude(description="")
 		return queryset
 
 	def get_context_data(self, **kwargs):
 		context = super(NewView, self).get_context_data(**kwargs)
 		#JSON sent to client to calc distance from user
 		context['products_json'] = serialize('json', context['products'])
-
 		for furnituretype in FurnitureType.objects.all():
-			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new)
+			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new).exclude(description="")
 		context['BaseUrl'] = BASE_URL
 		context['liked_items'] = get_liked_items(self.request.user)
 		return context
@@ -65,7 +62,7 @@ class NewView(LoginRequiredMixin, generic.ListView):
 
 class VintageView(LoginRequiredMixin, generic.ListView):
 	# TODO: update view to reflect instagrammy feed.  Will mimic DetailView
-	template_name = 'goods/vintage/vintage.html'
+	template_name = 'goods/vintage/vintage2.html'
 	context_object_name = 'products'
 	model = Product
 	vintage = Segment.objects.filter(select='vintage')[0]
@@ -93,6 +90,7 @@ class DetailView(LoginRequiredMixin, generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(DetailView, self).get_context_data(**kwargs)
 		context['liked_items'] = get_liked_items(self.request.user)
+		context['returns'] = settings.RETURN_POLICY
 		return context
 
 

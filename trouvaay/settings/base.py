@@ -17,8 +17,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xvz6u4qrq5@7z6u2p2n^v+h*k(4_k81lzwb!q+ku)e-p^v%wou'
-GOOG_MAP_KEY = 'AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU'
+SECRET_KEY = ''
+GOOG_MAP_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -122,7 +122,10 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 FEATURE_NAME_BUYANDTRY = "Buy-and-Try"
-
+RETURN_POLICY = {
+    'allowed' : 'Can be returned for Rare Door credit within 14 days',
+    'not_allowed' : 'This is a final sale item'
+}
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
 

@@ -8,7 +8,7 @@ class Retailer(models.Model):
 	legal_name = models.CharField(max_length=255)
 	short_name = models.CharField(max_length=100)
 	organization_type = models.CharField(max_length=20, choices=[('indiv','individual'),('corp.','corporation')])
-	owner = models.ForeignKey(settings.AUTH_USER_MODEL, limit_choices_to={'is_merchant': True})
+	owner = models.ForeignKey(settings.AUTH_USER_MODEL, limit_choices_to={'is_merchant': True}, null=True, blank=True)
 	website = models.URLField(null=True, blank=True)
 
 	def __str__(self):
@@ -45,6 +45,7 @@ class Store(models.Model):
 	description = models.TextField(null=True, blank=True)
 	shipper = models.ManyToManyField(Shipper, null=True, blank=True)
 	is_featured = models.BooleanField(default=False)
+	has_returns = models.BooleanField(default=False)
 
 	class Meta:
 		ordering = ['retailer', 'street']
