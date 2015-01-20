@@ -15,3 +15,19 @@ STATIC_ROOT = 'staticfiles'
 SECRET_KEY = os.getenv('SECRET_KEY', None)
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', None)
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY', None)
+
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'localflavor',
+    'merchants',
+    'members',
+    'goods',
+    'cloudinary',
+    'crispy_forms',
+    'stripe',
+)
