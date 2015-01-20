@@ -147,6 +147,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .main-container.vintage {
   border-bottom: lightgray 1px solid;
+  padding-top: 0;
 }
 
 .top-bar .cart-info .value {
@@ -950,7 +951,6 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   padding: 12px 10%;
   letter-spacing: 2px;
-  line-height: 15px;
   background: #333;
   border: rgb(218,182,97) 2px solid;
   font-size: 12px;
@@ -4048,8 +4048,8 @@ footer ul li a:hover {
     padding-bottom: 5px;
   }
   .product-description.hours .heading {
-    height: 88px;
-    padding-top:25%;
+   /* height: 88px;
+    padding-top:25%;*/
   }
   .main-navigation .navbar-nav {
     border-top: solid 1px #cccccc;
