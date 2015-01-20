@@ -73,7 +73,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = ''
+DATABASES = { }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
