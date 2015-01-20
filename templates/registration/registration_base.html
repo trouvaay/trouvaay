@@ -1,0 +1,10 @@
+{% extends "members/auth/login.html" %}
+{% load crispy_forms_tags %}
+
+{% block modalforms %}
+<div class="form-group col-xs-12 text-center">	
+	<div class="text-center">
+	{% block registration %}{% endblock %}
+	</div>
+</div>
+{% endblock %}

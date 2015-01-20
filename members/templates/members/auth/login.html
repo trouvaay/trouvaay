@@ -1,42 +1,40 @@
 {% extends "goods/home/home.html" %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
-	{{ block.super }}
-	<!-- Login modal -->
-	<div class="modal fade" id="loginmodal">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
-	        <h4> {{ 'Rare Door' }}
-	        <h5 class="modal-title">Welcome! Please login</h5>
-	      </div>
-	      <div class="modal-body">
-	        {% if form.errors %}
-			<p>Your username and password didn't match. Please try again.</p>
-			{% endif %}
-		<form method="post" action="{% url 'members:login' %}">
-			{% csrf_token %}
-			<table>
-			<tr>
-			    <td style="padding-bottom: 20px">{{ form.email }}</td>
-			</tr></br>
-			<tr>
-			    <td>{{ form.password }}</td>
-			</tr>
-			</table>
-	      </div>
-	      <div class="modal-footer">
-	        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-	        <button type="submit" value="login" class="btn btn-primary">Login</button>
-	        <!-- <button type="button" id="signup" value="signup" class="btn btn-primary">Signup</button> -->
-	        <input type="hidden" name="next" value="{{ next }}" />
-	      </div>
-	      </form>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
-	</div><!-- /. end login modal -->
+{{ block.super }}
+
+<!-- Signup modal -->
+<div class="modal fade" id="signup-login-modal">
+	<div class="modal-dialog">
+    	<div class="modal-content col-xs-12">
+    		<div class="modal-body">
+				
+				<!-- this will make sigup and login show side by side -->
+				<div class="row">
+					{% block modalforms %}
+					<!-- Signup -->
+					<div class="form-group col-xs-6 text-center">	
+						<div class="text-center">
+						{% crispy signup_form %}
+						</div>
+					</div>
+					
+					<!-- Login  -->
+					<div class="form-group col-xs-6 text-center">	
+						<div class="text-center">
+						{% crispy login_form %}
+						
+						<div id="div_id_password" class="form-group">
+							<p><a href="{% url "auth_password_reset" %}">Forgot your password?</a></p>							
+						</div>
+					</div>
+					{% endblock %}						
+				</div>
+			</div>
+    	</div><!-- /.modal-content -->
+  	</div><!-- /.modal-dialog -->
+</div><!-- /. end signup modal -->	
 
 {% endblock %}
 {% block endjs %}
@@ -46,7 +44,7 @@
 			// var options = {
 			// 	"show" : true,
 			// };
-			$('#loginmodal').modal({"show": true});
+			$('#signup-login-modal').modal({"show": true});
 		});
 		
 		$('#signup').on('click', function () {
@@ -58,7 +56,6 @@
 	    	$('#loginmodal').modal({"show": true});
 	    	$('#signupmodal').modal({"show": false});
 	    });
-	
 	</script>
 
 {% endblock %}

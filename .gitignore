@@ -4,4 +4,5 @@ trouvaay/include/*
 latest.dump
 *.pyc
 *.log
+*.orig
 dev_settings.py

@@ -1,9 +1,9 @@
 from django.http import JsonResponse
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser, \
-	AuthUserCart, AuthUserOrder, AuthUserOrderItem, AuthUserAddress
+	AuthUserCart, AuthUserOrder, AuthUserOrderItem, AuthUserAddress, RegistrationProfile
 from goods.models import Product
-from members.forms import CustomAuthenticationForm
+from members.forms import CustomAuthenticationForm, RegistrationForm
 from braces.views import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import stripe
@@ -11,6 +11,12 @@ from django.shortcuts import redirect
 from django.conf import settings
 import logging
 from datetime import datetime, timedelta
+from registration.backends.default.views import RegistrationView as BaseRegistrationView
+from registration.backends.default.views import ActivationView as BaseActivationView
+from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth import get_user_model, authenticate, login
+from registration import signals
+from django.contrib.sites.models import RequestSite, Site
 
 logger = logging.getLogger(__name__)
 
@@ -19,20 +25,54 @@ class ClosetView(generic.ListView):
 	context_object_name = 'saved_items'
 	model = AuthUserActivity
 
+class ActivationView(BaseActivationView):
+	
+	def activate(self, request, activation_key):
+		"""Log user in upon successful activation"""
+		activated_user = super(ActivationView, self).activate(self, request, activation_key)
+		login(request, activated_user)
+		return activated_user
+	
 
-# #Needs to be updated implemented with registration/signup modal
-# class SignupView(generic.FormView):
-# 	template_name = 'members/auth/signup.html'
-# 	model = AuthUser
-# 	form_class = CustomAuthenticationForm
+class SignupView(BaseRegistrationView):
 
-# 	def post(self, request, *args, **kwargs):
-# 	    form_class = self.get_form_class()
-# 	    form = self.get_form(form_class)
-# 	    if form.is_valid():
-# 	        return self.form_valid(form)
-# 	    else:
-# 	        return self.form_invalid(form)
+	template_name = 'registration/registration_form.html'
+	form_class = RegistrationForm
+	success_url = reverse_lazy('home')
+
+	
+	def get_context_data(self, **kwargs):
+		context = super(SignupView, self).get_context_data(**kwargs)
+		context['signup_form'] = RegistrationForm()
+		context['login_form'] = RegistrationForm()
+
+		# TODO: do not add 'site_name' to context
+		# once the 'sites' are setup in settings
+		context['site_name'] = settings.SITE_NAME
+		return context
+
+	def register(self, request, **cleaned_data):
+		email, password = cleaned_data['email'], cleaned_data['password']
+# 		get_user_model().objects.create_user(email, password)
+# 		new_user = authenticate(username=email, password=password)
+# 		login(request, new_user)
+# 		signals.user_registered.send(sender=self.__class__,
+# 									 user=new_user,
+# 									 request=request)
+		
+		if Site._meta.installed:
+			site = Site.objects.get_current()
+		else:
+			site = RequestSite(request)
+		new_user = RegistrationProfile.objects.create_inactive_user(
+			email, password, site,
+			send_email=self.SEND_ACTIVATION_EMAIL,
+			request=request,
+		)
+		signals.user_registered.send(sender=self.__class__,
+									 user=new_user,
+									 request=request)		
+		return new_user
 
 @login_required
 def ProductLike(request):
@@ -110,10 +150,6 @@ class CartCheckoutCallbackView(LoginRequiredMixin, generic.DetailView):
 
 	def get_object(self, queryset=None):
 		return AuthUserCart.objects.get(authuser=self.request.user)
-
-	def get_context_data(self, **kwargs):
-		context = super(CartView, self).get_context_data(**kwargs)
-		return context
 
 	def post(self, request, *args, **kwargs):
 		try:
