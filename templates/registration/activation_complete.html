@@ -1,0 +1,8 @@
+{% extends "registration/registration_base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block registration %}
+	<h1>Thanks, activation complete!</h1>
+	<a class="btn btn-success" href="{% url "goods:home" %}">Look around</a>
+{% endblock %}

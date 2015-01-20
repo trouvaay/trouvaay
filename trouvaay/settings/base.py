@@ -33,12 +33,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'registration',
     'localflavor',
     'merchants',
     'members',
     'goods',
     'cloudinary',
-    'debug_toolbar',
+#     'debug_toolbar',
     'crispy_forms',
     'stripe',
 )
@@ -47,6 +48,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -197,10 +199,24 @@ LOGGING = {
     }
 }
 
+# registration settings
+ACCOUNT_ACTIVATION_DAYS = 30
+REGISTRATION_AUTO_LOGIN = True
+
 STRIPE_CAPTURE_TRANSACTION_TIME = 48  # hours
 
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''
+
+# email settings are another good candidate to have 
+# each developer define in their own dev_settings.py
+# here are what could be production settings
+DEFAULT_FROM_EMAIL = '' # e.g. 'support@raredoor.com'
+EMAIL_HOST = '' # 'smtp.gmail.com'
+EMAIL_PORT =  '' # 587 - for gmail
+EMAIL_HOST_USER = '' # e.g. 'support@raredoor.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True # google requires True
 
 PROJECT_ENV = os.getenv('PROJECT_ENV', None)
 if(PROJECT_ENV == 'dev'):

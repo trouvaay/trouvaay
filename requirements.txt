@@ -9,6 +9,7 @@ django-braces==1.4.0
 django-crispy-forms==1.4.0
 django-debug-toolbar==1.2.2
 django-localflavor==1.1
+django-registration-redux==1.1
 django-toolbelt==0.0.1
 djorm-pgarray==1.2
 gnureadline==6.3.3

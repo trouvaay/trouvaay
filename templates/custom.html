@@ -70,7 +70,15 @@ var trouvaay = {
 		    else {
 		    	$(this).addClass("active");
 		    	}
-	    	$.post("{% url 'members:like' %}", data);
+	    	$.post(
+	    		"{% url 'members:like' %}", 
+	    		data,
+	    		function(response){
+	    			if(response == 'loginrequired'){
+	    				window.location.replace("{% url "members:login" %}");
+	    			}
+	    		}
+	    	);
 	    });
 
         //Addtocart AJAX post

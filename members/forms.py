@@ -1,14 +1,71 @@
 from django.forms import ModelForm
 from members.models import AuthUser
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, \
+	SetPasswordForm
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.utils.text import capfirst
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field, Fieldset, ButtonHolder, Submit, Div, Button, HTML
+import logging
+
+logger = logging.getLogger(__name__)
+
+class CustomSetPasswordForm(SetPasswordForm):
+	def __init__(self, *args, **kargs):
+		super(CustomSetPasswordForm, self).__init__(*args, **kargs)
+		
+		self.helper = FormHelper()
+		self.helper.form_show_labels = False
+		self.helper.form_show_errors = True
+		self.helper.form_method = 'post'
+# 		self.helper.form_action = 'auth_password_reset'
+		self.helper.form_id = 'form-reset-password'
+
+		self.helper.layout = Layout(
+			Fieldset(
+				'Enter your new password below to reset your password:',
+				Div(
+					Field('new_password1', placeholder='New password'),
+					Field('new_password2', placeholder='New password Confirmation'),
+					Submit('button-reset-password', 'Set password', css_class="btn-primary"),
+					css_class = 'col-xs-10 col-xs-offset-1'
+				)
+			),
+		)
+		
+	class Meta:
+		fields = ('new_password1','new_password2')
+
+class CustomPasswordResetForm(PasswordResetForm):
+	def __init__(self, *args, **kargs):
+		super(CustomPasswordResetForm, self).__init__(*args, **kargs)
+		
+		self.helper = FormHelper()
+		self.helper.form_show_labels = False
+		self.helper.form_show_errors = True
+		self.helper.form_method = 'post'
+		self.helper.form_action = 'auth_password_reset'
+		self.helper.form_id = 'form-reset-password'
+
+		self.helper.layout = Layout(
+			Fieldset(
+				'Forgot your password?',
+				Div(
+					HTML("Enter your email in the form below and we'll send you instructions for creating a new one."),
+					Field('email', placeholder='Email address'),
+					Submit('button-reset-password', 'Reset password', css_class="btn-primary"),
+					css_class = 'col-xs-10 col-xs-offset-1'
+				)
+			),
+		)
+		
+	class Meta:
+		fields = ('email',)
 
 class CustomAuthenticationForm(AuthenticationForm):
 
-	email = forms.EmailField(max_length=254, widget=forms.TextInput(attrs={'placeholder':'email'}))
-	
+	email = forms.EmailField(max_length=254)
 
 	def __init__(self, *args, **kargs):
 		super(CustomAuthenticationForm, self).__init__(*args, **kargs)
@@ -24,6 +81,22 @@ class CustomAuthenticationForm(AuthenticationForm):
 		if self.fields['email'].label is None:
 			self.fields['email'].label = capfirst(self.username_field.verbose_name)
 
+		self.helper = FormHelper()
+		self.helper.form_show_labels = False
+		self.helper.form_show_errors = True
+		self.helper.form_method = 'post'
+		self.helper.form_action = 'members:login'
+		self.helper.form_id = 'form-login'
+
+		self.helper.layout = Layout(
+			Fieldset(
+				'Already a member? Log in',
+				Field('email', placeholder='Email address'),
+				Field('password', placeholder='Password'),
+				Submit('button-login', 'Step Inside', css_class="btn-default"),
+			),
+								
+		)
 
 	def clean(self):
 		email = self.cleaned_data.get('email')
@@ -42,3 +115,56 @@ class CustomAuthenticationForm(AuthenticationForm):
 			self.confirm_login_allowed(self.user_cache)
 
 		return self.cleaned_data
+
+class RegistrationForm(forms.ModelForm):
+
+	email = forms.EmailField(widget=forms.TextInput, required=True)
+	password = forms.CharField(widget=forms.PasswordInput, required=True)
+	password2 = forms.CharField(widget=forms.PasswordInput, required=True)
+
+	def __init__(self, *args, **kwargs):
+		super(RegistrationForm, self).__init__(*args, **kwargs)
+
+		self.helper = FormHelper()
+		self.helper.form_show_labels = False
+		self.helper.form_show_errors = True
+		self.helper.form_method = 'post'
+		self.helper.form_action = 'registration_register'
+		self.helper.form_id = 'form-signup'
+
+		self.helper.layout = Layout(
+			Fieldset(
+				'Create an account',
+				Field('email', placeholder='Email address'),
+				Field('password', placeholder='Password'),
+				Field('password2', placeholder='Confirm Password'),
+				Submit('submit', 'Submit', css_class="btn-primary"),
+			),
+		)
+
+	def clean(self):
+		cleaned_data = super(RegistrationForm, self).clean()
+		
+		password = cleaned_data.get("password")
+		password2 = cleaned_data.get("password")
+
+		if password != password2:
+			msg = "Your passwords should match."
+			self.add_error('password', msg)
+			self.add_error('password2', msg)		
+		return cleaned_data
+
+	def save(self, commit=True):
+
+		print 'in form.save()'
+
+		user = super(RegistrationForm, self).save(commit=False)
+		user.set_password(self.cleaned_data['password'])
+		if commit:
+			user.save()
+		return user
+
+	class Meta:
+		model = get_user_model()
+		fields = ('email', 'password', 'password2')
+
