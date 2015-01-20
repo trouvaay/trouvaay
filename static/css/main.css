@@ -1490,6 +1490,7 @@ text-align: left;
   height: 450px;
   position: relative;
   width: 100%;
+  border: lightgray 1px solid;
   /*margin: 2rem;*/
   text-align: center;
 }
@@ -2868,10 +2869,9 @@ form .form-checkbox-wrap .checkbox-label {
 .main-footer {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: #333;
   border-top: black solid 2.5px;
   bottom: 0;
-
 }
 .main-footer > .container {
   border-top: black;
@@ -3111,7 +3111,7 @@ footer ul li a:hover {
   
 }
 #first-content-after-nav {
-  padding-top: 75px;
+  padding-top: 65px;
 }
 .homepage-quote .text,
 .hp-tabs .text {
@@ -4008,7 +4008,7 @@ footer ul li a:hover {
     display: inline-block;
   }
   .icon-bar {
-    background: rgb(0,128,183);
+    background: rgb(218,182,97);
   }
   .navbar-toggle {
    /* border: 1px solid #7a7a7a;*/
@@ -4039,6 +4039,10 @@ footer ul li a:hover {
   .secondary-navigation > li > a {
     padding-top: 5px;
     padding-bottom: 5px;
+  }
+  .product-description.hours .heading {
+    height: 88px;
+    padding-top:25%;
   }
   .main-navigation .navbar-nav {
     border-top: solid 1px #cccccc;
@@ -4092,8 +4096,8 @@ footer ul li a:hover {
   position: fixed;
   z-index: 100;
   bottom: 0px;
-  background: #DAD8D8;
-  border-top: rgb(0,128,183) solid 4px;
+  background: #333;
+  border-top: rgb(218,182,97) solid 4px;
   width: 100%;
   display: block;
   }
@@ -4160,6 +4164,9 @@ footer ul li a:hover {
     margin: 0 auto 10px;
     width: 100%;
   }
+  .grid-product.vintage {
+    border: none
+  }
   .col-sm-7.product-description {
     width: 100%;
   }
@@ -4184,7 +4191,7 @@ footer ul li a:hover {
   }
   .top-bar {
     padding: 2px 5px;
-    border-bottom: 4px rgb(0,128,183) solid;
+    border-bottom: 4px rgb(218,182,97) solid;
   }
   .page-quote {
     /*margin-top: 50px;*/
