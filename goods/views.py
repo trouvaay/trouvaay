@@ -5,7 +5,9 @@ from django.core.serializers import serialize
 from braces.views import LoginRequiredMixin
 # from goods.forms import CommentForm
 from random import randint
+import logging
 
+logger = logging.getLogger(__name__)
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
@@ -13,13 +15,13 @@ def get_liked_items(user):
 	""" Creates list of user's liked items for json
 	Obj passed to addlikehearts js script
 	"""
-
+	if(not user.is_authenticated()):
+		return []
 	useractivity = AuthUserActivity.objects.get(authuser=user)
 	liked_list = useractivity.saved_items.all()
 	liked_ids = [prod.id for prod in liked_list]
 	print('printing ids',liked_ids)
 	return liked_ids
-
 
 class HomeView(LoginRequiredMixin, generic.ListView):
 	template_name = 'goods/home/home.html'

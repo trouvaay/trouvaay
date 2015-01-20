@@ -53,13 +53,6 @@ class SignupView(BaseRegistrationView):
 
 	def register(self, request, **cleaned_data):
 		email, password = cleaned_data['email'], cleaned_data['password']
-# 		get_user_model().objects.create_user(email, password)
-# 		new_user = authenticate(username=email, password=password)
-# 		login(request, new_user)
-# 		signals.user_registered.send(sender=self.__class__,
-# 									 user=new_user,
-# 									 request=request)
-		
 		if Site._meta.installed:
 			site = Site.objects.get_current()
 		else:
@@ -74,12 +67,18 @@ class SignupView(BaseRegistrationView):
 									 request=request)		
 		return new_user
 
-@login_required
+
 def ProductLike(request):
 	"""Adds product instance to 'saved_items' field of 
 		AuthUserActivity model
 	"""
-	#
+	
+	# because this is called via AJAX, the @login_required decorator
+	# is not very useful, so instead we have to manually check if
+	# user is authenticated or not and return appropariate status in json
+	if(not request.user.is_authenticated()):
+		return JsonResponse('loginrequired', safe=False)
+	
 	if request.method == "POST":
 		userinstance = request.user
 		product = Product.objects.get(pk=int(request.POST['id']))
