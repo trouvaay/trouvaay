@@ -22,19 +22,3 @@ EMAIL_HOST = os.getenv('EMAIL_HOST', None) # 'smtp.gmail.com'
 EMAIL_PORT =  os.getenv('EMAIL_PORT', None) # 587 - for gmail
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', None) # e.g. 'support@raredoor.com'
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', None)
-
-INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'localflavor',
-    'merchants',
-    'members',
-    'goods',
-    'cloudinary',
-    'crispy_forms',
-    'stripe',
-)
