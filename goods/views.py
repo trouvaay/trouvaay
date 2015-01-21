@@ -49,7 +49,7 @@ class NewView(generic.ListView):
 		new = None
 
 	def get_queryset(self):
-		queryset = self.model.objects.filter(is_published=True,segment=self.new).exclude(description="")
+		queryset = self.model.objects.filter(is_published=True)
 		return queryset
 
 	def get_context_data(self, **kwargs):
