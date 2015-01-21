@@ -326,6 +326,9 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   margin-bottom: 25px;
   letter-spacing: 1.5px;
 }
+.mobile-vintage-details {
+  display: none;
+}
 .text-editor h2 {
   width: 100%;
   font-family: "Quicksand", Arial, sans-serif;
@@ -949,6 +952,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   float: left;
   color: rgb(218,182,97);
   width: 100%;
+  line-height: 15px;
   padding: 12px 10%;
   letter-spacing: 2px;
   background: #333;
@@ -4108,6 +4112,9 @@ footer ul li a:hover {
   width: 100%;
   display: block;
   }
+  .mobile-vintage-details {
+  display: block;
+  }
   #mobile-footer a {
     color: white;
     font-weight: 500;
@@ -4245,6 +4252,12 @@ footer ul li a:hover {
   }
   .hp-tabs .tab-content {
     margin-top: 0;
+  }
+  .grid-product.vintage {
+    height: 300px;
+  }
+  .no-mobile {
+    display:none;
   }
 }
 
