@@ -34,73 +34,104 @@
 				       </div>
 				    </div>
 				    <div class="row" style="margin-bottom: 8%">
-		              {% include 'goods/_productlabel.html' %}
+		              <div>
+				        <div class="col-xs-9 pic-detail-home">
+				                {% if product.is_sold %}
+				                    <span class="sold">{{ 'Sold' }}</span>
+				                {% elif product.current_price %}
+				                    {% if product.has_trial %}
+				                        {% if product.store.is_featured %}
+				                            <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+				                                {{ 'buy&try  (10.0mi)' }}
+				                            </button>
+				                        {% else %}
+				                            <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+				                                {{ 'buy&try  (10.0mi)' }}
+				                            </button>
+				                        {% endif %}
+				                    {% else %}
+				                        <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
+				                            {{ 'buy' }} 
+				                        </button>
+				                    {% endif %}
+				                {% else %}
+				                    <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
+				                    Request Price
+				                    </button>
+				                {% endif %}
+				        </div>
+				        <div class="col-xs-3 pull-right text-right">
+				            <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
+				                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+				            </button>
+				        </div>
+				    </div>
 				  	</div>
 				  	{% if product.material.all %}
 				  	<div class="row">
-				  	   <div class="col-xs-5 attr-label">
+				  	   <div class="col-xs-4 attr-label">
 				           Made of
 				       </div>
-				       <div class="col-xs-7 attr">
+				       <div class="col-xs-8 attr">
 				       	{% for material in product.material.all %}  {{ material }}{% endfor %}
 				       </div>
 				    </div>
 				    {% else %}{% endif %}
 			        {% if product.has_dimensions %}	
 				    <div class="row">
-				  	   <div class="col-xs-5 attr-label">
+				  	   <div class="col-xs-4 attr-label">
 				        Dimensions
 				       </div>
-				       <div class="col-xs-7 attr">
+				       <div class="col-xs-8 attr">
 				        {{ product.get_dimension_str }}
 				        </div>
 				    </div>
 				    {% else %}{% endif %}
 				    {% if product.seat_height %}
 				    <div class="row">
-				  	   <div class="col-xs-5 attr-label">
+				  	   <div class="col-xs-4 attr-label">
 				       Seat Height
 				       </div>
-				       <div class="col-xs-7 attr">
+				       <div class="col-xs-8 attr">
 		               {{ product.seat_height }}
 				       </div>
 				    </div>
 			       {% else %}{% endif %}
 			       {% if product.diameter %}
 				    <div class="row">
-				  	   <div class="col-xs-5 attr-label">
+				  	   <div class="col-xs-4 attr-label">
 				        Diameter
 				        </div>
-				       <div class="col-xs-7 attr">
+				       <div class="col-xs-8 attr">
 				        {{ product.diameter }}
 				       </div>
 				    </div>
 			       {% else %}{% endif %}
 			       {% if product.bed_size %}
 				    <div class="row">
-				  	   <div class="col-xs-5 attr-label">
+				  	   <div class="col-xs-4 attr-label">
 				       Bed Size
 				       </div>
-				       <div class="col-xs-7 attr">  
+				       <div class="col-xs-8 attr">  
 		               {{ product.bed_size }}
 				       </div>
 				    </div>
 			       {% else %}{% endif %}
 			       {% if product.weight %}
 				    <div class="row">
-				  	   <div class="col-xs-5 attr-label">
+				  	   <div class="col-xs-4 attr-label">
 			           Weight
 			           </div>
-				       <div class="col-xs-7 attr">
+				       <div class="col-xs-8 attr">
 			           {{ product.weight }}
 			           </div>
 				    </div>
 				    {% else %}{% endif %}
 				    <div class="row">
-				  	   <div class="col-xs-5 attr-label">
+				  	   <div class="col-xs-4 attr-label">
 			           Returns
 			           </div>
-				       <div class="col-xs-7 attr">
+				       <div class="col-xs-8 attr return">
 			           	{% if product.has_returns %}
 			           		{{ returns.allowed }}
 			           	{% else %}

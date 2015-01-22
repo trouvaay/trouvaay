@@ -73,13 +73,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'trouvaay_dev',
-        'USER': 'blakeadams'
-    }
-}
+DATABASES = { }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -123,8 +117,8 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 FEATURE_NAME_BUYANDTRY = "Buy-and-Try"
 RETURN_POLICY = {
-    'allowed' : 'Can be returned for Rare Door credit within 14 days',
-    'not_allowed' : 'This is a final sale item'
+    'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
+    'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
 }
 SITE_ID = 1
 SITE_NAME = 'Rare Door'

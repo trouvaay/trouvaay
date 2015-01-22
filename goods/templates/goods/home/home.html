@@ -22,7 +22,7 @@
     <div class="row-fluid">
 	<h3>How it works</h3>
 	<div class="col-md-4 statement"><img src="{% static 'img/magnifying_glass.svg' %}">New or vintage,</br> we do the hunting for you, finding the hidden gems in local stores</div>
-	<div class="col-md-4 statement"><img src="{% static 'img/delivery_truck.svg' %} " height="70">If you’re unsure about your purchase, our <span><b>buy&try</b></span> option gives you 48 hrs to go in-store and check out an item in person.</div>
+	<div class="col-md-4 statement"><img src="{% static 'img/store.svg' %} " height="70">If you’re unsure about your purchase, our <span><b>buy&try</b></span> option gives you 48 hrs to go in-store and check out an item in person.</div>
 	<div class="col-md-4 statement"><img src="{% static 'img/calendar.svg' %}">New pieces posted daily. Check in before they’re gone.</div>
         <div class="col-sm-12">
             <div class="heading main-quote">
@@ -43,7 +43,7 @@
         <div class="row-fluid">
                 
             <div class="col-xs-12 col-sm-6 col-m-4" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
-                <h4 style="text-align: center; font-family:'avenir'">Shop new trendsetting furniture</h4>
+                <h4 style="text-align: center; font-family:'avenir'">Shop new furniture</h4>
                 <div class="grid-product centered-parent">
                     <div class="centered-child detail-image-large">
                             {% cloudinary new.image width=350 height=350 crop="fit" %}
@@ -62,7 +62,7 @@
             </div>
             
             <div class="col-xs-12 col-sm-6 col-m-4" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
-                <h4 style="text-align: center; font-family:'avenir'">Shop one of a kind, pre-loved items</h4>    
+                <h4 style="text-align: center; font-family:'avenir'">Shop pre-loved items</h4>    
                 <div class="grid-product centered-parent">
                     <div class="centered-child detail-image-large">
                             {% cloudinary vintage.image width=350 height=350 crop="fit" %}
@@ -83,39 +83,5 @@
       </div>
     </div>
 {% endblock content %}
-{% block endjs %}{% include 'js/addlikeditems.html' %}{% endblock endjs %}
-<!--<script type="text/javascript">
-          //add 'active' class to any heart of products user has liked
+{% block endjs %}{% endblock endjs %}
 
-	function  getpoints (userloc) {
-    var products = {{ products_json|safe }};
-    var userloc = {
-     // 'lat': userloc.coords.latitude,
-     // 'lng': userloc.coords.longitude,
-     'lat': 37.798530,
-    'lng': -122.417966,
-    };
-      
-      var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
-      initializemap(products, userloc);
-      for (i in products) {
-        add_dists(userpos,products[i],i);
-      } 
-    };
-
-  function add_dists(userpos, prod, prodnum) {
-    var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
-    var request = {
-          origin: userpos,
-          destination: productpos,
-          travelMode: google.maps.TravelMode.DRIVING
-      };
-    var directionsService = new google.maps.DirectionsService();
-    directionsService.route(request, function(result, status) {
-          if (status == google.maps.DirectionsStatus.OK) {
-          }
-          $(".dist").eq(prodnum).append('</br>('+result.routes[0].legs[0].distance.text+')');
-        });
-  };
-	navigator.geolocation.getCurrentPosition(getpoints);
-</script>-->

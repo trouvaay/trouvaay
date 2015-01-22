@@ -2,6 +2,12 @@ from django.conf.urls import patterns, include, url
 from members import views
 from members.forms import CustomAuthenticationForm, RegistrationForm
 
+from goods.models import Product, ProductImage
+context_product = Product.objects.get(short_name='HomepgFeatured')
+context_imgs = ProductImage.objects.filter(product=context_product).all()
+vintage = context_imgs[0]
+new = context_imgs[1]
+
 
 urlpatterns = patterns('',
     url(r'^account/(?P<pk>\d+)$', views.ClosetView.as_view(), name='closet'),
