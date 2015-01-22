@@ -111,7 +111,7 @@ class Product(models.Model):
 	is_featured = models.BooleanField(default=False)
 	lat = models.FloatField(null=True, blank=True)
 	lng = models.FloatField(null=True, blank=True)
-	slug = models.SlugField()
+	slug = models.SlugField(unique=True)
 
 
 	class Meta:
