@@ -38,7 +38,7 @@
 								          {% cloudinary product.productimage_set.first.image width=275 height=275 crop="fit" %}
 								      </div>
 								       <a href="{% url 'goods:detail' product.id  %}" class="view-product no-mobile">
-							            <div class="text">{{ product.description }}</div>
+							            <div class="text"><span style="color:rgb(218,182,97)">View Product</span></br>{{ product.description }}</div>
 							            <div class="background"></div>
 								       </a>
 								    </div>
