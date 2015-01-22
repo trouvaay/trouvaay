@@ -3,7 +3,10 @@ from helper import AbstractImageModel
 from math import acos, cos, radians, sin
 from django.utils import timezone
 from django.db.models.signals import post_save, m2m_changed
-
+import itertools
+from django.utils.text import slugify
+from django.db.models import F
+from django.utils.encoding import smart_text
 
 class Segment(models.Model):
 	select = models.CharField(unique=True, max_length=55, default='new', null=True, blank=True)	
@@ -108,6 +111,8 @@ class Product(models.Model):
 	is_featured = models.BooleanField(default=False)
 	lat = models.FloatField(null=True, blank=True)
 	lng = models.FloatField(null=True, blank=True)
+	slug = models.SlugField()
+
 
 	class Meta:
 		ordering = ['-pub_date']
@@ -120,6 +125,13 @@ class Product(models.Model):
 		self.lng = self.store.lng
 		if self.is_published == True and not self.pub_date:
 			self.pub_date = timezone.now()
+
+		self.slug = slugify(self.short_name)
+		for x in itertools.count(1):
+			if not Product.objects.filter(slug=self.slug).exists():
+				break
+			self.slug = '%s-%d' % (orig, x)
+
 		super(Product, self).save(*args, **kwargs)
 		
 	def hours_since_add(self):
