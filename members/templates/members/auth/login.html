@@ -53,6 +53,10 @@ $(document).ready(function () {
           	window.location.href = "http://stackoverflow.com";
 		    }
 		});
+		
+		$('#signup-login-modal').on('hidden.bs.modal', function () {
+			window.location.replace("{% url "goods:home" %}");
+		})
 
 });
 
