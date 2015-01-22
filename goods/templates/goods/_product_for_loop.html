@@ -10,7 +10,7 @@
         <div class="centered-child detail-image-small">
                 {% cloudinary product.productimage_set.first.image width=275 height=275 crop="fit" %}
         </div>
-        <a href="{% url 'goods:detail' product.id  %}" class="view-product">
+        <a href="{% url 'goods:detail' product.slug  %}" class="view-product">
             <div class="text">View product</div>
             <div class="background"></div>
         </a>

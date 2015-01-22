@@ -120,6 +120,9 @@ class Product(models.Model):
 	def __str__(self):
 		return self.short_name
 
+	def get_absolute_url(self):
+		return self.slug
+
 	def save(self, *args, **kwargs):
 		self.lat = self.store.lat
 		self.lng = self.store.lng
