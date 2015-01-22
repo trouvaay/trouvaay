@@ -18,6 +18,7 @@ from django.contrib.auth import get_user_model, authenticate, login
 from registration import signals
 from django.contrib.sites.models import RequestSite, Site
 
+
 logger = logging.getLogger(__name__)
 
 class ClosetView(generic.ListView):
@@ -40,7 +41,6 @@ class SignupView(BaseRegistrationView):
 	form_class = RegistrationForm
 	success_url = reverse_lazy('home')
 
-	
 	def get_context_data(self, **kwargs):
 		context = super(SignupView, self).get_context_data(**kwargs)
 		context['signup_form'] = RegistrationForm()

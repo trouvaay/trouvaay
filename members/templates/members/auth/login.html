@@ -47,6 +47,10 @@ $(document).ready(function () {
 		// };
 		$('#signup-login-modal').modal({"show": true});
 		});
+		
+		$('#signup-login-modal').on('hidden.bs.modal', function () {
+			window.location.replace("{% url "goods:home" %}");
+		})
 
 $('#signup').on('click', function () {
 		$('#signupmodal').modal({"show": true});
