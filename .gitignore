@@ -2,7 +2,7 @@ trouvaay/lib/*
 trouvaay/bin/*
 trouvaay/include/*
 latest.dump
-#*.pyc
+*.pyc
 *.log
 *.orig
 dev_settings.py
