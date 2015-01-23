@@ -76,7 +76,6 @@ class Material(models.Model):
 
 
 class Product(models.Model):
-<<<<<<< HEAD
     sku = models.CharField(max_length=25, null=True, blank=True)
     short_name = models.CharField(max_length=50)
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
