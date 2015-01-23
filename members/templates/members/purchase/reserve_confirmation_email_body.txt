@@ -1,0 +1,14 @@
+Thank you for your reservation.  
+
+Your {{ product.name }} is available at {{ product.store.retailer.short_name }} located at:
+
+{{ product.store.street }}{% if product.store.street2 %}
+{{ product.store.street2 }}
+{% endif %}{{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
+
+Please visit the store to pick up the item.
+
+Your card will not be charged until {{ capture_date }}.
+
+Sincerely,
+{{ site.name }} Support Team
