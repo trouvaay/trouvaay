@@ -135,6 +135,9 @@ class Product(models.Model):
             self.slug = '%s-%d' % (orig, x)
 
         super(Product, self).save(*args, **kwargs)
+
+    def get_price_in_cents(self):
+        return int(self.current_price * 100)
         
     def hours_since_add(self):
         delta = timezone.now() - self.pub_date

@@ -1,7 +1,10 @@
 #!/usr/bin/python
 import requests
+from django.core.mail import EmailMultiAlternatives
 from django.db import models
 from django.conf import settings
+from django.contrib.sites.models import RequestSite, Site
+from django.template.loader import render_to_string
 import cloudinary
 from cloudinary.models import CloudinaryField
 
@@ -14,60 +17,85 @@ cloudinary.config(
 
 
 class AbstractImageModel(models.Model):
-    """Abstract image model for ProductIMage and RetailerIMage models.
-    Uses Cloudinary for image rendering
-    """
-    # main image will be primary/1st displayed to user
-    is_main = models.BooleanField(default=False)
-    image = CloudinaryField('image')
+	"""Abstract image model for ProductIMage and RetailerIMage models.
+	Uses Cloudinary for image rendering
+	"""
+	#main image will be primary/1st displayed to user
+	is_main = models.BooleanField(default=False)
+	image = CloudinaryField('image')
+	
+	class Meta:
+		abstract = True
+		#primarily used in ProductImage model in goods app
+		app_label = 'goods'
 
-    class Meta:
-        abstract = True
-        # primarily used in ProductImage model in goods app
-        app_label = 'goods'
+def MakeSlug(string,spaceChar='+',Maxlen=None):
+	"""for use in GeoCode fct below"""
+	stringlst = string.split(" ")
+	newStr =""
+	for word in stringlst:
+		newStr+=(word+spaceChar)		
+	return newStr[:-1][:Maxlen]
 
+def send_email_from_template(to_email, context, subject_template, plain_text_body_template, html_body_template=None):
+	"""Creates email from subject and body templates and sends message to the user
+	
+	to_email - recipient email 
+	context - dictionary passed to all the templates
+	subject_template - template that will be used to generate message subject
+	plain_text_body_template - template that will be used to generate plain text message body
+	html_body_template - template that will be used to generate html message body
+	"""
+	
+	subject = render_to_string(subject_template, context)
+	subject = ''.join(subject.splitlines()) # remove new lines from subject
+	
+	message_txt = render_to_string(plain_text_body_template, context)
+	email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL, [to_email])
+	
+	if(html_body_template):
+		message_html = render_to_string(html_body_template, context)
+		email_message.attach_alternative(message_html, 'text/html')
+	email_message.send()
 
-def MakeSlug(string, spaceChar='+', Maxlen=None):
-    """for use in GeoCode fct below"""
-    stringlst = string.split(" ")
-    newStr = ""
-    for word in stringlst:
-        newStr += (word + spaceChar)
-    return newStr[:-1][:Maxlen]
-
+def get_site(request):
+	if Site._meta.installed:
+		site = Site.objects.get_current()
+	else:
+		site = RequestSite(request)	
+	return site
 
 def GeoCode(street, city, state, zipcd, street2=None):
-    """Used to fetch lat/lng coords from google api
+	"""Used to fetch lat/lng coords from google api
 
-    """
-
-    base_url = "https://maps.googleapis.com/maps/api/geocode/json?"
-    zipcd = str(zipcd)
-
-    if street2:
-        address = (street+street2+city+state+zipcd)
-    else:
-        address = (street+city+state+zipcd)
-
-    # address slug
-    geo_str = MakeSlug(address)
-    # TODO: convert to google API key to evrion var
-    key = settings.GOOG_MAP_KEY
-    final_url = base_url+"sensor=false"+"&address="+geo_str+"&key="+key
-    print final_url
-    try:
-        r = requests.get(final_url)
-        location_object = r.json()
-        num_results = len(location_object["results"])
-        # if response is 200 status and they arent too many results
-        if location_object['status'] == "OK" and num_results <= 4:
-            lat = location_object["results"][0]["geometry"]["location"]["lat"]
-            lng = location_object["results"][0]["geometry"]["location"]["lng"]
-            return(lat, lng)
-        else:
-            return(None, None)
-    except:
-        return(None, None)
+	"""
+	
+	base_url = "https://maps.googleapis.com/maps/api/geocode/json?"
+	zipcd = str(zipcd)
+	
+	if street2:
+		address = (street+street2+city+state+zipcd)
+	else:
+		address = (street+city+state+zipcd)
+	
+	# address slug
+	geo_str = MakeSlug(address)
+	#TODO: convert to google API key to evrion var 
+	key = settings.GOOG_MAP_KEY
+	final_url = base_url+"sensor=false"+"&address="+address+"&key="+key	
+	try:
+		r = requests.get(final_url) 
+		location_object =  r.json()
+		num_results = len(location_object["results"])
+		# if response is 200 status and they arent too many results	   
+		if location_object['status'] == "OK" and num_results <= 4:
+			lat = location_object["results"][0]["geometry"]["location"]["lat"]
+			lng = location_object["results"][0]["geometry"]["location"]["lng"]
+			return(lat,lng)
+		else:
+			return(None,None)
+	except:
+		return(None,None)
 
 # used to determine if AuthUser 'in_coverage_area' field should be set to True
 coverage_area = [94040]
@@ -158,63 +186,63 @@ Neighborhoods = {'SF': [
 ]}
 
 States = [
-        ('AK', 'Alaska'),
-        ('AL', 'Alabama'),
-        ('AR', 'Arkansas'),
-        ('AS', 'American Samoa'),
-        ('AZ', 'Arizona'),
-        ('CA', 'California'),
-        ('CO', 'Colorado'),
-        ('CT', 'Connecticut'),
-        ('DC', 'District of Columbia'),
-        ('DE', 'Delaware'),
-        ('FL', 'Florida'),
-        ('GA', 'Georgia'),
-        ('GU', 'Guam'),
-        ('HI', 'Hawaii'),
-        ('IA', 'Iowa'),
-        ('ID', 'Idaho'),
-        ('IL', 'Illinois'),
-        ('IN', 'Indiana'),
-        ('KS', 'Kansas'),
-        ('KY', 'Kentucky'),
-        ('LA', 'Louisiana'),
-        ('MA', 'Massachusetts'),
-        ('MD', 'Maryland'),
-        ('ME', 'Maine'),
-        ('MI', 'Michigan'),
-        ('MN', 'Minnesota'),
-        ('MO', 'Missouri'),
-        ('MP', 'Northern Mariana Islands'),
-        ('MS', 'Mississippi'),
-        ('MT', 'Montana'),
-        ('NA', 'National'),
-        ('NC', 'North Carolina'),
-        ('ND', 'North Dakota'),
-        ('NE', 'Nebraska'),
-        ('NH', 'New Hampshire'),
-        ('NJ', 'New Jersey'),
-        ('NM', 'New Mexico'),
-        ('NV', 'Nevada'),
-        ('NY', 'New York'),
-        ('OH', 'Ohio'),
-        ('OK', 'Oklahoma'),
-        ('OR', 'Oregon'),
-        ('PA', 'Pennsylvania'),
-        ('PR', 'Puerto Rico'),
-        ('RI', 'Rhode Island'),
-        ('SC', 'South Carolina'),
-        ('SD', 'South Dakota'),
-        ('TN', 'Tennessee'),
-        ('TX', 'Texas'),
-        ('UT', 'Utah'),
-        ('VA', 'Virginia'),
-        ('VI', 'Virgin Islands'),
-        ('VT', 'Vermont'),
-        ('WA', 'Washington'),
-        ('WI', 'Wisconsin'),
-        ('WV', 'West Virginia'),
-        ('WY', 'Wyoming'),
+		('AK', 'Alaska'),
+		('AL', 'Alabama'),
+		('AR', 'Arkansas'),
+		('AS', 'American Samoa'),
+		('AZ', 'Arizona'),
+		('CA', 'California'),
+		('CO', 'Colorado'),
+		('CT', 'Connecticut'),
+		('DC', 'District of Columbia'),
+		('DE', 'Delaware'),
+		('FL', 'Florida'),
+		('GA', 'Georgia'),
+		('GU', 'Guam'),
+		('HI', 'Hawaii'),
+		('IA', 'Iowa'),
+		('ID', 'Idaho'),
+		('IL', 'Illinois'),
+		('IN', 'Indiana'),
+		('KS', 'Kansas'),
+		('KY', 'Kentucky'),
+		('LA', 'Louisiana'),
+		('MA', 'Massachusetts'),
+		('MD', 'Maryland'),
+		('ME', 'Maine'),
+		('MI', 'Michigan'),
+		('MN', 'Minnesota'),
+		('MO', 'Missouri'),
+		('MP', 'Northern Mariana Islands'),
+		('MS', 'Mississippi'),
+		('MT', 'Montana'),
+		('NA', 'National'),
+		('NC', 'North Carolina'),
+		('ND', 'North Dakota'),
+		('NE', 'Nebraska'),
+		('NH', 'New Hampshire'),
+		('NJ', 'New Jersey'),
+		('NM', 'New Mexico'),
+		('NV', 'Nevada'),
+		('NY', 'New York'),
+		('OH', 'Ohio'),
+		('OK', 'Oklahoma'),
+		('OR', 'Oregon'),
+		('PA', 'Pennsylvania'),
+		('PR', 'Puerto Rico'),
+		('RI', 'Rhode Island'),
+		('SC', 'South Carolina'),
+		('SD', 'South Dakota'),
+		('TN', 'Tennessee'),
+		('TX', 'Texas'),
+		('UT', 'Utah'),
+		('VA', 'Virginia'),
+		('VI', 'Virgin Islands'),
+		('VT', 'Vermont'),
+		('WA', 'Washington'),
+		('WI', 'Wisconsin'),
+		('WV', 'West Virginia'),
+		('WY', 'Wyoming'),
 ]
 
 
@@ -242,7 +270,7 @@ States = [
 # 		('office', 'office'),
 # 		('lightning','lightning'),
 # 		('decor','decor'),
-#         ('other', 'other'),
+#		 ('other', 'other'),
 # 	],
 # 	'subcategory': [
 # 		('bar', 'bar'),
@@ -281,3 +309,5 @@ States = [
 # 		('wood_veneer','wood_veneer'),
 # 	]
 # }
+
+
