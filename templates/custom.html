@@ -62,40 +62,43 @@ var trouvaay = {
 
 		//product-like AJAX post
         $(".btn.btn-default.glyphs").click(function() {
-	    	var id = $(this).attr("id").substring(6);
-	    	var data = {'id': id};
-	   		if ($(this).hasClass("active")) {
-		    	$(this).removeClass("active");
-		    	}
-		    else {
-		    	$(this).addClass("active");
-		    	}
-	    	$.post(
-	    		"{% url 'members:like' %}", 
-	    		data,
-	    		function(response){
-	    			if(response == 'loginrequired'){
-	    				window.location.replace("{% url "members:login" %}");
-	    			}
-	    		}
-	    	);
-	    });
+            var id = $(this).attr("id").substring(6);
+            var data = {'id': id};
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+                }
+            else {
+                $(this).addClass("active");
+                }
+            $.post(
+                "{% url 'members:like' %}", 
+                data,
+                function(response){
+                    if(response == 'loginrequired'){
+                        window.location.replace("{% url "members:login" %}");
+                    }
+                }
+            );
+        });
+
+        
 
         //Addtocart AJAX post
 	    $(".btn.buy").click(function() {
-	    	var id = $(this).attr("id").substring(4);
-	    	var data = {'id': id};
-	   		if ($(this).hasClass("active")) {
-		    	$(this).removeClass("active");
-		    	}
-		    else {
-		    	$("#addtocartmodal").show().delay(2000).fadeOut();
-		    	$.post("{% url 'members:addtocart' %}", data, function(product) {
-		    		$(".badge.cart-counter").html(product.count.toString());
-		    		$(".badge.mobile-cart-counter").html(product.count.toString());
-	    		});
-		    }
-	    })  
+            var id = $(this).attr("id").substring(4);
+            var data = {'id': id};
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+                }
+            else {
+                $("#addtocartmodal").show().delay(2000).fadeOut();
+                $.post("{% url 'members:addtocart' %}", data, function(product) {
+                    $(".badge.cart-counter").html(product.count.toString());
+                    $(".badge.mobile-cart-counter").html(product.count.toString());
+                });
+            }
+        })
+  
 	}
 }
 

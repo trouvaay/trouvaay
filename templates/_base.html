@@ -34,7 +34,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="alert alert-info" role="alert" style="margin-bottom:0">
-                        <p class="text-center">Added to cart.  <a href="{% url 'members:cart' %}" class="alert-link">checkout now</a></p>
+                        
                     </div>
                 </div>  
             </div><!-- /.modal-content -->
@@ -59,15 +59,12 @@
                         <div class="col-sm-12 main-navigation bottom-row">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><div class="cart-info">
-                                        <a href="{% url 'members:cart' %}">
-                                            <img src="{% static 'img/shopping_cart24.png' %}"/><span class="badge cart-counter">{{ request.user.authusercart_set.first.get_item_count}}</span>
-                                        </a>
+                                        
                                     </div>
                                 </li>
                                 <li><a href="{% url 'goods:vintage' %}">Vintage</a></li>
                                 <li><a href="{% url 'goods:new' %}">New</a></li>
 				<li><a class="btn btn-link" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}Login{% endif %}</a></li>
-                                <!-- <li><a href="{% url 'goods:blog' %}">Blog</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -90,10 +87,7 @@
                     <a href="#">Profile</a>
                 </div> -->
                 <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
-                    <a href="{% url 'members:cart' %}">
-                        <img src="{% static 'img/shopping_cart24.png' %}"/>
-                        <span class="badge mobile-cart-counter">{{ request.user.authusercart_set.first.get_item_count }}</span>
-                    </a>
+                    
                 </div>
             </div>
             <div id="main-footer">

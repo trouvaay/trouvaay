@@ -11,9 +11,9 @@ from registration import auth_urls
 
 urlpatterns = patterns('',
 
-   # here users enter an email address to initiate password reset
-   url(r'^accounts/password/reset/$',
-       auth_views.password_reset,
+    # here users enter an email address to initiate password reset
+    url(r'^accounts/password/reset/$',
+        auth_views.password_reset,
        {'post_reset_redirect': reverse_lazy('auth_password_reset_done'),
         'password_reset_form': forms.CustomPasswordResetForm},
        name='auth_password_reset'),
@@ -24,10 +24,10 @@ urlpatterns = patterns('',
         {'post_reset_redirect': reverse_lazy('auth_password_reset_complete'),
          'set_password_form': forms.CustomSetPasswordForm},
         name='auth_password_reset_confirm'),
-                       
+              
     url(r'^', include('goods.urls', namespace='goods')),
     url(r'^', include('members.urls', namespace='members')),
-
+    
     url(r'accounts/register/$', SignupView.as_view(), name='registration_register'),
     (r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
