@@ -76,6 +76,7 @@ class Material(models.Model):
 
 
 class Product(models.Model):
+<<<<<<< HEAD
     sku = models.CharField(max_length=25, null=True, blank=True)
     short_name = models.CharField(max_length=50)
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
@@ -135,6 +136,9 @@ class Product(models.Model):
             self.slug = '%s-%d' % (orig, x)
 
         super(Product, self).save(*args, **kwargs)
+
+    def get_price_in_cents(self):
+        return int(self.current_price * 100)
         
     def hours_since_add(self):
         delta = timezone.now() - self.pub_date

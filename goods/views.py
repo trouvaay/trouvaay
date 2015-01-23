@@ -40,27 +40,33 @@ class HomeView(generic.TemplateView):
 
 
 class NewView(generic.ListView):
-    template_name = 'goods/new/new.html'
-    context_object_name = 'products'
-    model = Product
-    try:
-        new = Segment.objects.filter(select='new')[0]
-    except:
-        new = None
+	template_name = 'goods/new/new.html'
+	context_object_name = 'products'
+	model = Product
+	try:
+		new = Segment.objects.filter(select='new')[0]
+	except:
+		new = None
 
-    def get_queryset(self):
-        queryset = self.model.objects.filter(is_published=True)
-        return queryset
+	def get_queryset(self):
+		queryset = self.model.objects.filter(is_published=True)
+		return queryset
 
-    def get_context_data(self, **kwargs):
-        context = super(NewView, self).get_context_data(**kwargs)
-        #JSON sent to client to calc distance from user
-        context['products_json'] = serialize('json', context['products'])
-        for furnituretype in FurnitureType.objects.all():
-            context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new).exclude(description="")
-        context['BaseUrl'] = BASE_URL
-        context['liked_items'] = get_liked_items(self.request.user)
-        return context
+	def get_context_data(self, **kwargs):
+		context = super(NewView, self).get_context_data(**kwargs)
+		#JSON sent to client to calc distance from user
+		context['products_json'] = serialize('json', context['products'])
+		for furnituretype in FurnitureType.objects.all():
+			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new).exclude(description="")
+		context['BaseUrl'] = BASE_URL
+		context['FEATURE_NAME_BUYANDTRY'] = settings.FEATURE_NAME_BUYANDTRY
+		context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+		
+		# TODO: do not add 'site_name' to context
+		# once the 'sites' are setup in settings
+		context['site_name'] = settings.SITE_NAME
+		context['liked_items'] = get_liked_items(self.request.user)
+		return context
 
 
 class VintageView(generic.ListView):
@@ -90,12 +96,13 @@ class DetailView(generic.DetailView):
     context_object_name = 'product'
     model = Product
     slug_field = 'slug'
-
-    def get_context_data(self, **kwargs):
-        context = super(DetailView, self).get_context_data(**kwargs)
-        # context['liked_items'] = get_liked_items(self.request.user)
-        context['returns'] = settings.RETURN_POLICY
-        return context
+	def get_context_data(self, **kwargs):
+		context = super(DetailView, self).get_context_data(**kwargs)
+		context['liked_items'] = get_liked_items(self.request.user)
+		context['returns'] = settings.RETURN_POLICY
+		context['FEATURE_NAME_BUYANDTRY'] = settings.FEATURE_NAME_BUYANDTRY
+		context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY		
+		return context
 
 
 class DirectionsView(LoginRequiredMixin, generic.DetailView):
