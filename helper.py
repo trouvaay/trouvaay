@@ -28,11 +28,11 @@ class AbstractImageModel(models.Model):
 
 def MakeSlug(string,spaceChar='+',Maxlen=None):
 	"""for use in GeoCode fct below"""
-        stringlst = string.split(" ")
-        newStr =""
-        for word in stringlst:
-            newStr+=(word+spaceChar)        
-        return newStr[:-1][:Maxlen]
+	stringlst = string.split(" ")
+	newStr =""
+	for word in stringlst:
+		newStr+=(word+spaceChar)		
+	return newStr[:-1][:Maxlen]
 
 def GeoCode(street, city, state, zipcd, street2=None):
 	"""Used to fetch lat/lng coords from google api
@@ -46,17 +46,17 @@ def GeoCode(street, city, state, zipcd, street2=None):
 		address = (street+street2+city+state+zipcd)
 	else:
 		address = (street+city+state+zipcd)
-    
-    # address slug
+	
+	# address slug
 	geo_str = MakeSlug(address)
 	#TODO: convert to google API key to evrion var 
 	key = settings.GOOG_MAP_KEY
-	final_url = base_url+"sensor=false"+"&address="+address+"&key="+key    
+	final_url = base_url+"sensor=false"+"&address="+address+"&key="+key	
 	try:
 		r = requests.get(final_url) 
 		location_object =  r.json()
 		num_results = len(location_object["results"])
-		# if response is 200 status and they arent too many results       
+		# if response is 200 status and they arent too many results	   
 		if location_object['status'] == "OK" and num_results <= 4:
 			lat = location_object["results"][0]["geometry"]["location"]["lat"]
 			lng = location_object["results"][0]["geometry"]["location"]["lng"]
@@ -70,63 +70,63 @@ def GeoCode(street, city, state, zipcd, street2=None):
 coverage_area = [94040]
 
 States = [
-        ('AK', 'Alaska'),
-        ('AL', 'Alabama'),
-        ('AR', 'Arkansas'),
-        ('AS', 'American Samoa'),
-        ('AZ', 'Arizona'),
-        ('CA', 'California'),
-        ('CO', 'Colorado'),
-        ('CT', 'Connecticut'),
-        ('DC', 'District of Columbia'),
-        ('DE', 'Delaware'),
-        ('FL', 'Florida'),
-        ('GA', 'Georgia'),
-        ('GU', 'Guam'),
-        ('HI', 'Hawaii'),
-        ('IA', 'Iowa'),
-        ('ID', 'Idaho'),
-        ('IL', 'Illinois'),
-        ('IN', 'Indiana'),
-        ('KS', 'Kansas'),
-        ('KY', 'Kentucky'),
-        ('LA', 'Louisiana'),
-        ('MA', 'Massachusetts'),
-        ('MD', 'Maryland'),
-        ('ME', 'Maine'),
-        ('MI', 'Michigan'),
-        ('MN', 'Minnesota'),
-        ('MO', 'Missouri'),
-        ('MP', 'Northern Mariana Islands'),
-        ('MS', 'Mississippi'),
-        ('MT', 'Montana'),
-        ('NA', 'National'),
-        ('NC', 'North Carolina'),
-        ('ND', 'North Dakota'),
-        ('NE', 'Nebraska'),
-        ('NH', 'New Hampshire'),
-        ('NJ', 'New Jersey'),
-        ('NM', 'New Mexico'),
-        ('NV', 'Nevada'),
-        ('NY', 'New York'),
-        ('OH', 'Ohio'),
-        ('OK', 'Oklahoma'),
-        ('OR', 'Oregon'),
-        ('PA', 'Pennsylvania'),
-        ('PR', 'Puerto Rico'),
-        ('RI', 'Rhode Island'),
-        ('SC', 'South Carolina'),
-        ('SD', 'South Dakota'),
-        ('TN', 'Tennessee'),
-        ('TX', 'Texas'),
-        ('UT', 'Utah'),
-        ('VA', 'Virginia'),
-        ('VI', 'Virgin Islands'),
-        ('VT', 'Vermont'),
-        ('WA', 'Washington'),
-        ('WI', 'Wisconsin'),
-        ('WV', 'West Virginia'),
-        ('WY', 'Wyoming'),
+		('AK', 'Alaska'),
+		('AL', 'Alabama'),
+		('AR', 'Arkansas'),
+		('AS', 'American Samoa'),
+		('AZ', 'Arizona'),
+		('CA', 'California'),
+		('CO', 'Colorado'),
+		('CT', 'Connecticut'),
+		('DC', 'District of Columbia'),
+		('DE', 'Delaware'),
+		('FL', 'Florida'),
+		('GA', 'Georgia'),
+		('GU', 'Guam'),
+		('HI', 'Hawaii'),
+		('IA', 'Iowa'),
+		('ID', 'Idaho'),
+		('IL', 'Illinois'),
+		('IN', 'Indiana'),
+		('KS', 'Kansas'),
+		('KY', 'Kentucky'),
+		('LA', 'Louisiana'),
+		('MA', 'Massachusetts'),
+		('MD', 'Maryland'),
+		('ME', 'Maine'),
+		('MI', 'Michigan'),
+		('MN', 'Minnesota'),
+		('MO', 'Missouri'),
+		('MP', 'Northern Mariana Islands'),
+		('MS', 'Mississippi'),
+		('MT', 'Montana'),
+		('NA', 'National'),
+		('NC', 'North Carolina'),
+		('ND', 'North Dakota'),
+		('NE', 'Nebraska'),
+		('NH', 'New Hampshire'),
+		('NJ', 'New Jersey'),
+		('NM', 'New Mexico'),
+		('NV', 'Nevada'),
+		('NY', 'New York'),
+		('OH', 'Ohio'),
+		('OK', 'Oklahoma'),
+		('OR', 'Oregon'),
+		('PA', 'Pennsylvania'),
+		('PR', 'Puerto Rico'),
+		('RI', 'Rhode Island'),
+		('SC', 'South Carolina'),
+		('SD', 'South Dakota'),
+		('TN', 'Tennessee'),
+		('TX', 'Texas'),
+		('UT', 'Utah'),
+		('VA', 'Virginia'),
+		('VI', 'Virgin Islands'),
+		('VT', 'Vermont'),
+		('WA', 'Washington'),
+		('WI', 'Wisconsin'),
+		('WV', 'West Virginia'),
+		('WY', 'Wyoming'),
 ]
 
 
@@ -154,7 +154,7 @@ States = [
 # 		('office', 'office'),
 # 		('lightning','lightning'),
 # 		('decor','decor'),
-#         ('other', 'other'),
+#		 ('other', 'other'),
 # 	],
 # 	'subcategory': [
 # 		('bar', 'bar'),
