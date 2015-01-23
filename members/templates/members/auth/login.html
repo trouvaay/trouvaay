@@ -42,9 +42,7 @@
 	{{ block.super }}
 	<script type="text/javascript">
 $(document).ready(function () {
-		// var options = {
-		// 	"show" : true,
-		// };
+		
 		$('#signup-login-modal').modal({"show": true});
 		
 		$("#signup-login-modal").modal({
@@ -59,17 +57,5 @@ $(document).ready(function () {
 		})
 
 });
-
-		
-
-// $('#signup').on('click', function () {
-// 		$('#signupmodal').modal({"show": true});
-// 		$('#loginmodal').modal({"show": false});
-// 		});
-
-// $('#login').on('click', function () {
-// 		$('#loginmodal').modal({"show": true});
-// 		$('#signupmodal').modal({"show": false});
-// 		});
 	</script>
 	{% endblock %}

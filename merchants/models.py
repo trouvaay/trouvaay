@@ -2,6 +2,7 @@ from localflavor.us.models import PhoneNumberField
 from django.db import models
 from django.conf import settings
 from helper import States, GeoCode, AbstractImageModel
+from helper import Neighborhoods
 
 
 class Retailer(models.Model):
@@ -43,7 +44,8 @@ class Store(models.Model):
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=2, choices=States)
     zipcd = models.IntegerField()
-    # neighborhood = 
+    #TODO update so it dynamically pulls neighborhood for given goog locality
+    neighborhood = models.CharField(max_length=80, choices=Neighborhoods['SF'], default='na')
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)

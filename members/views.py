@@ -77,8 +77,8 @@ def ProductLike(request):
     # because this is called via AJAX, the @login_required decorator
     # is not very useful, so instead we have to manually check if
     # user is authenticated or not and return appropariate status in json
-    if(not request.user.is_authenticated()):
-        return JsonResponse('loginrequired', safe=False)
+    # if(not request.user.is_authenticated()):
+    #     return JsonResponse('loginrequired', safe=False)
     
     if request.method == "POST":
         userinstance = request.user
