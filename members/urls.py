@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^removefromcart/$', views.RemoveFromCart, name='removefromcart'),
     url(r'^checkout/$', views.CheckoutView.as_view(), name='checkout'),
     url(r'^checkoutcallback/$', views.CartCheckoutCallbackView.as_view(), name='checkoutcallback'),
+    url(r'^reservecallback/$', views.ReserveCallbackView.as_view(), name='reserve_callback'),
     url(r'^review/$', views.ReviewView.as_view(), name='review'),
     url(r'^payment/$', views.SubmitCustomerPayment, name='payment'),
 )

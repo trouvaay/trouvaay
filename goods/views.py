@@ -59,6 +59,12 @@ class NewView(generic.ListView):
 		for furnituretype in FurnitureType.objects.all():
 			context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True, segment=self.new).exclude(description="")
 		context['BaseUrl'] = BASE_URL
+		context['FEATURE_NAME_BUYANDTRY'] = settings.FEATURE_NAME_BUYANDTRY
+		context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+		
+		# TODO: do not add 'site_name' to context
+		# once the 'sites' are setup in settings
+		context['site_name'] = settings.SITE_NAME
 		context['liked_items'] = get_liked_items(self.request.user)
 		return context
 
@@ -94,6 +100,8 @@ class DetailView(generic.DetailView):
 		context = super(DetailView, self).get_context_data(**kwargs)
 		context['liked_items'] = get_liked_items(self.request.user)
 		context['returns'] = settings.RETURN_POLICY
+		context['FEATURE_NAME_BUYANDTRY'] = settings.FEATURE_NAME_BUYANDTRY
+		context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY		
 		return context
 
 

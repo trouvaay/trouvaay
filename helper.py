@@ -1,7 +1,10 @@
 #!/usr/bin/python
 import requests
+from django.core.mail import EmailMultiAlternatives
 from django.db import models
 from django.conf import settings
+from django.contrib.sites.models import RequestSite, Site
+from django.template.loader import render_to_string
 import cloudinary
 
 #TODO: convert to environ var
@@ -33,6 +36,34 @@ def MakeSlug(string,spaceChar='+',Maxlen=None):
 	for word in stringlst:
 		newStr+=(word+spaceChar)		
 	return newStr[:-1][:Maxlen]
+
+def send_email_from_template(to_email, context, subject_template, plain_text_body_template, html_body_template=None):
+	"""Creates email from subject and body templates and sends message to the user
+	
+	to_email - recipient email 
+	context - dictionary passed to all the templates
+	subject_template - template that will be used to generate message subject
+	plain_text_body_template - template that will be used to generate plain text message body
+	html_body_template - template that will be used to generate html message body
+	"""
+	
+	subject = render_to_string(subject_template, context)
+	subject = ''.join(subject.splitlines()) # remove new lines from subject
+	
+	message_txt = render_to_string(plain_text_body_template, context)
+	email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL, [to_email])
+	
+	if(html_body_template):
+		message_html = render_to_string(html_body_template, context)
+		email_message.attach_alternative(message_html, 'text/html')
+	email_message.send()
+
+def get_site(request):
+	if Site._meta.installed:
+		site = Site.objects.get_current()
+	else:
+		site = RequestSite(request)	
+	return site
 
 def GeoCode(street, city, state, zipcd, street2=None):
 	"""Used to fetch lat/lng coords from google api
@@ -193,3 +224,5 @@ States = [
 # 		('wood_veneer','wood_veneer'),
 # 	]
 # }
+
+

@@ -1,4 +1,5 @@
 {% load staticfiles %}
+<script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
 var trouvaay = {
 	init: function() {
@@ -82,6 +83,7 @@ var trouvaay = {
 	    });
 
         //Addtocart AJAX post
+        /*
 	    $(".btn.buy").click(function() {
 	    	var id = $(this).attr("id").substring(4);
 	    	var data = {'id': id};
@@ -95,7 +97,8 @@ var trouvaay = {
 		    		$(".badge.mobile-cart-counter").html(product.count.toString());
 	    		});
 		    }
-	    })  
+	    })
+	    */  
 	}
 }
 
@@ -135,5 +138,66 @@ $(document).ready(function() {
                 }
             }
         });
+	
+	
+
+	// Stripe checkout
+	$('.btn.buy.try').on('click', function(e) {
+		if(e.target.id.substr(0, 4) == 'buy_'){
+			var productId = e.target.id.substr(4);
+			if(productId && !(typeof productId === 'undefined')){
+				var productName = $("#product-name-"+productId).text();
+				var productPrice = $("#product-price-in-cents-"+productId).text();
+				
+				if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
+					var handler = StripeCheckout.configure({
+						key: '{{ STRIPE_PUBLISHABLE_KEY }}',
+						image: "{% static "img/logos/standalone-R_web_RGB.png" %}",
+						name: '{{ site_name }}',
+						description: productName,
+						amount: productPrice,
+						shippingAddress: "true",
+						token: function(token, args) {
+							$.ajax({
+								type: "POST",
+								url: {% url "members:reserve_callback" %},
+								data: {
+									token: token,
+									args: args,
+									total_amount: productPrice,
+									order_type: "{{ FEATURE_NAME_BUYANDTRY }}",
+									product_id: productId
+								},
+								success: function(data){
+								  	if(data['status'] == "ok"){
+								  		$("#reserved-product-name").text(data['product_name']);
+								  		$("#reserved-product-store-name").text(data['store_name']);
+								  		var storeAddress = data['store_street'];
+								  		if(data['store_street2'] != ""){
+								  			storeAddress += ("<br>" + data['store_street2']);
+								  		}
+								  		storeAddress += ("<br>" + data['store_city'] + " " + data['store_state'] + " " + data['store_zipcode']);
+										$("#reserved-product-store-address").html(storeAddress);
+										$("#reserved-product-capture-date").text(data['capture_date']);
+										$("#reserved-product-image").attr('src', (data['image_src']));
+										$("#addtocartmodal").modal({
+											show: true,
+											keyboard: true
+										});
+								  	}
+								},
+								dataType: "json"
+							});
+						}
+					});				
+				
+				  	handler.open({
+						panelLabel: "{{ FEATURE_NAME_BUYANDTRY }}"
+					});
+				}
+			}
+			e.preventDefault();
+		}
+ 	});
 });
 </script>

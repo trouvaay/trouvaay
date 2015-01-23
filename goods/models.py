@@ -122,6 +122,9 @@ class Product(models.Model):
 			self.pub_date = timezone.now()
 		super(Product, self).save(*args, **kwargs)
 		
+	def get_price_in_cents(self):
+		return int(self.current_price * 100)
+		
 	def hours_since_add(self):
 		delta = timezone.now() - self.pub_date
 		time_lapse = delta.total_seconds() // 3600

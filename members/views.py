@@ -16,8 +16,8 @@ from registration.backends.default.views import ActivationView as BaseActivation
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import get_user_model, authenticate, login
 from registration import signals
-from django.contrib.sites.models import RequestSite, Site
-
+from helper import send_email_from_template, get_site
+from django.utils import timezone
 
 logger = logging.getLogger(__name__)
 
@@ -53,10 +53,7 @@ class SignupView(BaseRegistrationView):
 
 	def register(self, request, **cleaned_data):
 		email, password = cleaned_data['email'], cleaned_data['password']
-		if Site._meta.installed:
-			site = Site.objects.get_current()
-		else:
-			site = RequestSite(request)
+		site = get_site(request)
 		new_user = RegistrationProfile.objects.create_inactive_user(
 			email, password, site,
 			send_email=self.SEND_ACTIVATION_EMAIL,
@@ -228,9 +225,9 @@ class CartCheckoutCallbackView(LoginRequiredMixin, generic.DetailView):
 				order_item.sell_price = product.current_price
 				order_item.captured = capture_order
 				if(capture_order):
-					order_item.capture_time = datetime.now()
+					order_item.capture_time = timezone.now()
 				else:
-					order_item.capture_time = datetime.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
+					order_item.capture_time = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
 				order_item.quantity = 1
 				order_item.save()
 			logger.debug('Added items to order')
@@ -250,6 +247,130 @@ class CartCheckoutCallbackView(LoginRequiredMixin, generic.DetailView):
 			logger.error(str(e))
 			return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
 
+class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
+	context_object_name = 'product'
+	model = Product
+
+	def get_object(self):
+		product_id = self.request.POST.get('product_id', None)
+		if(not product_id):
+			return None
+		try:
+			return Product.objects.get(pk=int(product_id))
+		except Product.DoesNotExist:
+			return None
+
+	def post(self, request, *args, **kwargs):
+		try:
+			# create new order
+			order = AuthUserOrder()
+			order.authuser = self.request.user
+			order.save()
+			logger.debug('Created new order %d' % order.id)
+
+			product = self.get_object()
+
+			order_type = request.POST['order_type'].strip().lower()
+			capture_order = (order_type == 'buy')
+
+			# create charge with stripe,
+			try:
+				token_id = request.POST['token[id]']
+				total_amount_in_cents = int(request.POST['total_amount'])
+				
+				logger.debug('total_amount_in_cents %d' % total_amount_in_cents)
+				logger.debug('product.get_price_in_cents %d' % product.get_price_in_cents())
+
+				if(total_amount_in_cents != product.get_price_in_cents()):
+					# either product price has changed since payment or
+					# user is trying to do something nasty
+					# in any case we have a discrepancy between
+					# what was shown to the user at the time of checkout
+					# and current product prive
+					# it is best to stop right here and refresh the page
+					logger.info('Product price did not match the total that came in the request')
+					return JsonResponse({'status': 'error', 'message': 'Total ammount does not match.'})
+
+				order_type = request.POST['order_type']
+				stripe.api_key = settings.STRIPE_SECRET_KEY
+				stripe.Charge.create(
+									amount=total_amount_in_cents,
+									currency="usd",
+									description=product.short_name,
+									card=token_id,
+									capture=capture_order,
+									metadata={
+											'order_id': order.id,
+											'order_type': order_type
+											})
+
+	 		except Exception, e:
+				logger.error('Error in ReserveCallbackView.post()')
+				logger.error(str(e))
+				return JsonResponse({'status': 'error', 'message': 'Failed to charge credit card.'})
+
+			# create or update shipping address
+			#
+			# TODO: allow multiple addresses per user
+			# right now there is only one address per user which
+			# is enforced in the database with a Unique key on user id
+			shipping_address = None
+			try:
+				shipping_address = AuthUserAddress.objects.get(authuser=self.request.user)
+				logger.debug('Updating existing shipping address')
+			except AuthUserAddress.DoesNotExist:
+				# no address, that's ok we will create a new one
+				shipping_address = AuthUserAddress()
+				logger.debug('Creating new shipping address')
+
+			# TODO: shipping address should be tied to the order
+			# right not it is only tied to user
+			shipping_address.authuser = self.request.user
+			shipping_address.street = request.POST['args[shipping_address_line1]']
+			shipping_address.city = request.POST['args[shipping_address_city]']
+			shipping_address.state = request.POST['args[shipping_address_state]']
+			shipping_address.zipcd = request.POST['args[shipping_address_zip]']
+			shipping_address.shipping = True
+			shipping_address.save()
+
+			# add item to order
+			order_item = AuthUserOrderItem()
+			order_item.product = product
+			order_item.order = order
+			order_item.sell_price = product.current_price
+			order_item.captured = capture_order
+			order_item.capture_time = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
+			order_item.quantity = 1
+			order_item.save()
+			logger.debug('Added items to order')
+
+			# send email with store address
+			send_email_from_template(to_email=self.request.user.email,
+				context = {
+					'product': product,
+					'site': get_site(self.request),
+					'capture_date': order_item.capture_time.date()
+					},
+				subject_template = 'members/purchase/reserve_confirmation_email_subject.txt',
+				plain_text_body_template = 'members/purchase/reserve_confirmation_email_body.txt',
+				html_body_template = 'members/purchase/reserve_confirmation_email_body.html')
+		
+			return JsonResponse({
+				'status': 'ok', 
+				'product_name': product.short_name,
+				'image_src': product.productimage_set.first().image.build_url(width=200, height=200, crop="fit"),
+				'store_name': product.store.retailer.short_name,
+				'store_street': product.store.street,
+				'store_street2': product.store.street2 if product.store.street2 else '',
+				'store_city': product.store.city,
+				'store_state': product.store.state,
+				'store_zipcode': product.store.zipcd,
+				'capture_date': order_item.capture_time.date()
+			})
+		except Exception, e:
+			logger.error('Error in ReserveCallbackView.post()')
+			logger.error(str(e))
+			return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
 
 def SubmitCustomerPayment(request):
 	stripe.api_key = "sk_test_Ss8OxSVnDLbGv3qJ2HGUNNau"
