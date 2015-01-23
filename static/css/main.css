@@ -58,7 +58,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   float: left;
   background: #333;
   padding: 0px 15px;
-  position: fixed;
   z-index: 100;
   border-bottom: 5px solid rgb(218,182,97);
   
@@ -1613,7 +1612,8 @@ text-align: left;
   transition: all .4s ease-in-out;
 }
 .view-product:hover {
-  text-decoration: none;
+  text-decoration: underline;
+  border-bottom: 1px solid #000;
 }
 .grid-product .view-product .text {
   font-family: "Quicksand", Arial, sans-serif;
@@ -1790,9 +1790,9 @@ text-align: left;
   opacity: 1;
 }
 .grid-products-wrapper .grid-product .view-product {
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
+  /*-webkit-opacity: 0;*/
+  /*-moz-opacity: 0;*/
+  /*opacity: 0;*/
 }
 .grid-products-wrapper .grid-product:hover .overlay {
   -webkit-opacity: 0;
@@ -1803,6 +1803,15 @@ text-align: left;
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
+}
+.grid-product.vintage-product .centered-child:before {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	background: url('/static/img/key.svg');
+
 }
 .shopping-container {
   width: 100%;
@@ -2942,6 +2951,9 @@ form .form-checkbox-wrap .checkbox-label {
   color: #999999;
   font-size: 16px;
 }
+.socialicon {
+	width: 16px;
+}
 .social-icons {
   width: 100%;
   float: left;
@@ -3081,15 +3093,28 @@ footer ul li a:hover {
 }
 .how-it-works h3 {
   text-align: center;
+  font-size: 21px;
+  margin-top: 10px;
 }
 .how-it-works h2 {
   margin-bottom: 60px;
 }
 .how-it-works .statement {
+  margin-top: 30px;
   margin-bottom: 30px;
+  min-height: 106px;
+}
+.how-it-works .statement:not(:last-child) {
+  border-right: 1px solid #DDD;
+}
+
+@media screen and (max-width: 992px) {
+.how-it-works .statement:not(:last-child) {
+  border-right: 0px;
+}
 }
 .how-it-works .row-fluid div {
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
 }
 .how-it-works .row-fluid div img {
@@ -3191,6 +3216,7 @@ footer ul li a:hover {
   width: 100%;
   padding: 0;
   border-top: 2.5px solid black;
+  overflow: hidden;
 }
 .homepage-slider-wrap {
   width: 100%;
@@ -3278,7 +3304,7 @@ footer ul li a:hover {
 .homepage-slider .slides h3 {
   position: absolute;
   width: 100%;
-  top: 80px;
+  top: 15px;
   color: #656161;
   font-weight: bold;
   font-family: chalkduster;

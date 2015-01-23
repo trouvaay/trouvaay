@@ -58,13 +58,19 @@
                     <div class="row">
                         <div class="col-sm-12 main-navigation bottom-row">
                             <ul class="nav navbar-nav navbar-right">
+				    <li><a href="#"><img src="{% static 'img/socialicons/instagram.svg' %}" class="socialicon"></a></li>
+				    <li><a href="#"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
+				    <li><a href="#"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
                                 <li><div class="cart-info">
                                         
                                     </div>
                                 </li>
-                                <li><a href="{% url 'goods:vintage' %}">Vintage</a></li>
-                                <li><a href="{% url 'goods:new' %}">New</a></li>
-				<li><a class="btn btn-link" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}Login{% endif %}</a></li>
+				{% if user.is_authenticated %}
+				<li><a class="btn btn-link" href="#">Profile</a></li>
+				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
+				{% else %}
+				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Login</a></li>
+				{% endif %}
                             </ul>
                         </div>
                     </div>
