@@ -46,20 +46,30 @@ $(document).ready(function () {
 		// 	"show" : true,
 		// };
 		$('#signup-login-modal').modal({"show": true});
+		
+		$("#signup-login-modal").modal({
+      		onClose: function () {
+      		console.log('print modal closed');
+          	window.location.href = "http://stackoverflow.com";
+		    }
 		});
 		
 		$('#signup-login-modal').on('hidden.bs.modal', function () {
 			window.location.replace("{% url "goods:home" %}");
 		})
 
-$('#signup').on('click', function () {
-		$('#signupmodal').modal({"show": true});
-		$('#loginmodal').modal({"show": false});
-		});
+});
 
-$('#login').on('click', function () {
-		$('#loginmodal').modal({"show": true});
-		$('#signupmodal').modal({"show": false});
-		});
+		
+
+// $('#signup').on('click', function () {
+// 		$('#signupmodal').modal({"show": true});
+// 		$('#loginmodal').modal({"show": false});
+// 		});
+
+// $('#login').on('click', function () {
+// 		$('#loginmodal').modal({"show": true});
+// 		$('#signupmodal').modal({"show": false});
+// 		});
 	</script>
 	{% endblock %}

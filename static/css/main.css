@@ -147,6 +147,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .main-container.vintage {
   border-bottom: lightgray 1px solid;
+  padding-top: 0;
 }
 
 .top-bar .cart-info .value {
@@ -324,6 +325,9 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   color: black;
   margin-bottom: 25px;
   letter-spacing: 1.5px;
+}
+.mobile-vintage-details {
+  display: none;
 }
 .text-editor h2 {
   width: 100%;
@@ -948,9 +952,9 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   float: left;
   color: rgb(218,182,97);
   width: 100%;
+  line-height: 15px;
   padding: 12px 10%;
   letter-spacing: 2px;
-  line-height: 15px;
   background: #333;
   border: rgb(218,182,97) 2px solid;
   font-size: 12px;
@@ -1026,6 +1030,9 @@ line-height: 50px;
 color: #333;
 border-top: solid 1px #e5e5e5;
 margin: 0;
+}
+.attr.return {
+line-height: inherit;
 }
 .attr-label {
 font-size: 14px;
@@ -4045,8 +4052,8 @@ footer ul li a:hover {
     padding-bottom: 5px;
   }
   .product-description.hours .heading {
-    height: 88px;
-    padding-top:25%;
+   /* height: 88px;
+    padding-top:25%;*/
   }
   .main-navigation .navbar-nav {
     border-top: solid 1px #cccccc;
@@ -4103,6 +4110,9 @@ footer ul li a:hover {
   background: #333;
   border-top: rgb(218,182,97) solid 4px;
   width: 100%;
+  display: block;
+  }
+  .mobile-vintage-details {
   display: block;
   }
   #mobile-footer a {
@@ -4242,6 +4252,12 @@ footer ul li a:hover {
   }
   .hp-tabs .tab-content {
     margin-top: 0;
+  }
+  .grid-product.vintage {
+    height: 300px;
+  }
+  .no-mobile {
+    display:none;
   }
 }
 
