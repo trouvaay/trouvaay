@@ -107,11 +107,13 @@ class Product(models.Model):
 	pub_date = models.DateTimeField()
 	has_trial = models.BooleanField(default=False)
 	is_sold = models.BooleanField(default=False)
-	is_published = models.BooleanField(default=True)
+	is_published = models.BooleanField(default=False)
+	is_publishable = models.BooleanField(default=True)
 	is_featured = models.BooleanField(default=False)
 	lat = models.FloatField(null=True, blank=True)
 	lng = models.FloatField(null=True, blank=True)
 	slug = models.SlugField(unique=True)
+
 
 
 	class Meta:

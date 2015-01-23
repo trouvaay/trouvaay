@@ -3,68 +3,71 @@ import requests
 from django.db import models
 from django.conf import settings
 import cloudinary
-
-#TODO: convert to environ var
-cloudinary.config(
-  cloud_name = 'trouvaay',  
-  api_key = '239337878822387',  
-  api_secret = 'sYSwTRGE6LwUnEkb6MgHIlo-tAU'  
-)
-
 from cloudinary.models import CloudinaryField
 
-class AbstractImageModel(models.Model):
-	"""Abstract image model for ProductIMage and RetailerIMage models.
-	Uses Cloudinary for image rendering
-	"""
-	#main image will be primary/1st displayed to user
-	is_main = models.BooleanField(default=False)
-	image = CloudinaryField('image')
-	
-	class Meta:
-		abstract = True
-		#primarily used in ProductImage model in goods app
-		app_label = 'goods'
+# TODO: convert to environ var
+cloudinary.config(
+    cloud_name='trouvaay',
+    api_key='239337878822387',
+    api_secret='sYSwTRGE6LwUnEkb6MgHIlo-tAU'
+)
 
-def MakeSlug(string,spaceChar='+',Maxlen=None):
-	"""for use in GeoCode fct below"""
-        stringlst = string.split(" ")
-        newStr =""
-        for word in stringlst:
-            newStr+=(word+spaceChar)        
-        return newStr[:-1][:Maxlen]
+
+class AbstractImageModel(models.Model):
+    """Abstract image model for ProductIMage and RetailerIMage models.
+    Uses Cloudinary for image rendering
+    """
+    # main image will be primary/1st displayed to user
+    is_main = models.BooleanField(default=False)
+    image = CloudinaryField('image')
+
+    class Meta:
+        abstract = True
+        # primarily used in ProductImage model in goods app
+        app_label = 'goods'
+
+
+def MakeSlug(string, spaceChar='+', Maxlen=None):
+    """for use in GeoCode fct below"""
+    stringlst = string.split(" ")
+    newStr = ""
+    for word in stringlst:
+        newStr += (word + spaceChar)
+    return newStr[:-1][:Maxlen]
+
 
 def GeoCode(street, city, state, zipcd, street2=None):
-	"""Used to fetch lat/lng coords from google api
+    """Used to fetch lat/lng coords from google api
 
-	"""
-	
-	base_url = "https://maps.googleapis.com/maps/api/geocode/json?"
-	zipcd = str(zipcd)
-	
-	if street2:
-		address = (street+street2+city+state+zipcd)
-	else:
-		address = (street+city+state+zipcd)
-    
+    """
+
+    base_url = "https://maps.googleapis.com/maps/api/geocode/json?"
+    zipcd = str(zipcd)
+
+    if street2:
+        address = (street+street2+city+state+zipcd)
+    else:
+        address = (street+city+state+zipcd)
+
     # address slug
-	geo_str = MakeSlug(address)
-	#TODO: convert to google API key to evrion var 
-	key = settings.GOOG_MAP_KEY
-	final_url = base_url+"sensor=false"+"&address="+address+"&key="+key    
-	try:
-		r = requests.get(final_url) 
-		location_object =  r.json()
-		num_results = len(location_object["results"])
-		# if response is 200 status and they arent too many results       
-		if location_object['status'] == "OK" and num_results <= 4:
-			lat = location_object["results"][0]["geometry"]["location"]["lat"]
-			lng = location_object["results"][0]["geometry"]["location"]["lng"]
-			return(lat,lng)
-		else:
-			return(None,None)
-	except:
-		return(None,None)
+    geo_str = MakeSlug(address)
+    # TODO: convert to google API key to evrion var
+    key = settings.GOOG_MAP_KEY
+    final_url = base_url+"sensor=false"+"&address="+geo_str+"&key="+key
+    print final_url
+    try:
+        r = requests.get(final_url)
+        location_object = r.json()
+        num_results = len(location_object["results"])
+        # if response is 200 status and they arent too many results
+        if location_object['status'] == "OK" and num_results <= 4:
+            lat = location_object["results"][0]["geometry"]["location"]["lat"]
+            lng = location_object["results"][0]["geometry"]["location"]["lng"]
+            return(lat, lng)
+        else:
+            return(None, None)
+    except:
+        return(None, None)
 
 # used to determine if AuthUser 'in_coverage_area' field should be set to True
 coverage_area = [94040]

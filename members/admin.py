@@ -10,8 +10,8 @@ class CustomUserCreationForm(UserCreationForm):
     """ A form for creating new users. Includes all the required fields, plus a repeated password. """
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password Confirmation', widget=forms.PasswordInput)
-    
-    #Remove usrname#
+
+    # emove usrname#
     def __init__(self, *args, **kargs):
         super(CustomUserCreationForm, self).__init__(*args, **kargs)
         del self.fields['username']
@@ -19,7 +19,7 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = AuthUser
         fields = ('email', 'is_merchant')
-        
+
 
     def clean_password2(self):
         #Check that the two password entries match
@@ -47,8 +47,7 @@ class CustomUserChangeForm(UserChangeForm):
 
     def __init__(self, *args, **kargs):
         super(CustomUserChangeForm, self).__init__(*args, **kargs)
-        del self.fields['username']
-    
+
     class Meta(UserChangeForm.Meta):
         model = AuthUser
         fields = ('email', 'is_merchant') #May want to reduce fields
@@ -72,22 +71,21 @@ class AuthUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
-    list_display = ('email','is_merchant', 'is_admin', 'is_superuser', )
-    list_filter = ('is_admin','is_merchant')
+    list_display = ('email', 'is_merchant', 'is_admin', 'is_superuser', )
+    list_filter = ('is_admin', 'is_merchant')
 
-    #change list
+    # change list
     fieldsets = (
-        (None, {'fields': ('email','password',('first_name', 'last_name'), ('is_merchant',
+        (None, {'fields': ('email', 'password', ('first_name', 'last_name'), ('is_merchant',
                            'is_active'))}),
         ('Permissions', {'fields': (('is_superuser', 'is_admin'),)}),
     )
 
-    #add list
+    # add list
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email','is_merchant', 'password1', 'password2')}
-        ),
+            'fields': ('email', 'is_merchant', 'password1', 'password2')}),
     )
     inlines = [AuthUserActivityInline, AuthUserCartInline]
     search_fields = ('email',)
@@ -101,7 +99,7 @@ class AuthUserOrderItemInline(admin.TabularInline):
 
 class AuthUserOrderAdmin(admin.ModelAdmin):
     model = AuthUserOrder
-    list_display = ['authuser','timestamp','updated']
+    list_display = ['authuser', 'timestamp', 'updated']
     # fields = ['authuser','timestamp','updated']
     inlines = [AuthUserOrderItemInline]
 
