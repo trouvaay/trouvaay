@@ -1,129 +1,113 @@
 {% extends '_base.html' %}
 {% load cloudinary %}
 {% block content %}
-<div class="container-fluid page-quote" id="first-content-after-nav">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="heading main-quote">
-                <h4 class="subheading">You can trial your new couch at {{ store.retailer }}</h4> 
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-<div class="row">
-<div class="col-sm-7 product-description">
-   <div class="container" style="width: 95%">
-      {% block mainphoto %}
+  <div class="container-fluid page-quote" id="first-content-after-nav">
       <div class="row">
           <div class="col-sm-12">
-              <div id="map-canvas"> </div>
+              <div class="heading main-quote">
+                  <h4 class="subheading">You can trial your new couch at {{ store.retailer }}</h4> 
+              </div>
           </div>
       </div>
-      {% endblock %}
   </div>
-  <div class="directions-block">
-           <h4>Getting there...</h4>
-           <div id="directions"></div>
-  </div>
-</div>
-<div class="col-sm-5 product-description">
-    {% block mainphotodescrip %}
-       <div class="heading map">{{ product.short_name }}</div>
-       <div class="info-block">
-           <h5>{{ store.retailer }}</h5>
-           <div class="info">
-               {{ store.street }}
-               {{ store.street2 }}</br>
-               {{ store.city }} {{ store.state }}, {{ store.zipcd }}
-           </div>
-       </div>
-       <div class="info-block image">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-7 product-description">
+        <div class="container" style="width: 95%">
+          {% block mainphoto %}
+          <div class="row">
+            <div class="col-sm-12">
+                <div id="map-canvas"> </div>
+            </div>
+          </div>
+          {% endblock %}
+        </div>
+        <div class="directions-block">
+          <h4>Getting there...</h4>
+          <div id="directions"></div>
+        </div>
+      </div><!-- end col-sm-7 product-description -->
+      <div class="col-sm-5 product-description">
+        {% block mainphotodescrip %}
+          <div class="heading map">{{ product.short_name }}</div>
+          <div class="info-block">
+            <h5>{{ store.retailer }}</h5>
+              <div class="info">
+                   {{ store.street }}
+                   {{ store.street2 }}</br>
+                   {{ store.city }} {{ store.state }}, {{ store.zipcd }}
+              </div>
+          </div>
+        <div class="info-block image">
           <a href="{% url 'goods:detail' product.id %}">{% cloudinary product.productimage_set.first.image width=150 height=150 crop="fill" %}</a>
         </div>
-       
-       <!-- <div class="info-block">
-           <h5>No way to pickup?</h5>
-           <div class="info">
-               Purchase now for {{ '$15' }} delivery.
-           </div>
-       </div>     -->
-    {% endblock %}     
-</div>
-</div>
-{% block itemfeed %}
-{% endblock %}
+        {% endblock mainphotodescrip %}     
+      </div><!-- end col-sm-5 product-description -->
+    </div>
+  </div>
 {% endblock content %}
 
-
 {% block endjs %}
-<script type="text/javascript" 
-	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
-</script>
-<script type="text/javascript">
-	
-	var directionsDisplay;
-	var directionsService = new google.maps.DirectionsService();
-	var map
+  <script type="text/javascript" 
+  	src=https://maps.googleapis.com/maps/api/js?key=AIzaSyDZTlXL-J2h0DQO0CVDpXbtKOtn_TTCZTU&sensor=true>
+  </script>
+  <script type="text/javascript">
+  	var directionsDisplay;
+  	var directionsService = new google.maps.DirectionsService();
+  	var map
 
-	function initialize (storeloc, userloc) {    
-	    directionsDisplay = new google.maps.DirectionsRenderer();
-	    stepDisplay = new google.maps.InfoWindow();
-	    
-	    var storepos = new google.maps.LatLng(storeloc.lat, storeloc.lng);
-	    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
-	    
-	    var mapOptions = {
-		    center: storepos,
-		    zoom: 12
-	    };
+  	function initialize (storeloc, userloc) {    
+  	    directionsDisplay = new google.maps.DirectionsRenderer();
+  	    stepDisplay = new google.maps.InfoWindow();
+  	    
+  	    var storepos = new google.maps.LatLng(storeloc.lat, storeloc.lng);
+  	    var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+  	    
+  	    var mapOptions = {
+  		    center: storepos,
+  		    zoom: 12
+  	    };
 
-	    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-	    directionsDisplay.setMap(map);
-	    
-		var request = {
-		    origin: userpos,
-		    destination: storepos,
-		    travelMode: google.maps.TravelMode.DRIVING
-		};
+  	    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  	    directionsDisplay.setMap(map);
+  	    
+  		var request = {
+  		    origin: userpos,
+  		    destination: storepos,
+  		    travelMode: google.maps.TravelMode.DRIVING
+  		};
 
-		directionsService.route(request, function(result, status) {
-		    if (status == google.maps.DirectionsStatus.OK) {
-		      directionsDisplay.setDirections(result);
-		      showSteps(result);
-		    }
-		  });
-		}
-		function showSteps(directionResult) {
-  			var myDuration = directionResult.routes[0].legs[0].duration.text;
-  			var myDistance = directionResult.routes[0].legs[0].distance.text;
-  			var myinstructions = [ ]
-        var directionsPanel = document.getElementById("directions");
-  			directionsPanel.innerHTML = "<h5>" + myDuration + " - " + myDistance + "</h5>"
-        for ( i in directionResult.routes[0].legs[0].steps) {
-          console.log(directionResult.routes[0].legs[0].steps[i].instructions);
-  				directionsPanel.insertAdjacentHTML('beforeEnd', ' - '+directionResult.routes[0].legs[0].steps[i].instructions+'</br>');	
-  			}
+  		directionsService.route(request, function(result, status) {
+  		    if (status == google.maps.DirectionsStatus.OK) {
+  		      directionsDisplay.setDirections(result);
+  		      showSteps(result);
+  		    }
+  		  });
   		}
-
-  		
-
-</script>
-<script type="text/javascript"> 
-	// var outty = navigator.geolocation.getCurrentPosition(initialize);
-	
-  var store = {
-		'lat': {{ store.lat }},
-		'lng': {{ store.lng }},
-	};
-	function  getpoints (userloco) {
-		var userloc = {
-			'lat': userloco.coords.latitude,
-			'lng': userloco.coords.longitude,
-		};
-		initialize(store, userloc);	
-	};
-	navigator.geolocation.getCurrentPosition(getpoints);
-	
-</script>
-{% endblock %}
+  		function showSteps(directionResult) {
+    			var myDuration = directionResult.routes[0].legs[0].duration.text;
+    			var myDistance = directionResult.routes[0].legs[0].distance.text;
+    			var myinstructions = [ ]
+          var directionsPanel = document.getElementById("directions");
+    			directionsPanel.innerHTML = "<h5>" + myDuration + " - " + myDistance + "</h5>"
+          for ( i in directionResult.routes[0].legs[0].steps) {
+            console.log(directionResult.routes[0].legs[0].steps[i].instructions);
+    				directionsPanel.insertAdjacentHTML('beforeEnd', ' - '+directionResult.routes[0].legs[0].steps[i].instructions+'</br>');	
+    			}
+    		}
+  </script>
+  <script type="text/javascript"> 
+    var store = {
+  		'lat': {{ store.lat }},
+  		'lng': {{ store.lng }},
+  	};
+  	function  getpoints (userloco) {
+  		var userloc = {
+  			'lat': userloco.coords.latitude,
+  			'lng': userloco.coords.longitude,
+  		};
+  		initialize(store, userloc);	
+  	};
+  	navigator.geolocation.getCurrentPosition(getpoints);
+  </script>
+{% endblock endjs %}

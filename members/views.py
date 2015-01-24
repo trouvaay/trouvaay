@@ -251,20 +251,20 @@ class CartCheckoutCallbackView(LoginRequiredMixin, generic.DetailView):
 
 
 class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
-	context_object_name = 'product'
-	model = Product
+    context_object_name = 'product'
+    model = Product
 
-	def get_object(self):
-		product_id = self.request.POST.get('product_id', None)
-		if(not product_id):
-			return None
-		try:
-			return Product.objects.get(pk=int(product_id))
-		except Product.DoesNotExist:
-			return None
+    def get_object(self):
+        product_id = self.request.POST.get('product_id', None)
+        if(not product_id):
+            return None
+        try:
+            return Product.objects.get(pk=int(product_id))
+        except Product.DoesNotExist:
+            return None
 
-	def post(self, request, *args, **kwargs):
-		try:
+    def post(self, request, *args, **kwargs):
+        try:
 			# create new order
 			order = AuthUserOrder()
 			order.authuser = self.request.user
@@ -370,7 +370,7 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
 				'store_zipcode': product.store.zipcd,
 				'capture_date': order_item.capture_time.date()
 			})
-		except Exception, e:
+        except Exception, e:
 			logger.error('Error in ReserveCallbackView.post()')
 			logger.error(str(e))
 			return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
