@@ -7,6 +7,7 @@ from django.contrib.sites.models import RequestSite, Site
 from django.template.loader import render_to_string
 import cloudinary
 from cloudinary.models import CloudinaryField
+from math import acos, cos, radians, sin
 
 # TODO: convert to environ var
 cloudinary.config(
@@ -97,6 +98,13 @@ def GeoCode(street, city, state, zipcd, street2=None):
 	except:
 		return(None,None)
 
+def getdist(self, ThereLat, ThereLng, HereLat, HereLng):
+    """ Calculates distance between two points
+    """
+    dist = 3959 * acos(cos(radians(HereLat)) * cos(radians(There.lat))
+        * cos(radians(There.lng) - radians(HereLng)) + sin(radians(HereLat))*
+        sin(radians(There.lat)))      
+    return round(dist,2)
 # used to determine if AuthUser 'in_coverage_area' field should be set to True
 coverage_area = [94040]
 
