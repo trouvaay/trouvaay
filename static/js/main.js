@@ -129,6 +129,7 @@ $(window).resize(function() {
 selectBar = $('.select-bar')[0];
 selectBar_offsetTop = selectBar.offsetTop;
 $(window).scroll(function() {
+	if ($(window).width() >= 768) {
 	if ($(window).scrollTop() >= selectBar_offsetTop) {
 		$(selectBar).css('position', 'fixed');
 		$(selectBar).css('top', '0');
@@ -141,6 +142,7 @@ $(window).scroll(function() {
 		$(selectBar).css('top', 'auto');
 		$('.how-it-works').css('margin-bottom', "0");
 
+	}
 	}
 });
 

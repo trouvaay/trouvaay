@@ -46,8 +46,8 @@
             {% block nav-all-else %}
             <div class="row">
                 <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></div>
-                <div class="navbar-collapse collapse col-xs-3" style="margin-top:10px"></div>
-                <div class="navbar-collapse collapse col-xs-3 right-side" style="padding: 0">        
+                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3" style="margin-top:10px"></div>
+                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3 right-side" style="padding: 0">        
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -83,16 +83,16 @@
     <footer class="main-footer">
         <div class="container">'
             <div id="mobile-footer" class="row" style="padding-bottom:10px">
-                <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
+                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-4" style="padding: 0; text-align:center">
                     <a href="{% url 'goods:vintage' %}">Vintage</a>
                 </div>
-                <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
+                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-4" style="padding: 0; text-align:center">
                     <a href="{% url 'goods:new' %}">New</a>
                 </div>
               <!--   <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
                     <a href="#">Profile</a>
                 </div> -->
-                <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
+                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-4" style="padding: 0; text-align:center">
                     
                 </div>
             </div>
