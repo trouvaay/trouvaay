@@ -57,8 +57,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   width: 100%;
   float: left;
   background: #333;
-  padding: 0px 15px;
-  position: fixed;
   z-index: 100;
   border-bottom: 5px solid rgb(218,182,97);
   
@@ -66,6 +64,27 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   -moz-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+.top-bar {
+	position: fixed;
+}
+}
+#mobil-nav .nav {
+	padding: 0 15px;
+}
+.top-bar, .select-bar {
+  padding: 0px 15px;
+}
+.select-bar {
+	padding-top: 20px;
+	z-index: 99;
+	background: #FFF;
+	width: 100%;
+} 
+.select-bar .hp-tabs {
+	padding: 0px;
 }
 .top-bar.non-white {
   background: #f4f4f4;
@@ -78,10 +97,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   text-align: right;
 }
 .logo-div {
-  padding-top: 10px;
+  padding-top: 6px;
   font-size: 25px;
   padding-left: 35px;
-  height: 60px;
+  height: 48px;
 }
 .main-footer a {
   color: #7a7a7a;
@@ -95,9 +114,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .row.footer {
   margin-bottom: 1em;
 }
-#logo {
-  width: 35%;
-  min-width: 120px;
+#logo, .logo {
+  width: 185px;
   max-width: 100%;
 }
 .insta-icon {
@@ -1613,7 +1631,8 @@ text-align: left;
   transition: all .4s ease-in-out;
 }
 .view-product:hover {
-  text-decoration: none;
+  text-decoration: underline;
+  border-bottom: 2px solid #000;
 }
 .grid-product .view-product .text {
   font-family: "Quicksand", Arial, sans-serif;
@@ -1790,9 +1809,9 @@ text-align: left;
   opacity: 1;
 }
 .grid-products-wrapper .grid-product .view-product {
-  -webkit-opacity: 0;
-  -moz-opacity: 0;
-  opacity: 0;
+  /*-webkit-opacity: 0;*/
+  /*-moz-opacity: 0;*/
+  /*opacity: 0;*/
 }
 .grid-products-wrapper .grid-product:hover .overlay {
   -webkit-opacity: 0;
@@ -1803,6 +1822,15 @@ text-align: left;
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
+}
+.grid-product.vintage-product .centered-child:before {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	background: url('/static/img/key.svg');
+
 }
 .shopping-container {
   width: 100%;
@@ -2942,6 +2970,10 @@ form .form-checkbox-wrap .checkbox-label {
   color: #999999;
   font-size: 16px;
 }
+.socialicon {
+	width: 16px;
+	padding-top: 6px;
+}
 .social-icons {
   width: 100%;
   float: left;
@@ -3081,15 +3113,28 @@ footer ul li a:hover {
 }
 .how-it-works h3 {
   text-align: center;
+  font-size: 21px;
+  margin-top: 10px;
 }
 .how-it-works h2 {
   margin-bottom: 60px;
 }
 .how-it-works .statement {
+  margin-top: 30px;
   margin-bottom: 30px;
+  min-height: 106px;
+}
+.how-it-works .statement:not(:last-child) {
+  border-right: 1px solid #DDD;
+}
+
+@media screen and (max-width: 992px) {
+.how-it-works .statement:not(:last-child) {
+  border-right: 0px;
+}
 }
 .how-it-works .row-fluid div {
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
 }
 .how-it-works .row-fluid div img {
@@ -3140,7 +3185,7 @@ footer ul li a:hover {
 .container.tab-icons {
   margin-top: 15px;
 }
-.container.tab-icons.mobile {
+.tab-icons.mobile {
   display: none;
 }
 .pic-tabs {
@@ -3190,7 +3235,8 @@ footer ul li a:hover {
   margin: 0;
   width: 100%;
   padding: 0;
-  border-top: 2.5px solid black;
+  /*border-top: 2.5px solid black;*/
+  overflow: hidden;
 }
 .homepage-slider-wrap {
   width: 100%;
@@ -3278,13 +3324,20 @@ footer ul li a:hover {
 .homepage-slider .slides h3 {
   position: absolute;
   width: 100%;
-  top: 80px;
+  top: 15px;
   color: #656161;
   font-weight: bold;
   font-family: chalkduster;
   padding: 0px 30px;
   text-align: left;
 }
+
+@media screen and (max-width: 768px) {
+.homepage-slider .slides h3 {
+	top: 80px;
+}
+}
+
 #map-canvas {
   height: 30rem;
 }
@@ -3886,6 +3939,9 @@ footer ul li a:hover {
     font-weight: bold;
     margin-bottom:5px;
   }
+  .main-navigation .navbar-nav > li > a.btn-link {
+    line-height: 32px;
+	}
   .main-navigation .navbar-nav > li > a:hover {
     background: transparent;
   }
@@ -4233,10 +4289,10 @@ footer ul li a:hover {
     width: 68%;
     margin-left: 16%;
   }
-  .container.tab-icons {
+  .tab-icons {
     display: none;
   }
-  .container.tab-icons.mobile {
+  .tab-icons.mobile {
     display: block;
     margin-top: 10px;
   }
@@ -4299,6 +4355,9 @@ footer ul li a:hover {
   padding: 0px;
 }
 
+#main-menu .bottom-row {
+	margin-top: 10px;
+}
 #main-menu .bottom-row .navbar-nav {
 	margin-right: 0px;
 }
@@ -4321,3 +4380,4 @@ li.socialicons a {
   overflow: auto;
   padding: 0px 30px;
 }
+
