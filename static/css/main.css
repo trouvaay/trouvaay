@@ -30,7 +30,7 @@ body {
   font-family: 'Quicksand';
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: chalkduster;
+  font-family: 'Avenir';
   /*text-transform: ;*/
 }
 .navbar-default {
@@ -2708,7 +2708,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   text-align: center;
-  padding: 80px 0 40px;
+  padding: 40px 0 40px;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
@@ -3136,7 +3136,7 @@ footer ul li a:hover {
 .how-it-works .row-fluid div.main-quote {
   margin-top: 30px;
   margin-bottom: 30px;
-  font-family: chalkduster;
+  font-family: 'Avenir';
 }
 
 .how-it-works .row-fluid div.main-quote div {
@@ -3318,7 +3318,7 @@ footer ul li a:hover {
   top: 15px;
   color: #656161;
   font-weight: bold;
-  font-family: chalkduster;
+  font-family: 'Avenir';
   padding: 0px 30px;
   text-align: left;
 }
