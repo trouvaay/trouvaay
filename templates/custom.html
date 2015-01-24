@@ -134,7 +134,7 @@ $(document).ready(function() {
 				if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
 					var handler = StripeCheckout.configure({
 						key: '{{ STRIPE_PUBLISHABLE_KEY }}',
-						image: "{% static "img/logos/standalone-R_web_RGB.png" %}",
+						image: "{% static 'img/logos/standalone-R_web_RGB.png' %}",
 						name: '{{ site_name }}',
 						description: productName,
 						amount: productPrice,
@@ -147,11 +147,12 @@ $(document).ready(function() {
 									token: token,
 									args: args,
 									total_amount: productPrice,
-									order_type: "{{ FEATURE_NAME_BUYANDTRY }}",
+									order_type: "{{ FEATURE_NAME_RESERVE }}",
 									product_id: productId
 								},
 								success: function(data){
 								  	if(data['status'] == "ok"){
+                                        console.log('it worked');
 								  		$("#reserved-product-name").text(data['product_name']);
 								  		$("#reserved-product-store-name").text(data['store_name']);
 								  		var storeAddress = data['store_street'];
@@ -174,7 +175,7 @@ $(document).ready(function() {
 					});				
 				
 				  	handler.open({
-						panelLabel: "{{ FEATURE_NAME_BUYANDTRY }}"
+						panelLabel: "{{ FEATURE_NAME_RESERVE }}"
 					});
 				}
 			}

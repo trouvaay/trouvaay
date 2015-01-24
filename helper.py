@@ -52,7 +52,7 @@ def send_email_from_template(to_email, context, subject_template, plain_text_bod
 	subject = ''.join(subject.splitlines()) # remove new lines from subject
 	
 	message_txt = render_to_string(plain_text_body_template, context)
-	email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL, [to_email])
+	email_message = EmailMultiAlternatives(subject, message_txt, settings.DEFAULT_FROM_EMAIL, [to_email, settings.DEFAULT_FROM_EMAIL])
 	
 	if(html_body_template):
 		message_html = render_to_string(html_body_template, context)
