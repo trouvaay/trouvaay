@@ -173,7 +173,7 @@ class Product(models.Model):
     def does_product_have_trial(self):
         """if product is part of a subcategory that
         is triable OR has a price above $1000, it is eligible for a trial
-        """
+        """     
         trial_list = Subcategory.objects.filter(trial_product=True)
         if self.current_price >= 1000 or self.subcategory.first() in trial_list:
             self.has_trial = True
