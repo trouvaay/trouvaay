@@ -1,4 +1,4 @@
-
+{% load staticfiles %}
     <div class="col-xs-12 pic-detail-home" style="text-align:left; margin-top: 3px; margin-bottom: 3px;">
         <p style="margin-bottom: 3px"><h5>{{ product.short_name|truncatechars:23 }}  <em>{{ ' - $'}}{{ product.current_price|floatformat:"0" }}</em></h5></p>
         <!-- need these so that we can pass product name and price to stripe checkout -->
@@ -7,18 +7,23 @@
     </div>
     <div>
         <div class="col-xs-9 pic-detail-home">
-            {% if product.is_sold %}
-                <span class="sold">{{ 'Sold' }}</span>
-            {% elif product.current_price %}
-                <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
-                    {{ FEATURE_NAME_RESERVE }}
-                </button>
-            	{% comment %}
-                {% if product.has_trial %}
-                    {% if product.store.is_featured %}
-                        <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
-                            {{ 'buy&try' }}
-                        </button>
+                {% if product.is_sold %}
+                    <span class="sold">{{ 'Sold' }}</span>
+                {% elif product.current_price %}
+                    <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+                        {{ FEATURE_NAME_RESERVE }}
+                    </button>
+                	{% comment %}
+                    {% if product.has_trial %}
+                        {% if product.store.is_featured %}
+                            <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+                                {{ 'Request' }}
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+                                {{ 'Request' }}
+                            </button>
+                        {% endif %}
                     {% else %}
                         <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
                             {{ 'buy&try' }}
@@ -36,9 +41,16 @@
                 </button>
             {% endif %}
         </div>
+        {% if product.is_vintage %}
         <div class="col-xs-3 pull-right text-right">
+            <img src="{% static 'img/key.svg' %}">
+        </div>
+        {% endif %}
+        <!-- <div class="grid-product centered-parent {% if product.is_vintage %}vintage-product{% endif %}"> -->
+        <!-- Like funtionality on hold until ProfileView implemented -->
+        <!-- <div class="col-xs-3 pull-right text-right">
             <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
             </button>
-        </div>
+        </div> -->
     </div>

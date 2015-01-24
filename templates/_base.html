@@ -48,58 +48,65 @@
               </div><!-- /.modal-dialog -->
             </div><!-- /. end Add to Cart modal -->
         {% endblock modal %}
-        {% block nav %}
-            <div class="container-fluid top-bar">
-                {% block nav-all-else %}
-                <div class="row">
-                    <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></div>
-                    <div class="navbar-collapse collapse col-xs-3" style="margin-top:10px"></div>
-                    <div class="navbar-collapse collapse col-xs-3 right-side" style="padding: 0">        
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                        </button><!-- </a> -->
-                    </div>
-                    <div id="main-menu" class="col-xs-6 right-side">
-                        <div class="row">
-                            <div class="col-sm-12 main-navigation bottom-row">
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="{% url 'goods:new' %}">New</a></li>
-    				<li><a class="btn btn-link" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}Login{% endif %}</a></li>
-                                </ul>
-                            </div>
+    {% block nav %}
+        <div class="container-fluid top-bar">
+            {% block nav-all-else %}
+            <div class="row">
+                <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></div>
+                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3" style="margin-top:10px"></div>
+                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3 right-side" style="padding: 0">        
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                    </button><!-- </a> -->
+                </div>
+                <div id="main-menu" class="col-xs-6 right-side">
+                    <div class="row">
+                        <div class="col-sm-12 main-navigation bottom-row">
+                            <ul class="nav navbar-nav navbar-right">
+            				    <li><a href="#"><img src="{% static 'img/socialicons/instagram.svg' %}" class="socialicon"></a></li>
+            				    <li><a href="#"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
+            				    <li><a href="#"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
+                                <li><div class="cart-info"></div></li>
+                				{% if user.is_authenticated %}
+                				<li><a class="btn btn-link" href="#">Profile</a></li>
+                				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
+                				{% else %}
+                				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Login</a></li>
+                				{% endif %}
+                            </ul>
                         </div>
                     </div>
                 </div>
-                {% endblock nav-all-else %}
             </div>
-        {% endblock nav %}
-        {% block content %}{% endblock content %}
-        <footer class="main-footer">
-            <div class="container">'
-                <div id="main-footer">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-2">
-                            <div class="footer-widget">
-                                <ul class="nav navbar-nav navbar-right" style="border:none">
-                                    <li class="socialicons">
-                                        <a class="insta-icon" href="http://instagram.com/raredoor/" target="_blank">
-                                            <img src="{% static 'img/socialicons/instagram_gray32.png' %}"/>
-                                        </a>
-                                    </li>
-                                    <li class="socialicons">
-                                        <a class="insta-icon" href="https://www.facebook.com/RareDoor" target="_blank">
-                                            <img src="{% static 'img/socialicons/facebook_gray32.png' %}"/>
-                                        </a>
-                                    </li>
-                                    <li class="socialicons">
-                                        <a class="insta-icon" href="https://www.twitter.com/RareDoor" target="_blank">
-                                            <img src="{% static 'img/socialicons/twitter_gray32.png' %}"/>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+            {% endblock nav-all-else %}
+        </div>
+    {% endblock nav %}
+    {% block content %}{% endblock content %}
+    <footer class="main-footer">
+        <div class="container">'
+            <div id="main-footer">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="footer-widget">
+                            <ul class="nav navbar-nav navbar-right" style="border:none">
+                                <li class="socialicons">
+                                    <a class="insta-icon" href="http://instagram.com/raredoor/" target="_blank">
+                                        <img src="{% static 'img/socialicons/instagram_gray32.png' %}"/>
+                                    </a>
+                                </li>
+                                <li class="socialicons">
+                                    <a class="insta-icon" href="https://www.facebook.com/RareDoor" target="_blank">
+                                        <img src="{% static 'img/socialicons/facebook_gray32.png' %}"/>
+                                    </a>
+                                </li>
+                                <li class="socialicons">
+                                    <a class="insta-icon" href="https://www.twitter.com/RareDoor" target="_blank">
+                                        <img src="{% static 'img/socialicons/twitter_gray32.png' %}"/>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                         <div class="col-xs-offset-1 col-xs-12 col-sm-2">
                             <div class="footer-widget">

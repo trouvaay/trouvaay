@@ -27,15 +27,31 @@ def get_liked_items(user):
     liked_ids = [prod.id for prod in liked_list]
     return liked_ids
 
-class HomeView(generic.TemplateView):
+class HomeView(generic.ListView):
     template_name = 'goods/home/home.html'
+    context_object_name = 'products'
+    model = Product
+
+    def get_queryset(self):
+        queryset = self.model.objects.filter(is_published=True)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        context_product = Product.objects.get(short_name='HomepgFeatured')
-        context_imgs = ProductImage.objects.filter(product=context_product).all()
-        context['vintage'] = context_imgs[0]
-        context['new'] = context_imgs[1]
+        print(context)
+        #JSON sent to client to calc distance from user
+        context['products_json'] = serialize('json', context['products'])
+        print(context.keys)
+        for furnituretype in FurnitureType.objects.all():
+            context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True,)
+        context['BaseUrl'] = BASE_URL
+        context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
+        context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+        
+        # TODO: do not add 'site_name' to context
+        # once the 'sites' are setup in settings
+        context['site_name'] = settings.SITE_NAME
+        context['liked_items'] = get_liked_items(self.request.user)
         return context
 
 

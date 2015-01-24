@@ -207,6 +207,13 @@ class Product(models.Model):
                 dimension_str+= (self.get_dimension(dimension)+'x')
         return dimension_str[:-3]
 
+    @property
+    def is_vintage(self):
+        if len(self.segment.filter(select__icontains="vintage")):
+            return True
+        else:
+            return False
+
 
 # Funtions created for Product model signals
 def does_product_have_trial(sender, instance, **kwargs):
