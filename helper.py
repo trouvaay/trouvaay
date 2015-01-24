@@ -6,15 +6,15 @@ from django.conf import settings
 from django.contrib.sites.models import RequestSite, Site
 from django.template.loader import render_to_string
 import cloudinary
+from cloudinary.models import CloudinaryField
 
-#TODO: convert to environ var
+# TODO: convert to environ var
 cloudinary.config(
-  cloud_name = 'trouvaay',  
-  api_key = '239337878822387',  
-  api_secret = 'sYSwTRGE6LwUnEkb6MgHIlo-tAU'  
+    cloud_name='trouvaay',
+    api_key='239337878822387',
+    api_secret='sYSwTRGE6LwUnEkb6MgHIlo-tAU'
 )
 
-from cloudinary.models import CloudinaryField
 
 class AbstractImageModel(models.Model):
 	"""Abstract image model for ProductIMage and RetailerIMage models.
@@ -99,6 +99,91 @@ def GeoCode(street, city, state, zipcd, street2=None):
 
 # used to determine if AuthUser 'in_coverage_area' field should be set to True
 coverage_area = [94040]
+
+# Neigborhoods by google's locality address component
+Neighborhoods = {'SF': [
+    ('Alamo Square', 'Alamo Square'),
+    ('Anza Vista', 'Anza Vista'),
+    ('Ashbury Heights', 'Ashbury Heights'),
+    ('Balboa Terrace', 'Balboa Terrace'),
+    ('Bayview - Hunters Point', 'Bayview - Hunters Point'),
+    ('Bernal Heights', 'Bernal Heights'),
+    ('Buena Vista', 'Buena Vista'),
+    ('Castro', 'Castro'),
+    ('Chinatown', 'Chinatown'),
+    ('Civic Center', 'Civic Center'),
+    ('Cole Valley', 'Cole Valley'),
+    ('Corona Heights', 'Corona Heights'),
+    ('Cow Hollow', 'Cow Hollow'),
+    ('Crocker-Amazon', 'Crocker-Amazon'),
+    ('Diamond Heights', 'Diamond Heights'),
+    ('Dogpatch', 'Dogpatch'),
+    ('Duboce Triangle', 'Duboce Triangle'),
+    ('Embarcadero', 'Embarcadero'),
+    ('Excelsior', 'Excelsior'),
+    ('Fillmore', 'Fillmore'),
+    ('Financial District', 'Financial District'),
+    ("Fisherman's Wharf", "Fisherman's Wharf"),
+    ('Forest Hill', 'Forest Hill'),
+    ('Glen Park', 'Glen Park'),
+    ('Haight-Ashbury', 'Haight-Ashbury'),
+    ('Hayes Valley', 'Hayes Valley'),
+    ('Ingleside', 'Ingleside'),
+    ('Ingleside Terraces', 'Ingleside Terraces'),
+    ('Inner Sunset', 'Inner Sunset'),
+    ('Jackson Square', 'Jackson Square'),
+    ('Japantown', 'Japantown'),
+    ('Lakeside', 'Lakeside'),
+    ('Lakeshore', 'Lakeshore'),
+    ('Laurel Heights', 'Laurel Heights'),
+    ('Lower Haight', 'Lower Haight'),
+    ('Lower Pacific Heights', 'Lower Pacific Heights'),
+    ('Lower Nob Hill', 'Lower Nob Hill'),
+    ('Marina', 'Marina'),
+    ('Merced Heights', 'Merced Heights'),
+    ('Merced Manor', 'Merced Manor'),
+    ('Miraloma Park', 'Miraloma Park'),
+    ('Mission Bay', 'Mission Bay'),
+    ('Mission District', 'Mission District'),
+    ('Mission Terrace', 'Mission Terrace'),
+    ('Monterey Heights', 'Monterey Heights'),
+    ('Mount Davidson', 'Mount Davidson'),
+    ('Nob Hill', 'Nob Hill'),
+    ('Noe Valley', 'Noe Valley'),
+    ('North Beach', 'North Beach'),
+    ('NoPa', 'NoPa'), 
+    ('Oakland', 'Oakland'),
+    ('Oceanview', 'Oceanview'),
+    ('Outer Mission', 'Outer Mission'),
+    ('Outer Sunset', 'Outer Sunset'),
+    ('Outer Richmond', 'Outer Richmond'),
+    ('Pacific Heights', 'Pacific Heights'),
+    ('Parkmerced', 'Parkmerced'),
+    ('Parkside', 'Parkside'),
+    ('Portola', 'Portola'),
+    ('Potrero Hill', 'Potrero Hill'),
+    ('Presidio', 'Presidio'),
+    ('Presidio Heights', 'Presidio Heights'),
+    ('Rincon Hill', 'Rincon Hill'),
+    ('Russian Hill', 'Russian Hill'),
+    ('Saint Francis Wood', 'Saint Francis Wood'),
+    ('Sea Cliff', 'Sea Cliff'),
+    ('Sherwood Forest', 'Sherwood Forest'),
+    ('South Beach', 'South Beach'),
+    ('SoMa', 'SoMa'),
+    ('Sunnyside', 'Sunnyside'),
+    ('Sunset District', 'Sunset District'),
+    ('Telegraph Hill', 'Telegraph Hill'),
+    ('Tenderloin', 'Tenderloin'),
+    ('Twin Peaks', 'Twin Peaks'),
+    ('Union Square', 'Union Square'),
+    ('Visitacion Valley', 'Visitacion Valley'),
+    ('West Portal', 'West Portal'),
+    ('Western Addition', 'Western Addition'),
+    ('Westwood Highlands', 'Westwood Highlands'),
+    ('Westwood Park', 'Westwood Park'),
+    ('Yerba Buena', 'Yerba Buena')
+]}
 
 States = [
 		('AK', 'Alaska'),

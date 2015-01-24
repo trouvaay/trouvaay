@@ -1,6 +1,7 @@
 {% load cloudinary %}
 <div class="col-xs-12 col-sm-6 col-md-4 product" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
     <div class="grid-product centered-parent">
+        <!-- <img class="img-responsive" src="{{ product.productimage_set.first.image.url }}"> -->
         <div class="centered-child detail-image-large">
                 {% cloudinary product.productimage_set.first.image width=350 height=300 crop="fit" %}
         </div>
@@ -10,7 +11,7 @@
         <div class="centered-child detail-image-small">
                 {% cloudinary product.productimage_set.first.image width=275 height=275 crop="fit" %}
         </div>
-        <a href="{% url 'goods:detail' product.id  %}" class="view-product">
+        <a href="{% url 'goods:detail' product.slug  %}" class="view-product">
             <div class="text">View product</div>
             <div class="background"></div>
         </a>

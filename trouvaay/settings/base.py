@@ -24,7 +24,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ ]
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'members',
     'goods',
     'cloudinary',
-#     'debug_toolbar',
+    # 'debug_toolbar',
     'crispy_forms',
     'stripe',
 )
