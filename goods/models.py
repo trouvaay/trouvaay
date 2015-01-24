@@ -132,7 +132,7 @@ class Product(models.Model):
         for x in itertools.count(1):
             if not Product.objects.filter(slug=self.slug).exists():
                 break
-            self.slug = '%s-%d' % (orig, x)
+            self.slug = '%s-%d' % (self.slug, x)
 
         super(Product, self).save(*args, **kwargs)
 
