@@ -152,7 +152,6 @@ $(document).ready(function() {
 								},
 								success: function(data){
 								  	if(data['status'] == "ok"){
-                                        console.log('it worked');
 								  		$("#reserved-product-name").text(data['product_name']);
 								  		$("#reserved-product-store-name").text(data['store_name']);
 								  		var storeAddress = data['store_street'];

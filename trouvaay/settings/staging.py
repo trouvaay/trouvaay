@@ -22,3 +22,4 @@ EMAIL_HOST = os.getenv('EMAIL_HOST', None)  # 'smtp.gmail.com'
 EMAIL_PORT = os.getenv('EMAIL_PORT', None)  # 587 - for gmail
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', None)  # e.g. 'support@raredoor.com'
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', None)
+ADMINS = os.getenv('ADMINS', None)

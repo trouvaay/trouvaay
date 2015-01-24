@@ -13,6 +13,7 @@ django-registration-redux==1.1
 django-toolbelt==0.0.1
 djorm-pgarray==1.2
 gnureadline==6.3.3
+gspread==0.2.2
 gunicorn==19.1.1
 ipython==2.3.1
 psycopg2==2.5.4
