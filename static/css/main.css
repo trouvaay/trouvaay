@@ -4225,6 +4225,9 @@ footer ul li a:hover {
     position: fixed;
     left: 10%;
   }
+  .container-fluid.select-bar.hp-tabs {
+    display: none;
+  }
   .product-description .name.map {
     margin: 0 auto 10px;
     width: 100%;
