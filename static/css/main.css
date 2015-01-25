@@ -83,7 +83,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li {
   display:inline-block;
-  color: black;
+}
+.container-fluid.select-bar.hp-tabs .nav.navbar-navt li a {
+  color: #333;
 }
 .select-bar {
 	padding-top: 20px;
@@ -2716,7 +2718,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   text-align: center;
-  padding: 40px 0 40px;
+  padding: 20px 0 20px;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
