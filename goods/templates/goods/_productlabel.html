@@ -6,9 +6,14 @@
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
         <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents }}</span>
     </div>
-    <div class="col-xs-12 pic-detail-home" style="text-align:left; margn-bottom: 1px">
+    <div class="col-xs-8 pic-detail-home" style="text-align:left; margn-bottom: 1px">
         <p style="margin-bottom: 3px"><em>{{'$'}}{{ product.current_price|floatformat:"0" }}</em></p>
     </div>
+    {% if product.is_vintage %}
+    <div class="col-xs-3 pic-detail-home" style="text-align:left; margn-bottom: 1px; color:rgb(218,182,97)">
+        <p style="margin-bottom: 3px"><b><em>1 of 1</em></b></p>
+    </div>
+    {% endif %}
     <div class="col-xs-9 pic-detail-home">
             {% if product.is_sold %}
                 <span class="sold">{{ 'Sold' }}</span>
