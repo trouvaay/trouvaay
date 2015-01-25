@@ -81,6 +81,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .top-bar, .select-bar {
   padding: 0px 15px;
 }
+.container-fluid.select-bar.hp-tabs .nav.navbar-navt li {
+  display:inline-block;
+  color: black;
+}
 .select-bar {
 	padding-top: 20px;
 	z-index: 99;
