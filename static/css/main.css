@@ -71,8 +71,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	position: fixed;
 }
 }
-#mobil-nav .nav {
+#mobile-nav .nav {
 	padding: 0 15px;
+}
+#tabs-icon-mobile {
+  background: white;
+  padding: 0;
 }
 .top-bar, .select-bar {
   padding: 0px 15px;

@@ -1,35 +1,33 @@
 {% load staticfiles %}
-    <div class="col-xs-9 pic-detail-home" style="text-align:left; margin-top: 3px;">
+    <div class="col-xs-12 pic-detail-home" style="text-align:left; margin-top: 3px;">
         <p style="margin-bottom: 3px">{{ product.short_name|truncatechars:28 }}</p>
 
         <!-- need these so that we can pass product name and price to stripe checkout -->
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
         <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents }}</span>
     </div>
-    <div class="col-xs-2 pic-detail-home" style="text-align:left;">
+    <div class="col-xs-12 pic-detail-home" style="text-align:left; margn-bottom: 1px">
         <p style="margin-bottom: 3px"><em>{{'$'}}{{ product.current_price|floatformat:"0" }}</em></p>
     </div>
-    <div>
-        <div class="col-xs-9 pic-detail-home">
-                {% if product.is_sold %}
-                    <span class="sold">{{ 'Sold' }}</span>
-                {% elif product.current_price %}
-                    <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
-                        {{ FEATURE_NAME_RESERVE }}
-                    </button>
-                {% else %}
-                    <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
-                    Request Price
-                    </button>
-                {% endif %}
-        </div>
-        <!-- Like funtionality on hold until ProfileView implemented -->
-        <div class="col-xs-3">
-            {{ product.store.neighborhood }}
-        </div>
+    <div class="col-xs-9 pic-detail-home">
+            {% if product.is_sold %}
+                <span class="sold">{{ 'Sold' }}</span>
+            {% elif product.current_price %}
+                <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+                    {{ FEATURE_NAME_RESERVE }}
+                </button>
+            {% else %}
+                <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
+                Request Price
+                </button>
+            {% endif %}
+    </div>
+    <!-- Like funtionality on hold until ProfileView implemented -->
+    <div class="col-xs-3">
+        {{ product.store.neighborhood }}
+    </div>
         <!-- <div class="col-xs-3 pull-right text-right">
             <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
             </button>
         </div> -->
-    </div>
