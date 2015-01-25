@@ -2722,7 +2722,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   text-align: center;
-  padding: 20px 0 20px;
+  padding: 10px 0 12px;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
@@ -2749,7 +2749,7 @@ form .form-checkbox-wrap .checkbox-label {
   -moz-background-clip: padding;
   border-radius: 0px;
   background-clip: padding-box;
-  height: 80px;
+  /*height: 80px;*/
   display: table;
   position: relative;
   width: 100%;
