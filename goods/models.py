@@ -30,6 +30,7 @@ class Style(models.Model):
 
 class FurnitureType(models.Model):
     select = models.CharField(unique=True, max_length=55, default='seating', null=True, blank=True) 
+    is_furniture = models.BooleanField(default=True)
     
     def __str__(self):
         return self.select or 'none'
@@ -170,13 +171,14 @@ class Product(models.Model):
     def has_returns(self):
         return self.store.has_returns
 
-    def does_product_have_trial(self):
-        """if product is part of a subcategory that
-        is triable OR has a price above $1000, it is eligible for a trial
-        """     
-        trial_list = Subcategory.objects.filter(trial_product=True)
-        if self.current_price >= 1000 or self.subcategory.first() in trial_list:
-            self.has_trial = True
+
+    def is_furniture(self):
+        """ Test whether furnituretypes have furniture set to True """
+        furniture = [str(i) for i in FurnitureType.objects.filter(is_furniture=True)]
+        if [i for i in self.furnituretype.all() if i.select in furniture]:
+            return True
+        else:
+            return False
 
     def has_dimensions(self):
         """Checks to see if any of dimension fields are not null/blank
