@@ -3252,7 +3252,7 @@ footer ul li a:hover {
   float: left;
   position: relative;
 }
-.homepage-slider .flex-control-paging {
+/*.homepage-slider .flex-control-paging {
   position: absolute;
   bottom: 10px;
   left: 0;
@@ -3277,7 +3277,7 @@ footer ul li a:hover {
   -moz-background-clip: padding;
   border-radius: 0px;
   background-clip: padding-box;
-}
+}*/
 .homepage-slider .flex-control-paging a.flex-active,
 .homepage-slider .flex-control-paging a:hover {
   background: #fd575f;

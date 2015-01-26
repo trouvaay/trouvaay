@@ -8,7 +8,6 @@ urlpatterns = patterns('',
     url(r'^about/$', views.AboutView.as_view(), name='about'),
     
     #TODO: add unique url generator for vintage sales from IG
-    # url(r'^new/$', views.NewView.as_view(), name='new'),
     #url(r'^vintage/$', views.VintageView.as_view(), name='vintage'),   
     
     # Additional copy pages 
