@@ -67,11 +67,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   transition: all .3s ease-in-out;
 }
 
-@media screen and (max-width: 768px) {
-.top-bar {
-	position: fixed;
-}
-}
+
 .col-centered {
   float: none;
   margin: 0 auto;
@@ -1539,27 +1535,14 @@ text-align: left;
   text-align: center;
 }
 
-
-@media screen and (min-width: 768px) {
-.product.col-sm-6 {
-	width: 48%;
-	margin-right: 4%;
-}
-
-.product.col-sm-6:nth-child(2n) {
-	margin-right: 0%;
-}
-
-
-}
-
-
 @media screen and (min-width: 992px) {
 .product.col-md-4 {
 	width: 30%;
 	margin-right: 5%;
 }
-
+.pic-detail-home {
+  text-align: left;
+}
 .product.col-sm-6:nth-child(2n) {
 	margin-right: 5%;
 }
@@ -1578,10 +1561,6 @@ text-align: left;
 /*  width: 90%;*/
   margin: 0 2.5%;
   /*height: 350px;*/
-}
-.grid-product figure img {
-  /*width: 100%;
-  max-height: 350px;*/
 }
 .detail-image-med {
   display: none;
@@ -1654,10 +1633,6 @@ text-align: left;
   -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/*.view-product:hover {
-  text-decoration: underline;
-  border-top: 5px solid rgb(218, 182, 97);
-}*/
 .grid-product .view-product .text {
   font-family: "existencelight", Arial, sans-serif;
   font-size: 11px;
@@ -2549,19 +2524,14 @@ form .form-checkbox-wrap .checkbox-label {
 
 #signup-login-modal .modal-content .col-md-6:first-child {
   border-right: 1px solid #eee;
-
 }
-
 #signup-login-modal .login form {
   margin-bottom: 20px;
 }
-
 #signup-login-modal .login .btn-primary {
   background-color: #999;
   border: 1px solid #999;
-
 }
-
 #signup-login-modal.in + .top-bar {
   background: transparent;
   border-color: transparent;
@@ -2571,7 +2541,6 @@ form .form-checkbox-wrap .checkbox-label {
 #signup-login-modal.in + .top-bar .main-navigation {
 	opacity: 0;
 }
-
 #signup-login-modal .modal-footer {
   border-top: 0px;
 }
@@ -2584,7 +2553,6 @@ form .form-checkbox-wrap .checkbox-label {
   left: 0px;
   right: 0px;
 }
-
 #signup-login-modal .modal-dialog button.close {
   position: absolute;
   right: 8px;
@@ -3151,11 +3119,16 @@ footer ul li a:hover {
 .how-it-works .statement:not(:last-child) {
   border-right: 1px solid #DDD;
 }
-
 @media screen and (max-width: 992px) {
-.how-it-works .statement:not(:last-child) {
-  border-right: 0px;
-}
+  .how-it-works .statement:not(:last-child) {
+    border-right: 0px;
+  }
+   .pic-detail-home {
+  }
+  .detail-image-med {
+    display: table;
+    margin: 0% auto 10%;
+  }
 }
 .how-it-works .row-fluid div {
   font-size: 14px;
@@ -3188,7 +3161,6 @@ footer ul li a:hover {
   float: left;
   padding: 5px 0 5px 0;
   height: 100%;
-  
 }
 #first-content-after-nav {
   padding-top: 65px;
@@ -3288,32 +3260,6 @@ footer ul li a:hover {
   float: left;
   position: relative;
 }
-/*.homepage-slider .flex-control-paging {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-}
-.homepage-slider .flex-control-paging li {
-  margin: 0 5px;
-  display: inline-block;
-  float: none;
-}
-.homepage-slider .flex-control-paging a {
-  width: 30px;
-  height: 5px;
-  background: #cccccc;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  -webkit-border-radius: 0px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
-  -moz-background-clip: padding;
-  border-radius: 0px;
-  background-clip: padding-box;
-}*/
 .homepage-slider .flex-control-paging a.flex-active,
 .homepage-slider .flex-control-paging a:hover {
   background: #fd575f;
@@ -3394,13 +3340,6 @@ footer ul li a:hover {
     opacity:.50;
     filter: alpha(opacity=50);
 }
-
-@media screen and (max-width: 768px) {
-.homepage-slider .slides h3 {
-	top: 80px;
-}
-}
-
 #map-canvas {
   height: 30rem;
 }
@@ -3525,36 +3464,7 @@ footer ul li a:hover {
 .detail-margin {
   /*margin: 2rem 4rem;*/
 }
-@media screen and (min-width: 992px) {
-  .col-sm-6 {
-  }
-}
 
-.pic-detail-home {
-    text-align: left;
-  }
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  .pic-detail-home {
-  }
-}
-@media screen and (min-width: 413px) and (max-width: 992px) {
-  .pic-detail-home {
-  }
-  .detail-image-med {
-    display: table;
-    margin: 0% auto 10%;
-  }
-}  
-@media screen and (min-width: 1199px) {
-  .grid-product figure {
-    /*width: 90%; */
-    /*height: 265px;*/
-  }
-  .grid-product figure img {
-  /*  width: 263px;
-    height: 263px;*/
-  }
-}
 @media screen and (min-width: 992px) and (max-width: 1199px) {
   .map-container {
     padding-bottom: 36.45%;
@@ -3785,7 +3695,8 @@ footer ul li a:hover {
     width: 100%;
   }
 }
-@media screen and (min-width: 200px) and (max-width: 574px) {
+
+@media screen and (min-width: 200px) and (max-width: 767px) {
   .products-wrapper article figure {
     width: 100%;
   }
@@ -3804,8 +3715,6 @@ footer ul li a:hover {
     width: 100%;
     padding-bottom: 346px;
   }
-}
-@media screen and (min-width: 200px) and (max-width: 767px) {
   .grid-product {
     /*width: 48%;*/
     margin-right: 2%;
@@ -3963,9 +3872,16 @@ footer ul li a:hover {
     top: auto;
   }
 }
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .main-navigation.top-row {
 	  padding-right: 30px;
+  }
+  .product.col-sm-6 {
+    width: 48%;
+    margin-right: 4%;
+  }
+  .product.col-sm-6:nth-child(2n) {
+    margin-right: 0%;
   }
   .main-navigation .navbar-nav {
   }
@@ -4116,23 +4032,23 @@ footer ul li a:hover {
   }
 }
 
-@media (max-width: 992px) {
-  
-  .detail-image-large {
-    display: none;
-    }
-
-  .logo-div {
-    padding-top: 10px;
-    height: 72px;
-  }
-}
 @media (max-width: 767px) {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
   }
-  #main-footer,
+  .container-fluid.select-bar.hp-tabs {
+    display: none;
+  }
+  .homepage-slider .slides h3 {
+    top: 80px;
+  }
+  .top-bar {
+    position: fixed;
+  }
   #main-menu {
+    display: none;
+  }
+  #main-footer {
     display: none;
   }
   .collapse {
@@ -4248,7 +4164,7 @@ footer ul li a:hover {
   }
 }
 
- @media (max-width: 413px) {
+@media screen and (max-width: 413px) {
   .detail-image-small {
   display: block;
   margin-bottom: 10%;
@@ -4294,9 +4210,7 @@ footer ul li a:hover {
     position: fixed;
     left: 10%;
   }
-  .container-fluid.select-bar.hp-tabs {
-    display: none;
-  }
+  
   .product-description .name.map {
     margin: 0 auto 10px;
     width: 100%;
@@ -4440,9 +4354,7 @@ li.socialicons a {
 }
 .tfoot {
   font-weight: 800;
-}
-
-
+} 
 .layer {
   overflow: auto;
   padding: 25px 30px;
