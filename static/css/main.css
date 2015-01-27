@@ -477,7 +477,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   float: left;
   background: white;
-  padding: 40px 0 40px;
+  padding: 0px 0 40px;
 }
 .main-container.comment-block {
   padding-top: 20px 0 40px;
