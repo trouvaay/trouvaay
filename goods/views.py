@@ -37,6 +37,7 @@ class HomeView(generic.ListView):
             context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True,)
         context['BaseUrl'] = BASE_URL
         context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
+        context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
         
         # TODO: do not add 'site_name' to context
@@ -81,6 +82,7 @@ class DetailView(generic.DetailView):
         # context['liked_items'] = get_liked_items(self.request.user)
         context['returns'] = settings.RETURN_POLICY
         context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
+        context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY     
         return context
 

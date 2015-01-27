@@ -2482,12 +2482,12 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .btn.btn-primary.buy {
   width: 70px;
-  background-color: #333;
-  border-color: black;
+  /*background-color: #333;*/
+  /*border-color: black;*/
 }
 .btn.btn-primary.buy.try {
   width: 145px;
-  background-color: rgb(201/177/62);
+  /*background-color: rgb(201,177,62);*/
 }
 .btn.btn-success.dist {
   width: 60px;
@@ -3241,6 +3241,16 @@ footer ul li a:hover {
   padding: 0;
   /*border-top: 2.5px solid black;*/
   overflow: hidden;
+  /*height: 50rem;*/
+}
+
+.black_overlay .landing-message {
+  color: white;
+  padding: 5% 15%;
+}
+.black_overlay h2,
+.black_overlay h3 {
+  text-align: center;
 }
 .homepage-slider-wrap {
   width: 100%;
@@ -3295,6 +3305,17 @@ footer ul li a:hover {
   list-style: none;
 }
 .homepage-slider .slides li {
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  height: 50rem;
+  position: relative;
+  width: 100%;
+  float: left;
+}
+.slides li {
   background-position: center center;
   background-repeat: no-repeat;
   -webkit-background-size: cover;

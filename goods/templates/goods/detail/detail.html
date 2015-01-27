@@ -49,7 +49,7 @@
 				                {% if product.is_sold %}
 				                    <span class="sold">{{ 'Sold' }}</span>
 				                {% elif product.current_price %}
-				                    <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+				                    <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}" title="{{ FEATURE_TOOLTIP_RESERVE }}">
 				                        {{ FEATURE_NAME_RESERVE }}
 				                    </button>
 				                    {% comment %}
