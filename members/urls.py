@@ -20,12 +20,12 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
     url(r'^signup/$', views.SignupView.as_view(), name='signup'),
     url(r'^productlike/$', views.ProductLike, name='like'),
-    url(r'^cart/$', views.CartView.as_view(), name='cart'),
     url(r'^addtocart/$', views.AddToCart, name='addtocart'),
-    url(r'^removefromcart/$', views.RemoveFromCart, name='removefromcart'),
-    url(r'^checkout/$', views.CheckoutView.as_view(), name='checkout'),
-    url(r'^checkoutcallback/$', views.CartCheckoutCallbackView.as_view(), name='checkoutcallback'),
     url(r'^reservecallback/$', views.ReserveCallbackView.as_view(), name='reserve_callback'),
-    url(r'^review/$', views.ReviewView.as_view(), name='review'),
-    url(r'^payment/$', views.SubmitCustomerPayment, name='payment'),
+
+    # Unused Cart Feature #
+    # url(r'^cart/$', views.CartView.as_view(), name='cart'),
+    # url(r'^removefromcart/$', views.RemoveFromCart, name='removefromcart'),
+    # url(r'^checkout/$', views.CheckoutView.as_view(), name='checkout'),
+    # url(r'^checkoutcallback/$', views.CartCheckoutCallbackView.as_view(), name='checkoutcallback'),
 )
