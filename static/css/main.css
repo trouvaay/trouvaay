@@ -1571,7 +1571,7 @@ text-align: left;
   border-top: lightgray 1px solid
 }
 .product-container:hover .vintage-label {
-  border-top: 5px solid rgb(218, 182, 97);
+  border-top: 5px solid rgb(33,16,106);
 }
 .grid-product figure {
 /*  width: 90%;*/
