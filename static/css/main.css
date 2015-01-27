@@ -1562,12 +1562,17 @@ text-align: left;
 .product.col-sm-6:nth-child(2n) {
 	margin-right: 5%;
 }
-
 .product.col-md-4:nth-child(3n) {
 	margin-right: 0%;
 }
+.vintage-label {
+  height: 1.5rem;
+  padding-top: 5px;
+  border-top: lightgray 1px solid
 }
-
+.product-container:hover .vintage-label {
+  border-top: 5px solid rgb(218, 182, 97);
+}
 .grid-product figure {
 /*  width: 90%;*/
   margin: 0 2.5%;
@@ -1648,10 +1653,10 @@ text-align: left;
   -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-.view-product:hover {
+/*.view-product:hover {
   text-decoration: underline;
-  border-bottom: 6px solid rgb(218, 182, 97);
-}
+  border-top: 5px solid rgb(218, 182, 97);
+}*/
 .grid-product .view-product .text {
   font-family: "Quicksand", Arial, sans-serif;
   font-size: 11px;

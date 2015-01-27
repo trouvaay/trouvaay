@@ -1,6 +1,7 @@
 {% load cloudinary %}
-<div class="col-xs-12 col-sm-6 col-md-4 product" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
-            <div style="text-align:center; margin-top: 5px; margin-bottom:-10px;"><b>Vintage</b></div>
+<div class="col-xs-12 col-sm-6 col-md-4 product-container" style="padding-bottom: 3rem;">
+    <div class="vintage-label" style="text-align:center; margin-top: 5px; margin-bottom:-10px;">
+        {% if product.is_vintage %}<b>Vintage</b>{% else %}{% endif %}</div>
     <div class="grid-product centered-parent {% if product.is_vintage %}vintage-product{% endif %}" style="margin-bottom:-5px;">
 	    
         <!-- <img class="img-responsive" src="{{ product.productimage_set.first.image.url }}"> -->
