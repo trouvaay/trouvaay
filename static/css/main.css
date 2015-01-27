@@ -59,6 +59,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   background: rgb(33,16,106);
   z-index: 100;
   border-bottom: 5px solid rgb(218,182,97);
+  min-height: 65px;
   
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
