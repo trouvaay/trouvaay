@@ -5,15 +5,15 @@
 {% block content %}
   <div class="container homepage-slider-container">
     <div class="row-fluid">
-        <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg'); height:45rem; background-size:contain no-repeat">
+        <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg'); height:45rem;">
         <!-- http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg -->
                 <div class="black_overlay">
-                    <div class="landing-message">
-                        <h1>
-                            Discover cool furniture in Bay Area stores
-                        </h1></br></br>
-                    </div>
                 </div><!-- end overlay -->
+		<div class="landing-message">
+		    <h1>
+			Discover cool furniture in Bay Area stores
+		    </h1>
+		</div>
         </div>
     </div>
   </div>
@@ -31,15 +31,15 @@
   </div>
     <div class="container-fluid select-bar hp-tabs" style="box-shadow: 0 6px 4px -4px #333;">
         <div class="row-fluid">
-            <div class="col-xs-12 col-sm-3 logo-div main-navigation hidden-xs">
+            <div class="col-xs-12 col-sm-3 col-md-3 logo-div main-navigation hidden-xs">
     	     <a href="{% url 'goods:home' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a>
             </div>
-    		<div class="col-xs-12 col-sm-7 col-md-6">
+    		<div class="col-xs-12 col-sm-6 col-md-6">
     			<div class="row-fluid">
     				<div class="tab-icons">
     					<div class="row-fluid">
     						<div class="col-sm-12 col-md-12">
-    						<ul class="nav nav-tabs pull-left center-block">
+    						<ul class="nav nav-tabs center-block">
     							<li class="hidden-lg hidden-md hidden-sm" style="padding-top: 20px;">filter</li>
     							<li class="active first"><a href="#tab1" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">everything</span></a></li>
     							<li><a href="#tab2" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/seating128.png' %}" title="seating" alt=""/></span><span class="inner icon-label" style="display:list-item">seating</span></a></li>
@@ -53,8 +53,9 @@
     				</div>
     			</div>
     		</div>
-    	<div class="col-xs-2 hidden-sm hidden-xs">
+    	<div class="col-xs-3 hidden-xs col-md-3">
     		<ul class="nav navbar-navt">
+    		<li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal">How it works</a></li>
     		{% if user.is_authenticated %}
     		<li><a class="btn btn-link" href="#">Profile</a></li>
     		<li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
@@ -164,6 +165,27 @@
                 {% endif %}
             </div>
     </div><!-- end pagination div -->
+    <div class="modal fade" id="how-it-works-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+	<div class="container-fluid how-it-works layer">
+    <div class="row-fluid">
+    	<div class="col-md-12 statement">
+    		<h2>5-Day Discovery Period </h2>
+            <h4>Go see your item in-store.</br>Change of heart? Cancel the order — no cost, no questions asked.</br>The convenience of online shopping without the regret.</h4>
+    	</div>
+    	<div class="col-md-12 statement">
+    		<h2>White Glove Delivery</h2>
+    		<h4>Ever find a great piece of furniture but discover that shipping cost more than the item itself? Pay no more than $75 for delivery</h4>
+    	</div>
+    </div>
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}
 {% block endjs %}{% endblock endjs %}
