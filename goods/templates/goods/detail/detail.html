@@ -7,13 +7,7 @@
         <div class="row">
 			<div class="col-sm-7 col-xs-12" style="text-align:center">
 				<div class="row">
-					<div class="col-xs-offset-5 col-xs-12">
-						{% if product.is_vintage %}
-					    <div class="col-xs-3 pic-detail-home" style="text-align:left; margn-bottom: 1px; color:rgb(218,182,97)">
-					        <p style="margin-bottom: 3px"><b><em>1 of 1</em></b></p>
-					    </div>
-					    {% endif %}
-					</div>
+				
 				</div>
 	      		<!-- renders images responsibly -->
 	      		<div class="detail-image-large">
@@ -37,6 +31,11 @@
 					  	<div class="row">
 					  	   <div id="first" class="col-xs-12 product-description">
 					           {{ product.description }}
+					       </div>
+					    </div>
+					    <div class="row">
+					  	   <div id="first" class="col-xs-12 product-description">
+					           <b>${{ product.current_price|floatformat:"0" }}</b>
 					       </div>
 					    </div>
 					    <div class="row" style="margin-bottom: 8%">
@@ -82,6 +81,18 @@
 					  	<!-- End Product labeling -->
 					  	<!-- Start Product Attributes -->
 					  	<div>
+					  		<div class="row">
+						  	   <div class="col-xs-4 attr-label">
+						           Type
+						       </div>
+						       <div class="col-xs-8 attr">
+						       	{% if product.is_vintage %}
+						       		Vintage
+						       	{% else %}
+						       		New
+						       	{% endif %}
+						       </div>
+						    </div>
 						  	{% if product.material.all %}
 						  	<div class="row">
 						  	   <div class="col-xs-4 attr-label">

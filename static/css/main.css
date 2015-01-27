@@ -56,7 +56,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .top-bar {
   width: 100%;
   float: left;
-  background: #333;
+  background: rgb(33,16,106);
   z-index: 100;
   border-bottom: 5px solid rgb(218,182,97);
   
@@ -115,6 +115,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-size: 25px;
   padding-left: 35px;
   height: 48px;
+}
+.logo-div.main-navigation {
+  text-align: left;
 }
 .main-footer a {
   color: #7a7a7a;
@@ -285,9 +288,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   padding-bottom: 75px;
 }
 .sold {
-  font-weight: 700;
-  font-style: italic;
-  color: #d9534f;
+  font-weight: 600;
+  color: red;
 }
 .icon-label {
   color: rgb(34, 34, 44);
@@ -979,6 +981,8 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   background: none;
   color: black;
   border: black 2px solid;
+  font-size: 16px;
+  font-weight: 600;
 }
 .product-description.hours .heading {
   float: left;
@@ -2485,6 +2489,7 @@ form .form-checkbox-wrap .checkbox-label {
   /*background-color: #333;*/
   /*border-color: black;*/
 }
+.btn.btn-default.sold,
 .btn.btn-primary.buy.try {
   width: 145px;
   /*background-color: rgb(201,177,62);*/
@@ -3120,13 +3125,18 @@ footer ul li a:hover {
   font-size: 21px;
   margin-top: 10px;
 }
+
+.how-it-works h4 {
+  padding: 0 15px;
+}
 .how-it-works h2 {
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 .how-it-works .statement {
   margin-top: 30px;
   margin-bottom: 30px;
   min-height: 106px;
+  padding: 0 8rem;
 }
 .how-it-works .statement:not(:last-child) {
   border-right: 1px solid #DDD;
@@ -3246,10 +3256,9 @@ footer ul li a:hover {
 
 .black_overlay .landing-message {
   color: white;
-  padding: 5% 15%;
+  padding: 10% 15%;
 }
-.black_overlay h2,
-.black_overlay h3 {
+.black_overlay h1 {
   text-align: center;
 }
 .homepage-slider-wrap {
@@ -3976,6 +3985,7 @@ footer ul li a:hover {
     font-size: 14px;
     font-weight: bold;
     margin-bottom:5px;
+    padding: 10px 5px;
   }
   .main-navigation .navbar-nav > li > a.btn-link {
     line-height: 32px;

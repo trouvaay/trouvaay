@@ -69,12 +69,12 @@
                     <div class="row">
                         <div class="col-sm-12 main-navigation bottom-row">
                             <ul class="nav navbar-nav navbar-right">
-            				    <li><a href="#"><img src="{% static 'img/socialicons/instagram.svg' %}" class="socialicon"></a></li>
-            				    <li><a href="#"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
-            				    <li><a href="#"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
+            				    <li><a href="http://instagram.com/raredoor/"><img src="{% static 'img/socialicons/instagram.svg' %}" class="socialicon"></a></li>
+            				    <li><a href="https://www.facebook.com/RareDoor"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
+            				    <li><a href="https://www.twitter.com/RareDoor"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
                                 <li><div class="cart-info"></div></li>
                 				{% if user.is_authenticated %}
-                				<li><a class="btn btn-link" href="#">Profile</a></li>
+                				<!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
                 				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
                 				{% else %}
                 				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Login</a></li>
@@ -116,7 +116,7 @@
                     <div class="col-xs-offset-1 col-xs-12 col-sm-2">
                         <div class="footer-widget">
                             <div class="footer-menu">
-                                <h2><a href="{% url 'goods:about' %}">Shipping</a></h2>
+                                <h2><a href="{% url 'goods:about' %}">Delivery</a></h2>
                             </div>
                         </div>
                     </div>
