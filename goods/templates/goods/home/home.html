@@ -13,7 +13,7 @@
 		    <h1>
 			Discover cool furniture in Bay Area stores
 		    </h1>
-            <h3>The convenience of online shopping without the regret.</h3>
+            <h3><span class="subheading">The convenience of online shopping without the regret.</span></h3>
 		</div>
         </div>
     </div>
@@ -56,9 +56,9 @@
     		</div>
     	<div class="col-xs-3 hidden-xs col-md-3">
     		<ul class="nav navbar-navt">
-    		<li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal">How it works</a></li>
+    		<li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h3>How it works</h3></a></li>
     		{% if user.is_authenticated %}
-    		<li><a class="btn btn-link" href="#">Profile</a></li>
+    		<!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
     		<li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
     		{% else %}
     		<li><a class="btn btn-link" href="{% url 'members:logout' %}">Login</a></li>

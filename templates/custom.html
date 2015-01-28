@@ -16,11 +16,11 @@ var trouvaay = {
 						"<li><a href='{% url 'goods:about' %}'>About</a></li>" +
 						"<li class='nav-divider'></li>" +
 						"<li><a style='display:inline-block' class='insta-icon mobile' href='http://instagram.com/raredoor/' target='_blank'>" +
-								"<img src='{% static 'img/socialicons/instagram_gray32.png' %}'/></a>" +
+								"<img src='{% static 'img/socialicons/instagram.svg' %}'/></a>" +
 							"<a style='display:inline-block' class='insta-icon mobile' href='https://www.facebook.com/RareDoor' target='_blank'>" +
-								"<img src='{% static 'img/socialicons/facebook_gray32.png' %}'/></a>" +
+								"<img src='{% static 'img/socialicons/facebook.svg' %}'/></a>" +
 							"<a style='display:inline-block'class='insta-icon mobile' href='https://twitter.com/RareDoor/' target='_blank'>" +
-					 			"<img src='{% static 'img/socialicons/twitter_gray32.png' %}'/></a>" +
+					 			"<img src='{% static 'img/socialicons/twitter.svg' %}'/></a>" +
 					 	"</li>" +
 					 "</ul></div>";
         var mobileTabIcons = "<div id='tab-icons-mobile' class='container select-bar hp-tabs'>"+
@@ -59,7 +59,7 @@ var trouvaay = {
                                     "</div>"+
                                 "</div>"+
                             "</div>"+
-                            "</div>"+
+                            "</div>"
 
 
         //Append mobile menu
@@ -75,7 +75,6 @@ var trouvaay = {
         $("#mob-nav").on('click',function() {
                 if (!$('#mobile-nav').length ) {
                   $(".container-fluid.top-bar").append(mobilemenutop);
-                
                 } else {
                   $("#mobile-nav").remove();
                 }

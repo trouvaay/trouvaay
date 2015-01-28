@@ -16,6 +16,7 @@ STATIC_ROOT = 'staticfiles'
 SECRET_KEY = os.getenv('SECRET_KEY', None)
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', None)
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY', None)
+OLARK_SITE_ID = os.getenv('OLARK_SITE_ID', None)
 
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', None)
 EMAIL_HOST = os.getenv('EMAIL_HOST', None)  # 'smtp.gmail.com'

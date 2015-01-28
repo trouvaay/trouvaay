@@ -21,7 +21,7 @@ class HomeView(generic.ListView):
     paginate_by = 15
 
     def get_queryset(self):
-        pub_products = self.model.objects.filter(is_published=True, description="")
+        pub_products = self.model.objects.filter(is_published=True)
         #filter by products that are furniture
         queryset = [i for i in pub_products if i.is_furniture()]
         return queryset
@@ -29,7 +29,7 @@ class HomeView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         #JSON sent to client to calc distance from user
-        context['products_json'] = serialize('json', context['products'])
+        # context['products_json'] = serialize('json', context['products'])
         for furnituretype in FurnitureType.objects.filter(is_furniture=True):
             context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True,)
         context['BaseUrl'] = BASE_URL

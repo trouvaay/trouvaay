@@ -1,20 +1,12 @@
 {% load staticfiles %}
     <div class="col-xs-12 pic-detail-home" style="text-align:left; margin: 3px 0px 5px;">
-        <p style="margin-bottom: 3px">{{ product.short_name|truncatechars:28 }}<em>{{' - $'}}{{ product.current_price|floatformat:"0" }}</em></p>
+        <p style="margin-bottom: 3px">{{ product.short_name|truncatechars:28 }}<em>{% if product.current_price %}{{' - $'}}{{ product.current_price|floatformat:"0" }}{% endif %}</em></p>
 
         <!-- need these so that we can pass product name and price to stripe checkout -->
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
         <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents }}</span>
     </div>
-    <!-- <div class="col-xs-8 pic-detail-home" style="text-align:left; margn-bottom: 1px">
-        <p style="margin-bottom: 3px"><em>{{'$'}}{{ product.current_price|floatformat:"0" }}</em></p>
-    </div> -->
-    <!-- {% if product.is_vintage %}
-    <div class="col-xs-3 pic-detail-home" style="text-align:left; margn-bottom: 1px; color:rgb(218,182,97)">
-        <p style="margin-bottom: 3px"><b><em>1 of 1</em></b></p>
-    </div>
-    {% endif %} -->
-    <div class="col-xs-9 pic-detail-home">
+    <div class="col-xs-12 col-sm-7 pic-detail-home" style="margin-bottom: 5px">
             {% if product.is_sold %}
                 <button type="button" class="btn btn-default sold disabled" id="buy_{{ product.id }}" title="{{ FEATURE_TOOLTIP_RESERVE }}">
                     <span class="sold">{{ 'Sold' }}</span>
@@ -30,7 +22,7 @@
             {% endif %}
     </div>
     <!-- Like funtionality on hold until ProfileView implemented -->
-    <div class="col-xs-3">
+    <div class="col-xs-12 col-sm-5" style="line-height: 15px">
         {{ product.store.neighborhood }}
     </div>
         <!-- <div class="col-xs-3 pull-right text-right">

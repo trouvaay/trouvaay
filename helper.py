@@ -115,6 +115,7 @@ Neighborhoods = {'SF': [
     ('Ashbury Heights', 'Ashbury Heights'),
     ('Balboa Terrace', 'Balboa Terrace'),
     ('Bayview - Hunters Point', 'Bayview - Hunters Point'),
+    ('Berkeley', 'Berkeley'),
     ('Bernal Heights', 'Bernal Heights'),
     ('Buena Vista', 'Buena Vista'),
     ('Castro', 'Castro'),

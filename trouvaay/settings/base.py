@@ -203,6 +203,7 @@ STRIPE_CAPTURE_TRANSACTION_TIME = 120  # hours
 
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''
+OLARK_SITE_ID = ''
 
 # email settings are another good candidate to have 
 # each developer define in their own dev_settings.py
