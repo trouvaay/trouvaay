@@ -10,6 +10,17 @@
 
 }
 @font-face {
+    font-family: 'droid_serifregular';
+    src: url('../fonts/DroidSerif-Regular-webfont.eot');
+    src: url('../fonts/DroidSerif-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSerif-Regular-webfont.woff') format('woff'),
+         url('../fonts/DroidSerif-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSerif-Regular-webfont.svg#droid_serifregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
     font-family: 'Chunkfive';
     src: url('../fonts/Chunkfive.otf') format('opentype');
     font-weight: normal;
@@ -23,14 +34,14 @@
 body {
   font-size: 14px;
   background: white;
-  font-family: 'existencelight';
+  font-family: 'droid_serifregular';
 }
 h1, h2, h3, .h1, .h2, .h3 {
   font-family: 'Chunkfive';
   /*text-transform: ;*/
 }
 h4, h5, h6, .h4, .h5, .h6 {
-  font-family: 'existencelight';
+  font-family: 'droid_serifregular';
 }
 .navbar-default {
   background: #f4f4f4;
@@ -75,6 +86,9 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 #mobile-nav .nav {
 	padding: 0 15px;
+}
+#mobile-nav ul > li > a {
+  color: white;
 }
 #tabs-icon-mobile {
   background: white;
@@ -208,7 +222,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: droid_serifregular, Arial, sans-serif;
 }
 .top-bar .language-selector .dropdown-menu {
   min-width: 100%;
@@ -266,7 +280,7 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 .top-quote .top-quote-text {
   color: white;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 36px;
   line-height: 50px;
   font-weight: 400;
@@ -323,7 +337,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   border-bottom: none;
 }
 .tab-container .nav-tabs a {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 44px;
   font-weight: 700;
@@ -363,7 +377,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 }
 .text-editor h2 {
   width: 100%;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -438,7 +452,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   color: white;
   position: relative;
   text-transform: uppercase;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 36px;
   line-height: 50px;
   font-weight: 400;
@@ -518,7 +532,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   transition: all .4s ease-in-out;
 }
 .post h2 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 36px;
   line-height: 50px;
   font-weight: 300;
@@ -615,7 +629,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   float: left;
   text-align: center;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: 700;
@@ -705,7 +719,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   float: left;
   text-align: center;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: 700;
@@ -898,7 +912,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 .print-info h3 {
   width: 100%;
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -1128,7 +1142,7 @@ text-align: left;
   float: left;
   letter-spacing: 1.5px;
   border: solid 2px #333;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 25px;
   font-weight: 600;
@@ -1139,7 +1153,7 @@ text-align: left;
   float: left;
   letter-spacing: 1.5px;
   border: solid 2px #333;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 16px;
   line-height: 25px;
   font-weight: 700;
@@ -1150,7 +1164,7 @@ text-align: left;
   float: left;
   letter-spacing: 1.5px;
   border: solid 2px #333;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 25px;
   font-weight: 700;
@@ -1215,7 +1229,7 @@ text-align: left;
 }
 .product-presentation-tabs .nav-tabs a {
   width: 275px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 12px;
   line-height: 40px;
   font-weight: 700;
@@ -1270,7 +1284,7 @@ text-align: left;
   width: 100%;
   float: left;
   text-align: center;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: 700;
@@ -1388,7 +1402,7 @@ text-align: left;
   height: auto;
 }
 .widget.leave-feedback h3 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: 700;
@@ -1473,7 +1487,7 @@ text-align: left;
   margin-top: 40px;
   background: #fd575f;
   padding: 10px 20px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 18px;
   line-height: 24px;
   font-weight: 300;
@@ -1486,7 +1500,7 @@ text-align: left;
   margin-top: 40px;
   background: black;
   color: white;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 48px;
   line-height: 40px;
   font-weight: 300;
@@ -1505,7 +1519,7 @@ text-align: left;
   margin-top: 40px;
 }
 .recommended-products h3 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 36px;
   line-height: 50px;
   font-weight: 300;
@@ -1618,7 +1632,7 @@ text-align: left;
 }
 
 .grid-product .overlay .item {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -1656,7 +1670,7 @@ text-align: left;
 }
 
 .grid-product .view-product .text {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 11px;
   line-height: 30px;
   font-weight: 700;
@@ -1698,7 +1712,7 @@ text-align: left;
 }
 .products-header .category-menu {
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
@@ -1717,7 +1731,7 @@ text-align: left;
   color: #fd575f;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
@@ -1763,7 +1777,7 @@ text-align: left;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -1854,7 +1868,7 @@ text-align: left;
   padding-left: 0;
 }
 .shopping-container h2 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 36px;
   line-height: 44px;
   font-weight: normal;
@@ -1868,7 +1882,7 @@ text-align: left;
 .shopping-container .column {
   width: 100%;
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -1899,7 +1913,7 @@ text-align: left;
 .shopping-container .product .name {
   float: left;
   width: 55%;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 30px;
   line-height: 44px;
   font-weight: 300;
@@ -1917,7 +1931,7 @@ text-align: left;
 .shopping-container .product .description {
   float: left;
   width: 55%;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 12px;
   line-height: 15px;
   font-weight: normal;
@@ -1932,7 +1946,7 @@ text-align: left;
   padding-left: 35px;
 }
 .shopping-container .product .quality .quality-label {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 12px;
   line-height: 15px;
   font-weight: normal;
@@ -1957,7 +1971,7 @@ text-align: left;
   float: left;
   width: 20px;
   height: 30px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -1983,7 +1997,7 @@ text-align: left;
   padding-left: 35px;
 }
 .shopping-container .product .colors .colors-label {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 12px;
   line-height: 15px;
   font-weight: normal;
@@ -2038,7 +2052,7 @@ text-align: left;
   background-clip: padding-box;
 }
 .shopping-container .product .price {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -2063,7 +2077,7 @@ text-align: left;
   margin-bottom: 40px;
 }
 .shopping-container .shipping-info h3 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -2115,7 +2129,7 @@ text-align: left;
 }
 .shopping-container .shipping-info .shipping-price {
   float: right;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -2142,7 +2156,7 @@ text-align: left;
 .shopping-container .price-info li {
   width: 100%;
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -2171,7 +2185,7 @@ text-align: left;
 }
 .filters-wrapper li {
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 44px;
   font-weight: 700;
@@ -2259,7 +2273,7 @@ text-align: left;
   margin-top: -5px;
 }
 .products-wrapper article h3 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 18px;
   line-height: 24px;
   font-weight: 700;
@@ -2297,7 +2311,7 @@ text-align: left;
   position: absolute;
   bottom: 10px;
   left: 270px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 11px;
   line-height: 18px;
   font-weight: 700;
@@ -2335,7 +2349,7 @@ text-align: left;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 44px;
   font-weight: 700;
@@ -2392,7 +2406,7 @@ text-align: left;
 }
 .checkout-steps-wrapper .checkout-steps li .checkout-step {
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 14px;
   line-height: 44px;
   font-weight: 700;
@@ -2612,7 +2626,7 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .modal-dialog .modal-content h3 {
   margin: 0;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "droid_serifregular", Arial, sans-serif;
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
@@ -2747,6 +2761,7 @@ form .form-checkbox-wrap .checkbox-label {
 .hp-tabs .nav-tabs > li.active > a {
   background: rgb(218, 182, 97);
   border: none;
+  padding: 15px 10px;
 }
 .hp-tabs .nav-tabs > li.active > a:after {
   border-top-color: rgb(218, 182, 97);
@@ -2811,7 +2826,7 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 35px 20px;
 }
 .testimonial h2 {
-  font-family: existencelight, Arial, sans-serif;
+  font-family: droid_serifregular, Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: bold;
@@ -2862,7 +2877,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   color: #adadad;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: droid_serifregular, Arial, sans-serif;
   font-size: 10px;
   line-height: 12px;
   font-weight: normal;
@@ -2878,7 +2893,7 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .anouncements h2 {
   color: #333333;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: droid_serifregular, Arial, sans-serif;
   font-size: 16px;
   line-height: 20px;
   font-weight: bold;
@@ -2941,7 +2956,7 @@ form .form-checkbox-wrap .checkbox-label {
   margin-bottom:  1rem;
 }
 .footer-widget h2 {
-  font-family: existencelight, Arial, sans-serif;
+  font-family: droid_serifregular, Arial, sans-serif;
   font-size: 13px;
   line-height: 22px;
   font-weight: bold;
@@ -3054,7 +3069,7 @@ form .form-checkbox-wrap .checkbox-label {
 .footer-menu ul li a {
   width: 100%;
   float: left;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: droid_serifregular, Arial, sans-serif;
   font-size: 13px;
   line-height: 15px;
   font-weight: normal;
@@ -3086,7 +3101,7 @@ footer ul li a:hover {
 .sitemap ul li a {
   width: 100%;
   float: left;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: droid_serifregular, Arial, sans-serif;
   font-size: 13px;
   line-height: 15px;
   font-weight: normal;
@@ -3284,7 +3299,7 @@ footer ul li a:hover {
 }
 .landing-message h3 {
   margin-top: 20px;
-  font-family: existencelight;
+  font-family: existenceLight;
 }
 .homepage-slider-wrap {
   width: 100%;
@@ -3420,7 +3435,7 @@ footer ul li a:hover {
 }
 .final-line p {
   color: #adadad;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: droid_serifregular, Arial, sans-serif;
   font-size: 11px;
   line-height: 14px;
   font-weight: 400;

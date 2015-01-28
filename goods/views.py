@@ -29,7 +29,7 @@ class HomeView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         #JSON sent to client to calc distance from user
-        context['products_json'] = serialize('json', context['products'])
+        # context['products_json'] = serialize('json', context['products'])
         for furnituretype in FurnitureType.objects.filter(is_furniture=True):
             context[(str(furnituretype))] = self.model.objects.filter(furnituretype=furnituretype, is_published=True,)
         context['BaseUrl'] = BASE_URL
