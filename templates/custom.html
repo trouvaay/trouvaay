@@ -193,7 +193,7 @@ $(document).ready(function() {
 				if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
 					var handler = StripeCheckout.configure({
 						key: '{{ STRIPE_PUBLISHABLE_KEY }}',
-						image: "{% static 'img/logos/Raredoor-logo-gold.png' %}",
+						image: "{% static 'img/logos/Raredoor-R-icon-gold.png' %}",
 						name: '{{ site_name }}',
 						description: productName,
 						amount: productPrice,
