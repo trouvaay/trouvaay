@@ -21,7 +21,7 @@ class HomeView(generic.ListView):
     paginate_by = 15
 
     def get_queryset(self):
-        pub_products = self.model.objects.filter(is_published=True)
+        pub_products = self.model.objects.filter(is_published=True, description="")
         #filter by products that are furniture
         queryset = [i for i in pub_products if i.is_furniture()]
         return queryset
