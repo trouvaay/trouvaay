@@ -3273,8 +3273,13 @@ footer ul li a:hover {
   top: 40%;
   width: 100%;
 }
-.landing-message h1 {
+.landing-message h1,
+.landing-message h3 {
   text-align: center;
+}
+.landing-message h3 {
+  margin-top: 20px;
+  font-family: existencelight;
 }
 .homepage-slider-wrap {
   width: 100%;
@@ -4128,6 +4133,9 @@ footer ul li a:hover {
 @media (max-width: 767px) {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
+  }
+  .how-it-works .statement {
+    padding: 0 2rem;
   }
   #main-footer,
   #main-menu {
