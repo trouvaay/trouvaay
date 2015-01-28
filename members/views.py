@@ -165,6 +165,7 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                     description=product.short_name,
                     card=token_id,
                     capture=capture_order,
+                    receipt_email=self.request.user.email,
                     metadata={
                         'order_id': order.id,
                         'order_type': order_type
