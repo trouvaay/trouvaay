@@ -136,7 +136,7 @@ class Product(models.Model):
     is_avail_now = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-pub_date']
+        ordering = ['width','-pub_date']
 
     def __str__(self):
         return self.short_name

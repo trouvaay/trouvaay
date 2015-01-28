@@ -14,7 +14,6 @@
     src: url('../fonts/Chunkfive.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-
 }
 
 .set-default {
@@ -59,7 +58,6 @@ h4, h5, h6, .h4, .h5, .h6 {
   background: rgb(33,16,106);
   z-index: 100;
   border-bottom: 5px solid rgb(218,182,97);
-  
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
@@ -480,7 +478,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   padding: 40px 0 40px;
 }
 .main-container.comment-block {
-  padding-top: 20px 0 40px;
+  padding-top: 0px 0 40px;
 }
 .contact-info {
   width: 100%;
@@ -1537,6 +1535,14 @@ text-align: left;
   /*margin: 2rem;*/
   text-align: center;
 }
+.vintage-label {
+  height: 1.5rem;
+  padding-top: 5px;
+  border-top: lightgray 1px solid
+}
+.product-container:hover .vintage-label {
+  border-top: 5px solid rgb(33,16,106);
+ }
 
 
 @media screen and (min-width: 768px) {
