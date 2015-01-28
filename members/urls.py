@@ -5,7 +5,7 @@ from members.forms import CustomAuthenticationForm, RegistrationForm
 
 urlpatterns = patterns('',
     # url(r'^account/(?P<pk>\d+)$', views.ProfileView.as_view(), name='closet'),
-    url(r'^login/$', views.custom_login,  # 'django.contrib.auth.views.login',
+    url(r'^login/$', views.custom_login,
         {'template_name': 'members/auth/login.html',
          'authentication_form' : CustomAuthenticationForm,
         },
