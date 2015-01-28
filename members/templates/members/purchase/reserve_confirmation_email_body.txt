@@ -11,4 +11,4 @@ Please visit the store to pick up the item.
 Your card will not be charged until {{ capture_date }}.
 
 Sincerely,
-{{ site.name }} Support Team
+Rare Door Support Team

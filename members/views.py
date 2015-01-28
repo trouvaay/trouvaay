@@ -135,7 +135,9 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
             product = self.get_object()
 
             order_type = request.POST['order_type'].strip().lower()
-            capture_order = (order_type == 'buy')
+            # For now all order will not be immediately captured
+            # capture_order = (order_type == 'buy')
+            capture_order = False
 
             # create charge with stripe,
             try:

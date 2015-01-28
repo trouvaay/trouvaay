@@ -172,8 +172,8 @@ $(document).ready(function() {
 	// Stripe checkout
 	$('.btn.buy.try').on('click', function(e) {
 		
-		alert("clicked");
-		console.log("clicked");
+		// alert("clicked");
+		// console.log("clicked");
 		$.ajax({
 			type: "GET",
 			url: "{% url "members:can_reserve" %}",
@@ -193,7 +193,7 @@ $(document).ready(function() {
 				if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
 					var handler = StripeCheckout.configure({
 						key: '{{ STRIPE_PUBLISHABLE_KEY }}',
-						image: "{% static 'img/logos/standalone-R_web_RGB.png' %}",
+						image: "{% static 'img/logos/Raredoor-logo-gold.png' %}",
 						name: '{{ site_name }}',
 						description: productName,
 						amount: productPrice,
