@@ -2592,7 +2592,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 630px;
   position: fixed;
   margin: 0px auto;
-  top: 50%;
+  top: 35%;
   margin-top: -130px;
   left: 0px;
   right: 0px;
@@ -4280,6 +4280,10 @@ footer ul li a:hover {
   margin-bottom: 10%;
   /*margin-left: 10%;*/
   max-width: 100%;
+  }
+  #signup-login-modal .modal-dialog {
+    width: 90%;
+    max-width: 650px;
   }
   .homepage-slider h2{
     font-size: 20px;
