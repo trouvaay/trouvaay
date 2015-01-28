@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from decimal import Decimal
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 
@@ -204,15 +206,17 @@ STRIPE_CAPTURE_TRANSACTION_TIME = 120  # hours
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''
 
-# email settings are another good candidate to have 
+SALES_TAX = Decimal('0.0875')
+
+# email settings are another good candidate to have
 # each developer define in their own dev_settings.py
 # here are what could be production settings
-DEFAULT_FROM_EMAIL = '' # e.g. 'support@raredoor.com'
-EMAIL_HOST = '' # 'smtp.gmail.com'
-EMAIL_PORT =  '' # 587 - for gmail
-EMAIL_HOST_USER = '' # e.g. 'support@raredoor.com'
+DEFAULT_FROM_EMAIL = ''  # e.g. 'support@raredoor.com'
+EMAIL_HOST = ''  # 'smtp.gmail.com'
+EMAIL_PORT = ''  # 587 - for gmail
+EMAIL_HOST_USER = ''  # e.g. 'support@raredoor.com'
 EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = True # google requires True
+EMAIL_USE_TLS = True  # google requires True
 
 PROJECT_ENV = os.getenv('PROJECT_ENV', None)
 if(PROJECT_ENV == 'dev'):

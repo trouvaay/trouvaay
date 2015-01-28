@@ -62,7 +62,7 @@ class SignupView(BaseRegistrationView):
         )
         signals.user_registered.send(sender=self.__class__,
                                      user=new_user,
-                                     request=request)       
+                                     request=request)
         return new_user
 
 
@@ -73,10 +73,10 @@ def ProductLike(request):
     # because this is called via AJAX, the @login_required decorator
     # is not very useful, so instead we have to manually check if
     # user is authenticated or not and return appropariate status in json
-    
+
     if(not request.user.is_authenticated()):
         return JsonResponse('loginrequired', safe=False)
-    
+
     if request.method == "POST":
         userinstance = request.user
         product = Product.objects.get(pk=int(request.POST['id']))
@@ -137,9 +137,9 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                 total_amount_in_cents = int(request.POST['total_amount'])
 
                 logger.debug('total_amount_in_cents %d' % total_amount_in_cents)
-                logger.debug('product.get_price_in_cents %d' % product.get_price_in_cents())
+                logger.debug('product.get_price_in_cents %d' % product.get_price_in_cents_with_tax())
 
-                if(total_amount_in_cents != product.get_price_in_cents()):
+                if(total_amount_in_cents != product.get_price_in_cents_with_tax()):
                     # either product price has changed since payment or
                     # user is trying to do something nasty
                     # in any case we have a discrepancy between
@@ -204,18 +204,18 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
 
             # send email with store address
             send_email_from_template(to_email=self.request.user.email,
-                context = {
+                context={
                     'product': product,
                     'site': get_site(self.request),
                     'capture_date': order_item.capture_time.date()
                     },
-                subject_template = 'members/purchase/reserve_confirmation_email_subject.txt',
-                plain_text_body_template = 'members/purchase/reserve_confirmation_email_body.txt',
-                html_body_template = 'members/purchase/reserve_confirmation_email_body.html')
+                subject_template='members/purchase/reserve_confirmation_email_subject.txt',
+                plain_text_body_template='members/purchase/reserve_confirmation_email_body.txt',
+                html_body_template='members/purchase/reserve_confirmation_email_body.html')
 
 
             return JsonResponse({
-                'status': 'ok', 
+                'status': 'ok',
                 'product_name': product.short_name,
                 'image_src': product.productimage_set.first().image.build_url(width=200, height=200, crop="fit"),
                 'store_name': product.store.retailer.short_name,

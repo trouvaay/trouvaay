@@ -4,7 +4,7 @@
 
         <!-- need these so that we can pass product name and price to stripe checkout -->
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
-        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents }}</span>
+        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_with_tax }}</span>
     </div>
     <!-- <div class="col-xs-8 pic-detail-home" style="text-align:left; margn-bottom: 1px">
         <p style="margin-bottom: 3px"><em>{{'$'}}{{ product.current_price|floatformat:"0" }}</em></p>
