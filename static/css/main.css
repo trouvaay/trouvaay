@@ -14,7 +14,6 @@
     src: url('../fonts/Chunkfive.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-
 }
 
 .set-default {
@@ -59,8 +58,6 @@ h4, h5, h6, .h4, .h5, .h6 {
   background: rgb(33,16,106);
   z-index: 100;
   border-bottom: 5px solid rgb(218,182,97);
-  min-height: 65px;
-  
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
@@ -478,10 +475,10 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   float: left;
   background: white;
-  padding: 0px 0 40px;
+  padding: 40px 0 40px;
 }
 .main-container.comment-block {
-  padding-top: 20px 0 40px;
+  padding-top: 0px 0 40px;
 }
 .contact-info {
   width: 100%;
@@ -1538,6 +1535,14 @@ text-align: left;
   /*margin: 2rem;*/
   text-align: center;
 }
+.vintage-label {
+  height: 1.5rem;
+  padding-top: 5px;
+  border-top: lightgray 1px solid
+}
+.product-container:hover .vintage-label {
+  border-top: 5px solid rgb(33,16,106);
+ }
 
 
 @media screen and (min-width: 768px) {
@@ -1563,17 +1568,12 @@ text-align: left;
 .product.col-sm-6:nth-child(2n) {
 	margin-right: 5%;
 }
+
 .product.col-md-4:nth-child(3n) {
 	margin-right: 0%;
 }
-.vintage-label {
-  height: 1.5rem;
-  padding-top: 5px;
-  border-top: lightgray 1px solid
 }
-.product-container:hover .vintage-label {
-  border-top: 5px solid rgb(33,16,106);
-}
+
 .grid-product figure {
 /*  width: 90%;*/
   margin: 0 2.5%;
@@ -1654,10 +1654,7 @@ text-align: left;
   -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/*.view-product:hover {
-  text-decoration: underline;
-  border-top: 5px solid rgb(218, 182, 97);
-}*/
+
 .grid-product .view-product .text {
   font-family: "existencelight", Arial, sans-serif;
   font-size: 11px;
@@ -2489,6 +2486,7 @@ form .form-checkbox-wrap .checkbox-label {
   border-color: #0080b7;
 }
 .btn.btn-primary.request {
+  height: 32px;
 }
 .btn.btn-primary.buy {
   width: 70px;
@@ -2498,6 +2496,7 @@ form .form-checkbox-wrap .checkbox-label {
 .btn.btn-default.sold,
 .btn.btn-primary.buy.try {
   width: 145px;
+  height: 32px;
   /*background-color: rgb(201,177,62);*/
 }
 .btn.btn-success.dist {
@@ -3151,6 +3150,10 @@ footer ul li a:hover {
 .how-it-works .statement:not(:last-child) {
   border-right: 1px solid #DDD;
 }
+.how-it-works .col-md-12.statement {
+  text-align: left;
+  padding: 0;
+}
 
 @media screen and (max-width: 992px) {
 .how-it-works .statement:not(:last-child) {
@@ -3275,8 +3278,13 @@ footer ul li a:hover {
   top: 40%;
   width: 100%;
 }
-.landing-message h1 {
+.landing-message h1,
+.landing-message h3 {
   text-align: center;
+}
+.landing-message h3 {
+  margin-top: 20px;
+  font-family: existencelight;
 }
 .homepage-slider-wrap {
   width: 100%;
@@ -4130,6 +4138,9 @@ footer ul li a:hover {
 @media (max-width: 767px) {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
+  }
+  .how-it-works .statement {
+    padding: 0 2rem;
   }
   #main-footer,
   #main-menu {

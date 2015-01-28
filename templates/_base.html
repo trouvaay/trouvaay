@@ -1,10 +1,8 @@
-{% load analytical %}
 <!DOCTYPE html>
 {% load cloudinary %}
 {% load staticfiles %}
 <html lang="en" class="no-js">
     <head>
-        {% analytical_head_top %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Rare Door</title>
@@ -27,10 +25,8 @@
           ga('send', 'pageview');
         </script>
         {% block beginjs %}{% endblock beginjs %}
-        {% analytical_head_top %}
     </head>
     <body>
-        {% analytical_body_top %}
         {% block modal %}
             <div class="modal" id="addtocartmodal">
               <div class="modal-dialog">
@@ -59,7 +55,7 @@
                 <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></div>
                 <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mobile-search">
-                           <img src="http://res.cloudinary.com/trouvaay/image/upload/v1422169579/Trouvaay_Static/1422191143_132.svg" style="height:24px">
+                           <img src="{% static 'img/Magnifying_Glass2.svg' %}" style="height:24px">
                     </button><!-- </a> -->
                 </div>
                 <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3 right-side" style="padding: 0">        
@@ -175,7 +171,6 @@
             {% include 'custom.html' %}
         </div>
         {% block endjs %}{% endblock endjs %}
-        {% analytical_body_bottom %}
     </body>
 </html>
 
