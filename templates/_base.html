@@ -1,8 +1,10 @@
+{% load analytical %}
 <!DOCTYPE html>
 {% load cloudinary %}
 {% load staticfiles %}
 <html lang="en" class="no-js">
     <head>
+        {% analytical_head_top %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Rare Door</title>
@@ -23,39 +25,44 @@
 
           ga('create', 'UA-58538929-1', 'auto');
           ga('send', 'pageview');
-
         </script>
         {% block beginjs %}{% endblock beginjs %}
+        {% analytical_head_top %}
     </head>
     <body>
-    {% block modal %}
-        <div class="modal" id="addtocartmodal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="alert alert-info" role="alert" style="margin-bottom:0">
-                        <p class="text-center">Thank you for your reservation.</p>
-                    </div>
-                    <div class="text-center">
-                    	<img id="reserved-product-image" src="" width="200" height="200" />
-						<p>
-						Your <b><span id="reserved-product-name"></span></b> is available at <i><span id="reserved-product-store-name"></span></i> located at:
-						</p>
-						<div id="reserved-product-store-address"></div>
-						Your card will not be charged until <span id="reserved-product-capture-date"></span>
-                    </div>
-                </div>  
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /. end Add to Cart modal -->
-    {% endblock %}
+        {% analytical_body_top %}
+        {% block modal %}
+            <div class="modal" id="addtocartmodal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="alert alert-info" role="alert" style="margin-bottom:0">
+                            <p class="text-center">Thank you for your reservation.</p>
+                        </div>
+                        <div class="text-center">
+                        	<img id="reserved-product-image" src="" width="200" height="200" />
+    						<p>
+    						Your <b><span id="reserved-product-name"></span></b> is available at <i><span id="reserved-product-store-name"></span></i> located at:
+    						</p>
+    						<div id="reserved-product-store-address"></div>
+    						Your card will not be charged until <span id="reserved-product-capture-date"></span>
+                        </div>
+                    </div>  
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /. end Add to Cart modal -->
+        {% endblock modal %}
     {% block nav %}
         <div class="container-fluid top-bar">
             {% block nav-all-else %}
             <div class="row">
                 <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></div>
-                <div class="navbar-collapse collapse col-xs-3" style="margin-top:10px"></div>
-                <div class="navbar-collapse collapse col-xs-3 right-side" style="padding: 0">        
+                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mobile-search">
+                           <img src="http://res.cloudinary.com/trouvaay/image/upload/v1422169579/Trouvaay_Static/1422191143_132.svg" style="height:24px">
+                    </button><!-- </a> -->
+                </div>
+                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3 right-side" style="padding: 0">        
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -66,13 +73,16 @@
                     <div class="row">
                         <div class="col-sm-12 main-navigation bottom-row">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><div class="cart-info">
-                                        
-                                    </div>
-                                </li>
-                                <li><a href="{% url 'goods:vintage' %}">Vintage</a></li>
-                                <li><a href="{% url 'goods:new' %}">New</a></li>
-				<li><a class="btn btn-link" href="{% url 'members:logout' %}">{% if user.is_authenticated %}Logout{% else %}Login{% endif %}</a></li>
+            				    <li><a href="http://instagram.com/raredoor/"><img src="{% static 'img/socialicons/instagram.svg' %}" class="socialicon"></a></li>
+            				    <li><a href="https://www.facebook.com/RareDoor"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
+            				    <li><a href="https://www.twitter.com/RareDoor"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
+                                <li><div class="cart-info"></div></li>
+                				{% if user.is_authenticated %}
+                				<!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
+                				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
+                				{% else %}
+                				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Login</a></li>
+                				{% endif %}
                             </ul>
                         </div>
                     </div>
@@ -84,20 +94,6 @@
     {% block content %}{% endblock content %}
     <footer class="main-footer">
         <div class="container">'
-            <div id="mobile-footer" class="row" style="padding-bottom:10px">
-                <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
-                    <a href="{% url 'goods:vintage' %}">Vintage</a>
-                </div>
-                <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
-                    <a href="{% url 'goods:new' %}">New</a>
-                </div>
-              <!--   <div class="navbar-collapse collapse col-xs-3" style="padding: 0; text-align:center">
-                    <a href="#">Profile</a>
-                </div> -->
-                <div class="navbar-collapse collapse col-xs-4" style="padding: 0; text-align:center">
-                    
-                </div>
-            </div>
             <div id="main-footer">
                 <div class="row">
                     <div class="col-xs-12 col-sm-2">
@@ -124,7 +120,7 @@
                     <div class="col-xs-offset-1 col-xs-12 col-sm-2">
                         <div class="footer-widget">
                             <div class="footer-menu">
-                                <h2><a href="{% url 'goods:about' %}">Shipping</a></h2>
+                                <h2><a href="{% url 'goods:about' %}">Delivery</a></h2>
                             </div>
                         </div>
                     </div>
@@ -149,36 +145,37 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="final-line">
-                            <div class="row">
-                                <div class="col-xs-offset-2 col-xs-12 col-sm-6 col-sm-offset-0">
-                                    <p>&copy; 2014 Trouvaay, Inc. All Rights Reserved.</p>
+                </div><!-- end row -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="final-line">
+                                <div class="row">
+                                    <div class="col-xs-offset-2 col-xs-12 col-sm-6 col-sm-offset-0">
+                                        <p>&copy; 2014 Trouvaay, Inc. All Rights Reserved.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+            </div><!-- end row -->
         </div>
-    </div>
-    </footer>
-    <!--closing js -->
-    <div>
-        <script src="{% static 'js/vendor/jquery-1.10.1.min.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery-ui-1.10.3.min.js' %}"></script>
-        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.isotope.min.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.raty.min.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.mousewheel.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.mCustomScrollbar.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.selectBoxIt.min.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.flexslider.js' %}"></script>
-        <script src="{% static 'js/main.js' %}"></script>
-        {% include 'custom.html' %}
-    </div>
-    {% block endjs %}{% endblock endjs %}
+        </footer>
+        <!--closing js -->
+        <div>
+            <script src="{% static 'js/vendor/jquery-1.10.1.min.js' %}"></script>
+            <script src="{% static 'js/vendor/jquery-ui-1.10.3.min.js' %}"></script>
+            <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+            <script src="{% static 'js/vendor/jquery.isotope.min.js' %}"></script>
+            <script src="{% static 'js/vendor/jquery.raty.min.js' %}"></script>
+            <script src="{% static 'js/vendor/jquery.mousewheel.js' %}"></script>
+            <script src="{% static 'js/vendor/jquery.mCustomScrollbar.js' %}"></script>
+            <script src="{% static 'js/vendor/jquery.selectBoxIt.min.js' %}"></script>
+            <script src="{% static 'js/vendor/jquery.flexslider.js' %}"></script>
+            <script src="{% static 'js/main.js' %}"></script>
+            {% include 'custom.html' %}
+        </div>
+        {% block endjs %}{% endblock endjs %}
+        {% analytical_body_bottom %}
     </body>
 </html>
 

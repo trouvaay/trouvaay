@@ -3,7 +3,7 @@ from django.forms import ModelForm, Textarea, TextInput
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
-#TODO: Added comment feature to product DetailView
+#TODO: Added comment feature to product VintageView
 # class CommentForm(ModelForm):
 
 #   class Meta:

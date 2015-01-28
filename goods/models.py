@@ -1,6 +1,5 @@
 from django.db import models
 from helper import AbstractImageModel
-from math import acos, cos, radians, sin
 from django.utils import timezone
 from django.db.models.signals import post_save, m2m_changed
 import itertools
@@ -8,63 +7,79 @@ from django.utils.text import slugify
 from django.db.models import F
 from django.utils.encoding import smart_text
 
+
 class Segment(models.Model):
     select = models.CharField(unique=True, max_length=55, default='new', null=True, blank=True) 
+
     def __str__(self):
         return self.select or 'none'
 
     class Meta:
         ordering = ['select']
+
 
 class Style(models.Model):
     select = models.CharField(unique=True, max_length=55, default='modern', null=True, blank=True)  
+    
     def __str__(self):
         return self.select or 'none'
 
     class Meta:
         ordering = ['select']
+
 
 class FurnitureType(models.Model):
     select = models.CharField(unique=True, max_length=55, default='seating', null=True, blank=True) 
+    is_furniture = models.BooleanField(default=True)
+    
     def __str__(self):
         return self.select or 'none'
 
     class Meta:
         ordering = ['select']
+
 
 class ValueTier(models.Model):
     select = models.CharField(unique=True, max_length=55, default='mid', null=True, blank=True) 
+    
     def __str__(self):
         return self.select or 'none'
 
     class Meta:
         ordering = ['select']
+
 
 class Category(models.Model):
     select = models.CharField(unique=True, max_length=55, default='living', null=True, blank=True)  
+    
     def __str__(self):
         return self.select or 'none'
 
     class Meta:
         ordering = ['select']
+
 
 class Subcategory(models.Model):
     select = models.CharField(unique=True, max_length=55, default='bar', null=True, blank=True)
     trial_product = models.BooleanField(default=False)
     shipping_charge = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, choices=[(5.00,5.00),(20.00,20.00),(50.00,50.00)])
+    
     def __str__(self):
         return self.select or 'none'
 
     class Meta:
         ordering = ['select']
 
+
 class Color(models.Model):
     select = models.CharField(unique=True, max_length=55, default='blue', null=True, blank=True)    
+    
     def __str__(self):
         return self.select or 'none'
     
     class Meta:
         ordering = ['select']
+
 
 class Material(models.Model):
     select = models.CharField(unique=True, max_length=55, default='leather', null=True, blank=True) 
@@ -78,12 +93,15 @@ class Material(models.Model):
 class Product(models.Model):
     sku = models.CharField(max_length=25, null=True, blank=True)
     short_name = models.CharField(max_length=50)
+    slug = models.SlugField(unique=True)
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     description = models.TextField(null=True, blank=True)
     store = models.ForeignKey('merchants.Store')
     manufacturer = models.CharField(max_length=25, null=True, blank=True)
     units = models.IntegerField(default=1)
+
+    # Dimensions & Attributes
     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     depth = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
@@ -93,13 +111,17 @@ class Product(models.Model):
     weight = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
     color = models.ManyToManyField(Color, null=True, blank=True)
     color_description = models.CharField(max_length=100, null=True, blank=True)
+    material = models.ManyToManyField(Material, null=True, blank=True)
+    tags = models.TextField(null=True, blank=True) # list of tag words
+
+    # Categorization
     segment = models.ManyToManyField(Segment, null=True, blank=True)
     style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
     furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
-    # subcategory is required to determine if product has trial
-    subcategory = models.ManyToManyField(Subcategory)
-    material = models.ManyToManyField(Material, null=True, blank=True)
+    subcategory = models.ManyToManyField(Subcategory) # required for has_trial
+    
+    # Availability
     added_date = models.DateTimeField(auto_now_add=True)
     pub_date = models.DateTimeField(null=True, blank=True)
     has_trial = models.BooleanField(default=False)
@@ -109,12 +131,14 @@ class Product(models.Model):
     is_featured = models.BooleanField(default=False)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
-    slug = models.SlugField(unique=True)
-
-
+    is_instore = models.BooleanField(default=True)
+    delivery_weeks = models.CharField(max_length=100, null=True, blank=True)
+    is_avail_now = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-pub_date']
+        # added Height as quick hack to randomize display of products as pub_date clusters
+        # items by store
+        ordering = ['height','-pub_date']
 
     def __str__(self):
         return self.short_name
@@ -125,20 +149,22 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         self.lat = self.store.lat
         self.lng = self.store.lng
-        if self.is_published == True and not self.pub_date:
+
+        # Check to see if pub date us missing if item is published.
+        if self.is_published and (not self.pub_date):
             self.pub_date = timezone.now()
 
         self.slug = slugify(self.short_name)
         for x in itertools.count(1):
             if not Product.objects.filter(slug=self.slug).exists():
                 break
-            self.slug = '%s-%d' % (orig, x)
-
+            # append number to slug if it already exists
+            self.slug = '%s-%d' % (self.slug, x)
         super(Product, self).save(*args, **kwargs)
 
     def get_price_in_cents(self):
         return int(self.current_price * 100)
-        
+
     def hours_since_add(self):
         delta = timezone.now() - self.pub_date
         time_lapse = delta.total_seconds() // 3600
@@ -146,22 +172,15 @@ class Product(models.Model):
 
     def has_returns(self):
         return self.store.has_returns
-        
-    def getdist(self, UserLat=39.94106319,UserLng=-75.173192):
-        dist = 3959 * acos(cos(radians(UserLat)) * cos(radians(self.lat)) \
-        * cos(radians(self.lng) - radians(UserLng)) + sin(radians(UserLat))*\
-        sin(radians(self.lat)))      
-        
-        return round(dist,2)
 
-    def does_product_have_trial(self):
-        """if product is part of a subcategory that
-        is triable OR has a price above $1000, it is eligible for a trial
-        """
 
-        trial_list = Subcategory.objects.filter(trial_product=True)
-        if self.current_price >= 1000 or self.subcategory.first() in trial_list:
-            self.has_trial = True
+    def is_furniture(self):
+        """ Test whether furnituretypes have furniture set to True """
+        furniture = [str(i) for i in FurnitureType.objects.filter(is_furniture=True)]
+        if [i for i in self.furnituretype.all() if i.select in furniture]:
+            return True
+        else:
+            return False
 
     def has_dimensions(self):
         """Checks to see if any of dimension fields are not null/blank
@@ -192,7 +211,15 @@ class Product(models.Model):
                 dimension_str+= (self.get_dimension(dimension)+'x')
         return dimension_str[:-3]
 
+    @property
+    def is_vintage(self):
+        if len(self.segment.filter(select__icontains="vintage")):
+            return True
+        else:
+            return False
 
+
+# Funtions created for Product model signals
 def does_product_have_trial(sender, instance, **kwargs):
         """if has a price above $1000, it is eligible for a trial
         """
@@ -207,9 +234,10 @@ def does_product_have_trial_subcat(sender, instance, **kwargs):
         if instance.subcategory.first() in trial_list:
             Product.objects.filter(id=instance.id).update(has_trial=True)
 
-# post_save methods for Product model to determin is product eligible for buy-and-try
+# post_save methods for Product model to determine if product eligible for buy-and-try
 post_save.connect(does_product_have_trial, sender=Product)
 m2m_changed.connect(does_product_have_trial_subcat, sender=Product.subcategory.through)
+
 
 class ProductImage(AbstractImageModel):
     product = models.ForeignKey('goods.Product')
