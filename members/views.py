@@ -18,6 +18,10 @@ from django.contrib.auth import get_user_model, authenticate, login
 from registration import signals
 from helper import send_email_from_template, get_site
 from django.utils import timezone
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.views import login as django_login
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +93,8 @@ def ProductLike(request):
         return JsonResponse('success', safe=False)
     else:
         return JsonResponse('success', safe=False)
+
+
 
 @login_required
 def AddToCart(request):
@@ -231,7 +237,45 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
             logger.error(str(e))
             return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
 
+def can_reserve(request):
+    """Checks for permissions whether user is able to reserve a product.
+    
+    For right now only checking if user is logged in or not
+    """
+    if(request.user.is_authenticated()):
+        return JsonResponse({'status': 'ok'})
+    return JsonResponse({'status': 'login_required'})
 
+@sensitive_post_parameters()
+@csrf_protect
+@never_cache
+def custom_login(request, template_name='registration/login.html',
+          authentication_form=CustomAuthenticationForm):
+    """This is a wrapper for django's login view.
+    It allows us to pass "next" parameter properly.
+    
+    """
+
+    # the foolowing unbound instances of forms are needed
+    # only for rendering of the template by login 'GET'
+    # the actual login 'POST' will be using authentication_form
+    # from above
+    extra_context = {
+                     'login_form': CustomAuthenticationForm(),
+                     'signup_form': RegistrationForm()
+                     }
+    if request.method == "GET":
+        next_param = request.GET.get('next', None)
+        if(next_param):
+            extra_context = {
+                             'login_form': CustomAuthenticationForm(initial={'next':next_param}),
+                             'signup_form': RegistrationForm()
+                             }
+
+    return django_login(request=request,
+                        template_name=template_name,
+                        authentication_form=authentication_form,
+                        extra_context=extra_context)
 
 
 #########Unused Cart Feature ###################
