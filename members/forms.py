@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 class CustomSetPasswordForm(SetPasswordForm):
     def __init__(self, *args, **kargs):
         super(CustomSetPasswordForm, self).__init__(*args, **kargs)
-        
+
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         self.helper.form_show_errors = True
@@ -29,18 +29,18 @@ class CustomSetPasswordForm(SetPasswordForm):
                     Field('new_password1', placeholder='New password'),
                     Field('new_password2', placeholder='New password Confirmation'),
                     Submit('button-reset-password', 'Set password', css_class="btn-primary"),
-                    css_class = 'col-xs-10 col-xs-offset-1'
+                    css_class='col-xs-10 col-xs-offset-1'
                 )
             ),
         )
-        
+
     class Meta:
-        fields = ('new_password1','new_password2')
+        fields = ('new_password1', 'new_password2')
 
 class CustomPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kargs):
         super(CustomPasswordResetForm, self).__init__(*args, **kargs)
-        
+
         self.helper = FormHelper()
         self.helper.form_show_labels = False
         self.helper.form_show_errors = True
@@ -55,24 +55,25 @@ class CustomPasswordResetForm(PasswordResetForm):
                     HTML("Enter your email in the form below and we'll send you instructions for creating a new one."),
                     Field('email', placeholder='Email address'),
                     Submit('button-reset-password', 'Reset password', css_class="btn-primary"),
-                    css_class = 'col-xs-10 col-xs-offset-1'
+                    css_class='col-xs-10 col-xs-offset-1'
                 )
             ),
         )
-        
+
     class Meta:
         fields = ('email',)
 
 class CustomAuthenticationForm(AuthenticationForm):
-
+    # TODO: add "next" hidden field
     email = forms.EmailField(max_length=254)
+    next = forms.CharField(max_length=1000, required=False, widget=forms.HiddenInput())
 
     def __init__(self, *args, **kargs):
         super(CustomAuthenticationForm, self).__init__(*args, **kargs)
         del self.fields['username']
         self.fields['password'].widget.attrs['placeholder'] = 'password'
 
-                # Adding classes to fields
+        # Adding classes to fields
         self.fields['password'].widget.attrs['class'] = 'form-control'
         self.fields['email'].widget.attrs['class'] = 'form-control'
 
@@ -85,7 +86,7 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.helper.form_show_labels = False
         self.helper.form_show_errors = True
         self.helper.form_method = 'post'
-        self.helper.form_action = 'members:login'
+        self.helper.form_action = '.'  # 'members:login'
         self.helper.form_id = 'form-login'
 
         self.helper.layout = Layout(
@@ -93,9 +94,10 @@ class CustomAuthenticationForm(AuthenticationForm):
                 'Already a member? Log in',
                 Field('email', placeholder='Email address'),
                 Field('password', placeholder='Password'),
+                Field('next'),
                 Submit('button-login', 'Step Inside', css_class="btn-default"),
             ),
-                                
+
         )
 
     def clean(self):
@@ -144,14 +146,14 @@ class RegistrationForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
-        
+
         password = cleaned_data.get("password")
         password2 = cleaned_data.get("password")
 
         if password != password2:
             msg = "Your passwords should match."
             self.add_error('password', msg)
-            self.add_error('password2', msg)        
+            self.add_error('password2', msg)
         return cleaned_data
 
     def save(self, commit=True):

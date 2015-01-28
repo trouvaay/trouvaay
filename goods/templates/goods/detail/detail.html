@@ -43,7 +43,7 @@
 					        <div class="col-xs-12 col-sm-7 pic-detail-home">
 						        <!-- need these so that we can pass product name and price to stripe checkout -->
 						        <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
-						        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents }}</span>
+						        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_with_tax }}</span>
 				        
 				                {% if product.is_sold %}
 				                    <span class="sold">{{ 'Sold' }}</span>
@@ -74,7 +74,7 @@
 				                    </button>
 				                {% endif %}
 					        </div>
-					        <div class="col-xs-12 col-sm-5">
+					        <div class="col-xs-12 col-sm-5 neighborhood">
 						        {{ product.store.neighborhood }}
 						    </div>
 					  	</div>
@@ -82,12 +82,11 @@
 					  	<!-- Start Product Attributes -->
 					  	<div>
 					  		<div class="row">
-						  	   <div class="col-xs-4 attr-label">
-						           Type
-						       </div>
-						       <div class="col-xs-8 attr">
+						  	   <!-- <div class="col-xs-6 attr-label">
+						       </div> -->
+						       <div class="col-xs-12 attr">
 						       	{% if product.is_vintage %}
-						       		Vintage
+						       		vintage
 						       	{% else %}
 						       		New
 						       	{% endif %}
