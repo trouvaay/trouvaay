@@ -2486,6 +2486,7 @@ form .form-checkbox-wrap .checkbox-label {
   border-color: #0080b7;
 }
 .btn.btn-primary.request {
+  height: 32px;
 }
 .btn.btn-primary.buy {
   width: 70px;
@@ -3148,6 +3149,10 @@ footer ul li a:hover {
 }
 .how-it-works .statement:not(:last-child) {
   border-right: 1px solid #DDD;
+}
+.how-it-works .col-md-12.statement {
+  text-align: left;
+  padding: 0;
 }
 
 @media screen and (max-width: 992px) {
