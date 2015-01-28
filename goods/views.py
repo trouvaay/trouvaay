@@ -18,7 +18,7 @@ class HomeView(generic.ListView):
     template_name = 'goods/home/home.html'
     context_object_name = 'products'
     model = Product
-    paginate_by = 15
+    paginate_by = 30
 
     def get_queryset(self):
         pub_products = self.model.objects.filter(is_published=True)
