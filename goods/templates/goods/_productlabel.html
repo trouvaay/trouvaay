@@ -4,7 +4,7 @@
 
         <!-- need these so that we can pass product name and price to stripe checkout -->
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
-        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents }}</span>
+        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_with_tax }}</span>
     </div>
     <div class="col-xs-12 col-sm-7 pic-detail-home" style="margin-bottom: 5px">
             {% if product.is_sold %}
@@ -22,7 +22,7 @@
             {% endif %}
     </div>
     <!-- Like funtionality on hold until ProfileView implemented -->
-    <div class="col-xs-12 col-sm-5" style="line-height: 15px">
+    <div class="col-xs-12 col-sm-5 neighborhood" style="line-height: 15px; margin-top: 12px">
         {{ product.store.neighborhood }}
     </div>
         <!-- <div class="col-xs-3 pull-right text-right">
