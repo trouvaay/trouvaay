@@ -45,12 +45,24 @@
     						<div class="col-sm-12 col-md-12">
     						<ul class="nav nav-tabs center-block">
     							<li class="hidden-lg hidden-md hidden-sm" style="padding-top: 20px;">filter</li>
-    							<li class="active first"><a href="#tab1" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">everything</span></a></li>
-    							<li><a href="#tab2" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/seating128.png' %}" title="seating" alt=""/></span><span class="inner icon-label" style="display:list-item">seating</span></a></li>
-    							<li><a href="#tab3" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/table128.png' %}" title="table" alt=""/></span><span class="inner icon-label" style="display:list-item">tables/desks</span></a></li>
-    							<li><a href="#tab4" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bed128.png' %}" title="bed" alt=""/></span><span class="inner icon-label" style="display:list-item">beds</span></a></li>
-    							<li><a href="#tab5" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/storage128.png' %}" title="storage" alt=""/></span><span class="inner icon-label" style="display:list-item">storage</span></a></li>
-    							<li><a href="#tab6" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a></li>
+    							<li class="active first">
+                                    <a href="{% url 'goods:home' %}"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">everything</span></a>
+                                </li>
+    							<li>
+                                    <a href="{% url 'goods:furnituretype' %}?type=seating"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/seating128.png' %}" title="seating" alt=""/></span><span class="inner icon-label" style="display:list-item">seating</span></a>
+                                </li>
+    							<li>
+                                    <a href="{% url 'goods:furnituretype' %}?type=tables"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/table128.png' %}" title="table" alt=""/></span><span class="inner icon-label" style="display:list-item">tables/desks</span></a>
+                                </li>
+    							<li>
+                                    <a href="{% url 'goods:furnituretype' %}?type=beds"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bed128.png' %}" title="bed" alt=""/></span><span class="inner icon-label" style="display:list-item">beds</span></a>
+                                </li>
+    							<li>
+                                    <a href="{% url 'goods:furnituretype' %}?type=storage"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/storage128.png' %}" title="storage" alt=""/></span><span class="inner icon-label" style="display:list-item">storage</span></a>
+                                </li>
+    							<li>
+                                    <a href="{% url 'goods:furnituretype' %}?type=lighting"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a>
+                                </li>
     						</ul>
     						</div>
     					</div>
@@ -73,12 +85,24 @@
         <div class="row-fluid">
             <div class="col-sm-11 col-md-10">
             <ul class="nav nav-tabs pull-left">
-                <li class="active"><a href="#tab1" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">everything</span></a></li>
-                <li><a href="#tab2" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/seating128.png' %}" title="seating" alt=""/></span><span class="inner icon-label" style="display:list-item">seating</span></a></li>
-                <li><a href="#tab3" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/table128.png' %}" title="table" alt=""/></span><span class="inner icon-label" style="display:list-item">tables/desks</span></a></li>
-                <li><a href="#tab4" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bed128.png' %}" title="bed" alt=""/></span><span class="inner icon-label" style="display:list-item">beds</span></a></li>
-                <li><a href="#tab5" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/storage128.png' %}" title="storage" alt=""/></span><span class="inner icon-label" style="display:list-item">storage</span></a></li>
-                <li><a href="#tab6" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a></li>
+                <li class="active">
+                    <a href="{% url 'goods:home' %}"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">everything</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'goods:furnituretype' %}?type=seating"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/seating128.png' %}" title="seating" alt=""/></span><span class="inner icon-label" style="display:list-item">seating</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'goods:furnituretype' %}?type=tables"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/table128.png' %}" title="table" alt=""/></span><span class="inner icon-label" style="display:list-item">tables/desks</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'goods:furnituretype' %}?type=beds"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bed128.png' %}" title="bed" alt=""/></span><span class="inner icon-label" style="display:list-item">beds</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'goods:furnituretype' %}?type=storage"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/storage128.png' %}" title="storage" alt=""/></span><span class="inner icon-label" style="display:list-item">storage</span></a>
+                </li>
+                <li>
+                    <a href="{% url 'goods:furnituretype' %}?type=lighting"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a>
+                </li>
             </ul>
             </div>
         </div>
@@ -88,7 +112,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab1">
+                    <div class="tab-pane fade in active">
                         <div class="grid-products-wrapper">
                             <div class="row">
                                 {% for product in products %}
@@ -97,51 +121,6 @@
                             </div>
                         </div>
                     </div><!-- end tab1 -->
-                    <div class="tab-pane fade" id="tab2">
-                        <div class="grid-products-wrapper">
-                            <div class="row">
-                                {% for product in seating %}
-                                    {% include 'goods/_product_for_loop.html' %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div><!-- end tab2 -->
-                    <div class="tab-pane fade" id="tab3">
-                        <div class="grid-products-wrapper">
-                            <div class="row">
-                                {% for product in tables %}
-                                    {% include 'goods/_product_for_loop.html' %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div><!-- end tab3-->
-                     <div class="tab-pane fade" id="tab4">
-                        <div class="grid-products-wrapper">
-                            <div class="row">
-                                {% for product in beds %}
-                                    {% include 'goods/_product_for_loop.html' %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div><!-- end tab4 -->
-                     <div class="tab-pane fade" id="tab5">
-                        <div class="grid-products-wrapper">
-                            <div class="row">
-                                {% for product in storage %}
-                                    {% include 'goods/_product_for_loop.html' %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div><!-- end tab5 -->
-                     <div class="tab-pane fade" id="tab6">
-                        <div class="grid-products-wrapper">
-                            <div class="row">
-                                {% for product in lighting %}
-                                    {% include 'goods/_product_for_loop.html' %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div><!-- end tab6 -->
                 </div>
             </div>
         </div>
