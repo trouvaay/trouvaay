@@ -11,6 +11,7 @@ django-crispy-forms==1.4.0
 django-debug-toolbar==1.2.2
 django-localflavor==1.1
 django-registration-redux==1.1
+django-sslify==0.2.5
 django-toolbelt==0.0.1
 djorm-pgarray==1.2
 gnureadline==6.3.3
@@ -24,3 +25,4 @@ sqlparse==0.1.14
 static3==0.5.1
 stripe==1.19.1
 wsgiref==0.1.2
+django-sslify>=0.2.0

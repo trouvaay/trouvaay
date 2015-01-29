@@ -28,6 +28,9 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = [ ]
 
+# works with sslify to force https on Heroku
+SSLIFY_DISABLE = True
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,6 +51,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
