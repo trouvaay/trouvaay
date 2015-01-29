@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'stripe',
     'analytical',
+    'sslify',
 )
 
 MIDDLEWARE_CLASSES = (
