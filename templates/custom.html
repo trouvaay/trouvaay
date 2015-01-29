@@ -1,9 +1,10 @@
 {% load staticfiles %}
+<script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
 var trouvaay = {
 	init: function() {
 
-		var mobilemenutop = "<div id='mobil-nav' class='navbar-collapse'>" +
+		var mobilemenutop = "<div id='mobile-nav' class='navbar-collapse'>" +
 					"<ul class='nav navbar-nav'>" +
 						"<li>{% if user.is_authenticated %}" +
 							"<a href='{% url 'members:logout' %}'>Logout</a>" +
@@ -15,42 +16,70 @@ var trouvaay = {
 						"<li><a href='{% url 'goods:about' %}'>About</a></li>" +
 						"<li class='nav-divider'></li>" +
 						"<li><a style='display:inline-block' class='insta-icon mobile' href='http://instagram.com/raredoor/' target='_blank'>" +
-								"<img src='{% static 'img/socialicons/instagram_gray32.png' %}'/></a>" +
+								"<img src='{% static 'img/socialicons/instagram.svg' %}'/></a>" +
 							"<a style='display:inline-block' class='insta-icon mobile' href='https://www.facebook.com/RareDoor' target='_blank'>" +
-								"<img src='{% static 'img/socialicons/facebook_gray32.png' %}'/></a>" +
+								"<img src='{% static 'img/socialicons/facebook.svg' %}'/></a>" +
 							"<a style='display:inline-block'class='insta-icon mobile' href='https://twitter.com/RareDoor/' target='_blank'>" +
-					 			"<img src='{% static 'img/socialicons/twitter_gray32.png' %}'/></a>" +
+					 			"<img src='{% static 'img/socialicons/twitter.svg' %}'/></a>" +
 					 	"</li>" +
 					 "</ul></div>";
+        var mobileTabIcons = "<div id='tab-icons-mobile' class='container select-bar hp-tabs'>"+
+                                "<div class='tab-icons mobile'>"+
+                                "<div class='row-fluid'>"+
+                                    "<div class='col-sm-11 col-md-10'>"+
+                                    "<ul class='nav nav-tabs pull-left'>"+
+                                        "<li class='active'><a href='#tab1' data-toggle='tab'>"+
+                                        "<span class='inner' style='display:list-item'>"+
+                                            "<img src='{% static 'img/roomiconsnew/house128.png' %}' title='house' alt=''/>"+
+                                            "</span><span class='inner icon-label' style='display:list-item'>everything</span>"+
+                                            "</a></li>"+
+                                        "<li><a href='#tab2' data-toggle='tab'>"+
+                                            "<span class='inner' style='display:list-item'>"+
+                                            "<img src='{% static 'img/roomiconsnew/seating128.png' %}' title='seating' alt=''/>"+
+                                            "</span>"+
+                                            "<span class='inner icon-label' style='display:list-item'>seating</span>"+
+                                            "</a></li>"+
+                                        "<li><a href='#tab3' data-toggle='tab'><span class='inner' style='display:list-item'>"+
+                                            "<img src='{% static 'img/roomiconsnew/table128.png' %}' title='table' alt=''/>"+
+                                            "</span><span class='inner icon-label' style='display:list-item'>tables/desks</span>"+
+                                            "</a></li>"+
+                                        "<li><a href='#tab4' data-toggle='tab'><span class='inner' style='display:list-item'>"+
+                                            "<img src='{% static 'img/roomiconsnew/bed128.png' %}' title='bed' alt=''/></span>"+
+                                            "<span class='inner icon-label' style='display:list-item'>beds</span>"+
+                                            "</a></li>"+
+                                        "<li><a href='#tab5' data-toggle='tab'><span class='inner' style='display:list-item'>"+
+                                            "<img src='{% static 'img/roomiconsnew/storage128.png' %}' title='storage' alt=''/>"+
+                                            "</span><span class='inner icon-label' style='display:list-item'>storage</span>"+
+                                            "</a></li>"+
+                                        "<li><a href='#tab6' data-toggle='tab'><span class='inner' style='display:list-item'>"+
+                                            "<img src='{% static 'img/roomiconsnew/lighting128.png' %}' title='lighting' alt=''/>"+
+                                            "</span><span class='inner icon-label' style='display:list-item'>lighting</span>"+
+                                            "</a></li>"+
+                                    "</ul>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                            "</div>"
 
-		var mobilemenubottom = "<div id='mobil-nav' class='navbar-collapse'>" +
-					"<ul class='nav navbar-nav'>" +
-						"<li>{% if user.is_authenticated %}" +
-							"<a href='{% url 'members:logout' %}'>Logout</a>" +
-							"{% else %}" +
-							"<a href='{% url 'members:login' %}'>Login</a>" +
-							"{% endif %}" +
-						"</li>" +
-						"<li class='nav-divider'></li>" +
-						"<li><a href='{% url 'goods:about' %}'>About</a></li>" +
-						"<li class='nav-divider'></li>" +
-						"<li><a style='display:inline-block' class='insta-icon mobile' href='http://instagram.com/raredoor/' target='_blank'>" +
-								"<img src='{% static 'img/socialicons/instagram_gray32.png' %}'/></a>" +
-							"<a style='display:inline-block' class='insta-icon mobile' href='https://www.facebook.com/RareDoor' target='_blank'>" +
-								"<img src='{% static 'img/socialicons/facebook_gray32.png' %}'/></a>" +
-							"<a style='display:inline-block'class='insta-icon mobile' href='https://twitter.com/RareDoor/' target='_blank'>" +
-					 			"<img src='{% static 'img/socialicons/twitter_gray32.png' %}'/></a>" +
-					 	"</li>" +
-					 "</ul></div>";
 
-		$("#mob-nav").on('click',function() {
-                if (!$('#mobil-nav').length ) {
-                  $(".container-fluid.top-bar").append(mobilemenutop);
-                
+        //Append mobile menu
+		$("#mobile-search").on('click',function() {
+                if (!$('#tab-icons-mobile').length ) {
+                  $(".container-fluid.top-bar").append(mobileTabIcons);
                 } else {
-                  $("#mobil-nav").remove();
+                  $("#tab-icons-mobile").remove();
                 }
         });
+
+        //Append mobile tab icons
+        $("#mob-nav").on('click',function() {
+                if (!$('#mobile-nav').length ) {
+                  $(".container-fluid.top-bar").append(mobilemenutop);
+                } else {
+                  $("#mobile-nav").remove();
+                }
+        });
+
         //Highlights link of current page
         $(function(){
 		  $('a').each(function() {
@@ -75,15 +104,14 @@ var trouvaay = {
                 data,
                 function(response){
                     if(response == 'loginrequired'){
-                        window.location.replace("{% url "members:login" %}");
+                        window.location.replace("{% url 'members:login' %}");
                     }
                 }
             );
         });
 
-        
-
         //Addtocart AJAX post
+        /*
 	    $(".btn.buy").click(function() {
             var id = $(this).attr("id").substring(4);
             var data = {'id': id};
@@ -98,7 +126,7 @@ var trouvaay = {
                 });
             }
         })
-  
+        */
 	}
 }
 
@@ -138,5 +166,114 @@ $(document).ready(function() {
                 }
             }
         });
+	
+	
+
+	// Stripe checkout
+	$('.btn.buy.try').on('click', function(e) {
+		
+		// alert("clicked");
+		// console.log("clicked");
+		$.ajax({
+			type: "GET",
+			url: "{% url "members:can_reserve" %}",
+			success: function(data){
+				if(data['status'] == 'login_required'){
+					window.location.replace("{% url 'members:login' %}"+"?next="+window.location.href.toString().split(window.location.host)[1]);
+				}
+			}
+		});
+	
+		if(e.target.id.substr(0, 4) == 'buy_'){
+			var productId = e.target.id.substr(4);
+			if(productId && !(typeof productId === 'undefined')){
+				var productName = $("#product-name-"+productId).text();
+				var productPrice = $("#product-price-in-cents-"+productId).text();
+				
+				if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
+					var handler = StripeCheckout.configure({
+						key: '{{ STRIPE_PUBLISHABLE_KEY }}',
+						image: "{% static 'img/logos/Raredoor-R-icon-gold.png' %}",
+						name: '{{ site_name }}',
+						description: productName,
+						amount: productPrice,
+						shippingAddress: "true",
+						token: function(token, args) {
+							$.ajax({
+								type: "POST",
+								url: {% url "members:reserve_callback" %},
+								data: {
+									token: token,
+									args: args,
+									total_amount: productPrice,
+									order_type: "{{ FEATURE_NAME_RESERVE }}",
+									product_id: productId
+								},
+								success: function(data){
+								  	if(data['status'] == "ok"){
+								  		$("#reserved-product-name").text(data['product_name']);
+								  		$("#reserved-product-store-name").text(data['store_name']);
+								  		var storeAddress = data['store_street'];
+								  		if(data['store_street2'] != ""){
+								  			storeAddress += ("<br>" + data['store_street2']);
+								  		}
+								  		storeAddress += ("<br>" + data['store_city'] + " " + data['store_state'] + " " + data['store_zipcode']);
+										$("#reserved-product-store-address").html(storeAddress);
+										$("#reserved-product-capture-date").text(data['capture_date']);
+										$("#reserved-product-image").attr('src', (data['image_src']));
+										$("#addtocartmodal").modal({
+											show: true,
+											keyboard: true
+										});
+								  	}
+								},
+								dataType: "json"
+							});
+						}
+					});				
+				
+				  	handler.open({
+						panelLabel: "{{ FEATURE_NAME_RESERVE }} {% verbatim %}{{amount}}{% endverbatim %} incl. tax"
+					});
+				}
+			}
+			e.preventDefault();
+		}
+ 	});
 });
+//Unsed formula to append distance from product to user's loco
+//  function  getpoints (userloc) {
+//      var products = {{ products_json|safe }};
+//      var userloc = {
+//       'lat': userloc.coords.latitude,
+//       'lng': userloc.coords.longitude,
+//      };
+          
+//          var userpos = new google.maps.LatLng(userloc.lat, userloc.lng);
+//          for (i in products) {
+//              console.log(products[i]);
+//          add_dists(userpos,products[i],i);
+//          } 
+//     };
+
+//  function add_dists(userpos, prod, prodnum) {
+//      var productpos = new google.maps.LatLng(prod.fields.lat, prod.fields.lng);
+//      var request = {
+//            origin: userpos,
+//            destination: productpos,
+//            travelMode: google.maps.TravelMode.DRIVING
+//        };
+//      var directionsService = new google.maps.DirectionsService();
+//      directionsService.route(request, function(result, status) {
+//            if (status == google.maps.DirectionsStatus.OK) {
+//              var id = "buy_"+prod.pk;
+//              console.log(id);
+//              $(id).append(result.routes[0].legs[0].distance.text);
+//            } 
+//          });
+//  };
+
+//  navigator.geolocation.getCurrentPosition(getpoints);
+
 </script>
+

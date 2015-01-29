@@ -10,6 +10,9 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sslify
+from decimal import Decimal
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 
@@ -25,6 +28,9 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = [ ]
+
+# works with sslify to force https on Heroku
+
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -42,9 +48,11 @@ INSTALLED_APPS = (
     # 'debug_toolbar',
     'crispy_forms',
     'stripe',
+    'analytical',
 )
 
 MIDDLEWARE_CLASSES = (
+    'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -115,7 +123,8 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
-FEATURE_NAME_BUYANDTRY = "Reserve"
+FEATURE_NAME_RESERVE = "Buy"
+FEATURE_TOOLTIP_RESERVE = "You have 5 days to go see the product in-store (location is revealed after purchase) before you payment will be processed.  Cancel at any time before the 'discovery' period ends!"
 RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
     'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
@@ -197,20 +206,25 @@ LOGGING = {
 ACCOUNT_ACTIVATION_DAYS = 30
 REGISTRATION_AUTO_LOGIN = True
 
-STRIPE_CAPTURE_TRANSACTION_TIME = 48  # hours
+STRIPE_CAPTURE_TRANSACTION_TIME = 120  # hours
 
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''
+OLARK_SITE_ID = ''
+MIXPANEL_API_TOKEN = ''
+ANALYTICAL_INTERNAL_IPS = []
 
-# email settings are another good candidate to have 
+SALES_TAX = Decimal('0.0875')
+
+# email settings are another good candidate to have
 # each developer define in their own dev_settings.py
 # here are what could be production settings
-DEFAULT_FROM_EMAIL = '' # e.g. 'support@raredoor.com'
-EMAIL_HOST = '' # 'smtp.gmail.com'
-EMAIL_PORT =  '' # 587 - for gmail
-EMAIL_HOST_USER = '' # e.g. 'support@raredoor.com'
+DEFAULT_FROM_EMAIL = ''  # e.g. 'support@raredoor.com'
+EMAIL_HOST = ''  # 'smtp.gmail.com'
+EMAIL_PORT = ''  # 587 - for gmail
+EMAIL_HOST_USER = ''  # e.g. 'support@raredoor.com'
 EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = True # google requires True
+EMAIL_USE_TLS = True  # google requires True
 
 PROJECT_ENV = os.getenv('PROJECT_ENV', None)
 if(PROJECT_ENV == 'dev'):

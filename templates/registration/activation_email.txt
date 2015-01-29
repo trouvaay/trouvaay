@@ -11,5 +11,5 @@ To activate this account, please click the following link within the next
 http://{{ siteurl }}{{ activation_key_url }}
 
 Sincerely,
-{{ sitename }} Management
+Rare Door
 {% endblocktrans %}

@@ -1,6 +1,8 @@
 {% load cloudinary %}
-<div class="col-xs-12 col-sm-6 col-md-4 product" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
-    <div class="grid-product centered-parent">
+<div class="col-xs-12 col-sm-6 col-md-4 product-container" style="padding-bottom: 3rem;">
+    <div class="vintage-label" style="text-align:center; margin-top: 5px; margin-bottom:-10px;">
+        {% if product.is_vintage %}<b>Vintage</b>{% else %}{% endif %}</div>
+    <div class="grid-product centered-parent {% if product.is_vintage %}vintage-product{% endif %}" style="margin-bottom:-5px;">
         <!-- <img class="img-responsive" src="{{ product.productimage_set.first.image.url }}"> -->
         <div class="centered-child detail-image-large">
                 {% cloudinary product.productimage_set.first.image width=350 height=300 crop="fit" %}
@@ -12,8 +14,6 @@
                 {% cloudinary product.productimage_set.first.image width=275 height=275 crop="fit" %}
         </div>
         <a href="{% url 'goods:detail' product.slug  %}" class="view-product">
-            <div class="text">View product</div>
-            <div class="background"></div>
         </a>
     </div>
     {% include 'goods/_productlabel.html' %}

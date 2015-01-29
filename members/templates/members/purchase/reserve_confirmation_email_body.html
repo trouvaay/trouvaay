@@ -1,0 +1,19 @@
+<h1>Thank you for your purchase.</h1>  
+
+<p>
+Your <b>{{ product.short_name }}</b> is available at <i>{{ product.store.retailer.short_name }}</i> located at:
+<br /><br />
+{{ product.store.street }}<br />
+{% if product.store.street2 %}{{ product.store.street2 }}<br />{% endif %}
+{{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
+</p>
+
+<p>You have our 5 day discovery period to go view the item in store.</p>
+
+<p>Your card will not be charged until {{ capture_date }}.  Call or text to cancel.
+We are happy to answer any questions you might have!<p>
+
+<p>
+Sincerely,<br />
+Rare Door Support Team
+</p>

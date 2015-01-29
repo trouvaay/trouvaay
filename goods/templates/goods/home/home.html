@@ -5,86 +5,196 @@
 {% block content %}
   <div class="container homepage-slider-container">
     <div class="row-fluid">
-        <div class="col-sm-12" style="padding-left:0px; padding-right:0px">
-            <div class="homepage-slider">
-                <ul class="slides">
-                    <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1421713992/4._Lotta_qextx7.jpg');">
-		    <h3>Find unique home décor </br>in local SF stores</h3>
-                    </li>
-                    <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1421713992/4._Lotta_qextx7.jpg');"></li>
-                    <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1421713992/4._Lotta_qextx7.jpg');"></li>
-                    <li style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1421713992/4._Lotta_qextx7.jpg');"></li>
-                </ul>
-            </div>
+        <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg'); height:45rem;">
+        <!-- http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg -->
+                <div class="black_overlay">
+                </div><!-- end overlay -->
+		<div class="landing-message">
+		    <h1>
+			Discover cool furniture in Bay Area stores
+		    </h1>
+            <h3><span class="subheading">The convenience of online shopping without the regret</span></h3>
+		</div>
         </div>
     </div>
   </div>
-  
-  
   <div class="container-fluid how-it-works layer">
     <div class="row-fluid">
-	<h3>How it works</h3>
-	<div class="col-md-4 statement"><img src="{% static 'img/magnifying_glass.svg' %}">New or vintage,</br> we do the hunting for you, finding the hidden gems in local stores</div>
-	<div class="col-md-4 statement"><img src="{% static 'img/store.svg' %} " height="70">If you’re unsure about your purchase, our <span><b>buy&try</b></span> option gives you 48 hrs to go in-store and check out an item in person.</div>
-	<div class="col-md-4 statement"><img src="{% static 'img/calendar.svg' %}">New pieces posted daily. Check in before they’re gone.</div>
-        <div class="col-sm-12">
-            <div class="heading main-quote">
-              <div class="row">
-              <div class="col-sm-12">
-                More treasure, less hunting
-              </div>
-              </div>
-            </div>
+    	<div class="col-md-6 statement">
+    		<h2>5-Day Discovery Period </h2>
+            <h4>Go see your item in-store. Change of heart? Cancel the order — no cost, no questions asked.</h4>
+    	</div>
+    	<div class="col-md-6 statement">
+    		<h2>White Glove Delivery</h2>
+    		<h4>Ever find a great piece of furniture but discover that shipping cost more than the item itself? Pay no more than $75 for delivery</h4>
+    	</div>
+        <div class="col-md-6 statement mobile-details">
+            <a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h3>Details</h3></a>
         </div>
     </div>
   </div>
-  <div class="container-fluid layer">
-    <div class="grid-products-wrapper">
-	<div class="row-fluid">
-		<h3>Items we've curated:</h3></br></br>
-	</div>
+    <div class="container-fluid select-bar hp-tabs" style="box-shadow: 0 6px 4px -4px #333;">
         <div class="row-fluid">
-                
-            <div class="col-xs-12 col-sm-6 col-m-4" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
-                <h4 style="text-align: center; font-family:'avenir'">Shop new furniture</h4>
-                <div class="grid-product centered-parent">
-                    <div class="centered-child detail-image-large">
-                            {% cloudinary new.image width=350 height=350 crop="fit" %}
-                    </div>
-                    <div class="centered-child detail-image-med">
-                            {% cloudinary new.image width=300 height=300 crop="fit" %}
-                    </div>
-                    <div class="centered-child detail-image-small">
-                            {% cloudinary new.image width=275 height=275 crop="fit" %}
-                    </div>
-                    <a href="{% url 'goods:new'  %}" class="view-product">
-                        <div class="text">View New</div>
-                        <div class="background"></div>
-                    </a>
-                </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 logo-div main-navigation hidden-xs">
+    	     <a href="{% url 'goods:home' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a>
             </div>
-            
-            <div class="col-xs-12 col-sm-6 col-m-4" style="padding-bottom: 3rem; border-bottom: lightgray 1px solid">
-                <h4 style="text-align: center; font-family:'avenir'">Shop pre-loved items</h4>    
-                <div class="grid-product centered-parent">
-                    <div class="centered-child detail-image-large">
-                            {% cloudinary vintage.image width=350 height=350 crop="fit" %}
-                    </div>
-                    <div class="centered-child detail-image-med">
-                            {% cloudinary vintage.image width=300 height=300 crop="fit" %}
-                    </div>
-                    <div class="centered-child detail-image-small">
-                            {% cloudinary vintage.image width=275 height=275 crop="fit" %}
-                    </div>
-                    <a href="{% url 'goods:vintage'  %}" class="view-product">
-                        <div class="text">View Vintage</div>
-                        <div class="background"></div>
-                    </a>
+    		<div class="col-xs-12 col-sm-6 col-md-6">
+    			<div class="row-fluid">
+    				<div class="tab-icons">
+    					<div class="row-fluid">
+    						<div class="col-sm-12 col-md-12">
+    						<ul class="nav nav-tabs center-block">
+    							<li class="hidden-lg hidden-md hidden-sm" style="padding-top: 20px;">filter</li>
+    							<li class="active first"><a href="#tab1" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">everything</span></a></li>
+    							<li><a href="#tab2" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/seating128.png' %}" title="seating" alt=""/></span><span class="inner icon-label" style="display:list-item">seating</span></a></li>
+    							<li><a href="#tab3" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/table128.png' %}" title="table" alt=""/></span><span class="inner icon-label" style="display:list-item">tables/desks</span></a></li>
+    							<li><a href="#tab4" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bed128.png' %}" title="bed" alt=""/></span><span class="inner icon-label" style="display:list-item">beds</span></a></li>
+    							<li><a href="#tab5" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/storage128.png' %}" title="storage" alt=""/></span><span class="inner icon-label" style="display:list-item">storage</span></a></li>
+    							<li><a href="#tab6" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a></li>
+    						</ul>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	<div class="col-xs-3 hidden-xs col-md-3">
+    		<ul class="nav navbar-navt">
+    		<li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h3>How it works</h3></a></li>
+    		{% if user.is_authenticated %}
+    		<!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
+    		<li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
+    		{% else %}
+    		<li><a class="btn btn-link" href="{% url 'members:logout' %}">Login</a></li>
+    		{% endif %}
+    		</ul>
+    	</div>
+    </div>
+    <div class="tab-icons mobile">
+        <div class="row-fluid">
+            <div class="col-sm-11 col-md-10">
+            <ul class="nav nav-tabs pull-left">
+                <li class="active"><a href="#tab1" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">everything</span></a></li>
+                <li><a href="#tab2" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/seating128.png' %}" title="seating" alt=""/></span><span class="inner icon-label" style="display:list-item">seating</span></a></li>
+                <li><a href="#tab3" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/table128.png' %}" title="table" alt=""/></span><span class="inner icon-label" style="display:list-item">tables/desks</span></a></li>
+                <li><a href="#tab4" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bed128.png' %}" title="bed" alt=""/></span><span class="inner icon-label" style="display:list-item">beds</span></a></li>
+                <li><a href="#tab5" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/storage128.png' %}" title="storage" alt=""/></span><span class="inner icon-label" style="display:list-item">storage</span></a></li>
+                <li><a href="#tab6" data-toggle="tab"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+	<div class="container pic-tabs">        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                                {% for product in products %}
+                                    {% include 'goods/_product_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab1 -->
+                    <div class="tab-pane fade" id="tab2">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                                {% for product in seating %}
+                                    {% include 'goods/_product_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab2 -->
+                    <div class="tab-pane fade" id="tab3">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                                {% for product in tables %}
+                                    {% include 'goods/_product_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab3-->
+                     <div class="tab-pane fade" id="tab4">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                                {% for product in beds %}
+                                    {% include 'goods/_product_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab4 -->
+                     <div class="tab-pane fade" id="tab5">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                                {% for product in storage %}
+                                    {% include 'goods/_product_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab5 -->
+                     <div class="tab-pane fade" id="tab6">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                                {% for product in lighting %}
+                                    {% include 'goods/_product_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab6 -->
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" style="margin: 0px">
+            <div class="col-md-4 col-md-offset-4" style="text-align:center">
+                <nav>
+                  <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li>
+                      <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    {% endif %}
+                    {% for page in page_obj.paginator.page_range %}
+                        <li><a href="?page={{ page }}">{{ page }}</a></li>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li>
+                      <a href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+            </div>
+    </div><!-- end pagination div -->
+    <div class="modal fade" id="how-it-works-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+	<div class="container-fluid how-it-works layer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div class="row-fluid">
+    	<div class="col-md-12 statement">
+    		<h2>Purchase & 5-Day Discovery Period </h2>
+            <h4>While some items do have a return policy we want to give you the opportunity to experience the product before you pay for it.  When you purchase through us you have 5 days to go touch, feel, and see your item in-store before your card is charged.</br></br>If you change your mind cancel the order — no cost, no questions asked.</h4>
+    	</div>
+    	<div class="col-md-12 statement">
+    		<h2>White Glove Delivery</h2>
+    		<h4>We know the disappointment that comes with finding a great piece of furniture and then realizing that shipping costs more than the item itself. Even worse, sometimes you have to coordinate the delivery on your own. We want to remove all that hassle.</br></br>We have a simple, 3 tiered pricing structure for delivery: $25, $50, & $75 based on the size of the purchase (not included in your item's list price).</h4>
+            <h4>After you’ve placed your order, we’ll call you to provide the delivery price and coordinate a delivery time that is convenient for you.</h4>
+    	</div>
+    </div>
+  </div>
+
       </div>
     </div>
+  </div>
+</div>
+
 {% endblock content %}
 {% block endjs %}{% endblock endjs %}
 
