@@ -1,4 +1,4 @@
-Thank you for your reservation.  
+Thank you for your purchase.  
 
 Your {{ product.name }} is available at {{ product.store.retailer.short_name }} located at:
 
@@ -6,9 +6,10 @@ Your {{ product.name }} is available at {{ product.store.retailer.short_name }} 
 {{ product.store.street2 }}
 {% endif %}{{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
 
-Please visit the store to pick up the item.
+You have our 5 day discovery period to go view the item in store.  
 
-Your card will not be charged until {{ capture_date }}.
+Your card will not be charged until {{ capture_date }}.  Call or text to cancel.
+We are happy to answer any questions you might have!
 
 Sincerely,
-Rare Door Support Team
+Rare Door

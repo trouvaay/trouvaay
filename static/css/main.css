@@ -3191,6 +3191,9 @@ footer ul li a:hover {
   margin-bottom: 30px;
   font-family: 'Chunkfive';
 }
+.container-fluid.how-it-works.layer {
+  margin-bottom: 0;
+}
 
 .how-it-works .row-fluid div.main-quote div {
   font-size: 24px;
