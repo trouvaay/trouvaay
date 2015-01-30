@@ -18,7 +18,7 @@ class HomeView(generic.ListView):
     template_name = 'goods/home/home.html'
     context_object_name = 'products'
     model = Product
-    paginate_by = 18
+    paginate_by = 21
 
     def get_queryset(self):
         pub_products = self.model.objects.filter(is_published=True)
@@ -47,7 +47,7 @@ class FurnitureTypeView(generic.ListView):
     template_name = 'goods/home/furniture_type.html'
     context_object_name = 'products'
     model = Product
-    paginate_by = 3
+    paginate_by = 21
     
 
     def get_queryset(self):
