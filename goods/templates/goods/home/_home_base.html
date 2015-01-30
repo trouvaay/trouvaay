@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
 {% load cloudinary %}
+{% load goods_extras %}
 
 {% block content %}
     <div class="container-fluid select-bar hp-tabs" style="box-shadow: 0 6px 4px -4px #333;">
@@ -102,17 +103,17 @@
               <ul class="pagination">
                 {% if page_obj.has_previous %}
                 <li>
-                  <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                  <a href="?{% url_replace request 'page' page_obj.previous_page_number %}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
                 {% endif %}
                 {% for page in page_obj.paginator.page_range %}
-                    <li><a href="?page={{ page }}">{{ page }}</a></li>
+                    <li><a href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
                 {% endfor %}
                 {% if page_obj.has_next %}
                 <li>
-                  <a href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                  <a href="?{% url_replace request 'page' page_obj.next_page_number %}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                   </a>
                 </li>
