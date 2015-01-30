@@ -89,7 +89,14 @@
 					    </div>
 					    <div class="row">
 					  	   <div id="first" class="col-xs-12 product-description">
-					           <b>${{ product.current_price|floatformat:"0" }}</b>
+					           <em><p>{% if product.current_price %}
+					            {% if product.is_discounted %}
+					                <strike>{{' - $'}}{{ product.original_price|floatformat:"0" }}</strike>
+					                <span class="discount">{{' - $'}}{{ product.current_price|floatformat:"0" }}<span>
+					            {% else %}
+					                <b>{{' - $'}}{{ product.current_price|floatformat:"0" }}</b>
+					            {% endif %}
+					        {% endif %}</em></p>
 					       </div>
 					    </div>
 					    <div class="row" style="margin-bottom: 8%">

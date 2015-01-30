@@ -106,6 +106,9 @@ h4, h5, h6, .h4, .h5, .h6 {
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a {
   color: #333;
 }
+.discount {
+  color: red;
+}
 .select-bar {
 	padding-top: 20px;
 	z-index: 99;
