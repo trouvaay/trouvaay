@@ -27,7 +27,7 @@
   float: left;
 }
 body {
-  font-size: 14px;
+  font-size: 13px;
   background: white;
   font-family: 'ralewaylight';
 }
@@ -2609,6 +2609,12 @@ form .form-checkbox-wrap .checkbox-label {
 #how-it-works-modal .how-it-works .statement:not(:last-child) {
   border-right: 0px;
 }
+#how-it-works-button {
+  font-family: 'Chunkfive'
+}
+.btn.btn-link.tab-menu {
+  padding-top: 0;
+}
 #addtocartmodal {
   top: 15%;
   /*left: 25%;*/
@@ -2748,7 +2754,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   text-align: center;
-  padding: 10px 0 12px;
+  padding: 5px 0 0;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
@@ -3269,7 +3275,7 @@ footer ul li a:hover {
   line-height: 30px;
 }
 .nav.nav-tabs img {
-  max-height: 30px;
+  max-height: 1.75em;
 }
 
 .homepage-quote .heading a {
@@ -4161,6 +4167,9 @@ footer ul li a:hover {
   .how-it-works .statement {
     padding: 0 2rem;
   }
+  .container-fluid.select-bar.hp-tabs {
+    display: none;
+  }
   .how-it-works .col-md-6.statement.mobile-details {
     display: block;
   }
@@ -4335,9 +4344,7 @@ footer ul li a:hover {
     position: fixed;
     left: 10%;
   }
-  .container-fluid.select-bar.hp-tabs {
-    display: none;
-  }
+  
   .product-description .name.map {
     margin: 0 auto 10px;
     width: 100%;
