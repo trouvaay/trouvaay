@@ -4189,6 +4189,10 @@ footer ul li a:hover {
   #mobile-navigation {
     display: block;
     background-color: rgb(33,16,106);
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    margin: 0;
   }
   #desktop-navigation {
     display: none;
