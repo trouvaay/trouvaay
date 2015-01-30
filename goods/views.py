@@ -43,7 +43,7 @@ class HomeView(generic.ListView):
         return context
 
 class FurnitureTypeView(generic.ListView):
-    template_name = 'goods/home/home.html'
+    template_name = 'goods/home/furniture_type.html'
     context_object_name = 'products'
     model = Product
     paginate_by = 30
