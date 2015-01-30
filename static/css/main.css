@@ -144,7 +144,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   margin-bottom: 1em;
 }
 #logo, .logo {
-  width: 185px;
+  width: 225px;
   max-width: 100%;
 }
 .insta-icon {
@@ -3014,7 +3014,7 @@ form .form-checkbox-wrap .checkbox-label {
   font-size: 16px;
 }
 .socialicon {
-	width: 16px;
+	width: 20px;
 	padding-top: 6px;
 }
 .social-icons {
