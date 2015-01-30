@@ -94,7 +94,7 @@
 					    </div>
 					    <div class="row" style="margin-bottom: 8%">
 					    	<!-- Start Product labeling -->
-					        <div class="col-xs-12 col-sm-7 pic-detail-home">
+					        <div class="col-xs-12 col-sm-6 pic-detail-home">
 						        <!-- need these so that we can pass product name and price to stripe checkout -->
 						        <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
 						        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_with_tax }}</span>
@@ -128,7 +128,7 @@
 				                    </button>
 				                {% endif %}
 					        </div>
-					        <div class="col-xs-12 col-sm-5" style="margin-top:12px">
+					        <div class="col-xs-12 col-sm-6" style="margin-top:12px">
 						         located in: <span class="neighborhood">{{ product.store.neighborhood }}</span>
 						    </div>
 					  	</div>
