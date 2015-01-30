@@ -3432,6 +3432,10 @@ footer ul li a:hover {
     opacity:.50;
     filter: alpha(opacity=50);
 }
+.layer {
+  overflow: auto;
+  padding: 0px 30px;
+}
 
 @media screen and (max-width: 768px) {
 .homepage-slider .slides h3 {
@@ -4178,7 +4182,10 @@ footer ul li a:hover {
   .how-it-works .statement {
     padding: 0 2rem;
   }
-
+  .layer {
+  overflow: auto;
+  padding: 0px 10px;
+  }
   .container-fluid.select-bar.hp-tabs {
     display: none;
   }
@@ -4503,8 +4510,5 @@ li.socialicons a {
 }
 
 
-.layer {
-  overflow: auto;
-  padding: 0px 30px;
-}
+
 
