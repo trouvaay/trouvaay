@@ -171,6 +171,19 @@ $(document).ready(function() {
 
 	// Stripe checkout
 	$('.btn.buy.try').on('click', function(e) {
+		
+		// alert("clicked");
+		// console.log("clicked");
+		$.ajax({
+			type: "GET",
+			url: "{% url "members:can_reserve" %}",
+			success: function(data){
+				if(data['status'] == 'login_required'){
+					window.location.replace("{% url 'members:login' %}"+"?next="+window.location.href.toString().split(window.location.host)[1]);
+				}
+			}
+		});
+	
 		if(e.target.id.substr(0, 4) == 'buy_'){
 			var productId = e.target.id.substr(4);
 			if(productId && !(typeof productId === 'undefined')){
@@ -180,7 +193,7 @@ $(document).ready(function() {
 				if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
 					var handler = StripeCheckout.configure({
 						key: '{{ STRIPE_PUBLISHABLE_KEY }}',
-						image: "{% static 'img/logos/standalone-R_web_RGB.png' %}",
+						image: "{% static 'img/logos/Raredoor-R-icon-gold.png' %}",
 						name: '{{ site_name }}',
 						description: productName,
 						amount: productPrice,
@@ -220,7 +233,7 @@ $(document).ready(function() {
 					});				
 				
 				  	handler.open({
-						panelLabel: "{{ FEATURE_NAME_RESERVE }}"
+						panelLabel: "{{ FEATURE_NAME_RESERVE }} {% verbatim %}{{amount}}{% endverbatim %} incl. tax"
 					});
 				}
 			}

@@ -6,10 +6,10 @@ import itertools
 from django.utils.text import slugify
 from django.db.models import F
 from django.utils.encoding import smart_text
-
+from django.conf import settings
 
 class Segment(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='new', null=True, blank=True) 
+    select = models.CharField(unique=True, max_length=55, default='new', null=True, blank=True)
 
     def __str__(self):
         return self.select or 'none'
@@ -19,8 +19,8 @@ class Segment(models.Model):
 
 
 class Style(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='modern', null=True, blank=True)  
-    
+    select = models.CharField(unique=True, max_length=55, default='modern', null=True, blank=True)
+
     def __str__(self):
         return self.select or 'none'
 
@@ -29,9 +29,9 @@ class Style(models.Model):
 
 
 class FurnitureType(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='seating', null=True, blank=True) 
+    select = models.CharField(unique=True, max_length=55, default='seating', null=True, blank=True)
     is_furniture = models.BooleanField(default=True)
-    
+
     def __str__(self):
         return self.select or 'none'
 
@@ -40,8 +40,8 @@ class FurnitureType(models.Model):
 
 
 class ValueTier(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='mid', null=True, blank=True) 
-    
+    select = models.CharField(unique=True, max_length=55, default='mid', null=True, blank=True)
+
     def __str__(self):
         return self.select or 'none'
 
@@ -50,8 +50,8 @@ class ValueTier(models.Model):
 
 
 class Category(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='living', null=True, blank=True)  
-    
+    select = models.CharField(unique=True, max_length=55, default='living', null=True, blank=True)
+
     def __str__(self):
         return self.select or 'none'
 
@@ -62,8 +62,8 @@ class Category(models.Model):
 class Subcategory(models.Model):
     select = models.CharField(unique=True, max_length=55, default='bar', null=True, blank=True)
     trial_product = models.BooleanField(default=False)
-    shipping_charge = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, choices=[(5.00,5.00),(20.00,20.00),(50.00,50.00)])
-    
+    shipping_charge = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, choices=[(5.00, 5.00), (20.00, 20.00), (50.00, 50.00)])
+
     def __str__(self):
         return self.select or 'none'
 
@@ -72,20 +72,20 @@ class Subcategory(models.Model):
 
 
 class Color(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='blue', null=True, blank=True)    
-    
+    select = models.CharField(unique=True, max_length=55, default='blue', null=True, blank=True)
+
     def __str__(self):
         return self.select or 'none'
-    
+
     class Meta:
         ordering = ['select']
 
 
 class Material(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='leather', null=True, blank=True) 
+    select = models.CharField(unique=True, max_length=55, default='leather', null=True, blank=True)
     def __str__(self):
         return self.select or 'none'
-    
+
     class Meta:
         ordering = ['select']
 
@@ -112,15 +112,15 @@ class Product(models.Model):
     color = models.ManyToManyField(Color, null=True, blank=True)
     color_description = models.CharField(max_length=100, null=True, blank=True)
     material = models.ManyToManyField(Material, null=True, blank=True)
-    tags = models.TextField(null=True, blank=True) # list of tag words
+    tags = models.TextField(null=True, blank=True)  # list of tag words
 
     # Categorization
     segment = models.ManyToManyField(Segment, null=True, blank=True)
     style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
     furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
-    subcategory = models.ManyToManyField(Subcategory) # required for has_trial
-    
+    subcategory = models.ManyToManyField(Subcategory)  # required for has_trial
+
     # Availability
     added_date = models.DateTimeField(auto_now_add=True)
     pub_date = models.DateTimeField(null=True, blank=True)
@@ -136,7 +136,9 @@ class Product(models.Model):
     is_avail_now = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['width','-pub_date']
+        # added Height as quick hack to randomize display of products as pub_date clusters
+        # items by store
+        ordering = ['height', '-pub_date']
 
     def __str__(self):
         return self.short_name
@@ -162,6 +164,9 @@ class Product(models.Model):
 
     def get_price_in_cents(self):
         return int(self.current_price * 100)
+
+    def get_price_in_cents_with_tax(self):
+        return int(self.get_price_in_cents() * (1 + settings.SALES_TAX))
 
     def hours_since_add(self):
         delta = timezone.now() - self.pub_date
@@ -194,19 +199,19 @@ class Product(models.Model):
         template rendering.  Ie 10 --> 10"W
         """
         try:
-            value = round(getattr(self,dimension),1)
+            value = round(getattr(self, dimension), 1)
             appendterm = dimension[0].upper()
-            return (str(value)+'"'+appendterm)
+            return (str(value) + '"' + appendterm)
         except:
             pass
-        
+
 
     def get_dimension_str(self):
-        dimension_list = ['width','height','depth']
+        dimension_list = ['width', 'height', 'depth']
         dimension_str = ""
         for dimension in dimension_list:
             if self.get_dimension(dimension):
-                dimension_str+= (self.get_dimension(dimension)+'x')
+                dimension_str += (self.get_dimension(dimension) + 'x')
         return dimension_str[:-3]
 
     @property
@@ -247,7 +252,7 @@ class ProductImage(AbstractImageModel):
         return self.product.short_name
 
 
-#FUTURE FEATURES
+# FUTURE FEATURES
 # class ProductActivity(models.Model):
 #   product = models.ForeignKey(Product)
 #   likes = models.IntegerField(default=0)

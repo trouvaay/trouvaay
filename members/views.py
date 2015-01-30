@@ -18,6 +18,10 @@ from django.contrib.auth import get_user_model, authenticate, login
 from registration import signals
 from helper import send_email_from_template, get_site
 from django.utils import timezone
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.views import login as django_login
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +66,7 @@ class SignupView(BaseRegistrationView):
         )
         signals.user_registered.send(sender=self.__class__,
                                      user=new_user,
-                                     request=request)       
+                                     request=request)
         return new_user
 
 
@@ -73,10 +77,10 @@ def ProductLike(request):
     # because this is called via AJAX, the @login_required decorator
     # is not very useful, so instead we have to manually check if
     # user is authenticated or not and return appropariate status in json
-    
+
     if(not request.user.is_authenticated()):
         return JsonResponse('loginrequired', safe=False)
-    
+
     if request.method == "POST":
         userinstance = request.user
         product = Product.objects.get(pk=int(request.POST['id']))
@@ -89,6 +93,8 @@ def ProductLike(request):
         return JsonResponse('success', safe=False)
     else:
         return JsonResponse('success', safe=False)
+
+
 
 @login_required
 def AddToCart(request):
@@ -129,7 +135,9 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
             product = self.get_object()
 
             order_type = request.POST['order_type'].strip().lower()
-            capture_order = (order_type == 'buy')
+            # For now all order will not be immediately captured
+            # capture_order = (order_type == 'buy')
+            capture_order = False
 
             # create charge with stripe,
             try:
@@ -137,9 +145,9 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                 total_amount_in_cents = int(request.POST['total_amount'])
 
                 logger.debug('total_amount_in_cents %d' % total_amount_in_cents)
-                logger.debug('product.get_price_in_cents %d' % product.get_price_in_cents())
+                logger.debug('product.get_price_in_cents %d' % product.get_price_in_cents_with_tax())
 
-                if(total_amount_in_cents != product.get_price_in_cents()):
+                if(total_amount_in_cents != product.get_price_in_cents_with_tax()):
                     # either product price has changed since payment or
                     # user is trying to do something nasty
                     # in any case we have a discrepancy between
@@ -157,6 +165,7 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                     description=product.short_name,
                     card=token_id,
                     capture=capture_order,
+                    receipt_email=self.request.user.email,
                     metadata={
                         'order_id': order.id,
                         'order_type': order_type
@@ -204,18 +213,18 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
 
             # send email with store address
             send_email_from_template(to_email=self.request.user.email,
-                context = {
+                context={
                     'product': product,
                     'site': get_site(self.request),
                     'capture_date': order_item.capture_time.date()
                     },
-                subject_template = 'members/purchase/reserve_confirmation_email_subject.txt',
-                plain_text_body_template = 'members/purchase/reserve_confirmation_email_body.txt',
-                html_body_template = 'members/purchase/reserve_confirmation_email_body.html')
+                subject_template='members/purchase/reserve_confirmation_email_subject.txt',
+                plain_text_body_template='members/purchase/reserve_confirmation_email_body.txt',
+                html_body_template='members/purchase/reserve_confirmation_email_body.html')
 
 
             return JsonResponse({
-                'status': 'ok', 
+                'status': 'ok',
                 'product_name': product.short_name,
                 'image_src': product.productimage_set.first().image.build_url(width=200, height=200, crop="fit"),
                 'store_name': product.store.retailer.short_name,
@@ -231,7 +240,45 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
             logger.error(str(e))
             return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
 
+def can_reserve(request):
+    """Checks for permissions whether user is able to reserve a product.
+    
+    For right now only checking if user is logged in or not
+    """
+    if(request.user.is_authenticated()):
+        return JsonResponse({'status': 'ok'})
+    return JsonResponse({'status': 'login_required'})
 
+@sensitive_post_parameters()
+@csrf_protect
+@never_cache
+def custom_login(request, template_name='registration/login.html',
+          authentication_form=CustomAuthenticationForm):
+    """This is a wrapper for django's login view.
+    It allows us to pass "next" parameter properly.
+    
+    """
+
+    # the foolowing unbound instances of forms are needed
+    # only for rendering of the template by login 'GET'
+    # the actual login 'POST' will be using authentication_form
+    # from above
+    extra_context = {
+                     'login_form': CustomAuthenticationForm(),
+                     'signup_form': RegistrationForm()
+                     }
+    if request.method == "GET":
+        next_param = request.GET.get('next', None)
+        if(next_param):
+            extra_context = {
+                             'login_form': CustomAuthenticationForm(initial={'next':next_param}),
+                             'signup_form': RegistrationForm()
+                             }
+
+    return django_login(request=request,
+                        template_name=template_name,
+                        authentication_form=authentication_form,
+                        extra_context=extra_context)
 
 
 #########Unused Cart Feature ###################
