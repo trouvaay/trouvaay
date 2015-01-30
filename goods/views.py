@@ -18,7 +18,7 @@ class HomeView(generic.ListView):
     template_name = 'goods/home/home.html'
     context_object_name = 'products'
     model = Product
-    paginate_by = 30
+    paginate_by = 21
 
     def get_queryset(self):
         pub_products = self.model.objects.filter(is_published=True)
@@ -34,6 +34,7 @@ class HomeView(generic.ListView):
         context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
         context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+        context['query_operator'] = '?'
         
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings
@@ -46,7 +47,7 @@ class FurnitureTypeView(generic.ListView):
     template_name = 'goods/home/furniture_type.html'
     context_object_name = 'products'
     model = Product
-    paginate_by = 30
+    paginate_by = 21
     
 
     def get_queryset(self):
@@ -66,6 +67,7 @@ class FurnitureTypeView(generic.ListView):
         context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
         context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+        context['query_operator'] = '&'
         
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings
