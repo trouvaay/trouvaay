@@ -16,11 +16,11 @@ var trouvaay = {
 						"<li><a href='{% url 'goods:about' %}'>About</a></li>" +
 						"<li class='nav-divider'></li>" +
 						"<li><a style='display:inline-block' class='insta-icon mobile' href='http://instagram.com/raredoor/' target='_blank'>" +
-								"<img src='{% static 'img/socialicons/instagram_gray32.png' %}'/></a>" +
+								"<img src='{% static 'img/socialicons/instagram.svg' %}'/></a>" +
 							"<a style='display:inline-block' class='insta-icon mobile' href='https://www.facebook.com/RareDoor' target='_blank'>" +
-								"<img src='{% static 'img/socialicons/facebook_gray32.png' %}'/></a>" +
+								"<img src='{% static 'img/socialicons/facebook.svg' %}'/></a>" +
 							"<a style='display:inline-block'class='insta-icon mobile' href='https://twitter.com/RareDoor/' target='_blank'>" +
-					 			"<img src='{% static 'img/socialicons/twitter_gray32.png' %}'/></a>" +
+					 			"<img src='{% static 'img/socialicons/twitter.svg' %}'/></a>" +
 					 	"</li>" +
 					 "</ul></div>";
         var mobileTabIcons = "<div id='tab-icons-mobile' class='container select-bar hp-tabs'>"+
@@ -59,7 +59,7 @@ var trouvaay = {
                                     "</div>"+
                                 "</div>"+
                             "</div>"+
-                            "</div>"+
+                            "</div>"
 
 
         //Append mobile menu
@@ -73,11 +73,10 @@ var trouvaay = {
 
         //Append mobile tab icons
         $("#mob-nav").on('click',function() {
-                if (!$('#mobil-nav').length ) {
+                if (!$('#mobile-nav').length ) {
                   $(".container-fluid.top-bar").append(mobilemenutop);
-                
                 } else {
-                  $("#mobil-nav").remove();
+                  $("#mobile-nav").remove();
                 }
         });
 
@@ -173,8 +172,8 @@ $(document).ready(function() {
 	// Stripe checkout
 	$('.btn.buy.try').on('click', function(e) {
 		
-		alert("clicked");
-		console.log("clicked");
+		// alert("clicked");
+		// console.log("clicked");
 		$.ajax({
 			type: "GET",
 			url: "{% url "members:can_reserve" %}",
@@ -194,7 +193,7 @@ $(document).ready(function() {
 				if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
 					var handler = StripeCheckout.configure({
 						key: '{{ STRIPE_PUBLISHABLE_KEY }}',
-						image: "{% static 'img/logos/standalone-R_web_RGB.png' %}",
+						image: "{% static 'img/logos/Raredoor-R-icon-gold.png' %}",
 						name: '{{ site_name }}',
 						description: productName,
 						amount: productPrice,

@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='product',
-            options={'ordering': ['height', '-pub_date']},
+            options={'ordering': ['width', '-pub_date']},
         ),
     ]

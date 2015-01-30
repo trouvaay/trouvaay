@@ -10,11 +10,16 @@
 
 }
 @font-face {
+    font-family: 'ralewaylight';
+    src: url('../fonts/Raleway-Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+} 
+@font-face {
     font-family: 'Chunkfive';
     src: url('../fonts/Chunkfive.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-
 }
 
 .set-default {
@@ -22,16 +27,16 @@
   float: left;
 }
 body {
-  font-size: 14px;
+  font-size: 13px;
   background: white;
-  font-family: 'existencelight';
+  font-family: 'ralewaylight';
 }
 h1, h2, h3, .h1, .h2, .h3 {
   font-family: 'Chunkfive';
   /*text-transform: ;*/
 }
 h4, h5, h6, .h4, .h5, .h6 {
-  font-family: 'existencelight';
+  font-family: 'ralewaylight';
 }
 .navbar-default {
   background: #f4f4f4;
@@ -59,8 +64,6 @@ h4, h5, h6, .h4, .h5, .h6 {
   background: rgb(33,16,106);
   z-index: 100;
   border-bottom: 5px solid rgb(218,182,97);
-  min-height: 65px;
-  
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
@@ -78,6 +81,9 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 #mobile-nav .nav {
 	padding: 0 15px;
+}
+#mobile-nav ul > li > a {
+  color: white;
 }
 #tabs-icon-mobile {
   background: white;
@@ -97,6 +103,9 @@ h4, h5, h6, .h4, .h5, .h6 {
 	z-index: 99;
 	background: #FFF;
 	width: 100%;
+}
+.neighborhood {
+  color: rgb(218,182,97)
 } 
 .select-bar .hp-tabs {
 	padding: 0px;
@@ -211,7 +220,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: ralewaylight, Arial, sans-serif;
 }
 .top-bar .language-selector .dropdown-menu {
   min-width: 100%;
@@ -269,7 +278,7 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 .top-quote .top-quote-text {
   color: white;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 36px;
   line-height: 50px;
   font-weight: 400;
@@ -326,7 +335,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   border-bottom: none;
 }
 .tab-container .nav-tabs a {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 44px;
   font-weight: 700;
@@ -366,7 +375,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 }
 .text-editor h2 {
   width: 100%;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -441,7 +450,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   color: white;
   position: relative;
   text-transform: uppercase;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 36px;
   line-height: 50px;
   font-weight: 400;
@@ -478,10 +487,10 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   float: left;
   background: white;
-  padding: 0px 0 40px;
+  padding: 40px 0 40px;
 }
 .main-container.comment-block {
-  padding-top: 20px 0 40px;
+  padding-top: 0px 0 40px;
 }
 .contact-info {
   width: 100%;
@@ -521,7 +530,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   transition: all .4s ease-in-out;
 }
 .post h2 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 36px;
   line-height: 50px;
   font-weight: 300;
@@ -618,7 +627,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   float: left;
   text-align: center;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: 700;
@@ -708,7 +717,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   float: left;
   text-align: center;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: 700;
@@ -901,7 +910,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 .print-info h3 {
   width: 100%;
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -1131,7 +1140,7 @@ text-align: left;
   float: left;
   letter-spacing: 1.5px;
   border: solid 2px #333;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 25px;
   font-weight: 600;
@@ -1142,7 +1151,7 @@ text-align: left;
   float: left;
   letter-spacing: 1.5px;
   border: solid 2px #333;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 16px;
   line-height: 25px;
   font-weight: 700;
@@ -1153,7 +1162,7 @@ text-align: left;
   float: left;
   letter-spacing: 1.5px;
   border: solid 2px #333;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 25px;
   font-weight: 700;
@@ -1218,7 +1227,7 @@ text-align: left;
 }
 .product-presentation-tabs .nav-tabs a {
   width: 275px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 12px;
   line-height: 40px;
   font-weight: 700;
@@ -1273,7 +1282,7 @@ text-align: left;
   width: 100%;
   float: left;
   text-align: center;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: 700;
@@ -1391,7 +1400,7 @@ text-align: left;
   height: auto;
 }
 .widget.leave-feedback h3 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: 700;
@@ -1476,7 +1485,7 @@ text-align: left;
   margin-top: 40px;
   background: #fd575f;
   padding: 10px 20px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 18px;
   line-height: 24px;
   font-weight: 300;
@@ -1489,7 +1498,7 @@ text-align: left;
   margin-top: 40px;
   background: black;
   color: white;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 48px;
   line-height: 40px;
   font-weight: 300;
@@ -1508,7 +1517,7 @@ text-align: left;
   margin-top: 40px;
 }
 .recommended-products h3 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 36px;
   line-height: 50px;
   font-weight: 300;
@@ -1538,6 +1547,15 @@ text-align: left;
   /*margin: 2rem;*/
   text-align: center;
 }
+.vintage-label {
+  height: 1.5rem;
+  padding-top: 5px;
+  border-top: lightgray 1px solid;
+  font-family: 'Chunkfive';
+}
+.product-container:hover .vintage-label {
+  border-top: 5px solid rgb(33,16,106);
+ }
 
 
 @media screen and (min-width: 768px) {
@@ -1563,17 +1581,12 @@ text-align: left;
 .product.col-sm-6:nth-child(2n) {
 	margin-right: 5%;
 }
+
 .product.col-md-4:nth-child(3n) {
 	margin-right: 0%;
 }
-.vintage-label {
-  height: 1.5rem;
-  padding-top: 5px;
-  border-top: lightgray 1px solid
 }
-.product-container:hover .vintage-label {
-  border-top: 5px solid rgb(33,16,106);
-}
+
 .grid-product figure {
 /*  width: 90%;*/
   margin: 0 2.5%;
@@ -1618,7 +1631,7 @@ text-align: left;
 }
 
 .grid-product .overlay .item {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -1654,12 +1667,9 @@ text-align: left;
   -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
-/*.view-product:hover {
-  text-decoration: underline;
-  border-top: 5px solid rgb(218, 182, 97);
-}*/
+
 .grid-product .view-product .text {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 11px;
   line-height: 30px;
   font-weight: 700;
@@ -1701,7 +1711,7 @@ text-align: left;
 }
 .products-header .category-menu {
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
@@ -1720,7 +1730,7 @@ text-align: left;
   color: #fd575f;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
@@ -1766,7 +1776,7 @@ text-align: left;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -1857,7 +1867,7 @@ text-align: left;
   padding-left: 0;
 }
 .shopping-container h2 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 36px;
   line-height: 44px;
   font-weight: normal;
@@ -1871,7 +1881,7 @@ text-align: left;
 .shopping-container .column {
   width: 100%;
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -1902,7 +1912,7 @@ text-align: left;
 .shopping-container .product .name {
   float: left;
   width: 55%;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 30px;
   line-height: 44px;
   font-weight: 300;
@@ -1920,7 +1930,7 @@ text-align: left;
 .shopping-container .product .description {
   float: left;
   width: 55%;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 12px;
   line-height: 15px;
   font-weight: normal;
@@ -1935,7 +1945,7 @@ text-align: left;
   padding-left: 35px;
 }
 .shopping-container .product .quality .quality-label {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 12px;
   line-height: 15px;
   font-weight: normal;
@@ -1960,7 +1970,7 @@ text-align: left;
   float: left;
   width: 20px;
   height: 30px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -1986,7 +1996,7 @@ text-align: left;
   padding-left: 35px;
 }
 .shopping-container .product .colors .colors-label {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 12px;
   line-height: 15px;
   font-weight: normal;
@@ -2041,7 +2051,7 @@ text-align: left;
   background-clip: padding-box;
 }
 .shopping-container .product .price {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -2066,7 +2076,7 @@ text-align: left;
   margin-bottom: 40px;
 }
 .shopping-container .shipping-info h3 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
   font-weight: 700;
@@ -2118,7 +2128,7 @@ text-align: left;
 }
 .shopping-container .shipping-info .shipping-price {
   float: right;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -2145,7 +2155,7 @@ text-align: left;
 .shopping-container .price-info li {
   width: 100%;
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   font-weight: 700;
@@ -2174,7 +2184,7 @@ text-align: left;
 }
 .filters-wrapper li {
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 44px;
   font-weight: 700;
@@ -2262,7 +2272,7 @@ text-align: left;
   margin-top: -5px;
 }
 .products-wrapper article h3 {
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 18px;
   line-height: 24px;
   font-weight: 700;
@@ -2300,7 +2310,7 @@ text-align: left;
   position: absolute;
   bottom: 10px;
   left: 270px;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 11px;
   line-height: 18px;
   font-weight: 700;
@@ -2338,7 +2348,7 @@ text-align: left;
   -moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 44px;
   font-weight: 700;
@@ -2395,7 +2405,7 @@ text-align: left;
 }
 .checkout-steps-wrapper .checkout-steps li .checkout-step {
   float: left;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 14px;
   line-height: 44px;
   font-weight: 700;
@@ -2489,6 +2499,7 @@ form .form-checkbox-wrap .checkbox-label {
   border-color: #0080b7;
 }
 .btn.btn-primary.request {
+  height: 32px;
 }
 .btn.btn-primary.buy {
   width: 70px;
@@ -2498,6 +2509,7 @@ form .form-checkbox-wrap .checkbox-label {
 .btn.btn-default.sold,
 .btn.btn-primary.buy.try {
   width: 145px;
+  height: 32px;
   /*background-color: rgb(201,177,62);*/
 }
 .btn.btn-success.dist {
@@ -2579,7 +2591,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 630px;
   position: fixed;
   margin: 0px auto;
-  top: 50%;
+  top: 35%;
   margin-top: -130px;
   left: 0px;
   right: 0px;
@@ -2597,6 +2609,12 @@ form .form-checkbox-wrap .checkbox-label {
 #how-it-works-modal .how-it-works .statement:not(:last-child) {
   border-right: 0px;
 }
+#how-it-works-button {
+  font-family: 'Chunkfive'
+}
+.btn.btn-link.tab-menu {
+  padding-top: 0;
+}
 #addtocartmodal {
   top: 15%;
   /*left: 25%;*/
@@ -2606,14 +2624,14 @@ form .form-checkbox-wrap .checkbox-label {
 }
 #signup-login-modal .modal-dialog .modal-content {
   float: left;
-  padding: 20px 0px;
+  padding: 20px;
   border: 0;
   max-width: 100%;
   width: 100%;
 }
 .modal-dialog .modal-content h3 {
   margin: 0;
-  font-family: "existencelight", Arial, sans-serif;
+  font-family: "ralewaylight", Arial, sans-serif;
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
@@ -2736,7 +2754,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   text-align: center;
-  padding: 10px 0 12px;
+  padding: 5px 0 0;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
@@ -2748,6 +2766,7 @@ form .form-checkbox-wrap .checkbox-label {
 .hp-tabs .nav-tabs > li.active > a {
   background: rgb(218, 182, 97);
   border: none;
+  padding: 15px 10px;
 }
 .hp-tabs .nav-tabs > li.active > a:after {
   border-top-color: rgb(218, 182, 97);
@@ -2812,7 +2831,7 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 35px 20px;
 }
 .testimonial h2 {
-  font-family: existencelight, Arial, sans-serif;
+  font-family: ralewaylight, Arial, sans-serif;
   font-size: 18px;
   line-height: 44px;
   font-weight: bold;
@@ -2863,7 +2882,7 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   color: #adadad;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: ralewaylight, Arial, sans-serif;
   font-size: 10px;
   line-height: 12px;
   font-weight: normal;
@@ -2879,7 +2898,7 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .anouncements h2 {
   color: #333333;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: ralewaylight, Arial, sans-serif;
   font-size: 16px;
   line-height: 20px;
   font-weight: bold;
@@ -2942,7 +2961,7 @@ form .form-checkbox-wrap .checkbox-label {
   margin-bottom:  1rem;
 }
 .footer-widget h2 {
-  font-family: existencelight, Arial, sans-serif;
+  font-family: ralewaylight, Arial, sans-serif;
   font-size: 13px;
   line-height: 22px;
   font-weight: bold;
@@ -3055,7 +3074,7 @@ form .form-checkbox-wrap .checkbox-label {
 .footer-menu ul li a {
   width: 100%;
   float: left;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: ralewaylight, Arial, sans-serif;
   font-size: 13px;
   line-height: 15px;
   font-weight: normal;
@@ -3087,7 +3106,7 @@ footer ul li a:hover {
 .sitemap ul li a {
   width: 100%;
   float: left;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: ralewaylight, Arial, sans-serif;
   font-size: 13px;
   line-height: 15px;
   font-weight: normal;
@@ -3143,13 +3162,19 @@ footer ul li a:hover {
   margin-bottom: 20px;
 }
 .how-it-works .statement {
-  margin-top: 30px;
-  margin-bottom: 30px;
-  min-height: 106px;
-  padding: 0 8rem;
+  margin: 10px 0;
+  min-height: 100px;
+  padding: 0 5rem;
 }
 .how-it-works .statement:not(:last-child) {
   border-right: 1px solid #DDD;
+}
+.how-it-works .col-md-12.statement {
+  text-align: left;
+  padding: 0;
+}
+.how-it-works .col-md-6.statement.mobile-details {
+  display: none;
 }
 
 @media screen and (max-width: 992px) {
@@ -3171,6 +3196,9 @@ footer ul li a:hover {
   margin-bottom: 30px;
   font-family: 'Chunkfive';
 }
+.container-fluid.how-it-works.layer {
+  margin-bottom: 0;
+}
 
 .how-it-works .row-fluid div.main-quote div {
   font-size: 24px;
@@ -3191,7 +3219,7 @@ footer ul li a:hover {
   
 }
 #first-content-after-nav {
-  padding-top: 65px;
+  padding-top: 45px;
 }
 .homepage-quote .text,
 .hp-tabs .text {
@@ -3247,7 +3275,7 @@ footer ul li a:hover {
   line-height: 30px;
 }
 .nav.nav-tabs img {
-  max-height: 30px;
+  max-height: 1.75em;
 }
 
 .homepage-quote .heading a {
@@ -3275,8 +3303,13 @@ footer ul li a:hover {
   top: 40%;
   width: 100%;
 }
-.landing-message h1 {
+.landing-message h1,
+.landing-message h3 {
   text-align: center;
+}
+.landing-message h3 {
+  margin-top: 20px;
+  font-family: ralewaylight;
 }
 .homepage-slider-wrap {
   width: 100%;
@@ -3412,7 +3445,7 @@ footer ul li a:hover {
 }
 .final-line p {
   color: #adadad;
-  font-family: existencelight, Arial, sans-serif;
+  font-family: ralewaylight, Arial, sans-serif;
   font-size: 11px;
   line-height: 14px;
   font-weight: 400;
@@ -4131,6 +4164,19 @@ footer ul li a:hover {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
   }
+  .how-it-works .statement {
+    padding: 0 2rem;
+  }
+  .container-fluid.select-bar.hp-tabs {
+    display: none;
+  }
+  .how-it-works .col-md-6.statement.mobile-details {
+    display: block;
+  }
+  .landing-message {
+    padding: 0 10%;
+    top: 20%;
+  }
   #main-footer,
   #main-menu {
     display: none;
@@ -4255,6 +4301,10 @@ footer ul li a:hover {
   /*margin-left: 10%;*/
   max-width: 100%;
   }
+  #signup-login-modal .modal-dialog {
+    width: 90%;
+    max-width: 650px;
+  }
   .homepage-slider h2{
     font-size: 20px;
   }
@@ -4294,9 +4344,7 @@ footer ul li a:hover {
     position: fixed;
     left: 10%;
   }
-  .container-fluid.select-bar.hp-tabs {
-    display: none;
-  }
+  
   .product-description .name.map {
     margin: 0 auto 10px;
     width: 100%;
@@ -4445,6 +4493,6 @@ li.socialicons a {
 
 .layer {
   overflow: auto;
-  padding: 25px 30px;
+  padding: 0px 30px;
 }
 

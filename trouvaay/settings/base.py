@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sslify
 from decimal import Decimal
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
@@ -27,6 +28,9 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = [ ]
+
+# works with sslify to force https on Heroku
+
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -48,6 +52,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -205,6 +210,9 @@ STRIPE_CAPTURE_TRANSACTION_TIME = 120  # hours
 
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''
+OLARK_SITE_ID = ''
+MIXPANEL_API_TOKEN = ''
+ANALYTICAL_INTERNAL_IPS = []
 
 SALES_TAX = Decimal('0.0875')
 
