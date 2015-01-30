@@ -108,9 +108,11 @@
                   </a>
                 </li>
                 {% endif %}
-                {% for page in page_obj.paginator.page_range %}
-                    <li><a href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
-                {% endfor %}
+                {% if page_obj.has_other_pages %}
+                    {% for page in page_obj.paginator.page_range %}
+                        <li><a href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
+                    {% endfor %}
+                {% endif %}
                 {% if page_obj.has_next %}
                 <li>
                   <a href="?{% url_replace request 'page' page_obj.next_page_number %}" aria-label="Next">
