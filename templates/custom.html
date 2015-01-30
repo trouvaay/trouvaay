@@ -89,6 +89,7 @@ var trouvaay = {
 		  });
 		});
 
+
 		//product-like AJAX post
         $(".btn.btn-default.glyphs").click(function() {
             var id = $(this).attr("id").substring(6);
@@ -132,8 +133,24 @@ var trouvaay = {
 
 $(document).ready(function() {
     trouvaay.init();
- 
+    
+    //Get furniture type param
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    };
 
+    function addactivelink (type){
+      $('li').each(function() {
+        if ($(this).attr('id') == getParameterByName(type)) {
+          $(this).addClass('active');
+        }
+      });
+    };
+
+    addactivelink('type');
     //Django boilerplat to Auto add csrf token to template for $.POST Ajax
     function getCookie(name) {
             var cookieValue = null;

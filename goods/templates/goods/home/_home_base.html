@@ -5,33 +5,33 @@
 {% block content %}
     <div class="container-fluid select-bar hp-tabs" style="box-shadow: 0 6px 4px -4px #333;">
         <div class="row-fluid">
-            <div class="col-xs-12 col-sm-3 col-md-2 logo-div main-navigation hidden-xs">
+            <div class="col-xs-12 col-sm-2 logo-div main-navigation hidden-xs">
              <a href="{% url 'goods:home' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></br>
             </div>
             
-            <div class="col-xs-12 col-sm-6 col-md-8">
+            <div class="col-xs-12 col-sm-8">
                 <div class="row-fluid">
                     <div class="tab-icons">
                         <div class="row-fluid">
                             <div class="col-sm-12 col-md-12">
                             <ul class="nav nav-tabs center-block">
                                 <li class="hidden-lg hidden-md hidden-sm" style="padding-top: 20px;">filter</li>
-                                <li class="active first">
-                                    <a href="{% url 'goods:home' %}"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">everything</span></a>
+                                <li id="everything">
+                                    <a href="{% url 'goods:home' %}"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">All</span></a>
                                 </li>
-                                <li>
+                                <li id="seating">
                                     <a href="{% url 'goods:furnituretype' %}?type=seating"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/seating128.png' %}" title="seating" alt=""/></span><span class="inner icon-label" style="display:list-item">seating</span></a>
                                 </li>
-                                <li>
-                                    <a href="{% url 'goods:furnituretype' %}?type=tables"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/table128.png' %}" title="table" alt=""/></span><span class="inner icon-label" style="display:list-item">tables/desks</span></a>
+                                <li id="tables">
+                                    <a href="{% url 'goods:furnituretype' %}?type=tables"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/table128.png' %}" title="table" alt=""/></span><span class="inner icon-label" style="display:list-item">tables</span></a>
                                 </li>
-                                <li>
+                                <li id="beds">
                                     <a href="{% url 'goods:furnituretype' %}?type=beds"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bed128.png' %}" title="bed" alt=""/></span><span class="inner icon-label" style="display:list-item">beds</span></a>
                                 </li>
-                                <li>
+                                <li id="storage">
                                     <a href="{% url 'goods:furnituretype' %}?type=storage"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/storage128.png' %}" title="storage" alt=""/></span><span class="inner icon-label" style="display:list-item">storage</span></a>
                                 </li>
-                                <li>
+                                <li id="lighting">
                                     <a href="{% url 'goods:furnituretype' %}?type=lighting"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a>
                                 </li>
                             </ul>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-        <div class="col-xs-3 hidden-xs col-md-2" style="height:75px">
+        <div class="col-xs-3 hidden-xs col-sm-2" style="height:75px">
             <ul class="nav navbar-navt">
             <li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal" style="height:40px"><h4 style="margin-top:0"><span id="how-it-works-button">How it works</span></h4></a></li>
             {% if user.is_authenticated %}
