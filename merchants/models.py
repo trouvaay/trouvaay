@@ -45,7 +45,7 @@ class Store(models.Model):
     state = models.CharField(max_length=2, choices=States)
     zipcd = models.IntegerField()
     #TODO update so it dynamically pulls neighborhood for given goog locality
-    neighborhood = models.CharField(max_length=80, choices=Neighborhoods['SF'], default='na')
+    neighborhood = models.CharField(max_length=80, choices=Neighborhoods['SF'], default='Bay Area')
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
