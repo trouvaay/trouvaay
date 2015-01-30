@@ -85,9 +85,10 @@ h4, h5, h6, .h4, .h5, .h6 {
 #mobile-nav ul > li > a {
   color: white;
 }
-#tabs-icon-mobile {
+#tab-icons-mobile {
   background: white;
   padding: 0;
+  height: 175px;
 }
 .top-bar, .select-bar {
   padding: 0px 15px;
@@ -2789,6 +2790,7 @@ form .form-checkbox-wrap .checkbox-label {
   display: table;
   position: relative;
   width: 100%;
+  padding-bottom: 0
 }
 .hp-tabs .nav-tabs > li > a:after {
   width: 0px;
@@ -4157,7 +4159,13 @@ footer ul li a:hover {
   .detail-image-large {
     display: none;
     }
-
+  .hp-tabs .nav-tabs > li > a {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .hp-tabs .nav-tabs > li {
+    min-width: 60px
+  }
   .logo-div {
     padding-top: 10px;
     height: 72px;
@@ -4170,6 +4178,7 @@ footer ul li a:hover {
   .how-it-works .statement {
     padding: 0 2rem;
   }
+
   .container-fluid.select-bar.hp-tabs {
     display: none;
   }
