@@ -3,13 +3,13 @@
 {% load cloudinary %}
 {% load goods_extras %}
 
+
 {% block content %}
     <div class="container-fluid select-bar hp-tabs" style="box-shadow: 0 6px 4px -4px #333;">
         <div class="row-fluid">
             <div class="col-xs-12 col-sm-2 logo-div main-navigation hidden-xs">
              <a href="{% url 'goods:home' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></br>
             </div>
-            
             <div class="col-xs-12 col-sm-8 col-md-7">
                 <div class="row-fluid">
                     <div class="tab-icons">
@@ -108,9 +108,11 @@
                   </a>
                 </li>
                 {% endif %}
-                {% for page in page_obj.paginator.page_range %}
-                    <li><a href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
-                {% endfor %}
+                {% if page_obj.has_other_pages %}
+                    {% for page in page_obj.paginator.page_range %}
+                        <li><a href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
+                    {% endfor %}
+                {% endif %}
                 {% if page_obj.has_next %}
                 <li>
                   <a href="?{% url_replace request 'page' page_obj.next_page_number %}" aria-label="Next">
@@ -130,11 +132,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="row-fluid">
                     <div class="col-md-12 statement">
-                        <h2>Purchase & 5-Day Discovery Period </h2>
+                        <h3>Purchase & 5-Day Discovery Period </h3>
                         <h4>While some items do have a return policy we want to give you the opportunity to experience the product before you pay for it.  When you purchase through us you have 5 days to go touch, feel, and see your item in-store before your card is charged.</br></br>If you change your mind cancel the order — no cost, no questions asked.</h4>
                     </div>
                     <div class="col-md-12 statement">
-                        <h2>White Glove Delivery</h2>
+                        <h3>White Glove Delivery</h3>
                         <h4>We know the disappointment that comes with finding a great piece of furniture and then realizing that shipping costs more than the item itself. Even worse, sometimes you have to coordinate the delivery on your own. We want to remove all that hassle.</br></br>We have a simple, 3 tiered pricing structure for delivery: $25, $50, & $75 based on the size of the purchase (not included in your item's list price).</h4>
                         <h4>After you’ve placed your order, we’ll call you to provide the delivery price and coordinate a delivery time that is convenient for you.</h4>
                     </div>
