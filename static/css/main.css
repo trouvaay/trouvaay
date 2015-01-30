@@ -79,6 +79,13 @@ h4, h5, h6, .h4, .h5, .h6 {
   float: none;
   margin: 0 auto;
 }
+
+#desktop-navigation {
+  display: block;
+}
+#mobile-navigation {
+  display: none;
+}
 #mobile-nav .nav {
 	padding: 0 15px;
 }
@@ -4178,6 +4185,13 @@ footer ul li a:hover {
 @media (max-width: 767px) {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
+  }
+  #mobile-navigation {
+    display: block;
+    background-color: rgb(33,16,106);
+  }
+  #desktop-navigation {
+    display: none;
   }
   .how-it-works .statement {
     padding: 0 2rem;

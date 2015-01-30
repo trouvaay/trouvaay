@@ -65,7 +65,8 @@ var trouvaay = {
         //Append mobile menu
 		$("#mobile-search").on('click',function() {
                 if (!$('#tab-icons-mobile').length ) {
-                  $(".container-fluid.top-bar").append(mobileTabIcons);
+                    console.log('is this workgin?');
+                  $("#mobile-navigation").append(mobileTabIcons);
                 } else {
                   $("#tab-icons-mobile").remove();
                 }
@@ -74,7 +75,7 @@ var trouvaay = {
         //Append mobile tab icons
         $("#mob-nav").on('click',function() {
                 if (!$('#mobile-nav').length ) {
-                  $(".container-fluid.top-bar").append(mobilemenutop);
+                  $("#mobile-navigation").append(mobilemenutop);
                 } else {
                   $("#mobile-nav").remove();
                 }
