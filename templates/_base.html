@@ -93,43 +93,7 @@
             </div><!-- /. end Add to Cart modal -->
         {% endblock modal %}
     {% block nav %}
-        <!-- <div class="container-fluid top-bar">
-            {% block nav-all-else %}
-            <div class="row">
-                <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></div>
-                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mobile-search">
-                           <img src="{% static 'img/Magnifying_Glass2.svg' %}" style="height:24px">
-                    </button>
-                </div>
-                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3 right-side" style="padding: 0">        
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="main-menu" class="col-xs-6 right-side">
-                    <div class="row">
-                        <div class="col-sm-12 main-navigation bottom-row">
-                            <ul class="nav navbar-nav navbar-right">
-            				    <li><a href="http://instagram.com/raredoor/"><img src="{% static 'img/socialicons/instagram.svg' %}" class="socialicon"></a></li>
-            				    <li><a href="https://www.facebook.com/RareDoor"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
-            				    <li><a href="https://www.twitter.com/RareDoor"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
-                                <li><div class="cart-info"></div></li>
-                				{% if user.is_authenticated %}
-                				<!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
-                				<!-- <li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
-                				{% else %}
-                				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Login</a></li>
-                				{% endif %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        <!--     {% endblock nav-all-else %}
-        </div> --> 
+        {% include 'goods/home/_mobile_nav.html' %}
     {% endblock nav %}
     {% block content %}{% endblock content %}
     <footer class="main-footer">
