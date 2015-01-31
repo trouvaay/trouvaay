@@ -10,15 +10,15 @@
 				
 				</div>
 	      		<!-- renders images responsibly -->
-	      		<div class="detail-image-large">
-	          		{% cloudinary product.productimage_set.first.image width=450 height=550 crop="fit" %}
-	      		</div>
-	      		<div class="detail-image-med">
-	          		{% cloudinary product.productimage_set.first.image width=400 height=400 crop="fit" %}
-	      		</div>
-	      		<div class="detail-image-small">
-	          		{% cloudinary product.productimage_set.first.image width=275 height=350 crop="fit" %}
-	      		</div>
+			<div>
+			</div>
+				<picture>
+					<!--[if IE 9]><video style="display: none;"><![endif]-->
+					<source srcset="{% cloudinary_url product.productimage_set.first.image width=450 height=550 crop="fit" %}" media="(min-width: 992px)">
+					<source srcset="{% cloudinary_url product.productimage_set.first.image width=400 height=400 crop="fit" %}" media="(min-width: 413px)">
+					<!--[if IE 9]></video><![endif]-->
+					<img srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=350 crop="fit" %}' alt="">
+				</picture>
 			</div>
 			<div class="col-sm-5 col-xs-12 product-description">
 			  	<div class="row">
