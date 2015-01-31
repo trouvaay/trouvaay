@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
-from members.models import AuthUser, AuthUserActivity, AuthUserCart, AuthUserOrder, AuthUserOrderItem
+from members.models import AuthUser, AuthUserActivity, AuthUserCart, AuthUserOrder, \
+    AuthUserOrderItem, PromotionOffer, PromotionRedemption
 from django import forms
 
 
@@ -22,7 +23,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
     def clean_password2(self):
-        #Check that the two password entries match
+        # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
 
@@ -31,7 +32,7 @@ class CustomUserCreationForm(UserCreationForm):
         return password2
 
     def save(self, commit=True):
-        #Save the provided password in hashed format
+        # Save the provided password in hashed format
         user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         if commit:
@@ -50,7 +51,7 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta(UserChangeForm.Meta):
         model = AuthUser
-        fields = ('email', 'is_merchant') #May want to reduce fields
+        fields = ('email', 'is_merchant')  # May want to reduce fields
 
 
     def clean_password(self):
@@ -71,7 +72,7 @@ class AuthUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
-    list_display = ('email', 'is_merchant', 'is_admin', 'is_superuser', )
+    list_display = ('email', 'is_merchant', 'is_admin', 'is_superuser',)
     list_filter = ('is_admin', 'is_merchant')
 
     # change list
@@ -103,8 +104,32 @@ class AuthUserOrderAdmin(admin.ModelAdmin):
     # fields = ['authuser','timestamp','updated']
     inlines = [AuthUserOrderItemInline]
 
+class PromotionOfferAdmin(admin.ModelAdmin):
+    model = PromotionOffer
+    list_display = ('name',
+                    'is_active',
+                    'offer_type',
+                    'start_time',
+                    'end_time',
+                    'is_code_required',
+                    'code',
+                    'is_discount',
+                    'discount_fixed_amount',
+                    'discount_percent',
+                    'discount_limit'
+                    )
+
+
+class PromotionRedemptionAdmin(admin.ModelAdmin):
+    model = PromotionRedemption
+    list_display = ('offer', 'authuser', 'order', 'total_before_discount', 'discount_amount', 'timestamp')
+
+
 admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(AuthUserActivity)
 admin.site.register(AuthUserCart)
 admin.site.register(AuthUserOrder, AuthUserOrderAdmin)
 admin.site.register(AuthUserOrderItem)
+admin.site.register(PromotionOffer, PromotionOfferAdmin)
+admin.site.register(PromotionRedemption, PromotionRedemptionAdmin)
+

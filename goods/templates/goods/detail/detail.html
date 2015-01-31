@@ -43,7 +43,7 @@
 					        <div class="col-xs-12 col-sm-7 pic-detail-home">
 						        <!-- need these so that we can pass product name and price to stripe checkout -->
 						        <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
-						        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_with_tax }}</span>
+						        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
 				        
 				                {% if product.is_sold %}
 				                    <span class="sold">{{ 'Sold' }}</span>

@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^addtocart/$', views.AddToCart, name='addtocart'),
     url(r'^canreserve/$', views.can_reserve, name='can_reserve'),
     url(r'^reservecallback/$', views.ReserveCallbackView.as_view(), name='reserve_callback'),
+    url(r'^precheckout/$', views.PreCheckoutView.as_view(), name='pre_checkout'),
 
     # Unused Cart Feature #
     # url(r'^cart/$', views.CartView.as_view(), name='cart'),

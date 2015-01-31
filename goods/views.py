@@ -1,6 +1,6 @@
 from django.views import generic
 from goods.models import Product, Category, FurnitureType, Segment, ProductImage
-from members.models import AuthUserActivity
+from members.models import AuthUserActivity, OfferType, PromotionOffer
 from django.core.serializers import serialize
 from django.core.paginator import Paginator
 from braces.views import LoginRequiredMixin
@@ -8,6 +8,7 @@ from braces.views import LoginRequiredMixin
 from random import randint
 import logging
 from django.conf import settings
+
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +41,13 @@ class HomeView(generic.ListView):
         context['site_name'] = settings.SITE_NAME
         # removed until profile page implemented
         # context['liked_items'] = get_liked_items(self.request.user)
+
+        # add any "First time" offers
+        # if there is more than one get the first one
+        offers = PromotionOffer.get_current_offers(user=self.request.user, offer_type=OfferType.FIRST_ORDER)
+        if(offers):
+            context['promotion_offer'] = offers[0]
+
         return context
 
 class FurnitureTypeView(generic.ListView):
