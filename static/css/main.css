@@ -4193,7 +4193,7 @@ footer ul li a:hover {
   }
   #mobile-navigation {
     display: block;
-    background-color: rgb(33,16,106);
+    background-color: black;
     position: fixed;
     z-index: 10;
     width: 100%;
