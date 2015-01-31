@@ -45,6 +45,33 @@ class RegistrationManager(BaseRegistrationManager):
 
         return new_user
 
+    def create_active_user(self, email, password,
+                             site, send_email=True, request=None):
+        """
+        Overwiding the method from the base class to not use the username.
+        
+        Create a new, active ``User``, generate a
+        ``RegistrationProfile`` and email its activation key to the
+        ``User``, returning the new ``User``.
+
+        By default, a confirmation email will be sent to the new
+        user. To disable this, pass ``send_email=False``.
+        Additionally, if email is sent and ``request`` is supplied,
+        it will be passed to the email template.
+
+        """
+        new_user = get_user_model().objects.create_user(email, password)
+        new_user.is_active = True
+        new_user.save()
+
+        
+
+        #Need to update - currently sends activation email
+        # if send_email:
+        #     registration_profile.send_activation_email(site, request)
+
+        return new_user
+
     def create_profile(self, user):
         """
         Overwiding the method from the base class to not use the username.
