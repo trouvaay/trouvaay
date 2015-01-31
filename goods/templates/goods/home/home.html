@@ -2,6 +2,12 @@
 {% load staticfiles %}
 {% load cloudinary %}
 
+{% block modal %}
+	{{ block.super }}
+	
+	<div id="pre-checkout-modal-container"></div>
+{% endblock %}
+
 {% block content %}
       <div class="container homepage-slider-container">
         <div class="row-fluid">
@@ -35,7 +41,37 @@
       </div>
     {{ block.super }}
     
+	{% if promotion_offer and not request.user.is_authenticated %}
+	<div class="modal fade" id="promotion-offer-modal">
+		<div class="modal-dialog">
+			<div class="modal-content col-xs-12">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<div class="modal-body">
+					<div class="form-group text-center">	
+						<div class="text-center">
+							<h2>{{ promotion_offer.name }}</h2>
+							<div>
+								{{ promotion_offer.short_terms }}
+							</div>
+							<div>
+								<a class="btn btn-primary" href="{% url "members:login" %}">Take the offer</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /. end promotion-offer-modal -->
+	{% endif %}    
 
 {% endblock content %}
-{% block endjs %}{% endblock endjs %}
+{% block endjs %}
 
+{% if promotion_offer and not request.user.is_authenticated %}
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$('#promotion-offer-modal').modal({"show": true});
+	});
+	</script>
+{% endif %}
+{% endblock endjs %}

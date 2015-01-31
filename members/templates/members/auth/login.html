@@ -41,21 +41,11 @@
 	{% block endjs %}
 	{{ block.super }}
 	<script type="text/javascript">
-$(document).ready(function () {
-		
+	$(document).ready(function () {
 		$('#signup-login-modal').modal({"show": true});
-		
-		$("#signup-login-modal").modal({
-      		onClose: function () {
-      		console.log('print modal closed');
-          	window.location.href = "http://stackoverflow.com";
-		    }
-		});
-		
 		$('#signup-login-modal').on('hidden.bs.modal', function () {
 			window.location.replace("{% url "goods:home" %}");
 		})
-
-});
+	});
 	</script>
 	{% endblock %}

@@ -7,6 +7,8 @@ from django.utils.text import slugify
 from django.db.models import F
 from django.utils.encoding import smart_text
 from django.conf import settings
+from decimal import Decimal
+from members.models import PromotionOffer
 
 class Segment(models.Model):
     select = models.CharField(unique=True, max_length=55, default='new', null=True, blank=True)
@@ -170,6 +172,18 @@ class Product(models.Model):
 
     def get_price_in_cents_with_tax(self):
         return int(self.get_price_in_cents() * (1 + settings.SALES_TAX))
+
+    def get_price_in_cents_for_checkout(self):
+        """Computes final price for checkout by applying taxes and all discounts"""
+        pass
+#
+#         total_in_dollars = Decimal(self.get_price_in_cents_with_tax() / 100)
+#         discounts_in_dollars = 0
+#         offers = PromotionOffer.objects.
+#             # get offers from
+#         for offer in offers:
+#             discounts_in_dollars += offer.get_offer_discount(total_in_dollars)
+#         return int((total_in_dollars - discounts_in_dollars) * 100)
 
     def hours_since_add(self):
         delta = timezone.now() - self.pub_date
