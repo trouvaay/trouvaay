@@ -15,6 +15,8 @@ from registration.models import RegistrationProfile as BaseRegistrationProfile
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from decimal import Decimal
+from django.db.models import Q
+from django.db.models import F
 import hashlib
 import six
 import random
@@ -350,11 +352,20 @@ class PromotionOffer(models.Model):
     @classmethod
     def get_current_offers(self, user=None, offer_type=None):
         right_now = timezone.now()
+        
         offers = PromotionOffer.objects.filter(is_active=True,
                                                start_time__lte=right_now,
                                                end_time__gte=right_now)
         if(offer_type):
             offers = offers.filter(offer_type=offer_type)
+
+        if(user):
+            result = []
+            for offer in offers:
+                if(offer.limit_per_user == -1 or
+                   offer.limit_per_user > PromotionRedemption.objects.filter(offer_id=offer.id, authuser_id=user.id).count()):
+                    result += [offer]
+            offers = result
         return offers
 
     def get_discount_dollar_value(self, total_price_before_offers=None):
