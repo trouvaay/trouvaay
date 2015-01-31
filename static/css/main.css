@@ -2784,9 +2784,13 @@ form .form-checkbox-wrap .checkbox-label {
 .hp-tabs .nav-tabs > li.active > a:after {
   border-top-color: rgb(218, 182, 97);
 }
+.hp-tabs .nav-tabs > li.active > a:hover,
+.hp-tabs .nav-tabs > li > a:hover {
+  background: #999;
+  height: 65px;
+}
 .hp-tabs .nav-tabs > li.active > a:hover {
   background: rgb(218, 182, 97);
-  height: 70px;
 }
 .hp-tabs .nav-tabs > li > a {
   border: none;
@@ -2818,9 +2822,7 @@ form .form-checkbox-wrap .checkbox-label {
   display: table-cell;
   vertical-align: middle;
 }
-.hp-tabs .nav-tabs > li > a:hover {
-  background: #999;
-}
+
 .hp-tabs .tab-content {
   width: 100%;
   float: left;
