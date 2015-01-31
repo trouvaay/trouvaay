@@ -1563,7 +1563,8 @@ text-align: left;
   height: 1.5rem;
   padding-top: 5px;
   border-top: lightgray 1px solid;
-  font-family: 'Chunkfive';
+  font-family: 'ralewaylight';
+  font-style: italic
 }
 .product-container:hover .vintage-label {
   border-top: 5px solid rgb(33,16,106);
@@ -2784,9 +2785,13 @@ form .form-checkbox-wrap .checkbox-label {
 .hp-tabs .nav-tabs > li.active > a:after {
   border-top-color: rgb(218, 182, 97);
 }
+.hp-tabs .nav-tabs > li.active > a:hover,
+.hp-tabs .nav-tabs > li > a:hover {
+  background: #999;
+  height: 65px;
+}
 .hp-tabs .nav-tabs > li.active > a:hover {
   background: rgb(218, 182, 97);
-  height: 70px;
 }
 .hp-tabs .nav-tabs > li > a {
   border: none;
@@ -2818,9 +2823,7 @@ form .form-checkbox-wrap .checkbox-label {
   display: table-cell;
   vertical-align: middle;
 }
-.hp-tabs .nav-tabs > li > a:hover {
-  background: #999;
-}
+
 .hp-tabs .tab-content {
   width: 100%;
   float: left;
@@ -4191,7 +4194,7 @@ footer ul li a:hover {
   }
   #mobile-navigation {
     display: block;
-    background-color: rgb(33,16,106);
+    background-color: black;
     position: fixed;
     z-index: 10;
     width: 100%;
