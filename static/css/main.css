@@ -1563,7 +1563,8 @@ text-align: left;
   height: 1.5rem;
   padding-top: 5px;
   border-top: lightgray 1px solid;
-  font-family: 'Chunkfive';
+  font-family: 'ralewaylight';
+  font-style: italic
 }
 .product-container:hover .vintage-label {
   border-top: 5px solid rgb(33,16,106);
