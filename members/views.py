@@ -59,12 +59,14 @@ class SignupView(BaseRegistrationView):
     def register(self, request, **cleaned_data):
         email, password = cleaned_data['email'], cleaned_data['password']
         site = get_site(request)
-        new_user = RegistrationProfile.objects.create_inactive_user(
+        new_user = RegistrationProfile.objects.create_active_user(
             email, password, site,
-            send_email=self.SEND_ACTIVATION_EMAIL,
+            send_email=False,
             request=request,
         )
-        signals.user_registered.send(sender=self.__class__,
+        user = authenticate(email=email, password=password)
+        login(request, user)
+        signals.user_activated.send(sender=self.__class__,
                                      user=new_user,
                                      request=request)
         return new_user
