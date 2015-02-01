@@ -1,7 +1,8 @@
 from django.http import JsonResponse
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser, \
-    AuthUserCart, AuthUserOrder, AuthUserOrderItem, AuthUserAddress, RegistrationProfile
+    AuthUserCart, AuthUserOrder, AuthUserOrderItem, AuthUserAddress, RegistrationProfile, \
+    PromotionOffer, PromotionRedemption
 from goods.models import Product
 from members.forms import CustomAuthenticationForm, RegistrationForm
 from braces.views import LoginRequiredMixin
@@ -22,6 +23,8 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.views import login as django_login
+from django.shortcuts import render_to_response
+from decimal import Decimal
 
 logger = logging.getLogger(__name__)
 
@@ -98,19 +101,7 @@ def ProductLike(request):
 
 
 
-@login_required
-def AddToCart(request):
 
-    if request.method == "POST" and request.is_ajax:
-        userinstance = request.user
-        product = Product.objects.get(pk=int(request.POST['id']))
-        usercart, created = AuthUserCart.objects.get_or_create(authuser=userinstance)
-        usercart.saved_items.add(product)
-        usercart.save()
-        count = usercart.get_item_count()
-        return JsonResponse({'count': count, 'message':'success'})
-    else:
-        return JsonResponse('success', safe=False)
 
 
 class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
@@ -131,15 +122,11 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
             # create new order
             order = AuthUserOrder()
             order.authuser = self.request.user
-            order.save()
-            logger.debug('Created new order %d' % order.id)
 
             product = self.get_object()
 
             order_type = request.POST['order_type'].strip().lower()
-            # For now all order will not be immediately captured
-            # capture_order = (order_type == 'buy')
-            capture_order = False
+            capture_order = (order_type == 'buy')
 
             # create charge with stripe,
             try:
@@ -147,9 +134,14 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                 total_amount_in_cents = int(request.POST['total_amount'])
 
                 logger.debug('total_amount_in_cents %d' % total_amount_in_cents)
-                logger.debug('product.get_price_in_cents %d' % product.get_price_in_cents_with_tax())
 
-                if(total_amount_in_cents != product.get_price_in_cents_with_tax()):
+                discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(self.request.user, total_price_before_offers=product.current_price)
+
+                logger.debug('discounts %s' % str(discounts))
+                logger.debug('subtotal_dollar_value %s' % str(subtotal_dollar_value))
+                logger.debug('total %s' % str(total))
+
+                if(total_amount_in_cents != total['in_cents']):
                     # either product price has changed since payment or
                     # user is trying to do something nasty
                     # in any case we have a discrepancy between
@@ -159,7 +151,26 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                     logger.info('Product price did not match the total that came in the request')
                     return JsonResponse({'status': 'error', 'message': 'Total ammount does not match.'})
 
-                order_type = request.POST['order_type']
+
+                order.taxes = taxes['dollar_value']
+                order.save()
+                logger.debug('Created new order %d' % order.id)
+
+                # create redemptions
+                for discount in discounts:
+
+                    offer_id = discount['offer_id']
+                    redemption = PromotionRedemption()
+                    redemption.authuser = self.request.user
+                    redemption.offer_id = offer_id
+                    redemption.order = order
+                    redemption.timestamp = timezone.now()
+                    redemption.total_before_discount = product.current_price
+                    redemption.discount_amount = discount['dollar_value']
+                    redemption.save()
+
+                    logger.debug('Created redemption %d' % redemption.id)
+
                 stripe.api_key = settings.STRIPE_SECRET_KEY
                 stripe.Charge.create(
                     amount=total_amount_in_cents,
@@ -208,7 +219,10 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
             order_item.order = order
             order_item.sell_price = product.current_price
             order_item.captured = capture_order
-            order_item.capture_time = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
+            if(order_item.captured):
+                order_item.capture_time = timezone.now()
+            else:
+                order_item.capture_time = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
             order_item.quantity = 1
             order_item.save()
             logger.debug('Added items to order')
@@ -218,7 +232,7 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                 context={
                     'product': product,
                     'site': get_site(self.request),
-                    'capture_date': order_item.capture_time.date()
+                    'capture_date': order_item.capture_time.date() if not order_item.captured else None
                     },
                 subject_template='members/purchase/reserve_confirmation_email_subject.txt',
                 plain_text_body_template='members/purchase/reserve_confirmation_email_body.txt',
@@ -235,21 +249,49 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                 'store_city': product.store.city,
                 'store_state': product.store.state,
                 'store_zipcode': product.store.zipcd,
-                'capture_date': order_item.capture_time.date()
+                'capture_date': order_item.capture_time.date() if not order_item.captured else None
             })
         except Exception, e:
             logger.error('Error in ReserveCallbackView.post()')
             logger.error(str(e))
             return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
 
+
+class PreCheckoutView(LoginRequiredMixin, generic.DetailView):
+    context_object_name = 'product'
+    model = Product
+
+    def get_object(self):
+        product_id = self.request.POST.get('product_id', None)
+        if(not product_id):
+            return None
+        try:
+            return Product.objects.get(pk=int(product_id))
+        except Product.DoesNotExist:
+            return None
+
+    def post(self, request, *args, **kwargs):
+
+        product = self.get_object()
+        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(self.request.user, total_price_before_offers=product.current_price)
+        total_discount = 0
+        for discount in discounts:
+            total_discount += discount['dollar_value']
+        capture_time = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
+        stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
+        feature_name_reserve = settings.FEATURE_NAME_RESERVE
+        site_name = settings.SITE_NAME
+        return render_to_response('members/purchase/pre_checkout.html', locals())
+
+
 def can_reserve(request):
     """Checks for permissions whether user is able to reserve a product.
-    
-    For right now only checking if user is logged in or not
     """
+    
     if(request.user.is_authenticated()):
         return JsonResponse({'status': 'ok'})
     return JsonResponse({'status': 'login_required'})
+    
 
 @sensitive_post_parameters()
 @csrf_protect
@@ -284,6 +326,21 @@ def custom_login(request, template_name='registration/login.html',
 
 
 #########Unused Cart Feature ###################
+
+# @login_required
+# def AddToCart(request):
+
+#     if request.method == "POST" and request.is_ajax:
+#         userinstance = request.user
+#         product = Product.objects.get(pk=int(request.POST['id']))
+#         usercart, created = AuthUserCart.objects.get_or_create(authuser=userinstance)
+#         usercart.saved_items.add(product)
+#         usercart.save()
+#         count = usercart.get_item_count()
+#         return JsonResponse({'count': count, 'message':'success'})
+#     else:
+#         return JsonResponse('success', safe=False)
+        
 # class CheckoutView(LoginRequiredMixin, generic.TemplateView):
 #     template_name = 'members/purchase/checkout.html'
 

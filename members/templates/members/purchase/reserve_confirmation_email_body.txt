@@ -6,10 +6,11 @@ Your {{ product.name }} is available at {{ product.store.retailer.short_name }} 
 {{ product.store.street2 }}
 {% endif %}{{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
 
+{% if capture_date %}
 You have our 5 day discovery period to go view the item in store.  
 
-Your card will not be charged until {{ capture_date }}.  Call or text to cancel.
-We are happy to answer any questions you might have!
+Your card will not be charged until {{ capture_date }}. Call or text to cancel.
+{% endif %}We are happy to answer any questions you might have!
 
 Sincerely,
 Rare Door

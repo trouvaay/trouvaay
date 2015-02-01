@@ -76,27 +76,7 @@
     </head>
     <body>
         {% analytical_body_top %}
-        {% block modal %}
-            <div class="modal" id="addtocartmodal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="alert alert-info" role="alert" style="margin-bottom:0">
-                            <p class="text-center">Thank you for your reservation.</p>
-                        </div>
-                        <div class="text-center">
-                        	<img id="reserved-product-image" src="" width="200" height="200" />
-    						<p>
-    						Your <b><span id="reserved-product-name"></span></b> is available at <i><span id="reserved-product-store-name"></span></i> located at:
-    						</p>
-    						<div id="reserved-product-store-address"></div>
-    						Your card will not be charged until <span id="reserved-product-capture-date"></span>
-                        </div>
-                    </div>  
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal-dialog -->
-            </div><!-- /. end Add to Cart modal -->
-        {% endblock modal %}
+      
     {% block nav %}
         {% include 'goods/home/_mobile_nav.html' %}
     {% endblock nav %}
@@ -168,35 +148,61 @@
                     </div>
             </div><!-- end row -->
         </div>
-        <div class="modal fade" id="how-it-works-modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          
-          <div class="modal-body">
-            
-            <div class="container-fluid how-it-works layer">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <!-- <span class="hide">Close</span> -->
-                </button>
-                <div class="row-fluid">
-
-                    <div class="col-md-12 statement">
-                        <h3>Purchase & 5-Day Discovery Period </h3>
-                        <h4>While some items do have a return policy we want to give you the opportunity to experience the product before you pay for it.  When you purchase through us you have 5 days to go touch, feel, and see your item in-store before your card is charged.</br></br>If you change your mind cancel the order — no cost, no questions asked.</h4>
-                    </div>
-                    <div class="col-md-12 statement">
-                        <h3>White Glove Delivery</h3>
-                        <h4>We know the disappointment that comes with finding a great piece of furniture and then realizing that shipping costs more than the item itself. Even worse, sometimes you have to coordinate the delivery on your own. We want to remove all that hassle.</br></br>We have a simple, 3 tiered pricing structure for delivery: $25, $50, & $75 based on the size of the purchase (not included in your item's list price).</h4>
-                        <h4>After you’ve placed your order, we’ll call you to provide the delivery price and coordinate a delivery time that is convenient for you.</h4>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-        </div>
-    </div>
+    
     </footer>
+        {% block modal %}
+            <div class="modal fade" id="how-it-works-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div class="container-fluid how-it-works layer" style="margin-bottom:0">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <!-- <span class="hide">Close</span> -->
+                            </button>
+                            <div class="row-fluid">
+                                <div class="col-md-12 statement">
+                                    <h3>Purchase & 5-Day Discovery Period</h3>
+                                    <h4>While some items do have a return policy we want to give you the opportunity to experience the product before you pay for it.  When you purchase through us you have 5 days to go touch, feel, and see your item in-store before your card is charged.</br></br>If you change your mind cancel the order — no cost, no questions asked.</h4>
+                                </div>
+                                <div class="col-md-12 statement">
+                                    <h3>White Glove Delivery</h3>
+                                    <h4>We know the disappointment that comes with finding a great piece of furniture and then realizing that shipping costs more than the item itself. Even worse, sometimes you have to coordinate the delivery on your own. We want to remove all that hassle.</br></br>We have a simple, 3 tiered pricing structure for delivery: $25, $50, & $75 based on the size of the purchase (not included in your item's list price).</h4>
+                                    <h4>After you’ve placed your order, we’ll call you to provide the delivery price and coordinate a delivery time that is convenient for you.</h4>
+                                </div>
+                            </div><!-- end row -->
+                        </div><!-- end container-fluid -->
+                      </div><!-- end modal-body -->
+                    </div><!-- end modal-content -->
+                </div><!-- end modal-dialog -->
+                </div><!-- end modal -->
+            <div class="modal" id="post-checkout-modal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px; padding-bottom:2px">
+                                <span aria-hidden="true">&times;</span>
+                                <!-- <span class="hide">Close</span> -->
+                            </button></br>
+                        <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+                            <p class="text-center"><h3>Thank you for your reservation.</h3></p>
+                        </div>
+                        <div class="text-center">
+                            <img id="reserved-product-image" src="" width="300" height="300" />
+                            <p></br>
+                            <h4>Your <b><span id="reserved-product-name"></span></b> is available at <i><span id="reserved-product-store-name"></span></i> located at:
+                            </p>
+                            <div id="reserved-product-store-address"></h4>
+                            {% if capture_time %}
+                            <h4>Your card will not be charged until <span id="reserved-product-capture-date"></span></h4>
+                            {% endif %}
+                        </h5></div>
+                    </div>  
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /. end Add to Cart modal -->
+            <div id="pre-checkout-modal-container"></div>
+        {% endblock modal %}
         <!--closing js -->
         <div>
             <script src="{% static 'js/vendor/jquery-1.10.1.min.js' %}"></script>
