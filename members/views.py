@@ -62,12 +62,14 @@ class SignupView(BaseRegistrationView):
     def register(self, request, **cleaned_data):
         email, password = cleaned_data['email'], cleaned_data['password']
         site = get_site(request)
-        new_user = RegistrationProfile.objects.create_inactive_user(
+        new_user = RegistrationProfile.objects.create_active_user(
             email, password, site,
-            send_email=self.SEND_ACTIVATION_EMAIL,
+            send_email=False,
             request=request,
         )
-        signals.user_registered.send(sender=self.__class__,
+        user = authenticate(email=email, password=password)
+        login(request, user)
+        signals.user_activated.send(sender=self.__class__,
                                      user=new_user,
                                      request=request)
         return new_user
@@ -99,19 +101,7 @@ def ProductLike(request):
 
 
 
-@login_required
-def AddToCart(request):
 
-    if request.method == "POST" and request.is_ajax:
-        userinstance = request.user
-        product = Product.objects.get(pk=int(request.POST['id']))
-        usercart, created = AuthUserCart.objects.get_or_create(authuser=userinstance)
-        usercart.saved_items.add(product)
-        usercart.save()
-        count = usercart.get_item_count()
-        return JsonResponse({'count': count, 'message':'success'})
-    else:
-        return JsonResponse('success', safe=False)
 
 
 class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
@@ -336,6 +326,21 @@ def custom_login(request, template_name='registration/login.html',
 
 
 #########Unused Cart Feature ###################
+
+# @login_required
+# def AddToCart(request):
+
+#     if request.method == "POST" and request.is_ajax:
+#         userinstance = request.user
+#         product = Product.objects.get(pk=int(request.POST['id']))
+#         usercart, created = AuthUserCart.objects.get_or_create(authuser=userinstance)
+#         usercart.saved_items.add(product)
+#         usercart.save()
+#         count = usercart.get_item_count()
+#         return JsonResponse({'count': count, 'message':'success'})
+#     else:
+#         return JsonResponse('success', safe=False)
+        
 # class CheckoutView(LoginRequiredMixin, generic.TemplateView):
 #     template_name = 'members/purchase/checkout.html'
 

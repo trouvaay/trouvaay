@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
-from members.models import AuthUser, AuthUserActivity, AuthUserCart, AuthUserOrder, \
+from members.models import AuthUser, AuthUserActivity, AuthUserOrder, \
     AuthUserOrderItem, PromotionOffer, PromotionRedemption
 from django import forms
 
@@ -64,9 +64,6 @@ class AuthUserActivityInline(admin.TabularInline):
     model = AuthUserActivity
 
 
-class AuthUserCartInline(admin.TabularInline):
-    model = AuthUserCart
-
 
 class AuthUserAdmin(UserAdmin):
     form = CustomUserChangeForm
@@ -88,7 +85,7 @@ class AuthUserAdmin(UserAdmin):
             'classes': ('wide',),
             'fields': ('email', 'is_merchant', 'password1', 'password2')}),
     )
-    inlines = [AuthUserActivityInline, AuthUserCartInline]
+    inlines = [AuthUserActivityInline]
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)
@@ -127,9 +124,7 @@ class PromotionRedemptionAdmin(admin.ModelAdmin):
 
 admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(AuthUserActivity)
-admin.site.register(AuthUserCart)
 admin.site.register(AuthUserOrder, AuthUserOrderAdmin)
-admin.site.register(AuthUserOrderItem)
 admin.site.register(PromotionOffer, PromotionOfferAdmin)
 admin.site.register(PromotionRedemption, PromotionRedemptionAdmin)
 

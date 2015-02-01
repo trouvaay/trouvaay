@@ -28,30 +28,30 @@ var trouvaay = {
                                 "<div class='row-fluid'>"+
                                     "<div class='col-sm-11 col-md-10'>"+
                                     "<ul class='nav nav-tabs pull-left'>"+
-                                        "<li class='active'><a href='#tab1' data-toggle='tab'>"+
+                                        "<li id='everything'><a href='{% url 'goods:home' %}'>"+
                                         "<span class='inner' style='display:list-item'>"+
                                             "<img src='{% static 'img/roomiconsnew/house128.png' %}' title='house' alt=''/>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>everything</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab2' data-toggle='tab'>"+
+                                        "<li id='seating'><a href='{% url 'goods:furnituretype' %}?type=seating'>"+
                                             "<span class='inner' style='display:list-item'>"+
                                             "<img src='{% static 'img/roomiconsnew/seating128.png' %}' title='seating' alt=''/>"+
                                             "</span>"+
                                             "<span class='inner icon-label' style='display:list-item'>seating</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab3' data-toggle='tab'><span class='inner' style='display:list-item'>"+
+                                        "<li id='tables'><a href='{% url 'goods:furnituretype' %}?type=tables'><span class='inner' style='display:list-item'>"+
                                             "<img src='{% static 'img/roomiconsnew/table128.png' %}' title='table' alt=''/>"+
-                                            "</span><span class='inner icon-label' style='display:list-item'>tables/desks</span>"+
+                                            "</span><span class='inner icon-label' style='display:list-item'>tables</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab4' data-toggle='tab'><span class='inner' style='display:list-item'>"+
+                                        "<li id='beds'><a href='{% url 'goods:furnituretype' %}?type=beds'><span class='inner' style='display:list-item'>"+
                                             "<img src='{% static 'img/roomiconsnew/bed128.png' %}' title='bed' alt=''/></span>"+
                                             "<span class='inner icon-label' style='display:list-item'>beds</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab5' data-toggle='tab'><span class='inner' style='display:list-item'>"+
+                                        "<li id='storage'><a href='{% url 'goods:furnituretype' %}?type=storage'><span class='inner' style='display:list-item'>"+
                                             "<img src='{% static 'img/roomiconsnew/storage128.png' %}' title='storage' alt=''/>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>storage</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab6' data-toggle='tab'><span class='inner' style='display:list-item'>"+
+                                        "<li id='lighting'><a href='{% url 'goods:furnituretype' %}?type=lighting'><span class='inner' style='display:list-item'>"+
                                             "<img src='{% static 'img/roomiconsnew/lighting128.png' %}' title='lighting' alt=''/>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>lighting</span>"+
                                             "</a></li>"+
@@ -65,7 +65,8 @@ var trouvaay = {
         //Append mobile menu
 		$("#mobile-search").on('click',function() {
                 if (!$('#tab-icons-mobile').length ) {
-                  $(".container-fluid.top-bar").append(mobileTabIcons);
+                    console.log('is this workgin?');
+                  $("#mobile-navigation").append(mobileTabIcons);
                 } else {
                   $("#tab-icons-mobile").remove();
                 }
@@ -74,7 +75,7 @@ var trouvaay = {
         //Append mobile tab icons
         $("#mob-nav").on('click',function() {
                 if (!$('#mobile-nav').length ) {
-                  $(".container-fluid.top-bar").append(mobilemenutop);
+                  $("#mobile-navigation").append(mobilemenutop);
                 } else {
                   $("#mobile-nav").remove();
                 }
@@ -88,6 +89,7 @@ var trouvaay = {
 		    }
 		  });
 		});
+
 
 		//product-like AJAX post
         $(".btn.btn-default.glyphs").click(function() {
@@ -109,31 +111,30 @@ var trouvaay = {
                 }
             );
         });
-
-        //Addtocart AJAX post
-        /*
-	    $(".btn.buy").click(function() {
-            var id = $(this).attr("id").substring(4);
-            var data = {'id': id};
-            if ($(this).hasClass("active")) {
-                $(this).removeClass("active");
-                }
-            else {
-                $("#addtocartmodal").show().delay(2000).fadeOut();
-                $.post("{% url 'members:addtocart' %}", data, function(product) {
-                    $(".badge.cart-counter").html(product.count.toString());
-                    $(".badge.mobile-cart-counter").html(product.count.toString());
-                });
-            }
-        })
-        */
+        
 	}
 }
 
 $(document).ready(function() {
     trouvaay.init();
- 
+    
+    //Get furniture type param
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    };
 
+    function addactivelink (type){
+      $('li').each(function() {
+        if ($(this).attr('id') == getParameterByName(type)) {
+          $(this).addClass('active');
+        }
+      });
+    };
+
+    addactivelink('type');
     //Django boilerplat to Auto add csrf token to template for $.POST Ajax
     function getCookie(name) {
             var cookieValue = null;

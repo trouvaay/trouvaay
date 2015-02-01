@@ -3,21 +3,31 @@
 	<div class="modal-dialog">
 		<div class="modal-content col-xs-12">
 			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
 				<div class="form-group text-center">	
 					<div class="text-center">
 						<fieldset>
 							<legend>Summary</legend>
-							<div class="col-xs-12">
-								<button id="button-order-type-try" class="btn btn-primary" type="button">5 day discovery</button>
-								<button id="button-order-type-buy" class="btn btn-default" type="button">Buy now</button>
-								<span style="display: none;" id="order-type">try</span>
+							<div class="row" style="margin-bottom: 10px">
+								<div class="col-xs-12">
+									<button id="button-order-type-try" class="btn btn-primary" type="button">5 day discovery</button>
+									<button id="button-order-type-buy" class="btn btn-default" type="button">Buy now</button>
+									<span style="display: none;" id="order-type">try</span>
+								</div>
 							</div>
+							<div class="row">
 							<div class="col-xs-12">
-								<p>
-									<span id="pre-checkout-capture-date">{% if capture_time %}Your card will not be charged until {{ capture_time|date:"m/d/Y" }}{% endif %}</span>
-									You will receive the location of your product once your researvation is complete
-								</p>
+								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+		                            <p class="text-center"><span id="pre-checkout-capture-date">{% if capture_time %}
+		                            Your card will not be charged until {{ capture_time|date:"m/d/Y" }}. </br>You are one step away from the location of your:</span></br>
+										<b>{{ product.short_name }}</b></p>
+									{% endif %}
+	                        	</div>
 							</div>
+							</div>
+							<div class="row">
 							<div class="col-xs-12">
 								<table class="table">
 							      	<thead>
@@ -54,6 +64,7 @@
 							      	</tbody>
 							    </table>
 							    <button id="button-precheckout-submit" type="button" class="btn btn-success">Submit</button>		
+							</div>
 							</div>
 						</fieldset>
 					</div>
@@ -121,8 +132,6 @@ $(document).ready(function() {
 						
 						  	if(data['status'] == "ok"){
 						  	
-						  		
-						  		
 						  		$("#reserved-product-name").text(data['product_name']);
 						  		$("#reserved-product-store-name").text(data['store_name']);
 						  		var storeAddress = data['store_street'];
@@ -134,7 +143,7 @@ $(document).ready(function() {
 								
 								console.log('capture date: '+data['capture_date']);
 								if(data['capture_date']){
-									$("#reserved-product-capture-date-value").text(data['capture_date']);
+									$("#reserved-product-capture-date").text(data['capture_date']);
 									$("#reserved-product-capture-date").show();
 								}
 								else{
@@ -142,7 +151,7 @@ $(document).ready(function() {
 								}
 								
 								$("#reserved-product-image").attr('src', (data['image_src']));
-								$("#addtocartmodal").modal({
+								$("#post-checkout-modal").modal({
 									show: true,
 									keyboard: true
 								});

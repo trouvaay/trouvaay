@@ -164,6 +164,9 @@ class Product(models.Model):
             self.slug = '%s-%d' % (self.slug, x)
         super(Product, self).save(*args, **kwargs)
 
+    def is_discounted(self):
+        return (self.current_price < self.original_price)
+
     def get_price_in_cents(self):
         return int(self.current_price * 100)
 
