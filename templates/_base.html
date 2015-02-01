@@ -180,7 +180,7 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
-                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px; padding-bottom:2px">
                                 <span aria-hidden="true">&times;</span>
                                 <!-- <span class="hide">Close</span> -->
                             </button></br>
@@ -193,7 +193,9 @@
                             <h4>Your <b><span id="reserved-product-name"></span></b> is available at <i><span id="reserved-product-store-name"></span></i> located at:
                             </p>
                             <div id="reserved-product-store-address"></h4>
+                            {% if capture_time %}
                             <h4>Your card will not be charged until <span id="reserved-product-capture-date"></span></h4>
+                            {% endif %}
                         </h5></div>
                     </div>  
                 </div><!-- /.modal-content -->

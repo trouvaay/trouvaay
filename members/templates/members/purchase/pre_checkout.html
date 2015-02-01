@@ -20,8 +20,10 @@
 							<div class="row">
 							<div class="col-xs-12">
 								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-		                            <p class="text-center"><span id="pre-checkout-capture-date">{% if capture_time %}Your card will not be charged until {{ capture_time|date:"m/d/Y" }}{% endif %}.</span></br>
-										<b>One step away from the location of your {{ product.short_name }}!</b></p>
+		                            <p class="text-center"><span id="pre-checkout-capture-date">{% if capture_time %}
+		                            Your card will not be charged until {{ capture_time|date:"m/d/Y" }}. </br>You are one step away from the location of your:</span></br>
+										<b>{{ product.short_name }}</b></p>
+									{% endif %}
 	                        	</div>
 							</div>
 							</div>
