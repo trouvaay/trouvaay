@@ -68,7 +68,7 @@ class FurnitureTypeView(generic.ListView):
         except Exception, e:
             logger.debug(str(e))
             furniture_type_object = None
-        queryset = self.model.objects.filter(is_published=True,furnituretype = furniture_type_object )
+        queryset = list(self.model.objects.filter(is_published=True,furnituretype = furniture_type_object ))
         #filter by products that are furniture
         shuffle(queryset)
         return queryset
