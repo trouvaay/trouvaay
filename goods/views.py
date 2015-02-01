@@ -8,6 +8,8 @@ from braces.views import LoginRequiredMixin
 from random import randint
 import logging
 from django.conf import settings
+from random import shuffle
+
 
 
 logger = logging.getLogger(__name__)
@@ -25,6 +27,7 @@ class HomeView(generic.ListView):
         pub_products = self.model.objects.filter(is_published=True)
         #filter by products that are furniture
         queryset = [i for i in pub_products if i.is_furniture()]
+        shuffle(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -67,6 +70,7 @@ class FurnitureTypeView(generic.ListView):
             furniture_type_object = None
         queryset = self.model.objects.filter(is_published=True,furnituretype = furniture_type_object )
         #filter by products that are furniture
+        shuffle(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
