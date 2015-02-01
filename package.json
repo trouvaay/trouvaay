@@ -1,0 +1,25 @@
+{
+  "name": "trouvaay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://igorline@github.com/igorline/trouvaay.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igorline/trouvaay/issues"
+  },
+  "homepage": "https://github.com/igorline/trouvaay",
+  "devDependencies": {
+    "grunt-contrib-cssmin": "^0.11.0",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-ucss": "^0.1.2",
+    "grunt-uncss": "^0.4.0"
+  }
+}
