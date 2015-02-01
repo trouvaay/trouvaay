@@ -13,12 +13,16 @@ from helper import States
 from registration.models import RegistrationManager as BaseRegistrationManager
 from registration.models import RegistrationProfile as BaseRegistrationProfile
 from django.contrib.auth import get_user_model
+from django.utils import timezone
+from decimal import Decimal
+from django.db.models import Q
+from django.db.models import F
 import hashlib
 import six
 import random
 
 class RegistrationManager(BaseRegistrationManager):
-    
+
     def create_inactive_user(self, email, password,
                              site, send_email=True, request=None):
         """
@@ -45,6 +49,33 @@ class RegistrationManager(BaseRegistrationManager):
 
         return new_user
 
+    def create_active_user(self, email, password,
+                             site, send_email=True, request=None):
+        """
+        Overwiding the method from the base class to not use the username.
+        
+        Create a new, active ``User``, generate a
+        ``RegistrationProfile`` and email its activation key to the
+        ``User``, returning the new ``User``.
+
+        By default, a confirmation email will be sent to the new
+        user. To disable this, pass ``send_email=False``.
+        Additionally, if email is sent and ``request`` is supplied,
+        it will be passed to the email template.
+
+        """
+        new_user = get_user_model().objects.create_user(email, password)
+        new_user.is_active = True
+        new_user.save()
+
+        
+
+        #Need to update - currently sends activation email
+        # if send_email:
+        #     registration_profile.send_activation_email(site, request)
+
+        return new_user
+
     def create_profile(self, user):
         """
         Overwiding the method from the base class to not use the username.
@@ -62,7 +93,7 @@ class RegistrationManager(BaseRegistrationManager):
         email = user.email
         if isinstance(email, six.text_type):
             username = email.encode('utf-8')
-        activation_key = hashlib.sha1(salt+email).hexdigest()
+        activation_key = hashlib.sha1(salt + email).hexdigest()
         return self.create(user=user,
                            activation_key=activation_key)
 
@@ -156,7 +187,7 @@ class AuthUserAddress(models.Model):
     lng = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return ("{},{},{},{}".format(self.street,self.city,self.state,self.zipcd))
+        return ("{},{},{},{}".format(self.street, self.city, self.state, self.zipcd))
 
 class AuthUserActivity(models.Model):
     authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
@@ -170,7 +201,7 @@ class AuthUserActivity(models.Model):
     value_tier = models.ManyToManyField('goods.ValueTier', null=True, blank=True)
 
     def __str__(self):
-        return ('user: '+self.authuser.email+' ;  items: '+str(self.saved_items.all()))
+        return ('user: ' + self.authuser.email + ' ;  items: ' + str(self.saved_items.all()))
 
     class Meta:
         ordering = ['authuser']
@@ -195,7 +226,7 @@ class AuthUserCart(models.Model):
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return ('Cart for user: '+self.authuser.email+';  items: '+str(self.saved_items.all()))
+        return ('Cart for user: ' + self.authuser.email + ';  items: ' + str(self.saved_items.all()))
 
     def get_item_count(self):
         return self.saved_items.all().count()
@@ -221,6 +252,31 @@ class AuthUserOrder(models.Model):
     authuser = models.ForeignKey(settings.AUTH_USER_MODEL)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    taxes = models.DecimalField(max_digits=8, decimal_places=2, blank=None, null=None, default=0.00)
+
+
+    @classmethod
+    def compute_order_line_items(self, user, total_price_before_offers):
+        offers = PromotionOffer.get_current_offers(user)
+        discounts = []
+        taxes = {}
+        total = {}
+        total_discount = 0
+        for offer in offers:
+            discount_dollar_value = offer.get_discount_dollar_value(total_price_before_offers=total_price_before_offers)
+            if(discount_dollar_value):
+                discounts += [{'name': offer.name, 
+                               'dollar_value': discount_dollar_value, 
+                               'offer_id': offer.id}]
+                total_discount += discount_dollar_value
+        subtotal_dollar_value = total_price_before_offers - total_discount
+        taxes['dollar_value'] = subtotal_dollar_value * settings.SALES_TAX
+        taxes['percentage'] = settings.SALES_TAX * 100
+
+        total['in_dollars'] = Decimal(subtotal_dollar_value + taxes['dollar_value']).quantize(Decimal('.01'))
+        total['in_cents'] = int(total['in_dollars'] * 100)
+
+        return discounts, subtotal_dollar_value, taxes, total 
 
     def get_captured_amt(self):
         """some of total amount captured on current transaction
@@ -240,7 +296,7 @@ class AuthUserOrder(models.Model):
         return total
 
     def __str__(self):
-        return('user: '+self.authuser.email+' ;  items: '+str(self.authuserorderitem_set.all()))
+        return('user: ' + self.authuser.email + ' ;  items: ' + str(self.authuserorderitem_set.all()))
 
 
 class AuthUserOrderItem(models.Model):
@@ -257,8 +313,146 @@ class AuthUserOrderItem(models.Model):
     quantity = models.IntegerField(default=1)
 
 
+class OfferType(object):
+    """This class maintains a list of all offer types
+    
+    Having this class allows us to use "constants" in our code.
+    This is better because in case of a typo the compiler will catch it
+    at compile time.
+    
+    To see the benefit consider these 2 cases:
+    
+    offers = PromotionOffer.objects.filter(offer_type = OfferType.FIRST_ORDERx)
+    
+    vs.
+    
+    offers = PromotionOffer.objects.filter(offer_type = 'FIRST_ORDERx')
+    
+    In both cases we made a typo notice extra "x", however in the first case
+    compiler will catch this error as soon as we run the code, so we will be
+    forced to fix it right away. In second case there is no compiler error 
+    and we might never find the issue.
+    """
+    FIRST_ORDER = 'FIRST_ORDER'
+
+OFFER_TYPES = (
+    (OfferType.FIRST_ORDER, 'First order'),
+)
 
 
+class PromotionOffer(models.Model):
+    name = models.CharField(max_length=100, blank=False, null=False, help_text='e.g. First order 10% off')
+    short_terms = models.TextField(max_length=1000, blank=False, null=False, help_text='This is a short vertion of the terms that we can show to the user e.g. on a front page where they might actually read it.')
+    terms = models.TextField(max_length=10000, blank=False, null=False, help_text='This is the "fine print", explaining in every details the terms of the promotion')
+    limit_per_user = models.IntegerField(blank=False, null=False, help_text='Positive number - how many times this offer can be used per user, -1 - unlimited')
+
+    # This takes precedence over any other fields when determining whether or not the offer is valid
+    # e.g. start/end time or limit per user would only make sence if the offer is active
+    # making default=False, so that we have to consiously enable it
+    is_active = models.BooleanField(blank=False, null=False, default=False, help_text='This is On/Off switch for the offer')
+
+    # we only have a one type for now, but there may be more
+    # and each has to be handled differently
+    # having a special field would allow us to figure out
+    # how each 'kind' of offer should be handled
+    offer_type = models.CharField(max_length=50, choices=OFFER_TYPES, blank=False, null=False, db_index=True, help_text='This field determines how offer is applied: e.g. "First order", or "$10 off towards next purchase')
+
+    start_time = models.DateTimeField(blank=True, null=True, default=None, help_text='When offer becomes available')
+    end_time = models.DateTimeField(blank=True, null=True, default=None, help_text='When offer expires')
+    is_code_required = models.BooleanField(blank=False, null=False, default=True)
+
+    # codes must be unique, but they are also optional
+    # we will handle the uniqueness in the 'save' method
+    # because django can't handle unique and optinally empty fields
+    # the way one would expect. I've ran into this long time ago,
+    # but the issue still remains to this day see my stackoverflow question for details
+    # http://stackoverflow.com/questions/454436/unique-fields-that-allow-nulls-in-django
+    code = models.CharField(max_length=100, blank=True, default='', db_index=True, help_text='Code for the promotion. Codes are case insensitive, e.g. PROMO2015 and Promo2015 is the same thing, so cannot create two different codes like that.')
+
+    # For 'discount' kind of promotion either discount_fixed_amount or discount_percent must be set and be non-zero
+    # we will handle this constraint in the save() method
+    is_discount = models.BooleanField(blank=False, null=False, default=True, help_text='Is this offer containing a price discount? Some offer might not, e.g. Same day delivery is not a Discount kind of promition.')
+    discount_fixed_amount = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=None, help_text='e.g. $20 off')
+    discount_percent = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, default=None, help_text='Expressed as percentage, e.g. 10 means 10% off')
+    discount_limit = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=None, help_text='Limits the Percent discount off to this value. This is applicable only when discount_percent is set')
+
+    @classmethod
+    def get_current_offers(self, user=None, offer_type=None):
+        right_now = timezone.now()
+        
+        offers = PromotionOffer.objects.filter(is_active=True,
+                                               start_time__lte=right_now,
+                                               end_time__gte=right_now)
+        if(offer_type):
+            offers = offers.filter(offer_type=offer_type)
+
+        if(user):
+            result = []
+            for offer in offers:
+                if(offer.limit_per_user == -1 or
+                   offer.limit_per_user > PromotionRedemption.objects.filter(offer_id=offer.id, authuser_id=user.id).count()):
+                    result += [offer]
+            offers = result
+        return offers
+
+    def get_discount_dollar_value(self, total_price_before_offers=None):
+        if(self.is_discount):
+            if(self.discount_fixed_amount and self.discount_fixed_amount > total_price_before_offers):
+                return self.discount_fixed_amount
+            elif(self.discount_percent):
+                discount = total_price_before_offers * self.discount_percent / 100
+                if(self.discount_limit):
+                    if(discount > self.discount_limit):
+                        return self.discount_limit
+                return discount
+        return Decimal('0.0')
+
+    def __unicode__(self):
+        return u'%s (%s)' % (self.name, 'Active' if self.is_active else 'Inactive')
+
+    def generate_code(self):
+        """Returns a new unique code.
+        
+        When determining the uniqueness will do a case-insensitive check
+        """
+
+        CODE_LENGTH = 10
+        random.seed()
+        # Since we are generating the code randomly
+        # so there is a chance the result might spell to
+        # something offensive
+        # To eliminate it we will not use any vowels or 0 (which looks like o) or 1 (which looks like i)
+        alphabet = 'BCDFGHIGKLMNPQRSTVWXYZ23456789'
+        while(True):
+
+            result = ''
+            for _i in xrange(CODE_LENGTH):
+                result += random.choice(alphabet)
+            if(PromotionOffer.objects.filter(code__iexact=result).count() == 0):
+                # this is a unique code that does not exist yet
+                # exactly what we need
+                return result
+
+    def save(self, *args, **kwargs):
+        if(self.is_discount):
+            if(not self.discount_fixed_amount and not self.discount_percent):
+                raise Exception('Discount must be specified either as fixed amount or percent off, cannot have both values empty')
+            if(self.discount_fixed_amount and self.discount_percent):
+                raise Exception('Discount should be set either as a fixed amount or percent off but not both')
+            if(self.discount_percent and (self.discount_percent > 100 or self.discount_percent < 0)):
+                raise Exception('Discount percent can be between 0 and 100 inclusive')
+
+        if(not self.id):  # this is a new order
+            if(self.is_code_required and not self.code):
+                self.code = self.generate_code()
+        super(PromotionOffer, self).save(*args, **kwargs)
 
 
+class PromotionRedemption(models.Model):
+    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_redemptions')
+    offer = models.ForeignKey(PromotionOffer, blank=False, null=False, related_name='offer_redemptions')
+    order = models.ForeignKey(AuthUserOrder, blank=False, null=False, related_name='order_redemptions')
+    timestamp = models.DateTimeField(blank=False, null=False, help_text='When this was redeemed')
 
+    total_before_discount = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=None, help_text="Total dollar amount before applying any promotinal discounts to the order")
+    discount_amount = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=None, help_text="Discount dollar amount")

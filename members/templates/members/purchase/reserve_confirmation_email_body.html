@@ -8,10 +8,10 @@ Your <b>{{ product.short_name }}</b> is available at <i>{{ product.store.retaile
 {{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
 </p>
 
-<p>You have our 5 day discovery period to go view the item in store.</p>
+<p>{% if capture_date %}You have our 5 day discovery period to go view the item in store.</p>
 
 <p>Your card will not be charged until {{ capture_date }}.  Call or text to cancel.
-We are happy to answer any questions you might have!<p>
+{% endif %}We are happy to answer any questions you might have!<p>
 
 <p>
 Sincerely,<br />

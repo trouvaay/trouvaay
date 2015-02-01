@@ -8,8 +8,8 @@
 <div class="modal fade" id="signup-login-modal">
 	<div class="modal-dialog">
 		<div class="modal-content col-xs-12">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<div class="modal-body">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<!-- this will make sigup and login show side by side -->
 				<div class="row">
 					{% block modalforms %}
@@ -41,21 +41,11 @@
 	{% block endjs %}
 	{{ block.super }}
 	<script type="text/javascript">
-$(document).ready(function () {
-		
+	$(document).ready(function () {
 		$('#signup-login-modal').modal({"show": true});
-		
-		$("#signup-login-modal").modal({
-      		onClose: function () {
-      		console.log('print modal closed');
-          	window.location.href = "http://stackoverflow.com";
-		    }
-		});
-		
 		$('#signup-login-modal').on('hidden.bs.modal', function () {
 			window.location.replace("{% url "goods:home" %}");
 		})
-
-});
+	});
 	</script>
 	{% endblock %}

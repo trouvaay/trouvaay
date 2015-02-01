@@ -1,0 +1,171 @@
+{% load staticfiles %}
+<div class="modal" id="pre-checkout-modal">
+	<div class="modal-dialog">
+		<div class="modal-content col-xs-12">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+				<div class="form-group text-center">	
+					<div class="text-center">
+						<fieldset>
+							<legend>Summary</legend>
+							<div class="row" style="margin-bottom: 10px">
+								<div class="col-xs-12">
+									<button id="button-order-type-try" class="btn btn-primary" type="button">5 day discovery</button>
+									<button id="button-order-type-buy" class="btn btn-default" type="button">Buy now</button>
+									<span style="display: none;" id="order-type">try</span>
+								</div>
+							</div>
+							<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+		                            <p class="text-center"><span id="pre-checkout-capture-date">{% if capture_time %}
+		                            Your card will not be charged until {{ capture_time|date:"m/d/Y" }}. </br>You are one step away from the location of your:</span></br>
+										<b>{{ product.short_name }}</b></p>
+									{% endif %}
+	                        	</div>
+							</div>
+							</div>
+							<div class="row">
+							<div class="col-xs-12">
+								<table class="table">
+							      	<thead>
+							        	<tr>
+							          		<th>Product</th>
+							          		<td align="right"><strong>Price</strong></td>
+							        	</tr>
+							      	</thead>
+							      	<tbody>
+										<tr>
+											<th scope="row">{{ product.short_name }}</td>
+											<td align="right">${{ product.current_price|floatformat:2 }}</td>
+										</tr>
+										{% for discount in discounts %}
+										<tr>
+											<th scope="row">Discount ({{ discount.name }})</td>
+											<td align="right">(${{ discount.dollar_value|floatformat:2 }})</td>
+										</tr>
+										{% endfor %}
+										<tr>
+											<th scope="row">Subtotal</td>
+											<td align="right">{{ subtotal_dollar_value|floatformat:2 }}</td>
+										</tr>
+										{% if taxes %}
+										<tr>
+											<th scope="row">Taxes ({{ taxes.percentage|floatformat:2 }}%)</td>
+											<td align="right">{{ taxes.dollar_value|floatformat:2 }}</td>
+										</tr>
+										{% endif %}
+										<tr class="success">
+											<th scope="row"><strong>Total</strong></td>
+											<td align="right">{{ total.in_dollars|floatformat:2 }}</td>
+										</tr>										
+							      	</tbody>
+							    </table>
+							    <button id="button-precheckout-submit" type="button" class="btn btn-success">Submit</button>		
+							</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.pre-checkout-modal -->
+
+<script>
+$(document).ready(function() {
+
+	$('#button-order-type-try').on('click', function(e) {
+		$('#order-type').text("try");
+		$('#pre-checkout-capture-date').show();
+		$('#button-order-type-buy').removeClass('btn-primary');
+		$('#button-order-type-buy').addClass('btn-default');
+		$('#button-order-type-try').removeClass('btn-default');
+		$('#button-order-type-try').addClass('btn-primary');
+	});
+	$('#button-order-type-buy').on('click', function(e) {
+		$('#order-type').text("buy");
+		$('#pre-checkout-capture-date').hide();
+		$('#button-order-type-try').removeClass('btn-primary');
+		$('#button-order-type-try').addClass('btn-default');
+		$('#button-order-type-buy').removeClass('btn-default');
+		$('#button-order-type-buy').addClass('btn-primary');
+	});
+	
+	var productName = "{{ product.short_name }}";
+	var productPrice = {{ total.in_cents }};
+	
+	console.log('pre-checkout is loaded');
+	console.log('productPrice: ' + productPrice);
+	console.log('total_purchase_price: ' + {{ total.in_cents }});
+	
+	$('#button-precheckout-submit').on('click', function(e) {
+		
+		if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
+		
+	  		console.log('hide pre-checkout modal');
+	  		$('#pre-checkout-modal').modal('hide');
+	  		console.log('show after-checkout modal');
+
+			var handler = StripeCheckout.configure({
+				key: '{{ stripe_publishable_key }}',
+				image: "{% static 'img/logos/Raredoor-R-icon-gold.png' %}",
+				name: '{{ site_name }}',
+				description: productName,
+				amount: productPrice,
+				shippingAddress: "true",
+				token: function(token, args) {
+					$.ajax({
+						type: "POST",
+						url: {% url "members:reserve_callback" %},
+						data: {
+							token: token,
+							args: args,
+							total_amount: productPrice,
+							order_type: $('#order-type').text(),
+							product_id: {{ product.id }}
+						},
+						success: function(data){
+							console.log('checkout callback returned: ' + data['status']);
+						
+						  	if(data['status'] == "ok"){
+						  	
+						  		$("#reserved-product-name").text(data['product_name']);
+						  		$("#reserved-product-store-name").text(data['store_name']);
+						  		var storeAddress = data['store_street'];
+						  		if(data['store_street2'] != ""){
+						  			storeAddress += ("<br>" + data['store_street2']);
+						  		}
+						  		storeAddress += ("<br>" + data['store_city'] + " " + data['store_state'] + " " + data['store_zipcode']);
+								$("#reserved-product-store-address").html(storeAddress);
+								
+								console.log('capture date: '+data['capture_date']);
+								if(data['capture_date']){
+									$("#reserved-product-capture-date").text(data['capture_date']);
+									$("#reserved-product-capture-date").show();
+								}
+								else{
+									$("#reserved-product-capture-date").hide();
+								}
+								
+								$("#reserved-product-image").attr('src', (data['image_src']));
+								$("#post-checkout-modal").modal({
+									show: true,
+									keyboard: true
+								});
+						  	}
+						},
+						dataType: "json"
+					});
+				}
+			});				
+		
+		  	handler.open({
+				panelLabel: "{{ feature_name_reserve }} {% verbatim %}{{amount}}{% endverbatim %}"
+			});
+		}
+	});
+});
+</script>
