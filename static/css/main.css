@@ -2807,6 +2807,7 @@ form .form-checkbox-wrap .checkbox-label {
   display: table;
   position: relative;
   width: 100%;
+  padding: 10px 13.5px;
   padding-bottom: 0
 }
 .hp-tabs .nav-tabs > li > a:after {
