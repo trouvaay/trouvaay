@@ -101,19 +101,7 @@ def ProductLike(request):
 
 
 
-@login_required
-def AddToCart(request):
 
-    if request.method == "POST" and request.is_ajax:
-        userinstance = request.user
-        product = Product.objects.get(pk=int(request.POST['id']))
-        usercart, created = AuthUserCart.objects.get_or_create(authuser=userinstance)
-        usercart.saved_items.add(product)
-        usercart.save()
-        count = usercart.get_item_count()
-        return JsonResponse({'count': count, 'message':'success'})
-    else:
-        return JsonResponse('success', safe=False)
 
 
 class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
@@ -338,6 +326,21 @@ def custom_login(request, template_name='registration/login.html',
 
 
 #########Unused Cart Feature ###################
+
+# @login_required
+# def AddToCart(request):
+
+#     if request.method == "POST" and request.is_ajax:
+#         userinstance = request.user
+#         product = Product.objects.get(pk=int(request.POST['id']))
+#         usercart, created = AuthUserCart.objects.get_or_create(authuser=userinstance)
+#         usercart.saved_items.add(product)
+#         usercart.save()
+#         count = usercart.get_item_count()
+#         return JsonResponse({'count': count, 'message':'success'})
+#     else:
+#         return JsonResponse('success', safe=False)
+        
 # class CheckoutView(LoginRequiredMixin, generic.TemplateView):
 #     template_name = 'members/purchase/checkout.html'
 

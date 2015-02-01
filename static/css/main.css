@@ -117,7 +117,9 @@ h4, h5, h6, .h4, .h5, .h6 {
   height: 75px;
 }
 .neighborhood {
-  color: rgb(218,182,97)
+  color: rgb(218,182,97);
+  font-style: italic;
+  font-weight: 600;
 } 
 .select-bar .hp-tabs {
 	padding: 0px;
@@ -1567,7 +1569,7 @@ text-align: left;
   font-style: italic
 }
 .product-container:hover .vintage-label {
-  border-top: 5px solid rgb(33,16,106);
+  border-top: 4px solid black;
  }
 
 
