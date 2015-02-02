@@ -15,11 +15,10 @@ from registration.models import RegistrationProfile as BaseRegistrationProfile
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from decimal import Decimal
-from django.db.models import Q
-from django.db.models import F
 import hashlib
 import six
 import random
+
 
 class RegistrationManager(BaseRegistrationManager):
 
@@ -147,6 +146,38 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 
     REQUIRED_FIELDS = []
 
+    @classmethod
+    def get_user_by_email(cls, email):
+        """Looks up or or creates a new user if needed with specified email
+        
+        Returns tuple (is_existing, user)
+        where is_existing True - user already existed, False - new user
+        """
+        
+        user_model = get_user_model()
+        try:
+            existing_user = user_model.objects.get(email__iexact=email)
+            if(existing_user):
+                return (True, existing_user)
+        except user_model.DoesNotExist:
+            # this is ok, we will create a new user
+            pass
+
+        new_user = user_model.objects.create_user(email=email, password=None)
+        new_user.first_name = ''
+        new_user.last_name = ''
+        new_user.is_merchant = False
+        new_user.is_admin = False
+
+        # Mark user as active. To actually use the account user has to
+        # reset their password first. We will send them password reset
+        # link along with their order or they can always
+        # use 'forgot password' functionality to reset it
+        new_user.is_active = True
+        new_user.save()
+        return (False, new_user)
+
+
     # Need to overide full_name and short_name from parent to make relevant
     def get_full_name(self):
         """ User is identified by their email """
@@ -254,7 +285,6 @@ class AuthUserOrder(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     taxes = models.DecimalField(max_digits=8, decimal_places=2, blank=None, null=None, default=0.00)
 
-
     @classmethod
     def compute_order_line_items(self, user, total_price_before_offers):
         offers = PromotionOffer.get_current_offers(user)
@@ -262,13 +292,16 @@ class AuthUserOrder(models.Model):
         taxes = {}
         total = {}
         total_discount = 0
-        for offer in offers:
-            discount_dollar_value = offer.get_discount_dollar_value(total_price_before_offers=total_price_before_offers)
-            if(discount_dollar_value):
-                discounts += [{'name': offer.name, 
-                               'dollar_value': discount_dollar_value, 
-                               'offer_id': offer.id}]
-                total_discount += discount_dollar_value
+
+        # offers are available only to authenticated users
+        if(user.is_authenticated()):
+            for offer in offers:
+                discount_dollar_value = offer.get_discount_dollar_value(total_price_before_offers=total_price_before_offers)
+                if(discount_dollar_value):
+                    discounts += [{'name': offer.name,
+                                   'dollar_value': discount_dollar_value,
+                                   'offer_id': offer.id}]
+                    total_discount += discount_dollar_value
         subtotal_dollar_value = total_price_before_offers - total_discount
         taxes['dollar_value'] = subtotal_dollar_value * settings.SALES_TAX
         taxes['percentage'] = settings.SALES_TAX * 100
