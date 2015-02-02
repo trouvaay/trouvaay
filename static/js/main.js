@@ -120,14 +120,18 @@ var TrendyRoom = {
 $(document).ready(function() {
     TrendyRoom.init();
 });
-$(window).resize(function() {
-    TrendyRoom.resizeContent();
-    TrendyRoom.placeLogo();
-    selectBar_offsetTop = selectBar.offsetTop;
-});
 
 selectBar = $('.select-bar')[0];
 selectBar_offsetTop = selectBar.offsetTop;
+picTabs = $('.pic-tabs')[0];
+
+$(window).resize(function() {
+    selectBar_offsetTop = picTabs.offsetTop;
+
+    TrendyRoom.resizeContent();
+    TrendyRoom.placeLogo();
+});
+
 $(window).scroll(function() {
 	if ($(window).width() >= 768) {
 	if ($(window).scrollTop() >= selectBar_offsetTop) {
