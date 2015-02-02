@@ -4226,6 +4226,7 @@ footer ul li a:hover {
   }
   .how-it-works .col-md-6.statement.mobile-details {
     display: block;
+    min-height: 0;
   }
   .landing-message {
     padding: 0 10%;
