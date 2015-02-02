@@ -228,7 +228,7 @@ class Product(models.Model):
         dimension_str = ""
         for dimension in dimension_list:
             if self.get_dimension(dimension):
-                dimension_str += (self.get_dimension(dimension) + 'x')
+                dimension_str += (self.get_dimension(dimension) + ' x ')
         return dimension_str[:-3]
 
     @property

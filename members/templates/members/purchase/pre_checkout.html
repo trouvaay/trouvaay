@@ -12,7 +12,8 @@
 							<legend>Summary</legend>
 							<div class="row" style="margin-bottom: 10px">
 								<div class="col-xs-12">
-									<button id="button-order-type-try" class="btn btn-primary" type="button">5 day discovery</button>
+									Please select option
+									<button id="button-order-type-try" class="btn btn-primary" type="button">48hr hold</button>
 									<button id="button-order-type-buy" class="btn btn-default" type="button">Buy now</button>
 									<span style="display: none;" id="order-type">try</span>
 								</div>
@@ -21,7 +22,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
 		                            <p class="text-center"><span id="pre-checkout-capture-date">{% if capture_time %}
-		                            Your card will not be charged until {{ capture_time|date:"m/d/Y" }}. </br>You are one step away from the location of your:</span></br>
+		                            Your card will not be charged until {{ capture_time|date:"m/d/Y" }}. </br>You are one step away from getting the location of your:</span></br>
 										<b>{{ product.short_name }}</b></p>
 									{% endif %}
 	                        	</div>
@@ -49,17 +50,17 @@
 										{% endfor %}
 										<tr>
 											<th scope="row">Subtotal</td>
-											<td align="right">{{ subtotal_dollar_value|floatformat:2 }}</td>
+											<td align="right">${{ subtotal_dollar_value|floatformat:2 }}</td>
 										</tr>
 										{% if taxes %}
 										<tr>
 											<th scope="row">Taxes ({{ taxes.percentage|floatformat:2 }}%)</td>
-											<td align="right">{{ taxes.dollar_value|floatformat:2 }}</td>
+											<td align="right">${{ taxes.dollar_value|floatformat:2 }}</td>
 										</tr>
 										{% endif %}
 										<tr class="success">
 											<th scope="row"><strong>Total</strong></td>
-											<td align="right">{{ total.in_dollars|floatformat:2 }}</td>
+											<td align="right">${{ total.in_dollars|floatformat:2 }}</td>
 										</tr>										
 							      	</tbody>
 							    </table>
