@@ -216,7 +216,7 @@ ANALYTICAL_INTERNAL_IPS = []
 
 SALES_TAX = Decimal('0.0875')
 
-OFFER_MODAL_EXPIRATION = 5 * 60  # do not show promo offers again whithin this many seconds
+OFFER_MODAL_EXPIRATION = 3600  # do not show promo offers again whithin this many seconds
 
 # email settings are another good candidate to have
 # each developer define in their own dev_settings.py
