@@ -23,7 +23,11 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.views import login as django_login
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render_to_response
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from decimal import Decimal
 
 logger = logging.getLogger(__name__)
@@ -100,11 +104,7 @@ def ProductLike(request):
         return JsonResponse('success', safe=False)
 
 
-
-
-
-
-class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
+class ReserveCallbackView(generic.DetailView):
     context_object_name = 'product'
     model = Product
 
@@ -121,7 +121,6 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
         try:
             # create new order
             order = AuthUserOrder()
-            order.authuser = self.request.user
 
             product = self.get_object()
 
@@ -151,7 +150,18 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                     logger.info('Product price did not match the total that came in the request')
                     return JsonResponse({'status': 'error', 'message': 'Total ammount does not match.'})
 
+                order_user = self.request.user
+                is_existing = True
+                if(not order_user.is_authenticated()):
+                    email = self.request.POST.get('token[email]', None)
+                    if(not email):
+                        # cannot go any further without email
+                        logger.info('No email in the request')
+                        return JsonResponse({'status': 'error', 'message': 'No email'})
+                    is_existing, order_user = get_user_model().get_user_by_email(email)
+                    logger.debug('is_existing: %s' % str(is_existing))
 
+                order.authuser = order_user
                 order.taxes = taxes['dollar_value']
                 order.save()
                 logger.debug('Created new order %d' % order.id)
@@ -161,7 +171,7 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
 
                     offer_id = discount['offer_id']
                     redemption = PromotionRedemption()
-                    redemption.authuser = self.request.user
+                    redemption.authuser = order_user
                     redemption.offer_id = offer_id
                     redemption.order = order
                     redemption.timestamp = timezone.now()
@@ -178,7 +188,7 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
                     description=product.short_name,
                     card=token_id,
                     capture=capture_order,
-                    receipt_email=self.request.user.email,
+                    receipt_email=order_user.email,
                     metadata={
                         'order_id': order.id,
                         'order_type': order_type
@@ -196,7 +206,7 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
             # is enforced in the database with a Unique key on user id
             shipping_address = None
             try:
-                shipping_address = AuthUserAddress.objects.get(authuser=self.request.user)
+                shipping_address = AuthUserAddress.objects.get(authuser=order_user)
                 logger.debug('Updating existing shipping address')
             except AuthUserAddress.DoesNotExist:
                 # no address, that's ok we will create a new one
@@ -205,7 +215,7 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
 
             # TODO: shipping address should be tied to the order
             # right not it is only tied to user
-            shipping_address.authuser = self.request.user
+            shipping_address.authuser = order_user
             shipping_address.street = request.POST['args[shipping_address_line1]']
             shipping_address.city = request.POST['args[shipping_address_city]']
             shipping_address.state = request.POST['args[shipping_address_state]']
@@ -228,12 +238,23 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
             logger.debug('Added items to order')
 
             # send email with store address
-            send_email_from_template(to_email=self.request.user.email,
-                context={
-                    'product': product,
-                    'site': get_site(self.request),
-                    'capture_date': order_item.capture_time.date() if not order_item.captured else None
-                    },
+            email_context = {
+                             'product': product,
+                             'site': get_site(self.request),
+                             'capture_date': order_item.capture_time.date() if not order_item.captured else None
+                             }
+
+            if(not is_existing):
+                # This is a newly created user without password. We will send this
+                # user a password reset link along with the order
+                # add extra context parameters needed for password reset link
+                email_context['token'] = default_token_generator.make_token(order_user)
+                email_context['uid'] = urlsafe_base64_encode(force_bytes(order_user.pk))
+                email_context['domain'] = get_current_site(request).domain
+                email_context['protocol'] = 'https' if self.request.is_secure() else 'http'
+
+                
+            send_email_from_template(to_email=order_user.email, context=email_context,
                 subject_template='members/purchase/reserve_confirmation_email_subject.txt',
                 plain_text_body_template='members/purchase/reserve_confirmation_email_body.txt',
                 html_body_template='members/purchase/reserve_confirmation_email_body.html')
@@ -257,7 +278,7 @@ class ReserveCallbackView(LoginRequiredMixin, generic.DetailView):
             return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
 
 
-class PreCheckoutView(LoginRequiredMixin, generic.DetailView):
+class PreCheckoutView(generic.DetailView):
     context_object_name = 'product'
     model = Product
 
@@ -273,7 +294,8 @@ class PreCheckoutView(LoginRequiredMixin, generic.DetailView):
     def post(self, request, *args, **kwargs):
 
         product = self.get_object()
-        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(self.request.user, total_price_before_offers=product.current_price)
+
+        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(user=self.request.user, total_price_before_offers=product.current_price)
         total_discount = 0
         for discount in discounts:
             total_discount += discount['dollar_value']
