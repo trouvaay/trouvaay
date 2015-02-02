@@ -40,6 +40,7 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline, AuthUserOrderItemInline]
 
     search_fields = ['short_name', 'long_name', 'store']
+    list_filter = ['store', 'is_published']
 
     list_editable = ['current_price', 'is_published', 'is_sold', 'pub_date','is_instore', 'delivery_weeks', 'is_avail_now']
     
