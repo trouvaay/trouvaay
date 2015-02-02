@@ -2555,6 +2555,7 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .modal {
   margin: auto;
+  top: 5%;
 }
 
 #signup-login-modal .btn {
