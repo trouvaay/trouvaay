@@ -4261,6 +4261,15 @@ footer ul li a:hover {
   a#logo {
     font-size: 20px;
   }
+  #signup-login-modal .modal-dialog .modal-body {
+    padding: 0;
+  }
+  #signup-login-modal .form-group {
+    margin-bottom: 5px;
+  }
+  #signup-login-modal legend {
+    font-size: 18px;
+  }
   .navbar-default .navbar-toggle:focus {
     outline: none;
     background: transparent;
