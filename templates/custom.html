@@ -198,7 +198,7 @@ $(document).ready(function() {
 						product_id: productId,
 					},
 					success: function(response, status){
-						console.log('response from pre-checkout call: '+status );
+						// console.log('response from pre-checkout call: '+status );
 						$("#pre-checkout-modal-container").html(response);
 						$("#pre-checkout-modal").modal({
 							show: true,

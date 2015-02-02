@@ -2556,8 +2556,6 @@ form .form-checkbox-wrap .checkbox-label {
 .modal {
   margin: auto;
   /*top: 5%;*/
-  position: absolute;
-  overflow-y: scroll;
 }
 
 #signup-login-modal .btn {
