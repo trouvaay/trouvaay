@@ -124,7 +124,7 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 FEATURE_NAME_RESERVE = "Buy"
-FEATURE_TOOLTIP_RESERVE = "You have 5 days to go see the product in-store (location is revealed after purchase) before you payment will be processed.  Cancel at any time before the 'discovery' period ends!"
+FEATURE_TOOLTIP_RESERVE = "You have 2 days to go see the product in-store (location is revealed after purchase) before you payment will be processed."
 RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
     'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
