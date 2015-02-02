@@ -2807,6 +2807,7 @@ form .form-checkbox-wrap .checkbox-label {
   display: table;
   position: relative;
   width: 100%;
+  padding: 10px 13.5px;
   padding-bottom: 0
 }
 .hp-tabs .nav-tabs > li > a:after {
@@ -3192,6 +3193,9 @@ footer ul li a:hover {
 .how-it-works .col-md-12.statement {
   text-align: left;
   padding: 0;
+}
+.how-it-works .col-md-12.statement h3 {
+  font-family: 'Chunkfive'
 }
 .how-it-works .col-md-6.statement.mobile-details {
   display: none;
