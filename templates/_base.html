@@ -192,18 +192,16 @@
                                 <!-- <span class="hide">Close</span> -->
                             </button>
                         <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-                            <p class="text-center"><h3>Thank you for your reservation.</h3></p>
+                            <p class="text-center"><h3>Thank you for your <span id="product-purchase-try">reservation.</span><span id="product-purchase-buy" style="display:none">purchase.</span></h3></p>
                         </div>
                         <div class="text-center">
                             <img id="reserved-product-image" src="" width="300" height="300" />
                             <p></br>
-                            <h4>Your <b><span id="reserved-product-name"></span></b> is available at:
+                            <h4>Your order (<b><span id="reserved-product-name"></span>)</b> is available at:
                             </p>
                             <i><span id="reserved-product-store-name"></span></i>
                             <div id="reserved-product-store-address"></h4>
-                            {% if capture_time %}
-                            <h4>Your card will not be charged until <span id="reserved-product-capture-date"></span></h4>
-                            {% endif %}
+                            <h4><span id="reserved-product-capture-date">Your card will not be charged until</span></h4>
                         </h5></div>
                     </div>  
                 </div><!-- /.modal-content -->
