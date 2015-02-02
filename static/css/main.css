@@ -4415,7 +4415,7 @@ footer ul li a:hover {
     width: 100%;
   }
   .col-sm-5.product-description {
-    /*padding: 0;*/
+    margin-top: 20px
   }
   .info-block.image {
     margin-left: 25%;
