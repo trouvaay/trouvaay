@@ -110,7 +110,11 @@
                 {% endif %}
                 {% if page_obj.has_other_pages %}
                     {% for page in page_obj.paginator.page_range %}
+                        {% if page_obj.number == page %}
+                            <li><a id="current-page" href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
+                        {% else %}
                         <li><a href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
                 {% if page_obj.has_next %}
