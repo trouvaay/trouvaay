@@ -18,7 +18,7 @@ from decimal import Decimal
 import hashlib
 import six
 import random
-import email
+
 
 class RegistrationManager(BaseRegistrationManager):
 
