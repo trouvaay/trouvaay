@@ -140,7 +140,7 @@ class Product(models.Model):
     class Meta:
         # added Height as quick hack to randomize display of products as pub_date clusters
         # items by store
-        ordering = ['height', '-pub_date']
+        ordering = ['short_name', '-pub_date']
 
     def __str__(self):
         return self.short_name
