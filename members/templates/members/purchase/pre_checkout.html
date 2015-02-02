@@ -12,7 +12,8 @@
 							<legend>Summary</legend>
 							<div class="row" style="margin-bottom: 10px">
 								<div class="col-xs-12">
-									<button id="button-order-type-try" class="btn btn-primary" type="button">5 day discovery</button>
+									Please select option
+									<button id="button-order-type-try" class="btn btn-primary" type="button">48hr hold</button>
 									<button id="button-order-type-buy" class="btn btn-default" type="button">Buy now</button>
 									<span style="display: none;" id="order-type">try</span>
 								</div>
@@ -20,10 +21,12 @@
 							<div class="row">
 							<div class="col-xs-12">
 								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-		                            <p class="text-center"><span id="pre-checkout-capture-date">{% if capture_time %}
-		                            Your card will not be charged until {{ capture_time|date:"m/d/Y" }}. </br>You are one step away from the location of your:</span></br>
-										<b>{{ product.short_name }}</b></p>
-									{% endif %}
+		                            <p class="text-center"><span id="pre-checkout-capture-date-try">
+		                            Your card will not be charged until {{ capture_time|date:"m/d/Y" }}. </br>You are one step away from getting the location of your</span>
+		                            <span id="pre-checkout-capture-date-buy" style="display:none">
+		                            You are one step away from your</br></span>
+		                            <b>{{ product.short_name }}</b>
+		                            </p>
 	                        	</div>
 							</div>
 							</div>
@@ -49,17 +52,17 @@
 										{% endfor %}
 										<tr>
 											<th scope="row">Subtotal</td>
-											<td align="right">{{ subtotal_dollar_value|floatformat:2 }}</td>
+											<td align="right">${{ subtotal_dollar_value|floatformat:2 }}</td>
 										</tr>
 										{% if taxes %}
 										<tr>
 											<th scope="row">Taxes ({{ taxes.percentage|floatformat:2 }}%)</td>
-											<td align="right">{{ taxes.dollar_value|floatformat:2 }}</td>
+											<td align="right">${{ taxes.dollar_value|floatformat:2 }}</td>
 										</tr>
 										{% endif %}
 										<tr class="success">
 											<th scope="row"><strong>Total</strong></td>
-											<td align="right">{{ total.in_dollars|floatformat:2 }}</td>
+											<td align="right">${{ total.in_dollars|floatformat:2 }}</td>
 										</tr>										
 							      	</tbody>
 							    </table>
@@ -79,7 +82,8 @@ $(document).ready(function() {
 
 	$('#button-order-type-try').on('click', function(e) {
 		$('#order-type').text("try");
-		$('#pre-checkout-capture-date').show();
+		$('#pre-checkout-capture-date-buy').hide();
+		$('#pre-checkout-capture-date-try').show();
 		$('#button-order-type-buy').removeClass('btn-primary');
 		$('#button-order-type-buy').addClass('btn-default');
 		$('#button-order-type-try').removeClass('btn-default');
@@ -87,7 +91,8 @@ $(document).ready(function() {
 	});
 	$('#button-order-type-buy').on('click', function(e) {
 		$('#order-type').text("buy");
-		$('#pre-checkout-capture-date').hide();
+		$('#pre-checkout-capture-date-try').hide();
+		$('#pre-checkout-capture-date-buy').show();
 		$('#button-order-type-try').removeClass('btn-primary');
 		$('#button-order-type-try').addClass('btn-default');
 		$('#button-order-type-buy').removeClass('btn-default');
@@ -143,11 +148,13 @@ $(document).ready(function() {
 								
 								console.log('capture date: '+data['capture_date']);
 								if(data['capture_date']){
-									$("#reserved-product-capture-date").text(data['capture_date']);
+									$("#reserved-product-capture-date").append(' ' + data['capture_date']);
 									$("#reserved-product-capture-date").show();
 								}
 								else{
 									$("#reserved-product-capture-date").hide();
+									$("#product-purchase-try").hide();
+									$("#product-purchase-buy").show();
 								}
 								
 								$("#reserved-product-image").attr('src', (data['image_src']));

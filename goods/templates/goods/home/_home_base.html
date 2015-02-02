@@ -5,7 +5,7 @@
 
 
 {% block content %}
-    <div class="container-fluid select-bar hp-tabs" style="box-shadow: 0 6px 4px -4px #333;">
+    <div class="container-fluid select-bar hp-tabs">
         <div class="row-fluid">
             <div class="col-xs-12 col-sm-2 logo-div main-navigation hidden-xs">
              <a href="{% url 'goods:home' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></br>
@@ -110,7 +110,11 @@
                 {% endif %}
                 {% if page_obj.has_other_pages %}
                     {% for page in page_obj.paginator.page_range %}
+                        {% if page_obj.number == page %}
+                            <li><a id="current-page" href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
+                        {% else %}
                         <li><a href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
                 {% if page_obj.has_next %}

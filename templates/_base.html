@@ -16,9 +16,6 @@
         <link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
         <link rel="stylesheet" href="{% static 'css/jquery.selectBoxIt.css' %}">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
-        <script>
-            mixpanel.track("Home page landing");
-        </script>
         <script src="{% static 'js/vendor/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
         <!-- Google Analytics -->
         <script>
@@ -166,15 +163,15 @@
                             <div class="row-fluid">
                                 <div class="col-md-12 statement">
                                     <h3>Great Items That Are Different</h3>
-                                    <h4>Ever want that great statement piece but not know where to go? We partner with the small home decor retailers in the Bay Area to bring all the best vintage, unique, and floor model deals in the Bay Area all in one place.</br>  The convenience of online shopping without the regret.</h4>
+                                    <h4>Want that great statement piece but don't know where to go? We partner with small home decor retailers in the Bay Area to bring all the best vintage, unique, and floor model deals in one place.</h4>
                                 </div>
                                 <div class="col-md-12 statement">
-                                    <h3>Go See Your Item In Person</h3>
-                                    <h4>While some items do have a return policy we want to give you the opportunity to experience the product before you pay for it.  When you purchase through us you have 48 hours to go touch, feel, and see your item in-store before your card is charged.</br></br>If you change your mind cancel the order — no cost, no questions asked.</h4>
+                                    <h3>See Your Item Before Paying</h3>
+                                    <h4>Because we're locally focused, we give you the opportunity to experience the product before you pay for it.  You have 48 hours to go touch, feel, and see your item in-store & then confirm your purchase.If we don't hear from you in 48 hours, the transaction is cancelled. </br></br>The convenience of online shopping without the regret.</h4>
                                 </div>
                                 <div class="col-md-12 statement">
-                                    <h3>White Glove Delivery</h3>
-                                    <h4>We know the disappointment that comes with finding a great piece of furniture and then realizing that shipping costs more than the item itself. Even worse, sometimes you have to coordinate the delivery on your own. We want to remove all that hassle.</br></br>We have a simple, 3 tiered pricing structure for delivery: $25, $50, & $75 based on the size of the purchase (not included in your item's list price).</h4>
+                                    <h3>Affordable Delivery</h3>
+                                    <h4>We charge $5 for small items, $65 for bulk items (not included in your item's list price).</h4>
                                     <h4>After you’ve placed your order, we’ll call you to provide the delivery price and coordinate a delivery time that is convenient for you.</h4>
                                 </div>
                             </div><!-- end row -->
@@ -190,19 +187,18 @@
                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px; padding-bottom:2px">
                                 <span aria-hidden="true">&times;</span>
                                 <!-- <span class="hide">Close</span> -->
-                            </button></br>
+                            </button>
                         <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-                            <p class="text-center"><h3>Thank you for your reservation.</h3></p>
+                            <p class="text-center"><h3>Thank you for your <span id="product-purchase-try">reservation.</span><span id="product-purchase-buy" style="display:none">purchase.</span></h3></p>
                         </div>
                         <div class="text-center">
                             <img id="reserved-product-image" src="" width="300" height="300" />
                             <p></br>
-                            <h4>Your <b><span id="reserved-product-name"></span></b> is available at <i><span id="reserved-product-store-name"></span></i> located at:
+                            <h4>Your order (<b><span id="reserved-product-name"></span>)</b> is available at:
                             </p>
+                            <i><span id="reserved-product-store-name"></span></i>
                             <div id="reserved-product-store-address"></h4>
-                            {% if capture_time %}
-                            <h4>Your card will not be charged until <span id="reserved-product-capture-date"></span></h4>
-                            {% endif %}
+                            <h4><span id="reserved-product-capture-date">Your card will not be charged until</span></h4>
                         </h5></div>
                     </div>  
                 </div><!-- /.modal-content -->
