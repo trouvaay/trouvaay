@@ -102,6 +102,7 @@ class Product(models.Model):
     store = models.ForeignKey('merchants.Store')
     manufacturer = models.CharField(max_length=25, null=True, blank=True)
     units = models.IntegerField(default=1)
+    url = models.URLField(null=True, blank=True)
 
     # Dimensions & Attributes
     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
