@@ -23,6 +23,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.views import login as django_login
+from django.contrib.auth.views import logout as django_logout
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render_to_response
@@ -78,6 +79,22 @@ class SignupView(BaseRegistrationView):
                                      request=request)
         return new_user
 
+
+class AjaxLoginView(generic.TemplateView):
+    """Displays login/signup forms that can be loaded via ajax"""
+    
+    template_name = "members/auth/signup_login.html"
+    
+    def get_context_data(self, **kwargs):
+
+        if(self.request.user.is_authenticated()):
+            django_logout(self.request)
+
+        context = super(AjaxLoginView, self).get_context_data(**kwargs)
+        context['login_form'] = CustomAuthenticationForm()
+        context['signup_form'] = RegistrationForm()
+        return context
+    
 
 def ProductLike(request):
     """Adds product instance to 'saved_items' field of 

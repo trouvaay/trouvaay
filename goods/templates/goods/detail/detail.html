@@ -49,7 +49,7 @@
             <!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
             <li><a class="btn btn-link tab-menu" href="{% url 'members:logout' %}">Logout</a></li>
             {% else %}
-            <li><a class="btn btn-link tab-menu" href="{% url 'members:logout' %}">Login</a></li>
+            <li><a id="nav-login-button" class="btn btn-link tab-menu" href="#">Login</a></li>
             {% endif %}
             </ul>
         </div>

@@ -4,48 +4,17 @@
 {% block modal %}
 {{ block.super }}
 
-<!-- Signup modal -->
-<div class="modal fade" id="signup-login-modal">
-	<div class="modal-dialog">
-		<div class="modal-content col-xs-12">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<div class="modal-body">
-				<!-- this will make sigup and login show side by side -->
-				<div class="row">
-					{% block modalforms %}
-					<!-- Signup -->
-					<div class="form-group col-sm-6 text-center">	
-						<div class="text-center">
-							{% crispy signup_form %}
-						</div>
-					</div>
+{% include "members/auth/signup_login.html" %}
 
-					<!-- Login  -->
-					<div class="form-group col-sm-6 text-center login">	
-						<div class="text-center">
-							{% crispy login_form %}
-
-							<div id="div_id_password" class="form-group">
-								<p><a href="{% url "auth_password_reset" %}">Forgot your password?</a></p>							
-							</div>
-						</div>
-						{% endblock %}						
-					</div>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /. end signup modal -->	
-</div>
-
-	{% endblock %}
-	{% block endjs %}
-	{{ block.super }}
-	<script type="text/javascript">
-	$(document).ready(function () {
-		$('#signup-login-modal').modal({"show": true});
-		$('#signup-login-modal').on('hidden.bs.modal', function () {
-			window.location.replace("{% url "goods:home" %}");
-		})
-	});
-	</script>
-	{% endblock %}
+{% endblock %}
+{% block endjs %}
+{{ block.super }}
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#signup-login-modal').modal({"show": true});
+	$('#signup-login-modal').on('hidden.bs.modal', function () {
+		window.location.replace("{% url "goods:home" %}");
+	})
+});
+</script>
+{% endblock %}
