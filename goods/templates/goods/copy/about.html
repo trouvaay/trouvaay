@@ -2,65 +2,11 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid select-bar hp-tabs" style="box-shadow: 0 6px 4px -4px #333;">
-        <div class="row-fluid">
-            <div class="col-xs-12 col-sm-2 logo-div main-navigation hidden-xs">
-             <a href="{% url 'goods:home' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></br>
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-7">
-                <div class="row-fluid">
-                    <div class="tab-icons">
-                        <div class="row-fluid">
-                            <div class="col-sm-12 col-md-12">
-                            <ul class="nav nav-tabs center-block">
-                                <li class="hidden-lg hidden-md hidden-sm" style="padding-top: 20px;">filter</li>
-                                <li id="everything">
-                                    <a href="{% url 'goods:home' %}" style="border-right: lightgray 1px solid; border-left: lightgray 1px solid;"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/house128.png' %}" title="house" alt=""/></span><span class="inner icon-label" style="display:list-item">All</span></a>
-                                </li>
-                                <li id="seating">
-                                    <a href="{% url 'goods:furnituretype' %}?type=seating"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/seating128.png' %}" title="seating" alt=""/></span><span class="inner icon-label" style="display:list-item">seating</span></a>
-                                </li>
-                                <li id="tables">
-                                    <a href="{% url 'goods:furnituretype' %}?type=tables"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/table128.png' %}" title="table" alt=""/></span><span class="inner icon-label" style="display:list-item">tables</span></a>
-                                </li>
-                                <li id="beds">
-                                    <a href="{% url 'goods:furnituretype' %}?type=beds"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/bed128.png' %}" title="bed" alt=""/></span><span class="inner icon-label" style="display:list-item">beds</span></a>
-                                </li>
-                                <li id="storage">
-                                    <a href="{% url 'goods:furnituretype' %}?type=storage"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/storage128.png' %}" title="storage" alt=""/></span><span class="inner icon-label" style="display:list-item">storage</span></a>
-                                </li>
-                                <li id="lighting">
-                                    <a href="{% url 'goods:furnituretype' %}?type=lighting" style="border-right: lightgray 1px solid;"><span class="inner" style="display:list-item"><img src="{% static 'img/roomiconsnew/lighting128.png' %}" title="lighting" alt=""/></span><span class="inner icon-label" style="display:list-item">lighting</span></a>
-                                </li>
-                            </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <div class="col-xs-3 hidden-xs col-sm-2 col-md-3" style="height:75px">
-            <ul class="nav navbar-navt">
-            <li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal" style="height:40px"><h4 style="margin-top:0"><span id="how-it-works-button">How it works</span></h4></a></li>
-            {% if user.is_authenticated %}
-            <!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
-            <li><a class="btn btn-link tab-menu" href="{% url 'members:logout' %}">Logout</a></li>
-            {% else %}
-            <li><a class="btn btn-link tab-menu" href="{% url 'members:logout' %}">Login</a></li>
-            {% endif %}
-            </ul>
-        </div>
-    </div>
-  </div>
+{% include '_tab_nav.html' %}
 <section class="top-quote" style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg'); padding-top:300px">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <!-- <div class="top-quote-text">
-                    live well, live much, laugh often.
-                </div>
-                <div class="top-quote-author">
-                    - Elisabeth-Anne "Bessie" Anderson Stanley
-                </div> -->
             </div>
         </div>
     </div>
