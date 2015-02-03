@@ -5,15 +5,17 @@
 {% block content %}
       <div class="container homepage-slider-container">
         <div class="row-fluid">
-            <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg'); height:30em;">
+            <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/c_fill,h_843,w_1265/v1422902656/shutterstock_160709951_hsvzx9.jpg'); height:40em;">
             <!-- http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg -->
             <div class="black_overlay"></div><!-- end overlay -->
             {% include 'goods/home/_home_nav_snippet.html' %}
             <div class="landing-message">
-                <h1>
-                Discover cool furniture in Bay Area stores
-                </h1>
-                <h3><span class="subheading">The convenience of online shopping without the regret</span></h3>
+                <h2>
+                Shop Unique Furniture Available In Bay Area Stores
+                </h2>
+                <h3>
+                    10% off your first purchase as a new user
+                </h3>
             </div>
             </div>
         </div>
@@ -21,15 +23,15 @@
       <div class="container-fluid how-it-works layer">
         <div class="row-fluid">
             <div class="col-md-6 statement">
-                <h3>5-Day Discovery Period </h3>
-                <h5>Go see your item in-store. Change of heart? Cancel the order — no cost, no questions asked.</h5>
+                <h3>We do the hunting for you</h3>
+                <h4>We scour the Bay Area for the best vintage and unique home decor pieces.  More treasure, less hunting.</h4>
             </div>
             <div class="col-md-6 statement">
-                <h3>White Glove Delivery</h3>
-                <h5>Ever find a great piece of furniture but discover that shipping cost more than the item itself? Pay no more than $75 for delivery</h5>
+                <h3>See in-store before paying</h3>
+                <h4>At check out, you have the option to buy now or see the item in-store within 48 hours.</h4>
             </div>
             <div class="col-md-6 statement mobile-details">
-                <a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h3>Details</h3></a>
+                <a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5>Click for more details</h5></a>
             </div>
         </div>
       </div>
@@ -61,11 +63,13 @@
 {% endblock content %}
 {% block endjs %}
 
+{% comment %}
 {% if promotion_offer and not request.user.is_authenticated %}
-	<script type="text/javascript">
-	$(document).ready(function () {
-		$('#promotion-offer-modal').modal({"show": true});
-	});
-	</script>
-{% endif %}
+ //    <script type="text/javascript">
+	// $(document).ready(function () {
+	// 	$('#promotion-offer-modal').modal({"show": true});
+	// });
+	// </script>
+{% endif %}{% endcomment %}
+
 {% endblock endjs %}

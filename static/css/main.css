@@ -112,7 +112,7 @@ h4, h5, h6, .h4, .h5, .h6 {
 .select-bar {
 	padding-top: 20px;
 	z-index: 99;
-	background: #FFF;
+	background: #f4f4f4;
 	width: 100%;
   height: 75px;
 }
@@ -362,7 +362,6 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   border-radius: 0px;
   background-clip: padding-box;
   letter-spacing: 1.5px;
-  text-transform: uppercase;
   border-top: solid 2px transparent;
   -webkit-transition: all .4s ease-in-out;
   -moz-transition: all .4s ease-in-out;
@@ -2556,6 +2555,7 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .modal {
   margin: auto;
+  /*top: 5%;*/
 }
 
 #signup-login-modal .btn {
@@ -2654,7 +2654,7 @@ form .form-checkbox-wrap .checkbox-label {
   letter-spacing: 2px;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
 }
 .modal-dialog .modal-content button {
 }
@@ -2709,6 +2709,10 @@ form .form-checkbox-wrap .checkbox-label {
   width: 49%;
   float: left;
   padding: 20px;
+}
+#current-page {
+  font-weight: 900;
+  color: black;
 }
 .pagination-wrapper {
   text-align: right;
@@ -2765,11 +2769,16 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 0;
   margin-right: 5px;
 }
+#first {
+  margin-bottom: 2px 0 0;
+}
 .hp-tabs {
   width: 100%;
   float: left;
   text-align: center;
   padding: 10px 0 0;
+  box-shadow: 0 6px 4px -4px #333;
+  margin-bottom: 5px;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
@@ -2807,6 +2816,7 @@ form .form-checkbox-wrap .checkbox-label {
   display: table;
   position: relative;
   width: 100%;
+  padding: 10px 13.5px;
   padding-bottom: 0
 }
 .hp-tabs .nav-tabs > li > a:after {
@@ -3166,7 +3176,7 @@ footer ul li a:hover {
   background-position: center -182px;
 }
 .how-it-works {
-  background-color: #f4f4f4;
+  background-color: white;
   font-family: "Chunkfive";
 }
 .how-it-works h3 {
@@ -3184,7 +3194,7 @@ footer ul li a:hover {
 .how-it-works .statement {
   margin: 10px 0;
   min-height: 100px;
-  padding: 0 5rem;
+  padding: 0 2.5em;
 }
 .how-it-works .statement:not(:last-child) {
   border-right: 1px solid #DDD;
@@ -3192,6 +3202,9 @@ footer ul li a:hover {
 .how-it-works .col-md-12.statement {
   text-align: left;
   padding: 0;
+}
+.how-it-works .col-md-12.statement h3 {
+  font-family: 'Chunkfive'
 }
 .how-it-works .col-md-6.statement.mobile-details {
   display: none;
@@ -3323,6 +3336,7 @@ footer ul li a:hover {
   top: 40%;
   width: 100%;
 }
+.landing-message h2,
 .landing-message h1,
 .landing-message h3 {
   text-align: center;
@@ -3459,7 +3473,7 @@ footer ul li a:hover {
 }
 
 #map-canvas {
-  height: 30rem;
+  height: 35rem;
 }
 .final-line {
   width: 100%;
@@ -4210,17 +4224,18 @@ footer ul li a:hover {
   }
   .layer {
   overflow: auto;
-  padding: 0px 10px;
+  padding: 15px 10px 0px;
   }
   .container-fluid.select-bar.hp-tabs {
     display: none;
   }
   .how-it-works .col-md-6.statement.mobile-details {
     display: block;
+    min-height: 0;
   }
   .landing-message {
     padding: 0 10%;
-    top: 20%;
+    top: 30%;
   }
   #main-footer,
   #main-menu {
@@ -4243,6 +4258,15 @@ footer ul li a:hover {
   }
   a#logo {
     font-size: 20px;
+  }
+  #signup-login-modal .modal-dialog .modal-body {
+    padding: 0;
+  }
+  #signup-login-modal .form-group {
+    margin-bottom: 5px;
+  }
+  #signup-login-modal legend {
+    font-size: 18px;
   }
   .navbar-default .navbar-toggle:focus {
     outline: none;
@@ -4401,7 +4425,7 @@ footer ul li a:hover {
     width: 100%;
   }
   .col-sm-5.product-description {
-    /*padding: 0;*/
+    margin-top: 20px
   }
   .info-block.image {
     margin-left: 25%;
