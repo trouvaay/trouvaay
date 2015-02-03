@@ -2796,14 +2796,6 @@ form .form-checkbox-wrap .checkbox-label {
 .hp-tabs .nav-tabs > li.active > a:after {
   border-top-color: rgb(218, 182, 97);
 }
-.hp-tabs .nav-tabs > li.active > a:hover,
-.hp-tabs .nav-tabs > li > a:hover {
-  background: #999;
-  height: 65px;
-}
-.hp-tabs .nav-tabs > li.active > a:hover {
-  background: rgb(218, 182, 97);
-}
 .hp-tabs .nav-tabs > li > a {
   border: none;
   -webkit-border-radius: 0px;
@@ -3881,11 +3873,6 @@ footer ul li a:hover {
     /*width: 48%;*/
     margin-right: 2%;
   }
-  .hp-tabs .nav-tabs > li.active > a:hover,
-  .hp-tabs .nav-tabs > li > a:hover {
-    background: none;
-    height: 100%;
-  }
   .widget.sketch figure img {
     width: auto;
   }
@@ -4042,6 +4029,14 @@ footer ul li a:hover {
 @media (min-width: 768px) {
   .main-navigation.top-row {
 	  padding-right: 30px;
+  }
+  .hp-tabs .nav-tabs > li.active > a:hover,
+  .hp-tabs .nav-tabs > li > a:hover {
+    background: #999;
+    height: 65px;
+  }
+  .hp-tabs .nav-tabs > li.active > a:hover {
+    background: rgb(218, 182, 97);
   }
   .main-navigation .navbar-nav {
   }
