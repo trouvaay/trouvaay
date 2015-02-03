@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from members import views
 from members.forms import CustomAuthenticationForm, RegistrationForm
 
-
+from django.contrib.auth.views import logout_then_login
 urlpatterns = patterns('',
     # url(r'^account/(?P<pk>\d+)$', views.ProfileView.as_view(), name='closet'),
     url(r'^login/$', views.custom_login,
@@ -10,6 +10,7 @@ urlpatterns = patterns('',
          'authentication_form' : CustomAuthenticationForm,
         },
         name='login'),
+    url(r'^ajaxlogin/$', views.AjaxLoginView.as_view(), name='ajax_login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login', name='logout'),
     url(r'^signup/$', views.SignupView.as_view(), name='signup'),
     url(r'^productlike/$', views.ProductLike, name='like'),

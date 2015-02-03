@@ -169,6 +169,36 @@ $(document).ready(function() {
         });
 	
 	
+	// navigation login
+	$('#nav-login-button').on('click', function(e) {
+		$.ajax({
+			type: "GET",
+			dataType: "html",
+			url: "{% url "members:ajax_login" %}",
+			success: function(response, status){
+				console.log('status ['+status+']');
+				if(status == 'success'){
+					console.log('loaded ajax_login');
+					$("#ajax-login-modal-container").html(response);
+					var currentUrl = document.URL;
+					
+					// after login redirect where we were except 'login' itself
+					// so that we don't end up with a loop
+					
+					console.log(currentUrl.indexOf("{% url 'members:login' %}"));
+					
+					if(currentUrl.indexOf("{% url 'members:login' %}") === -1){
+						$("#id_next").val(currentUrl);
+						console.log($("#id_next").val());
+					}
+					$("#signup-login-modal").modal({
+						show: true,
+						keyboard: true
+					});
+				}			
+			}
+		});
+	});
 
 	// Stripe checkout
 	$('.btn.buy.try').on('click', function(e) {
