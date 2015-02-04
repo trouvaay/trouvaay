@@ -242,7 +242,11 @@ $(document).ready(function() {
 							show: true,
 							keyboard: true
 						});
-					}
+					},
+                    error: function(response, status, error) {
+                      var err = eval("(" + response.responseText + ")");
+                      alert(err.Message);
+                    }
 				});
 			}
 			e.preventDefault();

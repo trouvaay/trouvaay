@@ -2796,14 +2796,6 @@ form .form-checkbox-wrap .checkbox-label {
 .hp-tabs .nav-tabs > li.active > a:after {
   border-top-color: rgb(218, 182, 97);
 }
-.hp-tabs .nav-tabs > li.active > a:hover,
-.hp-tabs .nav-tabs > li > a:hover {
-  background: #999;
-  height: 65px;
-}
-.hp-tabs .nav-tabs > li.active > a:hover {
-  background: rgb(218, 182, 97);
-}
 .hp-tabs .nav-tabs > li > a {
   border: none;
   -webkit-border-radius: 0px;
@@ -4038,6 +4030,14 @@ footer ul li a:hover {
   .main-navigation.top-row {
 	  padding-right: 30px;
   }
+  .hp-tabs .nav-tabs > li.active > a:hover,
+  .hp-tabs .nav-tabs > li > a:hover {
+    background: #999;
+    height: 65px;
+  }
+  .hp-tabs .nav-tabs > li.active > a:hover {
+    background: rgb(218, 182, 97);
+  }
   .main-navigation .navbar-nav {
   }
   .navbar-nav > li a {
@@ -4207,6 +4207,10 @@ footer ul li a:hover {
 @media (max-width: 767px) {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
+  }
+  .tab-icons.mobile {
+    display: block;
+    margin-top: 10px;
   }
   #mobile-navigation {
     display: block;
@@ -4475,10 +4479,6 @@ footer ul li a:hover {
   }
   .tab-icons {
     display: none;
-  }
-  .tab-icons.mobile {
-    display: block;
-    margin-top: 10px;
   }
   .nav .nav-divider {
     border-bottom: #e5e5e5 2px solid;
