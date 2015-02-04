@@ -56,12 +56,13 @@ class SignupView(BaseRegistrationView):
 
     def get_context_data(self, **kwargs):
         context = super(SignupView, self).get_context_data(**kwargs)
-        context['signup_form'] = RegistrationForm()
+        # context['signup_form'] = RegistrationForm()
         context['login_form'] = RegistrationForm()
 
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings
         context['site_name'] = settings.SITE_NAME
+        print ('this is template context',  context)
         return context
 
     def register(self, request, **cleaned_data):
