@@ -146,6 +146,12 @@ h4, h5, h6, .h4, .h5, .h6 {
 .main-footer a {
   color: white;
 }
+button a.btn.btn-link.nav-login-button:hover {
+  text-decoration: none;
+}
+button a.btn.btn-link.nav-login-button {
+  color: white
+}
 #main-footer {
   height: 95px;
 }
@@ -4068,7 +4074,7 @@ footer ul li a:hover {
   }
   .main-navigation .navbar-nav > li > a {
     border-top: solid 2px transparent;
-    color: wheat;
+    color: rgb(218,182,97);
     font-size: 14px;
     font-weight: bold;
     margin-bottom:5px;
