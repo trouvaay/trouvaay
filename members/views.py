@@ -83,7 +83,7 @@ class SignupView(BaseRegistrationView):
 class AjaxLoginView(generic.TemplateView):
     """Displays login/signup forms that can be loaded via ajax"""
     
-    template_name = "members/auth/signup_login.html"
+    template_name = "members/auth/ajax_signup_login.html"
     
     def get_context_data(self, **kwargs):
 

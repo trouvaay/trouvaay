@@ -1,8 +1,4 @@
-{% extends "goods/home/home.html" %}
 {% load crispy_forms_tags %}
-
-{% block modal %}
-{{ block.super }}
 
 <!-- Signup modal -->
 <div class="modal fade" id="signup-login-modal">
@@ -40,15 +36,3 @@
 	</div><!-- /. end signup modal -->	
 </div>
 
-{% endblock %}
-{% block endjs %}
-{{ block.super }}
-<script type="text/javascript">
-$(document).ready(function () {
-	$('#signup-login-modal').modal({"show": true});
-	$('#signup-login-modal').on('hidden.bs.modal', function () {
-		window.location.replace("{% url "goods:home" %}");
-	})
-});
-</script>
-{% endblock %}
