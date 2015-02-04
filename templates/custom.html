@@ -152,7 +152,15 @@ $(document).ready(function() {
             return cookieValue;
         }
 
-        var csrftoken = getCookie('csrftoken');
+		function getCsrfToken(){
+			var token = $("#csrftoken-container").children("[name='csrfmiddlewaretoken']").val();
+			return token;
+		}
+
+        var csrftoken = getCsrfToken() // getCookie('csrftoken');
+        
+        console.log('csrftoken: '+csrftoken);
+        
         function csrfSafeMethod(method) {
     	// these HTTP methods do not require CSRF protection
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
