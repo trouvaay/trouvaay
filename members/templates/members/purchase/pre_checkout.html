@@ -107,6 +107,11 @@ $(document).ready(function() {
 	console.log('total_purchase_price: ' + {{ total.in_cents }});
 	
 	$('#button-precheckout-submit').on('click', function(e) {
+
+		mixpanel.track(
+                "Clicked Pre-checkout Submit",
+                { "product": productName }
+            );
 		
 		if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
 		
