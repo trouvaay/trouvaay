@@ -294,7 +294,7 @@ class ReserveCallbackView(generic.DetailView):
             logger.error(str(e))
             return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
 
-@csrf_exempt
+
 class PreCheckoutView(generic.DetailView):
     context_object_name = 'product'
     model = Product
