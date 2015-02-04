@@ -4230,7 +4230,12 @@ footer ul li a:hover {
     display: none;
   }
   .how-it-works .statement {
-    padding: 0 2rem;
+    padding: 0 5%;
+    margin-top: 50px;
+  }
+  .how-it-works .statement.mobile-details {
+    padding: 0 5%;
+    margin-top: 20px;
   }
   .layer {
   overflow: auto;

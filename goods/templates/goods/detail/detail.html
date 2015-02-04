@@ -26,12 +26,12 @@
 			</div>
 			<div class="col-sm-5 col-xs-12 product-description">
 			  	<div class="row">
-			    	<div class="col-sm-12">
+			    	<div class="col-sm-12" style="padding: 0">
 			       		<div class="heading">{{ product.short_name }}</div></br>
 			    	</div>
 			  	</div>
 			  	<div class="row row-attrs">
-					<div class="col-sm-12">
+					<div class="col-sm-12" style="padding: 0">
 					  	<div class="row">
 					  	   <div id="first" class="col-xs-12 product-description">
 					           {{ product.description }}
@@ -97,7 +97,7 @@
 						       </div> -->
 						       <div class="col-xs-12 attr">
 						       	{% if product.is_vintage %}
-						       		vintage / 1 unit available
+						       		1 unit available
 						       	{% else %}
 						       		New
 						       	{% endif %}
@@ -131,7 +131,7 @@
 						       Seat Height
 						       </div>
 						       <div class="col-xs-8 attr">
-				               {{ product.seat_height }}
+				               {{ product.seat_height }}"
 						       </div>
 						    </div>
 					       {% else %}{% endif %}
