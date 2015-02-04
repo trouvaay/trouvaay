@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from members import views
 from members.forms import CustomAuthenticationForm, RegistrationForm
 
-from django.contrib.auth.views import logout_then_login
+
 urlpatterns = patterns('',
     # url(r'^account/(?P<pk>\d+)$', views.ProfileView.as_view(), name='closet'),
     url(r'^login/$', views.custom_login,
