@@ -21,7 +21,7 @@ from helper import send_email_from_template, get_site
 from django.utils import timezone
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.views import login as django_login
 from django.contrib.auth.views import logout as django_logout
 from django.contrib.auth.tokens import default_token_generator
@@ -294,7 +294,7 @@ class ReserveCallbackView(generic.DetailView):
             logger.error(str(e))
             return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
 
-
+@csrf_exempt
 class PreCheckoutView(generic.DetailView):
     context_object_name = 'product'
     model = Product
