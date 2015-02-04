@@ -119,6 +119,30 @@ var TrendyRoom = {
 };
 $(document).ready(function() {
     TrendyRoom.init();
+
+    if (!$('.product-details')) {
+	$(window).scroll(function() {
+		if ($(window).width() >= 768) {
+		if ($(window).scrollTop() >= selectBar_offsetTop) {
+			$(selectBar).css('position', 'fixed');
+			$(selectBar).css('top', '0');
+			$('.how-it-works').css('margin-bottom', $(selectBar).outerHeight());
+		} else {
+			if (selectBar_offsetTop < 300) {
+				selectBar_offsetTop = selectBar.offsetTop;
+			}
+			$(selectBar).css('position', 'relative');
+			$(selectBar).css('top', 'auto');
+			$('.how-it-works').css('margin-bottom', "0");
+
+		}
+		}
+	});
+
+
+    } else {
+	    
+    }
 });
 
 selectBar = $('.select-bar')[0];
@@ -132,21 +156,4 @@ $(window).resize(function() {
     TrendyRoom.placeLogo();
 });
 
-$(window).scroll(function() {
-	if ($(window).width() >= 768) {
-	if ($(window).scrollTop() >= selectBar_offsetTop) {
-		$(selectBar).css('position', 'fixed');
-		$(selectBar).css('top', '0');
-		$('.how-it-works').css('margin-bottom', $(selectBar).outerHeight());
-	} else {
-		if (selectBar_offsetTop < 300) {
-			selectBar_offsetTop = selectBar.offsetTop;
-		}
-		$(selectBar).css('position', 'relative');
-		$(selectBar).css('top', 'auto');
-		$('.how-it-works').css('margin-bottom', "0");
-
-	}
-	}
-});
 
