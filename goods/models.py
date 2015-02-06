@@ -115,14 +115,17 @@ class Product(models.Model):
     color = models.ManyToManyField(Color, null=True, blank=True)
     color_description = models.CharField(max_length=100, null=True, blank=True)
     material = models.ManyToManyField(Material, null=True, blank=True)
+    material_description = models.CharField(max_length=100, null=True, blank=True)
     tags = models.TextField(null=True, blank=True)  # list of tag words
+    is_custom = models.BooleanField(default=False)
+    is_floor_model = models.BooleanField(default=False)
 
     # Categorization
     segment = models.ManyToManyField(Segment, null=True, blank=True)
     style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
     furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
-    subcategory = models.ManyToManyField(Subcategory)  # required for has_trial
+    subcategory = models.ManyToManyField(Subcategory, null=True, blank=True)  # required for has_trial
 
     # Availability
     added_date = models.DateTimeField(auto_now_add=True)
