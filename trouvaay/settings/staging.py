@@ -29,6 +29,7 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', None)  # e.g. 'support@raredoor.c
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', None)
 ADMINS = os.getenv('ADMINS', None)
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
