@@ -11,7 +11,7 @@ SSLIFY_DISABLE = False
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
-DEBUG = True
+DEBUG = False
 #STATIC_ROOT = 'static'
 
 SECRET_KEY = os.getenv('SECRET_KEY', None)
