@@ -1,9 +1,12 @@
 from django.core.management.base import BaseCommand, CommandError
-from goods.models import Product, Segment, Subcategory, FurnitureType, Material
+from goods.models import Product, ProductImage, Segment, Subcategory, FurnitureType, Material, add_img_instance
 import requests
 from pprint import pprint as pp
-
 import gspread
+import logging
+from django.db import IntegrityError
+
+logger = logging.getLogger(__name__)
 
 email = 'blakesadams@gmail.com'
 password = 'Bloopers1423'
@@ -25,11 +28,11 @@ class Command(BaseCommand):
         worksheet = ss.worksheet(spreadsheet_name)
 
         headers = [i for i in worksheet.row_values(1)]
-        pp(headers)
-        products_to_add = []
         # try:
         for row in range(start_row, end_row+1):
             data = worksheet.row_values(row)
+            row_len = len(data)
+            print ('data is {} long'.format(len(data)))
             u = Product()
 
             # Store = data[0]
@@ -55,18 +58,40 @@ class Command(BaseCommand):
             u.material_description = data[21]
             u.delivery_weeks = data[25]
 
-            u.save()
+            try:
+                u.save()
+                logger.info('Added {} to database'.format(u))
+                u.material.add(Material.objects.get(select=data[20]))
+                u.segment.add(Segment.objects.get(select=data[22]))
+                u.furnituretype.add(FurnitureType.objects.get(select=data[23]))
+                u.subcategory.add(Subcategory.objects.get(select=data[24]))
+                main_image_url = data[26]
+                try:
+                    ProductImage.objects.get(product=u)
+                except ProductImage.DoesNotExist:
+                    add_img_instance(u.pk, main_image_url, is_main=True)
+                
+                for i in range(27,30):
+                    try:
+                        add_img_instance(u.pk, data[i])    
+                    except Exception, e:
+                        logger.info('No {} Image for {}'.format(headers[i], u))
+                        break
+
+            except Exception, e:
+                logger.error('Error Saving {} from google into database'.format(u))
+                logger.error(str(e))
+            
+
+            
+            
+
+            
 
             # add manytomany fields
-            u.material.add(Material.objects.get(select=data[20]))
-            u.segment.add(Segment.objects.get(select=data[22]))
-            u.furnituretype.add(FurnitureType.objects.get(select=data[23]))
-            u.subcategory.add(Subcategory.objects.get(select=data[24]))
             
-            # u.main_image_url = data[26]
-            # image_2_url = data[27]
-            # image_3_url = data[28]
-            # image_4_url = data[29]
+
+
 
             
 

@@ -3,6 +3,10 @@ from helper import AbstractImageModel
 from django.utils import timezone
 from django.db.models.signals import post_save, m2m_changed
 import itertools
+import requests
+import cloudinary
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 from django.utils.text import slugify
 from django.db.models import F
 from django.utils.encoding import smart_text
@@ -91,6 +95,16 @@ class Material(models.Model):
     class Meta:
         ordering = ['select']
 
+def add_img_instance(product_pk, img_url, is_main=False):
+    upload_response = cloudinary.uploader.upload(img_url)
+    cloudinary_image = cloudinary.CloudinaryImage(metadata=upload_response)
+    product = Product.objects.get(pk=product_pk)
+    product_image = ProductImage()
+    product_image.image = cloudinary_image
+    product_image.is_main = is_main
+    product_image.product = product
+    product_image.save()
+    
 
 class Product(models.Model):
     sku = models.CharField(max_length=25, null=True, blank=True)
@@ -145,6 +159,7 @@ class Product(models.Model):
         # added Height as quick hack to randomize display of products as pub_date clusters
         # items by store
         ordering = ['-is_featured', 'short_name', '-pub_date']
+        unique_together = ('short_name', 'store',)
 
     def __str__(self):
         return self.short_name
@@ -166,8 +181,10 @@ class Product(models.Model):
                 break
             # append number to slug if it already exists
             self.slug = '%s-%d' % (self.slug, x)
-        super(Product, self).save(*args, **kwargs)
 
+        super(Product, self).save(*args, **kwargs)
+            
+            
     def is_discounted(self):
         return (self.current_price < self.original_price)
 
