@@ -10,7 +10,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SSLIFY_DISABLE = False
 
 # Allow all host headers
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 DEBUG = False
 #STATIC_ROOT = 'static'
 
