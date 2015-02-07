@@ -159,7 +159,7 @@ $(document).ready(function() {
 
         var csrftoken = getCsrfToken() // getCookie('csrftoken');
         
-        console.log('csrftoken: '+csrftoken);
+        // console.log('csrftoken: '+csrftoken);
         
         function csrfSafeMethod(method) {
     	// these HTTP methods do not require CSRF protection
@@ -176,7 +176,14 @@ $(document).ready(function() {
             }
         });
 	
-	
+	$('.view-product').on('click', function(e) {
+        var productslug = e.target.pathname.substr(7);
+        mixpanel.track(
+                "Clicked Detail Page",
+                { "productSlug": productslug }
+            );
+    })
+
 	// navigation login
 	$('.nav-login-button').on('click', function(e) {
 		$.ajax({
@@ -211,6 +218,8 @@ $(document).ready(function() {
 	// Stripe checkout
 	$('.btn.buy.try').on('click', function(e) {
 
+
+
 		{% comment %}
 		$.ajax({
 			type: "GET",
@@ -225,7 +234,11 @@ $(document).ready(function() {
 	
 		if(e.target.id.substr(0, 4) == 'buy_'){
 			var productId = e.target.id.substr(4);
-			if(productId && !(typeof productId === 'undefined')){
+			mixpanel.track(
+                "Clicked Buy Button",
+                { "productId": productId }
+            );
+            if(productId && !(typeof productId === 'undefined')){
 			
 				// call pre-checkout
 				$.ajax({

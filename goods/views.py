@@ -139,31 +139,31 @@ class AboutView(generic.TemplateView):
     template_name = 'goods/copy/about.html'
 
 
-class DirectionsView(LoginRequiredMixin, generic.DetailView):
-    template_name = 'goods/detail/map.html'
-    context_object_name = 'product'
-    model = Product
+# class DirectionsView(LoginRequiredMixin, generic.DetailView):
+#     template_name = 'goods/detail/map.html'
+#     context_object_name = 'product'
+#     model = Product
 
-    def get_context_data(self, **kwargs):
-        context = super(DirectionsView, self).get_context_data(**kwargs)
-        context['store'] = self.object.store
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super(DirectionsView, self).get_context_data(**kwargs)
+#         context['store'] = self.object.store
+#         return context
 
 
 # Gets list of liked items to populate 'active' hearts
-# def get_liked_items(user):
-#     """ Creates list of user's liked items for json
-#     Obj passed to addlikehearts js script
-#     """
-#     if(not user.is_authenticated()):
-#         return []
+def get_liked_items(user):
+    """ Creates list of user's liked items for json
+    Obj passed to addlikehearts js script
+    """
+    if(not user.is_authenticated()):
+        return []
 
-#     useractivity, new = AuthUserActivity.objects.get_or_create(authuser=user)
-#     if new:
-#         useractivity.save()
-#     liked_list = useractivity.saved_items.all()
-#     liked_ids = [prod.id for prod in liked_list]
-#     return liked_ids
+    useractivity, new = AuthUserActivity.objects.get_or_create(authuser=user)
+    if new:
+        useractivity.save()
+    liked_list = useractivity.saved_items.all()
+    liked_ids = [prod.id for prod in liked_list]
+    return liked_ids
 
 #####Additional views for copy pages######
 

@@ -3,6 +3,10 @@ from helper import AbstractImageModel
 from django.utils import timezone
 from django.db.models.signals import post_save, m2m_changed
 import itertools
+import requests
+import cloudinary
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 from django.utils.text import slugify
 from django.db.models import F
 from django.utils.encoding import smart_text
@@ -91,18 +95,28 @@ class Material(models.Model):
     class Meta:
         ordering = ['select']
 
+def add_img_instance(product_pk, img_url, is_main=False):
+    upload_response = cloudinary.uploader.upload(img_url)
+    cloudinary_image = cloudinary.CloudinaryImage(metadata=upload_response)
+    product = Product.objects.get(pk=product_pk)
+    product_image = ProductImage()
+    product_image.image = cloudinary_image
+    product_image.is_main = is_main
+    product_image.product = product
+    product_image.save()
+    
 
 class Product(models.Model):
     sku = models.CharField(max_length=25, null=True, blank=True)
     short_name = models.CharField(max_length=50)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=255)
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     description = models.TextField(null=True, blank=True)
     store = models.ForeignKey('merchants.Store')
     manufacturer = models.CharField(max_length=25, null=True, blank=True)
     units = models.IntegerField(default=1)
-    url = models.URLField(null=True, blank=True)
+    url = models.URLField(null=True, blank=True, max_length=255)
 
     # Dimensions & Attributes
     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
@@ -115,14 +129,17 @@ class Product(models.Model):
     color = models.ManyToManyField(Color, null=True, blank=True)
     color_description = models.CharField(max_length=100, null=True, blank=True)
     material = models.ManyToManyField(Material, null=True, blank=True)
+    material_description = models.CharField(max_length=255, null=True, blank=True)
     tags = models.TextField(null=True, blank=True)  # list of tag words
+    is_custom = models.BooleanField(default=False)
+    is_floor_model = models.BooleanField(default=False)
 
     # Categorization
     segment = models.ManyToManyField(Segment, null=True, blank=True)
     style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
     furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
-    subcategory = models.ManyToManyField(Subcategory)  # required for has_trial
+    subcategory = models.ManyToManyField(Subcategory, null=True, blank=True)  # required for has_trial
 
     # Availability
     added_date = models.DateTimeField(auto_now_add=True)
@@ -142,6 +159,7 @@ class Product(models.Model):
         # added Height as quick hack to randomize display of products as pub_date clusters
         # items by store
         ordering = ['-is_featured', 'short_name', '-pub_date']
+        unique_together = ('short_name', 'store',)
 
     def __str__(self):
         return self.short_name
@@ -163,8 +181,10 @@ class Product(models.Model):
                 break
             # append number to slug if it already exists
             self.slug = '%s-%d' % (self.slug, x)
-        super(Product, self).save(*args, **kwargs)
 
+        super(Product, self).save(*args, **kwargs)
+            
+            
     def is_discounted(self):
         return (self.current_price < self.original_price)
 

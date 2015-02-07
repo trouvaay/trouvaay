@@ -31,13 +31,14 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from decimal import Decimal
 
+
 logger = logging.getLogger(__name__)
 
 # TODO: For profile page
 # class ProfileView(generic.ListView):
-# template_name = 'members/closet/closet.html'
-# context_object_name = 'saved_items'
-# model = AuthUserActivity
+#     template_name = 'members/closet/closet.html'
+#     context_object_name = 'saved_items'
+#     model = AuthUserActivity
 
 
 class ActivationView(BaseActivationView):
@@ -62,6 +63,7 @@ class SignupView(BaseRegistrationView):
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings
         context['site_name'] = settings.SITE_NAME
+        print ('this is template context',  context)
         return context
 
     def register(self, request, **cleaned_data):

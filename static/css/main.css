@@ -144,7 +144,13 @@ h4, h5, h6, .h4, .h5, .h6 {
   text-align: left;
 }
 .main-footer a {
-  color: #7a7a7a;
+  color: white;
+}
+button a.btn.btn-link.nav-login-button:hover {
+  text-decoration: none;
+}
+button a.btn.btn-link.nav-login-button {
+  color: white
 }
 #main-footer {
   height: 95px;
@@ -2987,7 +2993,7 @@ form .form-checkbox-wrap .checkbox-label {
   font-size: 13px;
   line-height: 22px;
   font-weight: bold;
-  color: #5e5e5e;
+  color: white;
   margin: 0;
   margin-bottom: 35px;
 }
@@ -3613,6 +3619,9 @@ footer ul li a:hover {
     /*width: 90%; */
     /*height: 265px;*/
   }
+  .landing-message {
+    padding: 0 20%;
+  }
   .grid-product figure img {
   /*  width: 263px;
     height: 263px;*/
@@ -3624,6 +3633,9 @@ footer ul li a:hover {
   }
   .map-container .address-info {
     padding-top: 60px;
+  }
+  .landing-message {
+    padding: 0 12%;
   }
   .shopping-container .product .name {
     width: 100%;
@@ -3753,6 +3765,9 @@ footer ul li a:hover {
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .main-navigation .navbar-nav > li > a {
     padding: 10px;
+  }
+  .landing-message {
+    padding: 0 10%;
   }
   .map-container {
     padding-bottom: 36.45%;
@@ -4068,7 +4083,7 @@ footer ul li a:hover {
   }
   .main-navigation .navbar-nav > li > a {
     border-top: solid 2px transparent;
-    color: wheat;
+    color: rgb(218,182,97);
     font-size: 14px;
     font-weight: bold;
     margin-bottom:5px;
@@ -4224,7 +4239,12 @@ footer ul li a:hover {
     display: none;
   }
   .how-it-works .statement {
-    padding: 0 2rem;
+    padding: 0 5%;
+    margin-top: 50px;
+  }
+  .how-it-works .statement.mobile-details {
+    padding: 0 5%;
+    margin-top: 20px;
   }
   .layer {
   overflow: auto;
@@ -4238,8 +4258,11 @@ footer ul li a:hover {
     min-height: 0;
   }
   .landing-message {
-    padding: 0 10%;
+    padding: 0 7%;
     top: 30%;
+  }
+  .landing-message h2 {
+    font-size: 25px;
   }
   #main-footer,
   #main-menu {
