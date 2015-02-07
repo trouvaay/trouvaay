@@ -22,8 +22,7 @@
                 {% cloudinary product.productimage_set.first.image width=275 height=275 crop="fit" %}
         </div>
 -->
-        <!-- <a href="{% url 'goods:detail' product.slug  %}" class="view-product"> -->
-        <a href="#" class="view-product">
+        <a href="{% url 'goods:detail' product.slug  %}" class="view-product">
         </a>
     </div>
     {% include 'goods/_productlabel.html' %}
