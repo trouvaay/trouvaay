@@ -33,6 +33,7 @@ class Command(BaseCommand):
             data = worksheet.row_values(row)
             row_len = len(data)
             print ('data is {} long'.format(len(data)))
+            print data
             u = Product()
 
             # Store = data[0]

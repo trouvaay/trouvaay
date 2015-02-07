@@ -109,14 +109,14 @@ def add_img_instance(product_pk, img_url, is_main=False):
 class Product(models.Model):
     sku = models.CharField(max_length=25, null=True, blank=True)
     short_name = models.CharField(max_length=50)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, max_length=255)
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     description = models.TextField(null=True, blank=True)
     store = models.ForeignKey('merchants.Store')
     manufacturer = models.CharField(max_length=25, null=True, blank=True)
     units = models.IntegerField(default=1)
-    url = models.URLField(null=True, blank=True)
+    url = models.URLField(null=True, blank=True, max_length=255)
 
     # Dimensions & Attributes
     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
@@ -129,7 +129,7 @@ class Product(models.Model):
     color = models.ManyToManyField(Color, null=True, blank=True)
     color_description = models.CharField(max_length=100, null=True, blank=True)
     material = models.ManyToManyField(Material, null=True, blank=True)
-    material_description = models.CharField(max_length=100, null=True, blank=True)
+    material_description = models.CharField(max_length=255, null=True, blank=True)
     tags = models.TextField(null=True, blank=True)  # list of tag words
     is_custom = models.BooleanField(default=False)
     is_floor_model = models.BooleanField(default=False)
