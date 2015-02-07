@@ -32,7 +32,7 @@ class AuthUserOrderItemInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     model = Product
 
-    list_display = ['short_name', 'store', 'is_published', 'is_featured', 'is_sold', 'current_price', 'pub_date']
+    list_display = ['short_name', 'store', 'description', 'is_published', 'is_featured', 'is_sold', 'current_price', 'added_date', 'pub_date']
 
     fields = [('short_name', 'is_published', 'is_sold', 'is_featured'), ('store', 'has_trial', 'units'),('original_price', 'current_price'), 
                 'pub_date', 'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),

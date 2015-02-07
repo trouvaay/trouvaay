@@ -110,6 +110,7 @@ coverage_area = [94040]
 
 # Neigborhoods by google's locality address component
 Neighborhoods = {'SF': [
+    ('Alameda', 'Alameda'),
     ('Alamo Square', 'Alamo Square'),
     ('Anza Vista', 'Anza Vista'),
     ('Ashbury Heights', 'Ashbury Heights'),
@@ -129,6 +130,7 @@ Neighborhoods = {'SF': [
     ('Dogpatch', 'Dogpatch'),
     ('Duboce Triangle', 'Duboce Triangle'),
     ('Embarcadero', 'Embarcadero'),
+    ('Emeryville', 'Emeryville'),
     ('Excelsior', 'Excelsior'),
     ('Fillmore', 'Fillmore'),
     ('Financial District', 'Financial District'),
@@ -157,6 +159,7 @@ Neighborhoods = {'SF': [
     ('Mission Terrace', 'Mission Terrace'),
     ('Monterey Heights', 'Monterey Heights'),
     ('Mount Davidson', 'Mount Davidson'),
+    ('Mountain View', 'Mountain View'),
     ('Nob Hill', 'Nob Hill'),
     ('Noe Valley', 'Noe Valley'),
     ('North Beach', 'North Beach'),
@@ -176,9 +179,11 @@ Neighborhoods = {'SF': [
     ('Rincon Hill', 'Rincon Hill'),
     ('Russian Hill', 'Russian Hill'),
     ('Saint Francis Wood', 'Saint Francis Wood'),
+    ('San Jose', 'San Jose'),
     ('Sea Cliff', 'Sea Cliff'),
     ('Sherwood Forest', 'Sherwood Forest'),
     ('South Beach', 'South Beach'),
+    ('South SF', 'South SF'),
     ('SoMa', 'SoMa'),
     ('Sunnyside', 'Sunnyside'),
     ('Sunset District', 'Sunset District'),

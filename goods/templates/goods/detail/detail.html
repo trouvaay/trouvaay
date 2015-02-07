@@ -9,186 +9,186 @@
 <section class="main-container">
     <div class="container detail-margin" id="first-content-after-nav">
         <div class="row">
-			<div class="col-sm-7 col-xs-12" style="text-align:center">
-				<div class="row">
-				
-				</div>
-	      		<!-- renders images responsibly -->
-			<div>
-			</div>
-				<picture>
-					<!--[if IE 9]><video style="display: none;"><![endif]-->
-					<source srcset="{% cloudinary_url product.productimage_set.first.image width=450 height=550 crop="fit" %}" media="(min-width: 992px)">
-					<source srcset="{% cloudinary_url product.productimage_set.first.image width=400 height=400 crop="fit" %}" media="(min-width: 413px)">
-					<!--[if IE 9]></video><![endif]-->
-					<img srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=350 crop="fit" %}' alt="">
-				</picture>
-			</div>
-			<div class="col-sm-5 col-xs-12 product-description">
-			  	<div class="row">
-			    	<div class="col-sm-12">
-			       		<div class="heading">{{ product.short_name }}</div></br>
-			    	</div>
-			  	</div>
-			  	<div class="row row-attrs">
-					<div class="col-sm-12">
-					  	<div class="row">
-					  	   <div id="first" class="col-xs-12 product-description">
-					           {{ product.description }}
-					       </div>
-					    </div>
-					    <div class="row">
-					  	   <div id="first" class="col-xs-12 product-description">
-					           <em><p>{% if product.current_price %}
-					            {% if product.is_discounted %}
-					                <strike>{{'$'}}{{ product.original_price|floatformat:"0" }}</strike>
-					                <span class="discount">{{'$'}}{{ product.current_price|floatformat:"0" }}<span>
-					            {% else %}
-					                <b>{{'$'}}{{ product.current_price|floatformat:"0" }}</b>
-					            {% endif %}
-					        {% endif %}</em></p>
-					       </div>
-					    </div>
-					    <div class="row" style="margin-bottom: 8%">
-					    	<!-- Start Product labeling -->
-					        <div class="col-xs-12 col-sm-6 pic-detail-home">
-						        <!-- need these so that we can pass product name and price to stripe checkout -->
-						        <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
-						        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
-				        
-				                {% if product.is_sold %}
-				                    <span class="sold">{{ 'Sold' }}</span>
-				                {% elif product.current_price %}
-				                    <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}" title="{{ FEATURE_TOOLTIP_RESERVE }}">
-				                        {{ FEATURE_NAME_RESERVE }}
-				                    </button>
-				                    {% comment %}
-				                    {% if product.has_trial %}
-				                        {% if product.store.is_featured %}
-				                            <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
-				                                {{ 'buy&try  (10.0mi)' }}
-				                            </button>
-				                        {% else %}
-				                            <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
-				                                {{ 'buy&try  (10.0mi)' }}
-				                            </button>
-				                        {% endif %}
-				                    {% else %}
-				                        <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
-				                            {{ 'buy' }} 
-				                        </button>
-				                    {% endif %}
-				                    {% endcomment %}
-				                {% else %}
-				                    <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
-				                    Request Price
-				                    </button>
-				                {% endif %}
-					        </div>
-					        <div class="col-xs-12 col-sm-6" style="margin-top:12px">
-						         located in: <span class="neighborhood">{{ product.store.neighborhood }}</span>
-						    </div>
-					  	</div>
-					  	<!-- End Product labeling -->
-					  	<!-- Start Product Attributes -->
-					  	<div>
-					  		<div class="row">
-						  	   <!-- <div class="col-xs-6 attr-label">
-						       </div> -->
-						       <div class="col-xs-12 attr">
-						       	{% if product.is_vintage %}
-						       		vintage / 1 unit available
-						       	{% else %}
-						       		New
-						       	{% endif %}
-						       </div>
-						    </div>
-						  	{% if product.material.all %}
-						  	<div class="row">
-						  	   <div class="col-xs-4 attr-label">
-						           Made of
-						       </div>
-						       <div class="col-xs-8 attr">
-						       	{% for material in product.material.all %}  {{ material }}{% endfor %}
-						       </div>
-						    </div>
-						    {% else %}{% endif %}
-					        
-					        {% if product.has_dimensions %}	
-						    <div class="row">
-						  	   <div class="col-xs-4 attr-label">
-						        Dimensions
-						       </div>
-						       <div class="col-xs-8 attr">
-						        {{ product.get_dimension_str }}
-						        </div>
-						    </div>
-						    {% else %}{% endif %}
-						    
-						    {% if product.seat_height %}
-						    <div class="row">
-						  	   <div class="col-xs-4 attr-label">
-						       Seat Height
-						       </div>
-						       <div class="col-xs-8 attr">
-				               {{ product.seat_height }}
-						       </div>
-						    </div>
-					       {% else %}{% endif %}
-					       
-					       {% if product.diameter %}
-						    <div class="row">
-						  	   <div class="col-xs-4 attr-label">
-						        Diameter
-						        </div>
-						       <div class="col-xs-8 attr">
-						        {{ product.diameter }}
-						       </div>
-						    </div>
-					       {% else %}{% endif %}
-					       
-					       {% if product.bed_size %}
-						    <div class="row">
-						  	   <div class="col-xs-4 attr-label">
-						       Bed Size
-						       </div>
-						       <div class="col-xs-8 attr">  
-				               {{ product.bed_size }}
-						       </div>
-						    </div>
-					       {% else %}{% endif %}
-					       
-					       {% if product.weight %}
-						    <div class="row">
-						  	   <div class="col-xs-4 attr-label">
-					           Weight
-					           </div>
-						       <div class="col-xs-8 attr">
-					           {{ product.weight }}
-					           </div>
-						    </div>
-						    {% else %}{% endif %}
-						    
-						    <div class="row">
-						  	    <div class="col-xs-4 attr-label">
-						        	Returns
-						        </div>
-							    <div class="col-xs-8 attr return">
-						           	{% if product.has_returns %}
-						           		{{ returns.allowed }}
-						           	{% else %}
-						           		{{ returns.not_allowed }}
-						           	{% endif %}
-						        </div>
-							</div>
-						</div><!-- End Product Attributes -->
-				    </div>
-				</div><!--end row-attrs-->                   
-			</div>
-		</div>
+            <div class="col-sm-7 col-xs-12" style="text-align:center">
+                <div class="row">
+                
+                </div>
+                <!-- renders images responsibly -->
+            <div>
+            </div>
+                <picture>
+                    <!--[if IE 9]><video style="display: none;"><![endif]-->
+                    <source srcset="{% cloudinary_url product.productimage_set.first.image width=450 height=550 crop="fit" %}" media="(min-width: 992px)">
+                    <source srcset="{% cloudinary_url product.productimage_set.first.image width=400 height=400 crop="fit" %}" media="(min-width: 413px)">
+                    <!--[if IE 9]></video><![endif]-->
+                    <img srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=350 crop="fit" %}' alt="">
+                </picture>
+            </div>
+            <div class="col-sm-5 col-xs-12 product-description">
+                <div class="row">
+                    <div class="col-sm-12" style="padding: 0">
+                        <div class="heading">{{ product.short_name }}</div></br>
+                    </div>
+                </div>
+                <div class="row row-attrs">
+                    <div class="col-sm-12" style="padding: 0">
+                        <div class="row">
+                           <div id="first" class="col-xs-12 product-description">
+                               {{ product.description }}
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div id="first" class="col-xs-12 product-description">
+                               <em><p>{% if product.current_price %}
+                                {% if product.is_discounted %}
+                                    <strike>{{'$'}}{{ product.original_price|floatformat:"0" }}</strike>
+                                    <span class="discount">{{'$'}}{{ product.current_price|floatformat:"0" }}<span>
+                                {% else %}
+                                    <b>{{'$'}}{{ product.current_price|floatformat:"0" }}</b>
+                                {% endif %}
+                            {% endif %}</em></p>
+                           </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 8%">
+                            <!-- Start Product labeling -->
+                            <div class="col-xs-12 col-sm-6 pic-detail-home">
+                                <!-- need these so that we can pass product name and price to stripe checkout -->
+                                <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
+                                <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
+                        
+                                {% if product.is_sold %}
+                                    <span class="sold">{{ 'Sold' }}</span>
+                                {% elif product.current_price %}
+                                    <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}" title="{{ FEATURE_TOOLTIP_RESERVE }}">
+                                        {{ FEATURE_NAME_RESERVE }}
+                                    </button>
+                                    {% comment %}
+                                    {% if product.has_trial %}
+                                        {% if product.store.is_featured %}
+                                            <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+                                                {{ 'buy&try  (10.0mi)' }}
+                                            </button>
+                                        {% else %}
+                                            <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+                                                {{ 'buy&try  (10.0mi)' }}
+                                            </button>
+                                        {% endif %}
+                                    {% else %}
+                                        <button type="button" class="btn btn-primary buy" id="buy_{{ product.id }}">
+                                            {{ 'buy' }} 
+                                        </button>
+                                    {% endif %}
+                                    {% endcomment %}
+                                {% else %}
+                                    <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
+                                    Request Price
+                                    </button>
+                                {% endif %}
+                            </div>
+                            <div class="col-xs-12 col-sm-6" style="margin-top:12px">
+                                 located in: <span class="neighborhood">{{ product.store.neighborhood }}</span>
+                            </div>
+                        </div>
+                        <!-- End Product labeling -->
+                        <!-- Start Product Attributes -->
+                        <div>
+                            <div class="row">
+                               <!-- <div class="col-xs-6 attr-label">
+                               </div> -->
+                               <div class="col-xs-12 attr">
+                                {% if product.is_vintage %}
+                                    1 unit available
+                                {% else %}
+                                    New
+                                {% endif %}
+                               </div>
+                            </div>
+                            {% if product.material.all %}
+                            <div class="row">
+                               <div class="col-xs-4 attr-label">
+                                   Made of
+                               </div>
+                               <div class="col-xs-8 attr">
+                                {% for material in product.material.all %}  {{ material }}{% endfor %}
+                               </div>
+                            </div>
+                            {% else %}{% endif %}
+                            
+                            {% if product.has_dimensions %} 
+                            <div class="row">
+                               <div class="col-xs-4 attr-label">
+                                Dimensions
+                               </div>
+                               <div class="col-xs-8 attr">
+                                {{ product.get_dimension_str }}
+                                </div>
+                            </div>
+                            {% else %}{% endif %}
+                            
+                            {% if product.seat_height %}
+                            <div class="row">
+                               <div class="col-xs-4 attr-label">
+                               Seat Height
+                               </div>
+                               <div class="col-xs-8 attr">
+                               {{ product.seat_height }}"
+                               </div>
+                            </div>
+                           {% else %}{% endif %}
+                           
+                           {% if product.diameter %}
+                            <div class="row">
+                               <div class="col-xs-4 attr-label">
+                                Diameter
+                                </div>
+                               <div class="col-xs-8 attr">
+                                {{ product.diameter }}
+                               </div>
+                            </div>
+                           {% else %}{% endif %}
+                           
+                           {% if product.bed_size %}
+                            <div class="row">
+                               <div class="col-xs-4 attr-label">
+                               Bed Size
+                               </div>
+                               <div class="col-xs-8 attr">  
+                               {{ product.bed_size }}
+                               </div>
+                            </div>
+                           {% else %}{% endif %}
+                           
+                           {% if product.weight %}
+                            <div class="row">
+                               <div class="col-xs-4 attr-label">
+                               Weight
+                               </div>
+                               <div class="col-xs-8 attr">
+                               {{ product.weight }}
+                               </div>
+                            </div>
+                            {% else %}{% endif %}
+                            
+                            <div class="row">
+                                <div class="col-xs-4 attr-label">
+                                    Returns
+                                </div>
+                                <div class="col-xs-8 attr return">
+                                    {% if product.has_returns %}
+                                        {{ returns.allowed }}
+                                    {% else %}
+                                        {{ returns.not_allowed }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div><!-- End Product Attributes -->
+                    </div>
+                </div><!--end row-attrs-->                   
+            </div>
+        </div>
+    </div>
     </div>
 </section>
+
 {% endblock content %}
-{% block endjs %}
-	{% include 'js/addlikeditems.html' %}
-{% endblock endjs %}
+

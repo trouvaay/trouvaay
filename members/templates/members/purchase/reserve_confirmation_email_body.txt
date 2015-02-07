@@ -7,7 +7,7 @@ Your {{ product.name }} is available at {{ product.store.retailer.short_name }} 
 {% endif %}{{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
 
 {% if capture_date %}
-You have our 2 day discovery period to go view the item in store.  
+You have 48 hours to go see the item in store if you choose.  Happy shopping! 
 
 Your card will not be charged until {{ capture_date }}. Call or text to cancel.
 {% endif %}We are happy to answer any questions you might have!

@@ -1,1 +1,1 @@
-web: newrelic-admin run-program gunicorn trouvaay.wsgi --log-file -
+web: gunicorn trouvaay.wsgi --log-file -

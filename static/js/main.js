@@ -125,6 +125,7 @@ selectBar = $('.select-bar')[0];
 selectBar_offsetTop = selectBar.offsetTop;
 picTabs = $('.pic-tabs')[0];
 
+
 $(window).resize(function() {
     selectBar_offsetTop = picTabs.offsetTop;
 

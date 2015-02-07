@@ -20,7 +20,7 @@ class RetailerAdmin(admin.ModelAdmin):
 class StoreAdmin(admin.ModelAdmin):
     model = Store
     extra = 1
-    list_display = ['street', 'retailer', 'neighborhood', 'city', 'is_featured']
+    list_display = ['street', 'id', 'retailer', 'neighborhood', 'city', 'is_featured']
 
     fieldsets = (
         (None, {'fields': ('retailer','is_featured', 'store_num','has_returns')}),
