@@ -36,9 +36,9 @@ logger = logging.getLogger(__name__)
 
 # TODO: For profile page
 # class ProfileView(generic.ListView):
-# template_name = 'members/closet/closet.html'
-# context_object_name = 'saved_items'
-# model = AuthUserActivity
+#     template_name = 'members/closet/closet.html'
+#     context_object_name = 'saved_items'
+#     model = AuthUserActivity
 
 
 class ActivationView(BaseActivationView):
