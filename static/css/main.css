@@ -3619,6 +3619,9 @@ footer ul li a:hover {
     /*width: 90%; */
     /*height: 265px;*/
   }
+  .landing-message {
+    padding: 0 20%;
+  }
   .grid-product figure img {
   /*  width: 263px;
     height: 263px;*/
@@ -3630,6 +3633,9 @@ footer ul li a:hover {
   }
   .map-container .address-info {
     padding-top: 60px;
+  }
+  .landing-message {
+    padding: 0 12%;
   }
   .shopping-container .product .name {
     width: 100%;
@@ -3759,6 +3765,9 @@ footer ul li a:hover {
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .main-navigation .navbar-nav > li > a {
     padding: 10px;
+  }
+  .landing-message {
+    padding: 0 10%;
   }
   .map-container {
     padding-bottom: 36.45%;
@@ -4249,8 +4258,11 @@ footer ul li a:hover {
     min-height: 0;
   }
   .landing-message {
-    padding: 0 10%;
+    padding: 0 7%;
     top: 30%;
+  }
+  .landing-message h2 {
+    font-size: 25px;
   }
   #main-footer,
   #main-menu {
