@@ -30,7 +30,7 @@ from django.shortcuts import render_to_response
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from decimal import Decimal
-from django.db import IntegrityError
+
 
 logger = logging.getLogger(__name__)
 

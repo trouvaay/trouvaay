@@ -42,7 +42,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['short_name', 'long_name', 'store']
     list_filter = ['store', 'is_published']
 
-    list_editable = ['current_price','is_published', 'is_sold', 'is_featured', 'pub_date']
+    list_editable = ['current_price', 'is_published', 'is_sold', 'is_featured', 'pub_date']
     
     prepopulated_fields = {"current_price": ("original_price",)}
 
