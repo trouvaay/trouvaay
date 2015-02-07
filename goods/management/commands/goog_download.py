@@ -32,8 +32,7 @@ class Command(BaseCommand):
         for row in range(start_row, end_row+1):
             data = worksheet.row_values(row)
             row_len = len(data)
-            print ('data is {} long'.format(len(data)))
-            print data
+            print ('data is {} fields long'.format(len(data)))
             u = Product()
 
             # Store = data[0]
