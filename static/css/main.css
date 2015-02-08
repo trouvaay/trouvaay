@@ -4269,7 +4269,7 @@ footer ul li a:hover {
     width: 100%;
     margin: 0;
   }
-  .pic-tabs {
+  .pic-tabs.home {
     padding: 0;
   }
   #desktop-navigation {
