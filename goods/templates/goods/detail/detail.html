@@ -37,15 +37,18 @@
                            </div>
                         </div>
                         <div class="row">
-                           <div id="first" class="col-xs-12 product-description">
+                           <div id="first" class="col-xs-6 product-description">
                                <em><p>{% if product.current_price %}
                                 {% if product.is_discounted %}
                                     <strike>{{'$'}}{{ product.original_price|floatformat:"0" }}</strike>
-                                    <span class="discount">{{'$'}}{{ product.current_price|floatformat:"0" }}<span>
+                                    <span style="font-family: chunkfive" class="discount">{{'$'}}{{ product.current_price|floatformat:"0" }}<span>
                                 {% else %}
                                     <b>{{'$'}}{{ product.current_price|floatformat:"0" }}</b>
                                 {% endif %}
                             {% endif %}</em></p>
+                           </div>
+                           <div class="col-xs-6">
+                              <span class="neighborhood">{{ product.store.neighborhood }}</span>
                            </div>
                         </div>
                         <div class="row" style="margin-bottom: 8%">
@@ -59,6 +62,9 @@
                                     <span class="sold">{{ 'Sold' }}</span>
                                 {% elif product.current_price %}
                                     <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}" title="{{ FEATURE_TOOLTIP_RESERVE }}">
+                                        Buy
+                                    </button>
+                                    <button type="button" class="btn btn-primary buy try" id="reserve_{{ product.id }}" title="{{ FEATURE_TOOLTIP_RESERVE }}">
                                         {{ FEATURE_NAME_RESERVE }}
                                     </button>
                                     {% comment %}
@@ -83,9 +89,6 @@
                                     Request Price
                                     </button>
                                 {% endif %}
-                            </div>
-                            <div class="col-xs-12 col-sm-6" style="margin-top:12px">
-                              <span class="neighborhood">{{ product.store.neighborhood }}</span>
                             </div>
                         </div>
                         <!-- End Product labeling -->
