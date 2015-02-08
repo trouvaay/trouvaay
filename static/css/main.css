@@ -164,7 +164,7 @@ button a.btn.btn-link.home:hover {
   text-decoration: none
 }
 button.home-buttons {
-  background-color: transparent; 
+  background-color: rgb(79, 156, 156); 
   border: solid white 2px
 }
 button.home-buttons:first-child {
@@ -4260,7 +4260,6 @@ footer ul li a:hover {
   }
   .how-it-works .statement:first-child {
   border-right: 0px;
-  border-bottom: 1px lightgray solid;
   }
   .tab-icons.mobile {
     display: block;
