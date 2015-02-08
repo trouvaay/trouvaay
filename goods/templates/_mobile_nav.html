@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<div class="row" id="mobile-navigation">
+    <div class="col-xs-12">
+        <div class="row" style="margin:0;">
+            <div class="col-xs-6 logo-div mobile"><a href="{% url 'goods:main' %}"> <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></div>
+            <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-offset-3 col-xs-2 right-side">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mobile-search">
+                       <!-- <img src="{% static 'img/Magnifying_Glass2.svg' %}" style="height:24px"> -->
+                       <span style="color:rgb(218,182,97)">filter</span>
+                </button><!-- </a> -->
+            </div>
+            <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-1 right-side" style="padding: 0">        
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                </button><!-- </a> -->
+            </div>
+        </div>
+    </div>
+</div>

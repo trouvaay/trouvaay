@@ -118,6 +118,14 @@ var trouvaay = {
 $(document).ready(function() {
     trouvaay.init();
     
+    $('[data-toggle="tooltip"]').tooltip({
+        'placement': 'bottom'
+    });
+    $('.nav-login-button').tooltip({
+        'show': true,
+    });
+    $('.nav-login-button').tooltip('show');
+    
     //Get furniture type param
     function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -217,54 +225,50 @@ $(document).ready(function() {
 	});
 
 	// Stripe checkout
-	$('.btn.buy.try').on('click', function(e) {
-
-
-
-		{% comment %}
-		$.ajax({
-			type: "GET",
-			url: "{% url "members:can_reserve" %}",
-			success: function(data){
-				if(data['status'] == 'login_required'){
-					window.location.replace("{% url 'members:login' %}"+"?next="+window.location.href.toString().split(window.location.host)[1]);
-				}
-			}
-		});
-		{% endcomment %}
-	
+	$('.btn.buy').on('click', function(e) {
 		if(e.target.id.substr(0, 4) == 'buy_'){
 			var productId = e.target.id.substr(4);
+            var orderType = 'buy';
 			mixpanel.track(
                 "Clicked Buy Button",
                 { "productId": productId }
             );
-            if(productId && !(typeof productId === 'undefined')){
-			
-				// call pre-checkout
-				$.ajax({
-					type: "POST",
-					url: "{% url "members:pre_checkout" %}",
-					dataType: "html",
-					data: {
-						product_id: productId,
-					},
-					success: function(response, status){
-						// console.log('response from pre-checkout call: '+status );
-						$("#pre-checkout-modal-container").html(response);
-						$("#pre-checkout-modal").modal({
-							show: true,
-							keyboard: true
-						});
-					},
-                    error: function(response, status, error) {
-                      var err = eval("(" + response.responseText + ")");
-                      alert(err.Message);
-                    }
-				});
-			}
-			e.preventDefault();
+        }
+        else if(e.target.id.substr(0, 8) == 'reserve_'){
+            var productId = e.target.id.substr(8);
+            var orderType = 'reserve';
+            mixpanel.track(
+                "Clicked Reserve Button",
+                { "productId": productId }
+            );
+        }
+
+        if(productId && !(typeof productId === 'undefined')){
+		      console.log('this is the ordertype!', orderType)
+			// call pre-checkout
+			$.ajax({
+				type: "POST",
+				url: "{% url "members:pre_checkout" %}",
+				dataType: "html",
+				data: {
+					product_id: productId,
+                    order_type: orderType,
+				},
+				success: function(response, status){
+					// console.log('response from pre-checkout call: '+status );
+					$("#pre-checkout-modal-container").html(response);
+					$("#pre-checkout-modal").modal({
+						show: true,
+						keyboard: true
+					});
+				},
+                error: function(response, status, error) {
+                  var err = eval("(" + response.responseText + ")");
+                  alert(err.Message);
+                }
+			});
 		}
+		e.preventDefault();
  	});
 });
 //Unsed formula to append distance from product to user's loco

@@ -39,9 +39,9 @@ h4, h5, h6, .h4, .h5, .h6 {
   font-family: 'ralewaylight';
 }
 .navbar-default {
-  background: #f4f4f4;
+  background: #EFEEEE;
   border: none;
-  border-bottom: solid 5px #f4f4f4;
+  border-bottom: solid 5px #EFEEEE;
   width: 100%;
   float: left;
   margin-bottom: 0;
@@ -75,6 +75,9 @@ h4, h5, h6, .h4, .h5, .h6 {
 	position: fixed;
 }
 }
+#filter {
+  color: white;
+}
 .col-centered {
   float: none;
   margin: 0 auto;
@@ -104,7 +107,10 @@ h4, h5, h6, .h4, .h5, .h6 {
   display:inline-block;
 }
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a {
-  color: white;
+  color: rgb(218,182,97);
+}
+.container-fluid.select-bar.hp-tabs .nav.navbar-navt li a:hover {
+  background-color: transparent;
 }
 .discount {
   color: red;
@@ -112,7 +118,7 @@ h4, h5, h6, .h4, .h5, .h6 {
 .select-bar {
 	padding-top: 20px;
 	z-index: 99;
-	background: #f4f4f4;
+	background: #EFEEEE;
 	width: 100%;
   height: 75px;
 }
@@ -121,12 +127,13 @@ h4, h5, h6, .h4, .h5, .h6 {
   font-style: italic;
   font-weight: 600;
   font-size: 1.2em;
+  font-family: 'Chunkfive';
 } 
 .select-bar .hp-tabs {
 	padding: 0px;
 }
 .top-bar.non-white {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .top-bar-border {
   border-top: 3px rgb(0,128,183) solid;
@@ -158,7 +165,7 @@ button a.btn.btn-link.home:hover {
   text-decoration: none
 }
 button.home-buttons {
-  background-color: transparent; 
+  background-color: rgb(79, 156, 156); 
   border: solid white 2px
 }
 button.home-buttons:first-child {
@@ -305,7 +312,7 @@ button.home-buttons:first-child {
   background-size: cover;
   background-position: center center;
   text-align: center;
-  border-top: solid 10px #f4f4f4;
+  border-top: solid 10px #EFEEEE;
   padding: 160px 0;
 }
 .top-quote .top-quote-text {
@@ -326,7 +333,7 @@ button.home-buttons:first-child {
 .tab-container {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: #EFEEEE;
   padding-bottom: 75px;
 }
 .sold {
@@ -965,7 +972,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   padding: 1% 5%;
 }
 .similar-items.descrip {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 
 .product-description .product-slider {
@@ -1105,7 +1112,6 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 font-size: 14px;
 line-height: 50px;
 color: #333;
-border-top: solid 1px #e5e5e5;
 margin: 0;
 }
 .attr.return {
@@ -1115,6 +1121,7 @@ line-height: inherit;
 font-size: 14px;
 line-height: 50px;
 font-weight: 700;
+font-family: 'Chunkfive';
 color: #333;
 text-transform: uppercase;
 border-top: solid 1px #e5e5e5;
@@ -1215,7 +1222,7 @@ text-align: left;
   display: none;
 }
 .container.product-detail {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .product-presentation-tabs {
   width: 100%;
@@ -1862,7 +1869,7 @@ text-align: left;
   margin-top: 20px;
 }
 .grid-products-wrapper.recommended {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .grid-products-wrapper .row {
   /*margin: 0 -15px;*/
@@ -1895,7 +1902,7 @@ text-align: left;
 .shopping-container {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: #EFEEEE;
   padding: 30px 0 80px;
 }
 .shopping-container .col-sm-8 {
@@ -1997,7 +2004,7 @@ text-align: left;
   width: 30px;
   height: 30px;
   color: #cccccc;
-  background: #f4f4f4;
+  background: #EFEEEE;
   text-align: center;
   padding-top: 5px;
 }
@@ -2019,8 +2026,8 @@ text-align: left;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  border-top: solid 1px #f4f4f4;
-  border-bottom: solid 1px #f4f4f4;
+  border-top: solid 1px #EFEEEE;
+  border-bottom: solid 1px #EFEEEE;
   padding: 0;
   text-align: center;
   color: #5e5e5e;
@@ -2208,7 +2215,7 @@ text-align: left;
 .filters-wrapper {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .filters-wrapper ul {
   width: 100%;
@@ -2400,7 +2407,7 @@ text-align: left;
 .checkout-steps-wrapper {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: #EFEEEE;
   margin: 25px 0;
 }
 .checkout-steps-wrapper .checkout-steps {
@@ -2538,11 +2545,10 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .btn.btn-primary.buy {
   width: 70px;
-  /*background-color: #333;*/
-  /*border-color: black;*/
+  font-family: 'Chunkfive';
 }
 .btn.btn-default.sold,
-.btn.btn-primary.buy.try {
+.btn.btn-primary.buy {
   width: 145px;
   height: 32px;
   /*background-color: rgb(201,177,62);*/
@@ -3019,14 +3025,14 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .footer-search .input-group:hover .form-control, .footer-search .input-group:hover .btn {
   background: #fff;
-  border: 1px solid #f4f4f4;
+  border: 1px solid #EFEEEE;
 }
  .footer-search .input-group:hover .btn {
   border-left: none;
  }
 .footer-search .input-group .form-control {
   height: 40px;
-  background: #f4f4f4;
+  background: #EFEEEE;
   border: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -3047,7 +3053,7 @@ form .form-checkbox-wrap .checkbox-label {
 .footer-search .input-group .btn {
   border: 1px solid transparent;
   height: 40px;
-  background: #f4f4f4;
+  background: #EFEEEE;
   color: #999999;
   font-size: 16px;
 }
@@ -3189,7 +3195,7 @@ footer ul li a:hover {
   background-position: center -182px;
 }
 .how-it-works {
-  background-color: #f4f4f4;
+  background-color: #EFEEEE;
   font-family: "Chunkfive";
   color: black;
 }
@@ -3211,7 +3217,7 @@ footer ul li a:hover {
   padding: 0 2.5em;
 }
 .how-it-works .statement:first-child {
-  border-right: 1px solid #DDD;
+  border-right: 1px solid gray;
 }
 .how-it-works .col-md-12.statement {
   text-align: left;
@@ -3244,8 +3250,9 @@ footer ul li a:hover {
   margin-bottom: 0;
 }
 .shop-local-bottom {
-  padding: 20px;
-  background: rgb(79, 156, 156);
+  padding: 30px;
+  background: #EFEEEE;
+  margin-top: 2em;
 }
 
 .how-it-works .row-fluid div.main-quote div {
@@ -3256,10 +3263,10 @@ footer ul li a:hover {
   float: left;
   padding: 25px 0 25px 0;
   height: 100%;
-  background-color: #f4f4f4;
+  background-color: #EFEEEE;
 }
 .page-quote {
-  background: #f4f4f4;
+  background: #EFEEEE;
   width: 100%;
   float: left;
   padding: 5px 0 5px 0;
@@ -3280,7 +3287,7 @@ footer ul li a:hover {
   text-align: center;
 }
 .container-fluid.tab-icons {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .container.tab-icons {
   margin-top: 15px;
@@ -4147,7 +4154,7 @@ footer ul li a:hover {
     display: block;
   }
   .main-navigation .navbar-nav .dropdown-menu li {
-    border-top: solid 1px #f4f4f4;
+    border-top: solid 1px #EFEEEE;
     position: relative;
     width: 100%;
     float: left;
@@ -4252,9 +4259,8 @@ footer ul li a:hover {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
   }
-  .how-it-works .statement:not(:last-child) {
+  .how-it-works .statement:first-child {
   border-right: 0px;
-  border-bottom: 1px gray solid;
   }
   .tab-icons.mobile {
     display: block;
@@ -4269,7 +4275,7 @@ footer ul li a:hover {
     width: 100%;
     margin: 0;
   }
-  .pic-tabs {
+  .pic-tabs.home {
     padding: 0;
   }
   #desktop-navigation {
@@ -4434,6 +4440,10 @@ footer ul li a:hover {
   /*margin-left: 10%;*/
   max-width: 100%;
   }
+  .product-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
   button.home-buttons:first-child {
   margin-right: 5px
   }
@@ -4469,7 +4479,7 @@ footer ul li a:hover {
   }
   .attr-label,
   .attr {
-    line-height: 40px;
+    line-height: 30px;
     font-size: 12px;
   }
   .footer-widget {

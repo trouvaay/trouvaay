@@ -3,7 +3,7 @@
 <div class="row" id="desktop-navigation">
     <div class="col-xs-12">
         <div class="col-xs-6 logo-div">
-            <a href="{% url 'goods:main' %}"> <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a>
+            <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}">
         </div>
         <div id="main-menu" class="col-xs-6 right-side">
             <div class="row">
@@ -13,7 +13,7 @@
                         <li><a href="https://www.facebook.com/RareDoor"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
                         <li><a href="https://www.twitter.com/RareDoor"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
                         <li><div class="cart-info"></div></li>
-                        <li><a class="btn btn-link nav-login-button" href="#">Signup</a></li>
+                        <li><a class="btn btn-link nav-login-button" href="#" data-toggle="tooltip" title="{{ SIGNUP_OFFER }}">Signup</a></li>
                         {% if user.is_authenticated %}
                         <!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
                         <li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>

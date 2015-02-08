@@ -37,20 +37,23 @@
                            </div>
                         </div>
                         <div class="row">
-                           <div id="first" class="col-xs-12 product-description">
+                           <div id="first" class="col-xs-4 product-description">
                                <em><p>{% if product.current_price %}
                                 {% if product.is_discounted %}
                                     <strike>{{'$'}}{{ product.original_price|floatformat:"0" }}</strike>
-                                    <span class="discount">{{'$'}}{{ product.current_price|floatformat:"0" }}<span>
+                                    <span style="font-family: chunkfive" class="discount">{{'$'}}{{ product.current_price|floatformat:"0" }}<span>
                                 {% else %}
                                     <b>{{'$'}}{{ product.current_price|floatformat:"0" }}</b>
                                 {% endif %}
                             {% endif %}</em></p>
                            </div>
+                           <div class="col-xs-8">
+                              <span class="neighborhood">{{ product.store.neighborhood }}</span>
+                           </div>
                         </div>
                         <div class="row" style="margin-bottom: 8%">
                             <!-- Start Product labeling -->
-                            <div class="col-xs-12 col-sm-6 pic-detail-home">
+                            <div class="col-xs-12 pic-detail-home">
                                 <!-- need these so that we can pass product name and price to stripe checkout -->
                                 <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
                                 <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
@@ -58,7 +61,10 @@
                                 {% if product.is_sold %}
                                     <span class="sold">{{ 'Sold' }}</span>
                                 {% elif product.current_price %}
-                                    <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}" title="{{ FEATURE_TOOLTIP_RESERVE }}">
+                                    <button type="button" class="btn btn-primary buy buy" id="buy_{{ product.id }}">
+                                        Buy
+                                    </button>
+                                    <button type="button" class="btn btn-primary buy reserve" id="reserve_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_RESERVE }}">
                                         {{ FEATURE_NAME_RESERVE }}
                                     </button>
                                     {% comment %}
@@ -84,9 +90,6 @@
                                     </button>
                                 {% endif %}
                             </div>
-                            <div class="col-xs-12 col-sm-6" style="margin-top:12px">
-                                 located in: <span class="neighborhood">{{ product.store.neighborhood }}</span>
-                            </div>
                         </div>
                         <!-- End Product labeling -->
                         <!-- Start Product Attributes -->
@@ -104,10 +107,10 @@
                             </div>
                             {% if product.material.all %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                    Made of
                                </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                 {% for material in product.material.all %}  {{ material }}{% endfor %}
                                </div>
                             </div>
@@ -115,10 +118,10 @@
                             
                             {% if product.has_dimensions %} 
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                 Dimensions
                                </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                 {{ product.get_dimension_str }}
                                 </div>
                             </div>
@@ -126,10 +129,10 @@
                             
                             {% if product.seat_height %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                Seat Height
                                </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                {{ product.seat_height }}"
                                </div>
                             </div>
@@ -137,10 +140,10 @@
                            
                            {% if product.diameter %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                 Diameter
                                 </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                 {{ product.diameter }}
                                </div>
                             </div>
@@ -148,10 +151,10 @@
                            
                            {% if product.bed_size %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                Bed Size
                                </div>
-                               <div class="col-xs-8 attr">  
+                               <div class="col-xs-12 col-sm-8 attr">  
                                {{ product.bed_size }}
                                </div>
                             </div>
@@ -159,20 +162,20 @@
                            
                            {% if product.weight %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                Weight
                                </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                {{ product.weight }}
                                </div>
                             </div>
                             {% else %}{% endif %}
                             
                             <div class="row">
-                                <div class="col-xs-4 attr-label">
+                                <div class="col-xs-12 col-sm-4 attr-label">
                                     Returns
                                 </div>
-                                <div class="col-xs-8 attr return">
+                                <div class="col-xs-12 col-sm-8 attr return">
                                     {% if product.has_returns %}
                                         {{ returns.allowed }}
                                     {% else %}

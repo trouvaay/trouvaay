@@ -12,12 +12,13 @@
             <div class="col-xs-3 hidden-xs col-sm-2 col-md-4 pull-right" style="height:75px">
                 <ul class="nav navbar-navt">
                 <li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal" style="height:40px"><h4 style="margin-top:0"><span id="how-it-works-button">How it works</span></h4></a></li>
-                {% if user.is_authenticated %}
+                
                 <!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
                 <li><a class="btn btn-link tab-menu" href="{% url 'members:logout' %}">Signup</a></li>
-                <li><a class="btn btn-link tab-menu" href="{% url 'members:logout' %}">Logout</a></li>
+                {% if user.is_authenticated %}
+                    <li><a class="btn btn-link tab-menu" href="{% url 'members:logout' %}">Logout</a></li>
                 {% else %}
-                <li><a class="btn btn-link tab-menu nav-login-button" href="#">Login</a></li>
+                    <li><a class="btn btn-link tab-menu nav-login-button" href="#">Login</a></li>
                 {% endif %}
                 </ul>
             </div>
