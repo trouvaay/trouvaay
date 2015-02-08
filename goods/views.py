@@ -17,8 +17,8 @@ logger = logging.getLogger(__name__)
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
 
-class HomeView(generic.ListView):
-    template_name = 'goods/home/home.html'
+class LandingView(generic.ListView):
+    template_name = 'goods/landing/landing.html'
     context_object_name = 'products'
     model = Product
 
@@ -27,7 +27,7 @@ class HomeView(generic.ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
+        context = super(LandingView, self).get_context_data(**kwargs)
         #JSON sent to client to calc distance from user
         # context['products_json'] = serialize('json', context['products'])
         context['BaseUrl'] = BASE_URL
@@ -58,8 +58,8 @@ class HomeView(generic.ListView):
 
         return context
 
-class FurnitureTypeView(generic.ListView):
-    template_name = 'goods/home/furniture_type.html'
+class MainView(generic.ListView):
+    template_name = 'goods/main/main.html'
     context_object_name = 'products'
     model = Product
     paginate_by = 21
@@ -79,7 +79,7 @@ class FurnitureTypeView(generic.ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        context = super(FurnitureTypeView, self).get_context_data(**kwargs)
+        context = super(MainView, self).get_context_data(**kwargs)
         context['BaseUrl'] = BASE_URL
         context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
         context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE

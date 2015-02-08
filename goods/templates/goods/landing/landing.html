@@ -10,14 +10,14 @@
             <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/c_fill,h_843,w_1265/v1422902656/shutterstock_160709951_hsvzx9.jpg'); height:40em;">
             <!-- http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg -->
             <div class="black_overlay"></div><!-- end overlay -->
-            {% include 'goods/home/_home_nav_snippet.html' %}
+            {% include 'goods/landing/_landing_nav_snippet.html' %}
             <div class="landing-message">
                 <h2>
                 Shop The Unique Furniture Available In Bay Area Stores Without Leaving Your Couch
                 </h2>
                 <div class="span7 text-center">
                      <button class="home-buttons" style="margin-right:15px"><a class="btn btn-link home" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5><span id="how-it-works-button">How it works</span></h5></a></button>
-                    <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:furnituretype' %}"><h5>Shop local</h5></a></button>
+                    <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop local</h5></a></button>
                 </div>
             </div>
             </div>
@@ -39,7 +39,7 @@
         </div>
       </div>
     
-    <div class="container-fluid pic-tabs">        
+    <div class="container-fluid pic-tabs home">        
         <div class="row">
             <div class="col-sm-12">
                 <div class="tab-content">
@@ -47,7 +47,7 @@
                         <div class="grid-products-wrapper">
                             <div class="row">
                                 {% for product in products %}
-                                    {% include 'goods/home/_homeproduct_for_loop.html' %}
+                                    {% include 'goods/landing/_landingproduct_for_loop.html' %}
                                 {% endfor %}
                             </div>
                         </div>
@@ -58,7 +58,7 @@
     </div>
     <div class="container-fluid shop-local-bottom">        
         <div class="span7 text-center">
-            <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:furnituretype' %}"><h5>Shop local</h5></a></button>
+            <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop local</h5></a></button>
         </div>
     </div>
     

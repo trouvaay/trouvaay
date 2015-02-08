@@ -120,6 +120,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   color: rgb(218,182,97);
   font-style: italic;
   font-weight: 600;
+  font-size: 1.2em;
 } 
 .select-bar .hp-tabs {
 	padding: 0px;
@@ -514,7 +515,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   float: left;
   background: white;
-  padding: 40px 0 40px;
+  padding-bottom: 40px;
 }
 .main-container.comment-block {
   padding-top: 0px 0 40px;
@@ -1559,7 +1560,7 @@ text-align: left;
 }
 .grid-product {
   width: 100%;
-  height: 350px;
+  height: 315px;
   position: relative;
   width: 100%;
   /*margin: 2rem;*/
@@ -1583,6 +1584,9 @@ text-align: left;
 }
 .product-container:hover .vintage-label {
   border-top: 4px solid black;
+ }
+ .product-container {
+  padding-bottom: 2em;
  }
 
 
@@ -2790,6 +2794,9 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 10px 0 0;
   box-shadow: 0 6px 4px -4px #333;
   margin-bottom: 5px;
+  background-color: #333;
+  position: fixed;
+  top: 0;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
@@ -3283,8 +3290,14 @@ footer ul li a:hover {
 }
 .pic-tabs {
   background: white;
+}
+.pic-tabs.home {
   padding-right: 10%;
   padding-left: 10%;
+}
+.main-container.detail,
+.pic-tabs.main {
+  margin-top: 10%;
 }
 .container-fluid.tab-icons .row{
   padding: 1rem;
@@ -3350,6 +3363,7 @@ footer ul li a:hover {
 .landing-message h1,
 .landing-message h3 {
   text-align: center;
+  margin-bottom: 5%;
 }
 .landing-message h3 {
   margin-top: 20px;
@@ -4212,6 +4226,9 @@ footer ul li a:hover {
     line-height: 30px;
     color: #7a7a7a;
   }
+  .how-it-works {
+    padding: 30px inherit;
+  }
 }
 
 @media (max-width: 992px) {
@@ -4246,6 +4263,9 @@ footer ul li a:hover {
     z-index: 10;
     width: 100%;
     margin: 0;
+  }
+  .pic-tabs {
+    padding: 0;
   }
   #desktop-navigation {
     display: none;
