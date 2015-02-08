@@ -24,7 +24,7 @@ class HomeView(generic.ListView):
     paginate_by = 21
 
     def get_queryset(self):
-        pub_products = self.model.objects.filter(is_published=True)
+        pub_products = self.model.objects.filter(is_published=True, store__is_featured=True)
         #filter by products that are furniture
         queryset = [i for i in pub_products if i.is_furniture()]
         return queryset
@@ -75,7 +75,7 @@ class FurnitureTypeView(generic.ListView):
         except Exception, e:
             logger.debug(str(e))
             furniture_type_object = None
-        queryset = list(self.model.objects.filter(is_published=True,furnituretype = furniture_type_object ))
+        queryset = list(self.model.objects.filter(is_published=True,furnituretype = furniture_type_object, store__is_featured=True ))
         #filter by products that are furniture
         
         return queryset
