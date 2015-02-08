@@ -75,6 +75,9 @@ h4, h5, h6, .h4, .h5, .h6 {
 	position: fixed;
 }
 }
+#filter {
+  color: white;
+}
 .col-centered {
   float: none;
   margin: 0 auto;
@@ -4252,9 +4255,9 @@ footer ul li a:hover {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
   }
-  .how-it-works .statement:not(:last-child) {
+  .how-it-works .statement:first-child {
   border-right: 0px;
-  border-bottom: 1px gray solid;
+  border-bottom: 1px lightgray solid;
   }
   .tab-icons.mobile {
     display: block;
