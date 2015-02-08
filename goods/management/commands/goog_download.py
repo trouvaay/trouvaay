@@ -32,8 +32,8 @@ class Command(BaseCommand):
         for row in range(start_row, end_row+1):
             
             data = worksheet.row_values(row)
-
-            if data[0]:
+            
+            if data[0] == 'TRUE':
                 logger.info('uploading {}'.format(data[3]))
                 u = Product()
 
@@ -84,6 +84,5 @@ class Command(BaseCommand):
                     logger.error('Error Saving {} from google into database'.format(u))
                     logger.error(str(e))
             
-
-        
-        
+            else:
+                logger.info('skipping {}'.format(data[3])) 
