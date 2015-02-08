@@ -3250,8 +3250,9 @@ footer ul li a:hover {
   margin-bottom: 0;
 }
 .shop-local-bottom {
-  padding: 20px;
-  background: rgb(79, 156, 156);
+  padding: 30px;
+  background: #EFEEEE;
+  margin-top: 2em;
 }
 
 .how-it-works .row-fluid div.main-quote div {
