@@ -100,6 +100,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   background: white;
   padding: 0;
   height: 175px;
+  position: relative;
 }
 .top-bar, .select-bar {
   padding: 0px 15px;
@@ -1110,24 +1111,23 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   margin-top: 5%;
 }
 .attr {
-font-size: 14px;
-line-height: 50px;
-color: #333;
-margin: 0;
+  font-size: 14px;
+  line-height: 50px;
+  color: #333;
+  margin: 0;
 }
 .attr.return {
-line-height: inherit;
+  line-height: inherit;
 }
 .attr-label {
-font-size: 14px;
-line-height: 50px;
-font-weight: 700;
-font-family: 'Chunkfive';
-color: #333;
-text-transform: uppercase;
-border-top: solid 1px #e5e5e5;
-margin: 0;
-text-align: left;
+  font-size: 14px;
+  line-height: 50px;
+  font-weight: 700;
+  font-family: 'Chunkfive';
+  color: #333;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: left;
 }
 .attr#first {
   border-top:none;
@@ -1647,6 +1647,10 @@ text-align: left;
 }
 .row-attrs {
     margin-top: 5%;
+}
+.row.attributes {
+    border-top: solid lightgray 1px;
+    border-bottom: solid lightgray 1px;
 }
 .nearby img {
   max-height: 300px;
@@ -2551,7 +2555,8 @@ form .form-checkbox-wrap .checkbox-label {
 .btn.btn-default.sold,
 .btn.btn-primary.buy {
   width: 40%;
-  height: 32px;
+  max-width: 140px;
+  height: 3em;
   /*background-color: rgb(201,177,62);*/
 }
 .btn.btn-success.dist {
@@ -4082,6 +4087,10 @@ footer ul li a:hover {
   .main-navigation.top-row {
 	  padding-right: 30px;
   }
+  .hp-tabs .nav-tabs > li {
+    min-width: 55px;
+    max-width:68px;
+  }
   .hp-tabs .nav-tabs > li.active > a:hover,
   .hp-tabs .nav-tabs > li > a:hover {
     background: #999;
@@ -4250,10 +4259,6 @@ footer ul li a:hover {
   .hp-tabs .nav-tabs > li > a {
     padding-left: 5px;
     padding-right: 5px;
-  }
-  .hp-tabs .nav-tabs > li {
-    min-width: 55px;
-    max-width:68px;
   }
   .logo-div {
     padding-top: 10px;
@@ -4487,6 +4492,7 @@ footer ul li a:hover {
     line-height: 30px;
     font-size: 12px;
   }
+
   .footer-widget {
     margin-bottom: .5rem;
   }
