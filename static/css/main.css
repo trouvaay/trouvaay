@@ -3308,7 +3308,7 @@ footer ul li a:hover {
 }
 .main-container.detail,
 .pic-tabs.main {
-  margin-top: 10%;
+  margin-top: 5%;
 }
 .container-fluid.tab-icons .row{
   padding: 1rem;
@@ -4252,7 +4252,8 @@ footer ul li a:hover {
     padding-right: 5px;
   }
   .hp-tabs .nav-tabs > li {
-    min-width: 60px
+    min-width: 55px;
+    max-width:68px;
   }
   .logo-div {
     padding-top: 10px;
