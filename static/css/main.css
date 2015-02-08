@@ -104,7 +104,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   display:inline-block;
 }
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a {
-  color: #333;
+  color: white;
 }
 .discount {
   color: red;
@@ -160,6 +160,9 @@ button a.btn.btn-link.home:hover {
 button.home-buttons {
   background-color: transparent; 
   border: solid white 2px
+}
+button.home-buttons:first-child {
+  margin-right: 15px
 }
 #main-footer {
   height: 95px;
@@ -3222,9 +3225,6 @@ footer ul li a:hover {
 }
 
 @media screen and (max-width: 992px) {
-.how-it-works .statement:not(:last-child) {
-  border-right: 0px;
-}
 }
 .how-it-works .row-fluid div {
   font-size: 14px;
@@ -4252,6 +4252,10 @@ footer ul li a:hover {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
   }
+  .how-it-works .statement:not(:last-child) {
+  border-right: 0px;
+  border-bottom: 1px gray solid;
+  }
   .tab-icons.mobile {
     display: block;
     margin-top: 10px;
@@ -4260,6 +4264,7 @@ footer ul li a:hover {
     display: block;
     background-color: black;
     position: fixed;
+    top: 0;
     z-index: 10;
     width: 100%;
     margin: 0;
@@ -4428,6 +4433,9 @@ footer ul li a:hover {
   margin-bottom: 10%;
   /*margin-left: 10%;*/
   max-width: 100%;
+  }
+  button.home-buttons:first-child {
+  margin-right: 5px
   }
   #signup-login-modal .modal-dialog {
     width: 90%;
