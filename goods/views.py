@@ -34,7 +34,8 @@ class LandingView(generic.ListView):
         context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
         context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
-        context['query_operator'] = '?'
+        context['SIGNUP_OFFER'] = settings.SIGNUP_OFFER
+        
         
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings

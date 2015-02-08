@@ -13,7 +13,7 @@
                         <li><a href="https://www.facebook.com/RareDoor"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
                         <li><a href="https://www.twitter.com/RareDoor"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
                         <li><div class="cart-info"></div></li>
-                        <li><a class="btn btn-link nav-login-button" href="#">Signup</a></li>
+                        <li><a class="btn btn-link nav-login-button" href="#" data-toggle="tooltip" title="{{ SIGNUP_OFFER }}">Signup</a></li>
                         {% if user.is_authenticated %}
                         <!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
                         <li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
