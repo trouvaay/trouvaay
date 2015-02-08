@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'stripe',
     'analytical',
+    'endless_pagination',
 )
 
 MIDDLEWARE_CLASSES = (
