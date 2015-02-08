@@ -1,7 +1,9 @@
-{% extends 'goods/home/_home_base.html' %}
+{% extends '_base.html' %}
 {% load staticfiles %}
 {% load cloudinary %}
 
+{% block nav %}
+{% endblock nav %}
 {% block content %}
       <div class="container homepage-slider-container">
         <div class="row-fluid">
@@ -13,10 +15,10 @@
                 <h2>
                 Shop The Unique Furniture Available In Bay Area Stores Without Leaving Your Couch
                 </h2>
-                <h3>
-                    10% off your first purchase when you join
-                </h3>
-                <div class="span7 text-center"><button style="background-color: transparent; border: solid white 2px"><a class="btn btn-link nav-login-button" href="#">Join</a></button></div>
+                <div class="span7 text-center">
+                     <button class="home-buttons" style="margin-right:15px"><a class="btn btn-link home" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5><span id="how-it-works-button">How it works</span></h5></a></button>
+                    <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:furnituretype' %}"><h5>Shop local</h5></a></button>
+                </div>
             </div>
             </div>
         </div>
@@ -36,7 +38,29 @@
             </div>
         </div>
       </div>
-    {{ block.super }}
+    
+    <div class="container-fluid pic-tabs">        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                                {% for product in products %}
+                                    {% include 'goods/home/_homeproduct_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab1 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid shop-local-bottom">        
+        <div class="span7 text-center">
+            <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:furnituretype' %}"><h5>Shop local</h5></a></button>
+        </div>
+    </div>
     
 	{% if promotion_offer and not request.user.is_authenticated %}
 	<div class="modal fade" id="promotion-offer-modal">

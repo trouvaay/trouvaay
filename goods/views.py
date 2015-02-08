@@ -21,12 +21,9 @@ class HomeView(generic.ListView):
     template_name = 'goods/home/home.html'
     context_object_name = 'products'
     model = Product
-    paginate_by = 21
 
     def get_queryset(self):
-        pub_products = self.model.objects.filter(is_published=True)
-        #filter by products that are furniture
-        queryset = [i for i in pub_products if i.is_furniture()]
+        queryset = self.model.objects.filter(is_published=True, is_featured=True)[:6]
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -69,15 +66,16 @@ class FurnitureTypeView(generic.ListView):
     
 
     def get_queryset(self):
-        furn_type = self.request.GET['type']
         try:
-            furniture_type_object = FurnitureType.objects.get(select=furn_type)
-        except Exception, e:
-            logger.debug(str(e))
-            furniture_type_object = None
-        queryset = list(self.model.objects.filter(is_published=True,furnituretype = furniture_type_object ))
-        #filter by products that are furniture
-        
+            furn_type = self.request.GET['type']
+            try:
+                furniture_type_object = FurnitureType.objects.get(select=furn_type)
+            except Exception, e:
+                logger.debug(str(e))
+                furniture_type_object = None
+            queryset = list(self.model.objects.filter(is_published=True,furnituretype = furniture_type_object ))
+        except:
+            queryset = self.model.objects.all()
         return queryset
 
     def get_context_data(self, **kwargs):

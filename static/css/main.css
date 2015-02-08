@@ -149,8 +149,16 @@ h4, h5, h6, .h4, .h5, .h6 {
 button a.btn.btn-link.nav-login-button:hover {
   text-decoration: none;
 }
-button a.btn.btn-link.nav-login-button {
-  color: white
+button a.btn.btn-link.home {
+  color: white;
+  padding: 0 inherit;
+}
+button a.btn.btn-link.home:hover {
+  text-decoration: none
+}
+button.home-buttons {
+  background-color: transparent; 
+  border: solid white 2px
 }
 #main-footer {
   height: 95px;
@@ -2630,9 +2638,6 @@ form .form-checkbox-wrap .checkbox-label {
 #how-it-works-modal .how-it-works .statement:not(:last-child) {
   border-right: 0px;
 }
-#how-it-works-button {
-  font-family: 'Chunkfive'
-}
 .btn.btn-link.tab-menu {
   padding-top: 0;
 }
@@ -3174,8 +3179,9 @@ footer ul li a:hover {
   background-position: center -182px;
 }
 .how-it-works {
-  background-color: white;
+  background-color: #f4f4f4;
   font-family: "Chunkfive";
+  color: black;
 }
 .how-it-works h3 {
   text-align: center;
@@ -3194,7 +3200,7 @@ footer ul li a:hover {
   min-height: 100px;
   padding: 0 2.5em;
 }
-.how-it-works .statement:not(:last-child) {
+.how-it-works .statement:first-child {
   border-right: 1px solid #DDD;
 }
 .how-it-works .col-md-12.statement {
@@ -3229,6 +3235,10 @@ footer ul li a:hover {
 }
 .container-fluid.how-it-works.layer {
   margin-bottom: 0;
+}
+.shop-local-bottom {
+  padding: 20px;
+  background: rgb(79, 156, 156);
 }
 
 .how-it-works .row-fluid div.main-quote div {
@@ -3273,6 +3283,8 @@ footer ul li a:hover {
 }
 .pic-tabs {
   background: white;
+  padding-right: 10%;
+  padding-left: 10%;
 }
 .container-fluid.tab-icons .row{
   padding: 1rem;
@@ -3620,7 +3632,7 @@ footer ul li a:hover {
     /*height: 265px;*/
   }
   .landing-message {
-    padding: 0 25%;
+    padding: 0 22%;
   }
   .grid-product figure img {
   /*  width: 263px;

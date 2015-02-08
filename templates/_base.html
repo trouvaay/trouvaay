@@ -78,8 +78,9 @@
     <body>
         {% analytical_body_top %}
       
+    {% include 'goods/home/_mobile_nav.html' %}  
     {% block nav %}
-        {% include 'goods/home/_mobile_nav.html' %}
+        {% include '_tab_nav.html' %}
     {% endblock nav %}
     {% block content %}{% endblock content %}
     <footer class="main-footer">
