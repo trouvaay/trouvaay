@@ -2549,7 +2549,7 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .btn.btn-default.sold,
 .btn.btn-primary.buy {
-  width: 145px;
+  width: 40%;
   height: 32px;
   /*background-color: rgb(201,177,62);*/
 }
