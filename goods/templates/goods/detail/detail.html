@@ -85,7 +85,7 @@
                                 {% endif %}
                             </div>
                             <div class="col-xs-12 col-sm-6" style="margin-top:12px">
-                                 located in: <span class="neighborhood">{{ product.store.neighborhood }}</span>
+                              <span class="neighborhood">{{ product.store.neighborhood }}</span>
                             </div>
                         </div>
                         <!-- End Product labeling -->
@@ -104,10 +104,10 @@
                             </div>
                             {% if product.material.all %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                    Made of
                                </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                 {% for material in product.material.all %}  {{ material }}{% endfor %}
                                </div>
                             </div>
@@ -115,10 +115,10 @@
                             
                             {% if product.has_dimensions %} 
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                 Dimensions
                                </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                 {{ product.get_dimension_str }}
                                 </div>
                             </div>
@@ -126,10 +126,10 @@
                             
                             {% if product.seat_height %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                Seat Height
                                </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                {{ product.seat_height }}"
                                </div>
                             </div>
@@ -137,10 +137,10 @@
                            
                            {% if product.diameter %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                 Diameter
                                 </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                 {{ product.diameter }}
                                </div>
                             </div>
@@ -148,10 +148,10 @@
                            
                            {% if product.bed_size %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                Bed Size
                                </div>
-                               <div class="col-xs-8 attr">  
+                               <div class="col-xs-12 col-sm-8 attr">  
                                {{ product.bed_size }}
                                </div>
                             </div>
@@ -159,20 +159,20 @@
                            
                            {% if product.weight %}
                             <div class="row">
-                               <div class="col-xs-4 attr-label">
+                               <div class="col-xs-12 col-sm-4 attr-label">
                                Weight
                                </div>
-                               <div class="col-xs-8 attr">
+                               <div class="col-xs-12 col-sm-8 attr">
                                {{ product.weight }}
                                </div>
                             </div>
                             {% else %}{% endif %}
                             
                             <div class="row">
-                                <div class="col-xs-4 attr-label">
+                                <div class="col-xs-12 col-sm-4 attr-label">
                                     Returns
                                 </div>
-                                <div class="col-xs-8 attr return">
+                                <div class="col-xs-12 col-sm-8 attr return">
                                     {% if product.has_returns %}
                                         {{ returns.allowed }}
                                     {% else %}

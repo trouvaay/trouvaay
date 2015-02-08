@@ -127,6 +127,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   font-style: italic;
   font-weight: 600;
   font-size: 1.2em;
+  font-family: 'Chunkfive';
 } 
 .select-bar .hp-tabs {
 	padding: 0px;
@@ -1111,7 +1112,6 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 font-size: 14px;
 line-height: 50px;
 color: #333;
-border-top: solid 1px #e5e5e5;
 margin: 0;
 }
 .attr.return {
@@ -1121,6 +1121,7 @@ line-height: inherit;
 font-size: 14px;
 line-height: 50px;
 font-weight: 700;
+font-family: 'Chunkfive';
 color: #333;
 text-transform: uppercase;
 border-top: solid 1px #e5e5e5;
@@ -4479,7 +4480,7 @@ footer ul li a:hover {
   }
   .attr-label,
   .attr {
-    line-height: 40px;
+    line-height: 30px;
     font-size: 12px;
   }
   .footer-widget {
