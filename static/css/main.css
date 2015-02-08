@@ -77,6 +77,7 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 #filter {
   color: white;
+  font-size: 20px;
 }
 .col-centered {
   float: none;
@@ -2803,9 +2804,12 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 10px 0 0;
   box-shadow: 0 6px 4px -4px #333;
   margin-bottom: 5px;
-  background-color: #333;
+  background-color: white;
   position: fixed;
   top: 0;
+}
+.nav.navbar-navt > li > a {
+  padding:  10px 5px;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;

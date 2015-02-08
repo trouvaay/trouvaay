@@ -59,7 +59,7 @@ var trouvaay = {
                                     "</div>"+
                                 "</div>"+
                             "</div>"+
-                            "</div>"
+                            "</div>";
 
 
         //Append mobile menu
@@ -79,6 +79,14 @@ var trouvaay = {
                 } else {
                   $("#mobile-nav").remove();
                 }
+        });
+
+       $("#filter").on('click',function() {
+            if (!$('#desktopSearch').length ) {
+              $(".select-bar.hp-").append(desktopsearch);
+            } else {
+              $("#mobile-nav").remove();
+            }
         });
 
         //Highlights link of current page
