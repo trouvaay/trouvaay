@@ -23,7 +23,7 @@ class LandingView(generic.ListView):
     model = Product
 
     def get_queryset(self):
-        queryset = self.model.objects.filter(is_published=True, is_featured=True)[:6]
+        queryset = self.model.objects.filter(is_published=True, is_featured=True, store__is_featured=True)[:6]
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -73,9 +73,9 @@ class MainView(generic.ListView):
             except Exception, e:
                 logger.debug(str(e))
                 furniture_type_object = None
-            queryset = list(self.model.objects.filter(is_published=True,furnituretype = furniture_type_object ))
+            queryset = list(self.model.objects.filter(is_published=True, furnituretype = furniture_type_object, store__is_featured=True))
         except:
-            queryset = self.model.objects.all()
+            queryset = self.model.objects.filter(is_published=True, store__is_featured=True)
         return queryset
 
     def get_context_data(self, **kwargs):
