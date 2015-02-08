@@ -10,6 +10,8 @@ import logging
 from django.conf import settings
 from random import shuffle
 
+from endless_pagination.views import AjaxListView
+
 
 
 logger = logging.getLogger(__name__)
@@ -59,11 +61,12 @@ class LandingView(generic.ListView):
 
         return context
 
-class MainView(generic.ListView):
-    template_name = 'goods/main/main.html'
+class MainView(AjaxListView):
+    template_name = 'goods/main/main_ajax.html'
+    page_template = 'goods/main/main_ajax_page.html'
     context_object_name = 'products'
     model = Product
-    paginate_by = 21
+    key = 'page'
     
 
     def get_queryset(self):
