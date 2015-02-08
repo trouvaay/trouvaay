@@ -61,10 +61,10 @@
                                 {% if product.is_sold %}
                                     <span class="sold">{{ 'Sold' }}</span>
                                 {% elif product.current_price %}
-                                    <button type="button" class="btn btn-primary buy try" id="buy_{{ product.id }}">
+                                    <button type="button" class="btn btn-primary buy buy" id="buy_{{ product.id }}">
                                         Buy
                                     </button>
-                                    <button type="button" class="btn btn-primary buy try" id="reserve_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_RESERVE }}">
+                                    <button type="button" class="btn btn-primary buy reserve" id="reserve_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_RESERVE }}">
                                         {{ FEATURE_NAME_RESERVE }}
                                     </button>
                                     {% comment %}

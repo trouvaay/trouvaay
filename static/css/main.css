@@ -2545,11 +2545,10 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .btn.btn-primary.buy {
   width: 70px;
-  /*background-color: #333;*/
-  /*border-color: black;*/
+  font-family: 'Chunkfive';
 }
 .btn.btn-default.sold,
-.btn.btn-primary.buy.try {
+.btn.btn-primary.buy {
   width: 145px;
   height: 32px;
   /*background-color: rgb(201,177,62);*/

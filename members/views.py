@@ -313,6 +313,7 @@ class PreCheckoutView(generic.DetailView):
     def post(self, request, *args, **kwargs):
 
         product = self.get_object()
+        order_type = self.request.POST.get('order_type', None)
 
         discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(user=self.request.user, total_price_before_offers=product.current_price)
         total_discount = 0
