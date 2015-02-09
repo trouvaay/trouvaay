@@ -148,7 +148,7 @@ class RegistrationForm(forms.ModelForm):
         cleaned_data = super(RegistrationForm, self).clean()
 
         password = cleaned_data.get("password")
-        password2 = cleaned_data.get("password")
+        password2 = cleaned_data.get("password2")
 
         if password != password2:
             msg = "Your passwords should match."

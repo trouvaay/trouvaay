@@ -6,4 +6,4 @@ latest.dump
 *.log
 *.orig
 dev_settings.py
-
+dev_config.py

@@ -47,6 +47,7 @@ class LandingView(generic.ListView):
 
         # add any "First time" offers
         # if there is more than one get the first one
+        print (self.request.session.items())
         if(not self.request.session.get('seen_offers', False)):
             offers = PromotionOffer.get_current_offers(user=self.request.user, offer_type=OfferType.FIRST_ORDER)
             if(offers):
@@ -80,6 +81,7 @@ class MainView(AjaxListView):
             queryset = list(self.model.objects.filter(is_published=True, furnituretype = furniture_type_object, store__is_featured=True))
         except:
             queryset = self.model.objects.filter(is_published=True, store__is_featured=True)
+
         return queryset
 
     def get_context_data(self, **kwargs):
