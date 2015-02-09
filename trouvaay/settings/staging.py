@@ -44,5 +44,6 @@ INSTALLED_APPS = (
     'crispy_forms',
     'stripe',
     'registration',
-    'analytical'
+    'analytical',
+    'endless_pagination'
 )
