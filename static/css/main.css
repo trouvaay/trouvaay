@@ -2662,8 +2662,8 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 20px 0;
 }
 #how-it-works-button {
-  font-family: Chunkfive;
-  color: black;
+  /*font-family: Chunkfive;
+  color: black;*/
 }
 #how-it-works-modal .how-it-works .statement:not(:last-child) {
   border-right: 0px;
