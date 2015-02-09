@@ -1,10 +1,11 @@
 Thank you for your purchase.  
 
-Your {{ product.name }} is available at {{ product.store.retailer.short_name }} located at:
+Your {{ product.short_name }} is available at {{ product.store.retailer.short_name }} located at:
 
 {{ product.store.street }}{% if product.store.street2 %}
 {{ product.store.street2 }}
-{% endif %}{{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
+{% endif %}
+{{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
 
 {% if capture_date %}
 You have 48 hours to go see the item in store if you choose.  Happy shopping! 
