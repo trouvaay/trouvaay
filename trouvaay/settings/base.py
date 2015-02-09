@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'stripe',
     'analytical',
+    'endless_pagination',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -125,11 +126,12 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 FEATURE_NAME_RESERVE = "Reserve"
-FEATURE_TOOLTIP_RESERVE = "You have 2 days to go see the product in-store before your payment is processed.  The store location will be revealed after you complete your reservation."
+FEATURE_TOOLTIP_RESERVE = "You have 2 days to go see the product in-store before your payment is processed."
 RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
     'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
 }
+SIGNUP_OFFER = "10% off your first purchase after signup"
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
 
@@ -210,7 +212,7 @@ STRIPE_CAPTURE_TRANSACTION_TIME = 48  # hours
 
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''
-OLARK_SITE_ID = ''
+# OLARK_SITE_ID = ''
 MIXPANEL_API_TOKEN = ''
 ANALYTICAL_INTERNAL_IPS = []
 

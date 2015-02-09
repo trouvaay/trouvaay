@@ -1,4 +1,4 @@
-{% extends "goods/home/home.html" %}
+{% extends "goods/main/main.html" %}
 {% load crispy_forms_tags %}
 
 {% block modal %}
@@ -47,7 +47,7 @@
 $(document).ready(function () {
 	$('#signup-login-modal').modal({"show": true});
 	$('#signup-login-modal').on('hidden.bs.modal', function () {
-		window.location.replace("{% url "goods:home" %}");
+		window.location.replace("{% url "goods:main" %}");
 	})
 });
 </script>

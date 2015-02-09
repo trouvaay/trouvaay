@@ -39,9 +39,9 @@ h4, h5, h6, .h4, .h5, .h6 {
   font-family: 'ralewaylight';
 }
 .navbar-default {
-  background: #f4f4f4;
+  background: #EFEEEE;
   border: none;
-  border-bottom: solid 5px #f4f4f4;
+  border-bottom: solid 5px #EFEEEE;
   width: 100%;
   float: left;
   margin-bottom: 0;
@@ -75,6 +75,9 @@ h4, h5, h6, .h4, .h5, .h6 {
 	position: fixed;
 }
 }
+#filter {
+  color: white;
+}
 .col-centered {
   float: none;
   margin: 0 auto;
@@ -104,7 +107,10 @@ h4, h5, h6, .h4, .h5, .h6 {
   display:inline-block;
 }
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a {
-  color: #333;
+  color: rgb(218,182,97);
+}
+.container-fluid.select-bar.hp-tabs .nav.navbar-navt li a:hover {
+  background-color: transparent;
 }
 .discount {
   color: red;
@@ -112,7 +118,7 @@ h4, h5, h6, .h4, .h5, .h6 {
 .select-bar {
 	padding-top: 20px;
 	z-index: 99;
-	background: #f4f4f4;
+	background: #EFEEEE;
 	width: 100%;
   height: 75px;
 }
@@ -120,12 +126,14 @@ h4, h5, h6, .h4, .h5, .h6 {
   color: rgb(218,182,97);
   font-style: italic;
   font-weight: 600;
+  font-size: 1.2em;
+  font-family: 'Chunkfive';
 } 
 .select-bar .hp-tabs {
 	padding: 0px;
 }
 .top-bar.non-white {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .top-bar-border {
   border-top: 3px rgb(0,128,183) solid;
@@ -149,8 +157,19 @@ h4, h5, h6, .h4, .h5, .h6 {
 button a.btn.btn-link.nav-login-button:hover {
   text-decoration: none;
 }
-button a.btn.btn-link.nav-login-button {
-  color: white
+button a.btn.btn-link.home {
+  color: white;
+  padding: 0 inherit;
+}
+button a.btn.btn-link.home:hover {
+  text-decoration: none
+}
+button.home-buttons {
+  background-color: rgb(79, 156, 156); 
+  border: solid white 2px
+}
+button.home-buttons:first-child {
+  margin-right: 15px
 }
 #main-footer {
   height: 95px;
@@ -293,7 +312,7 @@ button a.btn.btn-link.nav-login-button {
   background-size: cover;
   background-position: center center;
   text-align: center;
-  border-top: solid 10px #f4f4f4;
+  border-top: solid 10px #EFEEEE;
   padding: 160px 0;
 }
 .top-quote .top-quote-text {
@@ -314,7 +333,7 @@ button a.btn.btn-link.nav-login-button {
 .tab-container {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: #EFEEEE;
   padding-bottom: 75px;
 }
 .sold {
@@ -506,7 +525,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   float: left;
   background: white;
-  padding: 40px 0 40px;
+  padding-bottom: 40px;
 }
 .main-container.comment-block {
   padding-top: 0px 0 40px;
@@ -953,7 +972,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   padding: 1% 5%;
 }
 .similar-items.descrip {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 
 .product-description .product-slider {
@@ -1093,7 +1112,6 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 font-size: 14px;
 line-height: 50px;
 color: #333;
-border-top: solid 1px #e5e5e5;
 margin: 0;
 }
 .attr.return {
@@ -1103,6 +1121,7 @@ line-height: inherit;
 font-size: 14px;
 line-height: 50px;
 font-weight: 700;
+font-family: 'Chunkfive';
 color: #333;
 text-transform: uppercase;
 border-top: solid 1px #e5e5e5;
@@ -1203,7 +1222,7 @@ text-align: left;
   display: none;
 }
 .container.product-detail {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .product-presentation-tabs {
   width: 100%;
@@ -1551,7 +1570,7 @@ text-align: left;
 }
 .grid-product {
   width: 100%;
-  height: 350px;
+  height: 315px;
   position: relative;
   width: 100%;
   /*margin: 2rem;*/
@@ -1575,6 +1594,9 @@ text-align: left;
 }
 .product-container:hover .vintage-label {
   border-top: 4px solid black;
+ }
+ .product-container {
+  padding-bottom: 2em;
  }
 
 
@@ -1847,7 +1869,7 @@ text-align: left;
   margin-top: 20px;
 }
 .grid-products-wrapper.recommended {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .grid-products-wrapper .row {
   /*margin: 0 -15px;*/
@@ -1880,7 +1902,7 @@ text-align: left;
 .shopping-container {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: #EFEEEE;
   padding: 30px 0 80px;
 }
 .shopping-container .col-sm-8 {
@@ -1982,7 +2004,7 @@ text-align: left;
   width: 30px;
   height: 30px;
   color: #cccccc;
-  background: #f4f4f4;
+  background: #EFEEEE;
   text-align: center;
   padding-top: 5px;
 }
@@ -2004,8 +2026,8 @@ text-align: left;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  border-top: solid 1px #f4f4f4;
-  border-bottom: solid 1px #f4f4f4;
+  border-top: solid 1px #EFEEEE;
+  border-bottom: solid 1px #EFEEEE;
   padding: 0;
   text-align: center;
   color: #5e5e5e;
@@ -2193,7 +2215,7 @@ text-align: left;
 .filters-wrapper {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .filters-wrapper ul {
   width: 100%;
@@ -2385,7 +2407,7 @@ text-align: left;
 .checkout-steps-wrapper {
   width: 100%;
   float: left;
-  background: #f4f4f4;
+  background: #EFEEEE;
   margin: 25px 0;
 }
 .checkout-steps-wrapper .checkout-steps {
@@ -2523,11 +2545,10 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .btn.btn-primary.buy {
   width: 70px;
-  /*background-color: #333;*/
-  /*border-color: black;*/
+  font-family: 'Chunkfive';
 }
 .btn.btn-default.sold,
-.btn.btn-primary.buy.try {
+.btn.btn-primary.buy {
   width: 145px;
   height: 32px;
   /*background-color: rgb(201,177,62);*/
@@ -2629,9 +2650,6 @@ form .form-checkbox-wrap .checkbox-label {
 
 #how-it-works-modal .how-it-works .statement:not(:last-child) {
   border-right: 0px;
-}
-#how-it-works-button {
-  font-family: 'Chunkfive'
 }
 .btn.btn-link.tab-menu {
   padding-top: 0;
@@ -2785,6 +2803,9 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 10px 0 0;
   box-shadow: 0 6px 4px -4px #333;
   margin-bottom: 5px;
+  background-color: #333;
+  position: fixed;
+  top: 0;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
@@ -3004,14 +3025,14 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .footer-search .input-group:hover .form-control, .footer-search .input-group:hover .btn {
   background: #fff;
-  border: 1px solid #f4f4f4;
+  border: 1px solid #EFEEEE;
 }
  .footer-search .input-group:hover .btn {
   border-left: none;
  }
 .footer-search .input-group .form-control {
   height: 40px;
-  background: #f4f4f4;
+  background: #EFEEEE;
   border: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -3032,7 +3053,7 @@ form .form-checkbox-wrap .checkbox-label {
 .footer-search .input-group .btn {
   border: 1px solid transparent;
   height: 40px;
-  background: #f4f4f4;
+  background: #EFEEEE;
   color: #999999;
   font-size: 16px;
 }
@@ -3174,8 +3195,9 @@ footer ul li a:hover {
   background-position: center -182px;
 }
 .how-it-works {
-  background-color: white;
+  background-color: #EFEEEE;
   font-family: "Chunkfive";
+  color: black;
 }
 .how-it-works h3 {
   text-align: center;
@@ -3194,8 +3216,8 @@ footer ul li a:hover {
   min-height: 100px;
   padding: 0 2.5em;
 }
-.how-it-works .statement:not(:last-child) {
-  border-right: 1px solid #DDD;
+.how-it-works .statement:first-child {
+  border-right: 1px solid gray;
 }
 .how-it-works .col-md-12.statement {
   text-align: left;
@@ -3209,9 +3231,6 @@ footer ul li a:hover {
 }
 
 @media screen and (max-width: 992px) {
-.how-it-works .statement:not(:last-child) {
-  border-right: 0px;
-}
 }
 .how-it-works .row-fluid div {
   font-size: 14px;
@@ -3230,6 +3249,11 @@ footer ul li a:hover {
 .container-fluid.how-it-works.layer {
   margin-bottom: 0;
 }
+.shop-local-bottom {
+  padding: 30px;
+  background: #EFEEEE;
+  margin-top: 2em;
+}
 
 .how-it-works .row-fluid div.main-quote div {
   font-size: 24px;
@@ -3239,10 +3263,10 @@ footer ul li a:hover {
   float: left;
   padding: 25px 0 25px 0;
   height: 100%;
-  background-color: #f4f4f4;
+  background-color: #EFEEEE;
 }
 .page-quote {
-  background: #f4f4f4;
+  background: #EFEEEE;
   width: 100%;
   float: left;
   padding: 5px 0 5px 0;
@@ -3263,7 +3287,7 @@ footer ul li a:hover {
   text-align: center;
 }
 .container-fluid.tab-icons {
-  background: #f4f4f4;
+  background: #EFEEEE;
 }
 .container.tab-icons {
   margin-top: 15px;
@@ -3273,6 +3297,14 @@ footer ul li a:hover {
 }
 .pic-tabs {
   background: white;
+}
+.pic-tabs.home {
+  padding-right: 10%;
+  padding-left: 10%;
+}
+.main-container.detail,
+.pic-tabs.main {
+  margin-top: 10%;
 }
 .container-fluid.tab-icons .row{
   padding: 1rem;
@@ -3338,6 +3370,7 @@ footer ul li a:hover {
 .landing-message h1,
 .landing-message h3 {
   text-align: center;
+  margin-bottom: 5%;
 }
 .landing-message h3 {
   margin-top: 20px;
@@ -3620,7 +3653,7 @@ footer ul li a:hover {
     /*height: 265px;*/
   }
   .landing-message {
-    padding: 0 20%;
+    padding: 0 22%;
   }
   .grid-product figure img {
   /*  width: 263px;
@@ -4121,7 +4154,7 @@ footer ul li a:hover {
     display: block;
   }
   .main-navigation .navbar-nav .dropdown-menu li {
-    border-top: solid 1px #f4f4f4;
+    border-top: solid 1px #EFEEEE;
     position: relative;
     width: 100%;
     float: left;
@@ -4200,6 +4233,9 @@ footer ul li a:hover {
     line-height: 30px;
     color: #7a7a7a;
   }
+  .how-it-works {
+    padding: 30px inherit;
+  }
 }
 
 @media (max-width: 992px) {
@@ -4223,17 +4259,24 @@ footer ul li a:hover {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
   }
+  .how-it-works .statement:first-child {
+  border-right: 0px;
+  }
   .tab-icons.mobile {
     display: block;
     margin-top: 10px;
   }
   #mobile-navigation {
     display: block;
-    background-color: black;
+    background-color: #333;
     position: fixed;
+    top: 0;
     z-index: 10;
     width: 100%;
     margin: 0;
+  }
+  .pic-tabs.home {
+    padding: 0;
   }
   #desktop-navigation {
     display: none;
@@ -4397,6 +4440,13 @@ footer ul li a:hover {
   /*margin-left: 10%;*/
   max-width: 100%;
   }
+  .product-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  button.home-buttons:first-child {
+  margin-right: 5px
+  }
   #signup-login-modal .modal-dialog {
     width: 90%;
     max-width: 650px;
@@ -4429,7 +4479,7 @@ footer ul li a:hover {
   }
   .attr-label,
   .attr {
-    line-height: 40px;
+    line-height: 30px;
     font-size: 12px;
   }
   .footer-widget {

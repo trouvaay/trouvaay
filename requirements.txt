@@ -14,6 +14,7 @@ django-localflavor==1.1
 django-registration-redux==1.1
 django-sslify==0.2.5
 django-toolbelt==0.0.1
+django-endless-pagination==2.0
 djorm-pgarray==1.2
 gnureadline==6.3.3
 gspread==0.2.2

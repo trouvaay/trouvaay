@@ -10,24 +10,27 @@
 					<div class="text-center">
 						<fieldset>
 							<legend>Pre-Checkout Summary</legend>
-							<div class="row" style="margin-bottom: 10px">
-								<div class="col-xs-12">Please select option:</div>
-								<div class="col-xs-12">
-									<button id="button-order-type-try" class="btn btn-primary" type="button">48hr hold</button>
-									<button id="button-order-type-buy" class="btn btn-default" type="button">Buy now</button>
-									<span style="display: none;" id="order-type">try</span>
-								</div>
-							</div>
 							<div class="row">
+							{% if order_type == 'reserve' %}
+								<div class="col-xs-12">
+									<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+			                            <p class="text-center"><span id="pre-checkout-capture-date-try">
+			                            You're card won't be charged. </br>You're 1 step away from getting the location of your</span>
+			                            </br>
+			                            <b>{{ product.short_name }}</b>
+			                            </p>
+		                        	</div>
+								</div>
+							{% else %}
+							<!-- Buy options -->
 							<div class="col-xs-12">
 								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-		                            <p class="text-center"><span id="pre-checkout-capture-date-try">
-		                            You're card won't be charged. </br>You're 1 step away from getting the location of your</span>
-		                            <span id="pre-checkout-capture-date-buy" style="display:none">
-		                            You are one step away from your</span></br>
+		                            <p class="text-center">
+		                            You are one step away from your</br>
 		                            <b>{{ product.short_name }}</b>
 		                            </p>
 	                        	</div>
+	                        {% endif %}
 							</div>
 							</div>
 							<div class="row">
@@ -66,7 +69,13 @@
 										</tr>										
 							      	</tbody>
 							    </table>
-							    <button id="button-precheckout-submit" type="button" class="btn btn-success">Submit</button>		
+							    <button id="button-precheckout-submit" type="button" class="btn btn-success">
+								    {% if order_type == 'reserve' %}
+										Reserve
+									{% else %}
+										Purchase
+		                        	{% endif %}
+	                        	</button>		
 							</div>
 							</div>
 						</fieldset>
@@ -79,39 +88,29 @@
 
 <script>
 $(document).ready(function() {
-
-	$('#button-order-type-try').on('click', function(e) {
-		$('#order-type').text("try");
-		$('#pre-checkout-capture-date-buy').hide();
-		$('#pre-checkout-capture-date-try').show();
-		$('#button-order-type-buy').removeClass('btn-primary');
-		$('#button-order-type-buy').addClass('btn-default');
-		$('#button-order-type-try').removeClass('btn-default');
-		$('#button-order-type-try').addClass('btn-primary');
-	});
-	$('#button-order-type-buy').on('click', function(e) {
-		$('#order-type').text("buy");
-		$('#pre-checkout-capture-date-try').hide();
-		$('#pre-checkout-capture-date-buy').show();
-		$('#button-order-type-try').removeClass('btn-primary');
-		$('#button-order-type-try').addClass('btn-default');
-		$('#button-order-type-buy').removeClass('btn-default');
-		$('#button-order-type-buy').addClass('btn-primary');
-	});
 	
 	var productName = "{{ product.short_name }}";
 	var productPrice = {{ total.in_cents }};
+	var orderType = "{{ order_type }}";
 	
 	console.log('pre-checkout is loaded');
 	console.log('productPrice: ' + productPrice);
 	console.log('total_purchase_price: ' + {{ total.in_cents }});
 	
 	$('#button-precheckout-submit').on('click', function(e) {
+		if (orderType == 'buy') {
+			mixpanel.track(
+	                "Buy Pre-checkout Submitted",
+	                { "product": productName }
+	            );
+		}
+		else if (orderType == 'reserve') {
+			mixpanel.track(
+	                "Reserve Pre-checkout Submitted",
+	                { "product": productName }
+	            );
+		}
 
-		mixpanel.track(
-                "Clicked Pre-checkout Submit",
-                { "product": productName }
-            );
 		if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
 		
 	  		$('#pre-checkout-modal').modal('hide');
@@ -133,7 +132,7 @@ $(document).ready(function() {
 							token: token,
 							args: args,
 							total_amount: productPrice,
-							order_type: $('#order-type').text(),
+							order_type: orderType,
 							product_id: {{ product.id }}
 						},
 						success: function(data){

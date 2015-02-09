@@ -10,6 +10,8 @@ import logging
 from django.conf import settings
 from random import shuffle
 
+from endless_pagination.views import AjaxListView
+
 
 
 logger = logging.getLogger(__name__)
@@ -17,27 +19,25 @@ logger = logging.getLogger(__name__)
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
 
-class HomeView(generic.ListView):
-    template_name = 'goods/home/home.html'
+class LandingView(generic.ListView):
+    template_name = 'goods/landing/landing.html'
     context_object_name = 'products'
     model = Product
-    paginate_by = 21
 
     def get_queryset(self):
-        pub_products = self.model.objects.filter(is_published=True)
-        #filter by products that are furniture
-        queryset = [i for i in pub_products if i.is_furniture()]
+        queryset = self.model.objects.filter(is_published=True, is_featured=True, store__is_featured=True)[:6]
         return queryset
 
     def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
+        context = super(LandingView, self).get_context_data(**kwargs)
         #JSON sent to client to calc distance from user
         # context['products_json'] = serialize('json', context['products'])
         context['BaseUrl'] = BASE_URL
         context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
         context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
-        context['query_operator'] = '?'
+        context['SIGNUP_OFFER'] = settings.SIGNUP_OFFER
+        
         
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings
@@ -61,27 +61,29 @@ class HomeView(generic.ListView):
 
         return context
 
-class FurnitureTypeView(generic.ListView):
-    template_name = 'goods/home/furniture_type.html'
+class MainView(AjaxListView):
+    template_name = 'goods/main/main_ajax.html'
+    page_template = 'goods/main/main_ajax_page.html'
     context_object_name = 'products'
     model = Product
-    paginate_by = 21
+    key = 'page'
     
 
     def get_queryset(self):
-        furn_type = self.request.GET['type']
         try:
-            furniture_type_object = FurnitureType.objects.get(select=furn_type)
-        except Exception, e:
-            logger.debug(str(e))
-            furniture_type_object = None
-        queryset = list(self.model.objects.filter(is_published=True,furnituretype = furniture_type_object ))
-        #filter by products that are furniture
-        
+            furn_type = self.request.GET['type']
+            try:
+                furniture_type_object = FurnitureType.objects.get(select=furn_type)
+            except Exception, e:
+                logger.debug(str(e))
+                furniture_type_object = None
+            queryset = list(self.model.objects.filter(is_published=True, furnituretype = furniture_type_object, store__is_featured=True))
+        except:
+            queryset = self.model.objects.filter(is_published=True, store__is_featured=True)
         return queryset
 
     def get_context_data(self, **kwargs):
-        context = super(FurnitureTypeView, self).get_context_data(**kwargs)
+        context = super(MainView, self).get_context_data(**kwargs)
         context['BaseUrl'] = BASE_URL
         context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
         context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE

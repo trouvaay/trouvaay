@@ -1,22 +1,24 @@
-{% extends 'goods/home/_home_base.html' %}
+{% extends '_base.html' %}
 {% load staticfiles %}
 {% load cloudinary %}
 
+{% block nav %}
+{% endblock nav %}
 {% block content %}
       <div class="container homepage-slider-container">
         <div class="row-fluid">
             <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/c_fill,h_843,w_1265/v1422902656/shutterstock_160709951_hsvzx9.jpg'); height:40em;">
             <!-- http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg -->
             <div class="black_overlay"></div><!-- end overlay -->
-            {% include 'goods/home/_home_nav_snippet.html' %}
+            {% include 'goods/landing/_landing_nav_snippet.html' %}
             <div class="landing-message">
                 <h2>
-                Shop All The Unique Furniture Available In Bay Area Stores Without Leaving Your Couch
+                Shop The Unique Furniture Available In Bay Area Stores Without Leaving Your Couch
                 </h2>
-                <h3>
-                    10% off your first purchase when you join
-                </h3>
-                <div class="span7 text-center"><button style="background-color: transparent; border: solid white 2px"><a class="btn btn-link nav-login-button" href="#">Join</a></button></div>
+                <div class="text-center">
+                     <button class="home-buttons"><a class="btn btn-link home" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5><span id="how-it-works-button">How it works</span></h5></a></button>
+                    <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop the Bay</h5></a></button>
+                </div>
             </div>
             </div>
         </div>
@@ -25,18 +27,40 @@
         <div class="row-fluid">
             <div class="col-md-6 statement">
                 <h3>We do the hunting for you</h3>
-                <h4>We scour the Bay Area for the best vintage and unique home decor pieces.  More treasure, less hunting.</h4>
+                <h4>We scour Bay Area stores for unique home decor pieces and bring them online here.  </h4>
             </div>
             <div class="col-md-6 statement">
-                <h3>Option to see in-store before you pay</h3>
-                <h4>At check out, you have the option to buy now or see the item in-store within 48 hours.</h4>
+                <h3>Reserve or Buy Now</h3>
+                <h4>Want to see it in person first? Reserve the item and get 48 hours to see it in store.</h4>
             </div>
             <div class="col-md-6 statement mobile-details">
                 <a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5>Click for more details</h5></a>
             </div>
         </div>
       </div>
-    {{ block.super }}
+    
+    <div class="container-fluid pic-tabs home">        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                                {% for product in products %}
+                                    {% include 'goods/landing/_landingproduct_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab1 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid shop-local-bottom">        
+        <div class="span7 text-center">
+            <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop the Bay</h5></a></button>
+        </div>
+    </div>
     
 	{% if promotion_offer and not request.user.is_authenticated %}
 	<div class="modal fade" id="promotion-offer-modal">
