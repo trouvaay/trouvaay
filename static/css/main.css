@@ -3387,14 +3387,14 @@ footer ul li a:hover {
   top: 40%;
   width: 100%;
 }
-.landing-message h2,
 .landing-message h1,
-.landing-message h3 {
+.landing-message h2,
+.landing-message h3,
+.landing-message h4 {
   text-align: center;
-  margin-bottom: 5%;
 }
-.landing-message h3 {
-  margin-top: 20px;
+.landing-message h4 {
+  margin-bottom: 20px;
   font-family: ralewaylight;
 }
 .homepage-slider-wrap {
