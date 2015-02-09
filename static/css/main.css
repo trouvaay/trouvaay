@@ -111,6 +111,10 @@ h4, h5, h6, .h4, .h5, .h6 {
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a {
   color: rgb(218,182,97);
 }
+.nav>li>a:focus {
+  background-color: transparent;
+  border: none;
+}
 #desktop-search > ul > li > a {
   font-size: 16px;
 }
@@ -2663,10 +2667,6 @@ form .form-checkbox-wrap .checkbox-label {
 #signup-login-modal .modal-dialog .modal-body {
   padding: 20px 0;
 }
-#how-it-works-button {
-  font-family: 'Chunkfive';
-  font-size: 18px;
-}
 #how-it-works-modal .how-it-works .statement:not(:last-child) {
   border-right: 0px;
 }
@@ -4276,6 +4276,10 @@ footer ul li a:hover {
   .logo-div {
     padding-top: 10px;
     height: 72px;
+  }
+  .hp-tabs ul > li > a {
+    font-size: 16px;
+    padding:  15px 3px;
   }
 }
 @media (max-width: 767px) {
