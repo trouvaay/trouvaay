@@ -19,8 +19,8 @@
                 Register for 10% off your first purchase
                 </h4>
                 <div class="text-center">
-                     <button class="home-buttons" id="how-it-works-button"><a class="btn btn-link home" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5><span>How it works</span></h5></a></button>
-                    <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop Now</h5></a></button>
+                     <button class="home-buttons" id="how-it-works-button"><a class="btn btn-link home" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5><span id="how-it-works-button">How it works</span></h5></a></button>
+                    <button class="home-buttons"><a class="btn btn-link home button-shop-the-bay" href="{% url 'goods:main' %}"><h5>Shop Now</h5></a></button>
                 </div>
             </div>
             </div>
@@ -66,7 +66,7 @@
     </div>
     <div class="container-fluid shop-local-bottom">        
         <div class="span7 text-center">
-            <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop Now</h5></a></button>
+            <button class="home-buttons"><a class="btn btn-link home button-shop-the-bay" href="{% url 'goods:main' %}"><h5>Shop Now</h5></a></button>
         </div>
     </div>
 	{% if promotion_offer and not request.user.is_authenticated %}
