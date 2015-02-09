@@ -5,12 +5,12 @@ from pprint import pprint as pp
 import gspread
 import logging
 from django.db import IntegrityError
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
-email = 'blakesadams@gmail.com'
-password = 'Bloopers1423'
-
+email = settings.GMAIL_EMAIL
+password = settings.GMAIL_PASSWORD
 
 class Command(BaseCommand):
     args = '<goog_file_name spreadsheet_name start_row end_row>'
