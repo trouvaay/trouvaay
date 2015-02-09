@@ -129,7 +129,6 @@ h4, h5, h6, .h4, .h5, .h6 {
   font-style: italic;
   font-weight: 600;
   font-size: 1.2em;
-  font-family: 'Chunkfive';
 } 
 .select-bar .hp-tabs {
 	padding: 0px;
@@ -158,6 +157,7 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 button a.btn.btn-link.nav-login-button:hover {
   text-decoration: none;
+  
 }
 button a.btn.btn-link.home {
   color: white;
@@ -168,10 +168,16 @@ button a.btn.btn-link.home:hover {
 }
 button.home-buttons {
   background-color: rgb(79, 156, 156); 
-  border: solid white 2px
+  border: none
+}
+button.home-buttons:hover {
+  opacity: 0.5
 }
 button.home-buttons:first-child {
   margin-right: 15px
+}
+button.home-buttons > a > h5 {
+  font-size: 16px;
 }
 #main-footer {
   height: 95px;
@@ -1123,7 +1129,6 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   font-size: 14px;
   line-height: 50px;
   font-weight: 700;
-  font-family: 'Chunkfive';
   color: #333;
   text-transform: uppercase;
   margin: 0;
@@ -2559,6 +2564,9 @@ form .form-checkbox-wrap .checkbox-label {
   height: 3em;
   /*background-color: rgb(201,177,62);*/
 }
+.btn.btn-primary.buy.reserve {
+  background-color: black;
+}
 .btn.btn-success.dist {
   width: 60px;
   padding: 6px 10px;
@@ -2653,7 +2661,10 @@ form .form-checkbox-wrap .checkbox-label {
 #signup-login-modal .modal-dialog .modal-body {
   padding: 20px 0;
 }
-
+#how-it-works-button {
+  font-family: Chunkfive;
+  color: black;
+}
 #how-it-works-modal .how-it-works .statement:not(:last-child) {
   border-right: 0px;
 }
@@ -3204,7 +3215,7 @@ footer ul li a:hover {
   background-position: center -182px;
 }
 .how-it-works {
-  background-color: #EFEEEE;
+  background-color: white;
   font-family: "Chunkfive";
   color: black;
 }
@@ -3252,8 +3263,8 @@ footer ul li a:hover {
   margin: 0 auto 20px;
 }
 .how-it-works .row-fluid div.main-quote {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   font-family: 'Chunkfive';
 }
 .container-fluid.how-it-works.layer {
@@ -3261,8 +3272,13 @@ footer ul li a:hover {
 }
 .shop-local-bottom {
   padding: 30px;
-  background: #EFEEEE;
+  background: white;
   margin-top: 2em;
+  background: #EFEEEE;
+}
+.featured-icons {
+  padding: 5px;
+  background: #EFEEEE;
 }
 
 .how-it-works .row-fluid div.main-quote div {
@@ -4248,7 +4264,7 @@ footer ul li a:hover {
     color: #7a7a7a;
   }
   .how-it-works {
-    padding: 10px inherit;
+    padding: 5px inherit;
   }
 }
 

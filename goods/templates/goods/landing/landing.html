@@ -7,7 +7,7 @@
 {% block content %}
       <div class="container homepage-slider-container">
         <div class="row-fluid">
-            <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/c_fill,h_843,w_1265/v1422902656/shutterstock_160709951_hsvzx9.jpg'); height:65em;">
+            <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/c_fill,h_843,w_1265/v1422902656/shutterstock_160709951_hsvzx9.jpg'); height:28em;">
             <!-- http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg -->
             <div class="black_overlay"></div><!-- end overlay -->
             {% include 'goods/landing/_landing_nav_snippet.html' %}
@@ -17,7 +17,7 @@
                 </h2>
                 <div class="text-center">
                      <button class="home-buttons"><a class="btn btn-link home" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5><span id="how-it-works-button">How it works</span></h5></a></button>
-                    <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop the Bay</h5></a></button>
+                    <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop Now</h5></a></button>
                 </div>
             </div>
             </div>
@@ -28,7 +28,7 @@
         <div class="row-fluid">
             <div class="col-md-6 statement">
                 <h3>We do the hunting for you</h3>
-                <h4>We scour Bay Area stores for unique home decor pieces and bring them online here.  </h4>
+                <h4>We scour Bay Area stores for unique home decor pieces and bring them online and tell you what store has them.</h4>
             </div>
             <div class="col-md-6 statement">
                 <h3>Reserve or Buy Now</h3>
@@ -39,14 +39,11 @@
             </div>
         </div>
       </div>
-    <div class="container" >
-        <div class="row" style="height:20px">
-            <div class="col-sm-offset-1 col-sm-3">
-                <h3>Featured Products...</h3>
-            </div>
+     <div class="container-fluid featured-icons">        
+        <div class="span7 text-center">
+            <h3>Featured Products</h3>
         </div>
     </div>
-    
     <div class="container-fluid pic-tabs home">        
         <div class="row">
             <div class="col-sm-12">
@@ -66,7 +63,7 @@
     </div>
     <div class="container-fluid shop-local-bottom">        
         <div class="span7 text-center">
-            <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop the Bay</h5></a></button>
+            <button class="home-buttons"><a class="btn btn-link home" href="{% url 'goods:main' %}"><h5>Shop Now</h5></a></button>
         </div>
     </div>
     
