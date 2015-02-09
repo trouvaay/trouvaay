@@ -128,7 +128,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   color: rgb(218,182,97);
   font-style: italic;
   font-weight: 600;
-  font-size: 1.2em;
+  font-size: 1.1em;
 } 
 .select-bar .hp-tabs {
 	padding: 0px;
@@ -168,7 +168,8 @@ button a.btn.btn-link.home:hover {
 }
 button.home-buttons {
   background-color: rgb(79, 156, 156); 
-  border: none
+  border: none;
+  width: 120px;
 }
 button.home-buttons:hover {
   opacity: 0.5
@@ -2555,7 +2556,6 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .btn.btn-primary.buy {
   width: 70px;
-  font-family: 'Chunkfive';
 }
 .btn.btn-default.sold,
 .btn.btn-primary.buy {
@@ -2693,7 +2693,6 @@ form .form-checkbox-wrap .checkbox-label {
   font-weight: 700;
   color: #333;
   letter-spacing: 2px;
-  text-transform: uppercase;
   text-align: center;
   /*margin-bottom: 20px;*/
 }
@@ -4108,6 +4107,7 @@ footer ul li a:hover {
     min-width: 55px;
     max-width:68px;
   }
+
   .hp-tabs .nav-tabs > li.active > a:hover,
   .hp-tabs .nav-tabs > li > a:hover {
     background: #999;
@@ -4293,6 +4293,9 @@ footer ul li a:hover {
     display: block;
     margin-top: 10px;
   }
+  .home-buttons.HIW> {
+    display: none;
+  }
   #mobile-navigation {
     display: block;
     background-color: #333;
@@ -4311,6 +4314,9 @@ footer ul li a:hover {
   .how-it-works .statement {
     padding: 0 5%;
     margin-top: 50px;
+  }
+  #how-it-works-button {
+    display: none;
   }
   .how-it-works .statement.mobile-details {
     padding: 0 5%;
