@@ -16,7 +16,7 @@
                 <!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
                 <li><a class="btn btn-link tab-menu" href="{% url 'members:logout' %}">Signup</a></li>
                 {% if user.is_authenticated %}
-                    <li><a class="btn btn-link tab-menu" href="{% url 'members:logout' %}">Logout</a></li>
+                    <li><a class="btn btn-link tab-menu nav-logout-button" href="{% url 'members:logout' %}">Logout</a></li>
                 {% else %}
                     <li><a class="btn btn-link tab-menu nav-login-button" href="#">Login</a></li>
                 {% endif %}
