@@ -111,6 +111,9 @@ h4, h5, h6, .h4, .h5, .h6 {
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a {
   color: rgb(218,182,97);
 }
+#desktop-search > ul > li > a {
+  font-size: 16px;
+}
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a:hover {
   background-color: transparent;
 }
@@ -118,7 +121,6 @@ h4, h5, h6, .h4, .h5, .h6 {
   color: red;
 }
 .select-bar {
-	padding-top: 20px;
 	z-index: 99;
 	background: #EFEEEE;
 	width: 100%;
@@ -2662,14 +2664,11 @@ form .form-checkbox-wrap .checkbox-label {
   padding: 20px 0;
 }
 #how-it-works-button {
-  /*font-family: Chunkfive;
-  color: black;*/
+  font-family: 'Chunkfive';
+  font-size: 18px;
 }
 #how-it-works-modal .how-it-works .statement:not(:last-child) {
   border-right: 0px;
-}
-.btn.btn-link.tab-menu {
-  padding-top: 0;
 }
 #addtocartmodal {
   top: 15%;
@@ -2816,15 +2815,12 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   text-align: center;
-  padding: 10px 0 0;
   box-shadow: 0 6px 4px -4px #333;
   margin-bottom: 5px;
   background-color: white;
   position: fixed;
   top: 0;
-}
-.nav.navbar-navt > li > a {
-  padding:  10px 5px;
+  height: 50px;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
