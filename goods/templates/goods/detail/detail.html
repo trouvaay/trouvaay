@@ -15,13 +15,21 @@
                 <!-- renders images responsibly -->
             <div>
             </div>
+	    <ul class="rslides">
+		    {% for picture in product.productimage_set.all %}
+		    
+		    <li>
                 <picture>
                     <!--[if IE 9]><video style="display: none;"><![endif]-->
-                    <source srcset="{% cloudinary_url product.productimage_set.first.image width=450 height=550 crop="fit" %}" media="(min-width: 992px)">
-                    <source srcset="{% cloudinary_url product.productimage_set.first.image width=400 height=400 crop="fit" %}" media="(min-width: 413px)">
+                    <source srcset="{% cloudinary_url picture.image width=450 height=550 crop="fit" %}" media="(min-width: 992px)">
+                    <source srcset="{% cloudinary_url picture.image width=400 height=400 crop="fit" %}" media="(min-width: 413px)">
                     <!--[if IE 9]></video><![endif]-->
-                    <img srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=350 crop="fit" %}' alt="">
+                    <img srcset='{% cloudinary_url picture.image width=275 height=350 crop="fit" %}' alt="">
                 </picture>
+		</li>
+		    {% endfor %}
+		
+	</ul>
             </div>
             <div class="col-sm-5 col-xs-12 product-description">
                 <div class="row">
@@ -193,3 +201,18 @@
 </section>
 {% endblock content %}
 
+{% block endjs %}
+{{ block.super }}
+<script src="{% static 'js/vendor/responsiveslides.min.js' %}"></script>
+<script>
+  $(function() {
+		  $(".rslides").responsiveSlides({
+			  auto: false,
+			  nav: true,
+			  prevText: 'b',
+			  nextText: 'a',
+			  
+			  });
+  });
+</script>
+{% endblock endjs %}
