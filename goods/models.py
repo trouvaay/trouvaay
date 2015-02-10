@@ -3,6 +3,7 @@ from helper import AbstractImageModel
 from django.utils import timezone
 from django.db.models.signals import post_save, m2m_changed
 import itertools
+import hashlib
 import requests
 import cloudinary
 from django.core.files import File
@@ -154,11 +155,12 @@ class Product(models.Model):
     is_instore = models.BooleanField(default=True)
     delivery_weeks = models.CharField(max_length=100, null=True, blank=True)
     is_avail_now = models.BooleanField(default=True)
+    md5_order = models.CharField(max_length=32, null=True, blank=True)
 
     class Meta:
         # added Height as quick hack to randomize display of products as pub_date clusters
         # items by store
-        ordering = ['-is_featured', 'short_name', '-pub_date']
+        ordering = ['-is_featured', 'md5_order', 'short_name', '-pub_date']
         unique_together = ('short_name', 'store',)
 
     def __str__(self):
@@ -181,10 +183,15 @@ class Product(models.Model):
                 break
             # append number to slug if it already exists
             self.slug = '%s-%d' % (self.slug, x)
-
+        # Create has for unique value for product sorting
+        self.add_md5_order()
         super(Product, self).save(*args, **kwargs)
             
-            
+    def add_md5_order(self):
+        u = hashlib.md5()
+        u.update(self.slug)
+        self.md5_order = u.hexdigest()
+
     def is_discounted(self):
         return (self.current_price < self.original_price)
 
