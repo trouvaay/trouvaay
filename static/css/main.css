@@ -122,7 +122,8 @@ h4, h5, h6, .h4, .h5, .h6 {
   background-color: transparent;
 }
 .discount {
-  color: red;
+  color: rgb(235, 27, 27);
+  font-weight: 600px;
 }
 .select-bar {
 	z-index: 99;
@@ -353,7 +354,7 @@ button.home-buttons > a > h5 {
 }
 .sold {
   font-weight: 600;
-  color: red;
+  color: rgb(235, 27, 27);
 }
 .icon-label {
   color: rgb(34, 34, 44);
@@ -4285,6 +4286,9 @@ footer ul li a:hover {
 @media (max-width: 767px) {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
+  }
+  .tooltip {
+    display: none !important;
   }
   .how-it-works .statement:first-child {
   border-right: 0px;

@@ -3,7 +3,7 @@
  <div class="container-fluid select-bar hp-tabs" style="background-color:#333" style="height:100%">
         <div class="row-fluid">
             <div class="col-xs-12 col-sm-3 logo-div main-navigation hidden-xs">
-                <a href="{% url 'goods:main' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></br>
+                <a href="{% url 'goods:landing' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></br>
             </div>
             <!-- <div class="col-xs-12 col-sm-1 logo-div main-navigation hidden-xs">
                 <a id="filter" href="#">filter</a></br>
@@ -22,6 +22,9 @@
             </div>
             <div id="desktop-search" class="col-xs-12 col-sm-6" style="text-align: center">
                 <ul class="nav navbar-navt center-block">
+                    <li id="all">
+                        <a class="btn btn-link tab-menu" href="{% url 'goods:main' %}">all</a>
+                    </li>
                     <li id="seating">
                         <a class="btn btn-link tab-menu" href="{% url 'goods:main' %}?type=seating">seating</a>
                     </li>

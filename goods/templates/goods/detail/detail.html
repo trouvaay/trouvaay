@@ -49,7 +49,7 @@
                                <em><p>{% if product.current_price %}
                                 {% if product.is_discounted %}
                                     <strike>{{'$'}}{{ product.original_price|floatformat:"0" }}</strike>
-                                    <span style="font-family: chunkfive" class="discount">{{'$'}}{{ product.current_price|floatformat:"0" }}<span>
+                                    <span class="discount">{{'$'}}{{ product.current_price|floatformat:"0" }}<span>
                                 {% else %}
                                     <b>{{'$'}}{{ product.current_price|floatformat:"0" }}</b>
                                 {% endif %}
