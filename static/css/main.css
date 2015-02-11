@@ -117,7 +117,8 @@ h4, h5, h6, .h4, .h5, .h6 {
   border: none;
 }
 #desktop-search > ul > li > a {
-  font-size: 16px;
+  font-size: 14px;
+  padding: 15px 8px;
 }
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a:hover {
   background-color: transparent;
@@ -4276,15 +4277,19 @@ footer ul li a:hover {
     padding-right: 5px;
   }
   .icon-label {
-    color: white;
+    color: white  ;
   }
   .logo-div {
     padding-top: 10px;
     height: 72px;
   }
   .hp-tabs ul > li > a {
-    font-size: 16px;
+    font-size: 14px;
     padding:  15px 3px;
+  }
+  #desktop-search > ul > li > a {
+    font-size: 13.5px;
+    padding:  15px 2px;
   }
 }
 @media (max-width: 767px) {
@@ -4294,6 +4299,7 @@ footer ul li a:hover {
   .tooltip {
     display: none !important;
   }
+  
   .how-it-works .statement:first-child {
   border-right: 0px;
   }
