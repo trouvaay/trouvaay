@@ -498,7 +498,7 @@ class PromotionOffer(models.Model):
             # no more such for this user
             return (False, promo_code, 'You have already used this promotion')
         elif not user.is_authenticated():
-            return (False, promo_code, 'Please log in')
+            return (False, promo_code, 'Please signup/login to use this promo')
 
         return (True, proper_promo_code, '')
 
