@@ -22,7 +22,7 @@
 								<div class="col-xs-12">
 									<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
 			                            <p class="text-center"><span id="pre-checkout-capture-date-try">
-			                            Youre card won't be charged. </br>You're one step away from getting the location of your</span>
+			                            Your card won't be charged. </br>You're one step away from getting the location of your</span>
 			                            </br>
 			                            <b>{{ product.short_name }}</b>
 			                            </p>
@@ -58,12 +58,28 @@
 										<tr>
 											<th scope="row">Discount ({{ discount.name }})</td>
 											<td align="right">(${{ discount.dollar_value|floatformat:2 }})</td>
+											{% if discount.promo_code %}
+											<span style="display: none;" class="promo-code-pass-through">{{ discount.promo_code }}</span>
+											{% endif %}
 										</tr>
 										{% endfor %}
 										<tr>
 											<th scope="row">Subtotal</td>
 											<td align="right">${{ subtotal_dollar_value|floatformat:2 }}</td>
 										</tr>
+										{% if not promo_is_valid %}
+										<tr>
+											<th scope="row">
+												{% if promo_code_message %}<label style="color:red" for="input-promo-code"><b>{{ promo_code_message }}</b></label>{% endif %}
+												<input type="text" name="promo_code" id="input-promo-code" placeholder="Promo code" />
+												<button id="{% if order_type == "buy" %}buy{% else %}reserve{% endif %}_withpromocode_{{ product.id }}" 
+													type="button" class="btn btn-primary btn-xs apply-promo-code">Apply</button>
+											</td>
+											<td align="right">&nbsp;</td>
+										</tr>
+										{% endif %}
+										{% if can_enter_promo_code %}
+										{% endif %}
 										{% if taxes %}
 										<tr>
 											<th scope="row">Taxes ({{ taxes.percentage|floatformat:2 }}%)</td>
@@ -104,6 +120,8 @@ $(document).ready(function() {
 	console.log('productPrice: ' + productPrice);
 	console.log('total_purchase_price: ' + {{ total.in_cents }});
 	
+	$('.btn.apply-promo-code').on('click', handleBuyButtonClick);
+	
 	$('#button-precheckout-submit').on('click', function(e) {
 		if (orderType == 'buy') {
 			mixpanel.track(
@@ -119,11 +137,20 @@ $(document).ready(function() {
 		}
 
 		if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
+
+			var promoCodesArray = [];
+			$(".promo-code-pass-through").each(function() {
+				promoCodesArray.push($(this).text());
+			});
+			console.log('promoCodesArray: '+promoCodesArray);
+			
+			var promoCodes = promoCodesArray.join(",");
+			console.log('promoCodes: '+promoCodes);
+		
 		
 	  		$('#pre-checkout-modal').modal('hide');
 	  		console.log('pre-checkout modal hidden');
 	  		
-
 			var handler = StripeCheckout.configure({
 				key: '{{ stripe_publishable_key }}',
 				image: "{% static 'img/logos/Raredoor-R-icon-gold.png' %}",
@@ -140,7 +167,8 @@ $(document).ready(function() {
 							args: args,
 							total_amount: productPrice,
 							order_type: orderType,
-							product_id: {{ product.id }}
+							product_id: {{ product.id }},
+							promo_codes: promoCodes
 						},
 						success: function(data){
 							console.log('checkout callback returned: ' + data['status']);

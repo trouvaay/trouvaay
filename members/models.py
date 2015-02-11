@@ -8,6 +8,7 @@ from django.contrib.auth.models import (
     BaseUserManager
     )
 from django.db import models
+from django.db.models import Q
 from django.conf import settings
 from helper import States
 from registration.models import RegistrationManager as BaseRegistrationManager
@@ -286,8 +287,12 @@ class AuthUserOrder(models.Model):
     taxes = models.DecimalField(max_digits=8, decimal_places=2, blank=None, null=None, default=0.00)
 
     @classmethod
-    def compute_order_line_items(self, user, total_price_before_offers):
-        offers = PromotionOffer.get_current_offers(user)
+    def compute_order_line_items(self, user, total_price_before_offers, promo_codes):
+        offers = PromotionOffer.get_current_offers(user=user, promo_codes=promo_codes)
+
+        for offer in offers:
+            print offer.code
+
         discounts = []
         taxes = {}
         total = {}
@@ -298,9 +303,12 @@ class AuthUserOrder(models.Model):
             for offer in offers:
                 discount_dollar_value = offer.get_discount_dollar_value(total_price_before_offers=total_price_before_offers)
                 if(discount_dollar_value):
-                    discounts += [{'name': offer.name,
+                    discounts += [{
+                                   'name': offer.name,
                                    'dollar_value': discount_dollar_value,
-                                   'offer_id': offer.id}]
+                                   'offer_id': offer.id,
+                                   'promo_code': offer.code if offer.code in promo_codes else None
+                                   }]
                     total_discount += discount_dollar_value
         subtotal_dollar_value = total_price_before_offers - total_discount
         taxes['dollar_value'] = subtotal_dollar_value * settings.SALES_TAX
@@ -308,6 +316,11 @@ class AuthUserOrder(models.Model):
 
         total['in_dollars'] = Decimal(subtotal_dollar_value + taxes['dollar_value']).quantize(Decimal('.01'))
         total['in_cents'] = int(total['in_dollars'] * 100)
+
+        print 'discounts', discounts
+        print 'subtotal_dollar_value', subtotal_dollar_value
+        print 'taxes', taxes
+        print 'total', total
 
         return discounts, subtotal_dollar_value, taxes, total 
 
@@ -367,9 +380,11 @@ class OfferType(object):
     and we might never find the issue.
     """
     FIRST_ORDER = 'FIRST_ORDER'
+    DISCOUNT_PROMO = 'DISCOUNT_PROMO'
 
 OFFER_TYPES = (
     (OfferType.FIRST_ORDER, 'First order'),
+    (OfferType.DISCOUNT_PROMO, 'Discount promo'),
 )
 
 
@@ -410,12 +425,21 @@ class PromotionOffer(models.Model):
     discount_limit = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=None, help_text='Limits the Percent discount off to this value. This is applicable only when discount_percent is set')
 
     @classmethod
-    def get_current_offers(self, user=None, offer_type=None):
+    def get_current_offers(cls, user=None, offer_type=None, promo_codes=None):
+        """Returns all current offers
+
+        if user is provided then filters out used up offers
+        if promo_codes is provided then also includes specific offers for each promo code
+        if offer_type is provided then only offers of this type will be considered, this takes precedence over promo_codes 
+        """
+
         right_now = timezone.now()
-        
-        offers = PromotionOffer.objects.filter(is_active=True,
-                                               start_time__lte=right_now,
-                                               end_time__gte=right_now)
+        query = Q(is_code_required=False)
+        if(promo_codes):
+            query |= Q(is_code_required=True, code__in=promo_codes)
+
+        offers = PromotionOffer.objects.filter(query, is_active=True, start_time__lte=right_now, end_time__gte=right_now)
+
         if(offer_type):
             offers = offers.filter(offer_type=offer_type)
 
@@ -428,9 +452,59 @@ class PromotionOffer(models.Model):
             offers = result
         return offers
 
+    @classmethod
+    def is_valid_promo_code(cls, user, promo_code):
+        """Checks if promo code is valid
+        
+        Does case insensitive comparison.
+        If code is valid then returned promo_code would have proper capitalization
+        
+        Returns tuple (is_valid, promo_code, message)
+        is_valid - boolean True - valid, False - invalid
+        promo_code - if the code is valid this will 
+            contain correct code with proper capitalization
+            if code is not valid then this is same as the 
+            input promo_code as-is
+        message - if code is invalid this will contain a reason why
+        
+        Returning proper capitalizaion is needed so that we can later use it 
+        when querying database using the "__in" query. Django does not support
+        case insensitive filter using "__in"
+        """
+
+        # empty promo codes are invalid
+        invalid_code_message = 'Invalid promo code'
+        if(not promo_code):
+            return (False, promo_code, invalid_code_message)
+
+        right_now = timezone.now()
+        proper_promo_code = None
+        try:
+            offer = PromotionOffer.objects.get(is_active=True,
+                                               code__iexact=promo_code,
+                                               start_time__lte=right_now,
+                                               end_time__gte=right_now)
+            proper_promo_code = offer.code
+        except PromotionOffer.DoesNotExist:
+            # did not find a valid offer for this promo code
+            return (False, promo_code, invalid_code_message)
+
+        # check whether the user used up all the offers
+        
+
+        if(user and
+           offer.limit_per_user != -1 and
+           offer.limit_per_user <= PromotionRedemption.objects.filter(offer_id=offer.id, authuser_id=user.id).count()):
+            # no more such for this user
+            return (False, promo_code, 'You have already used this promotion')
+        elif not user.is_authenticated():
+            return (False, promo_code, 'Please log in')
+
+        return (True, proper_promo_code, '')
+
     def get_discount_dollar_value(self, total_price_before_offers=None):
         if(self.is_discount):
-            if(self.discount_fixed_amount and self.discount_fixed_amount > total_price_before_offers):
+            if(self.discount_fixed_amount and self.discount_fixed_amount <= total_price_before_offers):
                 return self.discount_fixed_amount
             elif(self.discount_percent):
                 discount = total_price_before_offers * self.discount_percent / 100

@@ -152,8 +152,13 @@ class ReserveCallbackView(generic.DetailView):
                 total_amount_in_cents = int(request.POST['total_amount'])
 
                 logger.debug('total_amount_in_cents %d' % total_amount_in_cents)
-
-                discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(self.request.user, total_price_before_offers=product.current_price)
+                promo_codes = []
+                promo_codes_param = request.POST['promo_codes'].strip()
+                if(promo_codes_param):
+                    promo_codes = [i for i in promo_codes_param.split(',')]
+                discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(self.request.user,
+                                                                                                        total_price_before_offers=product.current_price,
+                                                                                                        promo_codes=promo_codes)
 
                 logger.debug('discounts %s' % str(discounts))
                 logger.debug('subtotal_dollar_value %s' % str(subtotal_dollar_value))
@@ -315,7 +320,24 @@ class PreCheckoutView(generic.DetailView):
         product = self.get_object()
         order_type = self.request.POST.get('order_type', None)
 
-        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(user=self.request.user, total_price_before_offers=product.current_price)
+        promo_code = self.request.POST.get('promo_code', None)
+
+        print 'promo_code', promo_code
+
+        promo_is_valid = False
+        promo_code_message = ''
+        promo_codes = []
+        if(promo_code):
+            promo_is_valid, proper_promo_code, invalid_message = PromotionOffer.is_valid_promo_code(self.request.user, promo_code)
+            if(promo_is_valid):
+                promo_codes = [proper_promo_code]
+                promo_code = proper_promo_code
+            else:
+                promo_code_message = invalid_message
+
+        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(user=self.request.user, 
+                                                                                                total_price_before_offers=product.current_price,
+                                                                                                promo_codes=promo_codes)
         total_discount = 0
         for discount in discounts:
             total_discount += discount['dollar_value']

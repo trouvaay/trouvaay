@@ -2,16 +2,25 @@
 {% load static %}
 
 {% block content %}
-{% include '_tab_nav.html' %}
-<section class="top-quote" style="background-image: url('http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg'); padding-top:300px">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
+<div class="container-fluid select-bar hp-tabs" style="background-color:#333" style="height:100%">
+        <div class="row-fluid">
+            <div class="col-xs-12 col-sm-3 logo-div main-navigation hidden-xs">
+                <a href="{% url 'goods:landing' %}"><img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a>
             </div>
-        </div>
-    </div>
-</section>
-<section class="tab-container">
+             <div class="col-xs-4 pull-right">
+                <ul class="nav navbar-navt">
+                    <li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal" style="height:40px"><span id="how-it-works-button">How it works</span></a></li>
+                    <li><a class="btn btn-link tab-menu" href="{% url 'goods:about' %}">About</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a class="btn btn-link tab-menu nav-logout-button" href="{% url 'members:logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a class="btn btn-link tab-menu nav-login-button" href="#">Signup</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div><!-- end row -->
+</div><!-- end hp-tabs -->
+<section class="tab-container" style="padding-top: 5%">
     <div class="container">
         <div class="row text-center">
             <ul class="nav nav-tabs">
@@ -54,12 +63,13 @@
                     </div>
                     <div class="tab-pane text-editor" id="careers">
                         <p>
-                             If you want to join our mission to make finding that perfect piece more fun and convenient,  shoot us an <a href="mailto:careers@raredoor.com">email</a>!
+                             If you want to join our mission to make finding that perfect piece more fun and convenient,  shoot us an <a style="font-family:ralewaylight" href="mailto:careers@raredoor.com">email</a>!
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 {% endblock %}

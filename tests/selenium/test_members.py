@@ -390,7 +390,12 @@ class RaredoorMembers(unittest.TestCase):
         sleep(1)
 
         # logout and then do login for newly created user
-        self.do_logout(driver)
+        if(self.is_logged_in(driver)):
+            self.do_logout(driver)
+        sleep(1)
+
+        driver.get(config.HOME_URL)
+
         self.do_login(driver, email, password)
         self.assert_(self.is_present_by_class(driver, "nav-logout-button"), "Login failed for newly created user")
 

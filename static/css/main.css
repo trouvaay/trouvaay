@@ -97,10 +97,11 @@ h4, h5, h6, .h4, .h5, .h6 {
   color: white;
 }
 #tab-icons-mobile {
-  background: white;
+  background: #333;
   padding: 0;
-  height: 175px;
+  height: 100%;
   position: relative;
+  padding-bottom: 10px;
 }
 .top-bar, .select-bar {
   padding: 0px 15px;
@@ -116,13 +117,15 @@ h4, h5, h6, .h4, .h5, .h6 {
   border: none;
 }
 #desktop-search > ul > li > a {
-  font-size: 16px;
+  font-size: 14px;
+  padding: 15px 8px;
 }
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a:hover {
   background-color: transparent;
 }
 .discount {
-  color: red;
+  color: rgb(235, 27, 27);
+  font-weight: 600px;
 }
 .select-bar {
 	z-index: 99;
@@ -353,7 +356,7 @@ button.home-buttons > a > h5 {
 }
 .sold {
   font-weight: 600;
-  color: red;
+  color: rgb(235, 27, 27);
 }
 .icon-label {
   color: rgb(34, 34, 44);
@@ -4049,7 +4052,7 @@ footer ul li a:hover {
     width: 25%;
   }
   .hp-tabs .nav-tabs > li a {
-    height: 80px;
+    height: 30px;
   }
   .hp-tabs .nav-tabs > li a .inner img {
     /*width: 100%;*/
@@ -4273,19 +4276,30 @@ footer ul li a:hover {
     padding-left: 5px;
     padding-right: 5px;
   }
+  .icon-label {
+    color: white  ;
+  }
   .logo-div {
     padding-top: 10px;
     height: 72px;
   }
   .hp-tabs ul > li > a {
-    font-size: 16px;
+    font-size: 14px;
     padding:  15px 3px;
+  }
+  #desktop-search > ul > li > a {
+    font-size: 13.5px;
+    padding:  15px 2px;
   }
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-toggle {
     margin-top: 13px;
   }
+  .tooltip {
+    display: none !important;
+  }
+  
   .how-it-works .statement:first-child {
   border-right: 0px;
   }

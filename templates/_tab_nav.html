@@ -3,14 +3,15 @@
  <div class="container-fluid select-bar hp-tabs" style="background-color:#333" style="height:100%">
         <div class="row-fluid">
             <div class="col-xs-12 col-sm-3 logo-div main-navigation hidden-xs">
-                <a href="{% url 'goods:main' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></br>
+                <a href="{% url 'goods:landing' %}"> <img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></br>
             </div>
             <!-- <div class="col-xs-12 col-sm-1 logo-div main-navigation hidden-xs">
                 <a id="filter" href="#">filter</a></br>
             </div> -->
-             <div class="col-xs-3 hidden-xs col-sm-3">
+             <div class="col-xs-3 hidden-xs col-sm-4">
                 <ul class="nav navbar-navt">
                 <li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal" style="height:40px"><span id="how-it-works-button">How it works</span></a></li>
+                <li><a class="btn btn-link tab-menu nav-logout-button" href="{% url 'goods:about' %}">About</a></li>
                 
                 <!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
                 {% if user.is_authenticated %}
@@ -20,8 +21,11 @@
                 {% endif %}
                 </ul>
             </div>
-            <div id="desktop-search" class="col-xs-12 col-sm-6" style="text-align: center">
+            <div id="desktop-search" class="col-xs-12 col-sm-5" style="text-align: center">
                 <ul class="nav navbar-navt center-block">
+                    <li id="all">
+                        <a class="btn btn-link tab-menu" href="{% url 'goods:main' %}">all</a>
+                    </li>
                     <li id="seating">
                         <a class="btn btn-link tab-menu" href="{% url 'goods:main' %}?type=seating">seating</a>
                     </li>

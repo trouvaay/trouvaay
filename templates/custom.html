@@ -6,14 +6,17 @@ var trouvaay = {
 
 		var mobilemenutop = "<div id='mobile-nav' class='navbar-collapse'>" +
 					"<ul class='nav navbar-nav'>" +
-						"<li>{% if user.is_authenticated %}" +
+                        "<li><a href='{% url 'goods:main' %}'>Shop</a></li>" +
+                        "<li class='nav-divider'></li>" +
+						"<li><a href='{% url 'goods:about' %}'>About</a></li>" +
+                        "<li class='nav-divider'></li>" +
+                        "<li>{% if user.is_authenticated %}" +
 							"<a href='{% url 'members:logout' %}'>Logout</a>" +
 							"{% else %}" +
 							"<a href='{% url 'members:login' %}'>Login</a>" +
 							"{% endif %}" +
 						"</li>" +
-						"<li class='nav-divider'></li>" +
-						"<li><a href='{% url 'goods:about' %}'>About</a></li>" +
+						
 						"<li class='nav-divider'></li>" +
 						"<li><a style='display:inline-block' class='insta-icon mobile' href='http://instagram.com/raredoor/' target='_blank'>" +
 								"<img src='{% static 'img/socialicons/instagram.svg' %}'/></a>" +
@@ -23,36 +26,30 @@ var trouvaay = {
 					 			"<img src='{% static 'img/socialicons/twitter.svg' %}'/></a>" +
 					 	"</li>" +
 					 "</ul></div>";
-        var mobileTabIcons = "<div id='tab-icons-mobile' class='container select-bar hp-tabs'>"+
+        var mobileTabIcons = "<div id='tab-icons-mobile' class='container select-bar hp-tabs' style='border-top: rgb(218, 182, 97) 1px solid;'>"+
                                 "<div class='tab-icons mobile'>"+
                                 "<div class='row-fluid'>"+
                                     "<div class='col-sm-11 col-md-10'>"+
                                     "<ul class='nav nav-tabs pull-left'>"+
                                         "<li id='everything'><a href='{% url 'goods:landing' %}'>"+
                                         "<span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/house128.png' %}' title='house' alt=''/>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>everything</span>"+
                                             "</a></li>"+
                                         "<li id='seating'><a href='{% url 'goods:main' %}?type=seating'>"+
                                             "<span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/seating128.png' %}' title='seating' alt=''/>"+
                                             "</span>"+
                                             "<span class='inner icon-label' style='display:list-item'>seating</span>"+
                                             "</a></li>"+
                                         "<li id='tables'><a href='{% url 'goods:main' %}?type=tables'><span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/table128.png' %}' title='table' alt=''/>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>tables</span>"+
                                             "</a></li>"+
-                                        "<li id='beds'><a href='{% url 'goods:main' %}?type=beds'><span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/bed128.png' %}' title='bed' alt=''/></span>"+
+                                        "<li id='beds'><a href='{% url 'goods:main' %}?type=beds'><span class='inner' style='display:list-item'></span>"+
                                             "<span class='inner icon-label' style='display:list-item'>beds</span>"+
                                             "</a></li>"+
                                         "<li id='storage'><a href='{% url 'goods:main' %}?type=storage'><span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/storage128.png' %}' title='storage' alt=''/>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>storage</span>"+
                                             "</a></li>"+
                                         "<li id='lighting'><a href='{% url 'goods:main' %}?type=lighting'><span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/lighting128.png' %}' title='lighting' alt=''/>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>lighting</span>"+
                                             "</a></li>"+
                                     "</ul>"+
@@ -121,6 +118,63 @@ var trouvaay = {
         });
         
 	}
+}
+
+function handleBuyButtonClick(e) {
+	console.log('clicked on buy button: '+e.target.id);
+
+	if(e.target.id.substr(0, 4) == 'buy_'){
+		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
+        var orderType = 'buy';
+		mixpanel.track(
+            "Clicked Buy Button",
+            { "productId": productId }
+        );
+    }
+    else if(e.target.id.substr(0, 8) == 'reserve_'){
+        var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
+        var orderType = 'reserve';
+        mixpanel.track(
+            "Clicked Reserve Button",
+            { "productId": productId }
+        );
+    }
+
+    if(productId && !(typeof productId === 'undefined')){
+	    console.log('this is the ordertype!', orderType)
+
+		var promoCode = ''
+		if($("#input-promo-code")) {
+			promoCode = $("#input-promo-code").val()
+		}
+		
+		console.log('promoCode: '+promoCode);
+		
+		// call pre-checkout
+		$.ajax({
+			type: "POST",
+			url: "{% url "members:pre_checkout" %}",
+			dataType: "html",
+			data: {
+				product_id: productId,
+                order_type: orderType,
+                promo_code: promoCode
+			},
+			success: function(response, status){
+				// console.log('response from pre-checkout call: '+status );
+				$("#pre-checkout-modal-container").html(response);
+				$("#pre-checkout-modal").modal({
+					show: true,
+					keyboard: true
+				});
+			},
+            error: function(response, status, error) {
+              var err = eval("(" + response.responseText + ")");
+              alert(err.Message);
+            }
+		});
+	}
+	e.preventDefault();
 }
 
 $(document).ready(function() {
@@ -229,51 +283,8 @@ $(document).ready(function() {
 	});
 
 	// Stripe checkout
-	$('.btn.buy').on('click', function(e) {
-		if(e.target.id.substr(0, 4) == 'buy_'){
-			var productId = e.target.id.substr(4);
-            var orderType = 'buy';
-			mixpanel.track(
-                "Clicked Buy Button",
-                { "productId": productId }
-            );
-        }
-        else if(e.target.id.substr(0, 8) == 'reserve_'){
-            var productId = e.target.id.substr(8);
-            var orderType = 'reserve';
-            mixpanel.track(
-                "Clicked Reserve Button",
-                { "productId": productId }
-            );
-        }
+	$('.btn.buy').on('click', handleBuyButtonClick);
 
-        if(productId && !(typeof productId === 'undefined')){
-		      console.log('this is the ordertype!', orderType)
-			// call pre-checkout
-			$.ajax({
-				type: "POST",
-				url: "{% url "members:pre_checkout" %}",
-				dataType: "html",
-				data: {
-					product_id: productId,
-                    order_type: orderType,
-				},
-				success: function(response, status){
-					// console.log('response from pre-checkout call: '+status );
-					$("#pre-checkout-modal-container").html(response);
-					$("#pre-checkout-modal").modal({
-						show: true,
-						keyboard: true
-					});
-				},
-                error: function(response, status, error) {
-                  var err = eval("(" + response.responseText + ")");
-                  alert(err.Message);
-                }
-			});
-		}
-		e.preventDefault();
- 	});
 });
 //Unsed formula to append distance from product to user's loco
 //  function  getpoints (userloc) {
