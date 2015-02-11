@@ -97,10 +97,11 @@ h4, h5, h6, .h4, .h5, .h6 {
   color: white;
 }
 #tab-icons-mobile {
-  background: white;
+  background: #333;
   padding: 0;
-  height: 175px;
+  height: 100%;
   position: relative;
+  padding-bottom: 10px;
 }
 .top-bar, .select-bar {
   padding: 0px 15px;
@@ -4050,7 +4051,7 @@ footer ul li a:hover {
     width: 25%;
   }
   .hp-tabs .nav-tabs > li a {
-    height: 80px;
+    height: 30px;
   }
   .hp-tabs .nav-tabs > li a .inner img {
     /*width: 100%;*/
@@ -4273,6 +4274,9 @@ footer ul li a:hover {
   .hp-tabs .nav-tabs > li > a {
     padding-left: 5px;
     padding-right: 5px;
+  }
+  .icon-label {
+    color: white;
   }
   .logo-div {
     padding-top: 10px;
