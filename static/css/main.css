@@ -77,6 +77,7 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 #filter {
   color: white;
+  font-size: 20px;
 }
 .col-centered {
   float: none;
@@ -99,6 +100,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   background: white;
   padding: 0;
   height: 175px;
+  position: relative;
 }
 .top-bar, .select-bar {
   padding: 0px 15px;
@@ -109,6 +111,13 @@ h4, h5, h6, .h4, .h5, .h6 {
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a {
   color: rgb(218,182,97);
 }
+.nav>li>a:focus {
+  background-color: transparent;
+  border: none;
+}
+#desktop-search > ul > li > a {
+  font-size: 16px;
+}
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a:hover {
   background-color: transparent;
 }
@@ -116,7 +125,6 @@ h4, h5, h6, .h4, .h5, .h6 {
   color: red;
 }
 .select-bar {
-	padding-top: 20px;
 	z-index: 99;
 	background: #EFEEEE;
 	width: 100%;
@@ -126,8 +134,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   color: rgb(218,182,97);
   font-style: italic;
   font-weight: 600;
-  font-size: 1.2em;
-  font-family: 'Chunkfive';
+  font-size: 1.1em;
 } 
 .select-bar .hp-tabs {
 	padding: 0px;
@@ -156,6 +163,7 @@ h4, h5, h6, .h4, .h5, .h6 {
 }
 button a.btn.btn-link.nav-login-button:hover {
   text-decoration: none;
+  
 }
 button a.btn.btn-link.home {
   color: white;
@@ -166,10 +174,17 @@ button a.btn.btn-link.home:hover {
 }
 button.home-buttons {
   background-color: rgb(79, 156, 156); 
-  border: solid white 2px
+  border: none;
+  width: 120px;
+}
+button.home-buttons:hover {
+  opacity: 0.5
 }
 button.home-buttons:first-child {
   margin-right: 15px
+}
+button.home-buttons > a > h5 {
+  font-size: 16px;
 }
 #main-footer {
   height: 95px;
@@ -1109,24 +1124,22 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   margin-top: 5%;
 }
 .attr {
-font-size: 14px;
-line-height: 50px;
-color: #333;
-margin: 0;
+  font-size: 14px;
+  line-height: 50px;
+  color: #333;
+  margin: 0;
 }
 .attr.return {
-line-height: inherit;
+  line-height: inherit;
 }
 .attr-label {
-font-size: 14px;
-line-height: 50px;
-font-weight: 700;
-font-family: 'Chunkfive';
-color: #333;
-text-transform: uppercase;
-border-top: solid 1px #e5e5e5;
-margin: 0;
-text-align: left;
+  font-size: 14px;
+  line-height: 50px;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: left;
 }
 .attr#first {
   border-top:none;
@@ -1646,6 +1659,10 @@ text-align: left;
 }
 .row-attrs {
     margin-top: 5%;
+}
+.row.attributes {
+    border-top: solid lightgray 1px;
+    border-bottom: solid lightgray 1px;
 }
 .nearby img {
   max-height: 300px;
@@ -2545,13 +2562,16 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .btn.btn-primary.buy {
   width: 70px;
-  font-family: 'Chunkfive';
 }
 .btn.btn-default.sold,
 .btn.btn-primary.buy {
-  width: 145px;
-  height: 32px;
+  width: 40%;
+  max-width: 140px;
+  height: 3em;
   /*background-color: rgb(201,177,62);*/
+}
+.btn.btn-primary.buy.reserve {
+  background-color: black;
 }
 .btn.btn-success.dist {
   width: 60px;
@@ -2647,12 +2667,8 @@ form .form-checkbox-wrap .checkbox-label {
 #signup-login-modal .modal-dialog .modal-body {
   padding: 20px 0;
 }
-
 #how-it-works-modal .how-it-works .statement:not(:last-child) {
   border-right: 0px;
-}
-.btn.btn-link.tab-menu {
-  padding-top: 0;
 }
 #addtocartmodal {
   top: 15%;
@@ -2676,7 +2692,6 @@ form .form-checkbox-wrap .checkbox-label {
   font-weight: 700;
   color: #333;
   letter-spacing: 2px;
-  text-transform: uppercase;
   text-align: center;
   /*margin-bottom: 20px;*/
 }
@@ -2800,12 +2815,12 @@ form .form-checkbox-wrap .checkbox-label {
   width: 100%;
   float: left;
   text-align: center;
-  padding: 10px 0 0;
   box-shadow: 0 6px 4px -4px #333;
   margin-bottom: 5px;
-  background-color: #333;
+  background-color: white;
   position: fixed;
   top: 0;
+  height: 50px;
 }
 .hp-tabs .nav-tabs {
   display: inline-block;
@@ -3195,7 +3210,7 @@ footer ul li a:hover {
   background-position: center -182px;
 }
 .how-it-works {
-  background-color: #EFEEEE;
+  background-color: white;
   font-family: "Chunkfive";
   color: black;
 }
@@ -3207,6 +3222,7 @@ footer ul li a:hover {
 
 .how-it-works h4 {
   padding: 0 15px;
+  text-align: center;
 }
 .how-it-works h2 {
   margin-bottom: 20px;
@@ -3242,8 +3258,8 @@ footer ul li a:hover {
   margin: 0 auto 20px;
 }
 .how-it-works .row-fluid div.main-quote {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   font-family: 'Chunkfive';
 }
 .container-fluid.how-it-works.layer {
@@ -3251,8 +3267,13 @@ footer ul li a:hover {
 }
 .shop-local-bottom {
   padding: 30px;
-  background: #EFEEEE;
+  background: white;
   margin-top: 2em;
+  background: #EFEEEE;
+}
+.featured-icons {
+  padding: 5px;
+  background: #EFEEEE;
 }
 
 .how-it-works .row-fluid div.main-quote div {
@@ -3304,7 +3325,7 @@ footer ul li a:hover {
 }
 .main-container.detail,
 .pic-tabs.main {
-  margin-top: 10%;
+  margin-top: 5%;
 }
 .container-fluid.tab-icons .row{
   padding: 1rem;
@@ -3366,14 +3387,14 @@ footer ul li a:hover {
   top: 40%;
   width: 100%;
 }
-.landing-message h2,
 .landing-message h1,
-.landing-message h3 {
+.landing-message h2,
+.landing-message h3,
+.landing-message h4 {
   text-align: center;
-  margin-bottom: 5%;
 }
-.landing-message h3 {
-  margin-top: 20px;
+.landing-message h4 {
+  margin-bottom: 20px;
   font-family: ralewaylight;
 }
 .homepage-slider-wrap {
@@ -3653,7 +3674,7 @@ footer ul li a:hover {
     /*height: 265px;*/
   }
   .landing-message {
-    padding: 0 22%;
+    padding: 0 24%;
   }
   .grid-product figure img {
   /*  width: 263px;
@@ -4078,6 +4099,11 @@ footer ul li a:hover {
   .main-navigation.top-row {
 	  padding-right: 30px;
   }
+  .hp-tabs .nav-tabs > li {
+    min-width: 55px;
+    max-width:68px;
+  }
+
   .hp-tabs .nav-tabs > li.active > a:hover,
   .hp-tabs .nav-tabs > li > a:hover {
     background: #999;
@@ -4234,7 +4260,7 @@ footer ul li a:hover {
     color: #7a7a7a;
   }
   .how-it-works {
-    padding: 30px inherit;
+    padding: 5px inherit;
   }
 }
 
@@ -4247,12 +4273,13 @@ footer ul li a:hover {
     padding-left: 5px;
     padding-right: 5px;
   }
-  .hp-tabs .nav-tabs > li {
-    min-width: 60px
-  }
   .logo-div {
     padding-top: 10px;
     height: 72px;
+  }
+  .hp-tabs ul > li > a {
+    font-size: 16px;
+    padding:  15px 3px;
   }
 }
 @media (max-width: 767px) {
@@ -4265,6 +4292,9 @@ footer ul li a:hover {
   .tab-icons.mobile {
     display: block;
     margin-top: 10px;
+  }
+  .home-buttons.HIW> {
+    display: none;
   }
   #mobile-navigation {
     display: block;
@@ -4285,6 +4315,9 @@ footer ul li a:hover {
     padding: 0 5%;
     margin-top: 50px;
   }
+  #how-it-works-button {
+    display: none;
+  }
   .how-it-works .statement.mobile-details {
     padding: 0 5%;
     margin-top: 20px;
@@ -4302,7 +4335,7 @@ footer ul li a:hover {
   }
   .landing-message {
     padding: 0 7%;
-    top: 30%;
+    top: 20%;
   }
   .landing-message h2 {
     font-size: 25px;
@@ -4482,6 +4515,7 @@ footer ul li a:hover {
     line-height: 30px;
     font-size: 12px;
   }
+
   .footer-widget {
     margin-bottom: .5rem;
   }
@@ -4632,6 +4666,105 @@ li.socialicons a {
   font-weight: 800;
 }
 
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  }
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+  }
+
+.rslides_nav {
+	font-family: "raredoor";
+	position: absolute;
+	top: 50%;
+	font-size: 34px;
+	z-index: 100;
+	color: #FFF;
+	text-shadow: #000 0px 0px 2px;
+	margin-top: -24px;
+}
+
+.rslides_nav:hover {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.rslides_nav.prev {
+	left: 34px;
+}
+
+.rslides_nav.next {
+	right: 34px;
+}
 
 
 
+@font-face {
+  font-family: "raredoor";
+  src:url("../fonts/raredoor.eot");
+  src:url("../fonts/raredoor.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/raredoor.woff") format("woff"),
+    url("../fonts/raredoor.ttf") format("truetype"),
+    url("../fonts/raredoor.svg#raredoor") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "raredoor" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "raredoor" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow:before {
+  content: "a";
+}
+.icon-left-arrow:before {
+  content: "b";
+}

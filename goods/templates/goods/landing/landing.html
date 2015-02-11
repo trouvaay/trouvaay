@@ -7,38 +7,46 @@
 {% block content %}
       <div class="container homepage-slider-container">
         <div class="row-fluid">
-            <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/c_fill,h_843,w_1265/v1422902656/shutterstock_160709951_hsvzx9.jpg'); height:40em;">
+            <div class="col-sm-12" style="padding-left:0px; padding-right:0px; background-image: url('http://res.cloudinary.com/trouvaay/image/upload/c_fill,h_843,w_1265/v1422902656/shutterstock_160709951_hsvzx9.jpg'); height:28em;">
             <!-- http://res.cloudinary.com/trouvaay/image/upload/v1422166458/hand_seat_t7r0xt.jpg -->
             <div class="black_overlay"></div><!-- end overlay -->
             {% include 'goods/landing/_landing_nav_snippet.html' %}
             <div class="landing-message">
                 <h2>
-                Shop The Unique Furniture Available In Bay Area Stores Without Leaving Your Couch
+                Shop Unique Furniture Available In Bay Area Stores Without Leaving Your Couch
                 </h2>
+                <h4>
+                Register for 10% off your first purchase
+                </h4>
                 <div class="text-center">
-                     <button class="home-buttons"><a class="btn btn-link home" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5><span id="how-it-works-button">How it works</span></h5></a></button>
-                    <button class="home-buttons"><a class="btn btn-link home button-shop-the-bay" href="{% url 'goods:main' %}"><h5>Shop the Bay</h5></a></button>
+                     <button class="home-buttons" id="how-it-works-button"><a class="btn btn-link home" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5><span id="how-it-works-button">How it works</span></h5></a></button>
+                    <button class="home-buttons"><a class="btn btn-link home button-shop-the-bay" href="{% url 'goods:main' %}"><h5>Shop Now</h5></a></button>
                 </div>
             </div>
             </div>
         </div>
       </div>
+        
       <div class="container-fluid how-it-works layer">
         <div class="row-fluid">
             <div class="col-md-6 statement">
                 <h3>We do the hunting for you</h3>
-                <h4>We scour Bay Area stores for unique home decor pieces and bring them online here.  </h4>
+                <h4>We scour Bay Area stores for unique home decor, share our finds, and and tell you what store has them.</h4>
             </div>
             <div class="col-md-6 statement">
                 <h3>Reserve or Buy Now</h3>
-                <h4>Want to see it in person first? Reserve the item and get 48 hours to see it in store.</h4>
+                <h4>Want to see it in person first? Reserve the item and get 48 hours to see it in store.  Otherwise, Buy Now and schedule pick up or have it delivered right away.</h4>
             </div>
             <div class="col-md-6 statement mobile-details">
                 <a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal"><h5>Click for more details</h5></a>
             </div>
         </div>
       </div>
-    
+     <div class="container-fluid featured-icons">        
+        <div class="span7 text-center">
+            <h3>Featured Products</h3>
+        </div>
+    </div>
     <div class="container-fluid pic-tabs home">        
         <div class="row">
             <div class="col-sm-12">
@@ -58,24 +66,23 @@
     </div>
     <div class="container-fluid shop-local-bottom">        
         <div class="span7 text-center">
-            <button class="home-buttons"><a class="btn btn-link home button-shop-the-bay" href="{% url 'goods:main' %}"><h5>Shop the Bay</h5></a></button>
+            <button class="home-buttons"><a class="btn btn-link home button-shop-the-bay" href="{% url 'goods:main' %}"><h5>Shop Now</h5></a></button>
         </div>
     </div>
-    
 	{% if promotion_offer and not request.user.is_authenticated %}
-	<div class="modal fade" id="promotion-offer-modal">
+	<div class="modal fade in" id="promotion-offer-modal">
 		<div class="modal-dialog">
 			<div class="modal-content col-xs-12">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<div class="modal-body">
+				<div class="modal-body" style="height: 250px">
 					<div class="form-group text-center">	
-						<div class="text-center">
+						<div class="text-center" style="padding-top: 3em">
 							<h2>{{ promotion_offer.name }}</h2>
 							<div>
-								{{ promotion_offer.short_terms }}
+								<!-- {{ promotion_offer.short_terms }} -->
 							</div>
 							<div>
-								<a class="btn btn-primary" href="{% url "members:login" %}">Take the offer</a>
+								<a class="btn btn-primary nav-login-button" href="#">Take the offer</a>
 							</div>
 						</div>
 					</div>
