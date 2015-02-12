@@ -25,7 +25,7 @@ class LandingView(generic.ListView):
     model = Product
 
     def get_queryset(self):
-        queryset = self.model.objects.filter(is_landing=True, store__is_featured=True)[:6]
+        queryset = self.model.objects.filter(is_landing=True, store__is_featured=True)[:9]
         return queryset
 
     def get_context_data(self, **kwargs):
