@@ -490,11 +490,15 @@ class PromotionOffer(models.Model):
             return (False, promo_code, invalid_code_message)
 
         # check whether the user used up all the offers
+        
+
         if(user and
            offer.limit_per_user != -1 and
            offer.limit_per_user <= PromotionRedemption.objects.filter(offer_id=offer.id, authuser_id=user.id).count()):
             # no more such for this user
             return (False, promo_code, 'You have already used this promotion')
+        elif not user.is_authenticated():
+            return (False, promo_code, 'Please signup/login to use this promo')
 
         return (True, proper_promo_code, '')
 

@@ -12,7 +12,8 @@
                         <li><a href="http://instagram.com/raredoor/"><img src="{% static 'img/socialicons/instagram.svg' %}" class="socialicon"></a></li>
                         <li><a href="https://www.facebook.com/RareDoor"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
                         <li><a href="https://www.twitter.com/RareDoor"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
-                        <li><div class="cart-info"></div></li>
+                        <li><a class="btn btn-link home" href="#" data-toggle="modal" data-target="#how-it-works-modal">How it works</a></li>
+                        <li><a class="btn btn-link tab-menu" href="{% url 'goods:about' %}">About</a></li>
                         <li><a class="btn btn-link nav-login-button" href="#">Signup</a></li>
                         {% if user.is_authenticated %}
                         <!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->

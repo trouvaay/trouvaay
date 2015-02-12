@@ -59,6 +59,7 @@ class Command(BaseCommand):
                 u.color_description = data[20]
                 u.material_description = data[22]
                 u.delivery_weeks = data[26]
+                u.is_published = True
 
                 try:
                     u.save()

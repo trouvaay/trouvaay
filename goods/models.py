@@ -109,7 +109,7 @@ def add_img_instance(product_pk, img_url, is_main=False):
 
 class Product(models.Model):
     sku = models.CharField(max_length=25, null=True, blank=True)
-    short_name = models.CharField(max_length=50)
+    short_name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, max_length=255)
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
