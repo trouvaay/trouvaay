@@ -28,7 +28,7 @@ class RaredoorMembers(unittest.TestCase):
     # -------------------------------------------------------------------------
 
     def setUp(self):
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Firefox()
         random.seed()
 
     def tearDown(self):
