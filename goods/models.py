@@ -151,6 +151,7 @@ class Product(models.Model):
     is_published = models.BooleanField(default=False)
     is_publishable = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
+    is_landing = models.BooleanField(default=False)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
     is_instore = models.BooleanField(default=True)
