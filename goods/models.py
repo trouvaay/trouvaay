@@ -147,6 +147,7 @@ class Product(models.Model):
     pub_date = models.DateTimeField(null=True, blank=True)
     has_trial = models.BooleanField(default=False)
     is_sold = models.BooleanField(default=False)
+    is_reserved = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     is_publishable = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
