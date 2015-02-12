@@ -120,29 +120,34 @@ var TrendyRoom = {
 $(document).ready(function() {
     TrendyRoom.init();
 });
-$(window).resize(function() {
-    TrendyRoom.resizeContent();
-    TrendyRoom.placeLogo();
-    selectBar_offsetTop = selectBar.offsetTop;
-});
 
-selectBar = $('.select-bar')[0];
-selectBar_offsetTop = selectBar.offsetTop;
-$(window).scroll(function() {
-	if ($(window).width() >= 768) {
-	if ($(window).scrollTop() >= selectBar_offsetTop) {
-		$(selectBar).css('position', 'fixed');
-		$(selectBar).css('top', '0');
-		$('.how-it-works').css('margin-bottom', $(selectBar).outerHeight());
-	} else {
-		if (selectBar_offsetTop < 300) {
-			selectBar_offsetTop = selectBar.offsetTop;
-		}
-		$(selectBar).css('position', 'relative');
-		$(selectBar).css('top', 'auto');
-		$('.how-it-works').css('margin-bottom', "0");
+// selectBar = $('.select-bar')[0];
+// selectBar_offsetTop = selectBar.offsetTop;
+// picTabs = $('.pic-tabs')[0];
 
-	}
-	}
-});
+
+// $(window).resize(function() {
+//     selectBar_offsetTop = picTabs.offsetTop;
+
+//     TrendyRoom.resizeContent();
+//     TrendyRoom.placeLogo();
+// });
+
+// $(window).scroll(function() {
+// 	if ($(window).width() >= 768) {
+// 	if ($(window).scrollTop() >= selectBar_offsetTop) {
+// 		$(selectBar).css('position', 'fixed');
+// 		$(selectBar).css('top', '0');
+// 		$('.how-it-works').css('margin-bottom', $(selectBar).outerHeight());
+// 	} else {
+// 		if (selectBar_offsetTop < 300) {
+// 			selectBar_offsetTop = selectBar.offsetTop;
+// 		}
+// 		$(selectBar).css('position', 'relative');
+// 		$(selectBar).css('top', 'auto');
+// 		$('.how-it-works').css('margin-bottom', "0");
+
+// 	}
+// 	}
+// });
 

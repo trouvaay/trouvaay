@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [ ]
 
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +50,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'stripe',
     'analytical',
+    'endless_pagination',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,7 +83,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = { }
+DATABASES = {}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -112,7 +114,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
+GMAIL_EMAIL =''
+GMAIL_PASSWORD = ''
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -123,12 +126,13 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
-FEATURE_NAME_RESERVE = "Buy"
-FEATURE_TOOLTIP_RESERVE = "You have 5 days to go see the product in-store (location is revealed after purchase) before you payment will be processed.  Cancel at any time before the 'discovery' period ends!"
+FEATURE_NAME_RESERVE = "Reserve"
+FEATURE_TOOLTIP_RESERVE = "You have 2 days to decide (go see the product in-store if you'd like!) before your ordered is cancelled.  Text, call or email us to confirm an order."
 RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
     'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
 }
+SIGNUP_OFFER = "10% off your first purchase after signup"
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
 
@@ -155,7 +159,6 @@ LOGGING = {
     'handlers': {
         'console': {
             'level': 'DEBUG',
-            'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
         },
         'null': {
@@ -206,15 +209,17 @@ LOGGING = {
 ACCOUNT_ACTIVATION_DAYS = 30
 REGISTRATION_AUTO_LOGIN = True
 
-STRIPE_CAPTURE_TRANSACTION_TIME = 120  # hours
+STRIPE_CAPTURE_TRANSACTION_TIME = 48  # hours
 
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''
-OLARK_SITE_ID = ''
+# OLARK_SITE_ID = ''
 MIXPANEL_API_TOKEN = ''
 ANALYTICAL_INTERNAL_IPS = []
 
 SALES_TAX = Decimal('0.0875')
+
+OFFER_MODAL_EXPIRATION = 3600  # do not show promo offers again whithin this many seconds
 
 # email settings are another good candidate to have
 # each developer define in their own dev_settings.py

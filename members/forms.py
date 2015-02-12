@@ -86,7 +86,7 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.helper.form_show_labels = False
         self.helper.form_show_errors = True
         self.helper.form_method = 'post'
-        self.helper.form_action = '.'  # 'members:login'
+        self.helper.form_action = 'members:login'
         self.helper.form_id = 'form-login'
 
         self.helper.layout = Layout(
@@ -148,7 +148,7 @@ class RegistrationForm(forms.ModelForm):
         cleaned_data = super(RegistrationForm, self).clean()
 
         password = cleaned_data.get("password")
-        password2 = cleaned_data.get("password")
+        password2 = cleaned_data.get("password2")
 
         if password != password2:
             msg = "Your passwords should match."

@@ -1,0 +1,70 @@
+{% extends '_base.html' %}
+{% load staticfiles %}
+{% load cloudinary %}
+{% load goods_extras %}
+{% load endless %}
+
+{% block content %}
+    </div>
+    <div class="container pic-tabs main">        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+				    {% include 'goods/main/main_ajax_page.html' %}
+                            </div>
+                        </div>
+                    </div><!-- end tab1 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="row" style="margin: 0px">
+        <div class="col-md-6 col-md-offset-3" style="text-align:center">
+            <nav>
+              <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li>
+                  <a href="?{% url_replace request 'page' page_obj.previous_page_number %}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                {% endif %}
+                {% if page_obj.has_other_pages %}
+                    {% for page in page_obj.paginator.page_range %}
+                        {% if page_obj.number == page %}
+                            <li><a id="current-page" href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
+                        {% else %}
+                        <li><a href="?{% url_replace request 'page' page %}">{{ page }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% if page_obj.has_next %}
+                <li>
+                  <a href="?{% url_replace request 'page' page_obj.next_page_number %}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+        </div>
+    </div>--><!-- end pagination div -->
+    
+{% endblock content %}
+{% block endjs %}
+
+{{ block.super }}
+<script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+<script>
+        $.endlessPaginate({
+            paginateOnScroll: true,
+            paginateOnScrollMargin: 200
+        });
+</script>
+
+{% endblock endjs %}
+

@@ -1,0 +1,30 @@
+{% load staticfiles %}
+    <div class="col-xs-12 pic-detail-home" style="text-align: center; margin: 3px 0px 5px;">
+        <p style="margin-bottom: 3px">{{ product.short_name|truncatechars:28 }}<em>
+        {% if product.current_price %}
+            {% if product.is_sold %}
+                <span class="sold">{{ 'Sold' }}</span>                
+            {% elif product.is_reserved %}
+                <span class="reserved">{{ 'Reserved' }}</span>                
+            {% elif product.is_discounted %}
+                <strike>{{' - $'}}{{ product.original_price|floatformat:"0" }}</strike>
+                <span class="discount">{{' - $'}}{{ product.current_price|floatformat:"0" }}<span>
+            {% else %}
+                {{' - $'}}{{ product.current_price|floatformat:"0" }}
+            {% endif %}
+        {% endif %}</em></p>
+
+        <!-- need these so that we can pass product name and price to stripe checkout -->
+        <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
+        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
+    </div>
+    <!-- Like funtionality on hold until ProfileView implemented -->
+    <div class="col-xs-12 neighborhood" style="text-align: center; line-height: 15px; margin-top: 6px">
+        {{ product.store.neighborhood }}
+    </div>
+    
+        <!-- <div class="col-xs-3 pull-right text-right">
+            <button type="button" class="btn btn-default glyphs" id="heart_{{ product.id }}">
+                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+            </button>
+        </div> -->

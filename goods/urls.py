@@ -3,9 +3,10 @@ from goods import views
 
 
 urlpatterns = patterns('',
-    url(r'^$', views.HomeView.as_view(), name='home'),
+    url(r'^$', views.LandingView.as_view(), name='landing'),
     url(r'^piece/(?P<slug>[-\w\d]+)/$', views.DetailView.as_view(), name='detail'),
     url(r'^about/$', views.AboutView.as_view(), name='about'),
+    url(r'^shop/$', views.MainView.as_view(), name='main'),
     
     #TODO: add unique url generator for vintage sales from IG
     #url(r'^vintage/$', views.VintageView.as_view(), name='vintage'),   

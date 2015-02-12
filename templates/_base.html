@@ -10,6 +10,7 @@
         <title>Rare Door</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="p:domain_verify" content="a087ecb11ad56c7333a66143ad5481c5">
         <link rel="icon" type="image/x-icon" href="http://res.cloudinary.com/trouvaay/image/upload/v1422488872/Raredoor-R-icon-gold_cdd65g.ico">
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
@@ -66,70 +67,20 @@
             <img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=926742507338043&amp;ev=PixelInitialized" />
         </noscript>
         <!-- End FB Pixel -->
+	<script>
+	// Picture element HTML5 shiv
+	document.createElement( "picture" );
+	</script>
+	<script src="{% static 'js/vendor/picturefill.min.js' %}" async></script>
         {% block beginjs %}{% endblock beginjs %}
         {% analytical_head_bottom %}
     </head>
     <body>
         {% analytical_body_top %}
-        {% block modal %}
-            <div class="modal" id="addtocartmodal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="alert alert-info" role="alert" style="margin-bottom:0">
-                            <p class="text-center">Thank you for your reservation.</p>
-                        </div>
-                        <div class="text-center">
-                        	<img id="reserved-product-image" src="" width="200" height="200" />
-    						<p>
-    						Your <b><span id="reserved-product-name"></span></b> is available at <i><span id="reserved-product-store-name"></span></i> located at:
-    						</p>
-    						<div id="reserved-product-store-address"></div>
-    						Your card will not be charged until <span id="reserved-product-capture-date"></span>
-                        </div>
-                    </div>  
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal-dialog -->
-            </div><!-- /. end Add to Cart modal -->
-        {% endblock modal %}
+      
+    {% include '_mobile_nav.html' %}  
     {% block nav %}
-        <div class="container-fluid top-bar">
-            {% block nav-all-else %}
-            <div class="row">
-                <div class="col-xs-6 logo-div"><a href="{% url 'goods:home' %}"> <img id="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a></div>
-                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mobile-search">
-                           <img src="{% static 'img/Magnifying_Glass2.svg' %}" style="height:24px">
-                    </button><!-- </a> -->
-                </div>
-                <div class="navbar-collapse hidden-md hidden-lg hidden-sm col-xs-3 right-side" style="padding: 0">        
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" id="mob-nav">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                    </button><!-- </a> -->
-                </div>
-                <div id="main-menu" class="col-xs-6 right-side">
-                    <div class="row">
-                        <div class="col-sm-12 main-navigation bottom-row">
-                            <ul class="nav navbar-nav navbar-right">
-            				    <li><a href="http://instagram.com/raredoor/"><img src="{% static 'img/socialicons/instagram.svg' %}" class="socialicon"></a></li>
-            				    <li><a href="https://www.facebook.com/RareDoor"><img src="{% static 'img/socialicons/facebook.svg' %}" class="socialicon"></a></li>
-            				    <li><a href="https://www.twitter.com/RareDoor"><img src="{% static 'img/socialicons/twitter.svg' %}" class="socialicon"></a></li>
-                                <li><div class="cart-info"></div></li>
-                				{% if user.is_authenticated %}
-                				<!-- <li><a class="btn btn-link" href="#">Profile</a></li> -->
-                				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Logout</a></li>
-                				{% else %}
-                				<li><a class="btn btn-link" href="{% url 'members:logout' %}">Login</a></li>
-                				{% endif %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endblock nav-all-else %}
-        </div>
+        {% include '_tab_nav.html' %}
     {% endblock nav %}
     {% block content %}{% endblock content %}
     <footer class="main-footer">
@@ -160,7 +111,7 @@
                     <div class="col-xs-offset-1 col-xs-12 col-sm-2">
                         <div class="footer-widget">
                             <div class="footer-menu">
-                                <h2><a href="{% url 'goods:about' %}">Delivery</a></h2>
+                                <h2><a href="{% url 'goods:about' %}">About</a></h2>
                             </div>
                         </div>
                     </div>
@@ -191,7 +142,7 @@
                             <div class="final-line">
                                 <div class="row">
                                     <div class="col-xs-offset-2 col-xs-12 col-sm-6 col-sm-offset-0">
-                                        <p>&copy; 2014 Trouvaay, Inc. All Rights Reserved.</p>
+                                        <p>&copy; 2015 Trouvaay, Inc. All Rights Reserved.</p>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +150,73 @@
                     </div>
             </div><!-- end row -->
         </div>
-        </footer>
+    
+    </footer>
+    <div id="csrftoken-container" style="display:none">{% csrf_token %}</div>
+    
+        {% block modal %}
+            <div class="modal fade" id="how-it-works-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div class="container-fluid how-it-works layer" style="margin-bottom:0">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <!-- <span class="hide">Close</span> -->
+                            </button>
+                            <div class="row-fluid">
+                                <div class="col-md-12 statement">
+                                    <h3>Great Items Available Locally</h3>
+                                    <h4>Want that great statement piece but don't know where to go? We partner with small home decor retailers in the Bay Area to bring all the best vintage, unique, and floor model deals in one place.</h4>
+                                </div>
+                                <div class="col-md-12 statement">
+                                    <h3>See Your Item Before Paying</h3>
+                                    <h4>You have 48 hours to go touch, feel, and see your item in-store & then confirm your purchase.If we don't hear from you in 48 hours, the transaction is cancelled. </br></br>The convenience of online shopping without the regret.</h4>
+                                </div>
+                                <div class="col-md-12 statement">
+                                    <h3>Affordable Delivery</h3>
+                                    <h4>We charge $5 for small items, $65 for bulk items (not included in your item's list price).</h4>
+                                    <h4>After you’ve placed your order, we’ll call you to provide the delivery price and coordinate a delivery time that is convenient for you.</h4>
+                                </div>
+                                <div class="col-md-12 statement">
+                                    <h3 style="text-align:center">More treasure, less hunting.</h3>
+                                </div>
+
+                                
+                            </div><!-- end row -->
+                        </div><!-- end container-fluid -->
+                      </div><!-- end modal-body -->
+                    </div><!-- end modal-content -->
+                </div><!-- end modal-dialog -->
+                </div><!-- end modal -->
+            <div class="modal" id="post-checkout-modal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px; padding-bottom:2px">
+                                <span aria-hidden="true">&times;</span>
+                                <!-- <span class="hide">Close</span> -->
+                            </button>
+                        <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+                            <p class="text-center"><h3>Thank you for your <span id="product-purchase-try">reservation.</span><span id="product-purchase-buy" style="display:none">purchase.</span></h3></p>
+                        </div>
+                        <div class="text-center">
+                            <img id="reserved-product-image" src="" width="300" height="300" />
+                            <p></br>
+                            <h4>Your order (<b><span id="reserved-product-name"></span>)</b> is available at:
+                            </p>
+                            <i><span id="reserved-product-store-name"></span></i>
+                            <div id="reserved-product-store-address"></h4>
+                            <h4><span id="reserved-product-capture-date">You have 48 hours to go check out your piece in store.  Please text, call, or email to confirm.  If we dont hear from you, your order will be cancelled on</span></h4>
+                        </h5></div>
+                    </div>  
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /. end Add to Cart modal -->
+            <div id="pre-checkout-modal-container"></div>
+        {% endblock modal %}
+        
+        {% block ajax_login_modal %}<div id="ajax-login-modal-container"></div>{% endblock %}
         <!--closing js -->
         <div>
             <script src="{% static 'js/vendor/jquery-1.10.1.min.js' %}"></script>
@@ -212,6 +229,12 @@
             <script src="{% static 'js/vendor/jquery.selectBoxIt.min.js' %}"></script>
             <script src="{% static 'js/vendor/jquery.flexslider.js' %}"></script>
             <script src="{% static 'js/main.js' %}"></script>
+            <!-- start Mixpanel -->
+            <script type="text/javascript">
+            // (function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);mixpanel.init("24185cfcfe78051f50e4870540755d5c");
+
+                
+            </script><!-- end Mixpanel -->
             {% include 'custom.html' %}
         </div>
         {% block endjs %}{% endblock endjs %}

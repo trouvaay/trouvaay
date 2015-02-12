@@ -6,14 +6,17 @@ var trouvaay = {
 
 		var mobilemenutop = "<div id='mobile-nav' class='navbar-collapse'>" +
 					"<ul class='nav navbar-nav'>" +
-						"<li>{% if user.is_authenticated %}" +
+                        "<li><a href='{% url 'goods:main' %}'>Shop</a></li>" +
+                        "<li class='nav-divider'></li>" +
+						"<li><a href='{% url 'goods:about' %}'>About</a></li>" +
+                        "<li class='nav-divider'></li>" +
+                        "<li>{% if user.is_authenticated %}" +
 							"<a href='{% url 'members:logout' %}'>Logout</a>" +
 							"{% else %}" +
 							"<a href='{% url 'members:login' %}'>Login</a>" +
 							"{% endif %}" +
 						"</li>" +
-						"<li class='nav-divider'></li>" +
-						"<li><a href='{% url 'goods:about' %}'>About</a></li>" +
+						
 						"<li class='nav-divider'></li>" +
 						"<li><a style='display:inline-block' class='insta-icon mobile' href='http://instagram.com/raredoor/' target='_blank'>" +
 								"<img src='{% static 'img/socialicons/instagram.svg' %}'/></a>" +
@@ -23,49 +26,44 @@ var trouvaay = {
 					 			"<img src='{% static 'img/socialicons/twitter.svg' %}'/></a>" +
 					 	"</li>" +
 					 "</ul></div>";
-        var mobileTabIcons = "<div id='tab-icons-mobile' class='container select-bar hp-tabs'>"+
+        var mobileTabIcons = "<div id='tab-icons-mobile' class='container select-bar hp-tabs' style='border-top: rgb(218, 182, 97) 1px solid;'>"+
                                 "<div class='tab-icons mobile'>"+
                                 "<div class='row-fluid'>"+
                                     "<div class='col-sm-11 col-md-10'>"+
                                     "<ul class='nav nav-tabs pull-left'>"+
-                                        "<li class='active'><a href='#tab1' data-toggle='tab'>"+
+                                        "<li id='everything'><a href='{% url 'goods:landing' %}'>"+
                                         "<span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/house128.png' %}' title='house' alt=''/>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>everything</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab2' data-toggle='tab'>"+
+                                        "<li id='seating'><a href='{% url 'goods:main' %}?type=seating'>"+
                                             "<span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/seating128.png' %}' title='seating' alt=''/>"+
                                             "</span>"+
                                             "<span class='inner icon-label' style='display:list-item'>seating</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab3' data-toggle='tab'><span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/table128.png' %}' title='table' alt=''/>"+
-                                            "</span><span class='inner icon-label' style='display:list-item'>tables/desks</span>"+
+                                        "<li id='tables'><a href='{% url 'goods:main' %}?type=tables'><span class='inner' style='display:list-item'>"+
+                                            "</span><span class='inner icon-label' style='display:list-item'>tables</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab4' data-toggle='tab'><span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/bed128.png' %}' title='bed' alt=''/></span>"+
+                                        "<li id='beds'><a href='{% url 'goods:main' %}?type=beds'><span class='inner' style='display:list-item'></span>"+
                                             "<span class='inner icon-label' style='display:list-item'>beds</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab5' data-toggle='tab'><span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/storage128.png' %}' title='storage' alt=''/>"+
+                                        "<li id='storage'><a href='{% url 'goods:main' %}?type=storage'><span class='inner' style='display:list-item'>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>storage</span>"+
                                             "</a></li>"+
-                                        "<li><a href='#tab6' data-toggle='tab'><span class='inner' style='display:list-item'>"+
-                                            "<img src='{% static 'img/roomiconsnew/lighting128.png' %}' title='lighting' alt=''/>"+
+                                        "<li id='lighting'><a href='{% url 'goods:main' %}?type=lighting'><span class='inner' style='display:list-item'>"+
                                             "</span><span class='inner icon-label' style='display:list-item'>lighting</span>"+
                                             "</a></li>"+
                                     "</ul>"+
                                     "</div>"+
                                 "</div>"+
                             "</div>"+
-                            "</div>"
+                            "</div>";
 
 
         //Append mobile menu
 		$("#mobile-search").on('click',function() {
                 if (!$('#tab-icons-mobile').length ) {
-                  $(".container-fluid.top-bar").append(mobileTabIcons);
+                    console.log('is this workgin?');
+                  $("#mobile-navigation").append(mobileTabIcons);
                 } else {
                   $("#tab-icons-mobile").remove();
                 }
@@ -74,10 +72,18 @@ var trouvaay = {
         //Append mobile tab icons
         $("#mob-nav").on('click',function() {
                 if (!$('#mobile-nav').length ) {
-                  $(".container-fluid.top-bar").append(mobilemenutop);
+                  $("#mobile-navigation").append(mobilemenutop);
                 } else {
                   $("#mobile-nav").remove();
                 }
+        });
+
+       $("#filter").on('click',function() {
+            if (!$('#desktopSearch').length ) {
+              $(".select-bar.hp-").append(desktopsearch);
+            } else {
+              $("#mobile-nav").remove();
+            }
         });
 
         //Highlights link of current page
@@ -88,6 +94,7 @@ var trouvaay = {
 		    }
 		  });
 		});
+
 
 		//product-like AJAX post
         $(".btn.btn-default.glyphs").click(function() {
@@ -109,31 +116,91 @@ var trouvaay = {
                 }
             );
         });
-
-        //Addtocart AJAX post
-        /*
-	    $(".btn.buy").click(function() {
-            var id = $(this).attr("id").substring(4);
-            var data = {'id': id};
-            if ($(this).hasClass("active")) {
-                $(this).removeClass("active");
-                }
-            else {
-                $("#addtocartmodal").show().delay(2000).fadeOut();
-                $.post("{% url 'members:addtocart' %}", data, function(product) {
-                    $(".badge.cart-counter").html(product.count.toString());
-                    $(".badge.mobile-cart-counter").html(product.count.toString());
-                });
-            }
-        })
-        */
+        
 	}
+}
+
+function handleBuyButtonClick(e) {
+	console.log('clicked on buy button: '+e.target.id);
+
+	if(e.target.id.substr(0, 4) == 'buy_'){
+		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
+        var orderType = 'buy';
+		mixpanel.track(
+            "Clicked Buy Button",
+            { "productId": productId }
+        );
+    }
+    else if(e.target.id.substr(0, 8) == 'reserve_'){
+        var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
+        var orderType = 'reserve';
+        mixpanel.track(
+            "Clicked Reserve Button",
+            { "productId": productId }
+        );
+    }
+
+    if(productId && !(typeof productId === 'undefined')){
+	    console.log('this is the ordertype!', orderType)
+
+		var promoCode = ''
+		if($("#input-promo-code")) {
+			promoCode = $("#input-promo-code").val()
+		}
+		
+		console.log('promoCode: '+promoCode);
+		
+		// call pre-checkout
+		$.ajax({
+			type: "POST",
+			url: "{% url "members:pre_checkout" %}",
+			dataType: "html",
+			data: {
+				product_id: productId,
+                order_type: orderType,
+                promo_code: promoCode
+			},
+			success: function(response, status){
+				// console.log('response from pre-checkout call: '+status );
+				$("#pre-checkout-modal-container").html(response);
+				$("#pre-checkout-modal").modal({
+					show: true,
+					keyboard: true
+				});
+			},
+            error: function(response, status, error) {
+              var err = eval("(" + response.responseText + ")");
+              alert(err.Message);
+            }
+		});
+	}
+	e.preventDefault();
 }
 
 $(document).ready(function() {
     trouvaay.init();
- 
+    
+    $('[data-toggle="tooltip"]').tooltip({
+        'placement': 'bottom'
+    });
 
+    //Get furniture type param
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    };
+
+    function addactivelink (type){
+      $('li').each(function() {
+        if ($(this).attr('id') == getParameterByName(type)) {
+          $(this).addClass('active');
+        }
+      });
+    };
+
+    addactivelink('type');
     //Django boilerplat to Auto add csrf token to template for $.POST Ajax
     function getCookie(name) {
             var cookieValue = null;
@@ -151,7 +218,15 @@ $(document).ready(function() {
             return cookieValue;
         }
 
-        var csrftoken = getCookie('csrftoken');
+		function getCsrfToken(){
+			var token = $("#csrftoken-container").children("[name='csrfmiddlewaretoken']").val();
+			return token;
+		}
+
+        var csrftoken = getCsrfToken() // getCookie('csrftoken');
+        
+        // console.log('csrftoken: '+csrftoken);
+        
         function csrfSafeMethod(method) {
     	// these HTTP methods do not require CSRF protection
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -167,79 +242,49 @@ $(document).ready(function() {
             }
         });
 	
-	
+	$('.view-product').on('click', function(e) {
+        var productslug = e.target.pathname.substr(7);
+        mixpanel.track(
+                "Clicked Detail Page",
+                { "productSlug": productslug }
+            );
+        console.log('clicked detail page-post');
+    })
 
-	// Stripe checkout
-	$('.btn.buy.try').on('click', function(e) {
-		
-		// alert("clicked");
-		// console.log("clicked");
+	// navigation login
+	$('.nav-login-button').on('click', function(e) {
 		$.ajax({
 			type: "GET",
-			url: "{% url "members:can_reserve" %}",
-			success: function(data){
-				if(data['status'] == 'login_required'){
-					window.location.replace("{% url 'members:login' %}"+"?next="+window.location.href.toString().split(window.location.host)[1]);
-				}
+			dataType: "html",
+			url: "{% url "members:ajax_login" %}",
+			success: function(response, status){
+				console.log('status ['+status+']');
+				if(status == 'success'){
+					console.log('loaded ajax_login');
+					$("#ajax-login-modal-container").html(response);
+					var currentUrl = document.URL;
+					
+					// after login redirect where we were except 'login' itself
+					// so that we don't end up with a loop
+					
+					console.log(currentUrl.indexOf("{% url 'members:login' %}"));
+					
+					if(currentUrl.indexOf("{% url 'members:login' %}") === -1){
+						$("#id_next").val(currentUrl);
+						console.log($("#id_next").val());
+					}
+					$("#signup-login-modal").modal({
+						show: true,
+						keyboard: true
+					});
+				}			
 			}
 		});
-	
-		if(e.target.id.substr(0, 4) == 'buy_'){
-			var productId = e.target.id.substr(4);
-			if(productId && !(typeof productId === 'undefined')){
-				var productName = $("#product-name-"+productId).text();
-				var productPrice = $("#product-price-in-cents-"+productId).text();
-				
-				if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
-					var handler = StripeCheckout.configure({
-						key: '{{ STRIPE_PUBLISHABLE_KEY }}',
-						image: "{% static 'img/logos/Raredoor-R-icon-gold.png' %}",
-						name: '{{ site_name }}',
-						description: productName,
-						amount: productPrice,
-						shippingAddress: "true",
-						token: function(token, args) {
-							$.ajax({
-								type: "POST",
-								url: {% url "members:reserve_callback" %},
-								data: {
-									token: token,
-									args: args,
-									total_amount: productPrice,
-									order_type: "{{ FEATURE_NAME_RESERVE }}",
-									product_id: productId
-								},
-								success: function(data){
-								  	if(data['status'] == "ok"){
-								  		$("#reserved-product-name").text(data['product_name']);
-								  		$("#reserved-product-store-name").text(data['store_name']);
-								  		var storeAddress = data['store_street'];
-								  		if(data['store_street2'] != ""){
-								  			storeAddress += ("<br>" + data['store_street2']);
-								  		}
-								  		storeAddress += ("<br>" + data['store_city'] + " " + data['store_state'] + " " + data['store_zipcode']);
-										$("#reserved-product-store-address").html(storeAddress);
-										$("#reserved-product-capture-date").text(data['capture_date']);
-										$("#reserved-product-image").attr('src', (data['image_src']));
-										$("#addtocartmodal").modal({
-											show: true,
-											keyboard: true
-										});
-								  	}
-								},
-								dataType: "json"
-							});
-						}
-					});				
-				
-				  	handler.open({
-						panelLabel: "{{ FEATURE_NAME_RESERVE }} {% verbatim %}{{amount}}{% endverbatim %} incl. tax"
-					});
-				}
-			}
-			e.preventDefault();
-		}
- 	});
+	});
+
+	// Stripe checkout
+	$('.btn.buy').on('click', handleBuyButtonClick);
+
 });
 //Unsed formula to append distance from product to user's loco
 //  function  getpoints (userloc) {

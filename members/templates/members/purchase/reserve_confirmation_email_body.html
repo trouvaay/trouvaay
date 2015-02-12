@@ -1,4 +1,4 @@
-<h1>Thank you for your purchase.</h1>  
+<h1>Thank you for your {% if capture_date %}reservation{% else %}purchase{% endif %}.</h1>  
 
 <p>
 Your <b>{{ product.short_name }}</b> is available at <i>{{ product.store.retailer.short_name }}</i> located at:
@@ -8,12 +8,22 @@ Your <b>{{ product.short_name }}</b> is available at <i>{{ product.store.retaile
 {{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
 </p>
 
-<p>You have our 5 day discovery period to go view the item in store.</p>
+<p>{% if capture_date %}You have 48 hours to go see the item in store if you choose.  Happy shopping!</p>
 
-<p>Your card will not be charged until {{ capture_date }}.  Call or text to cancel.
-We are happy to answer any questions you might have!<p>
+<p>Your card will not be charged until {{ capture_date }}.  Call, text, or email to cancel.
+{% endif %}We are happy to answer any questions you might have!<p>
 
+{% if uid and token %}
+<p>Your account has been created from email you have provided during our checkout process. 
+If you wish to login you need to first reset your password by following this link:<br>
+<a href="{{ protocol }}://{{ domain }}{% url 'auth_password_reset_confirm' uid token %}">
+{{ protocol }}://{{ domain }}{% url 'auth_password_reset_confirm' uid token %}</a></p>
+{% endif %}
 <p>
 Sincerely,<br />
-Rare Door Support Team
+Rare Door
+
+help@raredoor.com
+650.603.0386
+
 </p>
