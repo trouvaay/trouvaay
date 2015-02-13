@@ -51,7 +51,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     def first_image(self, obj):
         url = obj.productimage_set.first().image.build_url()
-        return '<img src={} style="width: 75px"/>'.format(url)
+        return '<img src={} style="width: 100px"/>'.format(url)
     
     first_image.allow_tags = True
 
