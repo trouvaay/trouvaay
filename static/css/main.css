@@ -4492,6 +4492,9 @@ footer ul li a:hover {
     padding-left: 0;
     padding-right: 0;
   }
+  #input-promo-code {
+    max-width: 85px;
+  }
   button.home-buttons:first-child {
   margin-right: 5px
   }
