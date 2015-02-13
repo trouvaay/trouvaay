@@ -32,7 +32,7 @@ class AuthUserOrderItemInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     model = Product
 
-    list_display = ['short_name', 'store', 'description', 'is_published', 'is_featured', 'is_sold', 'current_price', 'added_date', 'pub_date']
+    list_display = ['short_name', 'store', 'description', 'is_published', 'is_landing', 'is_featured', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date']
 
     fields = [('short_name', 'is_published', 'is_sold', 'is_featured'), ('store', 'has_trial', 'units'),('original_price', 'current_price'), 
                 'pub_date', 'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),
@@ -42,7 +42,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['short_name', 'long_name', 'store']
     list_filter = ['store', 'is_published']
 
-    list_editable = ['current_price', 'is_published', 'is_sold', 'is_featured', 'pub_date']
+    list_editable = ['current_price', 'is_published', 'is_landing', 'is_reserved', 'is_sold', 'is_featured', 'pub_date']
     
     prepopulated_fields = {"current_price": ("original_price",)}
 
