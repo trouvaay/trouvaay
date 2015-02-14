@@ -28,11 +28,14 @@ class ProductInline(admin.TabularInline):
 class AuthUserOrderItemInline(admin.TabularInline):
     model = AuthUserOrderItem
 
+class ProductImageAdmin(admin.ModelAdmin):
+    model = ProductImage
+    list_display = ['image', 'is_main']
 
 class ProductAdmin(admin.ModelAdmin):
     model = Product
 
-    list_display = ['short_name', 'store', 'description', 'is_published', 'is_landing', 'is_featured', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date']
+    list_display = ['short_name', 'first_image', 'store', 'description', 'is_published', 'is_landing', 'is_featured', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date']
 
     fields = [('short_name', 'is_published', 'is_sold', 'is_featured'), ('store', 'has_trial', 'units'),('original_price', 'current_price'), 
                 'pub_date', 'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),
@@ -46,5 +49,11 @@ class ProductAdmin(admin.ModelAdmin):
     
     prepopulated_fields = {"current_price": ("original_price",)}
 
+    def first_image(self, obj):
+        url = obj.productimage_set.first().image.build_url()
+        return '<img src={} style="width: 100px"/>'.format(url)
+    
+    first_image.allow_tags = True
+
 admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductImage)
+admin.site.register(ProductImage, ProductImageAdmin)
