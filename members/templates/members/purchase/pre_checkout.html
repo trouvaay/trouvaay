@@ -71,11 +71,9 @@
 										<tr>
 											<th scope="row">
 												{% if promo_code_message %}<label style="color:red" for="input-promo-code"><b>{{ promo_code_message }}</b></label>{% endif %}
-												<input type="text" name="promo_code" id="input-promo-code" placeholder="Promo code" />
-												<button id="{% if order_type == "buy" %}buy{% else %}reserve{% endif %}_withpromocode_{{ product.id }}" 
-													type="button" class="btn btn-primary btn-xs apply-promo-code">Apply</button>
-											</td>
-											<td align="right">&nbsp;</td>
+												<input type="text" name="promo_code" id="input-promo-code" placeholder="Promo code" /></td>
+											<td align="right"><button id="{% if order_type == "buy" %}buy{% else %}reserve{% endif %}_withpromocode_{{ product.id }}" 
+													type="button" class="btn btn-primary btn-xs apply-promo-code">Apply</button></td>
 										</tr>
 										{% endif %}
 										{% if can_enter_promo_code %}
