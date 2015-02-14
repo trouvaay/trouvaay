@@ -86,4 +86,4 @@ class Command(BaseCommand):
                     logger.error(str(e))
             
             else:
-                logger.info('skipping {}'.format(data[3])) 
+                logger.info('skipping {}'.format(unicode(data[3]))) 
