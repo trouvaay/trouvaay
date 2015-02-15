@@ -1,5 +1,5 @@
 from django.views import generic
-from goods.models import Product, Category, FurnitureType, Segment, ProductImage
+from goods.models import Product, Category, FurnitureType, Segment, ProductImage, Color, Style
 from members.models import AuthUserActivity, OfferType, PromotionOffer
 from django.core.serializers import serialize
 from django.core.paginator import Paginator
@@ -9,6 +9,7 @@ from random import randint
 import logging
 from django.conf import settings
 from random import shuffle
+from helper import Neighborhoods
 
 from endless_pagination.views import AjaxListView
 
@@ -91,6 +92,21 @@ class MainView(AjaxListView):
         context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
         context['query_operator'] = '&'
+        context['searchfilter'] = {
+                                   'price_slider_min': 0,
+                                   'price_slider_max': 10000,
+                                   'height_slider_min': 0,
+                                   'height_slider_max': 1000,
+                                   'width_slider_min': 0,
+                                   'width_slider_max': 1000,
+                                   'depth_slider_min': 0,
+                                   'depth_slider_max': 1000,
+                                   'segments': Segment.objects.all(),
+                                   'colors': Color.objects.all(),
+                                   'styles': Style.objects.all(),
+                                   'furnituretypes': FurnitureType.objects.all(),
+                                   'neighborhoods': Neighborhoods['SF']
+                                   }
         
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings
@@ -98,6 +114,81 @@ class MainView(AjaxListView):
         # removed until profile page implemented
         # context['liked_items'] = get_liked_items(self.request.user)
         return context
+
+
+class SearchFilterView(AjaxListView):
+    template_name = 'goods/main/main_ajax_page.html'
+    page_template = 'goods/main/main_ajax_page.html'
+
+    context_object_name = 'products'
+    model = Product
+    key = 'page'
+
+    def get_queryset(self):
+
+        queryset = self.model.objects.filter(is_published=True)
+        segments = [int(i) for i in self.request.GET.getlist('filter-segment')]
+        if(segments):
+            queryset = queryset.filter(segment__in=segments)
+
+        colors = [int(i) for i in self.request.GET.getlist('filter-color')]
+        if(colors):
+            queryset = queryset.filter(color__in=colors)
+
+        # TODO: enable styles, styles are for now disabled
+        # styles = [int(i) for i in self.request.GET.getlist('filter-style')]
+        # if(styles):
+        #    queryset = queryset.filter(style__in=styles)
+
+        furnituretypes = [int(i) for i in self.request.GET.getlist('filter-furnituretype')]
+        if(furnituretypes):
+            queryset = queryset.filter(furnituretype__in=furnituretypes)
+
+        neighborhoods = self.request.GET.getlist('filter-neighborhood')
+        if(neighborhoods):
+            queryset = queryset.filter(store__neighborhood__in=neighborhoods)
+
+        price_min = self.request.GET.get('filter-price-min', None)
+        if(price_min):
+            price_min = int(price_min)
+            queryset = queryset.filter(current_price__gte=price_min)
+
+        price_max = self.request.GET.get('filter-price-max', None)
+        if(price_max):
+            price_max = int(price_max)
+            queryset = queryset.filter(current_price__lte=price_max)
+
+        height_min = self.request.GET.get('filter-height-min', None)
+        if(height_min):
+            height_min = int(height_min)
+            queryset = queryset.filter(height__gte=height_min)
+
+        height_max = self.request.GET.get('filter-height-max', None)
+        if(height_max):
+            height_max = int(height_max)
+            queryset = queryset.filter(height__lte=height_max)
+
+        width_min = self.request.GET.get('filter-width-min', None)
+        if(width_min):
+            width_min = int(width_min)
+            queryset = queryset.filter(width__gte=width_min)
+
+        width_max = self.request.GET.get('filter-width-max', None)
+        if(width_max):
+            width_max = int(width_max)
+            queryset = queryset.filter(width__lte=width_max)
+
+        depth_min = self.request.GET.get('filter-depth-min', None)
+        if(depth_min):
+            depth_min = int(depth_min)
+            queryset = queryset.filter(depth__gte=depth_min)
+
+        depth_max = self.request.GET.get('filter-depth-max', None)
+        if(depth_max):
+            depth_max = int(depth_max)
+            queryset = queryset.filter(depth__lte=depth_max)
+
+        return queryset
 
 
 class VintageView(generic.ListView):
