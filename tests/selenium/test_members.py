@@ -8,6 +8,7 @@ from datetime import datetime
 import poplib
 import random
 import string
+import sys
 from time import sleep
 import unittest
 
@@ -20,15 +21,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 import config
 
-
-class RaredoorMembers(unittest.TestCase):
+class RaredoorMembers(object):
 
     # -------------------------------------------------------------------------
     # setup and teardown are part of the unittest framework
     # -------------------------------------------------------------------------
-
     def setUp(self):
-        self.driver = webdriver.Firefox()
+        self.driver = None  # this will be set in a subclass
         random.seed()
 
     def tearDown(self):
@@ -439,5 +438,13 @@ class RaredoorMembers(unittest.TestCase):
                          email_password=config.EXISTING_USER_EMAIL_PASSWORD,
                          password=config.EXISTING_USER_PASSWORD)
 
-if __name__ == "__main__":
-    unittest.main()
+class ChromeTests(RaredoorMembers, unittest.TestCase):
+    def setUp(self):
+        super(ChromeTests, self).setUp()
+        self.driver = webdriver.Chrome()
+
+
+class FirefoxTests(RaredoorMembers, unittest.TestCase):
+    def setUp(self):
+        super(FirefoxTests, self).setUp()
+        self.driver = webdriver.Firefox()
