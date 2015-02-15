@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^piece/(?P<slug>[-\w\d]+)/$', views.DetailView.as_view(), name='detail'),
     url(r'^about/$', views.AboutView.as_view(), name='about'),
     url(r'^shop/$', views.MainView.as_view(), name='main'),
+    url(r'^searchfilter/$', views.SearchFilterView.as_view(), name='searchfilter'),
     
     #TODO: add unique url generator for vintage sales from IG
     #url(r'^vintage/$', views.VintageView.as_view(), name='vintage'),   
