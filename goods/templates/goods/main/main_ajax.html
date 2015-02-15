@@ -4,15 +4,161 @@
 {% load goods_extras %}
 {% load endless %}
 
+{% block beginjs %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap-slider.min.css' %}">
+        <script src="{% static 'js/vendor/bootstrap-slider.min.js' %}"></script>
+{% endblock beginjs %}
 {% block content %}
     </div>
+    
+    {% if searchfilter %}
+    <form id="searchfilter-form" action="." method="post">
+	    <div id="filter-container" style="margin-top: 100px;" class="col-xs-12"><!-- searchfilters -->
+	
+			{% if searchfilter.segments %}
+			<div id="filter-segment-segment">
+				<h4>Segment</h4>
+				<ul>
+					{% for segment in searchfilter.segments %}
+					<li>
+						<input class="searchfilter-control" type="checkbox" name="filter-segment" value="{{ segment.id }}" />
+						<label for="filter-segment-{{ segment.id }}">{{ segment.select }}</label>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+	
+			<div id="filter-container-price">
+				<h4>Price</h4>
+				<input type="text" name="filter-price-min" class="searchfilter-control" value="" />
+				<input type="text" name="filter-price-max" class="searchfilter-control" value="" />
+				
+				{% comment %}
+				<span id="filter-price-slider-min" style="margin-right:20px;">{{ searchfilter.price_slider_min }}</span>
+				<input id="filter-price-slider" type="text" class="span2 searchfilter-control-price" value="" 
+					data-slider-min="{{ searchfilter.price_slider_min }}"
+					data-slider-max="{{ searchfilter.price_slider_max }}" 
+					data-slider-step="100" 
+					data-slider-value="[{{ searchfilter.price_slider_min }},{{ searchfilter.price_slider_max }}]"/> 
+				<span id="filter-price-slider-max" style="margin-left:20px;">{{ searchfilter.price_slider_max }}</span>
+				{% endcomment %}
+			</div>
+			
+			{% if searchfilter.colors %}
+			<div id="filter-container-color">
+				<h4>Color</h4>
+				<ul>
+					{% for color in searchfilter.colors %}
+					<li>
+						<input class="searchfilter-control" type="checkbox" name="filter-color" value="{{ color.id }}" />
+						<label for="filter-color-{{ color.id }}">{{ color.select }}</label>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+			
+			{% if searchfilter.styles %}
+			<div id="filter-container-style">
+				<h4>Style</h4>
+				<ul>
+					{% for style in searchfilter.styles %}
+					<li>
+						<input class="searchfilter-control" type="checkbox" name="filter-style" value="{{ style.id }}" />
+						<label for="filter-style-{{ style.id }}">{{ style.select }}</label>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+			{% comment %}
+			{% endcomment %}
+			
+			<div id="filter-container-dimensions">
+				<h4>Dimensions</h4>
+				<b>height</b>
+				<input type="text" name="filter-height-min" class="searchfilter-control" value="" />
+				<input type="text" name="filter-height-max" class="searchfilter-control" value="" />
+				
+				{% comment %}
+				<span id="filter-height-slider-min" style="margin-right:20px;">{{ searchfilter.height_slider_min }}</span>
+				<input id="filter-height-slider" type="text" class="span2" value="" 
+					data-slider-min="{{ searchfilter.height_slider_min }}" 
+					data-slider-max="{{ searchfilter.height_slider_max }}" 
+					data-slider-step="5" 
+					data-slider-value="[{{ searchfilter.height_slider_min }},{{ searchfilter.height_slider_max }}]"/> 
+				<span id="filter-height-slider-max" style="margin-left:20px;">{{ searchfilter.height_slider_max }}</span>
+				{% endcomment %}
+				
+				<b>width</b>
+				<input type="text" name="filter-width-min" class="searchfilter-control" value="" />
+				<input type="text" name="filter-width-max" class="searchfilter-control" value="" />
+				
+				{% comment %}
+				<span id="filter-width-slider-min" style="margin-right:20px;">{{ searchfilter.width_slider_min }}</span>
+				<input id="filter-width-slider" type="text" class="span2" value="" 
+					data-slider-min="{{ searchfilter.width_slider_min }}" 
+					data-slider-max="{{ searchfilter.width_slider_max }}" 
+					data-slider-step="5" 
+					data-slider-value="[{{ searchfilter.width_slider_min }},{{ searchfilter.width_slider_max }}]"/> 
+				<span id="filter-width-slider-max" style="margin-left:20px;">{{ searchfilter.width_slider_max }}</span>
+				{% endcomment %}
+	
+				<b>depth</b>
+				<input type="text" name="filter-depth-min" class="searchfilter-control" value="" />
+				<input type="text" name="filter-depth-max" class="searchfilter-control" value="" />
+				
+				{% comment %}
+				<span id="filter-depth-slider-min" style="margin-right:20px;">{{ searchfilter.depth_slider_min }}</span>
+				<input id="filter-depth-slider" type="text" class="span2" value="" 
+					data-slider-min="{{ searchfilter.depth_slider_min }}" 
+					data-slider-max="{{ searchfilter.depth_slider_max }}" 
+					data-slider-step="5" 
+					data-slider-value="[{{ searchfilter.depth_slider_min }},{{ searchfilter.depth_slider_max }}]"/> 
+				<span id="filter-depth-slider-max" style="margin-left:20px;">{{ searchfilter.depth_slider_max }}</span>
+				{% endcomment %}
+			</div>
+			
+			{% if searchfilter.furnituretypes %}
+			<div id="filter-container-furnituretype">
+				<h4>Furniture type</h4>
+				<ul>
+					{% for furnituretype in searchfilter.furnituretypes %}
+					<li>
+						<input class="searchfilter-control" type="checkbox" name="filter-furnituretype" value="{{ furnituretype.id }}" />
+						<label for="filter-furnituretype-{{ furnituretype.id }}">{{ furnituretype.select }}</label>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+			
+			{% if searchfilter.neighborhoods %}
+			<div id="filter-container-neighborhood">
+				<h4>Neighborhood</h4>
+				<ul>
+					{% for neighborhood_id, neighborhood_name in searchfilter.neighborhoods %}
+					<li>
+						<input class="searchfilter-control" type="checkbox" name="filter-neighborhood" value="{{ neighborhood_id }}" />
+						<label for="filter-neighborhood-{{ neighborhood_id }}">{{ neighborhood_name }}</label>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+	
+	    </div><!-- end searchfilters -->
+	</form>
+    {% endif %}
+    
     <div class="container pic-tabs main">        
         <div class="row">
             <div class="col-sm-12">
                 <div class="tab-content">
                     <div class="tab-pane fade in active">
                         <div class="grid-products-wrapper">
-                            <div class="row">
+                            <div id="ajax-product-container" class="row">
 				    {% include 'goods/main/main_ajax_page.html' %}
                             </div>
                         </div>
@@ -58,6 +204,48 @@
 {% block endjs %}
 
 {{ block.super }}
+<script>
+   	//var slider = new Slider('#filter-price-slider', {});
+   	//var slider = new Slider('#filter-height-slider', {});
+	//var slider = new Slider('#filter-width-slider', {});
+	//var slider = new Slider('#filter-depth-slider', {});
+
+	$(document).ready(function() {        
+  		
+  		var searchFilterTimer;
+		$(".searchfilter-control" ).change(function(e) {
+			console.log("searchfilter-control changed: "+e.target.id);
+			
+			// wait for other changes before we search
+			// if user is clicking on filter we don't
+			// want to make a request instantly after every click
+			// clear any previous timer and start a new one
+			if(searchFilterTimer && typeof searchFilterTimer != 'undefined'){ 
+				clearTimeout(searchFilterTimer);
+				console.log('timer is cleared');
+			}
+			
+			searchFilterTimer = setTimeout(function() {
+				// make ajax request to update the products
+				console.log("ajax request: "+{% url "goods:searchfilter" %});
+					
+				$.ajax({
+					type: "GET",
+					url: "{% url "goods:searchfilter" %}",
+					dataType: "html",
+					data: $("#searchfilter-form").serialize(),
+					success: function(response, status){
+						console.log('status from searchfilter call: '+status);
+						$("#ajax-product-container").html(response);
+					},
+				});					
+			}, 2000);
+			
+			console.log('timer is set: ');
+			console.log(searchFilterTimer);
+		});
+	});
+</script>
 <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
 <script>
         $.endlessPaginate({
