@@ -5,7 +5,7 @@ Created on Feb 6, 2015
 """
 
 import os
-
+from selenium import webdriver
 
 EXISTING_USER_EMAIL = ''  # test@gmail.com
 EXISTING_USER_EMAIL_PASSWORD = ''  # password for email, e.g. for gmail
@@ -26,6 +26,7 @@ NEW_USER_CC_NUMBER = '4242424242424242'
 NEW_USER_CC_EXP = '1020'
 NEW_USER_CC_CSC = '123'
 
+BROWSERS_TO_TEST = ['firefox', 'chrome']
 
 PROJECT_ENV = os.getenv('PROJECT_ENV', None)
 if(PROJECT_ENV == 'dev'):
