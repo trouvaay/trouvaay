@@ -54,11 +54,14 @@ class ProfileView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
         user = self.get_object()
-        # print user
-        context['user_activity'] = AuthUserActivity.objects.get(authuser= user)
         order = AuthUserOrder.objects.filter(authuser= user)
-        context['user_order_items'] = AuthUserOrderItem.objects.filter(order=order, has_open_reservation=True)
-        print (context['user_order_items'])
+        ordered_items = [i.product for i in AuthUserOrderItem.objects.filter(order=order, has_open_reservation=True)]
+        context['user_order_items'] = ordered_items
+
+        user_activity = AuthUserActivity.objects.get(authuser= user)
+        
+        # diff from liked_items context function in context_processors.py
+        context['liked_products'] = user_activity.saved_items.exclude(id__in= [i.id for i in ordered_items] )
         return context
 
 

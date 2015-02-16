@@ -18,12 +18,9 @@
                     <div class="tab-pane fade in active">
                         <div class="grid-products-wrapper">
                             <div class="row">
-                                {% for orderitem in user_order_items %}
+                                {% for product in user_order_items %}
                                   <!-- for now there is only 1 orderitem per order -->
-
-                                  {% with orderitem.product as product %}
                                     {% include 'members/closet/_reservedproduct_for_loop.html' %}
-                                  {% endwith %}
                                 {% endfor %}
                             </div>
                         </div>
@@ -45,15 +42,14 @@
           <h3>Saved Items</h3>
       </div>
     </div>
-    {% with user_activity.saved_items.all as products %}
-    {% if products %}        
+    {% if liked_products %}        
     <div class="row">
         <div class="col-sm-12">
             <div class="tab-content">
                 <div class="tab-pane fade in active">
                     <div class="grid-products-wrapper">
                         <div class="row">
-                            {% for product in products %}
+                            {% for product in liked_products %}
                                 {% include 'members/closet/_savedproduct_for_loop.html' %}
                             {% endfor %}
                         </div>
@@ -68,7 +64,6 @@
           <h4 style="text-align:center">Keep track of the best pieces by <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color:red"></span>'ing them</h4>
         </div>
       </div>
-    {% endif %}
-    {% endwith %}        
+    {% endif %}       
   </div>
 {% endblock content %}
