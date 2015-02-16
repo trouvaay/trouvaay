@@ -1,0 +1,363 @@
+#index-banner {
+  position: relative;
+  margin-bottom: 54px;
+  padding: 0px;
+
+  @include breakpoint(md) {
+    margin-bottom: 0px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  a {
+    color: #FFF;
+    text-transform: uppercase;
+  }
+
+  .arrow-link {
+    background-color: #000;
+    border: 3px solid #E6BE46;
+    font-size: 22px;
+    line-height: 22px;
+    margin-top: -28px;
+    padding: 4px 11px;
+
+    top: 50%;
+    right: 36px;
+    position: absolute;
+  }
+}
+
+#how-it-works {
+
+  @include breakpoint(md) {
+    background: #FFF;
+    position: fixed;
+    top: 80px;
+    width: 100%;
+    z-index: 2;
+    padding-top: 40px;
+
+  }
+
+  .info {
+    text-align: center;
+    font-size: 15px;
+    font-family: "Droid Serif";
+    font-weight: bold;
+
+    &:not(:last-child) {
+      padding-right: 30px;
+
+      @include breakpoint(md) {
+	padding-right: 15px;
+      }
+    }
+
+    > div {
+      background: $lily;
+      border: 2px solid $lily;
+      color: #FFF;
+      padding: 28px 18px 10px;
+      position: relative;
+      margin-bottom: 30px;
+
+      &:before {
+	content: 'a';
+	color: $lily;
+	display: block;
+	position: absolute;
+	background: #FFF;
+	border-radius: 22px;
+	border: 2px solid $lily;
+	width: 44px;
+	height: 44px;
+	line-height: 40px;
+	top: -22px;
+	left: 50%;
+	margin-left: -22px;
+	font-family: "raredoor";
+	text-align: center;
+
+
+      }
+
+      &.browse:before {
+	content: 'k';
+	font-size: 26px;
+
+      }
+
+      &.purchase:before {
+	content: 'g';
+	font-size: 20px;
+      }
+
+      &.reserve {
+	background: #FFF;
+	color: $lily;
+
+	&:before {
+	  font-size: 19px;
+	  content: 'h';
+	}
+
+	header {
+	  border-bottom: 1px solid $lily;
+	}
+      }
+    }
+
+    header {
+      border-bottom: 1px solid #FFF;
+      font-size: 20px;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+  }
+
+}
+
+#products {
+  header {
+    background: $dark-gray;
+    color: #FFF;
+    font-family: "Droid Serif";
+    font-size: 23px;
+    font-weight: bold;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+
+    @include breakpoint(md) {
+      background: $lily;
+      font-size: 17px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+  }
+
+  .see-more {
+    float: right;
+    background: $lily;
+    color: #FFF;
+    font-size: 30px;
+    padding: 0px 20px;
+    height: 50px;
+    line-height: 53px;
+    margin-top: -10px;
+    margin-bottom: 25px;
+
+    @include breakpoint(md) {
+      background: $yellow;
+      width: 100%;
+      text-align: center;
+      margin-top: 0px;
+      margin-bottom: 10px;
+
+    }
+
+    &:before {
+      font-size: 30px;
+    }
+
+  }
+
+
+}
+
+#products-grid {
+  @include breakpoint(md) {
+    padding: 0px;
+  }
+  img {
+    width: 100%;
+  }
+
+  .product a {
+    display: block;
+    img {
+      border-radius: 100%;
+      width: 100%;
+      margin-bottom: 20px;
+
+      @include breakpoint(md) {
+	border-radius: 0px;
+	margin-bottom: 10px;
+      }
+    }
+  }
+
+  .product {
+    margin-bottom: 35px;
+
+    @include breakpoint(md) {
+      margin-bottom: 10px;
+      &:nth-child(even) {
+	padding-right: 0px;
+	padding-left: 5px;
+      }
+      &:nth-child(odd) {
+	padding-left: 0px;
+	padding-right: 5px;
+      }
+
+    }
+
+
+    @include breakpoint(md) {
+      .name-container {
+	text-align: left;
+      }
+      &:nth-child(odd) {
+	.name-container {
+	  text-align: right;
+	}
+
+      }
+
+    }
+
+  }
+
+  .image-container {
+    padding: 0px 10px;
+
+    @include breakpoint(md) {
+      padding: 0px;
+    }
+  }
+
+  .name-container {
+    border: 3px solid $product-title-border;
+    font-family: "Droid Serif";
+    font-weight: bold;
+    text-align: center;
+    padding: 13px;
+
+    @include breakpoint(md) {
+      background: $product-title-border;
+      color: #FFF;
+
+    }
+
+    .name {
+      font-family: "Ostrich Sans";
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 40px;
+      letter-spacing: 1px;
+
+      @include breakpoint(md) {
+	font-size: 25px;
+	line-height: 25px;
+      }
+
+      a {
+	color: #000;
+
+	@include breakpoint(md) {
+	  color: #FFF;
+	}
+
+	&:hover {
+	  text-decoration: none;
+	}
+      }
+    }
+
+    .price {
+      font-size: 16px;
+    }
+  }
+}
+
+#quotes {
+  background: $light-brown-gray;
+  color: #FFF;
+  margin-bottom: 120px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+
+  @include breakpoint(md) {
+    margin-bottom: 0px;
+  }
+
+  &:after {
+    
+    content: '';
+    display: block;
+    position: absolute;
+    width: 75px;
+    height: 80px;
+    border-left: 75px solid transparent;
+    border-right: 0px solid transparent;
+    border-top: 80px solid #524b48;
+    left: 0px;
+    bottom: -80px;
+
+    @include breakpoint(md) {
+      content: none;
+    }
+  }
+
+  q {
+    display: block;
+
+    font-family: "Droid Serif";
+    font-style: italic;
+    font-size: 17px;
+    margin-bottom: 10px;
+
+
+  }
+
+  .author-name {
+    display: block;
+    font-family: "Ostrich Sans";
+    font-size: 20px;
+    letter-spacing: 1px;
+    &:before {
+      content: '—';
+      margin-right: 5px;
+    }
+  }
+
+  .quote:not(:last-child) {
+    border-right: 1px solid #FFF;
+    height: 135px;
+
+    @include breakpoint(md) {
+      border-right: 0px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+  }
+
+  header {
+    background: $yellow;
+    font-size: 30px;
+    font-family: "Droid Serif";
+    font-style: italic;
+    line-height: 60px;
+    text-transform: uppercase;
+    height: 60px;
+    width: 100%;
+  }
+
+  .header-container {
+    width: 100%;
+    position: absolute;
+    padding-left: 93px;
+    bottom: -80px;
+    right: 0px;
+  }
+
+}
