@@ -359,6 +359,9 @@ class AuthUserOrderItem(models.Model):
     quantity = models.IntegerField(default=1)
     has_open_reservation = models.BooleanField(default=True)
 
+    def __str__(self):
+        return(product)
+
 
 class OfferType(object):
     """This class maintains a list of all offer types
