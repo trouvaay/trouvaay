@@ -28,6 +28,28 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid featured-icons">        
+        <div class="span7 text-center" style="padding-top:30px">
+            <h3>Reservations</h3>
+        </div>
+    </div>
+    <div class="container pic-tabs main">        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                                {% for product in user_activity.saved_items.all %}
+                                    {% include 'members/closet/_closet_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab1 -->
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
 {% block endjs %}
     {% include 'js/addlikeditems.html' %}

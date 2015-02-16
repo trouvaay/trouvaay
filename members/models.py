@@ -357,6 +357,7 @@ class AuthUserOrderItem(models.Model):
     # for now we only have purchase quantities of one but in the future will allow
     # for purchase of multiple of same item
     quantity = models.IntegerField(default=1)
+    has_open_reservation = models.BooleanField(default=True)
 
 
 class OfferType(object):
