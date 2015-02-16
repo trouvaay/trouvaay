@@ -6,12 +6,12 @@
 
 {% block content %}
     {% if user_orders %}
-       <div class="container-fluid featured-icons">        
-          <div class="span7 text-center" style="padding-top:30px">
-              <h3>Reservations</h3>
+      <div class="container pic-tabs main">
+        <div class="container-fluid featured-icons">        
+          <div class="span7 text-center">
+              <h3>Reserved Items</h3>
           </div>
-      </div>
-      <div class="container pic-tabs main">        
+      </div>        
           <div class="row">
               <div class="col-sm-12">
                   <div class="tab-content">
@@ -32,19 +32,24 @@
           </div>
       </div>
     {% endif %}
-    <div class="container-fluid featured-icons">        
-        <div class="span7 text-center" style="padding-top:30px">
-            <h3>Saved Items</h3>
+
+    
+    
+      <div class="container pic-tabs" style="margin-bottom:30px">
+        <div class="container-fluid featured-icons">        
+          <div class="span7 text-center">
+              <h3>Saved Items</h3>
+          </div>
         </div>
-    </div>
-    <div class="container pic-tabs main">        
+        {% with user_activity.saved_items.all as products %}
+        {% if products %}        
         <div class="row">
             <div class="col-sm-12">
                 <div class="tab-content">
                     <div class="tab-pane fade in active">
                         <div class="grid-products-wrapper">
                             <div class="row">
-                                {% for product in user_activity.saved_items.all %}
+                                {% for product in products %}
                                     {% include 'members/closet/_closet_for_loop.html' %}
                                 {% endfor %}
                             </div>
@@ -53,8 +58,13 @@
                 </div>
             </div>
         </div>
-    </div>
+        {% else %}
+          <div class="row">
+            <div class="col-xs-12">
+              <h4 style="text-align:center">Keep track of the best pieces by <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color:red"></span>'ing them</h4>
+            </div>
+          </div>
+        {% endif %}
+        {% endwith %}        
+      </div>
 {% endblock content %}
-{% block endjs %}
-    {% include 'js/addlikeditems.html' %}
-{% endblock endjs %}

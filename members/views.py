@@ -57,8 +57,6 @@ class ProfileView(generic.DetailView):
         # print user
         context['user_activity'] = AuthUserActivity.objects.get(authuser= user)
         context['user_orders'] = AuthUserOrder.objects.filter(authuser= user)
-        context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
-        context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE
         return context
 
 
@@ -80,11 +78,6 @@ class SignupView(BaseRegistrationView):
         context = super(SignupView, self).get_context_data(**kwargs)
         context['signup_form'] = RegistrationForm()
         context['login_form'] = RegistrationForm()
-
-        # TODO: do not add 'site_name' to context
-        # once the 'sites' are setup in settings
-        context['site_name'] = settings.SITE_NAME
-        print ('this is template context',  context)
         return context
 
     def register(self, request, **cleaned_data):
@@ -455,7 +448,6 @@ def custom_login(request, template_name='registration/login.html',
 
 #     def get_context_data(self, **kwargs):
 #         context = super(CartView, self).get_context_data(**kwargs)
-#         context['FEATURE_NAME_BUYANDTRY'] = settings.FEATURE_NAME_BUYANDTRY
 #         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
 
 #         # TODO: do not add 'site_name' to context
