@@ -1,0 +1,54 @@
+footer {
+  background: #000;
+  height: 120px;
+  color: #FFF;
+  font-family: "Droid Serif";
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  @include breakpoint(md) {
+    height: 60px;
+  }
+
+  .social-icons {
+    line-height: 120px;
+    font-size: 45px;
+  }
+
+  .help-info {
+    line-height: 120px;
+
+    @include breakpoint(md) {
+      text-align: center;
+      line-height: 30px;
+      padding-top: 5px;
+    }
+
+    > * {
+      &:not(:last-child) {
+	margin-right: 50px;
+	padding-right: 50px;
+	border-right: 1px solid #FFF;
+	@include breakpoint(md) {
+	  margin-right: 20px;
+	  padding-right: 20px;
+	}
+      }
+    }
+
+  }
+
+  .copyright {
+    font-size: 11px;
+    text-align: center;
+  }
+
+  a {
+    color: #FFF;
+    &:hover {
+      text-decoration: none;
+      color: #FFF;
+    }
+  }
+}
