@@ -35,10 +35,28 @@ from decimal import Decimal
 logger = logging.getLogger(__name__)
 
 # TODO: For profile page
-# class ProfileView(generic.ListView):
-#     template_name = 'members/closet/closet.html'
-#     context_object_name = 'saved_items'
-#     model = AuthUserActivity
+class ProfileView(generic.DetailView):
+    template_name = 'members/closet/closet.html'
+    context_object_name = 'user'
+    model = AuthUser
+
+    def get_object(self):
+        if (self.request.user.is_authenticated()):
+            try:
+
+                user_id = self.request.user.id
+                return AuthUser.objects.get(pk= user_id)
+            except Exception, e:
+                return None
+        else:
+            return None
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        user = self.get_object()
+        # print user
+        context['user_activity'] = AuthUserActivity.objects.get(authuser= user)
+        return context
 
 
 class ActivationView(BaseActivationView):

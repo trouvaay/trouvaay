@@ -233,7 +233,7 @@ class AuthUserActivity(models.Model):
     value_tier = models.ManyToManyField('goods.ValueTier', null=True, blank=True)
 
     def __str__(self):
-        return ('user: ' + self.authuser.email + ' ;  items: ' + str(self.saved_items.all()))
+        return (self.authuser.email + ' UserActivityObject')
 
     class Meta:
         ordering = ['authuser']
