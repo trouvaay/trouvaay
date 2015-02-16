@@ -1,0 +1,20 @@
+{% load staticfiles %}
+{% load cloudinary %}
+<div class="col-xs-12 col-sm-6 col-md-4 product-container">
+    <div class="vintage-label" style="text-align:center; margin-top: 5px; margin-bottom:-10px;"></div>
+    <div class="grid-product centered-parent {% if product.is_vintage %}vintage-product{% endif %}" style="margin-bottom:-5px;">
+        <!-- <img class="img-responsive" src="{{ product.productimage_set.first.image.url }}"> -->
+    <div class="centered-child">
+        <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop="fit" %}" media="(min-width: 992px)">
+            <source srcset="{% cloudinary_url product.productimage_set.first.image width=300 height=275 crop="fit" %}" media="(min-width: 413px)">
+            <!--[if IE 9]></video><![endif]-->
+            <img srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=275 crop="fit" %}' alt="">
+        </picture>
+    </div>
+        <a href="{% url 'goods:detail' product.slug  %}" class="view-product">
+        </a>
+    </div>
+        {% include 'members/closet/_savedproductlabel.html' %}
+</div>

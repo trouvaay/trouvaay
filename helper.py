@@ -38,19 +38,6 @@ def MakeSlug(string,spaceChar='+',Maxlen=None):
 		newStr+=(word+spaceChar)		
 	return newStr[:-1][:Maxlen]
 
-# def get_liked_items(user):
-#     """ Creates list of user's liked items for json
-#     Obj passed to addlikehearts js script
-#     """
-#     if(not user.is_authenticated()):
-#         return []
-
-#     useractivity, new = AuthUserActivity.objects.get_or_create(authuser=user)
-#     if new:
-#         useractivity.save()
-#     liked_list = useractivity.saved_items.all()
-#     liked_ids = [prod.id for prod in liked_list]
-#     return liked_ids
 
 def send_email_from_template(to_email, context, subject_template, plain_text_body_template, html_body_template=None):
 	"""Creates email from subject and body templates and sends message to the user

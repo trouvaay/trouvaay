@@ -5,52 +5,25 @@
 
 
 {% block content %}
-    {% if user_orders %}
-      <div class="container pic-tabs main">
-        <div class="container-fluid featured-icons">        
-          <div class="span7 text-center">
-              <h3>Reserved Items</h3>
-          </div>
-      </div>        
-          <div class="row">
-              <div class="col-sm-12">
-                  <div class="tab-content">
-                      <div class="tab-pane fade in active">
-                          <div class="grid-products-wrapper">
-                              <div class="row">
-                                  {% for order in user_orders %}
-                                    <!-- for now there is only 1 orderitem per order -->
-                                    {% with order.authuserorderitem_set.first.product as product %}
-                                      {% include 'members/closet/_closet_for_loop.html' %}
-                                    {% endwith %}
-                                  {% endfor %}
-                              </div>
-                          </div>
-                      </div><!-- end tab1 -->
-                  </div>
-              </div>
-          </div>
-      </div>
-    {% endif %}
-
-    
-    
-      <div class="container pic-tabs" style="margin-bottom:30px">
-        <div class="container-fluid featured-icons">        
-          <div class="span7 text-center">
-              <h3>Saved Items</h3>
-          </div>
+  <div class="container pic-tabs main">
+      <div class="container-fluid featured-icons">        
+        <div class="span7 text-center">
+            <h3>Reserved Items</h3>
         </div>
-        {% with user_activity.saved_items.all as products %}
-        {% if products %}        
+      </div>
+      {% if user_order_items %}        
         <div class="row">
             <div class="col-sm-12">
                 <div class="tab-content">
                     <div class="tab-pane fade in active">
                         <div class="grid-products-wrapper">
                             <div class="row">
-                                {% for product in products %}
-                                    {% include 'members/closet/_closet_for_loop.html' %}
+                                {% for orderitem in user_order_items %}
+                                  <!-- for now there is only 1 orderitem per order -->
+
+                                  {% with orderitem.product as product %}
+                                    {% include 'members/closet/_reservedproduct_for_loop.html' %}
+                                  {% endwith %}
                                 {% endfor %}
                             </div>
                         </div>
@@ -58,13 +31,44 @@
                 </div>
             </div>
         </div>
-        {% else %}
-          <div class="row">
-            <div class="col-xs-12">
-              <h4 style="text-align:center">Keep track of the best pieces by <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color:red"></span>'ing them</h4>
+      {% else %}
+            <div class="row">
+              <div class="col-xs-12">
+                <h4 style="text-align:center">Keep track of the best pieces by <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color:red"></span>'ing them</h4>
+              </div>
             </div>
-          </div>
-        {% endif %}
-        {% endwith %}        
+      {% endif %}      
+  </div>
+  <div class="container pic-tabs" style="margin-bottom:30px">
+    <div class="container-fluid featured-icons">        
+      <div class="span7 text-center">
+          <h3>Saved Items</h3>
       </div>
+    </div>
+    {% with user_activity.saved_items.all as products %}
+    {% if products %}        
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tab-content">
+                <div class="tab-pane fade in active">
+                    <div class="grid-products-wrapper">
+                        <div class="row">
+                            {% for product in products %}
+                                {% include 'members/closet/_savedproduct_for_loop.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div><!-- end tab1 -->
+            </div>
+        </div>
+    </div>
+    {% else %}
+      <div class="row">
+        <div class="col-xs-12">
+          <h4 style="text-align:center">Keep track of the best pieces by <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color:red"></span>'ing them</h4>
+        </div>
+      </div>
+    {% endif %}
+    {% endwith %}        
+  </div>
 {% endblock content %}

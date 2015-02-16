@@ -56,7 +56,9 @@ class ProfileView(generic.DetailView):
         user = self.get_object()
         # print user
         context['user_activity'] = AuthUserActivity.objects.get(authuser= user)
-        context['user_orders'] = AuthUserOrder.objects.filter(authuser= user)
+        order = AuthUserOrder.objects.filter(authuser= user)
+        context['user_order_items'] = AuthUserOrderItem.objects.filter(order=order, has_open_reservation=True)
+        print (context['user_order_items'])
         return context
 
 
