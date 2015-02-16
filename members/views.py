@@ -57,6 +57,8 @@ class ProfileView(generic.DetailView):
         # print user
         context['user_activity'] = AuthUserActivity.objects.get(authuser= user)
         context['user_orders'] = AuthUserOrder.objects.filter(authuser= user)
+        context['FEATURE_NAME_RESERVE'] = settings.FEATURE_NAME_RESERVE
+        context['FEATURE_TOOLTIP_RESERVE'] = settings.FEATURE_TOOLTIP_RESERVE
         return context
 
 

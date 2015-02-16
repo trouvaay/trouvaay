@@ -2576,6 +2576,7 @@ form .form-checkbox-wrap .checkbox-label {
 }
 .btn.btn-primary.buy.reserve {
   background-color: black;
+  border-color: black;
 }
 .btn.btn-success.dist {
   width: 60px;

@@ -178,7 +178,15 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         new_user.save()
         return (False, new_user)
 
+    def get_username_from_email(self):
+        """Gets pre '@' portion of user's email"""
+        try:
+            handleindex = self.email.index(u'@')
+            handle = self.email[:handleindex]
+        except:
+            handle = self.email
 
+        return handle[:11]
     # Need to overide full_name and short_name from parent to make relevant
     def get_full_name(self):
         """ User is identified by their email """
