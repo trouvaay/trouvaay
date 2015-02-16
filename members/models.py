@@ -368,7 +368,7 @@ class AuthUserOrderItem(models.Model):
     has_open_reservation = models.BooleanField(default=True)
 
     def __str__(self):
-        return(product)
+        return(self.product.short_name)
 
 
 class OfferType(object):

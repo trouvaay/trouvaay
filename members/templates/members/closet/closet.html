@@ -19,7 +19,10 @@
                           <div class="grid-products-wrapper">
                               <div class="row">
                                   {% for order in user_orders %}
-                                    {{ order.authuserorderitem_set.all }}
+                                    <!-- for now there is only 1 orderitem per order -->
+                                    {% with order.authuserorderitem_set.first.product as product %}
+                                      {% include 'members/closet/_closet_for_loop.html' %}
+                                    {% endwith %}
                                   {% endfor %}
                               </div>
                           </div>
