@@ -540,7 +540,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #products-grid .name-container .name {
   font-family: "Ostrich Sans";
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 800;
   line-height: 40px;
   letter-spacing: 1px;
@@ -563,7 +563,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-decoration: none;
 }
 #products-grid .name-container .price {
-  font-size: 16px;
+  font-size: 14.5px;
 }
 
 #quotes {
