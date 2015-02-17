@@ -1,5 +1,5 @@
-Thank you for your {% if capture_date %}reservation{% else %}purchase{% endif %}.  
-
+Thank you for your {% if is_buy %}purchase{% else %}reservation{% endif %}.  
+{% if is_buy %}
 Your {{ product.short_name }} is available at {{ product.store.retailer.short_name }} located at:
 
 {{ product.store.street }}{% if product.store.street2 %}
@@ -12,9 +12,9 @@ You have 48 hours to go see the item in store if you choose.  Happy shopping!
 
 Your card will not be charged until {{ capture_date }}. Call or text to cancel.
 {% endif %}We are happy to answer any questions you might have!
-
+{% endif %}
 {% if uid and token %}Your account has been created from email you have 
-provided during our checkout process. If you wish to login you need to 
+provided during our {% if is_buy %}purchase{% else %}checkout{% endif %} process. If you wish to login you need to 
 first reset your password by following this link:
 {{ protocol }}://{{ domain }}{% url 'auth_password_reset_confirm' uid token %}
 {% endif %}

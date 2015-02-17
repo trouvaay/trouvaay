@@ -1,1 +1,1 @@
-{% if capture_date %}Reservation{% else %}Order{% endif %} confirmation from {{ site.name }}
+{% if is_buy %}Order{% else %}Reservation{% endif %} confirmation from {{ site.name }}
