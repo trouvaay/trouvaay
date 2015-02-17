@@ -187,6 +187,15 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
             result = 0
         return result
 
+    def get_username_from_email(self):
+        """Gets pre '@' portion of user's email"""
+        try:
+            handleindex = self.email.index(u'@')
+            handle = self.email[:handleindex]
+        except:
+            handle = self.email
+        return handle[:11]
+
     # Need to overide full_name and short_name from parent to make relevant
     def get_full_name(self):
         """ User is identified by their email """
@@ -241,7 +250,7 @@ class AuthUserActivity(models.Model):
     value_tier = models.ManyToManyField('goods.ValueTier', null=True, blank=True)
 
     def __str__(self):
-        return ('user: ' + self.authuser.email + ' ;  items: ' + str(self.saved_items.all()))
+        return (self.authuser.email + ' UserActivityObject')
 
     class Meta:
         ordering = ['authuser']
@@ -365,6 +374,10 @@ class AuthUserOrderItem(models.Model):
     # for now we only have purchase quantities of one but in the future will allow
     # for purchase of multiple of same item
     quantity = models.IntegerField(default=1)
+    has_open_reservation = models.BooleanField(default=True)
+
+    def __str__(self):
+        return(self.product.short_name)
 
     @classmethod
     def create_order_item(cls, order, product, order_type):

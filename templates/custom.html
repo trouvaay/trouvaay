@@ -102,6 +102,10 @@ var trouvaay = {
             var data = {'id': id};
             if ($(this).hasClass("active")) {
                 $(this).removeClass("active");
+                if (window.location.pathname == "{% url 'members:profile' %}") {
+                    var prodContainer = "product-container_" + id;
+                    $("#"+prodContainer).remove();
+                }
                 }
             else {
                 $(this).addClass("active");
@@ -195,6 +199,8 @@ function handleBuyButtonClick(e) {
     
 	e.preventDefault();
 }
+
+
 
 $(document).ready(function() {
     trouvaay.init();
@@ -301,7 +307,6 @@ $(document).ready(function() {
 		});
 	});
 
-	// Stripe checkout
 	$('.btn.buy').on('click', handleBuyButtonClick);
 
 });

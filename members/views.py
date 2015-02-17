@@ -31,10 +31,34 @@ from decimal import Decimal
 logger = logging.getLogger(__name__)
 
 # TODO: For profile page
-# class ProfileView(generic.ListView):
-#     template_name = 'members/closet/closet.html'
-#     context_object_name = 'saved_items'
-#     model = AuthUserActivity
+class ProfileView(generic.DetailView):
+    template_name = 'members/closet/closet.html'
+    context_object_name = 'user'
+    model = AuthUser
+
+    def get_object(self):
+        if (self.request.user.is_authenticated()):
+            try:
+
+                user_id = self.request.user.id
+                return AuthUser.objects.get(pk= user_id)
+            except Exception, e:
+                return None
+        else:
+            return None
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        user = self.get_object()
+        order = AuthUserOrder.objects.filter(authuser= user)
+        ordered_items = [i.product for i in AuthUserOrderItem.objects.filter(order=order, has_open_reservation=True)]
+        context['user_order_items'] = ordered_items
+
+        user_activity = AuthUserActivity.objects.get(authuser= user)
+        
+        # diff from liked_items context function in context_processors.py
+        context['liked_products'] = user_activity.saved_items.exclude(id__in= [i.id for i in ordered_items] )
+        return context
 
 
 class ActivationView(BaseActivationView):
@@ -55,10 +79,6 @@ class SignupView(BaseRegistrationView):
         context = super(SignupView, self).get_context_data(**kwargs)
         context['signup_form'] = RegistrationForm()
         context['login_form'] = RegistrationForm()
-
-        # TODO: do not add 'site_name' to context
-        # once the 'sites' are setup in settings
-        context['site_name'] = settings.SITE_NAME
         
         return context
 
@@ -448,7 +468,6 @@ def custom_login(request, template_name='registration/login.html',
 
 #     def get_context_data(self, **kwargs):
 #         context = super(CartView, self).get_context_data(**kwargs)
-#         context['FEATURE_NAME_BUYANDTRY'] = settings.FEATURE_NAME_BUYANDTRY
 #         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
 
 #         # TODO: do not add 'site_name' to context

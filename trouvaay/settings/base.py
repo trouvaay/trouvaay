@@ -78,6 +78,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    'context_processors.get_liked_items',
+    'context_processors.site_name',
+    'context_processors.get_feature_context',
 )
 
 # Database
