@@ -135,10 +135,6 @@ class ReserveView(generic.DetailView):
     def post(self, request, *args, **kwargs):
 
         product = self.get_object()
-        discounts, _subtotal_dollar_value, taxes, _total = AuthUserOrder.compute_order_line_items(self.request.user,
-                                                                                                  total_price_before_offers=product.current_price,
-                                                                                                  promo_codes=[])
-        
         order_user = None
         if(request.user.is_authenticated()):
             order_user = request.user
@@ -162,17 +158,9 @@ class ReserveView(generic.DetailView):
         # create order
         order = AuthUserOrder()
         order.authuser = order_user
-        order.taxes = taxes['dollar_value']
+        order.taxes = Decimal('0.0')
         order.save()
         logger.debug('created order')
-
-        # create redemption if any
-        for discount in discounts:
-            PromotionRedemption.create_redemption(order=order,
-                                                  product=product,
-                                                  offer_id=discount['offer_id'],
-                                                  discount_dollar_value=discount['dollar_value'])
-        logger.debug('created redemptions')
 
         # add item to order
         order_item = AuthUserOrderItem.create_order_item(order=order, product=product, order_type='reserve')
