@@ -12,7 +12,7 @@
             <!--[if IE 9]></video><![endif]-->
             <img class="main-image" srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=275 crop="fit" %}' alt="">
                 <a href="{% url 'goods:detail' product.slug  %}" class="view-product">
-                <div class="hover-text"><h5>{{ product.description|truncatechars:125 }}</h5><span class="details-label" style="margin-top:10px"><h4>Details</h4></span></div>
+                <div class="hover-text" style="left:22%"><span class="details-label"><h4>click to view</h4></span></div>
                 <!-- <div class="background"></div> -->
             </a>
             </img>

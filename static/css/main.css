@@ -1686,7 +1686,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
     -moz-opacity: 1;
     opacity: 1;
     margin: 10%;
-    padding: 0 5%; 
+    padding: 20 5%; 
     /*border-top: 4px solid black;*/
   }
   .product-container:hover .main-image {
@@ -1695,7 +1695,10 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
     opacity: .2;
   }
   .details-label {
-    color: rgb(218,182,97);
+    color: black;
+    margin-left: 20%;
+    padding: 30% 5%; 
+    text-align: center;
   }
   .product.col-sm-6:nth-child(2n) {
   	margin-right: 0%;
