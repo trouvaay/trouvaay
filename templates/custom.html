@@ -130,6 +130,41 @@ function handleBuyButtonClick(e) {
             "Clicked Buy Button",
             { "productId": productId }
         );
+        
+		if(productId && !(typeof productId === 'undefined')){
+		    console.log('this is the ordertype!', orderType)
+	
+			var promoCode = ''
+			if($("#input-promo-code")) {
+				promoCode = $("#input-promo-code").val()
+			}
+			
+			console.log('promoCode: '+promoCode);
+			
+			// call pre-checkout
+			$.ajax({
+				type: "POST",
+				url: "{% url "members:pre_checkout" %}",
+				dataType: "html",
+				data: {
+					product_id: productId,
+	                order_type: orderType,
+	                promo_code: promoCode
+				},
+				success: function(response, status){
+					// console.log('response from pre-checkout call: '+status );
+					$("#pre-checkout-modal-container").html(response);
+					$("#pre-checkout-modal").modal({
+						show: true,
+						keyboard: true
+					});
+				},
+	            error: function(response, status, error) {
+	              var err = eval("(" + response.responseText + ")");
+	              alert(err.Message);
+	            }
+			});
+		}        
     }
     else if(e.target.id.substr(0, 8) == 'reserve_'){
         var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
@@ -138,42 +173,26 @@ function handleBuyButtonClick(e) {
             "Clicked Reserve Button",
             { "productId": productId }
         );
+        urlToLoad = "/reserve/"+productId;
+        
+		if(productId && !(typeof productId === 'undefined')){
+		    console.log('ordertype: ', orderType)
+			$.ajax({
+				type: "GET",
+				url: "/reserve/"+productId,
+				dataType: "html",
+				success: function(response, status){
+					// console.log('response from pre-checkout call: '+status );
+					$("#pre-checkout-modal-container").html(response);
+					$("#researvation-modal").modal({
+						show: true,
+						keyboard: true
+					});
+				},
+			});
+		}        
     }
-
-    if(productId && !(typeof productId === 'undefined')){
-	    console.log('this is the ordertype!', orderType)
-
-		var promoCode = ''
-		if($("#input-promo-code")) {
-			promoCode = $("#input-promo-code").val()
-		}
-		
-		console.log('promoCode: '+promoCode);
-		
-		// call pre-checkout
-		$.ajax({
-			type: "POST",
-			url: "{% url "members:pre_checkout" %}",
-			dataType: "html",
-			data: {
-				product_id: productId,
-                order_type: orderType,
-                promo_code: promoCode
-			},
-			success: function(response, status){
-				// console.log('response from pre-checkout call: '+status );
-				$("#pre-checkout-modal-container").html(response);
-				$("#pre-checkout-modal").modal({
-					show: true,
-					keyboard: true
-				});
-			},
-            error: function(response, status, error) {
-              var err = eval("(" + response.responseText + ")");
-              alert(err.Message);
-            }
-		});
-	}
+    
 	e.preventDefault();
 }
 

@@ -26,6 +26,7 @@ NEW_USER_CC_NUMBER = '4242424242424242'
 NEW_USER_CC_EXP = '1020'
 NEW_USER_CC_CSC = '123'
 
+BROWSERS_TO_TEST = ['firefox', 'chrome']
 
 PROJECT_ENV = os.getenv('PROJECT_ENV', None)
 if(PROJECT_ENV == 'dev'):

@@ -221,6 +221,8 @@ SALES_TAX = Decimal('0.0875')
 
 OFFER_MODAL_EXPIRATION = 3600  # do not show promo offers again whithin this many seconds
 
+RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
+
 # email settings are another good candidate to have
 # each developer define in their own dev_settings.py
 # here are what could be production settings
