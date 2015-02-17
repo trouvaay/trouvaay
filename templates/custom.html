@@ -68,6 +68,10 @@ var trouvaay = {
                 }
         });
 
+        $("#mobile-shop").on('click',function() {
+            window.location.replace("{% url 'goods:main' %}");
+        });
+
         //Append mobile tab icons
         $("#mob-nav").on('click',function() {
                 if (!$('#mobile-nav').length ) {
