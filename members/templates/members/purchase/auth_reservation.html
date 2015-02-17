@@ -1,0 +1,37 @@
+{% load crispy_forms_tags %}
+<div class="modal" id="researvation-modal">
+	<div class="modal-dialog">
+		<div class="modal-content col-xs-12">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+				<div class="form-group text-center">
+					<div class="text-center">
+						<fieldset>
+							<legend>
+								{% if reservation_message %}
+									Reservation
+								{% else %}
+									Thank you for your reservation.
+								{% endif %}
+							</legend>
+							<div class="row">
+								<div class="col-xs-12" id="reservation-status-message" class="text-center">
+		                            <p>
+		                            {% if reservation_message %}
+		                            	{{ reservation_message }}
+		                            {% else %}
+		                            	You have {{ order_user.get_number_of_reservations_left }} reservtions left.<br />
+		                            	Check your email to find out where you can see this amazing piece.
+		                            {% endif %}
+		                            </p>
+	                        	</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.researvation-modal -->

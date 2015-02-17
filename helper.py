@@ -8,6 +8,10 @@ from django.template.loader import render_to_string
 import cloudinary
 from cloudinary.models import CloudinaryField
 from math import acos, cos, radians, sin
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.sites.shortcuts import get_current_site
 
 # TODO: convert to environ var
 cloudinary.config(
@@ -58,6 +62,36 @@ def send_email_from_template(to_email, context, subject_template, plain_text_bod
 		message_html = render_to_string(html_body_template, context)
 		email_message.attach_alternative(message_html, 'text/html')
 	email_message.send()
+
+
+def send_order_email(request, order_item, show_password_reset_link, is_buy):
+    capture_date = None
+    if(order_item.capture_time and not not order_item.captured):
+        capture_date = order_item.capture_time.date()
+
+    email_context = {
+                     'is_buy': is_buy,
+                     'product': order_item.product,
+                     'site': get_site(request),
+                     'capture_date': capture_date
+                     }
+
+    if(show_password_reset_link):
+        # This is a newly created user without password. We will send this
+        # user a password reset link along with the order
+        # add extra context parameters needed for password reset link
+        email_context['token'] = default_token_generator.make_token(order_item.order.authuser)
+        email_context['uid'] = urlsafe_base64_encode(force_bytes(order_item.order.authuser.pk))
+        email_context['domain'] = get_current_site(request).domain
+        email_context['protocol'] = 'https' if request.is_secure() else 'http'
+
+
+    send_email_from_template(to_email=order_item.order.authuser.email, context=email_context,
+        subject_template='members/purchase/reserve_confirmation_email_subject.txt',
+        plain_text_body_template='members/purchase/reserve_confirmation_email_body.txt',
+        html_body_template='members/purchase/reserve_confirmation_email_body.html')
+
+
 
 def get_site(request):
 	if Site._meta.installed:

@@ -178,6 +178,14 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         new_user.save()
         return (False, new_user)
 
+    def get_number_of_reservations(self):
+        return self.user_orders.filter(order_items__captured=False).count()
+
+    def get_number_of_reservations_left(self):
+        result = settings.RESERVATION_LIMIT - self.get_number_of_reservations()
+        if(result < 0):
+            result = 0
+        return result
 
     # Need to overide full_name and short_name from parent to make relevant
     def get_full_name(self):
@@ -281,7 +289,7 @@ class AuthUserCart(models.Model):
 
 class AuthUserOrder(models.Model):
     """Unique User-Order pair"""
-    authuser = models.ForeignKey(settings.AUTH_USER_MODEL)
+    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_orders')
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     taxes = models.DecimalField(max_digits=8, decimal_places=2, blank=None, null=None, default=0.00)
@@ -349,7 +357,7 @@ class AuthUserOrderItem(models.Model):
     """Unique product-order pair"""
 
     product = models.ForeignKey('goods.Product')
-    order = models.ForeignKey(AuthUserOrder, null=True, blank=True)
+    order = models.ForeignKey(AuthUserOrder, null=True, blank=True, related_name='order_items')
     sell_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     captured = models.BooleanField(default=True)
     # for buy-and-trial items, time at which transaction will be captured
@@ -357,6 +365,21 @@ class AuthUserOrderItem(models.Model):
     # for now we only have purchase quantities of one but in the future will allow
     # for purchase of multiple of same item
     quantity = models.IntegerField(default=1)
+
+    @classmethod
+    def create_order_item(cls, order, product, order_type):
+        order_item = AuthUserOrderItem()
+        order_item.product = product
+        order_item.order = order
+        order_item.sell_price = product.current_price
+        order_item.captured = (order_type == 'buy')
+        if(order_item.captured):
+            order_item.capture_time = timezone.now()
+        else:
+            order_item.capture_time = None
+        order_item.quantity = 1
+        order_item.save()
+        return order_item
 
 
 class OfferType(object):
@@ -563,3 +586,15 @@ class PromotionRedemption(models.Model):
 
     total_before_discount = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=None, help_text="Total dollar amount before applying any promotinal discounts to the order")
     discount_amount = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=None, help_text="Discount dollar amount")
+
+    @classmethod
+    def create_redemption(cls, order, product, offer_id, discount_dollar_value):
+        redemption = PromotionRedemption()
+        redemption.authuser = order.authuser
+        redemption.offer_id = offer_id
+        redemption.order = order
+        redemption.timestamp = timezone.now()
+        redemption.total_before_discount = product.current_price
+        redemption.discount_amount = discount_dollar_value
+        redemption.save()
+        return redemption

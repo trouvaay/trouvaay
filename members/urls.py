@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     # url(r'^member/$', views.ProfileView.as_view(), name='profile'),
     url(r'^productlike/$', views.ProductLike, name='like'),
     url(r'^canreserve/$', views.can_reserve, name='can_reserve'),
+    url(r'^reserve/(?P<pk>\d+)/$', views.ReserveView.as_view(), name='reserve'),
     url(r'^reservecallback/$', views.ReserveCallbackView.as_view(), name='reserve_callback'),
     url(r'^precheckout/$', views.PreCheckoutView.as_view(), name='pre_checkout'),
 
