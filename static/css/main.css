@@ -427,8 +427,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   font-size: 23px;
   font-weight: bold;
-  height: 35px;
-  line-height: 35px;
+  line-height: 25px;
+  padding: 12px 0px;
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 25px;
