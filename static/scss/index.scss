@@ -31,6 +31,7 @@
 }
 
 #how-it-works {
+  margin-bottom: 30px;
 
   @include breakpoint(md) {
     background: #FFF;
@@ -42,11 +43,17 @@
 
   }
 
+
   .info {
     text-align: center;
     font-size: 15px;
     font-family: "Droid Serif";
     font-weight: bold;
+
+    @include breakpoint(md, True) {
+      float: none;
+      display: table-cell;
+    }
 
     &:not(:last-child) {
       padding-right: 30px;
@@ -62,7 +69,15 @@
       color: #FFF;
       padding: 28px 18px 10px;
       position: relative;
-      margin-bottom: 30px;
+
+      @include breakpoint(md, True) {
+	height: 100%;
+	display: inline-table;
+      }
+
+      @include breakpoint(md) {
+	margin-bottom: 30px;
+      }
 
       &:before {
 	content: 'a';
@@ -123,14 +138,16 @@
 }
 
 #products {
+  padding: 0px;
+
   header {
     background: $dark-gray;
     color: #FFF;
     font-family: "Droid Serif";
     font-size: 23px;
     font-weight: bold;
-    height: 35px;
-    line-height: 35px;
+    line-height: 25px;
+    padding: 12px 0px;
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 25px;
