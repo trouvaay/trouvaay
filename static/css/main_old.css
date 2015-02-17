@@ -1588,20 +1588,6 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 }
 
 
-@media screen and (min-width: 992px) {
-.product.col-md-4 {
-	width: 30%;
-	margin-right: 5%;
-}
-
-.product.col-sm-6:nth-child(2n) {
-	margin-right: 5%;
-}
-
-.product.col-md-4:nth-child(3n) {
-	margin-right: 0%;
-}
-}
 
 .grid-product figure {
 /*  width: 90%;*/

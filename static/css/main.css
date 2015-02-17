@@ -418,6 +418,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin-bottom: 5px;
 }
 
+#products {
+  padding: 0px;
+}
 #products header {
   background: #524b48;
   color: #FFF;
