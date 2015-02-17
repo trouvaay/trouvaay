@@ -1,6 +1,6 @@
 {% load staticfiles %}
     <div class="col-xs-12 pic-detail-home" style="text-align: center; margin: 3px 0px 5px;">
-        <p style="margin-bottom: 3px">{{ product.short_name|truncatechars:28 }}<em>
+        <p style="margin-bottom: 3px">{{ product.short_name|truncatechars:26 }}<em>
         {% if product.current_price %}
             {% if product.is_sold %}
                 <span class="sold">{{ 'Sold' }}</span>                

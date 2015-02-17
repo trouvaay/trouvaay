@@ -1614,13 +1614,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   padding-bottom: 2em;
  }
 
-
-@media screen and (min-width: 768px) {
-  .product.col-sm-6 {
-  	width: 48%;
-  	margin-right: 4%;
-  }
-  .view-product {
+.view-product {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -1631,6 +1625,12 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
     -moz-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+  }
+
+@media screen and (min-width: 768px) {
+  .product.col-sm-6 {
+  	width: 48%;
+  	margin-right: 4%;
   }
   .grid-product .view-product .text {
     font-family: "ralewaylight", Arial, sans-serif;
@@ -4316,7 +4316,9 @@ footer ul li a:hover {
   .tooltip {
     display: none !important;
   }
-  
+  .hover-text {
+  display: none;
+  }
   .how-it-works .statement:first-child {
   border-right: 0px;
   }
