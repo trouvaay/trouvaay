@@ -11,10 +11,20 @@ header.top-bar {
   line-height: 60px;
   height: 60px;
   position: relative;
+  width: 100%;
 
   @include breakpoint(md) {
     height: 50px;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+    
+    & + div {
+      margin-top: 50px;
+
+    }
   }
+
 
   a {
     color: #FFF;
@@ -88,9 +98,7 @@ header.top-bar {
 	vertical-align: top;
       }
     span {
-      display: block;
-      text-indent: 100%;
-      overflow: hidden;
+      display: none;
 
       }
     }
