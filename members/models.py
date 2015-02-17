@@ -359,7 +359,7 @@ class AuthUserOrder(models.Model):
         return total
 
     def __str__(self):
-        return('user: ' + self.authuser.email + ' ;  items: ' + str(self.authuserorderitem_set.all()))
+        return('user: ' + self.authuser.email + ' ;  items: ' + str(self.order_items.all()))
 
 
 class AuthUserOrderItem(models.Model):

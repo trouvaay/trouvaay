@@ -79,7 +79,7 @@ class SignupView(BaseRegistrationView):
         context = super(SignupView, self).get_context_data(**kwargs)
         context['signup_form'] = RegistrationForm()
         context['login_form'] = RegistrationForm()
-        
+
         return context
 
     def register(self, request, **cleaned_data):
@@ -185,6 +185,10 @@ class ReserveView(generic.DetailView):
         # add item to order
         order_item = AuthUserOrderItem.create_order_item(order=order, product=product, order_type='reserve')
         logger.debug('created order item')
+        
+        product.is_reserved = True
+        product.save()
+        logger.debug('product is_reserved field set to True')
 
         # send order confirmation email
         send_order_email(request=self.request, order_item=order_item, show_password_reset_link=True, is_buy=False)

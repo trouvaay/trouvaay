@@ -11,21 +11,21 @@
 						<fieldset>
 							<legend>
 								{% if reservation_message %}
-									Reservation
+									<h2>Reservation</h2>
 								{% else %}
-									Thank you for your reservation.
+									<h2>Thank you for your reservation.</h2>
 								{% endif %}
 							</legend>
 							<div class="row">
 								<div class="col-xs-12" id="reservation-status-message" class="text-center">
-		                            <p>
+		                            <h5>
 		                            {% if reservation_message %}
 		                            	{{ reservation_message }}
 		                            {% else %}
 		                            	You have {{ order_user.get_number_of_reservations_left }} reservtions left.<br />
 		                            	Check your email to find out where you can see this amazing piece.
 		                            {% endif %}
-		                            </p>
+		                            </h5>
 	                        	</div>
 							</div>
 						</fieldset>
