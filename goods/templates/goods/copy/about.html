@@ -2,24 +2,6 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid select-bar hp-tabs" style="background-color:#333" style="height:100%">
-        <div class="row-fluid">
-            <div class="col-xs-12 col-sm-3 logo-div main-navigation hidden-xs">
-                <a href="{% url 'goods:landing' %}"><img class="logo" src="{% static 'img/logos/Raredoor-logo-gold.png' %}"></a>
-            </div>
-             <div class="col-xs-4 pull-right">
-                <ul class="nav navbar-navt">
-                    <li><a class="btn btn-link" href="#" data-toggle="modal" data-target="#how-it-works-modal" style="height:40px"><span id="how-it-works-button">How it works</span></a></li>
-                    <li><a class="btn btn-link tab-menu" href="{% url 'goods:about' %}">About</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a class="btn btn-link tab-menu nav-logout-button" href="{% url 'members:logout' %}">Logout</a></li>
-                    {% else %}
-                        <li><a class="btn btn-link tab-menu nav-login-button" href="#">Signup</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div><!-- end row -->
-</div><!-- end hp-tabs -->
 <section class="tab-container" style="padding-top: 5%">
     <div class="container">
         <div class="row text-center">

@@ -327,7 +327,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #how-it-works {
     background: #FFF;
     position: fixed;
-    top: 80px;
+    top: 50px;
     width: 100%;
     z-index: 2;
     padding-top: 40px;
