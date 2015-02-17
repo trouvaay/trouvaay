@@ -1,18 +1,17 @@
 {% load cloudinary %}
 <div class="product col-md-4 col-xs-6">
-	  <a href="{% url 'goods:detail' product.slug  %}" class="image-container">
-	  
+	<a href="{% url 'goods:detail' product.slug  %}" class="image-container">
+
 		<picture>
-			<!--[if IE 9]><video style="display: none;"><![endif]-->
-			<source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop="fit" %}" media="(min-width: 992px)">
-			<source srcset="{% cloudinary_url product.productimage_set.first.image width=300 height=275 crop="fit" %}" media="(min-width: 413px)">
-			<!--[if IE 9]></video><![endif]-->
-			<img srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=275 crop="fit" %}' alt="">
+		<!--[if IE 9]><video style="display: none;"><![endif]-->
+		<source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop="fit" %}" media="(min-width: 992px)">
+		<source srcset="{% cloudinary_url product.productimage_set.first.image width=300 height=275 crop="fit" %}" media="(min-width: 413px)">
+		<!--[if IE 9]></video><![endif]-->
+		<img srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=275 crop="fit" %}' alt="">
 		</picture>
-	  </a>
-	  <div class="name-container">
-	    {% include 'goods/landing/_landingproductlabel.html' %}
-	    </div>
-	  </div>
+	</a>
+	<div class="name-container">
+		{% include 'goods/landing/_landingproductlabel.html' %}
 	</div>
+</div>
 
