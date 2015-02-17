@@ -17,7 +17,7 @@ from registration.backends.default.views import ActivationView as BaseActivation
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import get_user_model, authenticate, login
 from registration import signals
-from helper import send_email_from_template, get_site, send_order_email
+from helper import get_site, send_order_email
 from django.utils import timezone
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
