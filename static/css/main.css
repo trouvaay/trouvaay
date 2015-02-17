@@ -323,6 +323,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   position: absolute;
 }
 
+#how-it-works {
+  margin-bottom: 30px;
+}
 @media (max-width: 992px) {
   #how-it-works {
     background: #FFF;
@@ -339,6 +342,12 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   font-weight: bold;
 }
+@media (min-width: 769px) {
+  #how-it-works .info {
+    float: none;
+    display: table-cell;
+  }
+}
 #how-it-works .info:not(:last-child) {
   padding-right: 30px;
 }
@@ -353,7 +362,17 @@ input#mobile-menu-switch:checked + #mobile-menu {
   color: #FFF;
   padding: 28px 18px 10px;
   position: relative;
-  margin-bottom: 30px;
+}
+@media (min-width: 769px) {
+  #how-it-works .info > div {
+    height: 100%;
+    display: inline-table;
+  }
+}
+@media (max-width: 992px) {
+  #how-it-works .info > div {
+    margin-bottom: 30px;
+  }
 }
 #how-it-works .info > div:before {
   content: 'a';
