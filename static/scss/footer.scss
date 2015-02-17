@@ -1,23 +1,24 @@
 footer {
   background: #000;
-  height: 120px;
   color: #FFF;
   font-family: "Droid Serif";
   font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
   @include breakpoint(md) {
-    height: 60px;
+    height: auto;
   }
 
   .social-icons {
-    line-height: 120px;
+    line-height: 100px;
     font-size: 45px;
   }
 
   .help-info {
-    line-height: 120px;
+    line-height: 100px;
 
     @include breakpoint(md) {
       text-align: center;
@@ -26,13 +27,28 @@ footer {
     }
 
     > * {
-      &:not(:last-child) {
+
+     
+    }
+
+    .row > * {
+
+      @include breakpoint(sm, True) {
+      float: none;
+      width: auto;
+	padding-left: 0px;
+    }
+       &:not(:last-child) {
 	margin-right: 50px;
-	padding-right: 50px;
+      padding-right: 50px;
 	border-right: 1px solid #FFF;
 	@include breakpoint(md) {
-	  margin-right: 20px;
-	  padding-right: 20px;
+	  padding-right: 10px;
+	  margin-right: 10px;
+
+	}
+	@include breakpoint(xs) {
+	  border-right: 0px;
 	}
       }
     }
