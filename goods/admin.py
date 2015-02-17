@@ -50,8 +50,11 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {"current_price": ("original_price",)}
 
     def first_image(self, obj):
-        url = obj.productimage_set.first().image.build_url()
-        return '<img src={} style="width: 100px"/>'.format(url)
+        try:
+            url = obj.productimage_set.first().image.build_url()
+            return '<img src={} style="width: 100px"/>'.format(url)
+        except:
+            return None
     
     first_image.allow_tags = True
 
