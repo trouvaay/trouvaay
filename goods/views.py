@@ -119,6 +119,9 @@ class DetailView(generic.DetailView):
 
 class AboutView(generic.TemplateView):
     template_name = 'goods/copy/about.html'
+    
+class ReturnsView(generic.TemplateView):
+    template_name = 'goods/copy/returns.html'
 
 
 # class DirectionsView(LoginRequiredMixin, generic.DetailView):

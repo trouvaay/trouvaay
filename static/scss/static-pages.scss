@@ -1,0 +1,108 @@
+.info-page {
+  background: #dcddde;
+  font-family: "Droid Serif";
+
+  .info {
+    background: #FFF;
+    border: 40px solid #000;
+    margin: 40px 34px 40px;
+    padding: 40px;
+
+    font-size: 17px;
+
+    @include breakpoint(md) {
+      margin-top: 90px;
+
+    }
+
+    p {
+      margin: 0px 0px 40px;
+
+    }
+
+    h2 {
+      font-family: "Droid Serif";
+    font-size: 30px; 
+    font-style: italic;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $gold;
+
+    @include breakpoint(md) {
+      font-size: 24px;
+
+    }
+
+    }
+
+  }
+}
+
+.more-questions-container {
+  background: $lily;
+  
+    color: #FFF;
+    font-family: "Droid Serif";
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 25px;
+    padding: 22px 0px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    
+    @include breakpoint(md) {
+      background: $lily;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #FFF;
+      &:hover {
+	color: #FFF;
+      }
+    }
+
+}
+
+.want-join-container {
+  margin-top: 20px;
+  font-family: "Droid Serif";
+  .row > div {
+
+    color: #FFF;
+    min-height: 80px;
+    font-size: 20px;
+    @include breakpoint(md) {
+      padding: 0px;
+      margin-bottom: 20px;
+
+    }
+    &:nth-child(2) {
+    padding: 10px 20px;
+    background: $light-brown-gray;
+  }
+
+  }
+
+  h3 {
+    background: $gold;
+    line-height: 80px;
+    color: #FFF;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    font-family: "Droid Serif";
+    font-weight: bold;
+    font-size: 28px;
+    font-style: italic;
+    text-transform: uppercase;
+    text-align: center;
+
+    @include breakpoint(md) {
+      margin-bottom: 0px;
+
+    }
+  }
+
+}

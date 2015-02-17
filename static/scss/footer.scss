@@ -9,7 +9,7 @@ footer {
   padding-bottom: 10px;
 
   @include breakpoint(md) {
-    height: auto;
+    height: 130px;
   }
 
   .social-icons {
@@ -67,4 +67,19 @@ footer {
       color: #FFF;
     }
   }
+}
+
+footer, .push {
+  height: 120px;
+  
+
+  @include breakpoint(md) {
+    height: 70px;
+  }
+  
+  @include breakpoint(xs) {
+    height: 130px;
+  }
+
+
 }

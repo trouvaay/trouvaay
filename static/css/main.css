@@ -6,10 +6,10 @@
 }
 .arrow-link:before {
   content: 'i';
-  font-size: 20px;
+  font-size: 33px;
   display: inline-block;
   position: relative;
-  top: 1px;
+  top: 6px;
   margin-right: 11px;
   font-family: "raredoor" !important;
   font-style: normal !important;
@@ -27,6 +27,27 @@
 
 .social-icons a span {
   display: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+.wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -120px;
+}
+@media (max-width: 768px) {
+  .wrap {
+    margin: 0 auto -130px;
+  }
+}
+@media (max-width: 992px) {
+  .wrap {
+    margin: 0 auto -70px;
+  }
 }
 
 @font-face {
@@ -149,6 +170,103 @@
   content: "m";
 }
 
+.info-page {
+  background: #dcddde;
+  font-family: "Droid Serif";
+}
+.info-page .info {
+  background: #FFF;
+  border: 40px solid #000;
+  margin: 40px 34px 40px;
+  padding: 40px;
+  font-size: 17px;
+}
+@media (max-width: 992px) {
+  .info-page .info {
+    margin-top: 90px;
+  }
+}
+.info-page .info p {
+  margin: 0px 0px 40px;
+}
+.info-page .info h2 {
+  font-family: "Droid Serif";
+  font-size: 30px;
+  font-style: italic;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #e6be46;
+}
+@media (max-width: 992px) {
+  .info-page .info h2 {
+    font-size: 24px;
+  }
+}
+
+.more-questions-container {
+  background: #91c3c3;
+  color: #FFF;
+  font-family: "Droid Serif";
+  font-size: 23px;
+  font-weight: bold;
+  line-height: 25px;
+  padding: 22px 0px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+@media (max-width: 992px) {
+  .more-questions-container {
+    background: #91c3c3;
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+}
+.more-questions-container a {
+  color: #FFF;
+}
+.more-questions-container a:hover {
+  color: #FFF;
+}
+
+.want-join-container {
+  margin-top: 20px;
+  font-family: "Droid Serif";
+}
+.want-join-container .row > div {
+  color: #FFF;
+  min-height: 80px;
+  font-size: 20px;
+}
+@media (max-width: 992px) {
+  .want-join-container .row > div {
+    padding: 0px;
+    margin-bottom: 20px;
+  }
+}
+.want-join-container .row > div:nth-child(2) {
+  padding: 10px 20px;
+  background: #989190;
+}
+.want-join-container h3 {
+  background: #e6be46;
+  line-height: 80px;
+  color: #FFF;
+  margin-top: 0px;
+  margin-bottom: 40px;
+  font-family: "Droid Serif";
+  font-weight: bold;
+  font-size: 28px;
+  font-style: italic;
+  text-transform: uppercase;
+  text-align: center;
+}
+@media (max-width: 992px) {
+  .want-join-container h3 {
+    margin-bottom: 0px;
+  }
+}
+
 #logo {
   height: 28px;
 }
@@ -249,11 +367,11 @@ header.top-bar .mobile-menu label:before {
 }
 header.top-bar .social-icons a {
   font-size: 25px;
-  line-height: 50px;
+  line-height: 40px;
   margin-right: 10px;
 }
 header.top-bar .social-icons a:before {
-  line-height: 50px;
+  line-height: 40px;
 }
 header.top-bar .links a {
   font-size: 18px;
@@ -291,9 +409,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   top: 50px;
   left: 0px;
   background: #FFF;
-  height: 50px;
-  line-height: 50px;
-  padding: 0px;
+  line-height: 30px;
+  padding: 10px 0px 10px;
   z-index: 2;
 }
 #mobile-menu a {
@@ -320,13 +437,72 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #index-banner .arrow-link {
   background-color: #000;
   border: 3px solid #E6BE46;
-  font-size: 22px;
-  line-height: 22px;
+  font-size: 30px;
+  line-height: 40px;
   margin-top: -28px;
-  padding: 4px 11px;
+  padding: 0px 11px;
   top: 50%;
-  right: 36px;
+  right: 15px;
   position: absolute;
+}
+#index-banner .text-container {
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  height: 100%;
+  margin-left: -585px;
+}
+@media (min-width: 992px) {
+  #index-banner .text-container {
+    margin-left: -485px;
+  }
+}
+@media (max-width: 992px) {
+  #index-banner .text-container {
+    margin-left: -375px;
+  }
+}
+@media (max-width: 768px) {
+  #index-banner .text-container {
+    margin-left: 0px;
+    left: 0%;
+    width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  #index-banner .text-container {
+    margin-left: -585px;
+  }
+}
+#index-banner .text {
+  font-family: "Droid Serif";
+  font-size: 22px;
+  color: #FFF;
+  line-height: 22px;
+  top: 50%;
+  position: relative;
+  margin-top: -62px;
+}
+@media (max-width: 992px) {
+  #index-banner .text {
+    font-size: 14px;
+    line-height: 14px;
+    margin-top: -39px;
+  }
+}
+#index-banner .text strong {
+  display: block;
+  color: #e6be46;
+  font-family: "Ostrich Sans";
+  font-weight: bold;
+  font-size: 80px;
+  line-height: 80px;
+}
+@media (max-width: 992px) {
+  #index-banner .text strong {
+    font-size: 50px;
+    line-height: 50px;
+  }
 }
 
 #how-it-works {
@@ -339,7 +515,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     top: 50px;
     width: 100%;
     z-index: 2;
-    padding-top: 40px;
+    padding-top: 30px;
   }
 }
 #how-it-works .info {
@@ -352,6 +528,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #how-it-works .info {
     float: none;
     display: table-cell;
+  }
+}
+@media (max-width: 992px) {
+  #how-it-works .info {
+    font-size: 12px;
   }
 }
 #how-it-works .info:not(:last-child) {
@@ -378,6 +559,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 @media (max-width: 992px) {
   #how-it-works .info > div {
     margin-bottom: 30px;
+    padding: 16px 18px 6px;
   }
 }
 #how-it-works .info > div:before {
@@ -397,13 +579,32 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "raredoor";
   text-align: center;
 }
+@media (max-width: 992px) {
+  #how-it-works .info > div:before {
+    width: 30px;
+    height: 30px;
+    line-height: 27px;
+    top: -15px;
+    margin-left: -15px;
+  }
+}
 #how-it-works .info > div.browse:before {
   content: 'k';
   font-size: 26px;
 }
+@media (max-width: 992px) {
+  #how-it-works .info > div.browse:before {
+    font-size: 19px;
+  }
+}
 #how-it-works .info > div.purchase:before {
   content: 'g';
   font-size: 20px;
+}
+@media (max-width: 992px) {
+  #how-it-works .info > div.purchase:before {
+    font-size: 18px;
+  }
 }
 #how-it-works .info > div.reserve {
   background: #FFF;
@@ -412,6 +613,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #how-it-works .info > div.reserve:before {
   font-size: 19px;
   content: 'h';
+}
+@media (max-width: 992px) {
+  #how-it-works .info > div.reserve:before {
+    font-size: 16px;
+  }
 }
 #how-it-works .info > div.reserve header {
   border-bottom: 1px solid #91c3c3;
@@ -422,6 +628,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-style: italic;
   text-transform: uppercase;
   margin-bottom: 5px;
+}
+@media (max-width: 992px) {
+  #how-it-works .info header {
+    font-size: 16px;
+  }
 }
 
 #products {
@@ -621,7 +832,15 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #quotes .quote:not(:last-child) {
     border-right: 0px;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+  }
+  #quotes .quote:not(:last-child):after {
+    content: '';
+    width: 52%;
+    height: 1px;
+    display: block;
+    background: #FFF;
+    margin: 15px auto 0px;
   }
 }
 #quotes header {
@@ -654,7 +873,7 @@ footer {
 }
 @media (max-width: 992px) {
   footer {
-    height: auto;
+    height: 130px;
   }
 }
 footer .social-icons {
@@ -704,6 +923,20 @@ footer a {
 footer a:hover {
   text-decoration: none;
   color: #FFF;
+}
+
+footer, .push {
+  height: 120px;
+}
+@media (max-width: 992px) {
+  footer, .push {
+    height: 70px;
+  }
+}
+@media (max-width: 480px) {
+  footer, .push {
+    height: 130px;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
