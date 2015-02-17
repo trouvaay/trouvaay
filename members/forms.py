@@ -118,6 +118,25 @@ class CustomAuthenticationForm(AuthenticationForm):
 
         return self.cleaned_data
 
+class ReserveForm(forms.Form):
+    email = forms.EmailField(widget=forms.TextInput, required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(ReserveForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False
+        self.helper.form_show_errors = True
+        self.helper.form_method = 'post'
+        self.helper.form_action = '.'
+        self.helper.form_id = 'form-reserve'
+
+        self.helper.layout = Layout(
+            Field('email', placeholder='Email address'),
+            Button('button-reserve', 'Submit', css_class="btn-success"),
+        )
+
+
 class RegistrationForm(forms.ModelForm):
 
     email = forms.EmailField(widget=forms.TextInput, required=True)

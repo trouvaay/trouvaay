@@ -4,7 +4,7 @@ from members.models import AuthUserActivity, AuthUser, \
     AuthUserCart, AuthUserOrder, AuthUserOrderItem, AuthUserAddress, RegistrationProfile, \
     PromotionOffer, PromotionRedemption
 from goods.models import Product
-from members.forms import CustomAuthenticationForm, RegistrationForm
+from members.forms import CustomAuthenticationForm, RegistrationForm, ReserveForm
 from braces.views import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import stripe
@@ -17,18 +17,14 @@ from registration.backends.default.views import ActivationView as BaseActivation
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import get_user_model, authenticate, login
 from registration import signals
-from helper import send_email_from_template, get_site
+from helper import send_email_from_template, get_site, send_order_email
 from django.utils import timezone
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.views import login as django_login
 from django.contrib.auth.views import logout as django_logout
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render_to_response
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
 from decimal import Decimal
 
 
@@ -123,6 +119,71 @@ def ProductLike(request):
         return JsonResponse('success', safe=False)
 
 
+class ReserveView(generic.DetailView):
+
+    context_object_name = 'product'
+    model = Product
+
+    def get(self, request, *args, **kwargs):
+        if(request.user.is_authenticated()):
+            # for authenticated user should behave same as post
+            return self.post(request, *args, **kwargs)
+        form = ReserveForm()
+        product = self.get_object()
+        return render_to_response('members/purchase/nonauth_reservation.html', locals())
+
+    def post(self, request, *args, **kwargs):
+
+        product = self.get_object()
+        discounts, _subtotal_dollar_value, taxes, _total = AuthUserOrder.compute_order_line_items(self.request.user,
+                                                                                                  total_price_before_offers=product.current_price,
+                                                                                                  promo_codes=[])
+        
+        order_user = None
+        if(request.user.is_authenticated()):
+            order_user = request.user
+
+        else:        
+            form = ReserveForm(request.POST)
+            if(not form.is_valid()):
+                return render_to_response('members/purchase/nonauth_reservation.html', locals())
+    
+            # create user if needed
+            email = self.request.POST.get('email', None)
+            is_existing, order_user = get_user_model().get_user_by_email(email)
+
+        logger.debug('number of reservations that user already has: %d' % order_user.get_number_of_reservations())
+        logger.debug('reservations limit in settings: %d' % settings.RESERVATION_LIMIT)
+        if(order_user.get_number_of_reservations() >= settings.RESERVATION_LIMIT):
+            reservation_message = 'You cannot reserve any more products'
+            return render_to_response('members/purchase/auth_reservation.html', locals())
+
+
+        # create order
+        order = AuthUserOrder()
+        order.authuser = order_user
+        order.taxes = taxes['dollar_value']
+        order.save()
+        logger.debug('created order')
+
+        # create redemption if any
+        for discount in discounts:
+            PromotionRedemption.create_redemption(order=order,
+                                                  product=product,
+                                                  offer_id=discount['offer_id'],
+                                                  discount_dollar_value=discount['dollar_value'])
+        logger.debug('created redemptions')
+
+        # add item to order
+        order_item = AuthUserOrderItem.create_order_item(order=order, product=product, order_type='reserve')
+        logger.debug('created order item')
+
+        # send order confirmation email
+        send_order_email(request=self.request, order_item=order_item, show_password_reset_link=True, is_buy=False)
+        logger.debug('sent email')
+        return render_to_response('members/purchase/auth_reservation.html', locals())
+                
+
 class ReserveCallbackView(generic.DetailView):
     context_object_name = 'product'
     model = Product
@@ -192,18 +253,10 @@ class ReserveCallbackView(generic.DetailView):
 
                 # create redemptions
                 for discount in discounts:
-
-                    offer_id = discount['offer_id']
-                    redemption = PromotionRedemption()
-                    redemption.authuser = order_user
-                    redemption.offer_id = offer_id
-                    redemption.order = order
-                    redemption.timestamp = timezone.now()
-                    redemption.total_before_discount = product.current_price
-                    redemption.discount_amount = discount['dollar_value']
-                    redemption.save()
-
-                    logger.debug('Created redemption %d' % redemption.id)
+                    PromotionRedemption.create_redemption(order=order,
+                                                          product=product,
+                                                          offer_id=discount['offer_id'],
+                                                          discount_dollar_value=discount['dollar_value'])
 
                 stripe.api_key = settings.STRIPE_SECRET_KEY
                 stripe.Charge.create(
@@ -238,7 +291,7 @@ class ReserveCallbackView(generic.DetailView):
                 logger.debug('Creating new shipping address')
 
             # TODO: shipping address should be tied to the order
-            # right not it is only tied to user
+            # right now it is only tied to user
             shipping_address.authuser = order_user
             shipping_address.street = request.POST['args[shipping_address_line1]']
             shipping_address.city = request.POST['args[shipping_address_city]']
@@ -248,40 +301,13 @@ class ReserveCallbackView(generic.DetailView):
             shipping_address.save()
 
             # add item to order
-            order_item = AuthUserOrderItem()
-            order_item.product = product
-            order_item.order = order
-            order_item.sell_price = product.current_price
-            order_item.captured = capture_order
-            if(order_item.captured):
-                order_item.capture_time = timezone.now()
-            else:
-                order_item.capture_time = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
-            order_item.quantity = 1
-            order_item.save()
-            logger.debug('Added items to order')
+            order_item = AuthUserOrderItem.create_order_item(order=order, product=product, order_type=order_type)
 
-            # send email with store address
-            email_context = {
-                             'product': product,
-                             'site': get_site(self.request),
-                             'capture_date': order_item.capture_time.date() if not order_item.captured else None
-                             }
-
-            if(not is_existing):
-                # This is a newly created user without password. We will send this
-                # user a password reset link along with the order
-                # add extra context parameters needed for password reset link
-                email_context['token'] = default_token_generator.make_token(order_user)
-                email_context['uid'] = urlsafe_base64_encode(force_bytes(order_user.pk))
-                email_context['domain'] = get_current_site(request).domain
-                email_context['protocol'] = 'https' if self.request.is_secure() else 'http'
-
-                
-            send_email_from_template(to_email=order_user.email, context=email_context,
-                subject_template='members/purchase/reserve_confirmation_email_subject.txt',
-                plain_text_body_template='members/purchase/reserve_confirmation_email_body.txt',
-                html_body_template='members/purchase/reserve_confirmation_email_body.html')
+            # send order confirmation email
+            send_order_email(request=self.request, 
+                             order_item=order_item, 
+                             show_password_reset_link=(not is_existing), 
+                             is_buy=(order_type == 'buy'))
 
 
             return JsonResponse({

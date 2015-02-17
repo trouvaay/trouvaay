@@ -1,0 +1,58 @@
+{% load crispy_forms_tags %}
+<div class="modal" id="researvation-modal">
+	<div class="modal-dialog">
+		<div class="modal-content col-xs-12">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+				<div class="form-group text-center">
+					<div class="text-center">
+						<fieldset>
+							<legend>
+								Reservation
+							</legend>
+							<div class="row">
+								<div class="col-xs-12" class="text-center">
+		                            <p>
+		                            Please provide your email to reserve the item and we'll tell you where you can see this amazing piece
+		                            </p>
+		                            <br />
+									{% crispy form %}
+	                        	</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.researvation-modal -->
+
+<script>
+$(document).ready(function() {
+	
+	var productId = "{{ product.id }}";
+	var productName = "{{ product.short_name }}";
+	$('#button-id-button-reserve').on('click', function(e) {
+	
+		console.log('clicked on submit reservation');
+		if(productId && !(typeof productId === 'undefined')){
+			$.ajax({
+				type: "POST",
+				url: "/reserve/"+productId+"/",
+				data: $("#form-reserve").serialize(),
+				dataType: "html",
+				success: function(response, status){
+					$("#pre-checkout-modal-container").html(response);
+					$("#researvation-modal").modal({
+						show: true,
+						keyboard: true
+					});
+				},
+			});
+		}        
+
+	});
+});
+</script>

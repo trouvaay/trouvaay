@@ -1,5 +1,5 @@
-<h1>Thank you for your {% if capture_date %}reservation{% else %}purchase{% endif %}.</h1>  
-
+<h1>Thank you for your {% if is_buy %}purchase{% else %}reservation{% endif %}.</h1>  
+{% if is_buy %}
 <p>
 Your <b>{{ product.short_name }}</b> is available at <i>{{ product.store.retailer.short_name }}</i> located at:
 <br /><br />
@@ -12,9 +12,9 @@ Your <b>{{ product.short_name }}</b> is available at <i>{{ product.store.retaile
 
 <p>Your card will not be charged until {{ capture_date }}.  Call, text, or email to cancel.
 {% endif %}We are happy to answer any questions you might have!<p>
-
+{% endif %}
 {% if uid and token %}
-<p>Your account has been created from email you have provided during our checkout process. 
+<p>Your account has been created from email you have provided during our {% if is_buy %}purchase{% else %}checkout{% endif %} process. 
 If you wish to login you need to first reset your password by following this link:<br>
 <a href="{{ protocol }}://{{ domain }}{% url 'auth_password_reset_confirm' uid token %}">
 {{ protocol }}://{{ domain }}{% url 'auth_password_reset_confirm' uid token %}</a></p>
