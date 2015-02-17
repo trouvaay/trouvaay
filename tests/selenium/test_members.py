@@ -248,6 +248,49 @@ class RaredoorMembers(object):
         message_text = self.do_get_latest_email(email, email_password)
         self.do_check_product_name_and_address(driver, message_text)
 
+    def do_reservation(self, driver, is_auth, email, email_password=None, password=None):
+
+        if(is_auth):
+            # test should run as authenticated
+            # login if not yet logged in
+            if(not self.is_logged_in(driver)):
+                self.do_login(driver, email, password)
+        else:
+            if(self.is_logged_in(driver)):
+                self.do_logout(driver)
+
+        self.do_view_random_product(driver)
+
+        # find buy button
+        buttons = driver.find_elements_by_class_name("buy")
+        buy_button = None
+        button_prefix = 'reserve_'
+        checkout_button_label = 'Reserve'
+
+        for button in buttons:
+            if(button.get_attribute('id').startswith(button_prefix)):
+                buy_button = button
+                break
+
+        self.assertIsNotNone(buy_button, 'Missing {0} button'.format(checkout_button_label))
+        webdriver.ActionChains(driver).move_to_element(buy_button).click(buy_button).perform()
+        sleep(1)
+        self.assert_(self.is_present_by_id(driver, "pre-checkout-modal-container"), 'Missing pre-checkout modal')
+
+        if(not is_auth):
+            email_field = driver.find_element_by_xpath("//form[@id='form-reserve']//input[@id='id_email']")
+            email_field.send_keys(email)
+            reserve_button = driver.find_element_by_xpath("//form[@id='form-reserve']//input[@id='button-id-button-reserve']")
+            webdriver.ActionChains(driver).move_to_element(reserve_button).click(reserve_button).perform()
+            sleep(3)
+
+        # if we are testing an authenticated user then they should either
+        # have reached the reservation limit or just did a successful reservation
+        reservation_message_elem = driver.find_element_by_id("reservation-status-message")
+        if('You cannot reserve any more products' not in reservation_message_elem.get_attribute('innerHTML')):
+            # limit is not reached so we should get reservation message
+            for i in ['You have ', ' reservtions left', 'Check your email to find out where you can see this amazing piece']:
+                self.assert_(i in reservation_message_elem.get_attribute('innerHTML'), 'Missing reservation message')
 
     def is_logged_in(self, driver):
         return self.is_present_by_class(driver, "nav-logout-button")
@@ -408,16 +451,6 @@ class RaredoorMembers(object):
                          email_password=config.EXISTING_USER_EMAIL_PASSWORD,
                          password=config.EXISTING_USER_PASSWORD)
 
-    def test_reserve_product_auth(self):
-        """Reserve product as authenticated user"""
-        driver = self.driver
-        driver.get(config.HOME_URL)
-
-        self.do_checkout(driver=driver, is_auth=True, is_buy=False,
-                         email=config.EXISTING_USER_EMAIL,
-                         email_password=config.EXISTING_USER_EMAIL_PASSWORD,
-                         password=config.EXISTING_USER_PASSWORD)
-
     def test_buy_product_nonauth(self):
         """Buy product as non-authenticated existing user"""
         driver = self.driver
@@ -428,15 +461,32 @@ class RaredoorMembers(object):
                          email_password=config.EXISTING_USER_EMAIL_PASSWORD,
                          password=config.EXISTING_USER_PASSWORD)
 
+    def test_reserve_product_auth(self):
+        """Reserve product as authenticated user"""
+        driver = self.driver
+        driver.get(config.HOME_URL)
+
+        self.do_reservation(driver=driver, is_auth=True,
+                            email=config.EXISTING_USER_EMAIL,
+                            email_password=config.EXISTING_USER_EMAIL_PASSWORD,
+                            password=config.EXISTING_USER_PASSWORD)
+
+
+
     def test_reserve_product_nonauth(self):
         """Reserve product as non-authenticated existing user"""
         driver = self.driver
         driver.get(config.HOME_URL)
 
-        self.do_checkout(driver=driver, is_auth=False, is_buy=False,
-                         email=config.EXISTING_USER_EMAIL,
-                         email_password=config.EXISTING_USER_EMAIL_PASSWORD,
-                         password=config.EXISTING_USER_PASSWORD)
+        self.do_reservation(driver=driver, is_auth=False, email=config.EXISTING_USER_EMAIL)
+
+    def test_reserve_product_newuser(self):
+        """Reserve product as a non-registered user"""
+        driver = self.driver
+        driver.get(config.HOME_URL)
+
+        self.do_reservation(driver=driver, is_auth=False, email=self.generate_new_email(config.NEW_USER_BASE_EMAIL))
+
 
 class ChromeTests(RaredoorMembers, unittest.TestCase):
     def setUp(self):
