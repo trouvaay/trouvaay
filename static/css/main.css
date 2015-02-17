@@ -428,13 +428,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding: 0px;
 }
 #products header {
-  background: #524b48;
+  background: #979391;
   color: #FFF;
   font-family: "Droid Serif";
   font-size: 23px;
   font-weight: bold;
   line-height: 25px;
-  padding: 12px 0px;
+  padding: 22px 0px;
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 25px;
