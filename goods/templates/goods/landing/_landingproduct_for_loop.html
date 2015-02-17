@@ -4,10 +4,10 @@
 
 		<picture>
 		<!--[if IE 9]><video style="display: none;"><![endif]-->
-		<source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop="fit" %}" media="(min-width: 992px)">
-		<source srcset="{% cloudinary_url product.productimage_set.first.image width=300 height=275 crop="fit" %}" media="(min-width: 413px)">
+		<source srcset="{% cloudinary_url product.productimage_set.first.image width=252 height=252 crop="fill" %}" media="(min-width: 992px)">
+		<source srcset="{% cloudinary_url product.productimage_set.first.image width=375 height=375 crop="fill" %}" media="(min-width: 413px)">
 		<!--[if IE 9]></video><![endif]-->
-		<img srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=275 crop="fit" %}' alt="">
+		<img srcset='{% cloudinary_url product.productimage_set.first.image width=292 height=292 crop="fill" %}' alt="">
 		</picture>
 	</a>
 	<div class="name-container">
