@@ -117,8 +117,8 @@ h4, h5, h6, .h4, .h5, .h6 {
   border: none;
 }
 #desktop-search > ul > li > a {
-  font-size: 14px;
-  padding: 15px 8px;
+  font-size: 16px;
+  padding: 15px 6px;
 }
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a:hover {
   background-color: transparent;
