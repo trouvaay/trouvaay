@@ -18,19 +18,19 @@
 <input id="display-how-it-works" type="checkbox" name="">
 <div class="container hidden-xs" id="how-it-works">
 	<div class="row">
-		<div class="col-md-4 info">
+		<div class="col-sm-4 info">
 			<div class="browse">
 				<header>Browse</header>
 				<p>A curated selection of new and vintage furniture — all available locally — at <i>Raredoor.com.</i></p>
 			</div>
 		</div>
-		<div class="col-md-4 info">
+		<div class="col-sm-4 info">
 			<div class="reserve">
 				<header>Reserve</header>
 				<p>Your perfect pieces online and take a few days to see the items in a store nearby.</p>
 			</div>
 		</div>
-		<div class="col-md-4 info">
+		<div class="col-sm-4 info">
 			<div class="purchase">
 				<header>Purchase</header>
 				<p>Through us and receive great deals, as well as affordable delivery.</p>
@@ -42,9 +42,13 @@
 <div class="container-fluid" id="products">
 	<div class="row-fluid">
 		<header class="col-md-12">Check out furniture in your neighborhood</header>
-		<div id="products-grid" class="container">
+		<div id="products-grid" class="container grid">
 			<div class="row-fluid">
 
+				{% for product in products %}
+				{% include 'goods/landing/_landingproduct_for_loop.html' %}
+				{% endfor %}
+				
 				{% for product in products %}
 				{% include 'goods/landing/_landingproduct_for_loop.html' %}
 				{% endfor %}
@@ -60,26 +64,26 @@
 	</div>
 </div>
 <div class="container" id="quotes">
-	<div class="header-container hidden-xs hidden-sm">
+	<div class="header-container hidden-xs">
 		<header>What people are saying about us!</header>
 	</div>
 
 	<div class="row">
-		<div class="col-md-4 quote">
+		<div class="col-sm-4 quote">
 			<q>
 				Rare door is the best thing ever! You should totally buy things from them!
 			</q>
 			<span class="author-name">Name, Location</span>
 		</div>
 
-		<div class="col-md-4 quote">
+		<div class="col-sm-4 quote">
 			<q>
 				Rare door is the best thing ever! You should totally buy things from them! I am a real person who has bought from this site! 
 			</q>
 			<span class="author-name">Name, Location</span>
 		</div>
 
-		<div class="col-md-4 quote">
+		<div class="col-sm-4 quote">
 			<q>
 				Rare door is the 
 			</q>

@@ -31,6 +31,7 @@
 
 html, body {
   height: 100%;
+  -webkit-font-smoothing: antialiased;
 }
 
 .wrap {
@@ -39,7 +40,7 @@ html, body {
   height: 100%;
   margin: 0 auto -120px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .wrap {
     margin: 0 auto -130px;
   }
@@ -204,6 +205,9 @@ html, body {
 }
 
 .more-questions-container {
+  padding: 0px;
+}
+.more-questions-container header {
   background: #91c3c3;
   color: #FFF;
   font-family: "Droid Serif";
@@ -216,7 +220,7 @@ html, body {
   margin-bottom: 25px;
 }
 @media (max-width: 992px) {
-  .more-questions-container {
+  .more-questions-container header {
     background: #91c3c3;
     font-size: 17px;
     margin-bottom: 10px;
@@ -303,7 +307,7 @@ header.top-bar .logo-div img {
   vertical-align: top;
   margin-top: 16px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   header.top-bar .logo-div {
     text-align: center;
     height: 50px;
@@ -315,7 +319,7 @@ header.top-bar .logo-div img {
 header.top-bar #logo {
   margin-right: 25px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   header.top-bar #logo {
     margin-right: 0px;
   }
@@ -362,6 +366,9 @@ header.top-bar .mobile-about label {
   height: 28px;
   min-width: 28px;
 }
+header.top-bar .mobile-menu label {
+  text-align: right;
+}
 header.top-bar .mobile-menu label:before {
   font-size: 32px;
 }
@@ -385,7 +392,7 @@ header.top-bar .links a:not(:last-child) {
 input#display-how-it-works {
   display: none;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   input#display-how-it-works + #how-it-works {
     display: none;
   }
@@ -422,7 +429,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin-bottom: 54px;
   padding: 0px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #index-banner {
     margin-bottom: 0px;
   }
@@ -462,7 +469,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     margin-left: -375px;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #index-banner .text-container {
     margin-left: 0px;
     left: 0%;
@@ -483,7 +490,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   position: relative;
   margin-top: -62px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #index-banner .text {
     font-size: 14px;
     line-height: 14px;
@@ -498,7 +505,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-size: 80px;
   line-height: 80px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #index-banner .text strong {
     font-size: 50px;
     line-height: 50px;
@@ -508,7 +515,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #how-it-works {
   margin-bottom: 30px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #how-it-works {
     background: #FFF;
     position: fixed;
@@ -524,13 +531,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   font-weight: bold;
 }
-@media (min-width: 769px) {
+@media (min-width: 481px) {
   #how-it-works .info {
     float: none;
     display: table-cell;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #how-it-works .info {
     font-size: 12px;
   }
@@ -538,7 +545,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #how-it-works .info:not(:last-child) {
   padding-right: 30px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #how-it-works .info:not(:last-child) {
     padding-right: 15px;
   }
@@ -550,13 +557,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding: 28px 18px 10px;
   position: relative;
 }
-@media (min-width: 769px) {
+@media (min-width: 481px) {
   #how-it-works .info > div {
     height: 100%;
     display: inline-table;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #how-it-works .info > div {
     margin-bottom: 30px;
     padding: 16px 18px 6px;
@@ -579,7 +586,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "raredoor";
   text-align: center;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #how-it-works .info > div:before {
     width: 30px;
     height: 30px;
@@ -592,7 +599,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   content: 'k';
   font-size: 26px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #how-it-works .info > div.browse:before {
     font-size: 19px;
   }
@@ -601,7 +608,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   content: 'g';
   font-size: 20px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #how-it-works .info > div.purchase:before {
     font-size: 18px;
   }
@@ -614,7 +621,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-size: 19px;
   content: 'h';
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #how-it-works .info > div.reserve:before {
     font-size: 16px;
   }
@@ -629,7 +636,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-transform: uppercase;
   margin-bottom: 5px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #how-it-works .info header {
     font-size: 16px;
   }
@@ -650,7 +657,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-transform: uppercase;
   margin-bottom: 25px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #products header {
     background: #91c3c3;
     font-size: 17px;
@@ -666,10 +673,10 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding: 0px 20px;
   height: 50px;
   line-height: 53px;
-  margin-top: -10px;
   margin-bottom: 25px;
+  margin-top: -10px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #products .see-more {
     background: #e6be46;
     width: 100%;
@@ -682,98 +689,98 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-size: 30px;
 }
 
-@media (max-width: 992px) {
-  #products-grid {
+@media (max-width: 767px) {
+  .grid {
     padding: 0px;
   }
 }
-#products-grid img {
+.grid img {
   width: 100%;
 }
-#products-grid .product a {
-  display: block;
-}
-#products-grid .product a img {
+.grid .grid-item img {
   border-radius: 100%;
   width: 100%;
   margin-bottom: 20px;
 }
-@media (max-width: 992px) {
-  #products-grid .product a img {
+@media (max-width: 767px) {
+  .grid .grid-item img {
     border-radius: 0px;
     margin-bottom: 10px;
   }
 }
-#products-grid .product {
+.grid .grid-item a {
+  display: block;
+}
+.grid .grid-item {
   margin-bottom: 35px;
 }
-@media (max-width: 992px) {
-  #products-grid .product {
+@media (max-width: 767px) {
+  .grid .grid-item {
     margin-bottom: 10px;
   }
-  #products-grid .product:nth-child(even) {
+  .grid .grid-item:nth-child(even) {
     padding-right: 0px;
     padding-left: 5px;
   }
-  #products-grid .product:nth-child(odd) {
+  .grid .grid-item:nth-child(odd) {
     padding-left: 0px;
     padding-right: 5px;
   }
 }
-@media (max-width: 992px) {
-  #products-grid .product .name-container {
+@media (max-width: 767px) {
+  .grid .grid-item .name-container {
     text-align: left;
   }
-  #products-grid .product:nth-child(odd) .name-container {
+  .grid .grid-item:nth-child(odd) .name-container {
     text-align: right;
   }
 }
-#products-grid .image-container {
+.grid .image-container {
   padding: 0px 10px;
 }
-@media (max-width: 992px) {
-  #products-grid .image-container {
+@media (max-width: 767px) {
+  .grid .image-container {
     padding: 0px;
   }
 }
-#products-grid .name-container {
+.grid .name-container {
   border: 3px solid #7f7f7f;
   font-family: "Droid Serif";
   font-weight: bold;
   text-align: center;
   padding: 13px;
 }
-@media (max-width: 992px) {
-  #products-grid .name-container {
+@media (max-width: 767px) {
+  .grid .name-container {
     background: #7f7f7f;
     color: #FFF;
   }
 }
-#products-grid .name-container .name {
+.grid .name-container .name {
   font-family: "Ostrich Sans";
   font-size: 30px;
   font-weight: 800;
   line-height: 40px;
   letter-spacing: 1px;
 }
-@media (max-width: 992px) {
-  #products-grid .name-container .name {
+@media (max-width: 767px) {
+  .grid .name-container .name {
     font-size: 25px;
     line-height: 25px;
   }
 }
-#products-grid .name-container .name a {
+.grid .name-container .name a {
   color: #000;
 }
-@media (max-width: 992px) {
-  #products-grid .name-container .name a {
+@media (max-width: 767px) {
+  .grid .name-container .name a {
     color: #FFF;
   }
 }
-#products-grid .name-container .name a:hover {
+.grid .name-container .name a:hover {
   text-decoration: none;
 }
-#products-grid .name-container .price {
+.grid .name-container .price {
   font-size: 14.5px;
 }
 
@@ -785,7 +792,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   position: relative;
   text-align: center;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #quotes {
     margin-bottom: 0px;
   }
@@ -802,7 +809,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   left: 0px;
   bottom: -80px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #quotes:after {
     content: none;
   }
@@ -813,6 +820,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-style: italic;
   font-size: 17px;
   margin-bottom: 10px;
+}
+@media (max-width: 992px) {
+  #quotes q {
+    font-size: 15px;
+  }
 }
 #quotes .author-name {
   display: block;
@@ -828,7 +840,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   border-right: 1px solid #FFF;
   height: 135px;
 }
-@media (max-width: 992px) {
+@media (max-width: 767px) {
   #quotes .quote:not(:last-child) {
     border-right: 0px;
     height: auto;
@@ -859,6 +871,44 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding-left: 93px;
   bottom: -80px;
   right: 0px;
+}
+
+.team-members-container {
+  padding: 0px;
+}
+.team-members-container header {
+  background: #91c3c3;
+  color: #FFF;
+  font-family: "Droid Serif";
+  font-size: 23px;
+  font-weight: bold;
+  line-height: 25px;
+  padding: 22px 0px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+@media (max-width: 992px) {
+  .team-members-container header {
+    background: #91c3c3;
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+}
+.team-members-container .name-container {
+  padding: 25px;
+}
+.team-members-container .name-container .name {
+  font-size: 50px;
+  line-height: 50px;
+}
+.team-members-container .name-container .subline {
+  font-size: 20px;
+}
+.team-members-container .grid-item {
+  margin-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 footer {

@@ -1,0 +1,39 @@
+.team-members-container {
+  padding: 0px;
+  header {
+    background: $lily;
+  color: #FFF;
+  font-family: "Droid Serif";
+  font-size: 23px;
+  font-weight: bold;
+  line-height: 25px;
+  padding: 22px 0px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 40px; 
+
+    @include breakpoint(md) {
+      background: $lily;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .name-container {
+    padding: 25px;
+    .name {
+      font-size: 50px;
+      line-height: 50px;
+    }
+
+    .subline {
+      font-size: 20px;
+    }
+  }
+
+  .grid-item {
+    margin-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

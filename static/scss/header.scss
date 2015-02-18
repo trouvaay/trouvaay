@@ -1,8 +1,5 @@
 #logo {
   height: 28px;
-  @include breakpoint(md) {
-
-  }
 
 }
 
@@ -42,7 +39,7 @@ header.top-bar {
       margin-top: 16px;
     }
 
-    @include breakpoint(md) {
+    @include breakpoint(sm) {
       text-align: center;
       height: 50px;
 
@@ -55,7 +52,7 @@ header.top-bar {
 
   #logo {
     margin-right: 25px;
-    @include breakpoint(md) {
+    @include breakpoint(sm) {
       margin-right: 0px;
 
     }
@@ -118,8 +115,11 @@ header.top-bar {
   }
 
   .mobile-menu {
-    label:before {
-      font-size: 32px;
+    label {
+      text-align: right;
+      &:before {
+	font-size: 32px;
+      }
     }
   }
 
@@ -153,7 +153,7 @@ header.top-bar {
 input#display-how-it-works {
   display: none;
 
-  @include breakpoint(md) {
+  @include breakpoint(sm) {
     + #how-it-works {
       display: none;
     }
