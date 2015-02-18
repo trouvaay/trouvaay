@@ -19,6 +19,7 @@ from decimal import Decimal
 import hashlib
 import six
 import random
+from datetime import timedelta
 
 
 class RegistrationManager(BaseRegistrationManager):
@@ -369,12 +370,13 @@ class AuthUserOrderItem(models.Model):
     order = models.ForeignKey(AuthUserOrder, null=True, blank=True, related_name='order_items')
     sell_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     captured = models.BooleanField(default=True)
-    # for buy-and-trial items, time at which transaction will be captured
+    # for reserved items, time at which reservation expires
     capture_time = models.DateTimeField(null=True, blank=True)
+    reservation_expire = models.DateTimeField(null=True, blank=True)
     # for now we only have purchase quantities of one but in the future will allow
     # for purchase of multiple of same item
     quantity = models.IntegerField(default=1)
-    has_open_reservation = models.BooleanField(default=True)
+    has_open_reservation = models.BooleanField(default=False)
 
     def __str__(self):
         return(self.product.short_name)
@@ -390,6 +392,8 @@ class AuthUserOrderItem(models.Model):
             order_item.capture_time = timezone.now()
         else:
             order_item.capture_time = None
+        if(order_type == 'reserve'):
+            order_item.reservation_expire = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
         order_item.quantity = 1
         order_item.save()
         return order_item

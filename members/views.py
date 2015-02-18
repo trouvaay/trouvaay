@@ -26,6 +26,7 @@ from django.contrib.auth.views import login as django_login
 from django.contrib.auth.views import logout as django_logout
 from django.shortcuts import render_to_response
 from decimal import Decimal
+from pprint import pprint as pp
 
 
 logger = logging.getLogger(__name__)
@@ -158,6 +159,8 @@ class ReserveView(generic.DetailView):
         order_user = None
         if(request.user.is_authenticated()):
             order_user = request.user
+            # Used as param in send_order_email fct
+            is_existing = True
 
         else:        
             form = ReserveForm(request.POST)
@@ -167,6 +170,15 @@ class ReserveView(generic.DetailView):
             # create user if needed
             email = self.request.POST.get('email', None)
             is_existing, order_user = get_user_model().get_user_by_email(email)
+            logger.debug('is_existing: {}'.format(is_existing))            
+        
+        # If new user need to set send_password link param to true 
+        if is_existing:
+            password_reset_link = False
+        else:
+            password_reset_link = True
+
+        logger.debug('Generate password rest?: {}'.format(password_reset_link))
 
         logger.debug('number of reservations that user already has: %d' % order_user.get_number_of_reservations())
         logger.debug('reservations limit in settings: %d' % settings.RESERVATION_LIMIT)
@@ -190,8 +202,9 @@ class ReserveView(generic.DetailView):
         product.save()
         logger.debug('product is_reserved field set to True')
 
+
         # send order confirmation email
-        send_order_email(request=self.request, order_item=order_item, show_password_reset_link=True, is_buy=False)
+        send_order_email(request=self.request, order_item=order_item, show_password_reset_link=password_reset_link, is_buy=False)
         logger.debug('sent email')
         return render_to_response('members/purchase/auth_reservation.html', locals())
                 
@@ -217,6 +230,7 @@ class ReserveCallbackView(generic.DetailView):
             product = self.get_object()
 
             order_type = request.POST['order_type'].strip().lower()
+            
             capture_order = (order_type == 'buy')
 
             # create charge with stripe,
