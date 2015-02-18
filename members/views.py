@@ -54,7 +54,7 @@ class ProfileView(generic.DetailView):
         order = AuthUserOrder.objects.filter(authuser= user)
         ordered_items = [i.product for i in AuthUserOrderItem.objects.filter(order=order, has_open_reservation=True)]
         context['user_order_items'] = ordered_items
-
+        print (context['user_order_items'])
         user_activity = AuthUserActivity.objects.get(authuser= user)
         
         # diff from liked_items context function in context_processors.py
