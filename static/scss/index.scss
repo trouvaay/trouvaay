@@ -87,18 +87,9 @@
   }
 }
 
-#how-it-works {
+#how-it-works, #how-it-works-mobile {
   margin-bottom: 30px;
 
-  @include breakpoint(sm) {
-    background: #FFF;
-    position: fixed;
-    top: 50px;
-    width: 100%;
-    z-index: 2;
-    padding-top: 30px;
-
-  }
 
 
   .info {
@@ -107,7 +98,7 @@
     font-family: "Droid Serif";
     font-weight: bold;
 
-    @include breakpoint(sm, True) {
+    @include breakpoint(md, True) {
       float: none;
       display: table-cell;
     }
@@ -131,7 +122,7 @@
       padding: 28px 18px 10px;
       position: relative;
 
-      @include breakpoint(sm, True) {
+      @include breakpoint(md, True) {
 	height: 100%;
 	display: inline-table;
       }

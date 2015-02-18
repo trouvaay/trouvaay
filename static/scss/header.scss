@@ -150,6 +150,19 @@ header.top-bar {
 
 }
 
+#how-it-works-mobile {
+  
+  @include breakpoint(sm) {
+    background: #FFF;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    z-index: 2;
+    padding-top: 30px;
+
+  }
+}
+
 input#display-how-it-works {
   display: none;
 
@@ -158,8 +171,9 @@ input#display-how-it-works {
       display: none;
     }
 
-    &:checked + #how-it-works {
+    &:checked + #how-it-works-mobile {
       display: block !important;
+      visibility: visible !important;
     }
   }
 
