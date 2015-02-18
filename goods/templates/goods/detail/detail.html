@@ -51,10 +51,10 @@
                                     {% elif product.is_reserved %}
                                         <span class="reserved">{{ 'Reserved' }}</span>                
                                     {% elif product.is_discounted %}
-                                        <strike>{{' - $'}}{{ product.original_price|floatformat:"0" }}</strike>
+                                        <strike>${{ product.original_price|floatformat:"0" }}</strike>
                                         <span class="discount">{{' - $'}}{{ product.current_price|floatformat:"0" }}<span>
                                     {% else %}
-                                        {{' - $'}}{{ product.current_price|floatformat:"0" }}
+                                        ${{ product.current_price|floatformat:"0" }}
                                     {% endif %}
                                 {% endif %}
                               </em></p>
