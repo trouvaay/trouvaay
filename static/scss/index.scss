@@ -25,8 +25,19 @@
     padding: 0px 11px;
 
     top: 50%;
-    right: 15px;
+    left: 75%;
     position: absolute;
+
+    @include breakpoint(md) {
+	    left: 72%;
+
+    }
+
+    @include breakpoint(sm) {
+	    left: auto;
+	    right: 5%;
+
+    }
   }
 
   .text-container {
