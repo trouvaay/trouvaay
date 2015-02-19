@@ -1,0 +1,53 @@
+{% load crispy_forms_tags %}
+<div class="modal" id="referral-signup-modal">
+	<div class="modal-dialog">
+		<div class="modal-content col-xs-12">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+				<div class="form-group text-center">
+					<div class="text-center">
+						<fieldset>
+							<legend>
+								<h2>Referral</h2>
+							</legend>
+							<div class="row">
+								<div class="col-xs-12" class="text-center">
+		                            <h5>
+		                            Please provide your email
+		                            </h5>
+		                            <br />
+									{% crispy form %}
+	                        	</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.researvation-modal -->
+
+<script>
+$(document).ready(function() {
+	
+	$('#submit-id-button-signup').on('click', function(e) {
+		console.log('clicked on submit');
+		$.ajax({
+			type: "POST",
+			url: "{% url "members:referral_signup" %}",
+			data: $("#form-referral").serialize(),
+			dataType: "html",
+			success: function(response, status){
+				$("#referral-modal-container").html(response);
+				$("#referral-signup-modal").modal({
+					show: true,
+					keyboard: true
+				});	
+			},
+		});
+		e.preventDefault();
+	});
+});
+</script>

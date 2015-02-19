@@ -1,0 +1,15 @@
+<h1>Thank you for signing up.</h1>  
+
+{% if uid and token %}<p>Your account has been created from email you have provided. <br>
+To login you need to first reset your password by following this link:<br>
+<a href="{{ protocol }}://{{ domain }}{% url 'auth_password_reset_confirm' uid token %}">
+{{ protocol }}://{{ domain }}{% url 'auth_password_reset_confirm' uid token %}</a></p>
+{% endif %}
+<p>
+Sincerely,<br />
+
+Rare Door
+help@raredoor.com
+650.603.0386
+
+</p>

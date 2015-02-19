@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from members.models import AuthUser
+from members.models import AuthUser, Join
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, \
     SetPasswordForm
 from django import forms
@@ -188,4 +188,23 @@ class RegistrationForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ('email', 'password', 'password2')
+
+
+class ReferralForm(forms.Form):
+    email = forms.EmailField(widget=forms.TextInput, required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(ReferralForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False
+        self.helper.form_show_errors = True
+        self.helper.form_method = 'post'
+        self.helper.form_action = '.'
+        self.helper.form_id = 'form-referral'
+
+        self.helper.layout = Layout(
+            Field('email', placeholder='Email address'),
+            Submit('button-signup', 'Submit', css_class="btn-success"),
+        )
 
