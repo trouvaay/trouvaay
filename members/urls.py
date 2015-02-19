@@ -19,6 +19,8 @@ urlpatterns = patterns('',
     url(r'^reserve/(?P<pk>\d+)/$', views.ReserveView.as_view(), name='reserve'),
     url(r'^reservecallback/$', views.ReserveCallbackView.as_view(), name='reserve_callback'),
     url(r'^precheckout/$', views.PreCheckoutView.as_view(), name='pre_checkout'),
+    url(r'^referralsignup/$', views.ReferralSignup.as_view(), name='referral_signup'),
+    url(r'^referralinfo/$', views.ReferralInfo.as_view(), name='referral_info'),
 
     # Unused Cart Feature #
     # url(r'^addtocart/$', views.AddToCart, name='addtocart'),

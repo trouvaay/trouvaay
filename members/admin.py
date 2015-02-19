@@ -2,9 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
 from members.models import AuthUser, AuthUserActivity, AuthUserOrder, \
-    AuthUserOrderItem, PromotionOffer, PromotionRedemption
+    AuthUserOrderItem, PromotionOffer, PromotionRedemption, Join
 from django import forms
-
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -122,9 +121,15 @@ class PromotionRedemptionAdmin(admin.ModelAdmin):
     list_display = ('offer', 'authuser', 'order', 'total_before_discount', 'discount_amount', 'timestamp')
 
 
+class JoinAdmin(admin.ModelAdmin):
+    list_display = ['__unicode__', 'friend', 'timestamp', 'updated']
+    class Meta:
+        model = Join
+
+
 admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(AuthUserActivity)
 admin.site.register(AuthUserOrder, AuthUserOrderAdmin)
+admin.site.register(Join, JoinAdmin)
 admin.site.register(PromotionOffer, PromotionOfferAdmin)
 admin.site.register(PromotionRedemption, PromotionRedemptionAdmin)
-

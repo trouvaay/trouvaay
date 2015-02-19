@@ -12,6 +12,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
+import time
 
 # TODO: convert to environ var
 cloudinary.config(
@@ -43,6 +44,20 @@ def MakeSlug(string,spaceChar='+',Maxlen=None):
 	return newStr[:-1][:Maxlen]
 
 
+def is_time_to_show_modal(request, key):
+    """Checks whether it's time to show modal screen"""
+    right_now = int(time.mktime(time.localtime()))  # current time time in seconds since epoch
+    expiration = int(request.session.get(key, 0))  # exporation time in seconds since epoch
+    return expiration < right_now
+
+
+def hide_modal(request, key, expiration_in_seconds):
+    """Sets new value for the cookie key as the expiration time"""
+    right_now = int(time.mktime(time.localtime()))
+    new_expiration = right_now + expiration_in_seconds
+    request.session[key] = str(new_expiration)
+
+
 def send_email_from_template(to_email, context, subject_template, plain_text_body_template, html_body_template=None):
 	"""Creates email from subject and body templates and sends message to the user
 	
@@ -62,12 +77,26 @@ def send_email_from_template(to_email, context, subject_template, plain_text_bod
                                            from_email=settings.DEFAULT_FROM_EMAIL, 
                                            to=[to_email], 
                                            bcc=[settings.DEFAULT_FROM_EMAIL])
-    
+
 	if(html_body_template):
 		message_html = render_to_string(html_body_template, context)
 		email_message.attach_alternative(message_html, 'text/html')
 	email_message.send()
 
+
+def send_user_password_change_email(request, user):
+    email_context = {
+                     'site': get_site(request),
+                     'token': default_token_generator.make_token(user),
+                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                     'domain':get_current_site(request).domain,
+                     'protocol': 'https' if request.is_secure() else 'http'
+                     }
+
+    send_email_from_template(to_email=user.email, context=email_context,
+        subject_template='members/implicit_user_creation/email_subject.txt',
+        plain_text_body_template='members/implicit_user_creation/email_body.txt',
+        html_body_template='members/implicit_user_creation/email_body.html')
 
 def send_order_email(request, order_item, show_password_reset_link, is_buy):
     capture_date = None
@@ -96,7 +125,22 @@ def send_order_email(request, order_item, show_password_reset_link, is_buy):
         plain_text_body_template='members/purchase/reserve_confirmation_email_body.txt',
         html_body_template='members/purchase/reserve_confirmation_email_body.html')
 
+def get_ip(request):
+    try:
+        x_forward = request.META.get("HTTP_X_FORWARDED_FOR")
+        if x_forward:
+            ip = x_forward.split(",")[0]
+        else:
+            ip = request.META.get("REMOTE_ADDR")
+    except:
+        ip = ""
+    return ip
 
+def get_client_id(request):
+    client_id = request.session.get('cid', None)
+    if(not client_id):
+        client_id = get_ip(request)
+    return client_id
 
 def get_site(request):
 	if Site._meta.installed:

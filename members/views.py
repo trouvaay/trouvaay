@@ -2,9 +2,9 @@ from django.http import JsonResponse
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser, \
     AuthUserCart, AuthUserOrder, AuthUserOrderItem, AuthUserAddress, RegistrationProfile, \
-    PromotionOffer, PromotionRedemption
+    PromotionOffer, PromotionRedemption, Join
 from goods.models import Product
-from members.forms import CustomAuthenticationForm, RegistrationForm, ReserveForm
+from members.forms import CustomAuthenticationForm, RegistrationForm, ReserveForm, ReferralForm
 from braces.views import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import stripe
@@ -17,7 +17,7 @@ from registration.backends.default.views import ActivationView as BaseActivation
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import get_user_model, authenticate, login
 from registration import signals
-from helper import get_site, send_order_email
+from helper import get_site, send_order_email, send_user_password_change_email
 from django.utils import timezone
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
@@ -26,7 +26,7 @@ from django.contrib.auth.views import login as django_login
 from django.contrib.auth.views import logout as django_logout
 from django.shortcuts import render_to_response
 from decimal import Decimal
-from pprint import pprint as pp
+from urllib import urlencode
 
 
 logger = logging.getLogger(__name__)
@@ -96,6 +96,8 @@ class SignupView(BaseRegistrationView):
         signals.user_activated.send(sender=self.__class__,
                                      user=new_user,
                                      request=request)
+
+        Join.create_join(request, user)
         return new_user
 
 
@@ -140,6 +142,45 @@ def ProductLike(request):
         return JsonResponse('success', safe=False)
 
 
+class ReferralSignup(generic.edit.FormView):
+    template_name = 'members/referral/signup.html'
+    form_class = ReferralForm
+    success_url = reverse_lazy('members:referral_info')
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        self.success_url += "?"
+        self.success_url += urlencode({'email': email})
+        is_existing, user = get_user_model().get_user_by_email(email)
+        if(not is_existing):
+            send_user_password_change_email(self.request, user)
+        Join.create_join(self.request, user)
+        return super(ReferralSignup, self).form_valid(form)
+
+    def form_invalid(self, form):
+        return super(ReferralSignup, self).form_invalid(form)
+
+class ReferralInfo(generic.base.TemplateView):
+
+    template_name = 'members/referral/info.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ReferralInfo, self).get_context_data(**kwargs)
+        user = None
+        if(self.request.user.is_authenticated()):
+            user = self.request.user
+        else:
+            email = self.request.GET.get('email', None)
+            if(email):
+                is_existing, user = get_user_model().get_user_by_email(email)
+                if(not is_existing):
+                    send_user_password_change_email(self.request, user)
+
+        if(user):
+            Join.create_join(self.request, user)
+            context['ref_url'] = user.get_referral_link()
+        return context
+
 class ReserveView(generic.DetailView):
 
     context_object_name = 'product'
@@ -177,9 +218,9 @@ class ReserveView(generic.DetailView):
             password_reset_link = False
         else:
             password_reset_link = True
+            Join.create_join(self.request, order_user)
 
         logger.debug('Generate password rest?: {}'.format(password_reset_link))
-
         logger.debug('number of reservations that user already has: %d' % order_user.get_number_of_reservations())
         logger.debug('reservations limit in settings: %d' % settings.RESERVATION_LIMIT)
         if(order_user.get_number_of_reservations() >= settings.RESERVATION_LIMIT):
@@ -270,6 +311,9 @@ class ReserveCallbackView(generic.DetailView):
                         logger.info('No email in the request')
                         return JsonResponse({'status': 'error', 'message': 'No email'})
                     is_existing, order_user = get_user_model().get_user_by_email(email)
+                    if(not is_existing):
+                        Join.create_join(self.request, order_user)
+
                     logger.debug('is_existing: %s' % str(is_existing))
 
                 order.authuser = order_user
@@ -373,8 +417,6 @@ class PreCheckoutView(generic.DetailView):
         order_type = self.request.POST.get('order_type', None)
 
         promo_code = self.request.POST.get('promo_code', None)
-
-        print 'promo_code', promo_code
 
         promo_is_valid = False
         promo_code_message = ''

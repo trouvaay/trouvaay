@@ -1,0 +1,30 @@
+{% load crispy_forms_tags %}
+<div class="modal" id="referral-signup-modal">
+	<div class="modal-dialog">
+		<div class="modal-content col-xs-12">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+				<div class="form-group text-center">
+					<div class="text-center">
+						<fieldset>
+							<legend>
+								<h2>Invite Friends & Earn Rewards</h2>
+							</legend>
+							<div class="row">
+								<div class="col-xs-12" class="text-center">
+		                            <h5>
+		                            Share your unique link below via Email, Facebook, Twitter, Reddit, or LinkedIn to earn rewards from raredoor.com.
+		                            </h5>
+		                            <br />
+									<span class="alert alert-info">{{ request.user.get_number_of_referrals }} {{ ref_url }}</span>
+	                        	</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.researvation-modal -->
