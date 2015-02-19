@@ -92,8 +92,35 @@
 	</div><!-- /. end promotion-offer-modal -->
 	{% endif %}    
 
+	{% if show_referral_first_modal or show_referral_second_modal  %}<div id="referral-modal-container"></div>{% endif %}
+
 {% endblock content %}
 {% block endjs %}
+
+{% if show_referral_first_modal or show_referral_second_modal  %}
+	<script type="text/javascript">
+	$(document).ready(function () {
+	
+		// ajax call to load referral
+		$.ajax({
+			type: "GET",
+			dataType: "html",
+			url: "{% if show_referral_first_modal %}{% url "members:referral_signup" %}{% else %}{% url "members:referral_info" %}{% endif %}",
+			success: function(response, status){
+				console.log('status ['+status+']');
+				if(status == 'success'){
+					$("#referral-modal-container").html(response);
+					$("#referral-signup-modal").modal({
+						show: true,
+						keyboard: true
+					});					
+				}			
+			}
+		});
+		
+	});
+	</script>
+{% endif %}
 
 {% comment %}
 {% if promotion_offer and not request.user.is_authenticated %}

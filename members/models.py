@@ -10,7 +10,7 @@ from django.contrib.auth.models import (
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
-from helper import States
+from helper import States, get_client_id
 from registration.models import RegistrationManager as BaseRegistrationManager
 from registration.models import RegistrationProfile as BaseRegistrationProfile
 from django.contrib.auth import get_user_model
@@ -19,7 +19,11 @@ from decimal import Decimal
 import hashlib
 import six
 import random
+import uuid
+from __builtin__ import classmethod
+import logging
 
+logger = logging.getLogger(__name__)
 
 class RegistrationManager(BaseRegistrationManager):
 
@@ -178,6 +182,15 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         new_user.save()
         return (False, new_user)
 
+    def get_number_of_referrals(self):
+        """Returns number of users who signed up using this user's referral link"""
+        return self.user_join.all()[0].referral.all().count()
+
+    def get_referral_link(self):
+        result = settings.SHARE_URL
+        result += self.user_join.all()[0].ref_id
+        return result
+
     def get_number_of_reservations(self):
         return self.user_orders.filter(order_items__captured=False).count()
 
@@ -307,8 +320,8 @@ class AuthUserOrder(models.Model):
     def compute_order_line_items(self, user, total_price_before_offers, promo_codes):
         offers = PromotionOffer.get_current_offers(user=user, promo_codes=promo_codes)
 
-        for offer in offers:
-            print offer.code
+#         for offer in offers:
+#             print offer.code
 
         discounts = []
         taxes = {}
@@ -333,11 +346,6 @@ class AuthUserOrder(models.Model):
 
         total['in_dollars'] = Decimal(subtotal_dollar_value + taxes['dollar_value']).quantize(Decimal('.01'))
         total['in_cents'] = int(total['in_dollars'] * 100)
-
-        print 'discounts', discounts
-        print 'subtotal_dollar_value', subtotal_dollar_value
-        print 'taxes', taxes
-        print 'total', total
 
         return discounts, subtotal_dollar_value, taxes, total 
 
@@ -611,3 +619,53 @@ class PromotionRedemption(models.Model):
         redemption.discount_amount = discount_dollar_value
         redemption.save()
         return redemption
+
+class Join(models.Model):
+    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_join')
+    friend = models.ForeignKey("self", related_name='referral', null=True, blank=True)
+    ref_id = models.CharField(max_length=120, blank=False, null=False, unique=True)
+
+    # client_id can be a GUID or an IP address - something that
+    # helps us prevent multiple referrals from same real user
+    client_id = models.CharField(max_length=120, blank=False, null=False)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __unicode__(self):
+        return "%s" % (self.authuser.email)
+
+    @classmethod
+    def generate_ref_id(cls):
+        ref_id = str(uuid.uuid4())[:11].replace('-', '').lower()
+        try:
+            if(Join.objects.get(ref_id=ref_id)):
+                return cls.generate_ref_id()
+        except Join.DoesNotExist:
+            return ref_id
+
+    @classmethod
+    def create_join(cls, request, user):
+        try:
+            user_join = Join.objects.get(authuser__id=user.id)
+            return user_join
+        except Join.DoesNotExist:
+            client_id = get_client_id(request)
+            valid_referral = True
+            if(Join.objects.filter(client_id=client_id).count() >= settings.LIMIT_REFERRAL_PER_CLIENT_ID):
+                valid_referral = False
+                logger.debug('reached the limit of referrals from the same client id')
+
+            user_join = Join()
+            user_join.authuser_id = user.id
+            user_join.friend = None
+            if(valid_referral):
+                # count referrals only if not exceeding the limit from the same client id
+                try:
+                    join_id = request.session.get('join_id_ref', None)
+                    user_join.friend = Join.objects.get(id=join_id) if join_id else None
+                except Join.DoesNotExist:
+                    pass
+            user_join.ref_id = Join.generate_ref_id()
+            user_join.client_id = client_id
+            user_join.save()
+            return user_join
