@@ -228,7 +228,7 @@ OFFER_MODAL_EXPIRATION = 3600  # do not show promo offers again whithin this man
 RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
 
 # referral settings
-SHARE_URL = "http://127.0.0.1:8000/?ref="
+SHARE_URL = ''
 ENABLE_REFERRAL = False
 LIMIT_REFERRAL_PER_CLIENT_ID = 3
 FIRST_REFERRAL_MODAL_EXP = 86400  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
