@@ -344,6 +344,8 @@ header.top-bar a.login {
   right: 0px;
   height: 25px;
   line-height: 25px;
+  width: 91px;
+  text-align: center;
 }
 header.top-bar .mobile-about label, header.top-bar .mobile-menu label {
   color: #FFF;
