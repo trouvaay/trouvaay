@@ -9,6 +9,7 @@ from random import randint
 import logging
 from django.conf import settings
 from random import shuffle
+from pprint import pprint as pp
 
 from endless_pagination.views import AjaxListView
 
@@ -26,6 +27,8 @@ class LandingView(generic.ListView):
 
     def get_queryset(self):
         queryset = self.model.objects.filter(is_landing=True, store__is_featured=True)[:9]
+        print('heres my landing query:')
+        pp(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
