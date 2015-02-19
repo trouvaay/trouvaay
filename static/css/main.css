@@ -462,19 +462,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin-top: -28px;
   padding: 0px 11px;
   top: 50%;
-  left: 75%;
+  left: 81%;
+  margin-left: -93px;
   position: absolute;
-}
-@media (max-width: 992px) {
-  #index-banner .arrow-link {
-    left: 72%;
-  }
-}
-@media (max-width: 767px) {
-  #index-banner .arrow-link {
-    left: auto;
-    right: 5%;
-  }
 }
 #index-banner .text-container {
   position: absolute;
