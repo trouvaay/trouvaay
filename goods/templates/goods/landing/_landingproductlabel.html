@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
-	    <div class="name"><a href="{% url 'goods:detail' product.slug  %}">{{ product.store.neighborhood }}</a></div>
-	    <div class="price">
+	    <div class="name"><a href="{% url 'goods:detail' product.slug  %}">{{ product.store.neighborhood }}</a></div></br>
+	   <!--  <div class="price">
 	      {{ product.short_name|truncatechars:20 }}
         {% if product.current_price %}
             {% if product.is_discounted %}
@@ -11,7 +11,7 @@
                 {{' - $'}}{{ product.current_price|floatformat:"0" }}
             {% endif %}
         {% endif %}
-	    </div>
+	    </div> -->
 
 
 	    <!--
