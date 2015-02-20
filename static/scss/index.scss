@@ -385,8 +385,8 @@
       letter-spacing: 1px;
 
       @include breakpoint(sm) {
-	font-size: 25px;
-	line-height: 25px;
+	font-size: 18px;
+	line-height: 18px;
       }
 
       a {
@@ -404,6 +404,11 @@
 
     .price {
       font-size: 14.5px;
+
+      @include breakpoint(sm) {
+	      font-size: 12px;
+
+      }
     }
   }
 }

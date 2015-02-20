@@ -806,8 +806,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   .grid .name-container .name {
-    font-size: 25px;
-    line-height: 25px;
+    font-size: 18px;
+    line-height: 18px;
   }
 }
 .grid .name-container .name a {
@@ -823,6 +823,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 .grid .name-container .price {
   font-size: 14.5px;
+}
+@media (max-width: 767px) {
+  .grid .name-container .price {
+    font-size: 12px;
+  }
 }
 
 #quotes {
