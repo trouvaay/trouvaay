@@ -57,12 +57,12 @@ html, body {
   height: auto !important;
   height: 100%;
   margin: 0 auto -120px;
-
   
-  @include breakpoint(sm) {
-    margin: 0 auto -130px;
-  }
   @include breakpoint(md) {
     margin: 0 auto -70px;
+  }
+  
+  @include breakpoint(xs) {
+    margin: 0 auto -130px;
   }
 }

@@ -40,14 +40,14 @@ html, body {
   height: 100%;
   margin: 0 auto -120px;
 }
-@media (max-width: 767px) {
-  .wrap {
-    margin: 0 auto -130px;
-  }
-}
 @media (max-width: 992px) {
   .wrap {
     margin: 0 auto -70px;
+  }
+}
+@media (max-width: 480px) {
+  .wrap {
+    margin: 0 auto -130px;
   }
 }
 
@@ -302,6 +302,7 @@ header.top-bar a:hover {
 }
 header.top-bar .logo-div {
   height: 60px;
+  padding-left: 20px;
 }
 header.top-bar .logo-div img {
   vertical-align: top;
@@ -343,6 +344,8 @@ header.top-bar a.login {
   right: 0px;
   height: 25px;
   line-height: 25px;
+  width: 91px;
+  text-align: center;
 }
 header.top-bar .mobile-about label, header.top-bar .mobile-menu label {
   color: #FFF;
@@ -461,28 +464,31 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin-top: -28px;
   padding: 0px 11px;
   top: 50%;
-  right: 15px;
+  left: 81%;
+  margin-left: -93px;
   position: absolute;
 }
 #index-banner .text-container {
   position: absolute;
-  left: 50%;
+  /*left: 50%;*/
   top: 0px;
   height: 100%;
-  margin-left: -585px;
+  padding-left: 35px;
+  /*margin-left: -585px;*/
 }
 @media (min-width: 992px) {
   #index-banner .text-container {
-    margin-left: -485px;
+    /*margin-left: -485px;*/
   }
 }
 @media (max-width: 992px) {
   #index-banner .text-container {
-    margin-left: -375px;
+    /*margin-left: -375px;*/
   }
 }
 @media (max-width: 767px) {
   #index-banner .text-container {
+    padding-left: 30px;
     margin-left: 0px;
     left: 0%;
     width: 100%;
@@ -490,7 +496,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (min-width: 1200px) {
   #index-banner .text-container {
-    margin-left: -585px;
+    /*margin-left: -585px;*/
   }
 }
 #index-banner .text {

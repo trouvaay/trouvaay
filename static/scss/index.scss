@@ -25,35 +25,39 @@
     padding: 0px 11px;
 
     top: 50%;
-    right: 15px;
+    left: 81%;
+    margin-left: -93px;
     position: absolute;
+
   }
 
   .text-container {
     position: absolute;
-    left: 50%;
+    /*left: 50%;*/
     top: 0px;
     height: 100%;
-    margin-left: -585px;
+    padding-left: 35px;
+    /*margin-left: -585px;*/
 
 
     
     @include breakpoint(lg, True) {
-      margin-left: -485px;
+      /*margin-left: -485px;*/
     }
 
     @include breakpoint(md) {
-      margin-left: -375px;
+      /*margin-left: -375px;*/
     }
 
     @include breakpoint(sm) {
+	padding-left: 30px;
       margin-left: 0px;
       left: 0%;
       width: 100%;
     }
     
     @include breakpoint(lg) {
-      margin-left: -585px;
+      /*margin-left: -585px;*/
     }
   }
 
