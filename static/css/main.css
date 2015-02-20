@@ -185,9 +185,10 @@ html, body {
 }
 .info-page .info {
   background: #FFF;
-  border: 40px solid #000;
+  /*border: 40px solid #000;*/
   margin: 40px 34px 40px;
-  padding: 40px;
+  /*padding: 40px;*/
+  padding: 10px 20px;
   font-size: 17px;
 }
 @media (max-width: 992px) {
