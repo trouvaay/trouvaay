@@ -267,17 +267,13 @@ html, body {
   color: #FFF;
   margin-top: 0px;
   margin-bottom: 40px;
+  margin-bottom: 0px;
   font-family: "Droid Serif";
   font-weight: bold;
   font-size: 28px;
   font-style: italic;
   text-transform: uppercase;
   text-align: center;
-}
-@media (max-width: 992px) {
-  .want-join-container h3 {
-    margin-bottom: 0px;
-  }
 }
 
 #logo {
