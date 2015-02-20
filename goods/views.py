@@ -14,6 +14,8 @@ import uuid
 
 # from helper import get_liked_items
 
+from pprint import pprint as pp
+
 from endless_pagination.views import AjaxListView
 
 
@@ -30,6 +32,8 @@ class LandingView(generic.ListView):
 
     def get_queryset(self):
         queryset = self.model.objects.filter(is_landing=True, store__is_featured=True)[:9]
+        print('heres my landing query:')
+        pp(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -118,6 +122,9 @@ class DetailView(generic.DetailView):
 
 class AboutView(generic.TemplateView):
     template_name = 'goods/copy/about.html'
+    
+class ReturnsView(generic.TemplateView):
+    template_name = 'goods/copy/returns.html'
 
 
 # class DirectionsView(LoginRequiredMixin, generic.DetailView):

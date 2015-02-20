@@ -1,0 +1,142 @@
+@font-face {
+    font-family: 'Ostrich Sans';
+    src: url('../fonts/ostrich-black-webfont.eot');
+    src: url('../fonts/ostrich-black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ostrich-black-webfont.woff2') format('woff2'),
+         url('../fonts/ostrich-black-webfont.woff') format('woff'),
+         url('../fonts/ostrich-black-webfont.ttf') format('truetype'),
+         url('../fonts/ostrich-black-webfont.svg#ostrich_sansblack') format('svg');
+    font-weight: 800;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Droid Serif';
+    src: url('../fonts/DroidSerif-Bold-webfont.eot');
+    src: url('../fonts/DroidSerif-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSerif-Bold-webfont.woff') format('woff'),
+         url('../fonts/DroidSerif-Bold-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSerif-Bold-webfont.svg#droid_serifbold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'Droid Serif';
+    src: url('../fonts/DroidSerif-BoldItalic-webfont.eot');
+    src: url('../fonts/DroidSerif-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSerif-BoldItalic-webfont.woff') format('woff'),
+         url('../fonts/DroidSerif-BoldItalic-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSerif-BoldItalic-webfont.svg#droid_serifbold') format('svg');
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+
+@font-face {
+    font-family: 'Droid Serif';
+    src: url('../fonts/DroidSerif-Italic-webfont.eot');
+    src: url('../fonts/DroidSerif-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSerif-Italic-webfont.woff') format('woff'),
+         url('../fonts/DroidSerif-Italic-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSerif-Italic-webfont.svg#droid_serifbold') format('svg');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'Droid Serif';
+    src: url('../fonts/DroidSerif-Regular-webfont.eot');
+    src: url('../fonts/DroidSerif-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSerif-Regular-webfont.woff') format('woff'),
+         url('../fonts/DroidSerif-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSerif-Regular-webfont.svg#droid_serif') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+  font-family: "raredoor";
+  src:url("../fonts/raredoor.eot");
+  src:url("../fonts/raredoor.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/raredoor.woff") format("woff"),
+    url("../fonts/raredoor.ttf") format("truetype"),
+    url("../fonts/raredoor.svg#raredoor") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "raredoor" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "raredoor" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow:before {
+  content: "a";
+}
+.icon-left-arrow:before {
+  content: "b";
+}
+.icon-raredoor-logo:before {
+  content: "c";
+}
+.icon-facebook:before {
+  content: "d";
+}
+.icon-instagram:before {
+  content: "e";
+}
+.icon-pinterest:before {
+  content: "f";
+}
+.icon-purchase-icon:before {
+  content: "g";
+}
+.icon-reserve-icon:before {
+  content: "h";
+}
+.icon-shop-now-icon:before {
+  content: "i";
+}
+.icon-twitter:before {
+  content: "j";
+}
+.icon-eye-icon:before {
+  content: "k";
+}
+
+.icon-question-mark:before {
+  content: "l";
+}
+
+.icon-hamburger-icon:before {
+  content: "m";
+}

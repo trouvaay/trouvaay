@@ -1,0 +1,68 @@
+/* Colors */
+$gold: #e6be46;
+$lily: #91c3c3;
+$dark-gray: #524b48;
+$product-title-border: #7f7f7f;
+$light-brown-gray: #989190;
+$yellow: #e6be46;
+
+.arrow-link {
+  font-family: "Ostrich Sans";
+  letter-spacing: 1px;
+
+  &:before {
+    content: 'i';
+    font-size: 33px;
+    display: inline-block;
+    position: relative;
+    top: 6px;
+    margin-right: 11px;
+
+
+    font-family: "raredoor" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.social-icons {
+  a {
+    span {
+      display: none;
+
+    }
+  }
+
+}
+
+
+html, body {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -120px;
+  
+  @include breakpoint(md) {
+    margin: 0 auto -70px;
+  }
+  
+  @include breakpoint(xs) {
+    margin: 0 auto -130px;
+  }
+}

@@ -1,0 +1,209 @@
+#logo {
+  height: 28px;
+
+}
+
+header.top-bar {
+  background: #000;
+  line-height: 60px;
+  height: 60px;
+  position: relative;
+  width: 100%;
+
+  @include breakpoint(md) {
+    height: 50px;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+    
+    & + div {
+      margin-top: 50px;
+
+    }
+  }
+
+
+  a {
+    color: #FFF;
+
+    &:hover {
+      color: #FFF;
+      text-decoration: none;
+    }
+  }
+
+  .logo-div {
+    height: 60px;
+    padding-left: 20px;
+    img {
+      vertical-align: top;
+      margin-top: 16px;
+    }
+
+    @include breakpoint(sm) {
+      text-align: center;
+      height: 50px;
+
+      img {
+	margin-top: 10px;
+
+      }
+    }
+  }
+
+  #logo {
+    margin-right: 25px;
+    @include breakpoint(sm) {
+      margin-right: 0px;
+
+    }
+  }
+
+  a {
+    font-family: "Ostrich Sans";
+  }
+
+  a.about-us {
+    border: 1px solid #FFF;
+    font-size: 20px;
+    font-weight: 800;
+    padding: 5px 13px;
+    text-transform: uppercase;
+
+  }
+
+  a.login {
+    background-color: #FFF;
+    color: #000;
+    position: absolute;
+    bottom: 0px;
+    padding: 0px 8px;
+    right: 0px;
+    height: 25px;
+    line-height: 25px;
+    width: 91px;
+    text-align: center;
+  }
+
+  .mobile-about, .mobile-menu {
+    
+    label {
+      color: #FFF;
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      &:before {
+	line-height: 28px;
+	vertical-align: top;
+      }
+    span {
+      display: none;
+
+      }
+    }
+
+  }
+
+  .mobile-about {
+    label {
+      background: #FFF;
+      border-radius: 14px;
+      color: #000;
+      
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+    }
+  }
+
+  .mobile-menu {
+    label {
+      text-align: right;
+      &:before {
+	font-size: 32px;
+      }
+    }
+  }
+
+  .social-icons {
+    a {
+      font-size: 25px;
+      line-height: 40px;
+      margin-right: 10px;
+
+      &:before {
+	line-height: 40px;
+      }
+    }
+  }
+
+  .links {
+    a {
+      font-size: 18px;
+
+      &:not(:last-child) {
+      border-right: 1px solid #000;
+      
+      padding-right: 10px;
+      margin-right: 10px;
+    }
+    }
+  }
+
+}
+
+#how-it-works-mobile {
+  
+  @include breakpoint(sm) {
+    background: #FFF;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    z-index: 2;
+    padding-top: 30px;
+
+  }
+}
+
+input#display-how-it-works {
+  display: none;
+
+  @include breakpoint(sm) {
+    + #how-it-works {
+      display: none;
+    }
+
+    &:checked + #how-it-works-mobile {
+      display: block !important;
+      visibility: visible !important;
+    }
+  }
+
+}
+
+input#mobile-menu-switch {
+  display: none;
+  & + #mobile-menu {
+  display: none;
+}
+
+&:checked + #mobile-menu {
+  display: block;
+}
+
+}
+
+#mobile-menu {
+  position: fixed;
+  top: 50px;
+  left: 0px;
+  background: #FFF;
+  line-height: 30px;
+  padding: 10px 0px 10px;
+  z-index: 2;
+
+  a {
+    color: #000;
+  }
+}

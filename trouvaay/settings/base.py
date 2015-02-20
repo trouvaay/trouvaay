@@ -131,7 +131,7 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 FEATURE_NAME_RESERVE = "Reserve"
-FEATURE_TOOLTIP_RESERVE = "Places item on 48 hours hold so you can go see it in person. (Limit of 3 open reservation per customer)"
+FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-store. 3 reservation limit"
 RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
     'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'

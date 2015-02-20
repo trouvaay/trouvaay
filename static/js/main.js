@@ -119,6 +119,18 @@ var TrendyRoom = {
 };
 $(document).ready(function() {
     TrendyRoom.init();
+
+    $('input#mobile-menu-switch').change(function() {
+
+      $("#display-how-it-works").prop('checked', false); 
+
+    });
+    
+    $('input#display-how-it-works').change(function() {
+
+      $("#mobile-menu-switch").prop('checked', false); 
+
+    });
 });
 
 // selectBar = $('.select-bar')[0];
