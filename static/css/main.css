@@ -2,6 +2,7 @@
 /* Colors */
 .arrow-link {
   font-family: "Ostrich Sans";
+  font-weight: 800;
   letter-spacing: 1px;
 }
 .arrow-link:before {
@@ -38,7 +39,7 @@ html, body {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -120px;
+  margin: 0 auto -150px;
 }
 @media (max-width: 992px) {
   .wrap {
@@ -56,6 +57,13 @@ html, body {
   src: url("../fonts/ostrich-black-webfont.eot");
   src: url("../fonts/ostrich-black-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/ostrich-black-webfont.woff2") format("woff2"), url("../fonts/ostrich-black-webfont.woff") format("woff"), url("../fonts/ostrich-black-webfont.ttf") format("truetype"), url("../fonts/ostrich-black-webfont.svg#ostrich_sansblack") format("svg");
   font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ostrich Sans';
+  src: url("../fonts/ostrich-bold-webfont.eot");
+  src: url("../fonts/ostrich-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/ostrich-bold-webfont.woff2") format("woff2"), url("../fonts/ostrich-bold-webfont.woff") format("woff"), url("../fonts/ostrich-bold-webfont.ttf") format("truetype"), url("../fonts/ostrich-bold-webfont.svg#ostrich_sansblack") format("svg");
+  font-weight: bold;
   font-style: normal;
 }
 @font-face {
@@ -468,6 +476,12 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin-left: -93px;
   position: absolute;
 }
+@media (max-width: 767px) {
+  #index-banner .arrow-link {
+    left: 50%;
+    top: 70%;
+  }
+}
 #index-banner .text-container {
   position: absolute;
   /*left: 50%;*/
@@ -488,7 +502,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #index-banner .text-container {
-    padding-left: 30px;
+    padding-left: 0px;
     margin-left: 0px;
     left: 0%;
     width: 100%;
@@ -510,9 +524,10 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #index-banner .text {
-    font-size: 14px;
-    line-height: 14px;
-    margin-top: -39px;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    top: 110px;
   }
 }
 #index-banner .text strong {
@@ -525,8 +540,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #index-banner .text strong {
-    font-size: 50px;
-    line-height: 50px;
+    font-size: 60px;
+    line-height: 60px;
   }
 }
 
@@ -837,6 +852,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #quotes .author-name {
   display: block;
   font-family: "Ostrich Sans";
+  font-weight: 800;
   font-size: 20px;
   letter-spacing: 1px;
 }
@@ -974,6 +990,16 @@ footer .help-info .row > *:not(:last-child) {
 footer .copyright {
   font-size: 11px;
   text-align: center;
+  border-top: 1px solid #FFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+@media (max-width: 992px) {
+  footer .copyright {
+    border-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 }
 footer a {
   color: #FFF;
@@ -984,7 +1010,7 @@ footer a:hover {
 }
 
 footer, .push {
-  height: 120px;
+  height: 150px;
 }
 @media (max-width: 992px) {
   footer, .push {
@@ -998,4 +1024,3 @@ footer, .push {
 }
 
 /*# sourceMappingURL=main.css.map */
-

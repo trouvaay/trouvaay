@@ -58,6 +58,16 @@ footer {
   .copyright {
     font-size: 11px;
     text-align: center;
+
+    border-top: 1px solid #FFF;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    @include breakpoint(md) {
+	border-top: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+    }
   }
 
   a {
@@ -70,7 +80,7 @@ footer {
 }
 
 footer, .push {
-  height: 120px;
+  height: 150px;
   
 
   @include breakpoint(md) {
