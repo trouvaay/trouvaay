@@ -238,7 +238,7 @@ Neighborhoods = {'SF': [
     ('Merced Manor', 'Merced Manor'),
     ('Miraloma Park', 'Miraloma Park'),
     ('Mission Bay', 'Mission Bay'),
-    ('Mission District', 'Mission District'),
+    ('The Mission', 'The Mission'),
     ('Mission Terrace', 'Mission Terrace'),
     ('Monterey Heights', 'Monterey Heights'),
     ('Mount Davidson', 'Mount Davidson'),

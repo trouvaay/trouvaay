@@ -1,0 +1,489 @@
+#index-banner {
+  position: relative;
+  margin-bottom: 54px;
+  padding: 0px;
+
+  @include breakpoint(sm) {
+    margin-bottom: 0px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  a {
+    color: #FFF;
+    text-transform: uppercase;
+  }
+
+  .arrow-link {
+    background-color: #000;
+    border: 3px solid #E6BE46;
+    font-size: 30px;
+    line-height: 40px;
+    margin-top: -28px;
+    padding: 0px 11px;
+
+    top: 50%;
+    left: 81%;
+    margin-left: -93px;
+    position: absolute;
+
+    @include breakpoint(sm) {
+	    left: 50%;
+	    top: 70%;
+
+    }
+
+  }
+
+  .text-container {
+    position: absolute;
+    /*left: 50%;*/
+    top: 0px;
+    height: 100%;
+    padding-left: 35px;
+    /*margin-left: -585px;*/
+
+
+    
+    @include breakpoint(lg, True) {
+      /*margin-left: -485px;*/
+    }
+
+    @include breakpoint(md) {
+      /*margin-left: -375px;*/
+    }
+
+    @include breakpoint(sm) {
+	padding-left: 0px;
+      margin-left: 0px;
+      left: 0%;
+      width: 100%;
+    }
+    
+    @include breakpoint(lg) {
+      /*margin-left: -585px;*/
+    }
+  }
+
+  .text {
+    font-family: "Droid Serif";
+    font-size: 22px;
+    color: #FFF;
+    line-height: 22px;
+    top: 50%;
+    position: relative;
+    margin-top: -62px;
+
+    @include breakpoint(sm) {
+      font-size: 18px;
+      line-height: 18px;
+      text-align: center;
+      top: 110px;
+    }
+    strong {
+      display: block;
+      color: $gold;
+      font-family: "Ostrich Sans";
+      font-weight: bold;
+      font-size: 80px;
+      line-height: 80px;
+      @include breakpoint(sm) {
+	font-size: 60px;
+	line-height: 60px;
+      }
+    }
+
+  }
+}
+
+#how-it-works, #how-it-works-mobile {
+  margin-bottom: 30px;
+
+
+
+  .info {
+    text-align: center;
+    font-size: 15px;
+    font-family: "Droid Serif";
+    font-weight: bold;
+
+    @include breakpoint(md, True) {
+      float: none;
+      display: table-cell;
+    }
+
+    @include breakpoint(sm) {
+      font-size: 12px;
+    }
+
+    &:not(:last-child) {
+      padding-right: 30px;
+
+      @include breakpoint(sm) {
+	padding-right: 15px;
+      }
+    }
+
+    > div {
+      background: $lily;
+      border: 2px solid $lily;
+      color: #FFF;
+      padding: 28px 18px 10px;
+      position: relative;
+
+      @include breakpoint(md, True) {
+	height: 100%;
+	display: inline-table;
+      }
+
+      @include breakpoint(sm) {
+	margin-bottom: 30px;
+	padding: 16px 18px 6px;
+      }
+
+      &:before {
+	content: 'a';
+	color: $lily;
+	display: block;
+	position: absolute;
+	background: #FFF;
+	border-radius: 22px;
+	border: 2px solid $lily;
+	width: 44px;
+	height: 44px;
+	line-height: 40px;
+	top: -22px;
+	left: 50%;
+	margin-left: -22px;
+	font-family: "raredoor";
+	text-align: center;
+
+	@include breakpoint(sm) {
+	  width: 30px;
+	  height: 30px;
+	  line-height: 27px;
+	  top: -15px;
+	  margin-left: -15px;
+
+	}
+
+
+      }
+
+      &.browse:before {
+	content: 'k';
+	font-size: 26px;
+
+	@include breakpoint(sm) {
+	  font-size: 19px;
+
+	}
+
+      }
+
+      &.purchase:before {
+	content: 'g';
+	font-size: 20px;
+
+	@include breakpoint(sm) {
+	  font-size: 18px;
+	}
+      }
+
+      &.reserve {
+	background: #FFF;
+	color: $lily;
+
+	&:before {
+	  font-size: 19px;
+	  content: 'h';
+
+	  @include breakpoint(sm) {
+	    font-size: 16px;
+	  }
+	}
+
+	header {
+	  border-bottom: 1px solid $lily;
+	}
+      }
+    }
+
+    header {
+      border-bottom: 1px solid #FFF;
+      font-size: 20px;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+
+      @include breakpoint(sm) {
+	font-size: 16px;
+      }
+    }
+
+  }
+
+}
+
+#products {
+  padding: 0px;
+
+  header {
+    background: #979391;
+    color: #FFF;
+    font-family: "Droid Serif";
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 25px;
+    padding: 22px 0px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+
+    @include breakpoint(sm) {
+      background: $lily;
+      font-size: 17px;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+  }
+
+  .see-more {
+    float: right;
+    background: $lily;
+    color: #FFF;
+    font-size: 30px;
+    padding: 0px 20px;
+    height: 50px;
+    line-height: 53px;
+    margin-bottom: 25px;
+    margin-top: -10px;
+
+    @include breakpoint(sm) {
+      background: $yellow;
+      width: 100%;
+      text-align: center;
+      margin-top: 0px;
+      margin-bottom: 10px;
+
+    }
+
+    &:before {
+      font-size: 30px;
+    }
+
+  }
+
+
+}
+
+.grid {
+  @include breakpoint(sm) {
+    padding: 0px;
+  }
+  img {
+    width: 100%;
+  }
+
+  .grid-item {
+    
+    img {
+      border-radius: 100%;
+      width: 100%;
+      
+      margin-bottom: 20px;
+
+      @include breakpoint(sm) {
+	border-radius: 0px;
+	margin-bottom: 10px;
+      }
+    }
+    a {
+      display: block;
+    }
+  }
+
+  .grid-item {
+    margin-bottom: 35px;
+
+    @include breakpoint(sm) {
+      margin-bottom: 10px;
+      &:nth-child(even) {
+	padding-right: 0px;
+	padding-left: 5px;
+      }
+      &:nth-child(odd) {
+	padding-left: 0px;
+	padding-right: 5px;
+      }
+
+    }
+
+
+    @include breakpoint(sm) {
+      .name-container {
+	text-align: left;
+      }
+      &:nth-child(odd) {
+	.name-container {
+	  text-align: right;
+	}
+
+      }
+
+    }
+
+  }
+
+  .image-container {
+    padding: 0px 10px;
+
+    @include breakpoint(sm) {
+      padding: 0px;
+    }
+  }
+
+  .name-container {
+    border: 3px solid $product-title-border;
+    font-family: "Droid Serif";
+    font-weight: bold;
+    text-align: center;
+    padding: 13px;
+
+    @include breakpoint(sm) {
+      background: $product-title-border;
+      color: #FFF;
+
+    }
+
+    .name {
+      font-family: "Ostrich Sans";
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 40px;
+      letter-spacing: 1px;
+
+      @include breakpoint(sm) {
+	font-size: 25px;
+	line-height: 25px;
+      }
+
+      a {
+	color: #000;
+
+	@include breakpoint(sm) {
+	  color: #FFF;
+	}
+
+	&:hover {
+	  text-decoration: none;
+	}
+      }
+    }
+
+    .price {
+      font-size: 14.5px;
+    }
+  }
+}
+
+#quotes {
+  background: $light-brown-gray;
+  color: #FFF;
+  margin-bottom: 120px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+
+  @include breakpoint(sm) {
+    margin-bottom: 0px;
+  }
+
+  &:after {
+    
+    content: '';
+    display: block;
+    position: absolute;
+    width: 75px;
+    height: 80px;
+    border-left: 75px solid transparent;
+    border-right: 0px solid transparent;
+    border-top: 80px solid #524b48;
+    left: 0px;
+    bottom: -80px;
+
+    @include breakpoint(sm) {
+      content: none;
+    }
+  }
+
+  q {
+    display: block;
+
+    font-family: "Droid Serif";
+    font-style: italic;
+    font-size: 17px;
+    margin-bottom: 10px;
+
+    @include breakpoint(md) {
+      font-size: 15px;
+    }
+
+
+  }
+
+  .author-name {
+    display: block;
+    font-family: "Ostrich Sans";
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1px;
+    &:before {
+      content: '—';
+      margin-right: 5px;
+    }
+  }
+
+  .quote:not(:last-child) {
+    border-right: 1px solid #FFF;
+    height: 135px;
+
+    @include breakpoint(sm) {
+      border-right: 0px;
+      height: auto;
+      margin-bottom: 15px;
+
+      &:after {
+	content: '';
+	width: 52%;
+	height: 1px;
+	display: block;
+	background: #FFF;
+	margin: 15px auto 0px;
+
+      }
+    }
+  }
+
+  header {
+    background: $yellow;
+    font-size: 30px;
+    font-family: "Droid Serif";
+    font-style: italic;
+    line-height: 60px;
+    text-transform: uppercase;
+    height: 60px;
+    width: 100%;
+  }
+
+  .header-container {
+    width: 100%;
+    position: absolute;
+    padding-left: 93px;
+    bottom: -80px;
+    right: 0px;
+  }
+
+}
