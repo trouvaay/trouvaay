@@ -451,14 +451,24 @@ input#mobile-menu-switch:checked + #mobile-menu {
   position: relative;
   margin-bottom: 54px;
   padding: 0px;
+  /*background: url('../static/img/index-banner-photo.jpg');*/
 }
 @media (max-width: 767px) {
   #index-banner {
     margin-bottom: 0px;
+    min-height: 282px;
   }
 }
 #index-banner img {
   width: 100%;
+}
+@media (max-width: 767px) {
+  #index-banner img {
+    width: 766px;
+    position: absolute;
+    left: 50%;
+    margin-left: -383px;
+  }
 }
 #index-banner a {
   color: #FFF;
@@ -479,13 +489,17 @@ input#mobile-menu-switch:checked + #mobile-menu {
 @media (max-width: 767px) {
   #index-banner .arrow-link {
     left: 50%;
-    top: 70%;
+    top: auto;
+    /*bottom: 35px;*/
+    position: absolute;
+    margin-top: 18px;
   }
 }
 #index-banner .text-container {
   position: absolute;
   /*left: 50%;*/
   top: 0px;
+  width: 100%;
   height: 100%;
   padding-left: 35px;
   /*margin-left: -585px;*/
@@ -527,7 +541,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
     font-size: 18px;
     line-height: 18px;
     text-align: center;
-    top: 110px;
+    margin-top: 25px;
+    top: auto;
   }
 }
 #index-banner .text strong {
@@ -541,7 +556,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 @media (max-width: 767px) {
   #index-banner .text strong {
     font-size: 60px;
-    line-height: 60px;
+    line-height: 49px;
   }
 }
 
