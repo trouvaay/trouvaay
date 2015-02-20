@@ -282,6 +282,12 @@ html, body {
 #logo {
   height: 28px;
 }
+@media (max-width: 767px) {
+  #logo {
+    height: 24px;
+    margin-top: 8px;
+  }
+}
 
 header.top-bar {
   background: #000;
@@ -362,9 +368,24 @@ header.top-bar .mobile-about label, header.top-bar .mobile-menu label {
   margin-top: 10px;
   cursor: pointer;
 }
+@media (max-width: 767px) {
+  header.top-bar .mobile-about label, header.top-bar .mobile-menu label {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+  }
+}
 header.top-bar .mobile-about label:before, header.top-bar .mobile-menu label:before {
   line-height: 28px;
   vertical-align: top;
+}
+@media (max-width: 767px) {
+  header.top-bar .mobile-about label:before, header.top-bar .mobile-menu label:before {
+    font-size: 24px;
+    line-height: 24px;
+    vertical-align: top;
+    font-size: 11px;
+  }
 }
 header.top-bar .mobile-about label span, header.top-bar .mobile-menu label span {
   display: none;
@@ -377,11 +398,23 @@ header.top-bar .mobile-about label {
   height: 28px;
   min-width: 28px;
 }
+@media (max-width: 767px) {
+  header.top-bar .mobile-about label {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+  }
+}
 header.top-bar .mobile-menu label {
   text-align: right;
 }
 header.top-bar .mobile-menu label:before {
   font-size: 32px;
+}
+@media (max-width: 767px) {
+  header.top-bar .mobile-menu label:before {
+    font-size: 27px;
+  }
 }
 header.top-bar .social-icons a {
   font-size: 25px;
