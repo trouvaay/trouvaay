@@ -39,7 +39,7 @@ html, body {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -120px;
+  margin: 0 auto -150px;
 }
 @media (max-width: 992px) {
   .wrap {
@@ -990,6 +990,16 @@ footer .help-info .row > *:not(:last-child) {
 footer .copyright {
   font-size: 11px;
   text-align: center;
+  border-top: 1px solid #FFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+@media (max-width: 992px) {
+  footer .copyright {
+    border-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 }
 footer a {
   color: #FFF;
@@ -1000,7 +1010,7 @@ footer a:hover {
 }
 
 footer, .push {
-  height: 120px;
+  height: 150px;
 }
 @media (max-width: 992px) {
   footer, .push {
