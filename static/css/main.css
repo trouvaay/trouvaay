@@ -562,8 +562,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #index-banner .text {
   font-family: "Droid Serif";
-  font-size: 22px;
-  color: #FFF;
+  font-size: 24px;
+  color: black;
   line-height: 22px;
   top: 50%;
   position: relative;

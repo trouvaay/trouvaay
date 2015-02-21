@@ -4239,7 +4239,9 @@ footer ul li a:hover {
   .tooltip {
     display: none !important;
   }
-  
+  .grid-product .view-product .hover-text {
+    display: none;
+  }
   .how-it-works .statement:first-child {
   border-right: 0px;
   }
