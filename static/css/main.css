@@ -988,6 +988,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding-right: 20px;
 }
 
+.rslides img {
+  float: none;
+  max-width: 100%;
+  margin: 0 auto;
+  width: auto;
+}
+
 footer {
   background: #000;
   color: #FFF;
