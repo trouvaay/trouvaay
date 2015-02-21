@@ -168,7 +168,7 @@ button.home-buttons > a > h5 {
 .row.footer {
   margin-bottom: 1em;
 }
-#logo, .logo {
+#logo_old, .logo {
   width: 225px;
   max-width: 100%;
 }
@@ -4312,6 +4312,9 @@ footer ul li a:hover {
     margin-top: 0px;
     padding-top: 3px;
     height: auto;
+  }
+  .logo-div-old {
+	  font-size: 25px;
   }
   a#logo {
     font-size: 20px;
