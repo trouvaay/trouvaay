@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.utils.text import capfirst
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Fieldset, ButtonHolder, Submit, Div, Button, HTML
+from localflavor.us.forms import USPhoneNumberField
 import logging
 
 logger = logging.getLogger(__name__)
@@ -118,11 +119,13 @@ class CustomAuthenticationForm(AuthenticationForm):
 
         return self.cleaned_data
 
-class ReserveForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput, required=True)
+class ReserveFormAuth(forms.Form):
+    first_name = forms.CharField(widget=forms.TextInput, required=True)
+    last_name = forms.CharField(widget=forms.TextInput, required=True)
+    phone = USPhoneNumberField(required=True)
 
     def __init__(self, *args, **kwargs):
-        super(ReserveForm, self).__init__(*args, **kwargs)
+        super(ReserveFormAuth, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_show_labels = False
@@ -132,9 +135,72 @@ class ReserveForm(forms.Form):
         self.helper.form_id = 'form-reserve'
 
         self.helper.layout = Layout(
-            Field('email', placeholder='Email address'),
+            Field('first_name', placeholder='First name'),
+            Field('last_name', placeholder='Last name'),
+            Field('phone', placeholder='Phone number'),
             Button('button-reserve', 'Submit', css_class="btn-success"),
         )
+
+class ReserveForm(ReserveFormAuth):
+    email = forms.EmailField(widget=forms.TextInput, required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(ReserveForm, self).__init__(*args, **kwargs)
+
+        self.helper.layout = Layout(
+            Field('first_name', placeholder='First name'),
+            Field('last_name', placeholder='Last name'),
+            Field('email', placeholder='Email address'),
+            Field('phone', placeholder='Phone number'),
+            Button('button-reserve', 'Submit', css_class="btn-success"),
+        )
+
+class PostCheckoutForm(forms.Form):
+    email = forms.CharField(widget=forms.HiddenInput)
+    post_checkout_hash = forms.CharField(widget=forms.HiddenInput)
+    phone = USPhoneNumberField(required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(PostCheckoutForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False
+        self.helper.form_show_errors = True
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'members:post_checkout_update'
+        self.helper.form_id = 'form-post-checkout'
+
+        self.helper.layout = Layout(
+            Field('email'),
+            Field('post_checkout_hash'),
+            Field('phone', placeholder='Phone number'),
+            Button('post-checkout', 'Submit', css_class="btn-success"),
+        )
+
+# class ReserveForm(forms.Form):
+#     first_name = forms.CharField(widget=forms.TextInput, required=True)
+#     last_name = forms.CharField(widget=forms.TextInput, required=True)
+#     email = forms.EmailField(widget=forms.TextInput, required=True)
+#     phone = USPhoneNumberField(required=True)
+#
+#     def __init__(self, *args, **kwargs):
+#         super(ReserveForm, self).__init__(*args, **kwargs)
+#
+#         self.helper = FormHelper()
+#         self.helper.form_show_labels = False
+#         self.helper.form_show_errors = True
+#         self.helper.form_method = 'post'
+#         self.helper.form_action = '.'
+#         self.helper.form_id = 'form-reserve'
+#
+#         self.helper.layout = Layout(
+#             Field('first_name', placeholder='First name'),
+#             Field('last_name', placeholder='Last name'),
+#             Field('email', placeholder='Email address'),
+#             Field('phone', placeholder='Phone number'),
+#             Button('button-reserve', 'Submit', css_class="btn-success"),
+#         )
+
 
 
 class RegistrationForm(forms.ModelForm):

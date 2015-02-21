@@ -21,7 +21,6 @@ import six
 import random
 from datetime import timedelta
 import uuid
-from __builtin__ import classmethod
 import logging
 
 
@@ -165,6 +164,7 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         try:
             existing_user = user_model.objects.get(email__iexact=email)
             if(existing_user):
+                Profile.create_profile(existing_user)
                 return (True, existing_user)
         except user_model.DoesNotExist:
             # this is ok, we will create a new user
@@ -182,7 +182,20 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         # use 'forgot password' functionality to reset it
         new_user.is_active = True
         new_user.save()
+        Profile.create_profile(new_user)
         return (False, new_user)
+
+    @classmethod
+    def compute_post_checkout_hash(cls, user):
+        """Hashes email and user id
+        
+        Given any email address we can always lookup a user
+        then using that user we can always compute this hash.
+        This is useful if we want to perform a non-authenticated
+        action when all we have is an email address
+        """
+        plain_text = "{0}|{1}".format(user.email, user.id)
+        return hashlib.sha256(plain_text).hexdigest()
 
     def get_number_of_referrals(self):
         """Returns number of users who signed up using this user's referral link"""
@@ -233,6 +246,25 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         """ Is the user a member of staff?"""
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class Profile(models.Model):
+    authuser = models.OneToOneField(settings.AUTH_USER_MODEL, blank=False, null=False, related_name='profile')
+    phone = PhoneNumberField(blank=True, null=False, default='')
+
+    @classmethod
+    def create_profile(cls, user):
+
+        logger.debug("user id: [%s]" % str(user.id))
+
+        profile = None
+        try:
+            profile = Profile.objects.get(authuser=user)
+        except Profile.DoesNotExist:
+            profile = Profile()
+            profile.authuser = user
+            profile.save()
+        return profile
 
 
 class AuthUserAddress(models.Model):
