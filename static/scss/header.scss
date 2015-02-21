@@ -1,6 +1,11 @@
 #logo {
   height: 28px;
 
+  @include breakpoint(sm) {
+	  height: 24px;
+	  margin-top: 8px;
+
+  }
 }
 
 header.top-bar {
@@ -93,9 +98,23 @@ header.top-bar {
       text-align: center;
       margin-top: 10px;
       cursor: pointer;
+      @include breakpoint(sm) {
+	      width: 24px;
+	      height: 24px;
+	      min-width: 24px;
+
+      }
       &:before {
 	line-height: 28px;
 	vertical-align: top;
+
+	@include breakpoint(sm) {
+		font-size: 24px;
+		line-height: 24px;
+		vertical-align: top;
+		font-size: 11px;
+
+	}
       }
     span {
       display: none;
@@ -114,6 +133,13 @@ header.top-bar {
       width: 28px;
       height: 28px;
       min-width: 28px;
+      
+      @include breakpoint(sm) {
+	      width: 24px;
+	      height: 24px;
+	      min-width: 24px;
+
+      }
     }
   }
 
@@ -122,6 +148,10 @@ header.top-bar {
       text-align: right;
       &:before {
 	font-size: 32px;
+
+	@include breakpoint(sm) {
+		font-size: 27px;
+	}
       }
     }
   }

@@ -4,9 +4,10 @@
 
   .info {
     background: #FFF;
-    border: 40px solid #000;
+    /*border: 40px solid #000;*/
     margin: 40px 34px 40px;
-    padding: 40px;
+    /*padding: 40px;*/
+    padding: 10px 20px;
 
     font-size: 17px;
 
@@ -92,22 +93,23 @@
   }
 
   h3 {
+	  
+
     background: $gold;
     line-height: 80px;
     color: #FFF;
     margin-top: 0px;
     margin-bottom: 40px;
+		margin-bottom: 0px;
     font-family: "Droid Serif";
     font-weight: bold;
     font-size: 28px;
     font-style: italic;
     text-transform: uppercase;
     text-align: center;
-
-    @include breakpoint(md) {
-      margin-bottom: 0px;
-
+    @include breakpoint(lg) {
     }
+
   }
 
 }
