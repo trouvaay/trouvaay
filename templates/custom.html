@@ -127,6 +127,22 @@ var trouvaay = {
 	}
 }
 
+function handlePostCheckoutClick(e){
+	console.log('clicked on post-checkout button');
+
+	$.ajax({
+		type: "POST",
+		url: "{% url "members:post_checkout_update" %}",
+		data: $("#form-post-checkout").serialize(),
+		dataType: "html",
+		success: function(response, status){
+			$("#post-checkout-form-contents").html(response);
+		},
+	});
+	e.preventDefault();
+
+}
+
 function handleBuyButtonClick(e) {
 	console.log('clicked on buy button: '+e.target.id);
 

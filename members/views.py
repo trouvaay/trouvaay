@@ -2,9 +2,10 @@ from django.http import JsonResponse
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser, \
     AuthUserCart, AuthUserOrder, AuthUserOrderItem, AuthUserAddress, RegistrationProfile, \
-    PromotionOffer, PromotionRedemption, Join
+    PromotionOffer, PromotionRedemption, Join, Profile
 from goods.models import Product
-from members.forms import CustomAuthenticationForm, RegistrationForm, ReserveForm, ReferralForm
+from members.forms import CustomAuthenticationForm, RegistrationForm, \
+    ReserveForm, ReserveFormAuth, ReferralForm, PostCheckoutForm
 from braces.views import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 import stripe
@@ -25,6 +26,7 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.views import login as django_login
 from django.contrib.auth.views import logout as django_logout
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 from decimal import Decimal
 from urllib import urlencode
 
@@ -98,6 +100,7 @@ class SignupView(BaseRegistrationView):
                                      request=request)
 
         Join.create_join(request, user)
+        Profile.create_profile(user)
         return new_user
 
 
@@ -157,8 +160,34 @@ class ReferralSignup(generic.edit.FormView):
         Join.create_join(self.request, user)
         return super(ReferralSignup, self).form_valid(form)
 
-    def form_invalid(self, form):
-        return super(ReferralSignup, self).form_invalid(form)
+class PostCheckoutUpdate(generic.edit.FormView):
+    template_name = 'members/purchase/post_checkout_update_phone.html'
+    form_class = PostCheckoutForm
+    success_url = None
+
+    def form_valid(self, form):
+        user = None
+        if(self.request.user.is_authenticated()):
+            user = self.request.user
+        else:
+            email = form.cleaned_data['email']
+            post_checkout_hash = form.cleaned_data['post_checkout_hash']
+            try:
+                find_user = AuthUser.objects.get(email=email)
+                real_hash = AuthUser.compute_post_checkout_hash(find_user)
+                if(real_hash == post_checkout_hash):
+                    user = find_user
+            except AuthUser.DoesNotExist:
+                # there is no user with this email something abnormal is going on
+                logger.error('got email for a non-existing user in PostCheckoutUpdate: {0}'.format(email))
+                pass
+
+        if(user):
+            profile = user.profile
+            profile.phone = form.cleaned_data['phone']
+            profile.save()
+        return HttpResponse('')
+
 
 class ReferralInfo(generic.base.TemplateView):
 
@@ -187,10 +216,16 @@ class ReserveView(generic.DetailView):
     model = Product
 
     def get(self, request, *args, **kwargs):
+        form = None
         if(request.user.is_authenticated()):
-            # for authenticated user should behave same as post
-            return self.post(request, *args, **kwargs)
-        form = ReserveForm()
+            # make sure user has the profile
+            Profile.create_profile(request.user)
+            form = ReserveFormAuth(initial={'first_name': request.user.first_name,
+                                            'last_name': request.user.last_name,
+                                            'phone': request.user.profile.phone
+                                            })
+        else:
+            form = ReserveForm()
         product = self.get_object()
         return render_to_response('members/purchase/nonauth_reservation.html', locals())
 
@@ -199,6 +234,11 @@ class ReserveView(generic.DetailView):
         product = self.get_object()
         order_user = None
         if(request.user.is_authenticated()):
+
+            form = ReserveFormAuth(request.POST)
+            if(not form.is_valid()):
+                return render_to_response('members/purchase/nonauth_reservation.html', locals())
+
             order_user = request.user
             # Used as param in send_order_email fct
             is_existing = True
@@ -212,6 +252,26 @@ class ReserveView(generic.DetailView):
             email = self.request.POST.get('email', None)
             is_existing, order_user = get_user_model().get_user_by_email(email)
             logger.debug('is_existing: {}'.format(is_existing))            
+
+            update_user = False
+#             first_name = self.request.POST.get('first_name', None)
+            first_name = form.cleaned_data['first_name']
+            if(not first_name is None):
+                order_user.first_name = first_name
+                update_user = True
+#             last_name = self.request.POST.get('last_name', None)
+            last_name = form.cleaned_data['last_name']
+            if(not last_name is None):
+                order_user.last_name = last_name
+                update_user = True
+            if(update_user):
+                order_user.save()
+#             phone = self.request.POST.get('phone', None)
+            phone = form.cleaned_data['phone']
+            if(not phone is None):
+                profile = order_user.profile
+                profile.phone = phone
+                profile.save()
         
         # If new user need to set send_password link param to true 
         if is_existing:
@@ -316,6 +376,27 @@ class ReserveCallbackView(generic.DetailView):
 
                     logger.debug('is_existing: %s' % str(is_existing))
 
+                # update first ane last name if needed
+                update_user = False
+                first_name = None
+                last_name = None
+                if(not order_user.first_name or not order_user.last_name):
+                    full_name = self.request.POST.get('args[shipping_name]', None)
+                    if(full_name):
+                        if(' ' in full_name):
+                            first_name, last_name = full_name.strip().split(' ', 1)
+                        else:
+                            first_name = full_name.strip()
+                if(not order_user.first_name and first_name):
+                    order_user.first_name = first_name
+                    update_user = True
+                if(not order_user.last_name and last_name):
+                    order_user.last_name = last_name
+                    update_user = True
+                if(update_user):
+                    order_user.save()
+
+                Profile.create_profile(order_user)
                 order.authuser = order_user
                 order.taxes = taxes['dollar_value']
                 order.save()
@@ -379,8 +460,7 @@ class ReserveCallbackView(generic.DetailView):
                              show_password_reset_link=(not is_existing), 
                              is_buy=(order_type == 'buy'))
 
-
-            return JsonResponse({
+            json_result = {
                 'status': 'ok',
                 'product_name': product.short_name,
                 'image_src': product.productimage_set.first().image.build_url(width=200, height=200, crop="fit"),
@@ -390,8 +470,27 @@ class ReserveCallbackView(generic.DetailView):
                 'store_city': product.store.city,
                 'store_state': product.store.state,
                 'store_zipcode': product.store.zipcd,
-                'capture_date': order_item.capture_time.date() if not order_item.captured else None
-            })
+                'capture_date': order_item.capture_time.date() if not order_item.captured else None,
+                'ask_phone': False
+            }
+
+            if(not order.authuser.profile.phone):
+
+                logger.debug("ask for the phone on post checkout")
+
+                # we don't have the phone for this user, need to ask for it
+                # if user is non-authenticated, and we are going to ask for the phone number
+                # we don't want to allow anyone to simply modify anyone else's phone
+                # to prevent that we'd compute this hash
+                # when the client submits the phone number the hash has to match with
+                # what we compute here
+                json_result['ask_phone'] = True
+                json_result['email'] = order.authuser.email
+                json_result['post_checkout_hash'] = AuthUser.compute_post_checkout_hash(order.authuser)
+            else:
+                logger.debug("already have a phone number do not ask again")
+
+            return JsonResponse(json_result)
         except Exception, e:
             logger.error('Error in ReserveCallbackView.post()')
             logger.error(str(e))
