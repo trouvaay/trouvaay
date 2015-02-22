@@ -555,6 +555,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     margin-left: 0px;
     left: 0%;
     width: 100%;
+    background: rgb(250, 247, 247);
   }
 }
 @media (min-width: 1200px) {
@@ -566,7 +567,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   font-size: 24px;
   color: black;
-  line-height: 22px;
   top: 25%;
   position: relative;
   margin-top: -62px;
@@ -574,7 +574,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 @media (max-width: 767px) {
   #index-banner .text {
     font-size: 18px;
-    line-height: 18px;
     text-align: center;
     margin-top: 25px;
     top: auto;
