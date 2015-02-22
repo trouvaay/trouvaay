@@ -31,7 +31,7 @@ class LandingView(generic.ListView):
     model = Product
 
     def get_queryset(self):
-        queryset = self.model.objects.filter(is_landing=True, store__is_featured=True)[:9]
+        queryset = self.model.objects.filter(is_landing=True, store__is_featured=True)[:6]
         print('heres my landing query:')
         pp(queryset)
         return queryset
