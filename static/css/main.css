@@ -822,7 +822,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-weight: bold;
   text-align: center;
   padding: 13px;
-  height: 72px
+  height: 100%;
+  min-height: 72px;
 }
 @media (max-width: 767px) {
   .grid .name-container {
