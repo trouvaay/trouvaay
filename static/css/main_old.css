@@ -513,6 +513,8 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   width: 100%;
   background: white;
   padding-bottom: 40px;
+  min-height: 100%;
+  margin-top: 20px
 }
 .main-container.comment-block {
   padding-top: 0px 0 40px;
