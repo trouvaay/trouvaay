@@ -152,17 +152,24 @@
                                 <!-- <span class="hide">Close</span> -->
                             </button>
                         <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-                            <p class="text-center"><h3>Thank you for your <span id="product-purchase-try">reservation.</span><span id="product-purchase-buy" style="display:none">purchase.</span></h3></p>
+                            <p class="text-center" style="text-align:center"><h2>Thank you for your <span id="product-purchase-try">reservation.</span><span id="product-purchase-buy" style="display:none">purchase.</span></h2></p>
                         </div>
                         <div class="text-center">
-                            <img id="reserved-product-image" src="" width="300" height="300" />
-                            <p></br>
-                            <h4>Your order (<b><span id="reserved-product-name"></span>)</b> is available at:
-                            </p>
-                            <i><span id="reserved-product-store-name"></span></i>
-                            <div id="reserved-product-store-address"></h4>
-                            <h4><span id="reserved-product-capture-date">You have 48 hours to go check out your piece in store.  Please text, call, or email to confirm.  If we dont hear from you, your order will be cancelled on</span></h4>
-                        </h5></div>
+                            <h5>You will recieve an order confirmation via email and hear from us shortly to coordinate pickup</h5>
+                            <div id="post-checkout-form-contents">
+                                <h5>Please enter your phone number</h5>
+                                <form  action="{% url "members:post_checkout_update" %}" id="form-post-checkout" method="post" >{% csrf_token %}
+                                    <input id="id_email" name="email" type="hidden" />
+                                    <input id="id_post_checkout_hash" name="post_checkout_hash" type="hidden" />
+                                    <div id="div_id_phone" class="form-group">
+                                        <div class="controls ">
+                                            <input class="textinput textInput form-control" id="id_phone" name="phone" placeholder="Phone number" type="text" />
+                                        </div>
+                                    </div>
+                                    <input type="button" name="post-checkout" value="Submit" class="btn btn-success" id="button-id-post-checkout">
+                                </form>
+                            </div>
+                        </div>
                     </div>  
                 </div><!-- /.modal-content -->
               </div><!-- /.modal-dialog -->
@@ -191,7 +198,7 @@
             </script><!-- end Mixpanel -->
             {% include 'custom.html' %}
         </div>
-        {% block endjs %}{% endblock endjs %}
+        {% block endjs %}{% include 'js/addlikeditems.html' %}{% endblock endjs %}
         {% analytical_body_bottom %}
     </body>
 </html>

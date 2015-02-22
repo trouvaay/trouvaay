@@ -166,66 +166,73 @@ document.createElement( "picture" );
 <div id="csrftoken-container" style="display:none">{% csrf_token %}</div>
 
 {% block modal %}
-<div class="modal fade" id="how-it-works-modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-	<div class="container-fluid how-it-works layer" style="margin-bottom:0">
-	  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-	    <!-- <span class="hide">Close</span> -->
-	  </button>
-	  <div class="row-fluid">
-	    <div class="col-md-12 statement">
-	      <h3>Great Items Available Locally</h3>
-	      <h4>Want that great statement piece but don't know where to go? We partner with small home decor retailers in the Bay Area to bring all the best vintage, unique, and floor model deals in one place.</h4>
-	    </div>
-	    <div class="col-md-12 statement">
-	      <h3>See Your Item Before Paying</h3>
-	      <h4>You have 48 hours to go touch, feel, and see your item in-store & then confirm your purchase.If we don't hear from you in 48 hours, the transaction is cancelled. </br></br>The convenience of online shopping without the regret.</h4>
-	    </div>
-	    <div class="col-md-12 statement">
-	      <h3>Affordable Delivery</h3>
-	      <h4>We charge $5 for small items, $65 for bulk items (not included in your item's list price).</h4>
-	      <h4>After you’ve placed your order, we’ll call you to provide the delivery price and coordinate a delivery time that is convenient for you.</h4>
-	    </div>
-	    <div class="col-md-12 statement">
-	      <h3 style="text-align:center">More treasure, less hunting.</h3>
-	    </div>
+            <div class="modal fade" id="how-it-works-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <div class="container-fluid how-it-works layer" style="margin-bottom:0">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <!-- <span class="hide">Close</span> -->
+                            </button>
+                            <div class="row-fluid">
+                                <div class="col-md-12 statement">
+                                    <h3>Great Items Available Locally</h3>
+                                    <h4>Want that great statement piece but don't know where to go? We partner with small home decor retailers in the Bay Area to bring all the best vintage, unique, and floor model deals in one place.</h4>
+                                </div>
+                                <div class="col-md-12 statement">
+                                    <h3>See Your Item Before Paying</h3>
+                                    <h4>You have 48 hours to go touch, feel, and see your item in-store & then confirm your purchase.If we don't hear from you in 48 hours, the transaction is cancelled. </br></br>The convenience of online shopping without the regret.</h4>
+                                </div>
+                                <div class="col-md-12 statement">
+                                    <h3>Affordable Delivery</h3>
+                                    <h4>We charge $5 for small items, $65 for bulk items (not included in your item's list price).</h4>
+                                    <h4>After you’ve placed your order, we’ll call you to provide the delivery price and coordinate a delivery time that is convenient for you.</h4>
+                                </div>
+                                <div class="col-md-12 statement">
+                                    <h3 style="text-align:center">More treasure, less hunting.</h3>
+                                </div>
 
-
-	  </div><!-- end row -->
-	</div><!-- end container-fluid -->
-      </div><!-- end modal-body -->
-    </div><!-- end modal-content -->
-  </div><!-- end modal-dialog -->
-</div><!-- end modal -->
-<div class="modal" id="post-checkout-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-	<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px; padding-bottom:2px">
-	  <span aria-hidden="true">&times;</span>
-	  <!-- <span class="hide">Close</span> -->
-	</button>
-	<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-	  <p class="text-center"><h3>Thank you for your <span id="product-purchase-try">reservation.</span><span id="product-purchase-buy" style="display:none">purchase.</span></h3></p>
-	</div>
-	<div class="text-center">
-	  <img id="reserved-product-image" src="" width="300" height="300" />
-	  <p></br>
-	  <h4>Your order (<b><span id="reserved-product-name"></span>)</b> is available at:
-	    </p>
-	    <i><span id="reserved-product-store-name"></span></i>
-	    <div id="reserved-product-store-address"></h4>
-	    <h4><span id="reserved-product-capture-date">You have 48 hours to go check out your piece in store.  Please text, call, or email to confirm.  If we dont hear from you, your order will be cancelled on</span></h4>
-	</h5></div>
-      </div>  
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /. end Add to Cart modal -->
-<div id="pre-checkout-modal-container"></div>
-{% endblock modal %}
+                                
+                            </div><!-- end row -->
+                        </div><!-- end container-fluid -->
+                      </div><!-- end modal-body -->
+                    </div><!-- end modal-content -->
+                </div><!-- end modal-dialog -->
+                </div><!-- end modal -->
+            <div class="modal" id="post-checkout-modal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px; padding-bottom:2px">
+                                <span aria-hidden="true">&times;</span>
+                                <!-- <span class="hide">Close</span> -->
+                            </button>
+                        <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+                            <p class="text-center" style="text-align:center"><h2>Thank you for your <span id="product-purchase-try">reservation.</span><span id="product-purchase-buy" style="display:none">purchase.</span></h2></p>
+                        </div>
+                        <div class="text-center">
+                            <h5>You will recieve an order confirmation via email and hear from us shortly to coordinate pickup</h5>
+                            <div id="post-checkout-form-contents">
+                                <h5>Please enter your phone number</h5>
+                                <form  action="{% url "members:post_checkout_update" %}" id="form-post-checkout" method="post" >{% csrf_token %}
+                                    <input id="id_email" name="email" type="hidden" />
+                                    <input id="id_post_checkout_hash" name="post_checkout_hash" type="hidden" />
+                                    <div id="div_id_phone" class="form-group">
+                                        <div class="controls ">
+                                            <input class="textinput textInput form-control" id="id_phone" name="phone" placeholder="Phone number" type="text" />
+                                        </div>
+                                    </div>
+                                    <input type="button" name="post-checkout" value="Submit" class="btn btn-success" id="button-id-post-checkout">
+                                </form>
+                            </div>
+                        </div>
+                    </div>  
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /. end Add to Cart modal -->
+            <div id="pre-checkout-modal-container"></div>
+        {% endblock modal %}
 
 {% block ajax_login_modal %}<div id="ajax-login-modal-container"></div>{% endblock %}
 <!--closing js -->
