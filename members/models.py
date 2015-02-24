@@ -152,6 +152,22 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 
     REQUIRED_FIELDS = []
 
+    @property
+    def username(self):
+        """Fake username"""
+        logger.debug('called fake "get" username')
+        return self.email
+
+    @username.setter
+    def username(self, value):
+        logger.debug('called fake "set" username')
+        pass
+
+    @username.deleter
+    def username(self):
+        logger.debug('called fake "delete" username')
+        pass
+
     @classmethod
     def get_user_by_email(cls, email):
         """Looks up or or creates a new user if needed with specified email

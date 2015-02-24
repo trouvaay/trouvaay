@@ -78,7 +78,7 @@ class LandingView(generic.ListView):
 
         return context
 
-class MainView(AjaxListView):
+class MainView(LoginRequiredMixin, AjaxListView):
     template_name = 'goods/main/main_ajax.html'
     page_template = 'goods/main/main_ajax_page.html'
     context_object_name = 'products'
@@ -107,7 +107,7 @@ class MainView(AjaxListView):
         return context
 
 
-class DetailView(generic.DetailView):
+class DetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'goods/detail/detail.html'
     context_object_name = 'product'
     model = Product
