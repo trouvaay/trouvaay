@@ -16,6 +16,9 @@ DEBUG = False
 
 SHARE_URL = "https://raredoor-staging.herokuapp.com/?ref="
 ENABLE_REFERRAL = True
+LIMIT_REFERRAL_PER_CLIENT_ID = 10
+FIRST_REFERRAL_MODAL_EXP = 1  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
+SECOND_REFERRAL_MODAL_EXP = 1
 
 SECRET_KEY = os.getenv('SECRET_KEY', None)
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', None)

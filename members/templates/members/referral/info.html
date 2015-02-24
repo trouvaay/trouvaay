@@ -11,6 +11,7 @@
 						<fieldset>
 							<legend>
 								<h2>Invite Friends & Earn Rewards</h2>
+								<h4>You've made {{ request.user.get_number_of_referrals }} referrals thus far</h4>
 							</legend>
 							<div class="row">
 								<div class="col-xs-12" class="text-center">
@@ -18,8 +19,11 @@
 		                            Share your unique link below via Email, Facebook, Twitter, Reddit, or LinkedIn to earn rewards from raredoor.com.
 		                            </h5>
 		                            <br />
-									<span class="alert alert-info">{{ request.user.get_number_of_referrals }} {{ ref_url }}</span>
-	                        	</div>
+									<span class="alert alert-info" style="margin-bottom:10px">{{ ref_url }}</span>
+									<div>
+										
+			                        </div>
+								</div>
 							</div>
 						</fieldset>
 					</div>
