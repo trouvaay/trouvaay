@@ -14,7 +14,8 @@ ALLOWED_HOSTS = ['*']
 DEBUG = False
 #STATIC_ROOT = 'static'
 
-SHARE_URL = "https://raredoor.com/?ref="
+SHARE_URL = "https://raredoor-staging.herokuapp.com/?ref="
+ENABLE_REFERRAL = True
 
 SECRET_KEY = os.getenv('SECRET_KEY', None)
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', None)
