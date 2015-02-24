@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'stripe',
     'analytical',
     'endless_pagination',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -82,6 +83,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'context_processors.get_liked_items',
     'context_processors.site_name',
     'context_processors.get_feature_context',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
 )
 
 # Database
@@ -243,6 +246,39 @@ EMAIL_PORT = ''  # 587 - for gmail
 EMAIL_HOST_USER = ''  # e.g. 'support@raredoor.com'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True  # google requires True
+
+# social login
+SOCIAL_AUTH_FACEBOOK_KEY = '380931628745745'
+SOCIAL_AUTH_FACEBOOK_SECRET = '5f84a4d1c72e2962331fb358d3685572'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['email', 'first_name', 'last_name']
+SOCIAL_AUTH_LOGIN_URL = LOGIN_URL
+SOCIAL_AUTH_LOGIN_ERROR_URL = LOGIN_URL
+SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+
+    # this is the default that's why we didn't have it before
+    # now that we are explicitly defining AUTHENTICATION_BACKENDS
+    # we have to list the default one here as well
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 PROJECT_ENV = os.getenv('PROJECT_ENV', None)
 if(PROJECT_ENV == 'dev'):

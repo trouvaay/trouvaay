@@ -27,6 +27,7 @@ urlpatterns = patterns('',
               
     url(r'^', include('goods.urls', namespace='goods')),
     url(r'^', include('members.urls', namespace='members')),
+    url(r'^facebook/', include('social.apps.django_app.urls', namespace='social')),
     
     url(r'accounts/register/$', SignupView.as_view(), name='registration_register'),
     (r'^accounts/', include('registration.backends.default.urls')),
