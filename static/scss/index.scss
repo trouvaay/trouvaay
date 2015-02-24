@@ -78,6 +78,7 @@
       margin-left: 0px;
       left: 0%;
       width: 100%;
+      background: rgb(250, 247, 247);
     }
     
     @include breakpoint(lg) {
@@ -87,23 +88,22 @@
 
   .text {
     font-family: "Droid Serif";
-    font-size: 22px;
-    color: #FFF;
-    line-height: 22px;
-    top: 50%;
+    font-size: 24px;
+    color: #000;
+    top: 25%;
     position: relative;
     margin-top: -62px;
 
     @include breakpoint(sm) {
       font-size: 18px;
-      line-height: 18px;
       text-align: center;
       margin-top: 25px;
       top: auto;
     }
     strong {
       display: block;
-      color: $gold;
+      /*color: $gold;*/
+      color: #000;
       font-family: "Ostrich Sans";
       font-weight: bold;
       font-size: 80px;
@@ -370,6 +370,8 @@
     font-weight: bold;
     text-align: center;
     padding: 13px;
+    height: 100%;
+    min-height: 72px;
 
     @include breakpoint(sm) {
       background: $product-title-border;
@@ -385,8 +387,8 @@
       letter-spacing: 1px;
 
       @include breakpoint(sm) {
-	font-size: 18px;
-	line-height: 18px;
+	font-size: 22px;
+	line-height: 22px;
       }
 
       a {

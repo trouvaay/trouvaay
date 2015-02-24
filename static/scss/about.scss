@@ -20,14 +20,19 @@
   }
 
   .name-container {
-    padding: 25px;
+    padding: 15px;
     .name {
       font-size: 50px;
       line-height: 50px;
+
+      @include breakpoint(sm) {
+	font-size: 22px;
+	line-height: 22px;
+      }
     }
 
     .subline {
-      font-size: 20px;
+      font-size: 14px;
     }
   }
 
