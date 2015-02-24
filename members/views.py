@@ -34,7 +34,7 @@ from urllib import urlencode
 logger = logging.getLogger(__name__)
 
 # TODO: For profile page
-class ProfileView(generic.DetailView):
+class ProfileView(LoginRequiredMixin, generic.DetailView):
     template_name = 'members/closet/closet.html'
     context_object_name = 'user'
     model = AuthUser
