@@ -196,6 +196,11 @@ html, body {
     margin-top: 90px;
   }
 }
+@media (max-width: 767px) {
+  .info-page .info {
+    border: 10px solid #000;
+  }
+}
 .info-page .info p {
   margin: 0px 0px 40px;
 }
@@ -282,9 +287,6 @@ html, body {
   #logo {
     height: 24px;
     margin-top: 8px;
-  }
-  .info-page .info {
-    border: 10px solid #000;
   }
 }
 
@@ -555,7 +557,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     margin-left: 0px;
     left: 0%;
     width: 100%;
-    background: rgb(250, 247, 247);
+    background: #faf7f7;
   }
 }
 @media (min-width: 1200px) {
@@ -566,7 +568,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #index-banner .text {
   font-family: "Droid Serif";
   font-size: 24px;
-  color: black;
+  color: #000;
   top: 25%;
   position: relative;
   margin-top: -62px;
@@ -581,8 +583,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #index-banner .text strong {
   display: block;
-  /*color: #e6be46;*/
-  color: black;
+  /*color: $gold;*/
+  color: #000;
   font-family: "Ostrich Sans";
   font-weight: bold;
   font-size: 80px;
@@ -839,7 +841,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   letter-spacing: 1px;
 }
 @media (max-width: 767px) {
-  .team-members-container .name-container .name,
   .grid .name-container .name {
     font-size: 22px;
     line-height: 22px;
@@ -980,10 +981,16 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .team-members-container .name-container {
   padding: 15px;
 }
-/*.team-members-container .name-container .name {
+.team-members-container .name-container .name {
   font-size: 50px;
   line-height: 50px;
-}*/
+}
+@media (max-width: 767px) {
+  .team-members-container .name-container .name {
+    font-size: 22px;
+    line-height: 22px;
+  }
+}
 .team-members-container .name-container .subline {
   font-size: 14px;
 }
