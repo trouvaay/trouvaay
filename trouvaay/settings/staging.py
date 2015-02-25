@@ -53,5 +53,6 @@ INSTALLED_APPS = (
     'stripe',
     'registration',
     'analytical',
-    'endless_pagination'
+    'endless_pagination',
+    'social.apps.django_app.default',
 )
