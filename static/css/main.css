@@ -185,7 +185,7 @@ html, body {
 }
 .info-page .info {
   background: #FFF;
-  border: 40px solid #000;
+  /*border: 40px solid #000;*/
   margin: 40px 34px 40px;
   /*padding: 40px;*/
   padding: 10px 20px;
@@ -226,11 +226,13 @@ html, body {
   padding: 22px 0px;
   text-align: center;
   text-transform: uppercase;
+  margin-bottom: 25px;
 }
 @media (max-width: 992px) {
   .more-questions-container header {
     background: #91c3c3;
     font-size: 17px;
+    margin-bottom: 10px;
   }
 }
 .more-questions-container a {
@@ -242,7 +244,6 @@ html, body {
 
 .want-join-container {
   margin-top: 20px;
-  margin-bottom: 20px;
   font-family: "Droid Serif";
 }
 .want-join-container .row > div {
@@ -282,9 +283,6 @@ html, body {
   #logo {
     height: 24px;
     margin-top: 8px;
-  }
-  .info-page .info {
-    border: 10px solid #000;
   }
 }
 
@@ -555,7 +553,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
     margin-left: 0px;
     left: 0%;
     width: 100%;
-    background: rgb(250, 247, 247);
   }
 }
 @media (min-width: 1200px) {
@@ -565,15 +562,17 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #index-banner .text {
   font-family: "Droid Serif";
-  font-size: 24px;
-  color: black;
-  top: 25%;
+  font-size: 22px;
+  color: #FFF;
+  line-height: 22px;
+  top: 50%;
   position: relative;
   margin-top: -62px;
 }
 @media (max-width: 767px) {
   #index-banner .text {
     font-size: 18px;
+    line-height: 18px;
     text-align: center;
     margin-top: 25px;
     top: auto;
@@ -581,8 +580,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #index-banner .text strong {
   display: block;
-  /*color: #e6be46;*/
-  color: black;
+  color: #e6be46;
   font-family: "Ostrich Sans";
   font-weight: bold;
   font-size: 80px;
@@ -822,8 +820,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-weight: bold;
   text-align: center;
   padding: 13px;
-  height: 100%;
-  min-height: 72px;
 }
 @media (max-width: 767px) {
   .grid .name-container {
@@ -839,10 +835,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   letter-spacing: 1px;
 }
 @media (max-width: 767px) {
-  .team-members-container .name-container .name,
   .grid .name-container .name {
-    font-size: 22px;
-    line-height: 22px;
+    font-size: 18px;
+    line-height: 18px;
   }
 }
 .grid .name-container .name a {
@@ -978,14 +973,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 .team-members-container .name-container {
-  padding: 15px;
+  padding: 25px;
 }
-/*.team-members-container .name-container .name {
+.team-members-container .name-container .name {
   font-size: 50px;
   line-height: 50px;
-}*/
+}
 .team-members-container .name-container .subline {
-  font-size: 14px;
+  font-size: 20px;
 }
 .team-members-container .grid-item {
   margin-bottom: 40px;

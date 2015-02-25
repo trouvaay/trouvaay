@@ -13,6 +13,8 @@ SSLIFY_DISABLE = False
 ALLOWED_HOSTS = ['*']
 DEBUG = False
 #STATIC_ROOT = 'static'
+SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('SOCIAL_AUTH_FACEBOOK_KEY', None)
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('SOCIAL_AUTH_FACEBOOK_SECRET', None)
 
 SHARE_URL = "https://raredoor-staging.herokuapp.com/?ref="
 ENABLE_REFERRAL = True
