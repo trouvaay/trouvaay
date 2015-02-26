@@ -9,10 +9,46 @@
 {% endblock pre-content %}
 
 {% block content %}
-      </div>
-    <div class="container pic-tabs main">        
-        <div class="row">
-            <div class="col-sm-12">
+      <div class="container-fluid" id="index-banner">
+	<picture>
+	<!--[if IE 9]><video style="display: none;"><![endif]-->
+	<source srcset="https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_1000,h_375/v1422902656/shutterstock_160709951_hsvzx9.jpg" media="(min-width: 992px)">
+	<!--[if IE 9]></video><![endif]-->
+	<img srcset='https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_766,h_282/v1422902656/shutterstock_160709951_hsvzx9.jpg' alt="">
+	</picture>
+	<div class="row-fluid text-container">
+		<div class="text "><div style="font-family: 'Droid Serif'; font-style: italic; text-transform: uppercase;'">Find one of a kind furniture available in </div><strong>Bay Area stores</strong><div>(without leaving your couch)</div></div>
+		<a href="{% url 'goods:main' %}" class="arrow-link button-shop-the-bay" id="shop-now">Shop now</a>
+	</div>
+
+</div>
+
+<div class="container hidden-xs" id="how-it-works">
+	<div class="row">
+		<div class="col-sm-4 info">
+			<div class="browse">
+				<header>Browse</header>
+				<p>A curated selection of new and vintage furniture — all currently available in local stores — at <i>Raredoor.com.</i></p>
+			</div>
+		</div>
+		<div class="col-sm-4 info">
+			<div class="reserve">
+				<header>Reserve</header>
+				<p>Your perfect pieces online and take a few days to see the items in a store nearby.</p>
+			</div>
+		</div>
+		<div class="col-sm-4 info">
+			<div class="purchase">
+				<header>Purchase</header>
+				<p>Through us and receive great deals, as well as affordable delivery.</p>
+			</div>
+		</div>
+	</div>
+</div>
+    <div class="container-fluid pic-tabs main" id="products">        
+        <div class="row-fluid">
+		<header class="col-md-12">Some pieces in Bay Area neighborhoods</header>
+            <div class="container" id="products-grid">
                 <div class="tab-content">
                     <div class="tab-pane fade in active">
                         <div class="grid-products-wrapper">
