@@ -766,7 +766,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   width: 100%;
 }
 .grid .grid-item img {
-  border-radius: 100%;
+  border-radius: 25%;
   width: 100%;
   margin-bottom: 20px;
 }
