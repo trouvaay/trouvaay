@@ -1,0 +1,39 @@
+{% extends 'goods/landingtest/_landingtestbase.html' %}
+{% load staticfiles %}
+{% load cloudinary %}
+{% load goods_extras %}
+{% load endless %}
+
+{% block pre-content %}
+    {{ super }}
+{% endblock pre-content %}
+
+{% block content %}
+      </div>
+    <div class="container pic-tabs main">        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                    {% include 'goods/landingtest/landingtest_ajax_page.html' %}
+                            </div>
+                        </div>
+                    </div><!-- end tab1 -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block endjs %}
+{{ block.super }}
+    <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+    <script>
+            $.endlessPaginate({
+                paginateOnScroll: true,
+                paginateOnScrollMargin: 200
+            });
+    </script>
+{% endblock endjs %}
+

@@ -78,6 +78,48 @@ class LandingView(generic.ListView):
 
         return context
 
+class LandingTestView(generic.ListView):
+    template_name = 'goods/landingtest/landingtest_ajax.html'
+    page_template = 'goods/landingtest/landingtest_ajax_page.html'
+    context_object_name = 'products'
+    model = Product
+    key = 'page'
+    
+
+    def get_queryset(self):
+        try:
+            furn_type = self.request.GET['type']
+            try:
+                furniture_type_object = FurnitureType.objects.get(select=furn_type)
+            except Exception, e:
+                logger.debug(str(e))
+                furniture_type_object = None
+            queryset = list(self.model.objects.filter(is_published=True, furnituretype = furniture_type_object, store__is_featured=True))
+        except:
+            queryset = self.model.objects.filter(is_published=True, store__is_featured=True)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(LandingTestView, self).get_context_data(**kwargs)
+        context['BaseUrl'] = BASE_URL
+        context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+        return context
+
+
+class DetailView(generic.DetailView):
+    template_name = 'goods/detail/detail.html'
+    context_object_name = 'product'
+    model = Product
+    slug_field = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        context['returns'] = settings.RETURN_POLICY
+        context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY     
+        return context
+
+
 class MainView(AjaxListView):
     template_name = 'goods/main/main_ajax.html'
     page_template = 'goods/main/main_ajax_page.html'

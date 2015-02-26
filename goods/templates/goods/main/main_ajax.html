@@ -56,15 +56,13 @@
     
 {% endblock content %}
 {% block endjs %}
-
-{{ block.super }}
-<script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
-<script>
-        $.endlessPaginate({
-            paginateOnScroll: true,
-            paginateOnScrollMargin: 200
-        });
-</script>
-
+    {{ block.super }}
+    <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+    <script>
+            $.endlessPaginate({
+                paginateOnScroll: true,
+                paginateOnScrollMargin: 200
+            });
+    </script>
 {% endblock endjs %}
 

@@ -151,6 +151,15 @@ function handlePostCheckoutClick(e){
 
 }
 
+function FBPurchaseEvent() {
+  _fbq.push(['track', '<pixel_id>', {'value':'0.00','currency':'USD'}]);
+}
+
+function FBReservationEvent() {
+    console.log('FB reservation event fired');
+    _fbq.push(['track', '6024578749644', {'value':'0.00','currency':'USD'}]);
+}
+
 function handleSeeMoreClick(e) {
     console.log('clicked on See More button: '+e.target.id);
     mixpanel.track("Clicked See More Button");
@@ -161,9 +170,8 @@ function handleShopNowClick(e) {
     mixpanel.track("Clicked Shop Now Button");
 }
 
-function handleFilterClick(e) {
-    console.log(e);
-    console.log('clicked filter for: '+e.target.search);
+function handleSeatingClick(e) {
+    console.log('clicked seating: '+e.target.search);
     mixpanel.track("Clicked Seating Search");
 }
 
@@ -375,7 +383,7 @@ $(document).ready(function() {
 	$('.btn.buy').on('click', handleBuyButtonClick);
     $('#see-more').on('click', handleSeeMoreClick);
     $('#shop-now').on('click', handleShopNowClick);
-    $('#desktop-search #seating').on('click', handleFilterClick);
+    $('#desktop-search #seating').on('click', handleSeatingClick);
     $('#desktop-search #tables').on('click', handleTablesClick);
     $('#desktop-search #beds').on('click', handleBedsClick);
     $('#desktop-search #storage').on('click', handleStorageClick);
