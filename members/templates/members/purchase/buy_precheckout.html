@@ -164,6 +164,9 @@ $(document).ready(function() {
 								    google_remarketing_only: false,
 								});
 
+								// fire FB purchase pixel
+								FBPurchaseEvent()
+
 								mixpanel.track(
 					                "Purchase Completed",
 					                { "product": data['product_name'] }
