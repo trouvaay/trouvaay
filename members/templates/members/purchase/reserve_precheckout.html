@@ -1,5 +1,5 @@
 {% load crispy_forms_tags %}
-<div class="modal" id="researvation-modal">
+<div class="modal" id="reserve_precheckout-modal">
 	<div class="modal-dialog">
 		<div class="modal-content col-xs-12">
 			<div class="modal-body">
@@ -35,6 +35,24 @@ $(document).ready(function() {
 	var productId = "{{ product.id }}";
 	var productName = "{{ product.short_name }}";
 	$('#button-id-button-reserve').on('click', function(e) {
+
+		//reserve event tracking
+
+		//fire mixpanel event
+		mixpanel.track(
+	                "Reserve Pre-checkout Submitted",
+	                { "product": productName }
+	            );
+
+		//fire google adwords event
+		window.google_trackConversion({
+		    google_conversion_id: 956335221,
+		    google_conversion_language: "en",
+			google_conversion_format: "3",
+			google_conversion_color: "ffffff",
+			google_conversion_label: "V56HCLDa6FkQ9YiCyAM",
+		    google_remarketing_only: false,
+		});
 	
 		console.log('clicked on submit reservation');
 		if(productId && !(typeof productId === 'undefined')){
@@ -45,10 +63,14 @@ $(document).ready(function() {
 				dataType: "html",
 				success: function(response, status){
 					$("#pre-checkout-modal-container").html(response);
-					$("#researvation-modal").modal({
+					$("#reservation-modal").modal({
 						show: true,
 						keyboard: true
 					});
+					mixpanel.track(
+	                "Reservation Completed",
+	                { "product": productName }
+	            	);
 				},
 			});
 		}        

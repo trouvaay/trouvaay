@@ -160,33 +160,7 @@ class ReferralSignup(generic.edit.FormView):
         Join.create_join(self.request, user)
         return super(ReferralSignup, self).form_valid(form)
 
-class PostCheckoutUpdate(generic.edit.FormView):
-    template_name = 'members/purchase/post_checkout_update_phone.html'
-    form_class = PostCheckoutForm
-    success_url = None
 
-    def form_valid(self, form):
-        user = None
-        if(self.request.user.is_authenticated()):
-            user = self.request.user
-        else:
-            email = form.cleaned_data['email']
-            post_checkout_hash = form.cleaned_data['post_checkout_hash']
-            try:
-                find_user = AuthUser.objects.get(email=email)
-                real_hash = AuthUser.compute_post_checkout_hash(find_user)
-                if(real_hash == post_checkout_hash):
-                    user = find_user
-            except AuthUser.DoesNotExist:
-                # there is no user with this email something abnormal is going on
-                logger.error('got email for a non-existing user in PostCheckoutUpdate: {0}'.format(email))
-                pass
-
-        if(user):
-            profile = user.profile
-            profile.phone = form.cleaned_data['phone']
-            profile.save()
-        return HttpResponse('')
 
 
 class ReferralInfo(generic.base.TemplateView):
@@ -211,6 +185,8 @@ class ReferralInfo(generic.base.TemplateView):
         return context
 
 class ReserveView(generic.DetailView):
+    """Precheckout and Postcheckout combined
+    """
 
     context_object_name = 'product'
     model = Product
@@ -227,7 +203,7 @@ class ReserveView(generic.DetailView):
         else:
             form = ReserveForm()
         product = self.get_object()
-        return render_to_response('members/purchase/nonauth_reservation.html', locals())
+        return render_to_response('members/purchase/reserve_precheckout.html', locals())
 
     def post(self, request, *args, **kwargs):
 
@@ -237,7 +213,7 @@ class ReserveView(generic.DetailView):
 
             form = ReserveFormAuth(request.POST)
             if(not form.is_valid()):
-                return render_to_response('members/purchase/nonauth_reservation.html', locals())
+                return render_to_response('members/purchase/reserve_precheckout.html', locals())
 
             order_user = request.user
             # Used as param in send_order_email fct
@@ -246,7 +222,7 @@ class ReserveView(generic.DetailView):
         else:        
             form = ReserveForm(request.POST)
             if(not form.is_valid()):
-                return render_to_response('members/purchase/nonauth_reservation.html', locals())
+                return render_to_response('members/purchase/reserve_precheckout.html', locals())
     
             # create user if needed
             email = self.request.POST.get('email', None)
@@ -285,7 +261,7 @@ class ReserveView(generic.DetailView):
         logger.debug('reservations limit in settings: %d' % settings.RESERVATION_LIMIT)
         if(order_user.get_number_of_reservations() >= settings.RESERVATION_LIMIT):
             reservation_message = 'You cannot reserve any more products'
-            return render_to_response('members/purchase/auth_reservation.html', locals())
+            return render_to_response('members/purchase/reserve_postcheckout.html', locals())
 
 
         # create order
@@ -307,10 +283,10 @@ class ReserveView(generic.DetailView):
         # send order confirmation email
         send_order_email(request=self.request, order_item=order_item, show_password_reset_link=password_reset_link, is_buy=False)
         logger.debug('sent email')
-        return render_to_response('members/purchase/auth_reservation.html', locals())
+        return render_to_response('members/purchase/reserve_postcheckout.html', locals())
                 
 
-class ReserveCallbackView(generic.DetailView):
+class BuyCallbackView(generic.DetailView):
     context_object_name = 'product'
     model = Product
 
@@ -344,9 +320,7 @@ class ReserveCallbackView(generic.DetailView):
                 promo_codes_param = request.POST['promo_codes'].strip()
                 if(promo_codes_param):
                     promo_codes = [i for i in promo_codes_param.split(',')]
-                discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(self.request.user,
-                                                                                                        total_price_before_offers=product.current_price,
-                                                                                                        promo_codes=promo_codes)
+                discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(self.request.user,total_price_before_offers=product.current_price, promo_codes=promo_codes)
 
                 logger.debug('discounts %s' % str(discounts))
                 logger.debug('subtotal_dollar_value %s' % str(subtotal_dollar_value))
@@ -423,7 +397,7 @@ class ReserveCallbackView(generic.DetailView):
                         })
 
             except Exception, e:
-                logger.error('Error in ReserveCallbackView.post()')
+                logger.error('Error in BuyCallbackView.post()')
                 logger.error(str(e))
                 return JsonResponse({'status': 'error', 'message': 'Failed to charge credit card.'})
 
@@ -491,13 +465,14 @@ class ReserveCallbackView(generic.DetailView):
                 logger.debug("already have a phone number do not ask again")
 
             return JsonResponse(json_result)
+            
         except Exception, e:
-            logger.error('Error in ReserveCallbackView.post()')
+            logger.error('Error in BuyCallbackView.post()')
             logger.error(str(e))
             return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
 
 
-class PreCheckoutView(generic.DetailView):
+class BuyPreCheckoutView(generic.DetailView):
     context_object_name = 'product'
     model = Product
 
@@ -528,9 +503,8 @@ class PreCheckoutView(generic.DetailView):
             else:
                 promo_code_message = invalid_message
 
-        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(user=self.request.user, 
-                                                                                                total_price_before_offers=product.current_price,
-                                                                                                promo_codes=promo_codes)
+        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(user=self.request.user, total_price_before_offers=product.current_price,
+            promo_codes=promo_codes)
         total_discount = 0
         for discount in discounts:
             total_discount += discount['dollar_value']
@@ -538,7 +512,36 @@ class PreCheckoutView(generic.DetailView):
         stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
         feature_name_reserve = settings.FEATURE_NAME_RESERVE
         site_name = settings.SITE_NAME
-        return render_to_response('members/purchase/pre_checkout.html', locals())
+        return render_to_response('members/purchase/buy_precheckout.html', locals())
+
+
+class PostCheckoutUpdate(generic.edit.FormView):
+    template_name = 'members/purchase/post_checkout_update_phone.html'
+    form_class = PostCheckoutForm
+    success_url = None
+
+    def form_valid(self, form):
+        user = None
+        if(self.request.user.is_authenticated()):
+            user = self.request.user
+        else:
+            email = form.cleaned_data['email']
+            post_checkout_hash = form.cleaned_data['post_checkout_hash']
+            try:
+                find_user = AuthUser.objects.get(email=email)
+                real_hash = AuthUser.compute_post_checkout_hash(find_user)
+                if(real_hash == post_checkout_hash):
+                    user = find_user
+            except AuthUser.DoesNotExist:
+                # there is no user with this email something abnormal is going on
+                logger.error('got email for a non-existing user in PostCheckoutUpdate: {0}'.format(email))
+                pass
+
+        if(user):
+            profile = user.profile
+            profile.phone = form.cleaned_data['phone']
+            profile.save()
+        return HttpResponse('')
 
 
 def can_reserve(request):

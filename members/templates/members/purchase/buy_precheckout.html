@@ -1,5 +1,5 @@
 {% load staticfiles %}
-<div class="modal" id="pre-checkout-modal">
+<div class="modal" id="buy_precheckout-modal">
 	<div class="modal-dialog">
 		<div class="modal-content col-xs-12">
 			<div class="modal-body">
@@ -13,18 +13,6 @@
 								<h2>Purchase Details</h2>
 							</legend>
 							<div class="row">
-							{% if order_type == 'reserve' %}
-								<div class="col-xs-12">
-									<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-			                            <p class="text-center"><span id="pre-checkout-capture-date-try">
-			                            Your card won't be charged. </br>You're one step away from getting the location of your</span>
-			                            </br>
-			                            <b>{{ product.short_name }}</b>
-			                            </p>
-		                        	</div>
-								</div>
-							{% else %}
-							<!-- Buy options -->
 							<div class="col-xs-12">
 								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
 		                            <p class="text-center">
@@ -32,7 +20,6 @@
 		                            <b>{{ product.short_name }}</b>
 		                            </p>
 	                        	</div>
-	                        {% endif %}
 							</div>
 							</div>
 							<div class="row">
@@ -116,18 +103,14 @@ $(document).ready(function() {
 	$('.btn.apply-promo-code').on('click', handleBuyButtonClick);
 	
 	$('#button-precheckout-submit').on('click', function(e) {
-		if (orderType == 'buy') {
-			mixpanel.track(
-	                "Buy Pre-checkout Submitted",
-	                { "product": productName }
-	            );
-		}
-		else if (orderType == 'reserve') {
-			mixpanel.track(
-	                "Reserve Pre-checkout Submitted",
-	                { "product": productName }
-	            );
-		}
+		
+		//buy event tracking
+
+		//fire mixpanel event
+		mixpanel.track(
+                "Buy Pre-checkout Submitted",
+                { "product": productName }
+            );
 
 		if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
 
@@ -141,7 +124,7 @@ $(document).ready(function() {
 			console.log('promoCodes: '+promoCodes);
 		
 		
-	  		$('#pre-checkout-modal').modal('hide');
+	  		$('#buy_precheckout-modal').modal('hide');
 	  		console.log('pre-checkout modal hidden');
 	  		
 			var handler = StripeCheckout.configure({
@@ -154,7 +137,7 @@ $(document).ready(function() {
 				token: function(token, args) {
 					$.ajax({
 						type: "POST",
-						url: {% url "members:reserve_callback" %},
+						url: {% url "members:buy_callback" %},
 						data: {
 							token: token,
 							args: args,
@@ -164,9 +147,27 @@ $(document).ready(function() {
 							promo_codes: promoCodes
 						},
 						success: function(data){
-							console.log('checkout callback returned: ' + data['status']);
+							
+							
+
+							console.log('Buy callback returned: ' + data['status']);
 						
 						  	if(data['status'] == "ok"){
+
+							  	//fire google adwords event
+								window.google_trackConversion({
+								    google_conversion_id: 956335221,
+								    google_conversion_language: "en",
+									google_conversion_format: "3",
+									google_conversion_color: "ffffff",
+									google_conversion_label: "h7XVCP2q5VkQ9YiCyAM",
+								    google_remarketing_only: false,
+								});
+
+								mixpanel.track(
+					                "Purchase Completed",
+					                { "product": data['product_name'] }
+					            	);
 						  	
 						  		$("#reserved-product-name").text(data['product_name']);
 						  		$("#reserved-product-store-name").text(data['store_name']);

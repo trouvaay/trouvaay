@@ -109,10 +109,18 @@ var trouvaay = {
                     var prodContainer = "product-container_" + id;
                     $("#"+prodContainer).remove();
                 }
-                }
+                mixpanel.track("Unliked product",
+                    { "productId": id }
+                );
+            }
+
             else {
                 $(this).addClass("active");
-                }
+                
+                mixpanel.track("Liked product",
+                    { "productId": id }
+                );
+            }
             $.post(
                 "{% url 'members:like' %}", 
                 data,
@@ -143,6 +151,41 @@ function handlePostCheckoutClick(e){
 
 }
 
+function handleSeeMoreClick(e) {
+    console.log('clicked on See More button: '+e.target.id);
+    mixpanel.track("Clicked See More Button");
+}
+
+function handleShopNowClick(e) {
+    console.log('clicked on Shop Now button: '+e.target.id);
+    mixpanel.track("Clicked Shop Now Button");
+}
+
+function handleFilterClick(e) {
+    console.log(e);
+    console.log('clicked filter for: '+e.target.search);
+    mixpanel.track("Clicked Seating Search");
+}
+
+function handleTablesClick(e) {
+    console.log('clicked tables: '+e.target.search);
+    mixpanel.track("Clicked Tables Search");
+}
+
+function handleBedsClick(e) {
+    console.log('clicked beds: '+e.target.search);
+    mixpanel.track("Clicked Beds Search");
+}
+
+function handleStorageClick(e) {
+    console.log('clicked storage: '+e.target.search);
+    mixpanel.track("Clicked Storage Search");
+}
+
+function handleLightingClick(e) {
+    console.log('clicked lighting: '+e.target.search);
+    mixpanel.track("Clicked Lighting Search");
+}
 function handleBuyButtonClick(e) {
 	console.log('clicked on buy button: '+e.target.id);
 
@@ -153,6 +196,7 @@ function handleBuyButtonClick(e) {
             "Clicked Buy Button",
             { "productId": productId }
         );
+        console.log('mixpanel: buy-button.onclick event fired');
         
 		if(productId && !(typeof productId === 'undefined')){
 		    console.log('this is the ordertype!', orderType)
@@ -167,7 +211,7 @@ function handleBuyButtonClick(e) {
 			// call pre-checkout
 			$.ajax({
 				type: "POST",
-				url: "{% url "members:pre_checkout" %}",
+				url: "{% url "members:buy_precheckout" %}",
 				dataType: "html",
 				data: {
 					product_id: productId,
@@ -177,7 +221,7 @@ function handleBuyButtonClick(e) {
 				success: function(response, status){
 					// console.log('response from pre-checkout call: '+status );
 					$("#pre-checkout-modal-container").html(response);
-					$("#pre-checkout-modal").modal({
+					$("#buy_precheckout-modal").modal({
 						show: true,
 						keyboard: true
 					});
@@ -196,18 +240,20 @@ function handleBuyButtonClick(e) {
             "Clicked Reserve Button",
             { "productId": productId }
         );
-        urlToLoad = "/reserve/"+productId;
+        console.log('mixpanel: reserve-button.onclick event fired');
+        var urlToLoad = "/reserve/"+productId;
         
 		if(productId && !(typeof productId === 'undefined')){
 		    console.log('ordertype: ', orderType)
 			$.ajax({
 				type: "GET",
-				url: "/reserve/"+productId,
+                // pass to ReservePreCheckout
+				url: urlToLoad,
 				dataType: "html",
 				success: function(response, status){
 					// console.log('response from pre-checkout call: '+status );
 					$("#pre-checkout-modal-container").html(response);
-					$("#researvation-modal").modal({
+					$("#reserve_precheckout-modal").modal({
 						show: true,
 						keyboard: true
 					});
@@ -327,6 +373,13 @@ $(document).ready(function() {
 	});
 
 	$('.btn.buy').on('click', handleBuyButtonClick);
+    $('#see-more').on('click', handleSeeMoreClick);
+    $('#shop-now').on('click', handleShopNowClick);
+    $('#desktop-search #seating').on('click', handleFilterClick);
+    $('#desktop-search #tables').on('click', handleTablesClick);
+    $('#desktop-search #beds').on('click', handleBedsClick);
+    $('#desktop-search #storage').on('click', handleStorageClick);
+    $('#desktop-search #lighting').on('click', handleLightingClick);
 
 });
 //Unsed formula to append distance from product to user's loco
