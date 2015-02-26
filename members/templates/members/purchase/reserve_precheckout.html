@@ -62,7 +62,6 @@ $(document).ready(function() {
 				data: $("#form-reserve").serialize(),
 				dataType: "html",
 				success: function(response, status){
-					console.log(status.text);
 					$("#pre-checkout-modal-container").html(response);
 					$("#reservation-modal").modal({
 						show: true,
