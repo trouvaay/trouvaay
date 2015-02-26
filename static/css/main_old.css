@@ -3252,6 +3252,7 @@ footer ul li a:hover {
 }
 .main-container.detail,
 .pic-tabs.main {
+  height:100%;
 }
 .container-fluid.tab-icons .row{
   padding: 1rem;
