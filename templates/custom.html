@@ -61,7 +61,6 @@ var trouvaay = {
         //Append mobile menu
 		$("#mobile-search").on('click',function() {
                 if (!$('#tab-icons-mobile').length ) {
-                    console.log('is this workgin?');
                   $("#mobile-navigation").append(mobileTabIcons);
                 } else {
                   $("#tab-icons-mobile").remove();
@@ -384,11 +383,21 @@ $(document).ready(function() {
 	$('.btn.buy').on('click', handleBuyButtonClick);
     $('#see-more').on('click', handleSeeMoreClick);
     $('#shop-now').on('click', handleShopNowClick);
+    
     $('#desktop-search #seating').on('click', handleSeatingClick);
+    $('.tab-icons #seating > a').on('click', handleSeatingClick);
+    
     $('#desktop-search #tables').on('click', handleTablesClick);
+    $('.tab-icons #tables').on('click', handleTablesClick);
+
     $('#desktop-search #beds').on('click', handleBedsClick);
+    $('.tab-icons #beds').on('click', handleBedsClick);
+
     $('#desktop-search #storage').on('click', handleStorageClick);
+    $('.tab-icons #storage').on('click', handleStorageClick);
+
     $('#desktop-search #lighting').on('click', handleLightingClick);
+    $('.tab-icons #lighting').on('click', handleLightingClick);
 
 });
 //Unsed formula to append distance from product to user's loco

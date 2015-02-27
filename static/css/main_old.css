@@ -4305,7 +4305,7 @@ footer ul li a:hover {
     display: inline-block;
   }
   .icon-bar {
-    background: rgb(218,182,97);
+    background: white;
   }
   .navbar-toggle {
    /* border: 1px solid #7a7a7a;*/
