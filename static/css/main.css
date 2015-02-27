@@ -988,8 +988,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding: 15px;
 }
 .team-members-container .name-container .name {
-  font-size: 50px;
-  line-height: 50px;
+  font-size: 20px;
+  line-height: 25px;
 }
 @media (max-width: 767px) {
   .team-members-container .name-container .name {
