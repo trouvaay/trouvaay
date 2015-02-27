@@ -139,7 +139,7 @@ RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
     'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
 }
-SIGNUP_OFFER = "10% off your first purchase after signup"
+SIGNUP_OFFER = "Signup and get 10% off your 1st purchase as a new customer"
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
 
@@ -226,7 +226,7 @@ ANALYTICAL_INTERNAL_IPS = []
 
 SALES_TAX = Decimal('0.0875')
 
-OFFER_MODAL_EXPIRATION = 3600  # do not show promo offers again whithin this many seconds
+OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many seconds
 
 RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
 

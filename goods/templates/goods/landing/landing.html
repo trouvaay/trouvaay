@@ -94,12 +94,13 @@
 
 </div>
 
+	<div id="promotion-modal-container"></div>
 	{% if show_referral_first_modal or show_referral_second_modal  %}<div id="referral-modal-container"></div>{% endif %}
 
 {% endblock content %}
 {% block endjs %}
 
-{% if show_referral_first_modal or show_referral_second_modal  %}
+<!-- {% if show_referral_first_modal or show_referral_second_modal  %}
 	<script type="text/javascript">
 	$(document).ready(function () {
 	
@@ -122,16 +123,16 @@
 		
 	});
 	</script>
-{% endif %}
+{% endif %} -->
 
-{% comment %}
+
 {% if promotion_offer and not request.user.is_authenticated %}
-//    <script type="text/javascript">
-// $(document).ready(function () {
-// 	$('#promotion-offer-modal').modal({"show": true});
-// });
-// </script>
-{% endif %}{% endcomment %}
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#promotion-offer-modal').modal({"show": true});
+		});
+</script>
+{% endif %}
 
 
 {% endblock endjs %}
