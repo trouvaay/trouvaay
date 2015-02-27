@@ -70,7 +70,7 @@ header.top-bar {
 
   a.about-us {
     border: 1px solid #FFF;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 800;
     padding: 5px 13px;
     text-transform: uppercase;
@@ -190,6 +190,14 @@ header.top-bar {
     z-index: 2;
     padding-top: 30px;
 
+  }
+  .statement {
+    
+    text-align: center;
+
+    h3 {
+      font-size: 18px;
+    }
   }
 }
 

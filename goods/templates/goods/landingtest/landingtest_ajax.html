@@ -1,12 +1,8 @@
-{% extends 'goods/landingtest/_landingtestbase.html' %}
+{% extends '_base_old.html' %}
 {% load staticfiles %}
 {% load cloudinary %}
 {% load goods_extras %}
 {% load endless %}
-
-{% block pre-content %}
-    {{ super }}
-{% endblock pre-content %}
 
 {% block content %}
       <div class="container-fluid" id="index-banner">
@@ -16,7 +12,7 @@
 	<!--[if IE 9]></video><![endif]-->
 	<img srcset='https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_766,h_282/v1422902656/shutterstock_160709951_hsvzx9.jpg' alt="">
 	</picture>
-	<div class="row-fluid text-container">
+	<div class="row-fluid text-container landingtest">
 		<div class="text "><div style="font-family: 'Droid Serif'; font-style: italic; text-transform: uppercase;'">Find one of a kind furniture available in </div><strong>Bay Area stores</strong><div>(without leaving your couch)</div></div>
 		<a href="{% url 'goods:main' %}" class="arrow-link button-shop-the-bay" id="shop-now">Shop now</a>
 	</div>
@@ -63,7 +59,8 @@
     </div>
 {% endblock content %}
 {% block endjs %}
-{{ block.super }}
+    {{ block.super }}
+    {% include 'js/addlikeditems.html' %}
     <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
     <script>
             $.endlessPaginate({

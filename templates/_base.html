@@ -91,19 +91,20 @@ document.createElement( "picture" );
   <div>
     <div class="row-fluid">
       <div class="col-xs-2 mobile-about visible-xs-block">
-	<label for="display-how-it-works" class="icon-question-mark"><span>How it works</span></label>
+	       <label for="display-how-it-works" class="icon-question-mark"><span>How it works</span></label>
       </div>
-      <div class="col-xs-8 logo-div">
+      <div class="col-xs-8 col-sm-10 logo-div">
       	<a href="/">
       	  <img src="{% static 'img/logos/raredoor-gold-logo.svg' %}" id="logo" alt="Raredoor" />
       	</a>
-        <a href="{% url 'goods:about' %}" class="about-us hidden-xs">About us</a>
+        <a href="#" data-toggle="modal" data-target="#how-it-works-modal" class="about-us hidden-xs" style="margin-left:10px">How it works</a>
+        <a href="{% url 'goods:about' %}" class="about-us hidden-xs" style="margin-left:10px">About us</a>
         {% if user.is_authenticated %}
-            <a href="{% url 'members:profile' %}" class="about-us hidden-xs" style="margin-left:10%">Profile</a>
+            <a href="{% url 'members:profile' %}" class="about-us hidden-xs" style="margin-left:10px">Profile</a>
         {% endif %}
       </div>
-      <div class="col-xs-2 mobile-menu visible-xs-block">
-	<label for="mobile-menu-switch" class="icon-hamburger-icon"><span>Menu</span></a>
+    <div class="col-xs-2 col-sm-1 mobile-menu visible-xs-block">
+	   <label for="mobile-menu-switch" class="icon-hamburger-icon"><span>Menu</span></a>
       </div>
       {% if user.is_authenticated %}
       <a href="{% url 'members:logout' %}" class="login hidden-xs nav-logout-button">Logout</a>

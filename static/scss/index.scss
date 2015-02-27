@@ -63,7 +63,9 @@
     padding-left: 35px;
     /*margin-left: -585px;*/
 
-
+    &.landingtest {
+      margin-top: 30px
+    }
     
     @include breakpoint(lg, True) {
       /*margin-left: -485px;*/
@@ -120,7 +122,11 @@
 #how-it-works, #how-it-works-mobile {
   margin-bottom: 30px;
 
-
+  .row {
+    @include breakpoint(sm) {
+      padding: 10% 0 0;
+    }
+  }
 
   .info {
     text-align: center;
@@ -262,7 +268,6 @@
     margin-bottom: 25px;
 
     @include breakpoint(sm) {
-      background: $lily;
       font-size: 17px;
       font-weight: normal;
       margin-bottom: 10px;

@@ -345,7 +345,7 @@ header.top-bar a {
 }
 header.top-bar a.about-us {
   border: 1px solid #FFF;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 800;
   padding: 5px 13px;
   text-transform: uppercase;
@@ -436,6 +436,12 @@ header.top-bar .links a:not(:last-child) {
     z-index: 2;
     padding-top: 30px;
   }
+}
+#how-it-works-mobile .statement {
+  text-align: center;
+}
+#how-it-works-mobile .statement h3 {
+  font-size: 18px;
 }
 
 input#display-how-it-works {
@@ -534,6 +540,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding-left: 35px;
   /*margin-left: -585px;*/
 }
+#index-banner .text-container.landingtest {
+  margin-top: 30px;
+}
 @media (min-width: 992px) {
   #index-banner .text-container {
     /*margin-left: -485px;*/
@@ -592,6 +601,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 
 #how-it-works, #how-it-works-mobile {
   margin-bottom: 30px;
+}
+@media (max-width: 767px) {
+  #how-it-works .row, #how-it-works-mobile .row {
+    padding: 10% 0 0;
+  }
 }
 #how-it-works .info, #how-it-works-mobile .info {
   text-align: center;
@@ -727,7 +741,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #products header {
-    background: #91c3c3;
     font-size: 17px;
     font-weight: normal;
     margin-bottom: 10px;

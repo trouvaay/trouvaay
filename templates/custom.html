@@ -101,6 +101,7 @@ var trouvaay = {
 
 		//product-like AJAX post
         $(".btn.btn-default.glyphs").click(function() {
+            console.log(data);
             var id = $(this).attr("id").substring(6);
             var data = {'id': id};
             if ($(this).hasClass("active")) {
