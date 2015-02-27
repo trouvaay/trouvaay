@@ -13,7 +13,7 @@
 	<img srcset='https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_766,h_282/v1422902656/shutterstock_160709951_hsvzx9.jpg' alt="">
 	</picture>
 	<div class="row-fluid text-container">
-		<div class="text "><div style="font-family: 'Droid Serif'; font-style: italic; text-transform: uppercase;'">Find one of a kind furniture available in </div><strong>Bay Area stores</strong><div>(without leaving your couch)</div></div>
+		<div class="text "><div style="font-style: italic; text-transform: uppercase;'">Find one of a kind furniture available in </div><strong>Bay Area stores</strong><div>(without leaving your couch)</div></div>
 		<a href="{% url 'goods:main' %}" class="arrow-link button-shop-the-bay" id="shop-now">Shop now</a>
 	</div>
 
@@ -94,7 +94,11 @@
 
 </div>
 
-	<div id="promotion-modal-container"></div>
+	<div id="promotion-modal-container">
+		
+
+
+	</div>
 	{% if show_referral_first_modal or show_referral_second_modal  %}<div id="referral-modal-container"></div>{% endif %}
 
 {% endblock content %}
