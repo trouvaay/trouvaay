@@ -291,7 +291,7 @@ html, body {
 }
 
 header.top-bar {
-  background: #000;
+  background: #333;
   line-height: 60px;
   height: 60px;
   position: relative;
