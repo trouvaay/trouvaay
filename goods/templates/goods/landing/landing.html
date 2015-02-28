@@ -135,8 +135,14 @@
 		$(document).ready(function () {
 			$('#promotion-offer-modal').modal({"show": true});
 		});
-</script>
+	</script>
 {% endif %}
-
-
+	<script>
+	// 	(mixpanel.track('LandingPage viewed', {
+	// 	    'page name' : document.title,
+	// 	    'url' : window.location.pathname
+	// 	}));
+	// 	console.log( "{{ request.session.cid }}");
+	// 	console.log('send mixpanel landing pageview event');
+	// </script>
 {% endblock endjs %}
