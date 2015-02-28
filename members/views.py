@@ -77,7 +77,7 @@ class SignupView(BaseRegistrationView):
     success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):
-        """Retursn the context for the tempalte for this view"""
+        """Returns the context for the template for this view"""
 
         context = super(SignupView, self).get_context_data(**kwargs)
         context['signup_form'] = RegistrationForm()
@@ -347,7 +347,7 @@ class BuyView(generic.DetailView):
             user.save()
 
     def get_object(self):
-        """Returns the object that thsi view is working with"""
+        """Returns the object that this view is working with"""
 
         product_id = None
         if(self.request.method == "POST"):
