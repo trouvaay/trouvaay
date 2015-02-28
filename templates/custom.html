@@ -220,8 +220,8 @@ function handleBuyButtonClick(e) {
 			
 			// call pre-checkout
 			$.ajax({
-				type: "POST",
-				url: "{% url "members:buy_precheckout" %}",
+				type: "GET",
+				url: "{% url "members:buy" %}",
 				dataType: "html",
 				data: {
 					product_id: productId,
