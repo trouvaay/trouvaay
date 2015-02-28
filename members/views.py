@@ -14,7 +14,6 @@ from django.conf import settings
 import logging
 from datetime import datetime, timedelta
 from registration.backends.default.views import RegistrationView as BaseRegistrationView
-from registration.backends.default.views import ActivationView as BaseActivationView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import get_user_model, authenticate, login
 from registration import signals
@@ -35,11 +34,15 @@ logger = logging.getLogger(__name__)
 
 # TODO: For profile page
 class ProfileView(LoginRequiredMixin, generic.DetailView):
+    """Displays user profile"""
+
     template_name = 'members/closet/closet.html'
     context_object_name = 'user'
     model = AuthUser
 
     def get_object(self):
+        """Returns the object that this view is working with"""
+
         if (self.request.user.is_authenticated()):
             try:
 
@@ -51,6 +54,8 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
             return None
 
     def get_context_data(self, **kwargs):
+        """Returns context for template for this view"""
+
         context = super(ProfileView, self).get_context_data(**kwargs)
         user = self.get_object()
         order = AuthUserOrder.objects.filter(authuser= user)
@@ -64,21 +69,16 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class ActivationView(BaseActivationView):
-
-    def activate(self, request, activation_key):
-        """Log user in upon successful activation"""
-        activated_user = super(ActivationView, self).activate(self, request, activation_key)
-        login(request, activated_user)
-        return activated_user
-
-
 class SignupView(BaseRegistrationView):
+    """Handles user signup process"""
+
     template_name = 'registration/registration_form.html'
     form_class = RegistrationForm
     success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):
+        """Returns the context for the template for this view"""
+
         context = super(SignupView, self).get_context_data(**kwargs)
         context['signup_form'] = RegistrationForm()
         context['login_form'] = RegistrationForm()
@@ -86,6 +86,8 @@ class SignupView(BaseRegistrationView):
         return context
 
     def register(self, request, **cleaned_data):
+        """Creates user"""
+
         email, password = cleaned_data['email'], cleaned_data['password']
         site = get_site(request)
         new_user = RegistrationProfile.objects.create_active_user(
@@ -146,11 +148,15 @@ def ProductLike(request):
 
 
 class ReferralSignup(generic.edit.FormView):
+    """Creates user via referral"""
+
     template_name = 'members/referral/signup.html'
     form_class = ReferralForm
     success_url = reverse_lazy('members:referral_info')
 
     def form_valid(self, form):
+        """Handles referral signup, this is called when submitted form was validated"""
+
         email = form.cleaned_data['email']
         self.success_url += "?"
         self.success_url += urlencode({'email': email})
@@ -161,13 +167,14 @@ class ReferralSignup(generic.edit.FormView):
         return super(ReferralSignup, self).form_valid(form)
 
 
-
-
 class ReferralInfo(generic.base.TemplateView):
+    """Shows user referral link which they can give to others to signup"""
 
     template_name = 'members/referral/info.html'
 
     def get_context_data(self, **kwargs):
+        """Returns conext for template for this view"""
+
         context = super(ReferralInfo, self).get_context_data(**kwargs)
         user = None
         if(self.request.user.is_authenticated()):
@@ -185,13 +192,14 @@ class ReferralInfo(generic.base.TemplateView):
         return context
 
 class ReserveView(generic.DetailView):
-    """Precheckout and Postcheckout combined
-    """
+    """Precheckout and Postcheckout combined"""
 
     context_object_name = 'product'
     model = Product
 
     def get(self, request, *args, **kwargs):
+        """Shows the reservation form"""
+
         form = None
         if(request.user.is_authenticated()):
             # make sure user has the profile
@@ -206,6 +214,7 @@ class ReserveView(generic.DetailView):
         return render_to_response('members/purchase/reserve_precheckout.html', locals())
 
     def post(self, request, *args, **kwargs):
+        """Completes the reservation process"""
 
         product = self.get_object()
         order_user = None
@@ -230,19 +239,16 @@ class ReserveView(generic.DetailView):
             logger.debug('is_existing: {}'.format(is_existing))            
 
             update_user = False
-#             first_name = self.request.POST.get('first_name', None)
             first_name = form.cleaned_data['first_name']
             if(not first_name is None):
                 order_user.first_name = first_name
                 update_user = True
-#             last_name = self.request.POST.get('last_name', None)
             last_name = form.cleaned_data['last_name']
             if(not last_name is None):
                 order_user.last_name = last_name
                 update_user = True
             if(update_user):
                 order_user.save()
-#             phone = self.request.POST.get('phone', None)
             phone = form.cleaned_data['phone']
             if(not phone is None):
                 profile = order_user.profile
@@ -286,12 +292,68 @@ class ReserveView(generic.DetailView):
         return render_to_response('members/purchase/reserve_postcheckout.html', locals())
                 
 
-class BuyCallbackView(generic.DetailView):
+class BuyView(generic.DetailView):
+    """Pre-checkout and post-checkout for the buying process"""
+
     context_object_name = 'product'
     model = Product
 
+    def __create_or_update_shipping_address(self, request, user):
+        """Creates if needed or updated existing shipping address for the user"""
+
+        # TODO: allow multiple addresses per user
+        # right now there is only one address per user which
+        # is enforced in the database with a Unique key on user id
+        shipping_address = None
+        try:
+            shipping_address = AuthUserAddress.objects.get(authuser=user)
+            logger.debug('Updating existing shipping address')
+        except AuthUserAddress.DoesNotExist:
+            # no address, that's ok we will create a new one
+            shipping_address = AuthUserAddress()
+            logger.debug('Creating new shipping address')
+
+        # TODO: shipping address should be tied to the order
+        # right now it is only tied to user
+        shipping_address.authuser = user
+        shipping_address.street = request.POST['args[shipping_address_line1]']
+        shipping_address.city = request.POST['args[shipping_address_city]']
+        shipping_address.state = request.POST['args[shipping_address_state]']
+        shipping_address.zipcd = request.POST['args[shipping_address_zip]']
+        shipping_address.shipping = True
+        shipping_address.save()
+        
+
+    def __update_name(self, request, user):
+        """Update user's first and last name if needed"""
+
+        update_user = False
+        first_name = None
+        last_name = None
+        if(not user.first_name or not user.last_name):
+            full_name = self.request.POST.get('args[shipping_name]', None)
+            if(full_name):
+                if(' ' in full_name):
+                    first_name, last_name = full_name.strip().split(' ', 1)
+                else:
+                    first_name = full_name.strip()
+        if(not user.first_name and first_name):
+            user.first_name = first_name
+            update_user = True
+        if(not user.last_name and last_name):
+            user.last_name = last_name
+            update_user = True
+        if(update_user):
+            user.save()
+
     def get_object(self):
-        product_id = self.request.POST.get('product_id', None)
+        """Returns the object that this view is working with"""
+
+        product_id = None
+        if(self.request.method == "POST"):
+            product_id = self.request.POST.get('product_id', None)
+        elif(self.request.method == "GET"):
+            product_id = self.request.GET.get('product_id', None)
         if(not product_id):
             return None
         try:
@@ -299,7 +361,43 @@ class BuyCallbackView(generic.DetailView):
         except Product.DoesNotExist:
             return None
 
+    def get(self, request, *args, **kwargs):
+        """Handles Pre-checkout screen to display order info: 
+        price, taxes, promo code (with verification), discounts and total
+        """
+
+        print self.request.GET
+
+        product = self.get_object()
+        order_type = self.request.GET.get('order_type', None)
+
+        promo_code = self.request.GET.get('promo_code', None)
+
+        promo_is_valid = False
+        promo_code_message = ''
+        promo_codes = []
+        if(promo_code):
+            promo_is_valid, proper_promo_code, invalid_message = PromotionOffer.is_valid_promo_code(self.request.user, promo_code)
+            if(promo_is_valid):
+                promo_codes = [proper_promo_code]
+                promo_code = proper_promo_code
+            else:
+                promo_code_message = invalid_message
+
+        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(user=self.request.user, total_price_before_offers=product.current_price,
+            promo_codes=promo_codes)
+        total_discount = 0
+        for discount in discounts:
+            total_discount += discount['dollar_value']
+        capture_time = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
+        stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
+        feature_name_reserve = settings.FEATURE_NAME_RESERVE
+        site_name = settings.SITE_NAME
+        return render_to_response('members/purchase/buy_precheckout.html', locals())
+
     def post(self, request, *args, **kwargs):
+        """Completes the order after user is done with stripe"""
+
         try:
             # create new order
             order = AuthUserOrder()
@@ -331,7 +429,7 @@ class BuyCallbackView(generic.DetailView):
                     # user is trying to do something nasty
                     # in any case we have a discrepancy between
                     # what was shown to the user at the time of checkout
-                    # and current product prive
+                    # and current product price
                     # it is best to stop right here and refresh the page
                     logger.info('Product price did not match the total that came in the request')
                     return JsonResponse({'status': 'error', 'message': 'Total ammount does not match.'})
@@ -351,24 +449,7 @@ class BuyCallbackView(generic.DetailView):
                     logger.debug('is_existing: %s' % str(is_existing))
 
                 # update first ane last name if needed
-                update_user = False
-                first_name = None
-                last_name = None
-                if(not order_user.first_name or not order_user.last_name):
-                    full_name = self.request.POST.get('args[shipping_name]', None)
-                    if(full_name):
-                        if(' ' in full_name):
-                            first_name, last_name = full_name.strip().split(' ', 1)
-                        else:
-                            first_name = full_name.strip()
-                if(not order_user.first_name and first_name):
-                    order_user.first_name = first_name
-                    update_user = True
-                if(not order_user.last_name and last_name):
-                    order_user.last_name = last_name
-                    update_user = True
-                if(update_user):
-                    order_user.save()
+                self.__update_name(request, order_user)
 
                 Profile.create_profile(order_user)
                 order.authuser = order_user
@@ -383,6 +464,7 @@ class BuyCallbackView(generic.DetailView):
                                                           offer_id=discount['offer_id'],
                                                           discount_dollar_value=discount['dollar_value'])
 
+                # create credit card charge with stripe
                 stripe.api_key = settings.STRIPE_SECRET_KEY
                 stripe.Charge.create(
                     amount=total_amount_in_cents,
@@ -397,33 +479,11 @@ class BuyCallbackView(generic.DetailView):
                         })
 
             except Exception, e:
-                logger.error('Error in BuyCallbackView.post()')
+                logger.error('Error in BuyView.post()')
                 logger.error(str(e))
                 return JsonResponse({'status': 'error', 'message': 'Failed to charge credit card.'})
 
-            # create or update shipping address
-            #
-            # TODO: allow multiple addresses per user
-            # right now there is only one address per user which
-            # is enforced in the database with a Unique key on user id
-            shipping_address = None
-            try:
-                shipping_address = AuthUserAddress.objects.get(authuser=order_user)
-                logger.debug('Updating existing shipping address')
-            except AuthUserAddress.DoesNotExist:
-                # no address, that's ok we will create a new one
-                shipping_address = AuthUserAddress()
-                logger.debug('Creating new shipping address')
-
-            # TODO: shipping address should be tied to the order
-            # right now it is only tied to user
-            shipping_address.authuser = order_user
-            shipping_address.street = request.POST['args[shipping_address_line1]']
-            shipping_address.city = request.POST['args[shipping_address_city]']
-            shipping_address.state = request.POST['args[shipping_address_state]']
-            shipping_address.zipcd = request.POST['args[shipping_address_zip]']
-            shipping_address.shipping = True
-            shipping_address.save()
+            self.__create_or_update_shipping_address(self.request, order_user)
 
             # add item to order
             order_item = AuthUserOrderItem.create_order_item(order=order, product=product, order_type=order_type)
@@ -467,52 +527,9 @@ class BuyCallbackView(generic.DetailView):
             return JsonResponse(json_result)
             
         except Exception, e:
-            logger.error('Error in BuyCallbackView.post()')
+            logger.error('Error in BuyView.post()')
             logger.error(str(e))
             return JsonResponse({'status': 'error', 'message': 'Error processing the order.'})
-
-
-class BuyPreCheckoutView(generic.DetailView):
-    context_object_name = 'product'
-    model = Product
-
-    def get_object(self):
-        product_id = self.request.POST.get('product_id', None)
-        if(not product_id):
-            return None
-        try:
-            return Product.objects.get(pk=int(product_id))
-        except Product.DoesNotExist:
-            return None
-
-    def post(self, request, *args, **kwargs):
-
-        product = self.get_object()
-        order_type = self.request.POST.get('order_type', None)
-
-        promo_code = self.request.POST.get('promo_code', None)
-
-        promo_is_valid = False
-        promo_code_message = ''
-        promo_codes = []
-        if(promo_code):
-            promo_is_valid, proper_promo_code, invalid_message = PromotionOffer.is_valid_promo_code(self.request.user, promo_code)
-            if(promo_is_valid):
-                promo_codes = [proper_promo_code]
-                promo_code = proper_promo_code
-            else:
-                promo_code_message = invalid_message
-
-        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(user=self.request.user, total_price_before_offers=product.current_price,
-            promo_codes=promo_codes)
-        total_discount = 0
-        for discount in discounts:
-            total_discount += discount['dollar_value']
-        capture_time = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
-        stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
-        feature_name_reserve = settings.FEATURE_NAME_RESERVE
-        site_name = settings.SITE_NAME
-        return render_to_response('members/purchase/buy_precheckout.html', locals())
 
 
 class PostCheckoutUpdate(generic.edit.FormView):
