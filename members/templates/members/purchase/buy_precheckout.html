@@ -137,7 +137,7 @@ $(document).ready(function() {
 				token: function(token, args) {
 					$.ajax({
 						type: "POST",
-						url: {% url "members:buy_callback" %},
+						url: {% url "members:buy" %},
 						data: {
 							token: token,
 							args: args,
@@ -153,7 +153,7 @@ $(document).ready(function() {
 							console.log('Buy callback returned: ' + data['status']);
 						
 						  	if(data['status'] == "ok"){
-
+								
 							  	//fire google adwords event
 								window.google_trackConversion({
 								    google_conversion_id: 956335221,
