@@ -140,7 +140,6 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30, null=True, blank=True)
     is_merchant = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
-    in_coverage_area = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True, null=False)
     is_admin = models.BooleanField(default=False, null=False)
 
@@ -301,46 +300,6 @@ class AuthUserActivity(models.Model):
 
     class Meta:
         ordering = ['authuser']
-
-# class AuthUserDesiredObject(models.Model):
-#   fur
-
-
-class AuthUserStripe(models.Model):
-    authuser = models.OneToOneField(settings.AUTH_USER_MODEL)
-    stripe_id = models.CharField(max_length=120, null=True, blank=True)
-
-    def __unicode__(self):
-        return str(self.stripe_id)
-
-
-class AuthUserCart(models.Model):
-    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
-    saved_items = models.ManyToManyField('goods.Product')
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-    active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return ('Cart for user: ' + self.authuser.email + ';  items: ' + str(self.saved_items.all()))
-
-    def get_item_count(self):
-        return self.saved_items.all().count()
-
-    def get_cart_total(self):
-        total = 0
-        for product in self.saved_items.all():
-            total += product.current_price
-        return total
-
-    def get_cart_total_in_cents(self):
-        return int(self.get_cart_total() * 100)
-
-    def has_trial_products(self):
-        for product in self.saved_items.all():
-            if(product.has_trial):
-                return True
-        return False
 
 
 class AuthUserOrder(models.Model):
@@ -706,3 +665,31 @@ class Join(models.Model):
             user_join.client_id = client_id
             user_join.save()
             return user_join
+
+# class AuthUserCart(models.Model):
+#     authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
+#     saved_items = models.ManyToManyField('goods.Product')
+#     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+#     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+#     active = models.BooleanField(default=True)
+
+#     def __str__(self):
+#         return ('Cart for user: ' + self.authuser.email + ';  items: ' + str(self.saved_items.all()))
+
+#     def get_item_count(self):
+#         return self.saved_items.all().count()
+
+#     def get_cart_total(self):
+#         total = 0
+#         for product in self.saved_items.all():
+#             total += product.current_price
+#         return total
+
+#     def get_cart_total_in_cents(self):
+#         return int(self.get_cart_total() * 100)
+
+#     def has_trial_products(self):
+#         for product in self.saved_items.all():
+#             if(product.has_trial):
+#                 return True
+#         return False

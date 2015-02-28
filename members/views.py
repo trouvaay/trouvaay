@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser, \
-    AuthUserCart, AuthUserOrder, AuthUserOrderItem, AuthUserAddress, RegistrationProfile, \
+    AuthUserOrder, AuthUserOrderItem, AuthUserAddress, RegistrationProfile, \
     PromotionOffer, PromotionRedemption, Join, Profile
 from goods.models import Product
 from members.forms import CustomAuthenticationForm, RegistrationForm, \
