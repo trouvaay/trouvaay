@@ -1,7 +1,6 @@
 {% load cloudinary %}
 <div class="product grid-item col-md-4 col-xs-6">
 	<a href="{% url 'goods:detail' product.slug  %}" class="image-container landing-view-product">
-
 		<picture>
 		<!--[if IE 9]><video style="display: none;"><![endif]-->
 		<source srcset="{% cloudinary_url product.productimage_set.first.image width=252 height=252 crop="fill" %}" media="(min-width: 992px)">
