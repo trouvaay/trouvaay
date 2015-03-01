@@ -271,6 +271,29 @@ function handleBuyButtonClick(e) {
 			});
 		}        
     }
+    else if(e.target.id.substr(0, 15) == 'cancel_reserve_'){
+        var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
+        mixpanel.track(
+            "Clicked Cancel Reserve Button In Profile",
+            { "productId": productId }
+        );
+        console.log('mixpanel: cancel_reserve.onclick event fired');
+        
+        if(productId && !(typeof productId === 'undefined')){
+            $.post(
+                "{% url 'members:cancel_reserve' %}", 
+                {'id': productId},
+                function(response){
+                    if(response == 'loginrequired'){
+                        window.location.replace("{% url 'members:login' %}");
+                    } else if (response == 'success') {
+                        var prodContainer = "reserved-product-container_" + productId;
+                        $("#"+prodContainer).remove();
+                    }
+                }
+            );
+        }
+    }
 	e.preventDefault();
 }
 

@@ -2509,7 +2509,8 @@ form .form-checkbox-wrap .checkbox-label {
   width: 70px;
 }
 .btn.btn-default.sold,
-.btn.btn-primary.buy {
+.btn.btn-primary.buy,
+.btn.btn-danger.buy.reserve {
   width: 40%;
   max-width: 140px;
   height: 3em;
