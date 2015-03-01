@@ -139,7 +139,7 @@ RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
     'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
 }
-SIGNUP_OFFER = "Signup and get 10% off your 1st purchase as a new customer"
+SIGNUP_OFFER = "Get 10% off your 1st purchase"
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
 
