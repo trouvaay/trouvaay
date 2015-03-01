@@ -998,7 +998,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 .team-members-container .name-container .subline {
-  font-size: 14px;
+  font-size: 13px;
 }
 .team-members-container .grid-item {
   margin-bottom: 40px;
