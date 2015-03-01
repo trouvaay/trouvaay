@@ -145,6 +145,26 @@ def ProductLike(request):
         return JsonResponse('success', safe=False)
 
 
+def CancelReserve(request):
+    """Remove product from reserve in Profile"""
+    # because this is called via AJAX, the @login_required decorator
+    # is not very useful, so instead we have to manually check if
+    # user is authenticated or not and return appropariate status in json
+
+    if(not request.user.is_authenticated()):
+        return JsonResponse('loginrequired', safe=False)
+
+    if request.method == "POST":
+        userinstance = request.user
+        product = Product.objects.get(pk=int(request.POST['id']))
+        product.is_reserved = False
+        product.save()
+        logger.debug('product is_reserved field set to False')
+        return JsonResponse('success', safe=False)
+    else:
+        return JsonResponse('success', safe=False)
+
+
 class ReferralSignup(generic.edit.FormView):
     template_name = 'members/referral/signup.html'
     form_class = ReferralForm
