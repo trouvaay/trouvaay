@@ -133,7 +133,7 @@ class MainView(AjaxListView):
             except Exception, e:
                 logger.debug(str(e))
                 furniture_type_object = None
-            queryset = list(self.model.objects.filter(is_published=True, furnituretype = furniture_type_object, is_featured=False, store__is_featured=True))
+            queryset = list(self.model.objects.filter(is_published=True, furnituretype = furniture_type_object, store__is_featured=True))
         except:
             queryset = self.model.objects.filter(is_published=True, store__is_featured=True)
 
