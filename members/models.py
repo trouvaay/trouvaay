@@ -134,8 +134,15 @@ class AuthUserManager(BaseUserManager):
         return user
 
 
+class LowerEmailField(models.EmailField):
+    def to_python(self, value):
+        value = super(LowerEmailField, self).to_python(value)
+        if isinstance(value, basestring):
+            return value.lower()
+        return value
+
 class AuthUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=255, unique=True,)
+    email = LowerEmailField(max_length=255, unique=True,)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
     is_merchant = models.BooleanField(default=False)
@@ -236,6 +243,9 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def save(self, *args, **kwargs):
+        if(self.email and self.email != self.email.lower()):
+            self.email = self.email.lower()
+
         super(AuthUser, self).save(*args, **kwargs)
         useractivity = AuthUserActivity.objects.get_or_create(authuser=self)
         useractivity[0].save()
