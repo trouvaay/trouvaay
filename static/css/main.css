@@ -848,8 +848,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   .grid .name-container .name {
-    font-size: 22px;
-    line-height: 22px;
+    font-size: 20px;
+    line-height: 20px;
   }
 }
 .grid .name-container .name a {
