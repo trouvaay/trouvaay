@@ -63,7 +63,7 @@ class Command(BaseCommand):
             u.save()
             
             try:
-                u.material.add(Material.objects.get(select=data[21]))
+                if data[21]: u.material.add(Material.objects.get(select=data[21]))
                 u.segment.add(Segment.objects.get(select=data[23]))
                 u.furnituretype.add(FurnitureType.objects.get(select=data[24]))
                 u.subcategory.add(Subcategory.objects.get(select=data[25]))
