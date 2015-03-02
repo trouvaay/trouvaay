@@ -35,7 +35,7 @@ class ProductImageAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     model = Product
 
-    list_display = ['short_name', 'first_image', 'store', 'is_published', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date', 'is_landing', 'is_featured',]
+    list_display = ['short_name', 'first_image', 'store', 'is_published', 'is_featured', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date', 'is_landing', 'is_featured',]
 
     fields = [('short_name', 'is_published', 'is_sold', 'is_featured'), ('store', 'has_trial', 'units'),('original_price', 'current_price'), 
                 'pub_date', 'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),

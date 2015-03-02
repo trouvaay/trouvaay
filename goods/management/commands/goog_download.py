@@ -80,10 +80,10 @@ class Command(BaseCommand):
                 
                 #continue going through imgs to create instances
                 for i in range(28,31):
-                    try:
-                        add_img_instance(u.pk, data[i])    
-                    except Exception, e:
-                        logger.info('No {} Image for {}'.format(headers[i], u))
+                    # try:
+                    add_img_instance(u.pk, data[i])    
+                    # except Exception, e:
+                    #     logger.info('No {} Image for {}'.format(headers[i], u))
 
                 logger.info('Added {} to database'.format(u))
                         
