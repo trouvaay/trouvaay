@@ -1,10 +1,11 @@
 {% load staticfiles %}
 {% load cloudinary %}
-<div class="col-xs-12 col-sm-6 col-md-4 product-container">
-    <div class="vintage-label" style="text-align:center; margin-top: 5px; margin-bottom:-10px;"></div>
+<div class="col-xs-6 col-sm-6 col-md-4 product-container">
+	<!--    <div class="vintage-label" style="text-align:center; margin-top: 5px; margin-bottom:-10px;"></div> -->
     <div class="grid-product centered-parent {% if product.is_vintage %}vintage-product{% endif %}" style="margin-bottom:-5px;">
         <!-- <img class="img-responsive" src="{{ product.productimage_set.first.image.url }}"> -->
     <div class="centered-child">
+	<a href="{% url 'goods:detail' product.slug  %}" target="_blank">
         <picture>
             <!--[if IE 9]><video style="display: none;"><![endif]-->
             <source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop="fit" %}" media="(min-width: 992px)">
@@ -12,12 +13,14 @@
             <!--[if IE 9]></video><![endif]-->
             <img class="main-image" srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=275 crop="fit" %}' alt="">
         </picture>
+	</a>
             
     </div>
+	    <!--
     <a href="{% url 'goods:detail' product.slug  %}" target="_blank" class="view-product" style="height:100%">
             <div class="hover-text" style="left:22%; top: 30%;"><span class="details-label"><h4>click to view</h4></span></div>
-            <!-- <div class="background"></div> -->
-    </a>
+            <div class="background"></div> 
+    </a>-->
     
         
     </div>

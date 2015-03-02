@@ -52,6 +52,10 @@ html, body {
   }
 }
 
+.like-btn span {
+  display: none;
+}
+
 @font-face {
   font-family: 'Ostrich Sans';
   src: url("../fonts/ostrich-black-webfont.eot");
@@ -1011,6 +1015,109 @@ input#mobile-menu-switch:checked + #mobile-menu {
   max-width: 100%;
   margin: 0 auto;
   width: auto;
+}
+
+.grid-products-wrapper {
+  margin-top: 50px;
+  background: transparent;
+}
+.grid-products-wrapper .product-container {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+  .grid-products-wrapper .product-container {
+    padding-bottom: 0px;
+  }
+  .grid-products-wrapper .product-container:nth-child(odd) {
+    padding-right: 10px;
+  }
+  .grid-products-wrapper .product-container:nth-child(even) {
+    padding-left: 10px;
+  }
+}
+.grid-products-wrapper .product-container:hover {
+  background: #FFF;
+  box-shadow: #AAA 0px 0px 5px;
+}
+.grid-products-wrapper .product-container:hover .main-image {
+  /* Remove with main_old.css */
+  opacity: 1;
+}
+.grid-products-wrapper .product-container:hover .actions {
+  display: block;
+}
+.grid-products-wrapper .grid-product {
+  padding: 10px 15px;
+}
+@media (max-width: 767px) {
+  .grid-products-wrapper .grid-product {
+    height: 330px;
+  }
+}
+@media (max-width: 480px) {
+  .grid-products-wrapper .grid-product {
+    height: 165px;
+  }
+}
+.grid-products-wrapper .grid-product .centered-child a {
+  display: block;
+}
+.grid-products-wrapper .grid-product .centered-child a img {
+  max-height: 100%;
+}
+.grid-products-wrapper .pic-detail-home {
+  text-align: center;
+  margin: 2px 0px 3px;
+  clear: both;
+  float: none;
+}
+.grid-products-wrapper .price {
+  font-family: "Droid Serif";
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+.grid-products-wrapper .name {
+  font-family: "Droid Serif";
+  font-size: 9px;
+  font-style: italic;
+}
+.grid-products-wrapper .name a {
+  color: #000;
+}
+.grid-products-wrapper .name a:hover {
+  text-decoration: none;
+}
+.grid-products-wrapper .neighborhood-like-container {
+  position: relative;
+}
+.grid-products-wrapper .neighborhood {
+  border-top: 1px solid #636466;
+  border-top: 1px solid rgba(99, 100, 102, 0.25);
+  font-family: "Droid Serif";
+  font-size: 13px;
+  font-style: italic;
+  text-transform: uppercase;
+  text-align: center;
+}
+.grid-products-wrapper .neighborhood, .grid-products-wrapper .actions {
+  padding-top: 4px;
+  line-height: 20px;
+}
+.grid-products-wrapper .actions {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+.grid-products-wrapper .actions a {
+  text-decoration: none;
+}
+.grid-products-wrapper .actions .like-btn {
+  display: block;
+  color: #e6be46;
+  font-size: 15px;
+  line-height: inherit;
 }
 
 footer {
