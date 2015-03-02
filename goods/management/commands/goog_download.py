@@ -74,16 +74,16 @@ class Command(BaseCommand):
                 except ProductImage.DoesNotExist:
                     try:
                         add_img_instance(u.pk, main_image_url, is_main=True)
-                    #img_url is invalid
+                    # img_url is invalid
                     except:
                         pass
                 
                 #continue going through imgs to create instances
                 for i in range(28,31):
-                    # try:
-                    add_img_instance(u.pk, data[i])    
-                    # except Exception, e:
-                    #     logger.info('No {} Image for {}'.format(headers[i], u))
+                    try:
+                        add_img_instance(u.pk, data[i])    
+                    except Exception, e:
+                        logger.info('No {} Image for {}'.format(headers[i], u))
 
                 logger.info('Added {} to database'.format(u))
                         
