@@ -1,0 +1,132 @@
+.grid-products-wrapper {
+    margin-top: 50px;
+    background: transparent;
+
+    .product-container {
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+
+      @include breakpoint(sm) {
+	padding-bottom: 0px;
+	&:nth-child(odd) {
+	  padding-right: 10px;
+
+	}
+
+	&:nth-child(even) {
+	  padding-left: 10px;
+	}
+
+      }
+
+      &:hover {
+	background: #FFF;
+	box-shadow: #AAA 0px 0px 5px;
+
+	.main-image {
+	  /* Remove with main_old.css */
+	  opacity: 1;
+
+	}
+
+	.actions {
+	  display: block;
+
+	}
+
+      }
+    }
+
+    .grid-product {
+	    padding: 10px 15px;
+	    @include breakpoint(sm) {
+	      height: 330px;
+	    }
+	    
+	    @include breakpoint(xs) {
+	      height: 165px;
+	    }
+
+	    .centered-child a {
+	      display: block;
+
+	      img {
+		max-height: 100%;
+	      }
+	    }
+
+    }
+
+    .pic-detail-home {
+      text-align: center;
+      margin: 2px 0px 3px;
+      clear: both;
+      float: none;
+
+    }
+
+    .price {
+      font-family: "Droid Serif";
+      font-size: 13px;
+      margin-bottom: 3px;
+
+    }
+
+    .name {
+      font-family: "Droid Serif";
+      font-size: 9px;
+      font-style: italic;
+
+      a {
+	color: #000;
+
+	&:hover {
+	  text-decoration: none;
+	}
+
+      }
+
+    }
+
+    .neighborhood-like-container {
+      position: relative;
+    }
+
+    .neighborhood {
+      border-top: 1px solid #636466;
+      border-top: 1px solid rgba(99, 100, 102, 0.25);
+      font-family: "Droid Serif";
+      font-size: 13px;
+      font-style: italic;
+      text-transform: uppercase;
+      text-align: center; 
+    }
+
+    .neighborhood, .actions {
+      padding-top: 4px;
+      line-height: 20px; 
+    }
+
+    .actions {
+      display: none;
+      position: absolute;
+      top: 0px;
+      width: 100%;
+
+      a {
+	text-decoration: none;
+      }
+
+      .like-btn {
+	display: block;
+	color: $gold;
+	font-size: 15px;
+	line-height: inherit;
+
+      }
+
+
+    }
+
+
+}
