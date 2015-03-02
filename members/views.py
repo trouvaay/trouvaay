@@ -171,7 +171,8 @@ class ReferralSignup(generic.edit.FormView):
     """Creates user via referral"""
 
     template_name = 'members/referral/signup.html'
-    form_class = ReferralForm
+    # form_class = ReferralForm
+    form_class = RegistrationForm
     success_url = reverse_lazy('members:referral_info')
 
     def form_valid(self, form):

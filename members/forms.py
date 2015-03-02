@@ -199,7 +199,7 @@ class RegistrationForm(forms.ModelForm):
                 Field('email', placeholder='Email address'),
                 Field('password', placeholder='Password'),
                 Field('password2', placeholder='Confirm Password'),
-                Submit('submit', 'Submit', css_class="btn-primary"),
+                Submit('submit', 'Join', css_class="btn-primary"),
             ),
         )
 

@@ -44,10 +44,12 @@ class LandingView(generic.ListView):
         if(settings.ENABLE_REFERRAL):
             if(self.request.user.is_authenticated()):
                 if(is_time_to_show_modal(self.request, 'referral2')):
+                    logger.info('we should be showing 2nd modal')
                     context['show_referral_second_modal'] = True
                     hide_modal(self.request, 'referral2', settings.SECOND_REFERRAL_MODAL_EXP)
             else:
                 if(is_time_to_show_modal(self.request, 'referral1')):
+                    logger.info('we should be showing 1st modal')
                     context['show_referral_first_modal'] = True
                     hide_modal(self.request, 'referral1', settings.FIRST_REFERRAL_MODAL_EXP)
 

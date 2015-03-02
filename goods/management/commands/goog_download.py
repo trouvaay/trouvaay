@@ -60,7 +60,8 @@ class Command(BaseCommand):
             u.material_description = data[22]
             u.delivery_weeks = data[26]
             u.is_published = True
-
+            u.save()
+            
             try:
                 u.material.add(Material.objects.get(select=data[21]))
                 u.segment.add(Segment.objects.get(select=data[23]))
@@ -84,7 +85,6 @@ class Command(BaseCommand):
                     except Exception, e:
                         logger.info('No {} Image for {}'.format(headers[i], u))
 
-                u.save()
                 logger.info('Added {} to database'.format(u))
                         
             except Exception, e:

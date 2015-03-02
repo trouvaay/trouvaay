@@ -232,10 +232,10 @@ RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reserv
 
 # referral settings
 SHARE_URL = ''
-ENABLE_REFERRAL = False
+ENABLE_REFERRAL = True
 LIMIT_REFERRAL_PER_CLIENT_ID = 3
-FIRST_REFERRAL_MODAL_EXP = 86400  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
-SECOND_REFERRAL_MODAL_EXP = 86400  # do not show second referral modal again within this many seconds
+FIRST_REFERRAL_MODAL_EXP = 1  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
+SECOND_REFERRAL_MODAL_EXP = 1  # do not show second referral modal again within this many seconds
 
 # email settings are another good candidate to have
 # each developer define in their own dev_settings.py
