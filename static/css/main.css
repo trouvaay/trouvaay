@@ -517,8 +517,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   line-height: 40px;
   margin-top: -28px;
   padding: 0px 11px;
-  top: 50%;
-  left: 81%;
+  top: 60%;
+  left: 22%;
   margin-left: -93px;
   position: absolute;
 }
