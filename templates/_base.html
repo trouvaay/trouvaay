@@ -282,7 +282,7 @@ document.createElement( "picture" );
   </script><!-- end Mixpanel -->
     {% include 'custom.html' %}
     </div>
-    {% block endjs %}{% endblock endjs %}
+    {% block endjs %}{% include 'js/addlikeditems.html' %}{% endblock endjs %}
     {% analytical_body_bottom %}
     </body>
 </html>
