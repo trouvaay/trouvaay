@@ -1,73 +1,76 @@
-{% extends '_base.html' %}
+{% extends '_base_old.html' %}
 {% load staticfiles %}
 {% load cloudinary %}
 {% load goods_extras %}
 
 
 {% block content %}
-  <div class="container pic-tabs main" style="margin-top:30px">
+<div class="wrap">
+  <div class="cont"
+    <div class="container pic-tabs main" style="margin-top:30px">
+        <div class="container-fluid featured-icons">        
+          <div class="span7 text-center">
+              <h3>Reserved Items</h3>
+          </div>
+        </div>
+        {% if user_order_items %}        
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="tab-content">
+                      <div class="tab-pane fade in active">
+                          <div class="grid-products-wrapper">
+                              <div class="row">
+                                  {% for product in user_order_items %}
+                                    <!-- bellow if statement is temporary as backend would be changed later -->
+                                    {% if product.is_reserved %}
+                                      <!-- for now there is only 1 orderitem per order -->
+                                      {% include 'members/closet/_reservedproduct_for_loop.html' %}
+                                    {% endif %}
+                                  {% endfor %}
+                              </div>
+                          </div>
+                      </div><!-- end tab1 -->
+                  </div>
+              </div>
+          </div>
+        {% else %}
+              <div class="row">
+                <div class="col-xs-12">
+                  <h4 style="text-align:center">You havent made any reservations yet!</h4>
+                </div>
+              </div>
+        {% endif %}      
+    </div>
+    <div class="container pic-tabs" style="margin-bottom:30px">
       <div class="container-fluid featured-icons">        
         <div class="span7 text-center">
-            <h3>Reserved Items</h3>
+            <h3>Saved Items</h3>
         </div>
       </div>
-      {% if user_order_items %}        
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="tab-content">
-                    <div class="tab-pane fade in active">
-                        <div class="grid-products-wrapper">
-                            <div class="row">
-                                {% for product in user_order_items %}
-                                  <!-- bellow if statement is temporary as backend would be changed later -->
-                                  {% if product.is_reserved %}
-                                    <!-- for now there is only 1 orderitem per order -->
-                                    {% include 'members/closet/_reservedproduct_for_loop.html' %}
-                                  {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div><!-- end tab1 -->
-                </div>
-            </div>
-        </div>
-      {% else %}
-            <div class="row">
-              <div class="col-xs-12">
-                <h4 style="text-align:center">You havent made any reservations yet!</h4>
-              </div>
-            </div>
-      {% endif %}      
-  </div>
-  <div class="container pic-tabs" style="margin-bottom:30px">
-    <div class="container-fluid featured-icons">        
-      <div class="span7 text-center">
-          <h3>Saved Items</h3>
-      </div>
-    </div>
-    {% if liked_products %}        
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="tab-content">
-                <div class="tab-pane fade in active">
-                    <div class="grid-products-wrapper">
-                        <div class="row">
-                            {% for product in liked_products %}
-                                {% include 'members/closet/_savedproduct_for_loop.html' %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div><!-- end tab1 -->
-            </div>
-        </div>
-    </div>
-    {% else %}
+      {% if liked_products %}        
       <div class="row">
-        <div class="col-xs-12">
-          <h4 style="text-align:center">Keep track of the best pieces by <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color:red"></span>'ing them</h4>
-        </div>
+          <div class="col-sm-12">
+              <div class="tab-content">
+                  <div class="tab-pane fade in active">
+                      <div class="grid-products-wrapper">
+                          <div class="row">
+                              {% for product in liked_products %}
+                                  {% include 'members/closet/_savedproduct_for_loop.html' %}
+                              {% endfor %}
+                          </div>
+                      </div>
+                  </div><!-- end tab1 -->
+              </div>
+          </div>
       </div>
-    {% endif %}       
+      {% else %}
+        <div class="row">
+          <div class="col-xs-12">
+            <h4 style="text-align:center">Keep track of the best pieces by <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color:red"></span>'ing them</h4>
+          </div>
+        </div>
+      {% endif %}       
+    </div>
   </div>
 {% endblock content %}
 {% block endjs %}

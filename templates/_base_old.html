@@ -3,6 +3,7 @@
 {% load cloudinary %}
 {% load staticfiles %}
 <html lang="en" class="no-js">
+
     <head>
         {% analytical_head_top %}
         <meta charset="utf-8">
@@ -80,13 +81,16 @@
         {% analytical_head_bottom %}
     </head>
     <body>
-        {% analytical_body_top %}
-      
-        {% include '_mobile_nav.html' %}  
-        {% block nav %}
-            {% include '_tab_nav.html' %}
-        {% endblock nav %}
-        {% block content %}{% endblock content %}
+        <!-- <div class="wrap"> -->
+            {% analytical_body_top %}
+          
+            {% include '_mobile_nav.html' %}  
+            {% block nav %}
+                {% include '_tab_nav.html' %}
+            {% endblock nav %}
+            {% block content %}
+            {% endblock content %}
+        <!-- </div> -->
 <footer>
   <div class="container">
     <div class="row">
