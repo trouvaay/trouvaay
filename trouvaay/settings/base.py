@@ -70,7 +70,7 @@ ROOT_URLCONF = 'trouvaay.urls'
 
 WSGI_APPLICATION = 'trouvaay.wsgi.application'
 
-ENDLESS_PAGINATION_LOADING = """<h3 style='text-align: center'>Loading...</h3>"""
+ENDLESS_PAGINATION_LOADING = """<h3 style='text-align:center; font-size:16px'>Loading...</h3>"""
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
