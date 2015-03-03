@@ -68,6 +68,11 @@
 
 	      img {
 		max-height: 100%;
+
+		@include breakpoint(sm) {
+			padding-bottom: 15px;
+
+		}
 	      }
 	    }
 
