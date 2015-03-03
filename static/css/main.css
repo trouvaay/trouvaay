@@ -179,6 +179,111 @@ html, body {
   content: "m";
 }
 
+/* Ion.RangeSlider, Flat UI Skin
+// css version 2.0.3
+// © Denis Ineshin, 2014    https://github.com/IonDen
+// ===================================================================================================================*/
+/* =====================================================================================================================
+// Skin details */
+.irs-line-left,
+.irs-line-right,
+.irs-line-mid {
+  background: #c7c8ca;
+}
+
+.irs-bar,
+.irs-bar-edge {
+  background: #636466;
+}
+
+.irs-slider {
+  background: #000;
+  border: 1px solid #FFF;
+  /*background: url(../img/sprite-skin-flat.png) repeat-x;*/
+}
+
+.irs-line-left {
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.irs {
+  height: 40px;
+}
+
+.irs-with-grid {
+  height: 60px;
+}
+
+.irs-line {
+  height: 4px;
+  top: 17px;
+}
+
+.irs-line-left {
+  height: 4px;
+}
+
+.irs-line-mid {
+  height: 4px;
+}
+
+.irs-line-right {
+  height: 4px;
+}
+
+.irs-bar {
+  height: 4px;
+  top: 17px;
+}
+
+.irs-bar-edge {
+  top: 12px;
+  height: 8px;
+  width: 8px;
+}
+
+.irs-shadow {
+  height: 3px;
+  top: 34px;
+  background: #000;
+  opacity: 0.25;
+}
+
+.lt-ie9 .irs-shadow {
+  filter: alpha(opacity=25);
+}
+
+.irs-slider {
+  width: 8px;
+  height: 8px;
+  top: 15px;
+  border-radius: 4px;
+}
+
+.irs-min, .irs-max {
+  color: #999;
+  font-size: 11px;
+  line-height: 1.333;
+  text-shadow: none;
+  top: 24px;
+  padding: 1px 3px;
+  font-family: "Ostrich Sans";
+  letter-spacing: 1px;
+}
+
+.irs-from, .irs-to, .irs-single {
+  color: #000;
+  font-size: 11px;
+  line-height: 1.333;
+  font-family: "Ostrich Sans";
+  letter-spacing: 1px;
+  text-shadow: none;
+  padding: 1px 5px;
+}
+
 .info-page {
   background: #dcddde;
   font-family: "Droid Serif";
@@ -1005,6 +1110,260 @@ input#mobile-menu-switch:checked + #mobile-menu {
   max-width: 100%;
   margin: 0 auto;
   width: auto;
+}
+
+.grid-products-wrapper, #filter-container {
+  margin-top: 50px;
+}
+
+.grid-products-wrapper {
+  padding-top: 20px;
+  background: transparent;
+}
+.grid-products-wrapper .row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+@media (max-width: 767px) {
+  .grid-products-wrapper .row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+}
+.grid-products-wrapper .product-container {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+  .grid-products-wrapper .product-container {
+    padding-bottom: 0px;
+  }
+  .grid-products-wrapper .product-container:nth-child(odd) {
+    padding-right: 10px;
+    padding-left: 0px;
+  }
+  .grid-products-wrapper .product-container:nth-child(even) {
+    padding-left: 10px;
+    padding-right: 0px;
+  }
+}
+.grid-products-wrapper .product-container:hover {
+  background: #FFF;
+  box-shadow: #AAA 0px 0px 5px;
+}
+.grid-products-wrapper .product-container:hover .main-image {
+  /* Remove with main_old.css */
+  opacity: 1;
+}
+.grid-products-wrapper .product-container:hover .actions {
+  display: block;
+}
+.grid-products-wrapper .grid-product {
+  padding: 10px 15px;
+}
+@media (max-width: 767px) {
+  .grid-products-wrapper .grid-product {
+    height: 330px;
+    padding: 0px;
+  }
+}
+@media (max-width: 480px) {
+  .grid-products-wrapper .grid-product {
+    height: 165px;
+    padding: 0px;
+  }
+}
+.grid-products-wrapper .grid-product .centered-child a {
+  display: block;
+}
+.grid-products-wrapper .grid-product .centered-child a img {
+  max-height: 100%;
+}
+.grid-products-wrapper .pic-detail-home {
+  text-align: center;
+  margin: 2px 0px 3px;
+  clear: both;
+  float: none;
+}
+.grid-products-wrapper .price {
+  font-family: "Droid Serif";
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+.grid-products-wrapper .name {
+  font-family: "Droid Serif";
+  font-size: 9px;
+  font-style: italic;
+}
+.grid-products-wrapper .name a {
+  color: #000;
+}
+.grid-products-wrapper .name a:hover {
+  text-decoration: none;
+}
+.grid-products-wrapper .neighborhood-like-container {
+  position: relative;
+}
+.grid-products-wrapper .neighborhood {
+  border-top: 1px solid #636466;
+  border-top: 1px solid rgba(99, 100, 102, 0.25);
+  font-family: "Droid Serif";
+  font-size: 13px;
+  font-style: italic;
+  text-transform: uppercase;
+  text-align: center;
+}
+.grid-products-wrapper .neighborhood, .grid-products-wrapper .actions {
+  padding-top: 4px;
+  line-height: 20px;
+}
+.grid-products-wrapper .actions {
+  display: none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+.grid-products-wrapper .actions a {
+  text-decoration: none;
+}
+.grid-products-wrapper .actions .like-btn {
+  display: block;
+  color: #e6be46;
+  font-size: 15px;
+  line-height: inherit;
+}
+
+#searchfilter-form {
+  width: 245px;
+  height: 100%;
+  background: #e6e7e8;
+  color: #000;
+  position: fixed;
+  padding: 90px 20px 35px 35px;
+  overflow: auto;
+  /* Category */
+}
+#searchfilter-form ul {
+  padding-left: 0px;
+}
+#searchfilter-form li {
+  list-style: none;
+  padding-left: 30px;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  white-space: nowrap;
+}
+#searchfilter-form + .main {
+  margin-left: 245px;
+}
+#searchfilter-form label {
+  width: auto;
+  float: none;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  margin-bottom: 0px;
+  height: auto;
+}
+#searchfilter-form header {
+  font-family: "Ostrich Sans";
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  border-bottom: 1px solid black;
+}
+#searchfilter-form .category {
+  margin-bottom: 50px;
+}
+#searchfilter-form .category header a.reset {
+  color: #000;
+  float: right;
+}
+#searchfilter-form .category header a.reset:hover {
+  text-decoration: none;
+}
+#searchfilter-form .category header a.reset:after {
+  content: '×';
+  font-weight: normal;
+}
+#searchfilter-form .category header a.reset span {
+  display: none;
+}
+#searchfilter-form .category.filters div header {
+  border-bottom: 1px dotted #939598;
+  padding-bottom: 2px;
+}
+#searchfilter-form .category.filters div a {
+  font-family: "Droid Serif";
+  color: #000;
+  font-size: 11px;
+  font-weight: bold;
+  display: block;
+}
+#searchfilter-form .category.filters div a:hover {
+  text-decoration: none;
+}
+#searchfilter-form .category.filters div a i {
+  float: right;
+  font-size: 20px;
+  margin-top: -3px;
+}
+#searchfilter-form .category.filters div a i:before {
+  content: "\f106";
+}
+#searchfilter-form .category.filters div header {
+  position: relative;
+}
+#searchfilter-form .category.filters div header a.reset {
+  position: absolute;
+  left: -20px;
+  top: -3px;
+  font-size: 16px;
+}
+#searchfilter-form .category.filters div a.collapsed i:before {
+  content: "\f107";
+}
+#searchfilter-form .category.filters > div {
+  padding-left: 30px;
+}
+#searchfilter-form .category.filters .fold .c-checkbox .checkbox-pseudocheckbox {
+  width: 4px;
+  height: 4px;
+  border: 1px solid #939598;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 0px;
+  margin-right: 4px;
+}
+#searchfilter-form .category.filters .fold .c-checkbox input:checked + .checkbox-pseudocheckbox {
+  background: #939598;
+}
+#searchfilter-form .c-checkbox {
+  font-family: "Droid Serif";
+  font-weight: bold;
+  font-size: 11px;
+  color: #888;
+}
+#searchfilter-form .c-checkbox input {
+  display: none;
+}
+#searchfilter-form .c-checkbox .checkbox-label {
+  position: relative;
+}
+#searchfilter-form .c-checkbox input:checked + .checkbox-label:before {
+  content: '×';
+  font-size: 16px;
+  display: block;
+  position: absolute;
+  top: -3px;
+  left: -20px;
+}
+#searchfilter-form .c-checkbox input:checked + label {
+  color: #000;
+}
+#searchfilter-form .c-checkbox label {
+  cursor: pointer;
 }
 
 footer {
