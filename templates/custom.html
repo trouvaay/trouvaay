@@ -99,10 +99,10 @@ var trouvaay = {
 
 
 		//product-like AJAX post
-        $(".btn.btn-default.glyphs").click(function() {
-            console.log(data);
+        $(".like-btn").click(function() {
             var id = $(this).attr("id").substring(6);
             var data = {'id': id};
+            console.log(data);
             if ($(this).hasClass("active")) {
                 $(this).removeClass("active");
                 if (window.location.pathname == "{% url 'members:profile' %}") {

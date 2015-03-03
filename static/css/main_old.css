@@ -2537,6 +2537,10 @@ form .form-checkbox-wrap .checkbox-label {
   /*color: #3094B2;*/
   color: red;
 }
+.like-btn.active {
+  /*color: #3094B2;*/
+  color: red;
+}
 .btn.btn-default:hover {
   background: lightgray;
 }

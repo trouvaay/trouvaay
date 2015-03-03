@@ -1133,6 +1133,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-size: 15px;
   line-height: inherit;
 }
+.grid-products-wrapper .actions .like-btn.active {
+  color: red;
+}
 
 footer {
   background: #000;
