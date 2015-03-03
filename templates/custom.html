@@ -99,7 +99,8 @@ var trouvaay = {
 
 
 		//product-like AJAX post
-        $(".like-btn").click(function() {
+        $(".like-btn").click(function(e) {
+            e.preventDefault();
             var id = $(this).attr("id").substring(6);
             var data = {'id': id};
             console.log(data);
