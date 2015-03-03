@@ -99,7 +99,7 @@ h4, h5, h6, .h4, .h5, .h6 {
   display:inline-block;
 }
 .container-fluid.select-bar.hp-tabs .nav.navbar-navt li a {
-  color: rgb(218,182,97);
+  color: white;
 }
 .nav>li>a:focus {
   background-color: transparent;
