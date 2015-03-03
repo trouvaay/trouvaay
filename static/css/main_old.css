@@ -952,7 +952,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 .product-description {
   background: white;
   float: left;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   /*padding-top: 3rem;*/
 }
 .similar-items {
