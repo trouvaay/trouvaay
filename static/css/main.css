@@ -1080,6 +1080,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .grid-product .centered-child a img {
   max-height: 100%;
 }
+@media (max-width: 767px) {
+  .grid-products-wrapper .grid-product .centered-child a img {
+    padding-bottom: 15px;
+  }
+}
 .grid-products-wrapper .pic-detail-home {
   text-align: center;
   margin: 2px 0px 3px;
