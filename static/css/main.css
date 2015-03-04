@@ -1240,10 +1240,21 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #display-categories + ul {
     display: none;
   }
+  #display-categories:checked + ul {
+    display: block;
+  }
 }
 
-#display-categories:checked + ul {
-  display: block !important;
+#display-filters {
+  display: none;
+}
+@media (max-width: 992px) {
+  #display-filters + .filters {
+    display: none;
+  }
+  #display-filters:checked + .filters {
+    display: block;
+  }
 }
 
 #searchfilter-form {
@@ -1255,6 +1266,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
   overflow: auto;
   height: 100%;
   /* Category */
+}
+#searchfilter-form b {
+  font-family: "Droid Serif";
+  font-weight: bold;
+  font-size: 11px;
 }
 #searchfilter-form #filter-container-furnituretype label {
   width: 100%;
@@ -1273,6 +1289,18 @@ input#mobile-menu-switch:checked + #mobile-menu {
     display: inline-block;
     cursor: pointer;
     width: 160px;
+    position: relative;
+  }
+  #searchfilter-form #filter-container-furnituretype header label, #searchfilter-form #refine label {
+    cursor: pointer;
+    display: block;
+    padding: 4px 11px;
+  }
+  #searchfilter-form #filter-container-furnituretype header label:after, #searchfilter-form #refine label:after {
+    position: absolute;
+    right: 11px;
+    font: normal normal normal 18px/1 FontAwesome;
+    top: 7px;
   }
   #searchfilter-form #filter-container-furnituretype {
     display: inline-block;
@@ -1281,19 +1309,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
   #searchfilter-form #filter-container-furnituretype header {
     margin-left: 76px;
-    position: relative;
-  }
-  #searchfilter-form #filter-container-furnituretype header label {
-    cursor: pointer;
-    display: block;
-    padding: 4px 11px;
   }
   #searchfilter-form #filter-container-furnituretype header label:after {
     content: '\f107';
-    position: absolute;
-    right: 11px;
-    font: normal normal normal 18px/1 FontAwesome;
-    top: 7px;
   }
   #searchfilter-form #filter-container-furnituretype ul {
     position: absolute;
@@ -1315,6 +1333,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
     float: right;
     margin-right: 76px;
   }
+  #searchfilter-form #refine label:after {
+    content: '\f105';
+  }
 }
 #searchfilter-form ul {
   padding-left: 0px;
@@ -1325,6 +1346,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-overflow: ellipsis;
   max-width: 100%;
   white-space: nowrap;
+}
+@media (max-width: 992px) {
+  #searchfilter-form li {
+    padding-left: 0px;
+  }
 }
 #searchfilter-form + .main {
   margin-left: 245px;
@@ -1374,6 +1400,19 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .category header a.reset span {
   display: none;
 }
+@media (max-width: 992px) {
+  #searchfilter-form .category.filters {
+    background: #FFF;
+    height: 100%;
+    width: 100%;
+    top: 50px;
+    position: fixed;
+    z-index: 3;
+    padding-top: 15px;
+    padding-bottom: 80px;
+    overflow: auto;
+  }
+}
 #searchfilter-form .category.filters div header {
   border-bottom: 1px dotted #939598;
   padding-bottom: 2px;
@@ -1411,6 +1450,33 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .category.filters > div {
   padding-left: 30px;
 }
+@media (max-width: 992px) {
+  #searchfilter-form .category.filters > div {
+    padding-left: 70px;
+    padding-right: 36px;
+  }
+}
+#searchfilter-form .category.filters .mobile {
+  padding-bottom: 15px;
+}
+#searchfilter-form .category.filters .mobile .col-xs-6:nth-child(odd) {
+  padding-right: 10px;
+}
+#searchfilter-form .category.filters .mobile .col-xs-6:nth-child(even) {
+  padding-left: 10px;
+}
+#searchfilter-form .category.filters .mobile input {
+  width: 100%;
+  font-family: "Ostrich Sans";
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+#searchfilter-form .category.filters .mobile label {
+  font-family: "Ostrich Sans";
+  font-size: 11px;
+  letter-spacing: 1px;
+  display: block;
+}
 #searchfilter-form .category.filters .fold .c-checkbox .checkbox-pseudocheckbox {
   width: 4px;
   height: 4px;
@@ -1420,8 +1486,30 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin-top: 0px;
   margin-right: 4px;
 }
+@media (max-width: 992px) {
+  #searchfilter-form .category.filters .fold .c-checkbox .checkbox-pseudocheckbox {
+    display: none;
+  }
+}
 #searchfilter-form .category.filters .fold .c-checkbox input:checked + .checkbox-pseudocheckbox {
   background: #939598;
+}
+@media (max-width: 992px) {
+  #searchfilter-form .category.filters .fold .c-checkbox .checkbox-label {
+    height: 20px;
+    line-height: 20px;
+    background: #91c3c3;
+    color: #FFF;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    font-family: "Ostrich Sans";
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
 }
 #searchfilter-form #filter-container-color li {
   display: inline-block;
@@ -1436,12 +1524,26 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .color-checkbox input:checked + label {
   border: 1px solid #939598;
 }
+@media (max-width: 992px) {
+  #searchfilter-form .color-checkbox input:checked + label {
+    border: 2px solid #939598;
+  }
+}
 #searchfilter-form .color-checkbox .checkbox-pseudocheckbox {
   width: 15px;
   height: 15px;
   -moz-border-radius: 8px;
   border-radius: 8px;
   background: #000;
+}
+@media (max-width: 992px) {
+  #searchfilter-form .color-checkbox .checkbox-pseudocheckbox {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 30px;
+    margin-bottom: 10px;
+  }
 }
 #searchfilter-form .c-checkbox {
   font-family: "Droid Serif";
@@ -1473,6 +1575,20 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #searchfilter-form .c-checkbox label {
   cursor: pointer;
+}
+
+/* Override main_old.css */
+@media (max-width: 992px) {
+  .collapse {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 }
 
 footer {
