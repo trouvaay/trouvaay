@@ -1,6 +1,10 @@
-{% extends "goods/landing/landing.html" %}
+{% extends "_base_old.html" %}
 {% load crispy_forms_tags %}
 
+
+ {% block content %}
+ 	<div class="container-fluid" style="height: 100%"></div>
+ {% endblock content %}
 {% block modal %}
 {{ block.super }}
 
@@ -47,7 +51,7 @@
 $(document).ready(function () {
 	$('#signup-login-modal').modal({"show": true});
 	$('#signup-login-modal').on('hidden.bs.modal', function () {
-		window.location.replace("{% url "goods:main" %}");
+		window.location.replace("{% url "goods:landing" %}");
 	})
 });
 </script>

@@ -5,7 +5,7 @@
 {% load endless %}
 
 {% block content %}
-      <div class="container-fluid" id="index-banner">
+<div class="container-fluid" id="index-banner">
 	<picture>
 	<!--[if IE 9]><video style="display: none;"><![endif]-->
 	<source srcset="https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_1000,h_375/v1422902656/shutterstock_160709951_hsvzx9.jpg" media="(min-width: 992px)">
@@ -67,5 +67,38 @@
                 paginateOnScrollMargin: 200
             });
     </script>
+    {% if show_referral_first_modal or show_referral_second_modal  %}
+        <script type="text/javascript">
+                $(document).ready(function () {
+                
+                    // ajax call to load referral
+                    $.ajax({
+                        type: "GET",
+                        dataType: "html",
+                        url: "{% if show_referral_first_modal %}{% url "members:referral_signup" %}{% else %}{% url "members:referral_info" %}{% endif %}",
+                        success: function(response, status){
+                            console.log('status ['+status+']');
+                            if(status == 'success'){
+                                $("#referral-modal-container").html(response);
+                                $("#referral-signup-modal").modal({
+                                    show: true,
+                                    keyboard: true
+                                });                 
+                            }           
+                        }
+                    });
+                    
+                });
+        </script>
+    {% endif %}
+
+
+    {% if promotion_offer and not request.user.is_authenticated %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#promotion-offer-modal').modal({"show": true});
+            });
+        </script>
+    {% endif %}
 {% endblock endjs %}
 

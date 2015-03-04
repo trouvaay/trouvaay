@@ -123,7 +123,6 @@ document.createElement( "picture" );
     	      <a href="#" class="icon-pinterest"><span>Pinterest</span></a>
     	    </div>
     	    <div class="col-xs-12 links">
-    	      <a href="{% url 'goods:main' %}">Shop</a>
             {% if user.is_authenticated %}
               <a href="{% url 'members:profile' %}">Profile</a>
             {% endif %}
