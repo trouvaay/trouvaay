@@ -152,18 +152,19 @@ class Product(models.Model):
     is_publishable = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     is_landing = models.BooleanField(default=False)
-    is_hot = models.BooleanField(default=False)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
     is_instore = models.BooleanField(default=True)
     delivery_weeks = models.CharField(max_length=100, null=True, blank=True)
     is_avail_now = models.BooleanField(default=True)
     md5_order = models.CharField(max_length=32, null=True, blank=True)
+    click_count = models.IntegerField(blank=False, null=False, default=0)
 
     class Meta:
         # added Height as quick hack to randomize display of products as pub_date clusters
         # items by store
-        ordering = ['-is_hot', '-is_featured', 'md5_order', 'short_name', '-pub_date']
+#         ordering = [-is_featured', 'md5_order', 'short_name', '-pub_date']
+        ordering = ['-click_count', '-is_featured', 'md5_order']
         unique_together = ('short_name', 'store',)
 
     def __str__(self):
@@ -180,12 +181,15 @@ class Product(models.Model):
         if self.is_published and (not self.pub_date):
             self.pub_date = timezone.now()
 
-        self.slug = slugify(self.short_name)
-        for x in itertools.count(1):
-            if not Product.objects.filter(slug=self.slug).exists():
-                break
-            # append number to slug if it already exists
-            self.slug = '%s-%d' % (self.slug, x)
+        # create slug once, only if we don't have it yet
+        if(not self.slug):
+            self.slug = slugify(self.short_name)
+            for x in itertools.count(1):
+                if not Product.objects.filter(slug=self.slug).exists():
+                    break
+                # append number to slug if it already exists
+                self.slug = '%s-%d' % (self.slug, x)
+
         # Create has for unique value for product sorting
         self.add_md5_order()
         super(Product, self).save(*args, **kwargs)
