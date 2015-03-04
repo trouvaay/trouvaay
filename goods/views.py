@@ -115,7 +115,11 @@ class DetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['returns'] = settings.RETURN_POLICY
-        context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY     
+        context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+
+        product = self.get_object()
+        product.click_count += 1
+        product.save()
         return context
 
 
@@ -145,19 +149,6 @@ class MainView(AjaxListView):
         context = super(MainView, self).get_context_data(**kwargs)
         context['BaseUrl'] = BASE_URL
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
-        return context
-
-
-class DetailView(generic.DetailView):
-    template_name = 'goods/detail/detail.html'
-    context_object_name = 'product'
-    model = Product
-    slug_field = 'slug'
-
-    def get_context_data(self, **kwargs):
-        context = super(DetailView, self).get_context_data(**kwargs)
-        context['returns'] = settings.RETURN_POLICY
-        context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY     
         return context
 
 
