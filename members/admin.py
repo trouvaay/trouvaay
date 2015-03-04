@@ -39,7 +39,7 @@ class CustomUserCreationForm(UserCreationForm):
         return user
 
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField(label="password",
                                          help_text="""Raw passwords are not stored, so there is no way to see this
                                          user's password, but you can change the password using <a href=\"password/\">
@@ -48,7 +48,7 @@ class CustomUserChangeForm(UserChangeForm):
     def __init__(self, *args, **kargs):
         super(CustomUserChangeForm, self).__init__(*args, **kargs)
 
-    class Meta(UserChangeForm.Meta):
+    class Meta:
         model = AuthUser
         fields = ('email', 'is_merchant')  # May want to reduce fields
 
