@@ -302,6 +302,40 @@
 	  }
 
   }
+
+  #filter-container-color {
+	  li {
+		  display: inline-block;
+		  padding-left: 0px;
+	  }
+
+  }
+
+  .color-checkbox {
+
+	  display: inline-block;
+
+	  input {
+		  display: none;
+	  }
+
+	  input:checked + label {
+		  border: 1px solid #939598;
+
+	  }
+
+	  .checkbox-pseudocheckbox {
+		  width: 15px;
+		  height: 15px;
+		  -moz-border-radius: 8px;
+		  border-radius: 8px;
+		  background: #000;
+
+	  }
+
+  }
+
+
   .c-checkbox {
     font-family: "Droid Serif"; 
     font-weight: bold;

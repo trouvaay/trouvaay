@@ -1339,6 +1339,26 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .category.filters .fold .c-checkbox input:checked + .checkbox-pseudocheckbox {
   background: #939598;
 }
+#searchfilter-form #filter-container-color li {
+  display: inline-block;
+  padding-left: 0px;
+}
+#searchfilter-form .color-checkbox {
+  display: inline-block;
+}
+#searchfilter-form .color-checkbox input {
+  display: none;
+}
+#searchfilter-form .color-checkbox input:checked + label {
+  border: 1px solid #939598;
+}
+#searchfilter-form .color-checkbox .checkbox-pseudocheckbox {
+  width: 15px;
+  height: 15px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background: #000;
+}
 #searchfilter-form .c-checkbox {
   font-family: "Droid Serif";
   font-weight: bold;
