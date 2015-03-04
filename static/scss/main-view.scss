@@ -151,15 +151,113 @@
 
 }
 
+#display-categories {
+	display: none;
+
+	@include breakpoint(md) {
+	+ ul {
+		display: none;
+	}
+}
+
+}
+
+#display-categories:checked + ul {
+	display: block !important;
+
+}
+
 #searchfilter-form {
 	
   width: 245px;
-  height: 100%;
   background: #e6e7e8;
   color: #000;
   position: fixed;
   padding: 90px 20px 35px 35px;
   overflow: auto;
+  height: 100%;
+
+  #filter-container-furnituretype {
+	  label {
+		  width: 100%;
+
+	  }
+
+  }
+
+  @include breakpoint(md) {
+	  width: 100%;
+	  height: auto;
+	  padding: 0px;
+	  overflow: visible;
+	  z-index: 2;
+
+
+	  #filter-container-furnituretype header, #refine {
+			  border: 1px solid #939598;
+			  color: #939598;
+			  display: inline-block;
+			  cursor: pointer;
+			width: 160px;
+
+	  }
+
+	  #filter-container-furnituretype {
+		  display: inline-block;
+		float: left;
+		position: relative;
+
+
+		  header {
+			  margin-left: 76px;
+			  position: relative;
+
+			label {
+				cursor: pointer;
+				display: block;
+				padding: 4px 11px;
+				
+			&:after {
+				content: '\f107';
+				position: absolute;
+				right: 11px;
+				font: normal normal normal 18px/1 FontAwesome;
+				top: 7px;
+
+
+			}
+			}
+
+		  }
+		  ul {
+			  position: absolute;
+			z-index: 3;
+			left: 76px;
+			top: 37px;
+			z-index: 3;
+			background: #e6e7e8;
+			border: 1px solid #939598;
+			border-top: 0px;
+
+		li {
+			padding: 4px 11px;
+			font-size: 14px;
+		}
+}
+
+		  
+
+	  }
+
+	  #refine {
+
+		  background: #939598;
+		  color: #FFF;
+		  float: right;
+		  margin-right: 76px;
+	  }
+
+  }
 
   ul {
 	  padding-left: 0px;
@@ -174,6 +272,12 @@
 
   + .main {
 	  margin-left: 245px;
+
+	  @include breakpoint(md) {
+		  margin-left: auto;
+		  margin-top: 50px;
+
+	  }
 
 
   }
@@ -202,6 +306,11 @@
 
   .category {
     margin-bottom: 50px;
+
+    @include breakpoint(md) {
+	    margin-bottom: 0px;
+
+    }
 
     header {
 	    a.reset {
@@ -357,6 +466,11 @@
       position: absolute;
       top: -3px;
       left: -20px;
+
+      @include breakpoint (md) {
+	      content: none;
+
+      }
     }
 
     input:checked + label {

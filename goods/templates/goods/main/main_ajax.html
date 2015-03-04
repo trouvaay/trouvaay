@@ -18,9 +18,10 @@
 	      
 			{% if searchfilter.furnituretypes %}
 			<div id="filter-container-furnituretype" class="category">
-				<header>Categories <a href="#" class="reset"><span>Reset</span></a></header>
+			  <header><label for="display-categories">Categories</a> <a href="#" class="reset hidden-xs hidden-sm"><span>Reset</span></a></header>
 				
-				<ul>
+				<input type="checkbox" value="{{ segment.id }}" id="display-categories">
+				<ul class="hidden-sm hidden-xs">
 					{% for furnituretype in searchfilter.furnituretypes %}
 					<li>
 					
@@ -57,8 +58,9 @@
 			{% endif %}
 			{% endcomment %}
 	
-			<div class="category filters">
-			  <header>Filters <a href="#" class="reset"><span>Reset</span></a></header>
+			<header id="refine" class="hidden-md hidden-lg">Refine</header>
+			<div class="category filters hidden-xs hidden-sm">
+			  <header class="hidden-xs hidden-sm">Filters <a href="#" class="reset"><span>Reset</span></a></header>
 			<div id="filter-container-price" class="filter-group">
 			  <header><a data-toggle="collapse" href="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice" class="collapsed">Price <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
 				<div id="collapsePrice" class="collapse fold" role="tabpanel" aria-labelledby="headingPrice">
