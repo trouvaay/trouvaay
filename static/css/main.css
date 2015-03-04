@@ -581,6 +581,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     text-align: center;
     margin-top: 25px;
     top: auto;
+    padding: 10px;
   }
 }
 #index-banner .text strong {
