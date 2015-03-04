@@ -70,3 +70,7 @@
     {% endif %}       
   </div>
 {% endblock content %}
+{% block endjs %}
+  {{ block.super }}
+  {% include 'js/addlikeditems.html' %}
+{% endblock endjs %}

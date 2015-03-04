@@ -239,6 +239,25 @@ document.createElement( "picture" );
                 </div>
               </div>
             </div>
+            <div class="modal" id="promotion-offer-modal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body" style="padding: 2em">
+                        <div style="margin-bottom:30px ">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px; padding-bottom:10px">
+                                <span aria-hidden="true">&times;</span>
+                                <!-- <span class="hide">Close</span> -->
+                          </button>
+                            <img src="{% static 'img/logos/raredoor-gold-logo.svg' %}" id="logo" alt="Raredoor" />
+                          </div>
+                          <div style="height:100%; text-align:center">
+                              <h4>{{ SIGNUP_OFFER }}</h4> 
+                              <h3>More Treasure Less Hunting</h3>
+                          </div>
+                    </div>  
+                </div>
+              </div>
+            </div>
             <div id="pre-checkout-modal-container"></div>
         {% endblock modal %}
 

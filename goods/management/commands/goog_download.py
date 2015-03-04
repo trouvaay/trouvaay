@@ -62,8 +62,6 @@ class Command(BaseCommand):
             u.is_published = True
 
             try:
-                u.save()
-                logger.info('Added {} to database'.format(u))
                 u.material.add(Material.objects.get(select=data[21]))
                 u.segment.add(Segment.objects.get(select=data[23]))
                 u.furnituretype.add(FurnitureType.objects.get(select=data[24]))
@@ -85,8 +83,10 @@ class Command(BaseCommand):
                         add_img_instance(u.pk, data[i])    
                     except Exception, e:
                         logger.info('No {} Image for {}'.format(headers[i], u))
-                        
 
+                u.save()
+                logger.info('Added {} to database'.format(u))
+                        
             except Exception, e:
                 logger.error('Error Saving {} from google into database'.format(u))
                 logger.error(str(e))

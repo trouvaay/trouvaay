@@ -32,8 +32,6 @@ class LandingView(generic.ListView):
 
     def get_queryset(self):
         queryset = self.model.objects.filter(is_landing=True, store__is_featured=True)[:6]
-        print('heres my landing query:')
-        pp(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -42,8 +40,6 @@ class LandingView(generic.ListView):
         if(not self.request.session.get('cid', None)):
             self.request.session['cid'] = str(uuid.uuid4())
 
-        #JSON sent to client to calc distance from user
-        # context['products_json'] = serialize('json', context['products'])
         context['BaseUrl'] = BASE_URL
         if(settings.ENABLE_REFERRAL):
             if(self.request.user.is_authenticated()):
@@ -59,12 +55,13 @@ class LandingView(generic.ListView):
         context['SIGNUP_OFFER'] = settings.SIGNUP_OFFER
 
         # add any "First time" offers
+        #only FIRST_ORDERs. DISCOUNT_PROMOs arent rendered
         # if there is more than one get the first one
-        print (self.request.session.items())
-
+        print('show_modal: ', is_time_to_show_modal(self.request, 'offer_modal'))
         if(is_time_to_show_modal(self.request, 'offer_modal')):
 #         if(not self.request.session.get('seen_offers', False)):
             offers = PromotionOffer.get_current_offers(user=self.request.user, offer_type=OfferType.FIRST_ORDER)
+            print('offers:', offers)
             if(offers):
                 context['promotion_offer'] = offers[0]
 
@@ -136,7 +133,7 @@ class MainView(AjaxListView):
             except Exception, e:
                 logger.debug(str(e))
                 furniture_type_object = None
-            queryset = list(self.model.objects.filter(is_published=True, furnituretype = furniture_type_object, store__is_featured=True))
+            queryset = list(self.model.objects.filter(is_published=True, furnituretype = furniture_type_object, is_featured=False, store__is_featured=True))
         except:
             queryset = self.model.objects.filter(is_published=True, store__is_featured=True)
 

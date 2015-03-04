@@ -61,7 +61,6 @@ var trouvaay = {
         //Append mobile menu
 		$("#mobile-search").on('click',function() {
                 if (!$('#tab-icons-mobile').length ) {
-                    console.log('is this workgin?');
                   $("#mobile-navigation").append(mobileTabIcons);
                 } else {
                   $("#tab-icons-mobile").remove();
@@ -220,8 +219,8 @@ function handleBuyButtonClick(e) {
 			
 			// call pre-checkout
 			$.ajax({
-				type: "POST",
-				url: "{% url "members:buy_precheckout" %}",
+				type: "GET",
+				url: "{% url "members:buy" %}",
 				dataType: "html",
 				data: {
 					product_id: productId,
@@ -365,12 +364,25 @@ $(document).ready(function() {
         });
 	
 	$('.view-product').on('click', function(e) {
-        var productslug = e.target.pathname.substr(7);
+        var initialProductSlug = $(this).attr("href").substr(7);
+        var productSlug = initialProductSlug.substring(0, initialProductSlug.length - 1);
+        // var productSlug = initialProductSlug.substring(0, initialProductSlug.length - 1);
         mixpanel.track(
                 "Clicked Detail Page",
-                { "productSlug": productslug }
+                { "productSlug": productSlug }
             );
-        console.log('clicked detail page-post');
+        console.log('mixpanel: view-product-detail.onclick event fired');
+    })
+
+    $('.landing-view-product').on('click', function(e) {
+        // var productslug = e.target.pathname.substr(7);
+        var initialProductSlug = $(this).attr("href").substr(7);
+        var productSlug = initialProductSlug.substring(0, initialProductSlug.length - 1);
+        mixpanel.track(
+                "Clicked Detail Page From Landing",
+                { "productSlug": productSlug }
+            );
+        console.log('mixpanel: landing-view-product-detail.onclick event fired');
     })
 
 	// navigation login
@@ -407,11 +419,21 @@ $(document).ready(function() {
 	$('.btn.buy').on('click', handleBuyButtonClick);
     $('#see-more').on('click', handleSeeMoreClick);
     $('#shop-now').on('click', handleShopNowClick);
+    
     $('#desktop-search #seating').on('click', handleSeatingClick);
+    $('.tab-icons #seating > a').on('click', handleSeatingClick);
+    
     $('#desktop-search #tables').on('click', handleTablesClick);
+    $('.tab-icons #tables').on('click', handleTablesClick);
+
     $('#desktop-search #beds').on('click', handleBedsClick);
+    $('.tab-icons #beds').on('click', handleBedsClick);
+
     $('#desktop-search #storage').on('click', handleStorageClick);
+    $('.tab-icons #storage').on('click', handleStorageClick);
+
     $('#desktop-search #lighting').on('click', handleLightingClick);
+    $('.tab-icons #lighting').on('click', handleLightingClick);
 
 });
 //Unsed formula to append distance from product to user's loco

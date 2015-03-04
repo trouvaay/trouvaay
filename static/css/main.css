@@ -291,7 +291,7 @@ html, body {
 }
 
 header.top-bar {
-  background: #000;
+  background: #333;
   line-height: 60px;
   height: 60px;
   position: relative;
@@ -511,7 +511,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-transform: uppercase;
 }
 #index-banner .arrow-link {
-  background-color: #000;
+  background-color: #333;
   border: 3px solid #E6BE46;
   font-size: 30px;
   line-height: 40px;
@@ -848,8 +848,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   .grid .name-container .name {
-    font-size: 22px;
-    line-height: 22px;
+    font-size: 20px;
+    line-height: 20px;
   }
 }
 .grid .name-container .name a {
@@ -863,11 +863,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid .name-container .name a:hover {
   text-decoration: none;
 }
-.grid .name-container .price {
+.grid .name-container .subline {
   font-size: 14.5px;
 }
 @media (max-width: 767px) {
-  .grid .name-container .price {
+  .grid .name-container .subline {
     font-size: 12px;
   }
 }
@@ -988,8 +988,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding: 15px;
 }
 .team-members-container .name-container .name {
-  font-size: 50px;
-  line-height: 50px;
+  font-size: 20px;
+  line-height: 25px;
 }
 @media (max-width: 767px) {
   .team-members-container .name-container .name {

@@ -134,11 +134,12 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 FEATURE_NAME_RESERVE = "Reserve"
 FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-store. 3 reservation limit"
+TOOLTIP_HEART = "Save to your profile page."
 RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
     'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
 }
-SIGNUP_OFFER = "10% off your first purchase after signup"
+SIGNUP_OFFER = "Get 10% off your 1st purchase"
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
 
@@ -225,7 +226,7 @@ ANALYTICAL_INTERNAL_IPS = []
 
 SALES_TAX = Decimal('0.0875')
 
-OFFER_MODAL_EXPIRATION = 3600  # do not show promo offers again whithin this many seconds
+OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many seconds
 
 RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
 

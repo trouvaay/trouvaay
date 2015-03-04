@@ -1,8 +1,11 @@
 {% load staticfiles %}
 
-	    <div class="name"><a href="{% url 'goods:detail' product.slug  %}">{{ product.store.neighborhood }}</a></div></br>
-	   <!--  <div class="price">
-	      {{ product.short_name|truncatechars:20 }}
+	    <div class="name"><a href="{% url 'goods:detail' product.slug  %}">{{ product.store.neighborhood }}</a>
+        
+        </div>
+	   <div class="subline">{{ product.short_name|truncatechars:18 }}</div>
+       
+        <!-- <div class="price">
         {% if product.current_price %}
             {% if product.is_discounted %}
                 <strike>{{' - $'}}{{ product.original_price|floatformat:"0" }}</strike>
