@@ -152,7 +152,6 @@ class Product(models.Model):
     is_publishable = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     is_landing = models.BooleanField(default=False)
-    is_hot = models.BooleanField(default=False)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
     is_instore = models.BooleanField(default=True)
@@ -164,8 +163,8 @@ class Product(models.Model):
     class Meta:
         # added Height as quick hack to randomize display of products as pub_date clusters
         # items by store
-#         ordering = ['-is_hot', '-is_featured', 'md5_order', 'short_name', '-pub_date']
-        ordering = ['-click_count']
+#         ordering = [-is_featured', 'md5_order', 'short_name', '-pub_date']
+        ordering = ['-click_count', '-is_featured', 'md5_order']
         unique_together = ('short_name', 'store',)
 
     def __str__(self):
