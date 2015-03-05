@@ -1,8 +1,8 @@
 {% load staticfiles %}
 {% load cloudinary %}
-<div class="col-xs-6 col-sm-6 col-md-4 product-container">
+<div class="col-xs-6 col-sm-6 col-md-4 product-container" id="reserved-product-container_{{ product.id }}">
     <!--    <div class="vintage-label" style="text-align:center; margin-top: 5px; margin-bottom:-10px;"></div> -->
-    <div class="grid-product centered-parent {% if product.is_vintage %}vintage-product{% endif %}" style="margin-bottom:-5px;">
+    <div class="grid-product centered-parent" style="margin-bottom:-5px;">
         <!-- <img class="img-responsive" src="{{ product.productimage_set.first.image.url }}"> -->
 
             <div class="hover-text hidden-sm hidden-md hidden-lg" style="left:22%; padding-bottom:10px; display:block"><span class="details-label"><h4 style="font-size:12px">click to view</h4></span></div>
