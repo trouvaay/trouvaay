@@ -7,11 +7,7 @@ Your {{ product.short_name }} is available at {{ product.store.retailer.short_na
 {% endif %}
 {{ product.store.city }} {{ product.store.state}} {{ product.store.zipcd }}  
 
-{% if capture_date %}
-You have 48 hours to go see the item in store if you choose.  Happy shopping! 
-
-Your card will not be charged until {{ capture_date }}. Call or text to cancel.
-{% endif %}We are happy to answer any questions you might have!
+We are happy to answer any questions you might have!
 {% endif %}
 {% if uid and token %}Your account has been created from email you have 
 provided during our {% if is_buy %}purchase{% else %}checkout{% endif %} process. If you wish to login you need to 

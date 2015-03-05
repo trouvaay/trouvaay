@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from django.views import generic
 from members.models import AuthUserActivity, AuthUser, \
-    AuthUserOrder, AuthUserOrderItem, AuthUserAddress, RegistrationProfile, \
-    PromotionOffer, PromotionRedemption, Join, Profile
+    AuthUserAddress, RegistrationProfile, \
+    PromotionOffer, Join, Profile, AuthOrder, OrderType, \
+    Reservation, OrderAddress, Purchase, Redemption
 from goods.models import Product
 from members.forms import CustomAuthenticationForm, RegistrationForm, \
     ReserveForm, ReserveFormAuth, ReferralForm, PostCheckoutForm
@@ -58,9 +59,7 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
 
         context = super(ProfileView, self).get_context_data(**kwargs)
         user = self.get_object()
-        order = AuthUserOrder.objects.filter(authuser= user)
-        ordered_items = [i.product for i in AuthUserOrderItem.objects.filter(order=order, has_open_reservation=True)]
-        context['user_order_items'] = ordered_items
+        context['user_order_items'] = Product.objects.filter(product_orders__in=user.orders.filter(order_type=OrderType.RESERVATION_ORDER))
         print (context['user_order_items'])
         user_activity = AuthUserActivity.objects.get(authuser= user)
         
@@ -289,26 +288,24 @@ class ReserveView(generic.DetailView):
             reservation_message = "Sorry it looks like you've hit your reservation limit - save something for the rest of us!.  On a serious note email us to extend your limit and we're generally happy to accomodate.  Unless you're a robot..."
             return render_to_response('members/purchase/reserve_postcheckout.html', locals())
 
-
         # create order
-        order = AuthUserOrder()
+        order = AuthOrder()
         order.authuser = order_user
-        order.taxes = Decimal('0.0')
+        order.product = product
+        order_type = OrderType.RESERVATION_ORDER
+        order.converted_from_reservation = False
         order.save()
-        logger.debug('created order')
+        logger.debug('created AuthOrder')
 
-        # add item to order
-        order_item = AuthUserOrderItem.create_order_item(order=order, product=product, order_type='reserve')
-        logger.debug('created order item')
+        # create reservation
+        Reservation.create_reservation(order)
         
         product.is_reserved = True
         product.save()
         logger.debug('product is_reserved field set to True')
 
-
         # send order confirmation email
-        send_order_email(request=self.request, order_item=order_item, show_password_reset_link=password_reset_link, is_buy=False)
-        logger.debug('sent email')
+        send_order_email(request=self.request, order=order, show_password_reset_link=password_reset_link, is_buy=False)
         return render_to_response('members/purchase/reserve_postcheckout.html', locals())
                 
 
@@ -318,31 +315,34 @@ class BuyView(generic.DetailView):
     context_object_name = 'product'
     model = Product
 
-    def __create_or_update_shipping_address(self, request, user):
-        """Creates if needed or updated existing shipping address for the user"""
+    def __create_or_update_default_address(self, request, user):
+        """Creates if needed or updated existing default user address"""
 
-        # TODO: allow multiple addresses per user
-        # right now there is only one address per user which
-        # is enforced in the database with a Unique key on user id
-        shipping_address = None
-        try:
-            shipping_address = AuthUserAddress.objects.get(authuser=user)
-            logger.debug('Updating existing shipping address')
-        except AuthUserAddress.DoesNotExist:
-            # no address, that's ok we will create a new one
-            shipping_address = AuthUserAddress()
-            logger.debug('Creating new shipping address')
+        default_address = None
+        if(hasattr(user, 'default_address')):
+            default_address = user.default_address
+        else:
+            default_address = AuthUserAddress()
 
-        # TODO: shipping address should be tied to the order
-        # right now it is only tied to user
-        shipping_address.authuser = user
-        shipping_address.street = request.POST['args[shipping_address_line1]']
-        shipping_address.city = request.POST['args[shipping_address_city]']
-        shipping_address.state = request.POST['args[shipping_address_state]']
-        shipping_address.zipcd = request.POST['args[shipping_address_zip]']
-        shipping_address.shipping = True
-        shipping_address.save()
-        
+        default_address.authuser = user
+        default_address.street = request.POST['args[shipping_address_line1]']
+        default_address.city = request.POST['args[shipping_address_city]']
+        default_address.state = request.POST['args[shipping_address_state]']
+        default_address.zipcd = request.POST['args[shipping_address_zip]']
+        default_address.shipping = True
+        default_address.save()
+
+    def __create_order_address(self, request, order):
+        """Creates order address from request's shipping address"""
+
+        order_address = OrderAddress()
+        order_address.authuser = order
+        order_address.street = request.POST['args[shipping_address_line1]']
+        order_address.city = request.POST['args[shipping_address_city]']
+        order_address.state = request.POST['args[shipping_address_state]']
+        order_address.zipcd = request.POST['args[shipping_address_zip]']
+        order_address.shipping = True
+        order_address.save()
 
     def __update_name(self, request, user):
         """Update user's first and last name if needed"""
@@ -386,13 +386,8 @@ class BuyView(generic.DetailView):
         price, taxes, promo code (with verification), discounts and total
         """
 
-        print self.request.GET
-
         product = self.get_object()
-        order_type = self.request.GET.get('order_type', None)
-
         promo_code = self.request.GET.get('promo_code', None)
-
         promo_is_valid = False
         promo_code_message = ''
         promo_codes = []
@@ -404,8 +399,9 @@ class BuyView(generic.DetailView):
             else:
                 promo_code_message = invalid_message
 
-        discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(user=self.request.user, total_price_before_offers=product.current_price,
-            promo_codes=promo_codes)
+        discounts, subtotal_dollar_value, taxes, total = AuthOrder.compute_order_line_items(user=self.request.user,
+                                                                                            total_price_before_offers=product.current_price,
+                                                                                            promo_codes=promo_codes)
         total_discount = 0
         for discount in discounts:
             total_discount += discount['dollar_value']
@@ -420,14 +416,11 @@ class BuyView(generic.DetailView):
 
         try:
             # create new order
-            order = AuthUserOrder()
+            order = AuthOrder()
 
             product = self.get_object()
-
             order_type = request.POST['order_type'].strip().lower()
             
-            capture_order = (order_type == 'buy')
-
             # create charge with stripe,
             try:
                 token_id = request.POST['token[id]']
@@ -438,7 +431,9 @@ class BuyView(generic.DetailView):
                 promo_codes_param = request.POST['promo_codes'].strip()
                 if(promo_codes_param):
                     promo_codes = [i for i in promo_codes_param.split(',')]
-                discounts, subtotal_dollar_value, taxes, total = AuthUserOrder.compute_order_line_items(self.request.user,total_price_before_offers=product.current_price, promo_codes=promo_codes)
+                discounts, subtotal_dollar_value, taxes, total = AuthOrder.compute_order_line_items(user=self.request.user,
+                                                                                                    total_price_before_offers=product.current_price,
+                                                                                                    promo_codes=promo_codes)
 
                 logger.debug('discounts %s' % str(discounts))
                 logger.debug('subtotal_dollar_value %s' % str(subtotal_dollar_value))
@@ -473,16 +468,23 @@ class BuyView(generic.DetailView):
 
                 Profile.create_profile(order_user)
                 order.authuser = order_user
-                order.taxes = taxes['dollar_value']
                 order.save()
                 logger.debug('Created new order %d' % order.id)
 
                 # create redemptions
                 for discount in discounts:
-                    PromotionRedemption.create_redemption(order=order,
-                                                          product=product,
-                                                          offer_id=discount['offer_id'],
-                                                          discount_dollar_value=discount['dollar_value'])
+                    Redemption.create_redemption(order=order,
+                                                 product=product,
+                                                 offer_id=discount['offer_id'],
+                                                 discount_dollar_value=discount['dollar_value'])
+
+                # create/update addresses
+                self.__create_or_update_default_address(self.request, order_user)
+                self.__create_order_address(request, order)
+
+                # add item to order
+                Purchase.create_purchase(order=order, taxes=taxes['dollar_value'], transaction_price=total['in_dollars'])
+
 
                 # create credit card charge with stripe
                 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -491,11 +493,11 @@ class BuyView(generic.DetailView):
                     currency="usd",
                     description=product.short_name,
                     card=token_id,
-                    capture=capture_order,
+                    capture=True,
                     receipt_email=order_user.email,
                     metadata={
                         'order_id': order.id,
-                        'order_type': order_type
+                        'order_type': 'buy'
                         })
 
             except Exception, e:
@@ -503,16 +505,11 @@ class BuyView(generic.DetailView):
                 logger.error(str(e))
                 return JsonResponse({'status': 'error', 'message': 'Failed to charge credit card.'})
 
-            self.__create_or_update_shipping_address(self.request, order_user)
-
-            # add item to order
-            order_item = AuthUserOrderItem.create_order_item(order=order, product=product, order_type=order_type)
-
             # send order confirmation email
             send_order_email(request=self.request, 
-                             order_item=order_item, 
-                             show_password_reset_link=(not is_existing), 
-                             is_buy=(order_type == 'buy'))
+                             order=order,
+                             show_password_reset_link=(not is_existing),
+                             is_buy=True)
 
             json_result = {
                 'status': 'ok',
