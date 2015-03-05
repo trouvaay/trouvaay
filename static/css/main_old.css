@@ -1700,11 +1700,11 @@ padding-bottom: 2em;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #666666;
-  -webkit-opacity: 0.7;
+  /*background: #666666;*/
+  /*-webkit-opacity: 0.7;
   -moz-opacity: 0.7;
   opacity: 0.7;
-  z-index: 300;
+  z-index: 300;*/
 }
 .products-header {
   width: 100%;
