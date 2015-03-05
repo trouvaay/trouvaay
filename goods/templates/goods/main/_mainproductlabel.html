@@ -14,9 +14,7 @@
             {% endif %}
         {% endif %}</div>
       <div class="name">
-	<a href="{% url 'goods:detail' product.slug  %}" target="_blank" >
 	{{ product.short_name|truncatechars:26 }}
-	</a>
       </div>
 
         <!-- need these so that we can pass product name and price to stripe checkout -->

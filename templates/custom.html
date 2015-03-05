@@ -377,17 +377,6 @@ $(document).ready(function() {
         console.log('mixpanel: view-product-detail.onclick event fired');
     })
 
-    $('.landing-view-product').on('click', function(e) {
-        // var productslug = e.target.pathname.substr(7);
-        var initialProductSlug = $(this).attr("href").substr(7);
-        var productSlug = initialProductSlug.substring(0, initialProductSlug.length - 1);
-        mixpanel.track(
-                "Clicked Detail Page From Landing",
-                { "productSlug": productSlug }
-            );
-        console.log('mixpanel: landing-view-product-detail.onclick event fired');
-    })
-
 	// navigation login
 	$('.nav-login-button').on('click', function(e) {
 		$.ajax({

@@ -163,14 +163,17 @@ $(document).ready(function() {
 									google_conversion_label: "h7XVCP2q5VkQ9YiCyAM",
 								    google_remarketing_only: false,
 								});
+								console.log('google-conversion fired');
 
 								// fire FB purchase pixel
 								FBPurchaseEvent();
+								console.log('FBPurchaseEvent fired');
 
 								mixpanel.track(
 					                "Purchase Completed",
 					                { "product": data['product_name'] }
 					            	);
+								console.log('mixpanel purchaseevent fired');
 						  	
 						  		$("#reserved-product-name").text(data['product_name']);
 						  		$("#reserved-product-store-name").text(data['store_name']);

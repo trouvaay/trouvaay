@@ -190,7 +190,7 @@ html, body {
 .info-page .info {
   background: #FFF;
   border: 40px solid #000;
-  margin: 40px 34px 40px;
+  margin: 70px 34px 40px;
   /*padding: 40px;*/
   padding: 10px 20px;
   font-size: 17px;
@@ -250,7 +250,7 @@ html, body {
 }
 
 .want-join-container {
-  margin-top: 20px;
+  margin-top: 10%;
   margin-bottom: 20px;
   font-family: "Droid Serif";
 }
