@@ -1078,11 +1078,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .grid-product.centered-parent {
   margin-bottom: -5px;
 }
-@media (max-width: 480px) {
-  .grid-products-wrapper .grid-product.centered-parent {
-    margin-bottom: 15px;
-  }
-}
 .grid-products-wrapper .grid-product .centered-child a {
   display: block;
 }
@@ -1104,6 +1099,12 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin: 2px 0px 3px;
   clear: both;
   float: none;
+}
+@media (max-width: 480px) {
+  .grid-products-wrapper .pic-detail-home {
+    padding-top: 15px;
+    margin-top: 10px;
+  }
 }
 .grid-products-wrapper .price {
   font-family: "Droid Serif";
