@@ -228,7 +228,10 @@
             </script><!-- end Mixpanel -->
             {% include 'custom.html' %}
         </div>
-        {% block endjs %}{% include 'js/addlikeditems.html' %}{% endblock endjs %}
+        {% block endjs %}
+        {% include 'js/addlikeditems.html' %}
+            <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+        {% endblock endjs %}
         {% analytical_body_bottom %}
     </body>
 </html>

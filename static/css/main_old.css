@@ -952,7 +952,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 .product-description {
   background: white;
   float: left;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   /*padding-top: 3rem;*/
 }
 .similar-items {
@@ -2534,6 +2534,17 @@ form .form-checkbox-wrap .checkbox-label {
   font-size: 20px;
 }
 .btn.btn-default.glyphs.active {
+  /*color: #3094B2;*/
+  color: red;
+}
+.like-btn {
+  color: #e6be46;
+}
+.like-btn:hover {
+  text-decoration: none;
+  color: #e6be46;
+}
+.like-btn.active {
   /*color: #3094B2;*/
   color: red;
 }
