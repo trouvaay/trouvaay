@@ -59,13 +59,15 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
 
         context = super(ProfileView, self).get_context_data(**kwargs)
         user = self.get_object()
-        context['user_order_items'] = Product.objects.filter(product_orders__in=user.orders.filter(order_type=OrderType.RESERVATION_ORDER,
-                                                                                                   order__reservation__is_active=True))
+        ordered_items = Product.objects.filter(product_orders__in=user.user_orders.filter(order_type=OrderType.RESERVATION_ORDER,
+                                                                                          reservation__is_active=True))
+        print ordered_items.query
+        context['user_order_items'] = ordered_items
         print (context['user_order_items'])
-        user_activity = AuthUserActivity.objects.get(authuser= user)
+        user_activity = AuthUserActivity.objects.get(authuser=user)
         
         # diff from liked_items context function in context_processors.py
-        context['liked_products'] = user_activity.saved_items.exclude(id__in= [i.id for i in ordered_items] )
+        context['liked_products'] = user_activity.saved_items.exclude(id__in=[i.id for i in ordered_items])
         return context
 
 
@@ -293,7 +295,7 @@ class ReserveView(generic.DetailView):
         order = AuthOrder()
         order.authuser = order_user
         order.product = product
-        order_type = OrderType.RESERVATION_ORDER
+        order.order_type = OrderType.RESERVATION_ORDER
         order.converted_from_reservation = False
         order.save()
         logger.debug('created AuthOrder')
@@ -337,7 +339,7 @@ class BuyView(generic.DetailView):
         """Creates order address from request's shipping address"""
 
         order_address = OrderAddress()
-        order_address.authuser = order
+        order_address.order = order
         order_address.street = request.POST['args[shipping_address_line1]']
         order_address.city = request.POST['args[shipping_address_city]']
         order_address.state = request.POST['args[shipping_address_state]']
@@ -469,6 +471,9 @@ class BuyView(generic.DetailView):
 
                 Profile.create_profile(order_user)
                 order.authuser = order_user
+                order.product = product
+                order.order_type = OrderType.PURCHASE_ORDER
+                order.converted_from_reservation = False
                 order.save()
                 logger.debug('Created new order %d' % order.id)
 

@@ -213,7 +213,7 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         return result
 
     def get_number_of_reservations(self):
-        return self.user_orders.filter(order_items__captured=False).count()
+        return self.reservations.filter(is_active=True).count()
 
     def get_number_of_reservations_left(self):
         result = settings.RESERVATION_LIMIT - self.get_number_of_reservations()
@@ -411,7 +411,7 @@ class Reservation(TimestampedModel):
         reservation = Reservation()
         reservation.authuser = order.authuser
         reservation.order = order
-        reservation = order.product.current_price
+        reservation.reservation_price = order.product.current_price
         reservation.is_active = True
         reservation.reservation_expiration = timezone.now() + timedelta(hours=settings.RESERVATION_PERIOD)
         reservation.save()
@@ -429,6 +429,7 @@ class Purchase(TimestampedModel):
     def create_purchase(cls, order, taxes, transaction_price):
         purchase = Purchase()
         purchase.authuser = order.authuser
+        purchase.order = order
         purchase.taxes = taxes
         purchase.original_price = order.product.current_price
         purchase.transaction_price = transaction_price

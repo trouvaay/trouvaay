@@ -8,7 +8,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 import os
 import logging
 
-logging.basicConfig()
+logging.basicConfig()  # need this so that scheduler is happy, even though we are not using this logger
 
 sched = BlockingScheduler()
 
@@ -37,5 +37,6 @@ def clear_expired_reservations():
         product = reservation.order.product
         product.is_reserved = False
         product.save()
+        print 'Cleared expired reservation for product {0}'.format(product.short_name)
 
 sched.start()
