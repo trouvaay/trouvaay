@@ -63,6 +63,15 @@
 	      padding: 0px;
 	    }
 
+      &.centered-parent {
+        margin-bottom: -5px;
+        
+        @include breakpoint(xs) {
+            margin-bottom: 15px;
+        }
+
+      }
+
 	    .centered-child a {
 	      display: block;
 

@@ -1075,6 +1075,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
     padding: 0px;
   }
 }
+.grid-products-wrapper .grid-product.centered-parent {
+  margin-bottom: -5px;
+}
+@media (max-width: 480px) {
+  .grid-products-wrapper .grid-product.centered-parent {
+    margin-bottom: 15px;
+  }
+}
 .grid-products-wrapper .grid-product .centered-child a {
   display: block;
 }
