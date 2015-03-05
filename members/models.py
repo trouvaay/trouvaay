@@ -433,6 +433,12 @@ class Purchase(TimestampedModel):
         purchase.original_price = order.product.current_price
         purchase.transaction_price = transaction_price
         purchase.save()
+
+        product = order.product
+        product.is_sold = True
+        product.is_reserved = False
+        product.save()
+        
         return purchase
 
 class OfferType(object):

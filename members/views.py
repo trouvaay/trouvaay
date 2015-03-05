@@ -405,7 +405,7 @@ class BuyView(generic.DetailView):
         total_discount = 0
         for discount in discounts:
             total_discount += discount['dollar_value']
-        capture_time = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
+        capture_time = timezone.now()
         stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
         feature_name_reserve = settings.FEATURE_NAME_RESERVE
         site_name = settings.SITE_NAME
@@ -521,7 +521,6 @@ class BuyView(generic.DetailView):
                 'store_city': product.store.city,
                 'store_state': product.store.state,
                 'store_zipcode': product.store.zipcd,
-                'capture_date': order_item.capture_time.date() if not order_item.captured else None,
                 'ask_phone': False
             }
 

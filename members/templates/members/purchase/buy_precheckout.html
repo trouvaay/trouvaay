@@ -181,16 +181,9 @@ $(document).ready(function() {
 						  		storeAddress += ("<br>" + data['store_city'] + " " + data['store_state'] + " " + data['store_zipcode']);
 								$("#reserved-product-store-address").html(storeAddress);
 								
-								console.log('capture date: '+data['capture_date']);
-								if(data['capture_date']){
-									$("#reserved-product-capture-date").append(' ' + data['capture_date']);
-									$("#reserved-product-capture-date").show();
-								}
-								else{
-									$("#reserved-product-capture-date").hide();
-									$("#product-purchase-try").hide();
-									$("#product-purchase-buy").show();
-								}
+								$("#reserved-product-capture-date").hide();
+								$("#product-purchase-try").hide();
+								$("#product-purchase-buy").show();
 								
 								$("#reserved-product-image").attr('src', (data['image_src']));
 								$("#post-checkout-modal").modal({
