@@ -1098,7 +1098,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 .grid-products-wrapper .price {
   font-family: "Droid Serif";
-  font-size: 13px;
+  font-size: 12px;
   margin-bottom: 3px;
 }
 .grid-products-wrapper .name {
