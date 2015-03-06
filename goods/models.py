@@ -299,6 +299,7 @@ class ProductImage(AbstractImageModel):
 
     class Meta:
         app_label = 'goods'
+        ordering = ['-is_main']
 
     def __str__(self):
         return self.product.short_name
