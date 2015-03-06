@@ -40,8 +40,9 @@
     {% comment %}
     {% endcomment %}
 
-    <header id="refine" class="hidden-md hidden-lg"><label for="display-filters">Refine</label></header>
     <input type="checkbox" id="display-filters">
+    <div class="filters-container">
+    <header id="refine" class="hidden-md hidden-lg"><label for="display-filters">Refine</label></header>
     
     <div class="category filters">
         <header class="hidden-xs hidden-sm header-group">Filters <a href="#" class="reset"><span>Reset</span></a></header>
@@ -247,6 +248,7 @@
         {% endif %}
 
     </div>
+</div>
 </div>
     </form>
     {% endif %} 

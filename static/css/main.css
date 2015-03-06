@@ -1245,18 +1245,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 
-#display-filters {
-  display: none;
-}
-@media (max-width: 992px) {
-  #display-filters + .filters {
-    display: none;
-  }
-  #display-filters:checked + .filters {
-    display: block;
-  }
-}
-
 #searchfilter-form {
   width: 245px;
   background: #e6e7e8;
@@ -1271,6 +1259,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   font-weight: bold;
   font-size: 11px;
+}
+#searchfilter-form .filters-container {
+  position: relative;
+  overflow: auto;
+  float: right;
 }
 #searchfilter-form #filter-container-furnituretype label {
   width: 100%;
@@ -1399,19 +1392,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #searchfilter-form .category header a.reset span {
   display: none;
-}
-@media (max-width: 992px) {
-  #searchfilter-form .category.filters {
-    background: #FFF;
-    height: 100%;
-    width: 100%;
-    top: 50px;
-    position: fixed;
-    z-index: 3;
-    padding-top: 15px;
-    padding-bottom: 80px;
-    overflow: auto;
-  }
 }
 #searchfilter-form .category.filters div header {
   border-bottom: 1px dotted #939598;
@@ -1575,6 +1555,51 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #searchfilter-form .c-checkbox label {
   cursor: pointer;
+}
+
+#searchfilter-form #display-filters {
+  display: none;
+}
+@media (max-width: 992px) {
+  #searchfilter-form #display-filters + .filters-container > * {
+    display: none;
+  }
+  #searchfilter-form #display-filters + .filters-container > header {
+    display: block;
+  }
+  #searchfilter-form #display-filters:checked + .filters-container > .category {
+    display: block;
+  }
+  #searchfilter-form #display-filters:checked + .filters-container {
+    background: #FFF;
+    height: 100%;
+    width: 100%;
+    top: 50px;
+    position: fixed;
+    z-index: 3;
+    padding-bottom: 80px;
+  }
+  #searchfilter-form #display-filters:checked + .filters-container #refine {
+    background: #000;
+    float: none;
+    width: 100%;
+    padding-left: 70px;
+    border: 0px;
+  }
+  #searchfilter-form #display-filters:checked + .filters-container #refine label {
+    padding: 6px 0px;
+  }
+  #searchfilter-form #display-filters:checked + .filters-container #refine label:after {
+    background: #e6be46;
+    border: 2px solid #FFF;
+    content: 'Done';
+    font-family: "Ostrich Sans";
+    font-size: 12px;
+    padding: 6px 17px;
+    font-weight: 800;
+    top: 6px;
+    margin-right: 25px;
+  }
 }
 
 /* Override main_old.css */

@@ -166,21 +166,6 @@
 
 }
 
-#display-filters {
-    display: none;
-
-    @include breakpoint(md) {
-        +.filters {
-            display: none;
-        }
-
-        &:checked + .filters {
-            display: block;
-        }
-
-    }
-
-}
 
 #searchfilter-form {
 
@@ -198,6 +183,22 @@
         font-size: 11px;
 
     }
+
+    .filters-container {
+        
+            //background: #FFF;
+            //height: 100%;
+            //width: 100%;
+            //top: 50px;
+            position: relative;
+            //position: fixed;
+            //z-index: 3;
+            //padding-top: 15px;
+            //padding-bottom: 80px;
+            overflow: auto;
+            float: right;
+
+        }
 
     #filter-container-furnituretype {
         label {
@@ -375,15 +376,6 @@
     .category.filters {
 
         @include breakpoint (md) {
-            background: #FFF;
-            height: 100%;
-            width: 100%;
-            top: 50px;
-            position: fixed;
-            z-index: 3;
-            padding-top: 15px;
-            padding-bottom: 80px;
-            overflow: auto;
         }
 
         div header {
@@ -605,6 +597,65 @@
     }
 
 
+
+}
+
+
+#searchfilter-form #display-filters {
+    display: none;
+
+    @include breakpoint(md) {
+        +.filters-container > * {
+            display: none;
+        }
+        
+        +.filters-container > header {
+            display: block;
+        }
+
+        &:checked + .filters-container > .category {
+            display: block;
+        }
+
+        &:checked + .filters-container {
+            
+            background: #FFF;
+            height: 100%;
+            width: 100%;
+            top: 50px;
+            position: fixed;
+            z-index: 3;
+            //padding-top: 15px;
+            padding-bottom: 80px;
+        }
+
+        &:checked + .filters-container #refine {
+            background: #000;
+            float: none;
+            width: 100%;
+            padding-left: 70px;
+            border: 0px;
+
+            label {
+                padding: 6px 0px;
+            }
+
+            label:after {
+                background: #e6be46;
+                border: 2px solid #FFF;
+                content: 'Done';
+                font-family: "Ostrich Sans";
+                font-size: 12px;
+                padding: 6px 17px;
+                font-weight: 800;
+                top: 6px;
+                margin-right: 25px;
+                
+            }
+
+        }
+
+    }
 
 }
 
