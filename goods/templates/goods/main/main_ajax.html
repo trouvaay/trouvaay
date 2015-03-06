@@ -18,7 +18,7 @@
 
     {% if searchfilter.furnituretypes %}
     <div id="filter-container-furnituretype" class="category">
-        <header><label for="display-categories">Categories</a> <a href="#" class="reset hidden-xs hidden-sm"><span>Reset</span></a></header>
+        <header class="header-group"><label for="display-categories">Categories</a> <a href="#" class="reset hidden-xs hidden-sm"><span>Reset</span></a></header>
 
         <input type="checkbox" id="display-categories">
         <ul class="hidden-sm hidden-xs">
@@ -38,30 +38,32 @@
     </div>
     {% endif %}
     {% comment %}
-    {% if searchfilter.segments %}
-    <div id="filter-segment-segment" class="category">
-        <header>Segment</header>
-        <ul>
-            {% for segment in searchfilter.segments %}
-            <li>
-
-            <div class="c-checkbox">
-                <input type="checkbox" class="checkbox searchfilter-control" name="filter-segment" value="{{ segment.id }}" id="filter-segment-{{ segment.id }}">
-                <label for="filter-segment-{{ segment.id }}" class="checkbox-label">
-                    {{ segment.select }}
-                </label>
-            </div>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
     {% endcomment %}
 
     <header id="refine" class="hidden-md hidden-lg"><label for="display-filters">Refine</label></header>
     <input type="checkbox" id="display-filters">
+    
     <div class="category filters">
-        <header class="hidden-xs hidden-sm">Filters <a href="#" class="reset"><span>Reset</span></a></header>
+        <header class="hidden-xs hidden-sm header-group">Filters <a href="#" class="reset"><span>Reset</span></a></header>
+        
+    {% if searchfilter.segments %}
+    <div id="filter-segment-segment" class="filter-group">
+        <header><a data-toggle="collapse" href="#collapseSegment" aria-expanded="true" aria-controls="collapseSegment" class="collapsed">Segment <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
+        <div id="collapseSegment" class="collapse fold" role="tabpanel" aria-labelledby="headingSegment">
+        <ul>
+            {% for segment in searchfilter.segments %}
+            <li>
+                <div class="c-checkbox">
+                    <input class="searchfilter-control checkbox" type="checkbox" name="filter-segment" id="filter-segment-{{segment.id}}" value="{{ segment.id }}" />
+                    <label for="filter-segment-{{ segment.id }}" class="checkbox-pseudocheckbox"></label>
+                    <label for="filter-segment-{{ segment.id }}" class="checkbox-label">{{ segment.select }}</label>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+    {% endif %}
         <div id="filter-container-price" class="filter-group">
             <header><a data-toggle="collapse" href="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice" class="collapsed">Price <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
             <div id="collapsePrice" class="collapse fold" role="tabpanel" aria-labelledby="headingPrice">
@@ -389,7 +391,11 @@ $('#filter-container-color').find('.checkbox-label').each(function() {
 
         });
 
-$('.category .reset').click(function() {
+$('.category .reset').click(function(event) {
+        if ($(event.target).parent().hasClass("header-group")) {
+            $(this).parent().parent().find('.filter-group .reset').addClass('hidden');
+
+        }
         $(this).parent().parent().find('input[type="checkbox"]').attr('checked', false);
         $(this).parent().parent().find('.slider').each(function() {
             $(this).data("ionRangeSlider").reset();
