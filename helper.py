@@ -222,6 +222,7 @@ Neighborhoods = {'SF': [
     ('Glen Park', 'Glen Park'),
     ('Haight-Ashbury', 'Haight-Ashbury'),
     ('Hayes Valley', 'Hayes Valley'),
+    ('Hayward', 'Hayward'),
     ('Ingleside', 'Ingleside'),
     ('Ingleside Terraces', 'Ingleside Terraces'),
     ('Jackson Square', 'Jackson Square'),
