@@ -245,6 +245,27 @@ class MainView(AjaxListView):
         context = super(MainView, self).get_context_data(**kwargs)
         context['BaseUrl'] = BASE_URL
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+        context['searchfilter'] = {
+                                   'price_slider_min': 0,
+                                   'price_slider_max': 10000,
+                                   'height_slider_min': 0,
+                                   'height_slider_max': 1000,
+                                   'width_slider_min': 0,
+                                   'width_slider_max': 1000,
+                                   'depth_slider_min': 0,
+                                   'depth_slider_max': 1000,
+                                   'segments': Segment.objects.all(),
+                                   'colors': Color.objects.all(),
+                                   'styles': Style.objects.all(),
+                                   'furnituretypes': FurnitureType.objects.all(),
+                                   'neighborhoods': Neighborhoods['SF']
+                                   }
+        
+        # TODO: do not add 'site_name' to context
+        # once the 'sites' are setup in settings
+        context['site_name'] = settings.SITE_NAME
+        # removed until profile page implemented
+        # context['liked_items'] = get_liked_items(self.request.user)
         return context
 
 
