@@ -3,9 +3,9 @@ Thank you for your {% if is_buy %}purchase{% else %}reservation{% endif %}.
 We will be in touch shortly to coordinate pickup/delivery of your {{ product.short_name }}
 {% else %}
 We're confirming the availability of your {{ product.short_name }} (these things move fast!).  Once confirmed, we'll send you an email with the name and location of the store that carries your piece.
-
 You can track your reservation from your profile page.
 {% endif %}
+
 We are happy to answer any questions you might have!
 {% if uid and token %}Your account has been created from email you have 
 provided during our {% if is_buy %}purchase{% else %}checkout{% endif %} process. If you wish to login you need to 

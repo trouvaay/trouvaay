@@ -23,25 +23,25 @@ cloudinary.config(
 
 
 class AbstractImageModel(models.Model):
-	"""Abstract image model for ProductIMage and RetailerIMage models.
-	Uses Cloudinary for image rendering
-	"""
-	#main image will be primary/1st displayed to user
-	is_main = models.BooleanField(default=False)
-	image = CloudinaryField('image')
-	
-	class Meta:
-		abstract = True
-		#primarily used in ProductImage model in goods app
-		app_label = 'goods'
+    """Abstract image model for ProductIMage and RetailerIMage models.
+    Uses Cloudinary for image rendering
+    """
+    #main image will be primary/1st displayed to user
+    is_main = models.BooleanField(default=False)
+    image = CloudinaryField('image')
+    
+    class Meta:
+        abstract = True
+        #primarily used in ProductImage model in goods app
+        app_label = 'goods'
 
 def MakeSlug(string,spaceChar='+',Maxlen=None):
-	"""for use in GeoCode fct below"""
-	stringlst = string.split(" ")
-	newStr =""
-	for word in stringlst:
-		newStr+=(word+spaceChar)		
-	return newStr[:-1][:Maxlen]
+    """for use in GeoCode fct below"""
+    stringlst = string.split(" ")
+    newStr =""
+    for word in stringlst:
+        newStr+=(word+spaceChar)        
+    return newStr[:-1][:Maxlen]
 
 
 def is_time_to_show_modal(request, key):
@@ -59,29 +59,29 @@ def hide_modal(request, key, expiration_in_seconds):
 
 
 def send_email_from_template(to_email, context, subject_template, plain_text_body_template, html_body_template=None):
-	"""Creates email from subject and body templates and sends message to the user
-	
-	to_email - recipient email 
-	context - dictionary passed to all the templates
-	subject_template - template that will be used to generate message subject
-	plain_text_body_template - template that will be used to generate plain text message body
-	html_body_template - template that will be used to generate html message body
-	"""
-	
-	subject = render_to_string(subject_template, context)
-	subject = ''.join(subject.splitlines()) # remove new lines from subject
-	
-	message_txt = render_to_string(plain_text_body_template, context)
-	email_message = EmailMultiAlternatives(subject=subject, 
+    """Creates email from subject and body templates and sends message to the user
+    
+    to_email - recipient email 
+    context - dictionary passed to all the templates
+    subject_template - template that will be used to generate message subject
+    plain_text_body_template - template that will be used to generate plain text message body
+    html_body_template - template that will be used to generate html message body
+    """
+    
+    subject = render_to_string(subject_template, context)
+    subject = ''.join(subject.splitlines()) # remove new lines from subject
+    
+    message_txt = render_to_string(plain_text_body_template, context)
+    email_message = EmailMultiAlternatives(subject=subject, 
                                            body=message_txt, 
                                            from_email=settings.DEFAULT_FROM_EMAIL, 
                                            to=[to_email], 
                                            bcc=[settings.DEFAULT_FROM_EMAIL])
 
-	if(html_body_template):
-		message_html = render_to_string(html_body_template, context)
-		email_message.attach_alternative(message_html, 'text/html')
-	email_message.send()
+    if(html_body_template):
+        message_html = render_to_string(html_body_template, context)
+        email_message.attach_alternative(message_html, 'text/html')
+    email_message.send()
 
 
 def send_user_password_change_email(request, user):
@@ -98,29 +98,24 @@ def send_user_password_change_email(request, user):
         plain_text_body_template='members/implicit_user_creation/email_body.txt',
         html_body_template='members/implicit_user_creation/email_body.html')
 
-def send_order_email(request, order_item, show_password_reset_link, is_buy):
-    capture_date = None
-    if(order_item.capture_time and not not order_item.captured):
-        capture_date = order_item.capture_time.date()
-
+def send_order_email(request, order, show_password_reset_link, is_buy):
     email_context = {
                      'is_buy': is_buy,
-                     'product': order_item.product,
+                     'product': order.product,
                      'site': get_site(request),
-                     'capture_date': capture_date
                      }
 
     if(show_password_reset_link):
         # This is a newly created user without password. We will send this
         # user a password reset link along with the order
         # add extra context parameters needed for password reset link
-        email_context['token'] = default_token_generator.make_token(order_item.order.authuser)
-        email_context['uid'] = urlsafe_base64_encode(force_bytes(order_item.order.authuser.pk))
+        email_context['token'] = default_token_generator.make_token(order.authuser)
+        email_context['uid'] = urlsafe_base64_encode(force_bytes(order.authuser.pk))
         email_context['domain'] = get_current_site(request).domain
         email_context['protocol'] = 'https' if request.is_secure() else 'http'
 
 
-    send_email_from_template(to_email=order_item.order.authuser.email, context=email_context,
+    send_email_from_template(to_email=order.authuser.email, context=email_context,
         subject_template='members/purchase/reserve_confirmation_email_subject.txt',
         plain_text_body_template='members/purchase/reserve_confirmation_email_body.txt',
         html_body_template='members/purchase/reserve_confirmation_email_body.html')
@@ -143,43 +138,43 @@ def get_client_id(request):
     return client_id
 
 def get_site(request):
-	if Site._meta.installed:
-		site = Site.objects.get_current()
-	else:
-		site = RequestSite(request)	
-	return site
+    if Site._meta.installed:
+        site = Site.objects.get_current()
+    else:
+        site = RequestSite(request)    
+    return site
 
 def GeoCode(street, city, state, zipcd, street2=None):
-	"""Used to fetch lat/lng coords from google api
+    """Used to fetch lat/lng coords from google api
 
-	"""
-	
-	base_url = "https://maps.googleapis.com/maps/api/geocode/json?"
-	zipcd = str(zipcd)
-	
-	if street2:
-		address = (street+street2+city+state+zipcd)
-	else:
-		address = (street+city+state+zipcd)
-	
-	# address slug
-	geo_str = MakeSlug(address)
-	#TODO: convert to google API key to evrion var 
-	key = settings.GOOG_MAP_KEY
-	final_url = base_url+"sensor=false"+"&address="+address+"&key="+key	
-	try:
-		r = requests.get(final_url) 
-		location_object =  r.json()
-		num_results = len(location_object["results"])
-		# if response is 200 status and they arent too many results	   
-		if location_object['status'] == "OK" and num_results <= 4:
-			lat = location_object["results"][0]["geometry"]["location"]["lat"]
-			lng = location_object["results"][0]["geometry"]["location"]["lng"]
-			return(lat,lng)
-		else:
-			return(None,None)
-	except:
-		return(None,None)
+    """
+    
+    base_url = "https://maps.googleapis.com/maps/api/geocode/json?"
+    zipcd = str(zipcd)
+    
+    if street2:
+        address = (street+street2+city+state+zipcd)
+    else:
+        address = (street+city+state+zipcd)
+    
+    # address slug
+    geo_str = MakeSlug(address)
+    #TODO: convert to google API key to evrion var 
+    key = settings.GOOG_MAP_KEY
+    final_url = base_url+"sensor=false"+"&address="+address+"&key="+key    
+    try:
+        r = requests.get(final_url) 
+        location_object =  r.json()
+        num_results = len(location_object["results"])
+        # if response is 200 status and they arent too many results       
+        if location_object['status'] == "OK" and num_results <= 4:
+            lat = location_object["results"][0]["geometry"]["location"]["lat"]
+            lng = location_object["results"][0]["geometry"]["location"]["lng"]
+            return(lat,lng)
+        else:
+            return(None,None)
+    except:
+        return(None,None)
 
 def getdist(self, ThereLat, ThereLng, HereLat, HereLng):
     """ Calculates distance between two points
@@ -282,63 +277,63 @@ Neighborhoods = {'SF': [
 ]}
 
 States = [
-		('AK', 'Alaska'),
-		('AL', 'Alabama'),
-		('AR', 'Arkansas'),
-		('AS', 'American Samoa'),
-		('AZ', 'Arizona'),
-		('CA', 'California'),
-		('CO', 'Colorado'),
-		('CT', 'Connecticut'),
-		('DC', 'District of Columbia'),
-		('DE', 'Delaware'),
-		('FL', 'Florida'),
-		('GA', 'Georgia'),
-		('GU', 'Guam'),
-		('HI', 'Hawaii'),
-		('IA', 'Iowa'),
-		('ID', 'Idaho'),
-		('IL', 'Illinois'),
-		('IN', 'Indiana'),
-		('KS', 'Kansas'),
-		('KY', 'Kentucky'),
-		('LA', 'Louisiana'),
-		('MA', 'Massachusetts'),
-		('MD', 'Maryland'),
-		('ME', 'Maine'),
-		('MI', 'Michigan'),
-		('MN', 'Minnesota'),
-		('MO', 'Missouri'),
-		('MP', 'Northern Mariana Islands'),
-		('MS', 'Mississippi'),
-		('MT', 'Montana'),
-		('NA', 'National'),
-		('NC', 'North Carolina'),
-		('ND', 'North Dakota'),
-		('NE', 'Nebraska'),
-		('NH', 'New Hampshire'),
-		('NJ', 'New Jersey'),
-		('NM', 'New Mexico'),
-		('NV', 'Nevada'),
-		('NY', 'New York'),
-		('OH', 'Ohio'),
-		('OK', 'Oklahoma'),
-		('OR', 'Oregon'),
-		('PA', 'Pennsylvania'),
-		('PR', 'Puerto Rico'),
-		('RI', 'Rhode Island'),
-		('SC', 'South Carolina'),
-		('SD', 'South Dakota'),
-		('TN', 'Tennessee'),
-		('TX', 'Texas'),
-		('UT', 'Utah'),
-		('VA', 'Virginia'),
-		('VI', 'Virgin Islands'),
-		('VT', 'Vermont'),
-		('WA', 'Washington'),
-		('WI', 'Wisconsin'),
-		('WV', 'West Virginia'),
-		('WY', 'Wyoming'),
+        ('AK', 'Alaska'),
+        ('AL', 'Alabama'),
+        ('AR', 'Arkansas'),
+        ('AS', 'American Samoa'),
+        ('AZ', 'Arizona'),
+        ('CA', 'California'),
+        ('CO', 'Colorado'),
+        ('CT', 'Connecticut'),
+        ('DC', 'District of Columbia'),
+        ('DE', 'Delaware'),
+        ('FL', 'Florida'),
+        ('GA', 'Georgia'),
+        ('GU', 'Guam'),
+        ('HI', 'Hawaii'),
+        ('IA', 'Iowa'),
+        ('ID', 'Idaho'),
+        ('IL', 'Illinois'),
+        ('IN', 'Indiana'),
+        ('KS', 'Kansas'),
+        ('KY', 'Kentucky'),
+        ('LA', 'Louisiana'),
+        ('MA', 'Massachusetts'),
+        ('MD', 'Maryland'),
+        ('ME', 'Maine'),
+        ('MI', 'Michigan'),
+        ('MN', 'Minnesota'),
+        ('MO', 'Missouri'),
+        ('MP', 'Northern Mariana Islands'),
+        ('MS', 'Mississippi'),
+        ('MT', 'Montana'),
+        ('NA', 'National'),
+        ('NC', 'North Carolina'),
+        ('ND', 'North Dakota'),
+        ('NE', 'Nebraska'),
+        ('NH', 'New Hampshire'),
+        ('NJ', 'New Jersey'),
+        ('NM', 'New Mexico'),
+        ('NV', 'Nevada'),
+        ('NY', 'New York'),
+        ('OH', 'Ohio'),
+        ('OK', 'Oklahoma'),
+        ('OR', 'Oregon'),
+        ('PA', 'Pennsylvania'),
+        ('PR', 'Puerto Rico'),
+        ('RI', 'Rhode Island'),
+        ('SC', 'South Carolina'),
+        ('SD', 'South Dakota'),
+        ('TN', 'Tennessee'),
+        ('TX', 'Texas'),
+        ('UT', 'Utah'),
+        ('VA', 'Virginia'),
+        ('VI', 'Virgin Islands'),
+        ('VT', 'Vermont'),
+        ('WA', 'Washington'),
+        ('WI', 'Wisconsin'),
+        ('WV', 'West Virginia'),
+        ('WY', 'Wyoming'),
 ]
 
 
@@ -347,63 +342,63 @@ States = [
 # individual models
 
 # Attributes = {
-# 	'segment': [
-# 		('new','new'),
-# 		('vintage','vintage')
-# 	],
-# 	'style': [
-# 		('modern','modern'),
-# 		('traditional', 'traditional'),
-# 		('contemporary', 'contemporary'),
-# 		('rustic', 'rustic'),
-# 		('industrial', 'industrial'),
-# 		('beach', 'beach'),
-# 		],
-# 	'category': [
-# 		('living', 'living'),
-# 		('dining', 'dining'),
-# 		('bedroom', 'bedroom'),
-# 		('office', 'office'),
-# 		('lightning','lightning'),
-# 		('decor','decor'),
-#		 ('other', 'other'),
-# 	],
-# 	'subcategory': [
-# 		('bar', 'bar'),
-# 		('bar_stool','bar_stool'),
-# 		('bed','bed'),
-# 		('bedding','bedding'),
-# 		('bench','bench'),
-# 		('chair','chair'),
-# 		('chaise','chaise'),
-# 		('desk','desk'),
-# 		('desk_light','desk_light'),
-# 		('dining_table','dining_table'),
-# 		('floor_lamp','floor_lamp'),
-# 		('kitchen_serving','kitchen_serving'),
-# 		('loveseat','loveseat'),
-# 		('media','media'),
-# 		('mirror','mirror'),
-# 		('nightstand','nightstand'),
-# 		('ottoman','ottoman'),
-# 		('other_lighting','other_lighting'),
-# 		('pillow','pillow'),
-# 		('rug_throw','rug_throw'),
-# 		('small_table','small_table'),
-# 		('sofa','sofa'),
-# 		('storage','storage'),
-# 		('wall_decor','wall_decor'),
-# 	],
-# 	'material': [
-# 		('acrylic','acrylic'),
-# 		('cotton','cotton'),
-# 		('engineered_wood','engineered_wood'),
-# 		('leather','leather'),
-# 		('linen','linen'),
-# 		('other_fabric','other_fabric'),
-# 		('polyester','polyester'),
-# 		('wood_veneer','wood_veneer'),
-# 	]
+#     'segment': [
+#         ('new','new'),
+#         ('vintage','vintage')
+#     ],
+#     'style': [
+#         ('modern','modern'),
+#         ('traditional', 'traditional'),
+#         ('contemporary', 'contemporary'),
+#         ('rustic', 'rustic'),
+#         ('industrial', 'industrial'),
+#         ('beach', 'beach'),
+#         ],
+#     'category': [
+#         ('living', 'living'),
+#         ('dining', 'dining'),
+#         ('bedroom', 'bedroom'),
+#         ('office', 'office'),
+#         ('lightning','lightning'),
+#         ('decor','decor'),
+#         ('other', 'other'),
+#     ],
+#     'subcategory': [
+#         ('bar', 'bar'),
+#         ('bar_stool','bar_stool'),
+#         ('bed','bed'),
+#         ('bedding','bedding'),
+#         ('bench','bench'),
+#         ('chair','chair'),
+#         ('chaise','chaise'),
+#         ('desk','desk'),
+#         ('desk_light','desk_light'),
+#         ('dining_table','dining_table'),
+#         ('floor_lamp','floor_lamp'),
+#         ('kitchen_serving','kitchen_serving'),
+#         ('loveseat','loveseat'),
+#         ('media','media'),
+#         ('mirror','mirror'),
+#         ('nightstand','nightstand'),
+#         ('ottoman','ottoman'),
+#         ('other_lighting','other_lighting'),
+#         ('pillow','pillow'),
+#         ('rug_throw','rug_throw'),
+#         ('small_table','small_table'),
+#         ('sofa','sofa'),
+#         ('storage','storage'),
+#         ('wall_decor','wall_decor'),
+#     ],
+#     'material': [
+#         ('acrylic','acrylic'),
+#         ('cotton','cotton'),
+#         ('engineered_wood','engineered_wood'),
+#         ('leather','leather'),
+#         ('linen','linen'),
+#         ('other_fabric','other_fabric'),
+#         ('polyester','polyester'),
+#         ('wood_veneer','wood_veneer'),
+#     ]
 # }
 
 
