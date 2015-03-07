@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
-from members.models import AuthUser, AuthUserActivity, AuthUserOrder, \
-    AuthUserOrderItem, PromotionOffer, PromotionRedemption, Join, Profile
+from members.models import AuthUser, AuthUserActivity, \
+    PromotionOffer, Redemption, Join, Profile, AuthOrder, Reservation, Purchase, OrderAddress
+
 from django import forms
 
 
@@ -90,16 +91,47 @@ class AuthUserAdmin(UserAdmin):
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)
 
+class AuthUserInline(admin.TabularInline):
+    model = AuthUser
 
-class AuthUserOrderItemInline(admin.TabularInline):
-    model = AuthUserOrderItem
+class OrderAddressInline(admin.TabularInline):
+    model = OrderAddress
+
+class PurchaseInline(admin.TabularInline):
+    model = Purchase
+    fields = ('authuser', 'taxes', 'original_price', 'transaction_price')
+
+class ReservationInline(admin.TabularInline):
+    model = Reservation
+    fields = ('authuser', 'reservation_price', 'is_active', 'reservation_expiration')
+
+class AuthOrderAdmin(admin.ModelAdmin):
+    model = AuthOrder
+    list_display = ('product', 'authuser', 'order_type', 'created_at', 'updated_at', 'converted_from_reservation')
+    fields = ('product', 'authuser', ('order_type', 'converted_from_reservation'), ('created_at', 'updated_at'))
+    inlines = (PurchaseInline, ReservationInline, OrderAddressInline)
+
+    def get_formsets_with_inlines(self, request, obj=None):
+        for inline in self.get_inline_instances(request, obj):
+            # FILTER THE INLINE FORMSET TO YIELD HERE 
+            # For example, given obj.related_instances value
+            if inline == OrderAddressInline:
+                yield inline.get_formset(request, obj), inline
+
+            elif inline.model.objects.filter(order=obj):
+                yield inline.get_formset(request, obj), inline
+                
 
 
-class AuthUserOrderAdmin(admin.ModelAdmin):
-    model = AuthUserOrder
-    list_display = ['authuser', 'timestamp', 'updated']
-    # fields = ['authuser','timestamp','updated']
-    inlines = [AuthUserOrderItemInline]
+class PurchaseAdmin(admin.ModelAdmin):
+    model = Purchase
+    list_display = ('authuser', 'order', 'taxes', 'original_price', 'transaction_price')
+
+
+class ReservationAdmin(admin.ModelAdmin):
+    model = Reservation
+    list_display = ('authuser', 'order', 'reservation_price', 'is_active', 'reservation_expiration')
+
 
 class PromotionOfferAdmin(admin.ModelAdmin):
     model = PromotionOffer
@@ -117,8 +149,8 @@ class PromotionOfferAdmin(admin.ModelAdmin):
                     )
 
 
-class PromotionRedemptionAdmin(admin.ModelAdmin):
-    model = PromotionRedemption
+class RedemptionAdmin(admin.ModelAdmin):
+    model = Redemption
     list_display = ('offer', 'authuser', 'order', 'total_before_discount', 'discount_amount', 'timestamp')
 
 
@@ -128,9 +160,11 @@ class JoinAdmin(admin.ModelAdmin):
         model = Join
 
 
+admin.site.register(AuthOrder, AuthOrderAdmin)
 admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(AuthUserActivity)
-admin.site.register(AuthUserOrder, AuthUserOrderAdmin)
 admin.site.register(Join, JoinAdmin)
 admin.site.register(PromotionOffer, PromotionOfferAdmin)
-admin.site.register(PromotionRedemption, PromotionRedemptionAdmin)
+admin.site.register(Purchase)
+admin.site.register(Redemption, RedemptionAdmin)
+admin.site.register(Reservation)
