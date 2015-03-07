@@ -350,36 +350,6 @@ class AuthOrder(TimestampedModel):
     order_type = models.CharField(max_length=20, choices=ORDER_TYPES, blank=False, null=False, db_index=True)
     converted_from_reservation = models.BooleanField(blank=False, null=False, default=False)
 
-    @classmethod
-    def compute_order_line_items(self, user, total_price_before_offers, promo_codes):
-        offers = PromotionOffer.get_current_offers(user=user, promo_codes=promo_codes)
-
-        discounts = []
-        taxes = {}
-        total = {}
-        total_discount = 0
-
-        # offers are available only to authenticated users
-        if(user.is_authenticated()):
-            for offer in offers:
-                discount_dollar_value = offer.get_discount_dollar_value(total_price_before_offers=total_price_before_offers)
-                if(discount_dollar_value):
-                    discounts += [{
-                                   'name': offer.name,
-                                   'dollar_value': discount_dollar_value,
-                                   'offer_id': offer.id,
-                                   'promo_code': offer.code if offer.code in promo_codes else None
-                                   }]
-                    total_discount += discount_dollar_value
-        subtotal_dollar_value = total_price_before_offers - total_discount
-        taxes['dollar_value'] = subtotal_dollar_value * settings.SALES_TAX
-        taxes['percentage'] = settings.SALES_TAX * 100
-
-        total['in_dollars'] = Decimal(subtotal_dollar_value + taxes['dollar_value']).quantize(Decimal('.01'))
-        total['in_cents'] = int(total['in_dollars'] * 100)
-
-        return discounts, subtotal_dollar_value, taxes, total
-
     def __unicode__(self):
         return u'user: {0}; item: {1}'.format(self.authuser.email, self.product.short_name)
 
@@ -418,12 +388,54 @@ class Reservation(TimestampedModel):
         logger.debug('created Reservation')
         return reservation
 
+    def cancel_reservation(self):
+        self.is_active = False
+        self.is_active = False
+        self.save()
+
+        product = self.order.product
+        product.is_reserved = False
+        product.save()
+
+
+
+
 class Purchase(TimestampedModel):
     authuser = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, related_name='purchases')
     order = models.OneToOneField(AuthOrder, related_name='purchase')
     taxes = models.DecimalField(max_digits=8, decimal_places=2, blank=None, null=None, default=0.00, help_text="Taxes in dollars")
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, help_text='Price of the product at the time of purchase')
     transaction_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, help_text='Total purchase price the user paid including promotions and taxes')
+
+    @classmethod
+    def compute_order_line_items(self, user, total_price_before_offers, promo_codes):
+        offers = PromotionOffer.get_current_offers(user=user, promo_codes=promo_codes)
+
+        discounts = []
+        taxes = {}
+        total = {}
+        total_discount = 0
+
+        # offers are available only to authenticated users
+        if(user.is_authenticated()):
+            for offer in offers:
+                discount_dollar_value = offer.get_discount_dollar_value(total_price_before_offers=total_price_before_offers)
+                if(discount_dollar_value):
+                    discounts += [{
+                                   'name': offer.name,
+                                   'dollar_value': discount_dollar_value,
+                                   'offer_id': offer.id,
+                                   'promo_code': offer.code if offer.code in promo_codes else None
+                                   }]
+                    total_discount += discount_dollar_value
+        subtotal_dollar_value = total_price_before_offers - total_discount
+        taxes['dollar_value'] = subtotal_dollar_value * settings.SALES_TAX
+        taxes['percentage'] = settings.SALES_TAX * 100
+
+        total['in_dollars'] = Decimal(subtotal_dollar_value + taxes['dollar_value']).quantize(Decimal('.01'))
+        total['in_cents'] = int(total['in_dollars'] * 100)
+
+        return discounts, subtotal_dollar_value, taxes, total
 
     @classmethod
     def create_purchase(cls, order, taxes, transaction_price):

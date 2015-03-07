@@ -29,14 +29,10 @@ def clear_expired_reservations():
     from django.utils import timezone
     from members.models import Reservation
 
-    expired_reservations = Reservation.objects.filter(reservation_expiration__lte=timezone.now())
+    expired_reservations = Reservation.objects.filter(is_active=True, reservation_expiration__lte=timezone.now())
 
     for reservation in expired_reservations:
-        reservation.is_active = False
-        reservation.save()
-        product = reservation.order.product
-        product.is_reserved = False
-        product.save()
+        reservation.cancel_reservation()
         print 'Cleared expired reservation for product {0}'.format(product.short_name)
 
 sched.start()

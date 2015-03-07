@@ -160,13 +160,21 @@ def CancelReserve(request):
 
     if request.method == "POST":
         userinstance = request.user
-        product = Product.objects.get(pk=int(request.POST['id']))
-        product.is_reserved = False
-        product.save()
-        logger.debug('product is_reserved field set to False')
-        return JsonResponse('success', safe=False)
-    else:
-        return JsonResponse('success', safe=False)
+        product_id = int(request.POST['id'])
+
+        # using filter here instead of get
+        # because found the cases where
+        # there were multiple reservations
+        # of the same item by the same user
+        # so we need to cancel all of them
+        reservations = Reservation.objects.filter(authuser=request.user,
+                                                  order__product__id=product_id,
+                                                  is_active=True)
+        for reservation in reservations:
+            reservation.cancel_reservation()
+            logger.debug('canceled reservation {0}'.format(reservation.id))
+
+    return JsonResponse('success', safe=False)
 
 
 class ReferralSignup(generic.edit.FormView):
@@ -402,9 +410,9 @@ class BuyView(generic.DetailView):
             else:
                 promo_code_message = invalid_message
 
-        discounts, subtotal_dollar_value, taxes, total = AuthOrder.compute_order_line_items(user=self.request.user,
-                                                                                            total_price_before_offers=product.current_price,
-                                                                                            promo_codes=promo_codes)
+        discounts, subtotal_dollar_value, taxes, total = Purchase.compute_order_line_items(user=self.request.user,
+                                                                                           total_price_before_offers=product.current_price,
+                                                                                           promo_codes=promo_codes)
         total_discount = 0
         for discount in discounts:
             total_discount += discount['dollar_value']
@@ -418,11 +426,28 @@ class BuyView(generic.DetailView):
         """Completes the order after user is done with stripe"""
 
         try:
-            # create new order
-            order = AuthOrder()
 
             product = self.get_object()
             order_type = request.POST['order_type'].strip().lower()
+            
+            # if user already has a reservation for this product
+            # use that order, otherwise create new order 
+            order = None
+            if(self.request.user.is_authenticated()):
+                
+                try:
+                    order = AuthOrder.objects.get(authuser = self.request.user,
+                                                  order_type=OrderType.RESERVATION_ORDER,
+                                                  reservation__is_active=True,
+                                                  product = product)
+                    logger.debug('found existing reservation order')
+
+                except AuthOrder.DoesNotExist:
+                    # user does not have a reservation for this product, that's ok
+                    pass
+            if(order is None):
+                order = AuthOrder()
+                logger.debug('new order')
             
             # create charge with stripe,
             try:
@@ -434,9 +459,9 @@ class BuyView(generic.DetailView):
                 promo_codes_param = request.POST['promo_codes'].strip()
                 if(promo_codes_param):
                     promo_codes = [i for i in promo_codes_param.split(',')]
-                discounts, subtotal_dollar_value, taxes, total = AuthOrder.compute_order_line_items(user=self.request.user,
-                                                                                                    total_price_before_offers=product.current_price,
-                                                                                                    promo_codes=promo_codes)
+                discounts, subtotal_dollar_value, taxes, total = Purchase.compute_order_line_items(user=self.request.user,
+                                                                                                   total_price_before_offers=product.current_price,
+                                                                                                   promo_codes=promo_codes)
 
                 logger.debug('discounts %s' % str(discounts))
                 logger.debug('subtotal_dollar_value %s' % str(subtotal_dollar_value))
@@ -472,10 +497,15 @@ class BuyView(generic.DetailView):
                 Profile.create_profile(order_user)
                 order.authuser = order_user
                 order.product = product
+                if(order.id and order.order_type == OrderType.RESERVATION_ORDER):
+                    order.converted_from_reservation = True
+                    logger.debug('converting existing reservation order {0} to purchase'.format(order.id))
+                else:
+                    order.converted_from_reservation = False
+
                 order.order_type = OrderType.PURCHASE_ORDER
-                order.converted_from_reservation = False
                 order.save()
-                logger.debug('Created new order %d' % order.id)
+                logger.debug('saved order {0}'.format(order.id))
 
                 # create redemptions
                 for discount in discounts:
