@@ -145,26 +145,18 @@ class Product(models.Model):
     # Availability
     added_date = models.DateTimeField(auto_now_add=True)
     pub_date = models.DateTimeField(null=True, blank=True)
-    has_trial = models.BooleanField(default=False)
     is_sold = models.BooleanField(default=False)
     is_reserved = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
-    is_publishable = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
-    is_landing = models.BooleanField(default=False)
     is_recent = models.BooleanField(default=False)
+    is_landing = models.BooleanField(default=False)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
-    is_instore = models.BooleanField(default=True)
-    delivery_weeks = models.CharField(max_length=100, null=True, blank=True)
-    is_avail_now = models.BooleanField(default=True)
     md5_order = models.CharField(max_length=32, null=True, blank=True)
     click_count = models.IntegerField(blank=False, null=False, default=0)
 
     class Meta:
-        # added Height as quick hack to randomize display of products as pub_date clusters
-        # items by store
-#         ordering = [-is_featured', 'md5_order', 'short_name', '-pub_date']
         ordering = ['-is_recent', '-click_count', '-is_featured', 'md5_order']
         unique_together = ('short_name', 'store',)
 
