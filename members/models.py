@@ -256,6 +256,17 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+    def has_module_perms(self, app_label):
+        if self.is_admin:
+            if app_label == 'goods':
+                return True
+        return super(AuthUser, self).has_module_perms(app_label)
+
+    def has_perm(self, perm, obj=None):
+        if self.is_active and self.is_admin:
+            return True
+        return super(AuthUser, self).has_perm(per, obj)
+
 
 class Profile(models.Model):
     authuser = models.OneToOneField(settings.AUTH_USER_MODEL, blank=False, null=False, related_name='profile')

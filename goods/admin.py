@@ -3,12 +3,39 @@ from members.models import AuthUserOrderItem
 from goods.models import Product, Color, Segment, Style, FurnitureType, ValueTier, Category, Subcategory, Material, ProductImage
 
 
-@admin.register(Segment, Style, Color, FurnitureType, ValueTier, Category, Material)
+class CustomAdmin(admin.ModelAdmin):
+    """
+    customized admin class.
+    superuser can delete objects, but admin user(is_admin) is not allowed
+    """
+    def get_actions(self, request):
+        actions = super(CustomAdmin, self).get_actions(request)
+        if not request.user.is_superuser and request.user.is_admin:
+            del actions['delete_selected']
+        return actions
+
+    def has_delete_permission(self, request, obj=None):
+        if request.user.is_superuser:
+            return True
+        elif request.user.is_admin:
+            return False
+        return True
+
+
+admin.site.register(Segment, CustomAdmin)
+admin.site.register(Style, CustomAdmin)
+admin.site.register(Color, CustomAdmin)
+admin.site.register(FurnitureType, CustomAdmin)
+admin.site.register(ValueTier, CustomAdmin)
+admin.site.register(Category, CustomAdmin)
+admin.site.register(Material, CustomAdmin)
+
+
 class TagAdmin(admin.ModelAdmin):
     pass
 
 
-class SubcategoryAdmin(admin.ModelAdmin):
+class SubcategoryAdmin(CustomAdmin):
     list_display = ['select', 'trial_product']
     list_editable = ['trial_product']
 
@@ -28,11 +55,13 @@ class ProductInline(admin.TabularInline):
 class AuthUserOrderItemInline(admin.TabularInline):
     model = AuthUserOrderItem
 
-class ProductImageAdmin(admin.ModelAdmin):
+
+class ProductImageAdmin(CustomAdmin):
     model = ProductImage
     list_display = ['image', 'is_main']
 
-class ProductAdmin(admin.ModelAdmin):
+
+class ProductAdmin(CustomAdmin):
     model = Product
 
     list_display = ['short_name', 'id', 'first_image', 'store', 'click_count', 'is_published', 'is_featured', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date', 'is_landing', 'is_featured',]
