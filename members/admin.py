@@ -91,14 +91,36 @@ class AuthUserAdmin(UserAdmin):
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)
 
+class AuthUserInline(admin.TabularInline):
+    model = AuthUser
+
 class OrderAddressInline(admin.TabularInline):
     model = OrderAddress
 
+class PurchaseInline(admin.TabularInline):
+    model = Purchase
+    fields = ('authuser', 'taxes', 'original_price', 'transaction_price')
+
+class ReservationInline(admin.TabularInline):
+    model = Reservation
+    fields = ('authuser', 'reservation_price', 'is_active', 'reservation_expiration')
 
 class AuthOrderAdmin(admin.ModelAdmin):
     model = AuthOrder
-    list_display = ('authuser', 'product', 'order_type', 'created_at', 'updated_at', 'converted_from_reservation')
-    inlines = (OrderAddressInline,)
+    list_display = ('product', 'authuser', 'order_type', 'created_at', 'updated_at', 'converted_from_reservation')
+    fields = ('product', ('order_type', 'converted_from_reservation'), ('created_at', 'updated_at'))
+    inlines = (PurchaseInline, ReservationInline, OrderAddressInline)
+
+    def get_formsets_with_inlines(self, request, obj=None):
+        for inline in self.get_inline_instances(request, obj):
+            # FILTER THE INLINE FORMSET TO YIELD HERE 
+            # For example, given obj.related_instances value
+            if inline == OrderAddressInline:
+                yield inline.get_formset(request, obj), inline
+
+            elif inline.model.objects.filter(order=obj):
+                yield inline.get_formset(request, obj), inline
+                
 
 
 class PurchaseAdmin(admin.ModelAdmin):
@@ -143,6 +165,6 @@ admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(AuthUserActivity)
 admin.site.register(Join, JoinAdmin)
 admin.site.register(PromotionOffer, PromotionOfferAdmin)
-admin.site.register(Purchase, PurchaseAdmin)
+# admin.site.register(Purchase, PurchaseAdmin)
 admin.site.register(Redemption, RedemptionAdmin)
-admin.site.register(Reservation, ReservationAdmin)
+# admin.site.register(Reservation, ReservationAdmin)
