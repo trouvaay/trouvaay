@@ -213,7 +213,7 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
         return result
 
     def get_number_of_reservations(self):
-        return self.user_orders.filter(order_items__captured=False).count()
+        return self.reservations.filter(is_active=True).count()
 
     def get_number_of_reservations_left(self):
         result = settings.RESERVATION_LIMIT - self.get_number_of_reservations()
@@ -276,23 +276,27 @@ class Profile(models.Model):
         return profile
 
 
-class AuthUserAddress(models.Model):
-    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
+class PostalAddress(models.Model):
     street = models.CharField(max_length=50)
     street2 = models.CharField(max_length=50, null=True, blank=True)
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=2, choices=States)
     zipcd = models.IntegerField()
     phone = models.CharField(max_length=120)
-    shipping = models.BooleanField(default=True)
-    billing = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
 
+    class Meta:
+        abstract = True
+
     def __str__(self):
         return ("{},{},{},{}".format(self.street, self.city, self.state, self.zipcd))
+
+class AuthUserAddress(PostalAddress):
+    authuser = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='default_address')
+
 
 class AuthUserActivity(models.Model):
     authuser = models.ForeignKey(settings.AUTH_USER_MODEL, unique=True)
@@ -312,19 +316,100 @@ class AuthUserActivity(models.Model):
         ordering = ['authuser']
 
 
-class AuthUserOrder(models.Model):
-    """Unique User-Order pair"""
-    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_orders')
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-    taxes = models.DecimalField(max_digits=8, decimal_places=2, blank=None, null=None, default=0.00)
+class TimestampedModel(models.Model):
+    created_at = models.DateTimeField(blank=False, null=False)
+    updated_at = models.DateTimeField(blank=False, null=False)
+
+    def save(self, *args, **kwargs):
+        """Sets/updates created_at and updated_at timestamps"""
+
+        right_now = timezone.now()
+        if(not self.id):
+            self.created_at = right_now
+        self.updated_at = right_now
+        super(TimestampedModel, self).save(*args, **kwargs)
+
+    class Meta:
+        abstract = True
+
+class OrderType(object):
+    """This class maintains a list of all order types
+    similar to how OfferType has list of all the offer types
+    """
+    RESERVATION_ORDER = 'RESERVATION'
+    PURCHASE_ORDER = 'PURCHASE'
+
+ORDER_TYPES = (
+    (OrderType.RESERVATION_ORDER, 'Reservation'),
+    (OrderType.PURCHASE_ORDER, 'Purhcase'),
+)
+
+class AuthOrder(TimestampedModel):
+    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, related_name='user_orders')
+    product = models.ForeignKey('goods.Product', blank=False, null=False, related_name='product_orders')
+    order_type = models.CharField(max_length=20, choices=ORDER_TYPES, blank=False, null=False, db_index=True)
+    converted_from_reservation = models.BooleanField(blank=False, null=False, default=False)
+
+    def __unicode__(self):
+        return u'user: {0}; item: {1}'.format(self.authuser.email, self.product.short_name)
+
+    def reservation_conversion(self):
+        """Converts reservation to purhcase order"""
+        
+        if(self.order_type == OrderType.PURCHASE_ORDER):
+            # this is already a purchase, nothing else to do
+            return
+        
+        if(self.order_type == OrderType.RESERVATION_ORDER and self.reservation):
+            self.order_type = OrderType.PURCHASE_ORDER
+            self.converted_from_reservation = True
+            self.save()
+            # TODO: create purchase from reservation
+            
+class OrderAddress(PostalAddress):
+    order = models.OneToOneField(AuthOrder, related_name='address')
+
+class Reservation(TimestampedModel):
+    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, related_name='reservations')
+    order = models.OneToOneField(AuthOrder, related_name='reservation')
+    reservation_price = models.DecimalField(max_digits=8, decimal_places=2, blank=False, null=False)
+    is_active = models.BooleanField(blank=False, null=False, default=True)
+    reservation_expiration = models.DateTimeField(blank=False, null=False)
+
+    @classmethod
+    def create_reservation(cls, order):
+        reservation = Reservation()
+        reservation.authuser = order.authuser
+        reservation.order = order
+        reservation.reservation_price = order.product.current_price
+        reservation.is_active = True
+        reservation.reservation_expiration = timezone.now() + timedelta(hours=settings.RESERVATION_PERIOD)
+        reservation.save()
+        logger.debug('created Reservation')
+        return reservation
+
+    def cancel_reservation(self):
+        self.is_active = False
+        self.is_active = False
+        self.save()
+
+        product = self.order.product
+        product.is_reserved = False
+        product.save()
+
+
+
+
+class Purchase(TimestampedModel):
+    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, related_name='purchases')
+    order = models.OneToOneField(AuthOrder, related_name='purchase')
+    taxes = models.DecimalField(max_digits=8, decimal_places=2, blank=None, null=None, default=0.00, help_text="Taxes in dollars")
+    original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, help_text='Price of the product at the time of purchase')
+    transaction_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, help_text='Total purchase price the user paid including promotions and taxes')
 
     @classmethod
     def compute_order_line_items(self, user, total_price_before_offers, promo_codes):
         offers = PromotionOffer.get_current_offers(user=user, promo_codes=promo_codes)
-
-#         for offer in offers:
-#             print offer.code
 
         discounts = []
         taxes = {}
@@ -350,64 +435,24 @@ class AuthUserOrder(models.Model):
         total['in_dollars'] = Decimal(subtotal_dollar_value + taxes['dollar_value']).quantize(Decimal('.01'))
         total['in_cents'] = int(total['in_dollars'] * 100)
 
-        return discounts, subtotal_dollar_value, taxes, total 
-
-    def get_captured_amt(self):
-        """some of total amount captured on current transaction
-        """
-        total = 0
-        for ordered_item in self.authuserorderitem_set.filter(captured=True):
-            total += ordered_item.sell_price
-        return total
-
-    def get_item_count(self):
-        return self.authuserorderitem_set.all().count()
-
-    def get_order_total(self):
-        total = 0
-        for ordered_item in self.authuserorderitem_set.all():
-            total += ordered_item.sell_price
-        return total
-
-    def __str__(self):
-        return('user: ' + self.authuser.email + ' ;  items: ' + str(self.order_items.all()))
-
-
-class AuthUserOrderItem(models.Model):
-    """Unique product-order pair"""
-
-    product = models.ForeignKey('goods.Product')
-    order = models.ForeignKey(AuthUserOrder, null=True, blank=True, related_name='order_items')
-    sell_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
-    captured = models.BooleanField(default=True)
-    # for reserved items, time at which reservation expires
-    capture_time = models.DateTimeField(null=True, blank=True)
-    reservation_expire = models.DateTimeField(null=True, blank=True)
-    # for now we only have purchase quantities of one but in the future will allow
-    # for purchase of multiple of same item
-    quantity = models.IntegerField(default=1)
-    has_open_reservation = models.BooleanField(default=True)
-
-    def __str__(self):
-        return(self.product.short_name)
+        return discounts, subtotal_dollar_value, taxes, total
 
     @classmethod
-    def create_order_item(cls, order, product, order_type):
-        order_item = AuthUserOrderItem()
-        order_item.product = product
-        order_item.order = order
-        order_item.sell_price = product.current_price
-        order_item.captured = (order_type == 'buy')
-        if(order_item.captured):
-            order_item.capture_time = timezone.now()
-        else:
-            order_item.capture_time = None
-        if(order_type == 'reserve'):
-            order_item.reservation_expire = timezone.now() + timedelta(hours=settings.STRIPE_CAPTURE_TRANSACTION_TIME)
-        order_item.quantity = 1
-        order_item.save()
-        return order_item
+    def create_purchase(cls, order, taxes, transaction_price):
+        purchase = Purchase()
+        purchase.authuser = order.authuser
+        purchase.order = order
+        purchase.taxes = taxes
+        purchase.original_price = order.product.current_price
+        purchase.transaction_price = transaction_price
+        purchase.save()
 
+        product = order.product
+        product.is_sold = True
+        product.is_reserved = False
+        product.save()
+        
+        return purchase
 
 class OfferType(object):
     """This class maintains a list of all offer types
@@ -605,10 +650,10 @@ class PromotionOffer(models.Model):
         super(PromotionOffer, self).save(*args, **kwargs)
 
 
-class PromotionRedemption(models.Model):
+class Redemption(models.Model):
     authuser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_redemptions')
     offer = models.ForeignKey(PromotionOffer, blank=False, null=False, related_name='offer_redemptions')
-    order = models.ForeignKey(AuthUserOrder, blank=False, null=False, related_name='order_redemptions')
+    order = models.ForeignKey(AuthOrder, blank=False, null=False, related_name='order_redemptions')
     timestamp = models.DateTimeField(blank=False, null=False, help_text='When this was redeemed')
 
     total_before_discount = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True, default=None, help_text="Total dollar amount before applying any promotinal discounts to the order")
@@ -616,7 +661,7 @@ class PromotionRedemption(models.Model):
 
     @classmethod
     def create_redemption(cls, order, product, offer_id, discount_dollar_value):
-        redemption = PromotionRedemption()
+        redemption = Redemption()
         redemption.authuser = order.authuser
         redemption.offer_id = offer_id
         redemption.order = order
@@ -625,6 +670,7 @@ class PromotionRedemption(models.Model):
         redemption.discount_amount = discount_dollar_value
         redemption.save()
         return redemption
+
 
 class Join(models.Model):
     authuser = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_join')
