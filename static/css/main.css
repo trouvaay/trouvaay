@@ -1295,7 +1295,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .filters-container {
   position: relative;
   overflow: auto;
-  float: right;
 }
 #searchfilter-form #filter-container-furnituretype label {
   width: 100%;
@@ -1313,7 +1312,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     color: #939598;
     display: inline-block;
     cursor: pointer;
-    width: 160px;
+    width: 130px;
     position: relative;
   }
   #searchfilter-form #filter-container-furnituretype header label, #searchfilter-form #refine label {
@@ -1335,6 +1334,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #searchfilter-form #filter-container-furnituretype header {
     margin-left: 76px;
   }
+}
+@media (max-width: 992px) and (max-width: 480px) {
+  #searchfilter-form #filter-container-furnituretype header {
+    margin-left: 25px;
+  }
+}
+@media (max-width: 992px) {
   #searchfilter-form #filter-container-furnituretype header label:after {
     content: '\f107';
   }
@@ -1358,6 +1364,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
     float: right;
     margin-right: 76px;
   }
+}
+@media (max-width: 992px) and (max-width: 480px) {
+  #searchfilter-form #refine {
+    margin-right: 25px;
+  }
+}
+@media (max-width: 992px) {
   #searchfilter-form #refine label:after {
     content: '\f105';
   }

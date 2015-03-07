@@ -216,7 +216,6 @@
             //padding-top: 15px;
             //padding-bottom: 80px;
             overflow: auto;
-            float: right;
 
         }
 
@@ -241,7 +240,7 @@
             color: #939598;
             display: inline-block;
             cursor: pointer;
-            width: 160px;
+            width: 130px;
             position: relative;
 
 
@@ -271,6 +270,11 @@
 
             header {
                 margin-left: 76px;
+
+                @include breakpoint(xs) {
+                    margin-left: 25px;
+
+                }
 
                 label:after {
                     content: '\f107';
@@ -304,6 +308,10 @@
             color: #FFF;
             float: right;
             margin-right: 76px;
+
+            @include breakpoint(xs) {
+                margin-right: 25px;
+            }
 
             label:after {
 
