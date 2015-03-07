@@ -1,5 +1,5 @@
 from django.views import generic
-from goods.models import Product, Category, FurnitureType, Segment, ProductImage, Color, Style
+from goods.models import Product, Category, FurnitureType, Segment, ProductImage, Color, Style, Subcategory
 from members.models import AuthUserActivity, OfferType, PromotionOffer
 from django.core.serializers import serialize
 from django.core.paginator import Paginator
@@ -83,7 +83,7 @@ class LandingTestView(AjaxListView):
     context_object_name = 'products'
     model = Product
     key = 'page'
-    
+
 
     def get_queryset(self):
         try:
@@ -118,7 +118,7 @@ class LandingTestView(AjaxListView):
                                    'furnituretypes': FurnitureType.objects.all(),
                                    'neighborhoods': Neighborhoods['SF']
                                    }
-        
+
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings
         context['site_name'] = settings.SITE_NAME
@@ -141,6 +141,10 @@ class SearchFilterView(AjaxListView):
         segments = [int(i) for i in self.request.GET.getlist('filter-segment')]
         if(segments):
             queryset = queryset.filter(segment__in=segments)
+
+        subcategories = [int(i) for i in self.request.GET.getlist('filter-subcategory')]
+        if(segments):
+            queryset = queryset.filter(subcategory__in=subcategories)
 
         colors = [int(i) for i in self.request.GET.getlist('filter-color')]
         if(colors):
@@ -225,7 +229,7 @@ class MainView(AjaxListView):
     context_object_name = 'products'
     model = Product
     key = 'page'
-    
+
 
     def get_queryset(self):
         try:
@@ -255,12 +259,13 @@ class MainView(AjaxListView):
                                    'depth_slider_min': 0,
                                    'depth_slider_max': 1000,
                                    'segments': Segment.objects.all(),
+                                   'subcategory': Subcategory.objects.all(),
                                    'colors': Color.objects.all(),
                                    'styles': Style.objects.all(),
                                    'furnituretypes': FurnitureType.objects.all(),
                                    'neighborhoods': Neighborhoods['SF']
                                    }
-        
+
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings
         context['site_name'] = settings.SITE_NAME
@@ -271,7 +276,7 @@ class MainView(AjaxListView):
 
 class AboutView(generic.TemplateView):
     template_name = 'goods/copy/about.html'
-    
+
 class ReturnsView(generic.TemplateView):
     template_name = 'goods/copy/returns.html'
 

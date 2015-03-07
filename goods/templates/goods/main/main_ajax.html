@@ -46,6 +46,24 @@
     <div class="category filters">
         <header class="hidden-xs hidden-sm header-group">Filters <a href="#" class="reset"><span>Reset</span></a></header>
         
+    {% if searchfilter.subcategory %}
+    <div id="filter-container-subcategory" class="filter-group">
+        <header><a data-toggle="collapse" href="#collapseSubcategory" aria-expanded="true" aria-controls="collapseSubcategory" class="collapsed">Item <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
+        <div id="collapseSubcategory" class="collapse fold" role="tabpanel" aria-labelledby="heading">
+        <ul>
+            {% for item in searchfilter.subcategory %}
+            <li>
+                <div class="c-checkbox">
+                    <input class="searchfilter-control checkbox" type="checkbox" name="filter-subcategory" id="filter-subcategory-{{item.id}}" value="{{ item.id }}" />
+                    <label for="filter-subcategory-{{ item.id }}" class="checkbox-pseudocheckbox"></label>
+                    <label for="filter-subcategory-{{ item.id }}" class="checkbox-label">{{ item.select }}</label>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+    {% endif %}
     {% if searchfilter.segments %}
     <div id="filter-segment-segment" class="filter-group">
         <header><a data-toggle="collapse" href="#collapseSegment" aria-expanded="true" aria-controls="collapseSegment" class="collapsed">Segment <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
