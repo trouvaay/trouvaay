@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created_at', models.DateTimeField()),
                 ('updated_at', models.DateTimeField()),
-                ('order_type', models.CharField(db_index=True, max_length=20, choices=[(b'RESERVATION', b'Reservation'), (b'PURCHASE', b'Purhcase')])),
+                ('order_type', models.CharField(db_index=True, max_length=20, choices=[(b'RESERVATION', b'Reservation'), (b'PURCHASE', b'Purchase')])),
                 ('converted_from_reservation', models.BooleanField(default=False)),
                 ('authuser', models.ForeignKey(related_name='user_orders', to=settings.AUTH_USER_MODEL)),
                 ('product', models.ForeignKey(related_name='product_orders', to='goods.Product')),

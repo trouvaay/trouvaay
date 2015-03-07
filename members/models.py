@@ -341,7 +341,7 @@ class OrderType(object):
 
 ORDER_TYPES = (
     (OrderType.RESERVATION_ORDER, 'Reservation'),
-    (OrderType.PURCHASE_ORDER, 'Purhcase'),
+    (OrderType.PURCHASE_ORDER, 'Purchase'),
 )
 
 class AuthOrder(TimestampedModel):
@@ -542,7 +542,7 @@ class PromotionOffer(models.Model):
             result = []
             for offer in offers:
                 if(offer.limit_per_user == -1 or
-                   offer.limit_per_user > PromotionRedemption.objects.filter(offer_id=offer.id, authuser_id=user.id).count()):
+                   offer.limit_per_user > Redemption.objects.filter(offer_id=offer.id, authuser_id=user.id).count()):
                     result += [offer]
             offers = result
         return offers
@@ -589,7 +589,7 @@ class PromotionOffer(models.Model):
 
         if(user and
            offer.limit_per_user != -1 and
-           offer.limit_per_user <= PromotionRedemption.objects.filter(offer_id=offer.id, authuser_id=user.id).count()):
+           offer.limit_per_user <= Redemption.objects.filter(offer_id=offer.id, authuser_id=user.id).count()):
             # no more such for this user
             return (False, promo_code, 'You have already used this promotion')
         elif not user.is_authenticated():
