@@ -108,7 +108,7 @@ class ReservationInline(admin.TabularInline):
 class AuthOrderAdmin(admin.ModelAdmin):
     model = AuthOrder
     list_display = ('product', 'authuser', 'order_type', 'created_at', 'updated_at', 'converted_from_reservation')
-    fields = ('product', ('order_type', 'converted_from_reservation'), ('created_at', 'updated_at'))
+    fields = ('product', 'authuser', ('order_type', 'converted_from_reservation'), ('created_at', 'updated_at'))
     inlines = (PurchaseInline, ReservationInline, OrderAddressInline)
 
     def get_formsets_with_inlines(self, request, obj=None):
@@ -165,6 +165,6 @@ admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(AuthUserActivity)
 admin.site.register(Join, JoinAdmin)
 admin.site.register(PromotionOffer, PromotionOfferAdmin)
-# admin.site.register(Purchase, PurchaseAdmin)
+admin.site.register(Purchase)
 admin.site.register(Redemption, RedemptionAdmin)
-# admin.site.register(Reservation, ReservationAdmin)
+admin.site.register(Reservation)
