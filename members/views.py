@@ -228,8 +228,40 @@ class ReserveView(generic.DetailView):
     context_object_name = 'product'
     model = Product
 
+    def __can_reserve(self, product, user):
+        """Checks if this user can reserve this product.
+        
+        Returns tuple
+        (status, message)
+        where
+            status - boolean, True - yes this user can reserve, False - user cannot reserve
+            message - string, in case user cannot reserve this it contains message why not, 
+            otherwise empty string
+        """
+
+        # make sure user is not trying to reserve an item that is already reserved or sold
+        if(product.is_sold):
+            return (False, "This item is sold out, you cannot reserve it at this time.")
+        elif(product.is_reserved):
+            # need to check who reserved the item to give a user an appropriate message
+            if(user.is_authenticated() and
+               user.user_orders.filter(order_type=OrderType.RESERVATION_ORDER,
+                                       reservation__is_active=True,
+                                       product=product).count() > 0):
+                return (False, "You have already reserved this item, you can see all your reservations in your profile page.")
+            else:
+                return (False, "You cannot reserve it at this item because it has already been reserved by someone else.")
+        return (True, '')
+
     def get(self, request, *args, **kwargs):
         """Shows the reservation form"""
+
+        product = self.get_object()
+
+        can_reserve_check, reservation_message = self.__can_reserve(product, request.user)
+        if(not can_reserve_check):
+            return render_to_response('members/purchase/reserve_postcheckout.html', locals())
+
 
         form = None
         if(request.user.is_authenticated()):
@@ -241,7 +273,7 @@ class ReserveView(generic.DetailView):
                                             })
         else:
             form = ReserveForm()
-        product = self.get_object()
+
         return render_to_response('members/purchase/reserve_precheckout.html', locals())
 
     def post(self, request, *args, **kwargs):
@@ -300,6 +332,10 @@ class ReserveView(generic.DetailView):
             reservation_message = "Sorry it looks like you've hit your reservation limit - save something for the rest of us!.  On a serious note email us to extend your limit and we're generally happy to accomodate.  Unless you're a robot..."
             return render_to_response('members/purchase/reserve_postcheckout.html', locals())
 
+        can_reserve_check, reservation_message = self.__can_reserve(product, order_user)
+        if(not can_reserve_check):
+            return render_to_response('members/purchase/reserve_postcheckout.html', locals())
+
         # create order
         order = AuthOrder()
         order.authuser = order_user
@@ -343,6 +379,32 @@ class BuyView(generic.DetailView):
         default_address.zipcd = request.POST['args[shipping_address_zip]']
         default_address.shipping = True
         default_address.save()
+
+    def __can_buy(self, product, user):
+        """Checks if this user can buy this product.
+        
+        Returns tuple
+        (status, message)
+        where
+            status - boolean, True - yes this user can buy, False - user cannot reserve
+            message - string, in case user cannot buy this product, it contains message 
+            why not, otherwise empty string
+        """
+
+        # make sure user is not trying to buy an item that is already reserved or sold
+        if(product.is_sold):
+            return (False, "You cannot buy this item, because it is sold out.")
+        elif(product.is_reserved):
+            # need to check who reserved the item to give a user an appropriate message
+            if(user.is_authenticated() and
+               user.user_orders.filter(order_type=OrderType.RESERVATION_ORDER,
+                                       reservation__is_active=True,
+                                       product=product).count() > 0):
+                # this item is reserved by this user, now they can buy it
+                return (True, '')
+            else:
+                return (False, "You cannot buy this item it at this item because it has been reserved by someone else.")
+        return (True, '')
 
     def __create_order_address(self, request, order):
         """Creates order address from request's shipping address"""
@@ -399,6 +461,11 @@ class BuyView(generic.DetailView):
         """
 
         product = self.get_object()
+
+        can_buy_status, buy_notavailable_message = self.__can_buy(product, request.user)
+        if(not can_buy_status):
+            return render_to_response('members/purchase/buy_notavailable.html', locals())
+
         promo_code = self.request.GET.get('promo_code', None)
         promo_is_valid = False
         promo_code_message = ''
@@ -429,6 +496,11 @@ class BuyView(generic.DetailView):
         try:
 
             product = self.get_object()
+
+            can_buy_status, buy_notavailable_message = self.__can_buy(product, request.user)
+            if(not can_buy_status):
+                return JsonResponse({'status': 'error', 'message': buy_notavailable_message})
+
             order_type = request.POST['order_type'].strip().lower()
             
             # if user already has a reservation for this product
