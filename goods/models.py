@@ -149,7 +149,7 @@ class Product(models.Model):
     is_reserved = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
-    is_recent = models.BooleanField(default=False)
+    is_recent = models.BooleanField(default=True)
     is_landing = models.BooleanField(default=False)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)

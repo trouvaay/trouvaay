@@ -3,7 +3,7 @@ Created on Mar 3, 2015
 
 @author: sergey@lanasoft.net
 """
-
+from datetime import timedelta
 from apscheduler.schedulers.blocking import BlockingScheduler
 import os
 import logging
@@ -69,4 +69,9 @@ def clear_expired_reservations():
         print 'Cleared expired reservation for product {0}'.format(product.short_name)
 
 
-sched.start()
+# sched.start()
+
+if __name__ == "__main__":
+    clear_expired_reservations()
+    update_product_is_recent()
+
