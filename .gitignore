@@ -8,3 +8,5 @@ latest.dump
 dev_settings.py
 dev_config.py
 node_modules/*
+orders.json
+user.json
