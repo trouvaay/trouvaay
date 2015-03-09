@@ -241,16 +241,16 @@ class ReserveView(generic.DetailView):
 
         # make sure user is not trying to reserve an item that is already reserved or sold
         if(product.is_sold):
-            return (False, "This item is sold out, you cannot reserve it at this time.")
+            return (False, "Sorry this item is no longer available")
         elif(product.is_reserved):
             # need to check who reserved the item to give a user an appropriate message
             if(user.is_authenticated() and
                user.user_orders.filter(order_type=OrderType.RESERVATION_ORDER,
                                        reservation__is_active=True,
                                        product=product).count() > 0):
-                return (False, "You have already reserved this item, you can see all your reservations in your profile page.")
+                return (False, "You've already reserved this item, you can see all your reservations in your profile page.")
             else:
-                return (False, "You cannot reserve it at this item because it has already been reserved by someone else.")
+                return (False, "Sorry this item is currently reserved")
         return (True, '')
 
     def get(self, request, *args, **kwargs):
@@ -393,7 +393,7 @@ class BuyView(generic.DetailView):
 
         # make sure user is not trying to buy an item that is already reserved or sold
         if(product.is_sold):
-            return (False, "You cannot buy this item, because it is sold out.")
+            return (False, "Sorry this item is no longer available")
         elif(product.is_reserved):
             # need to check who reserved the item to give a user an appropriate message
             if(user.is_authenticated() and
@@ -403,7 +403,7 @@ class BuyView(generic.DetailView):
                 # this item is reserved by this user, now they can buy it
                 return (True, '')
             else:
-                return (False, "You cannot buy this item it at this item because it has been reserved by someone else.")
+                return (False, "Sorry this item is currently reserved")
         return (True, '')
 
     def __create_order_address(self, request, order):
