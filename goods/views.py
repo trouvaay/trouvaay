@@ -124,7 +124,7 @@ class DetailView(generic.DetailView):
         if not self.request.user.email in exclude_emails:
             product.click_count += 1
             product.save()
-            logger.debug('added click-count')
+            logger.debug('added to click-count')
         
         return context
 

@@ -5,16 +5,17 @@
 {% load endless %}
 
 {% block content %}
-<div class="container-fluid" id="index-banner">
-	<picture>
-	<!--[if IE 9]><video style="display: none;"><![endif]-->
-	<source srcset="https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_1000,h_375/v1422902656/shutterstock_160709951_hsvzx9.jpg" media="(min-width: 992px)">
-	<!--[if IE 9]></video><![endif]-->
-	<img srcset='https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_766,h_282/v1422902656/shutterstock_160709951_hsvzx9.jpg' alt="">
-	</picture>
-	<div class="row-fluid text-container landingtest">
-		<div class="text "><div style="font-family: 'Droid Serif'; font-style: italic; text-transform: uppercase;'">Find one of a kind furniture available in </div><strong>Bay Area stores</strong></div>
-	</div>
+<div class="container-fluid" id="index-banner" style="margin-top:50px">
+	   <picture>
+    <!--[if IE 9]><video style="display: none;"><![endif]-->
+    <source srcset="https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_1000,h_375/v1422902656/shutterstock_160709951_hsvzx9.jpg" media="(min-width: 992px)">
+    <!--[if IE 9]></video><![endif]-->
+    <img srcset='https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_766,h_282/v1422902656/shutterstock_160709951_hsvzx9.jpg' alt="">
+    <img srcset="{% static 'img/landing image_MAP_NO_PIN2.jpg' %}" alt="">
+    </picture>
+    <div class="row-fluid text-container">
+        <div class="text "><div style="font-style: italic; text-transform: uppercase;'">Find one of a kind furniture available in </div><strong>Bay Area stores</strong></div>
+    </div>
 
 </div>
 
@@ -42,7 +43,7 @@
 </div>
     <div class="container-fluid pic-tabs main" id="products">        
         <div class="row-fluid">
-		<header class="col-md-12">We Find The Gems Hidden In Bay Area Stores</header>
+		<header class="col-md-12"></header>
             <div class="container" id="products-grid">
                 <div class="tab-content">
                     <div class="tab-pane fade in active">
