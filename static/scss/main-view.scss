@@ -1,5 +1,5 @@
 .grid-products-wrapper, #filter-container {
-    margin-top: 50px;
+    margin-top: 60px;
 
 }
 .grid-products-wrapper {
@@ -196,6 +196,66 @@
     padding: 90px 20px 35px 35px;
     overflow: auto;
     height: 100%;
+    top: 0px;
+    z-index: 1;
+    left: -245px;
+
+    
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+
+    
+    + .wrap {
+        //margin-left: 245px;
+
+        
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        margin-left: 0px;
+
+        @include breakpoint(md) {
+            margin-left: auto;
+            margin-top: 50px;
+
+        }
+
+        .container {
+
+          width: 1170px - 245px;
+
+          @include breakpoint(md) {
+            width: 970px - 245px;
+
+          }
+
+          @include breakpoint(sm) {
+            width: 750px - 245px;
+
+          }
+
+        }
+
+
+    }
+
+    &.open {
+      left: 0px;
+
+      + .wrap {
+        margin-left: 245px;
+      }
+
+      @include breakpoint(md) {
+        + .wrap {
+          margin-left: 0px;
+        }
+
+      }
+    }
 
     b {
         font-family: "Droid Serif";
@@ -233,6 +293,7 @@
         padding: 0px;
         overflow: visible;
         z-index: 2;
+        left: 0px;
 
 
         #filter-container-furnituretype header, #refine {
@@ -335,17 +396,6 @@
         }
     }
 
-    + .main {
-        margin-left: 245px;
-
-        @include breakpoint(md) {
-            margin-left: auto;
-            margin-top: 50px;
-
-        }
-
-
-    }
 
     label {
         width: auto;

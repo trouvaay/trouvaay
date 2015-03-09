@@ -1,6 +1,7 @@
 #index-banner {
   position: relative;
   margin-bottom: 40px;
+  margin-top: 60px;
   padding: 0px;
   max-height: 375px;
   height: auto;
@@ -11,6 +12,10 @@
   @include breakpoint(sm) {
     margin-bottom: 0px;
     min-height: 282px;
+  }
+  
+  @include breakpoint(md) {
+    margin-top: 50px;
   }
 
   img {

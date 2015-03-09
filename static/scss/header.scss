@@ -12,13 +12,15 @@ header.top-bar {
   background: #333;
   line-height: 60px;
   height: 60px;
-  position: relative;
+  position: fixed;
   width: 100%;
+  top: 0px;
+  z-index: 2;
+  left: 0px;
 
   @include breakpoint(md) {
     height: 50px;
     position: fixed;
-    top: 0px;
     z-index: 2;
     
     & + div {
@@ -68,26 +70,46 @@ header.top-bar {
     font-family: "Ostrich Sans";
   }
 
-  a.about-us {
+  a.btn {
     border: 1px solid #FFF;
     font-size: 17px;
     font-weight: 800;
     padding: 5px 13px;
     text-transform: uppercase;
+    border-radius: 0px;
+
+    &:focus {
+      color: #FFF;
+    }
 
   }
 
-  a.login {
+  a.btn + a.btn {
+    margin-left: 10px;
+
+  }
+
+  .right-bottom-buttons-cnt {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    line-height: 25px;
+
+    a {
+      display: inline-block;
+    }
+
+  }
+
+  a.white-right-button {
     background-color: #FFF;
     color: #000;
-    position: absolute;
-    bottom: 0px;
+    font-weight: 800;
     padding: 0px 8px;
-    right: 0px;
-    height: 25px;
     line-height: 25px;
     width: 91px;
     text-align: center;
+    margin-right: 0px;
   }
 
   .mobile-about, .mobile-menu {
@@ -121,8 +143,7 @@ header.top-bar {
 
   }
 
-  .mobile-about {
-    label {
+  .icon-question-mark, a.icon-question-mark {
       background: #FFF;
       border-radius: 14px;
       color: #000;
@@ -130,13 +151,37 @@ header.top-bar {
       width: 28px;
       height: 28px;
       min-width: 28px;
+      position: relative;
+      
+      &:before {
+        position: absolute;
+        left: 0px;
+        display: inline-block;
+        text-align: center;
+        width: 28px;
+        color: #000;
+      }
       
       @include breakpoint(sm) {
 	      width: 24px;
 	      height: 24px;
 	      min-width: 24px;
 
+
+          &:before {
+            width: 24px;
+          }
+
       }
+
+      &:focus {
+        color: #000;
+      }
+
+      
+    span {
+      display: none;
+
     }
   }
 
