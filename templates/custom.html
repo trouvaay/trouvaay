@@ -265,7 +265,7 @@ function handleBuyButtonClick(e) {
 				success: function(response, status){
 					// console.log('response from pre-checkout call: '+status );
 					$("#pre-checkout-modal-container").html(response);
-					$("#reserve_precheckout-modal").modal({
+					$("#reservation-modal").modal({
 						show: true,
 						keyboard: true
 					});
