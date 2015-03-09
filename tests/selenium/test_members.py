@@ -487,7 +487,6 @@ class RaredoorMembers(object):
 
         self.do_reservation(driver=driver, is_auth=False, email=self.generate_new_email(config.NEW_USER_BASE_EMAIL))
 
-
 class ChromeTests(RaredoorMembers, unittest.TestCase):
     def setUp(self):
         super(ChromeTests, self).setUp()
