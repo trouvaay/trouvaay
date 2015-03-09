@@ -118,8 +118,14 @@ class DetailView(generic.DetailView):
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
 
         product = self.get_object()
-        product.click_count += 1
-        product.save()
+
+        # click counter
+        exclude_emails = settings.CLICK_EXCLUSIONS
+        if not self.request.user.email in exclude_emails:
+            product.click_count += 1
+            product.save()
+            logger.debug('added click-count')
+        
         return context
 
 

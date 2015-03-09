@@ -127,6 +127,9 @@ LOGIN_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+#list of email for user to exclude from trick counting
+CLICK_EXCLUSIONS = []
+
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = not DEBUG
 
@@ -142,6 +145,7 @@ RETURN_POLICY = {
 SIGNUP_OFFER = "Get 10% off your 1st purchase"
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
+
 
 LOGGING = {
     'version': 1,
