@@ -234,7 +234,7 @@ OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many s
 
 RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
 
-RECENT_PRODUCT_AGE = 24  # products published less than this many hours ago qualify as recent
+RECENT_PRODUCT_AGE = 72  # products published less than this many hours ago qualify as recent
 
 # referral settings
 SHARE_URL = ''
