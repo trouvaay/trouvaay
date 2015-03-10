@@ -1,0 +1,260 @@
+{% if searchfilter %}
+    <form id="searchfilter-form" action="." method="post">
+<div id="filter-container">
+
+
+  {% if searchfilter.furnituretypes %}
+  <div id="filter-container-furnituretype" class="category">
+    <header class="header-group"><label for="display-categories">Categories</a> <a href="#" class="reset hidden-xs"><span>Reset</span></a></header>
+
+    <input type="checkbox" id="display-categories">
+    <ul class="">
+      {% for furnituretype in searchfilter.furnituretypes %}
+      <li>
+
+      <div class="c-checkbox">
+        <input type="checkbox" class="checkbox searchfilter-control" name="filter-furnituretype" value="{{ segment.id }}" id="filter-furnituretype-{{ furnituretype.id }}">
+        <label for="filter-furnituretype-{{ furnituretype.id }}" class="checkbox-label">
+          {{ furnituretype.select }}
+        </label>
+      </div>
+
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  {% comment %}
+  {% endcomment %}
+
+  <input type="checkbox" id="display-filters">
+  <div class="filters-container">
+    <header id="refine" class="hidden-md hidden-sm hidden-lg"><label for="display-filters">Refine</label></header>
+
+    <div class="category filters">
+      <header class="hidden-xs header-group">Filters <a href="#" class="reset"><span>Reset</span></a></header>
+
+      {% if searchfilter.subcategory %}
+      <div id="filter-container-subcategory" class="filter-group">
+        <header><a data-toggle="collapse" href="#collapseSubcategory" aria-expanded="true" aria-controls="collapseSubcategory" class="collapsed">Item <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
+        <div id="collapseSubcategory" class="collapse fold" role="tabpanel" aria-labelledby="heading">
+          <ul>
+            {% for item in searchfilter.subcategory %}
+            <li>
+            <div class="c-checkbox">
+              <input class="searchfilter-control checkbox" type="checkbox" name="filter-subcategory" id="filter-subcategory-{{item.id}}" value="{{ item.id }}" />
+              <label for="filter-subcategory-{{ item.id }}" class="checkbox-pseudocheckbox"></label>
+              <label for="filter-subcategory-{{ item.id }}" class="checkbox-label">{{ item.select }}</label>
+            </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+      {% if searchfilter.segments %}
+      <div id="filter-segment-segment" class="filter-group">
+        <header><a data-toggle="collapse" href="#collapseSegment" aria-expanded="true" aria-controls="collapseSegment" class="collapsed">Segment <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
+        <div id="collapseSegment" class="collapse fold" role="tabpanel" aria-labelledby="headingSegment">
+          <ul>
+            {% for segment in searchfilter.segments %}
+            <li>
+            <div class="c-checkbox">
+              <input class="searchfilter-control checkbox" type="checkbox" name="filter-segment" id="filter-segment-{{segment.id}}" value="{{ segment.id }}" />
+              <label for="filter-segment-{{ segment.id }}" class="checkbox-pseudocheckbox"></label>
+              <label for="filter-segment-{{ segment.id }}" class="checkbox-label">{{ segment.select }}</label>
+            </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+      <div id="filter-container-price" class="filter-group">
+        <header><a data-toggle="collapse" href="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice" class="collapsed">Price <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
+        <div id="collapsePrice" class="collapse fold" role="tabpanel" aria-labelledby="headingPrice">
+          <div class="desktop hidden-xs">
+            <input type="text" id="filter-price" name="filter-price-min" data-min="500" data-max="5000" data-from="0" data-to="5000" data-type="double" data-prefix="$" class="searchfilter-control slider" value="" />
+          </div>
+          <div class="mobile row hidden-md hidden-lg">
+            <div class="col-xs-6">
+              <label for="filter-price-min">From</label>
+              <input type="number" id="filter-price-min" name="filter-price-min" class="searchfilter-control" value="" placeholder="$" />
+            </div>
+            <div class="col-xs-6 text-right">
+              <label for="filter-price-max">To</label>
+              <input type="number" id="filter-price-max" name="filter-price-max" class="searchfilter-control" value="" placeholder="$$$$" />
+            </div>
+          </div>
+        </div>
+        <!--<input type="text" name="filter-price-max" class="searchfilter-control" value="" />-->
+
+        {% comment %}
+        <span id="filter-price-slider-min" style="margin-right:20px;">{{ searchfilter.price_slider_min }}</span>
+        <input id="filter-price-slider" type="text" class="span2 searchfilter-control-price" value="" 
+        data-slider-min="{{ searchfilter.price_slider_min }}"
+        data-slider-max="{{ searchfilter.price_slider_max }}" 
+        data-slider-step="100" 
+        data-slider-value="[{{ searchfilter.price_slider_min }},{{ searchfilter.price_slider_max }}]"/> 
+        <span id="filter-price-slider-max" style="margin-left:20px;">{{ searchfilter.price_slider_max }}</span>
+        {% endcomment %}
+      </div>
+
+      {% if searchfilter.colors %}
+      <div id="filter-container-color" class="filter-group">
+        <header><a data-toggle="collapse" href="#collapseColor" aria-expanded="true" aria-controls="collapseColor" class="collapsed">Color <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
+        <div id="collapseColor" class="collapse fold" role="tabpanel" aria-labelledby="headingColor">
+          <ul>
+            {% for color in searchfilter.colors %}
+            <li>
+            <div class="color-checkbox">
+              <input id="filter-color-{{ color.id }}" class="searchfilter-control" type="checkbox" name="filter-color" value="{{ color.id }}" />
+
+              <label for="filter-color-{{ color.id }}" class="checkbox-pseudocheckbox"></label>
+              <label for="filter-color-{{ color.id }}" class="checkbox-label hidden">{{ color.select }}</label>
+            </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if searchfilter.styles %}
+      <div id="filter-container-style" class="filter-group">
+        <header><a data-toggle="collapse" href="#collapseStyle" aria-expanded="true" aria-controls="collapseStyle" class="collapsed">
+            Style <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
+
+        <div id="collapseStyle" class="collapse fold" role="tabpanel" aria-labelledby="headingStyle">
+
+          <ul>
+            {% for style in searchfilter.styles %}
+            <li>
+            <div class="c-checkbox">
+              <input class="searchfilter-control checkbox" type="checkbox" name="filter-style" id="filter-style-{{style.id}}" value="{{ style.id }}" />
+              <label for="filter-style-{{ style.id }}" class="checkbox-pseudocheckbox"></label>
+              <label for="filter-style-{{ style.id }}" class="checkbox-label">{{ style.select }}</label>
+            </div>
+
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+      </div>
+      {% endif %}
+      {% comment %}
+      {% endcomment %}
+
+      <div id="filter-container-dimensions" class="filter-group">
+        <header><a data-toggle="collapse" href="#collapseDimensions" aria-expanded="true" aria-controls="collapseDimensions" class="collapsed">Dimensions <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
+        <div id="collapseDimensions" class="collapse fold" role="tabpanel" aria-labelledby="headingDimensions">
+
+          <b>Height</b>
+          <div class="desktop hidden-xs">"
+            <input type="text" name="filter-height-min" id="filter-height" class="searchfilter-control slider" data-min="{{ searchfilter.height_slider_min }}" data-max="{{ searchfilter.height_slider_max }}" data-from="{{ searchfilter.height_slider_min }}" data-to="{{ searchfilter.height_slider_max }}" data-type="double" data-prefix="" value="" />
+          </div>
+
+          <div class="mobile row hidden-md hidden-lg">
+            <div class="col-xs-6">
+              <label for="filter-height-min">From</label>
+              <input type="number" id="filter-height-min" name="filter-height-min" class="searchfilter-control" value="" placeholder="{{ searchfilter.height_slider_min }} FT" />
+            </div>
+            <div class="col-xs-6 text-right">
+              <label for="filter-height-max">To</label>
+              <input type="number" id="filter-height-max" name="filter-height-max" class="searchfilter-control" value="" placeholder="{{ searchfilter.height_slider_max }} FT" />
+            </div>
+          </div>
+
+
+          {% comment %}
+          <span id="filter-height-slider-min" style="margin-right:20px;">{{ searchfilter.height_slider_min }}</span>
+          <input id="filter-height-slider" type="text" class="span2" value="" 
+          data-slider-min="{{ searchfilter.height_slider_min }}" 
+          data-slider-max="{{ searchfilter.height_slider_max }}" 
+          data-slider-step="5" 
+          data-slider-value="[{{ searchfilter.height_slider_min }},{{ searchfilter.height_slider_max }}]"/> 
+          <span id="filter-height-slider-max" style="margin-left:20px;">{{ searchfilter.height_slider_max }}</span>
+          {% endcomment %}
+
+          <b>Width</b>
+
+          <div class="desktop hidden-xs">
+            <input type="text" name="filter-width-min" id="filter-width" class="searchfilter-control slider" data-min="{{ searchfilter.width_slider_min }}" data-max="{{ searchfilter.width_slider_max }}" data-from="{{ searchfilter.width_slider_min }}" data-to="{{ searchfilter.width_slider_max }}" data-type="double" data-prefix="" value="" />
+          </div>
+
+          <div class="mobile row hidden-md hidden-lg">
+            <div class="col-xs-6">
+              <label for="filter-width-min">From</label>
+              <input type="number" id="filter-width-min" name="filter-width-min" class="searchfilter-control" value="" placeholder="{{ searchfilter.width_slider_min }} FT" />
+            </div>
+            <div class="col-xs-6 text-right">
+              <label for="filter-width-max">To</label>
+              <input type="number" id="filter-width-max" name="filter-width-max" class="searchfilter-control" value="" placeholder="{{ searchfilter.width_slider_max }} FT" />
+            </div>
+          </div>
+          {% comment %}
+          <span id="filter-width-slider-min" style="margin-right:20px;">{{ searchfilter.width_slider_min }}</span>
+          <input id="filter-width-slider" type="text" class="span2" value="" 
+          data-slider-min="{{ searchfilter.width_slider_min }}" 
+          data-slider-max="{{ searchfilter.width_slider_max }}" 
+          data-slider-step="5" 
+          data-slider-value="[{{ searchfilter.width_slider_min }},{{ searchfilter.width_slider_max }}]"/> 
+          <span id="filter-width-slider-max" style="margin-left:20px;">{{ searchfilter.width_slider_max }}</span>
+          {% endcomment %}
+
+          <b>Depth</b>
+          <div class="desktop hidden-xs">
+            <input type="text" name="filter-depth-min" id="filter-depth" class="searchfilter-control slider" data-min="{{ searchfilter.depth_slider_min }}" data-max="{{ searchfilter.depth_slider_max }}" data-from="{{ searchfilter.depth_slider_min }}" data-to="{{ searchfilter.depth_slider_max }}" data-type="double" data-prefix="" value="" />
+          </div>
+
+          <div class="mobile row hidden-md hidden-lg">
+            <div class="col-xs-6">
+              <label for="filter-depth-min">From</label>
+              <input type="number" id="filter-depth-min" name="filter-depth-min" class="searchfilter-control" value="" placeholder="{{ searchfilter.depth_slider_min }} FT" />
+            </div>
+            <div class="col-xs-6 text-right">
+              <label for="filter-depth-max">To</label>
+              <input type="number" id="filter-depth-max" name="filter-depth-max" class="searchfilter-control" value="" placeholder="{{ searchfilter.depth_slider_max }} FT" />
+            </div>
+          </div>
+
+          {% comment %}
+          <span id="filter-depth-slider-min" style="margin-right:20px;">{{ searchfilter.depth_slider_min }}</span>
+          <input id="filter-depth-slider" type="text" class="span2" value="" 
+          data-slider-min="{{ searchfilter.depth_slider_min }}" 
+          data-slider-max="{{ searchfilter.depth_slider_max }}" 
+          data-slider-step="5" 
+          data-slider-value="[{{ searchfilter.depth_slider_min }},{{ searchfilter.depth_slider_max }}]"/> 
+          <span id="filter-depth-slider-max" style="margin-left:20px;">{{ searchfilter.depth_slider_max }}</span>
+          {% endcomment %}
+        </div>
+      </div>
+
+
+      {% if searchfilter.neighborhoods %}
+      <div id="filter-container-neighborhood" class="filter-group">
+        <header><a data-toggle="collapse" href="#collapseNeighborhood" aria-expanded="true" aria-controls="collapseNeighborhood" class="collapsed">Neighborhood <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
+        <div id="collapseNeighborhood" class="collapse fold" role="tabpanel" aria-labelledby="headingNeighborhood">
+          <ul>
+            {% for neighborhood_id, neighborhood_name in searchfilter.neighborhoods %}
+            <li>
+            <div class="c-checkbox">
+              <input class="searchfilter-control checkbox" type="checkbox" name="filter-neighborhood" id="filter-neighborhood-{{neighborhood_id}}" value="{{ neighborhood_id }}" />
+              <label for="filter-neighborhood-{{ neighborhood_id }}" class="checkbox-pseudocheckbox"></label>
+              <label for="filter-neighborhood-{{ neighborhood_id }}" class="checkbox-label">{{ neighborhood_name }}</label>
+            </div>
+
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+    </form>
+    {% endif %} 
+

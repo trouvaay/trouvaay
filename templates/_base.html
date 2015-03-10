@@ -86,6 +86,7 @@ document.createElement( "picture" );
 
 
 
+{% include 'goods/landing/searchfilter.html' %}
 <div class="wrap">
 <header class="top-bar">
   <div>
@@ -97,20 +98,21 @@ document.createElement( "picture" );
       	<a href="/">
       	  <img src="{% static 'img/logos/raredoor-gold-logo.svg' %}" id="logo" alt="Raredoor" />
       	</a>
-        <a href="#" data-toggle="modal" data-target="#how-it-works-modal" class="about-us hidden-xs" style="margin-left:10px">How it works</a>
-        <a href="{% url 'goods:about' %}" class="about-us hidden-xs" style="margin-left:10px">About us</a>
-        {% if user.is_authenticated %}
-            <a href="{% url 'members:profile' %}" class="about-us hidden-xs" style="margin-left:10px">Profile</a>
-        {% endif %}
+        <a href="#searchfilter-form" id="filter-btn" class="btn hidden-xs">Filter</a>
+        <a href="{% url 'goods:about' %}" class="btn hidden-xs">About us</a>
+        <a href="#" data-toggle="modal" data-target="#how-it-works-modal" class="btn hidden-xs icon-question-mark"><span>How it works</span></a>
       </div>
     <div class="col-xs-2 col-sm-1 mobile-menu visible-xs-block">
 	   <label for="mobile-menu-switch" class="icon-hamburger-icon"><span>Menu</span></a>
       </div>
+      <div class="right-bottom-buttons-cnt">
       {% if user.is_authenticated %}
-      <a href="{% url 'members:logout' %}" class="login hidden-xs nav-logout-button">Logout</a>
+      <a href="{% url 'members:profile' %}" class="white-right-button hidden-xs">Profile</a>
+      <a href="{% url 'members:logout' %}" class="white-right-button login hidden-xs nav-logout-button">Logout</a>
       {% else %}
       <a href="#" class="login hidden-xs nav-login-button">Login or sign up</a>
       {% endif %}
+      </div>
       <input id="mobile-menu-switch" type="checkbox" name="">
       <div class="col-xs-12" id="mobile-menu">
     	<div class="container">
