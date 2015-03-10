@@ -47,6 +47,14 @@ header.top-bar {
       margin-top: 16px;
     }
 
+    @include breakpoint(md) {
+      height: 50px;
+
+      img {
+        margin-top: 11px;
+      }
+    }
+
     @include breakpoint(sm) {
       text-align: center;
       height: 50px;
@@ -71,12 +79,19 @@ header.top-bar {
   }
 
   a.btn {
-    border: 1px solid #FFF;
     font-size: 17px;
     font-weight: 800;
-    padding: 5px 13px;
+    line-height: 17px;
     text-transform: uppercase;
+
+    padding: 5px 13px;
+
+    border: 1px solid #FFF;
     border-radius: 0px;
+
+    @include breakpoint(md) {
+      margin-top: -10px;
+    }
 
     &:focus {
       color: #FFF;

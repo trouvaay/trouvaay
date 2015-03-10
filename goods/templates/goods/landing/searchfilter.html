@@ -5,7 +5,7 @@
 
   {% if searchfilter.furnituretypes %}
   <div id="filter-container-furnituretype" class="category">
-    <header class="header-group"><label for="display-categories">Categories</a> <a href="#" class="reset hidden-xs hidden-sm"><span>Reset</span></a></header>
+    <header class="header-group"><label for="display-categories">Categories</a> <a href="#" class="reset hidden-xs"><span>Reset</span></a></header>
 
     <input type="checkbox" id="display-categories">
     <ul class="">
@@ -29,10 +29,10 @@
 
   <input type="checkbox" id="display-filters">
   <div class="filters-container">
-    <header id="refine" class="hidden-md hidden-lg"><label for="display-filters">Refine</label></header>
+    <header id="refine" class="hidden-md hidden-sm hidden-lg"><label for="display-filters">Refine</label></header>
 
     <div class="category filters">
-      <header class="hidden-xs hidden-sm header-group">Filters <a href="#" class="reset"><span>Reset</span></a></header>
+      <header class="hidden-xs header-group">Filters <a href="#" class="reset"><span>Reset</span></a></header>
 
       {% if searchfilter.subcategory %}
       <div id="filter-container-subcategory" class="filter-group">
@@ -73,7 +73,7 @@
       <div id="filter-container-price" class="filter-group">
         <header><a data-toggle="collapse" href="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice" class="collapsed">Price <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
         <div id="collapsePrice" class="collapse fold" role="tabpanel" aria-labelledby="headingPrice">
-          <div class="desktop hidden-xs hidden-sm">
+          <div class="desktop hidden-xs">
             <input type="text" id="filter-price" name="filter-price-min" data-min="500" data-max="5000" data-from="0" data-to="5000" data-type="double" data-prefix="$" class="searchfilter-control slider" value="" />
           </div>
           <div class="mobile row hidden-md hidden-lg">
@@ -151,7 +151,7 @@
         <div id="collapseDimensions" class="collapse fold" role="tabpanel" aria-labelledby="headingDimensions">
 
           <b>Height</b>
-          <div class="desktop hidden-xs hidden-sm">"
+          <div class="desktop hidden-xs">"
             <input type="text" name="filter-height-min" id="filter-height" class="searchfilter-control slider" data-min="{{ searchfilter.height_slider_min }}" data-max="{{ searchfilter.height_slider_max }}" data-from="{{ searchfilter.height_slider_min }}" data-to="{{ searchfilter.height_slider_max }}" data-type="double" data-prefix="" value="" />
           </div>
 
@@ -179,7 +179,7 @@
 
           <b>Width</b>
 
-          <div class="desktop hidden-xs hidden-sm">
+          <div class="desktop hidden-xs">
             <input type="text" name="filter-width-min" id="filter-width" class="searchfilter-control slider" data-min="{{ searchfilter.width_slider_min }}" data-max="{{ searchfilter.width_slider_max }}" data-from="{{ searchfilter.width_slider_min }}" data-to="{{ searchfilter.width_slider_max }}" data-type="double" data-prefix="" value="" />
           </div>
 
@@ -204,7 +204,7 @@
           {% endcomment %}
 
           <b>Depth</b>
-          <div class="desktop hidden-xs hidden-sm">
+          <div class="desktop hidden-xs">
             <input type="text" name="filter-depth-min" id="filter-depth" class="searchfilter-control slider" data-min="{{ searchfilter.depth_slider_min }}" data-max="{{ searchfilter.depth_slider_max }}" data-from="{{ searchfilter.depth_slider_min }}" data-to="{{ searchfilter.depth_slider_max }}" data-type="double" data-prefix="" value="" />
           </div>
 
