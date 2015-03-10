@@ -121,10 +121,16 @@ class DetailView(generic.DetailView):
 
         # click counter
         exclude_emails = settings.CLICK_EXCLUSIONS
-        if not self.request.user.email in exclude_emails:
+        if(self.request.user.is_authenticated()):
+            if not self.request.user.email in exclude_emails:
+                product.click_count += 1
+                product.save()
+                logger.debug('added to click-count')
+        else:
             product.click_count += 1
             product.save()
             logger.debug('added to click-count')
+
         
         return context
 
