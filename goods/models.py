@@ -173,6 +173,7 @@ class Product(models.Model):
 
     def calc_display_score(self):
         score = 0
+
         # get price score
         price_score = 0
         if self.current_price < 200.00:
@@ -181,8 +182,10 @@ class Product(models.Model):
             price_score = 5
         elif self.current_price < 500.00:
             price_score = 3
-
-        score=+price_score
+        
+        print('price score = ', price_score)  
+        score+=price_score
+        print('current score: ', score)
         
         # get date added score
         pub_dt_score = 0
@@ -194,14 +197,18 @@ class Product(models.Model):
         elif self.current_price < 504:
             pub_dt_score = 3
 
-        score=+pub_dt_score
+        print('pub_dt_score = ', pub_dt_score)
+        score+=pub_dt_score
+        print('current score: ', score)
         
         # get category score
         category_score = 0
         if self.furnituretype.all() and self.furnituretype.all()[0].select in ['seating', 'tables']:
             category_score = 3
 
-        score=+category_score
+        print('cat_score = ', category_score)
+        score+=category_score
+        print('current score: ', score)
 
         #is_available score
         available_score = 0
@@ -209,10 +216,15 @@ class Product(models.Model):
             available_score = -3
         elif self.is_sold:
             available_score = -5
-        score=+available_score
+
+        print('avail_score = ', available_score)
+        score+=available_score
+        print('current score: ', score)
 
         #add click count
-        score=+self.click_count
+        score+=self.click_count
+        print('click count = ', self.click_count)
+        print(' final score = ', score)
         
         self.display_score = score
         self.save()
