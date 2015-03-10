@@ -201,7 +201,7 @@ class Product(models.Model):
         if self.is_featured: featured_score = 5
         
         score = self.click_count + category_score + pub_dt_score + price_score + featured_score
-        logger.debug('display score for {} equals {}'.format(self, score))
+        logger.info('display score for {} equals {}'.format(self, score))
         self.display_score = score
         self.save()
         

@@ -5,6 +5,8 @@ Created on Mar 3, 2015
 """
 from datetime import timedelta
 from apscheduler.schedulers.blocking import BlockingScheduler
+from django.conf import settings
+from django.utils import timezone
 import os
 import logging
 
@@ -26,10 +28,8 @@ def update_product_is_recent():
     import django
     django.setup()  # this makes our django models available to our script
 
-    from django.conf import settings
-    from django.utils import timezone
-    from goods.models import Product
     
+    from goods.models import Product
     products = Product.objects.all()
 
     for product in products:
@@ -59,14 +59,32 @@ def clear_expired_reservations():
     import django
     django.setup()  # this makes our django models available to our script
 
-    from django.utils import timezone
     from members.models import Reservation
-
+    
     expired_reservations = Reservation.objects.filter(is_active=True, reservation_expiration__lte=timezone.now())
 
     for reservation in expired_reservations:
         reservation.cancel_reservation()
         print 'Cleared expired reservation for product {0}'.format(reservation.order.product_short_name)
+
+@sched.scheduled_job('interval', hours=1)
+def calc_display_score():
+    """Calculates display score for all products
+    """
+
+     # need the following because we are running
+    # this in a stand-alone script
+    # not part of the django application
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "trouvaay.settings.base")
+    import django
+    django.setup()  # this makes our django models available to our script
+
+
+    from goods.models import Product
+    for product in Product.objects.all():
+        product.calc_display_score()
+
+
 
 
 # sched.start()
@@ -74,4 +92,5 @@ def clear_expired_reservations():
 if __name__ == "__main__":
     clear_expired_reservations()
     update_product_is_recent()
+    calc_display_score()
 
