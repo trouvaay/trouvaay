@@ -739,7 +739,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-size: 23px;
   font-weight: bold;
   line-height: 25px;
-  padding: 22px 0px;
+  padding: 2px 0px;
   text-align: center;
   text-transform: uppercase;
 }
