@@ -14,6 +14,10 @@ from django.utils.encoding import smart_text
 from django.conf import settings
 from decimal import Decimal
 from members.models import PromotionOffer
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class Segment(models.Model):
     select = models.CharField(unique=True, max_length=55, default='new', null=True, blank=True)
@@ -155,9 +159,10 @@ class Product(models.Model):
     lng = models.FloatField(null=True, blank=True)
     md5_order = models.CharField(max_length=32, null=True, blank=True)
     click_count = models.IntegerField(blank=False, null=False, default=0)
+    display_score = models.IntegerField(blank=False, null=False, default=0)
 
     class Meta:
-        ordering = ['-is_recent', '-click_count', '-is_featured', 'md5_order']
+        ordering = ['-display_score', 'md5_order']
         unique_together = ('short_name', 'store',)
 
     def __str__(self):
@@ -165,6 +170,42 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return self.slug
+
+    def calc_display_score(self):
+        # get price score
+        price_score = 0
+        if self.current_price < 200.00:
+            price_score = 5
+        elif self.current_price < 400.00:
+            price_score = 3
+        elif self.current_price < 500.00:
+            price_score = 1
+        
+        # get date added score
+        pub_dt_score = 0
+        hrs_since_pub = self.hours_since_add()
+        if hrs_since_pub < 72:
+            pub_dt_score = 5
+        elif self.current_price < 240:
+            pub_dt_score = 3
+        elif self.current_price < 504:
+            pub_dt_score = 1
+        
+        # get category score
+        category_score = 0
+        if self.furnituretype.all() and self.furnituretype.all()[0].select in ['seating', 'tables']:
+            category_score = 2
+
+        #is_featured score
+        featured_score = 0
+        if self.is_featured: featured_score = 5
+        
+        score = self.click_count + category_score + pub_dt_score + price_score + featured_score
+        logger.debug('display score for {} equals {}'.format(self, score))
+        self.display_score = score
+        self.save()
+        
+
 
     def save(self, *args, **kwargs):
         self.lat = self.store.lat

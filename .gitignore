@@ -10,3 +10,4 @@ dev_config.py
 node_modules/*
 orders.json
 user.json
+dumpdata.json
