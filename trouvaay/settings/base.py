@@ -15,7 +15,6 @@ from decimal import Decimal
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -30,8 +29,6 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = [ ]
 
 # works with sslify to force https on Heroku
-
-
 INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',
@@ -88,7 +85,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
 DATABASES = {}
 
 # Internationalization
@@ -120,32 +116,20 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-GMAIL_EMAIL =''
-GMAIL_PASSWORD = ''
+
+
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-#list of email for user to exclude from trick counting
-CLICK_EXCLUSIONS = []
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = not DEBUG
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
-FEATURE_NAME_RESERVE = "Reserve"
-FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-store. 3 reservation limit"
-TOOLTIP_HEART = "Save to your profile page."
-RETURN_POLICY = {
-    'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
-    'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
-}
-SIGNUP_OFFER = "Get 10% off your 1st purchase"
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
-
 
 LOGGING = {
     'version': 1,
@@ -220,21 +204,35 @@ LOGGING = {
 ACCOUNT_ACTIVATION_DAYS = 30
 REGISTRATION_AUTO_LOGIN = True
 
-RESERVATION_PERIOD = 48  # hours
 
+# Analytics
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''
 # OLARK_SITE_ID = ''
 MIXPANEL_API_TOKEN = ''
 ANALYTICAL_INTERNAL_IPS = []
+#list of email for user to exclude from trick counting
+CLICK_EXCLUSIONS = []
 
+#transaction and offer settings
 SALES_TAX = Decimal('0.0875')
-
-OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many seconds
-
+FEATURE_NAME_RESERVE = "Reserve"
+FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-store. 3 reservation limit"
+TOOLTIP_HEART = "Save to your profile page."
+RETURN_POLICY = {
+    'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
+    'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
+}
 RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
+RESERVATION_PERIOD = 48  # hours
+
+
+# Offer settings
+OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many seconds
+SIGNUP_OFFER = "Get 10% off your 1st purchase"
 
 RECENT_PRODUCT_AGE = 72  # products published less than this many hours ago qualify as recent
+
 
 # referral settings
 SHARE_URL = ''
@@ -246,6 +244,8 @@ SECOND_REFERRAL_MODAL_EXP = 1  # do not show second referral modal again within 
 # email settings are another good candidate to have
 # each developer define in their own dev_settings.py
 # here are what could be production settings
+GMAIL_EMAIL =''
+GMAIL_PASSWORD = ''
 DEFAULT_FROM_EMAIL = ''  # e.g. 'support@raredoor.com'
 EMAIL_HOST = ''  # 'smtp.gmail.com'
 EMAIL_PORT = ''  # 587 - for gmail
