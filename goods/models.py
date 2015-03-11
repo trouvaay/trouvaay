@@ -192,11 +192,11 @@ class Product(models.Model):
         hrs_since_pub = self.hours_since_add()
         if hrs_since_pub:
             if hrs_since_pub < 72:
-                pub_dt_score = 10
+                pub_dt_score = 20
             elif self.current_price < 240:
-                pub_dt_score = 5
+                pub_dt_score = 10
             elif self.current_price < 504:
-                pub_dt_score = 3
+                pub_dt_score = 5
 
         print('pub_dt_score = ', pub_dt_score)
         score+=pub_dt_score
@@ -223,7 +223,7 @@ class Product(models.Model):
         print('current score: ', score)
 
         #add click count
-        score+=self.click_count
+        score+=(self.click_count/3)
         print('click count = ', self.click_count)
         print(' final score = ', score)
         
