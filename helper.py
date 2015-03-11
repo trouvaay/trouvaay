@@ -14,6 +14,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
 import time
 
+
 # TODO: convert to environ var
 cloudinary.config(
     cloud_name='trouvaay',

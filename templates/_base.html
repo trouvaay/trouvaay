@@ -81,10 +81,17 @@ document.createElement( "picture" );
 {% analytical_head_bottom %}
 </head>
 <body class="{% block bodyclass %}{% endblock %}">
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=380931628745745&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 {% analytical_body_top %}
-
-
-
 
 <div class="wrap">
 <header class="top-bar">
