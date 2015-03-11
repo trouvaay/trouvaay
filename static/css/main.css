@@ -1,5 +1,9 @@
 @charset "UTF-8";
 /* Colors */
+a:focus {
+  text-decoration: none;
+}
+
 .arrow-link {
   font-family: "Ostrich Sans";
   font-weight: 800;
