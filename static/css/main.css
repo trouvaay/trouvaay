@@ -1340,6 +1340,22 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 
+#close-filter {
+  color: #000;
+  font-family: "Ostrich Sans";
+  text-decoration: none;
+  position: absolute;
+  top: 80px;
+}
+#close-filter:before {
+  content: '×';
+  display: inline-block;
+  font-size: 20px;
+}
+#close-filter span {
+  display: none;
+}
+
 #searchfilter-form {
   width: 245px;
   background: #e6e7e8;
@@ -1492,6 +1508,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-overflow: ellipsis;
   max-width: 100%;
   white-space: nowrap;
+  line-height: 17px;
 }
 @media (max-width: 767px) {
   #searchfilter-form li {
@@ -1668,7 +1685,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   font-weight: bold;
   font-size: 11px;
-  color: #888;
+  color: #000;
 }
 #searchfilter-form .c-checkbox input {
   display: none;
@@ -1681,7 +1698,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-size: 16px;
   display: block;
   position: absolute;
-  top: -3px;
+  top: 0px;
   left: -20px;
 }
 @media (max-width: 767px) {
