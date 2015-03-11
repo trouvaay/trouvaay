@@ -157,6 +157,7 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     REQUIRED_FIELDS = []
+        
 
     @classmethod
     def get_user_by_email(cls, email):

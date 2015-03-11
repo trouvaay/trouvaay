@@ -70,7 +70,7 @@ class AuthUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
-    list_display = ('email', 'is_merchant', 'is_admin', 'is_superuser',)
+    list_display = ('email', 'date_joined', 'is_merchant', 'is_admin', 'is_superuser',)
     list_filter = ('is_admin', 'is_merchant')
 
     # change list
@@ -88,7 +88,7 @@ class AuthUserAdmin(UserAdmin):
     )
     inlines = [AuthUserActivityInline, ProfileInline]
     search_fields = ('email',)
-    ordering = ('email',)
+    ordering = ('-date_joined', 'email',)
     filter_horizontal = ('groups', 'user_permissions',)
 
 class AuthUserInline(admin.TabularInline):
