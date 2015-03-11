@@ -3,7 +3,59 @@
 
 
  {% block content %}
- 	<div class="container-fluid" style="height: 100%"></div>
+ 	<div class="container-fluid" id="index-banner" style="margin-top:50px">
+	   <picture>
+    <!--[if IE 9]><video style="display: none;"><![endif]-->
+    <source srcset="https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_1000,h_375/v1422902656/shutterstock_160709951_hsvzx9.jpg" media="(min-width: 992px)">
+    <!--[if IE 9]></video><![endif]-->
+    <img srcset='https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_766,h_282/v1422902656/shutterstock_160709951_hsvzx9.jpg' alt="">
+    </picture>
+    <div class="row-fluid text-container">
+        <div class="text "><div style="font-style: italic; text-transform: uppercase;'">Find one of a kind furniture available in </div><strong>Bay Area stores</strong></div>
+    </div>
+
+</div>
+
+<div class="container" id="how-it-works">
+	<div class="row">
+		<div class="col-sm-4 info">
+			<div class="browse">
+				<header>Browse</header>
+				<p>A curated selection of new and vintage furniture — all currently available in local stores — at <i>Raredoor.com.</i></p>
+			</div>
+		</div>
+		<div class="col-sm-4 info">
+			<div class="reserve">
+				<header>Reserve</header>
+				<p>Your perfect pieces online and take a few days to see the items in a store nearby.</p>
+			</div>
+		</div>
+		<div class="col-sm-4 info">
+			<div class="purchase">
+				<header>Purchase</header>
+				<p>Through us and receive great deals, as well as affordable delivery.</p>
+			</div>
+		</div>
+	</div>
+</div>
+    <div class="container-fluid pic-tabs main" id="products">        
+        <div class="row-fluid">
+		<header class="col-md-12"></header>
+            <div class="container" id="products-grid">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active">
+                        <div class="grid-products-wrapper">
+                            <div class="row">
+                    			{% for product in products %}
+                                    {% include 'goods/main/_mainproduct_for_loop.html' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!-- end tab1 -->
+                </div>
+            </div>
+        </div>
+    </div>
  {% endblock content %}
 {% block modal %}
 {{ block.super }}
