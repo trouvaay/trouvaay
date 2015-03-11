@@ -190,12 +190,13 @@ class Product(models.Model):
         # get date added score
         pub_dt_score = 0
         hrs_since_pub = self.hours_since_add()
-        if hrs_since_pub < 72:
-            pub_dt_score = 10
-        elif self.current_price < 240:
-            pub_dt_score = 5
-        elif self.current_price < 504:
-            pub_dt_score = 3
+        if hrs_since_pub:
+            if hrs_since_pub < 72:
+                pub_dt_score = 10
+            elif self.current_price < 240:
+                pub_dt_score = 5
+            elif self.current_price < 504:
+                pub_dt_score = 3
 
         print('pub_dt_score = ', pub_dt_score)
         score+=pub_dt_score
@@ -279,9 +280,12 @@ class Product(models.Model):
 #         return int((total_in_dollars - discounts_in_dollars) * 100)
 
     def hours_since_add(self):
-        delta = timezone.now() - self.pub_date
-        time_lapse = delta.total_seconds() // 3600
-        return int(time_lapse)
+        if self.pub_date:
+            delta = timezone.now() - self.pub_date
+            time_lapse = delta.total_seconds() // 3600
+            return int(time_lapse)
+        else:
+            return None
 
     def has_returns(self):
         return self.store.has_returns
