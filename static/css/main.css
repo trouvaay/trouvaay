@@ -187,6 +187,10 @@ html, body {
   content: "m";
 }
 
+.icon-down-arrow:before {
+  content: "n";
+}
+
 /* Ion.RangeSlider, Flat UI Skin
 // css version 2.0.3
 // © Denis Ineshin, 2014    https://github.com/IonDen
