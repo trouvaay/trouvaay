@@ -65,7 +65,7 @@ def clear_expired_reservations():
 
     for reservation in expired_reservations:
         reservation.cancel_reservation()
-        print 'Cleared expired reservation for product {0}'.format(reservation.order.product_short_name)
+        print 'Cleared expired reservation for product {0}'.format(reservation.order.product.short_name)
 
 @sched.scheduled_job('interval', hours=1)
 def calc_display_score():
