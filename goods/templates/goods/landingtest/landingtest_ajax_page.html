@@ -1,6 +1,0 @@
-{% load endless %}
-{% lazy_paginate 12 products %}
-{% for product in products %}
-    {% include 'goods/main/_mainproduct_for_loop.html' %}
-{% endfor %}
-{% show_more %}
