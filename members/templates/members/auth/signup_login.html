@@ -21,6 +21,9 @@
 						<div class="text-center">
 							{% crispy login_form %}
 
+							
+							{% include 'members/auth/social_login.html' %}
+							
 							<div id="div_id_password" class="form-group">
 								<p><a href="{% url "auth_password_reset" %}">Forgot your password?</a></p>							
 							</div>

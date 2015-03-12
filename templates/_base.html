@@ -27,10 +27,25 @@
  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
 ga('create', 'UA-58538929-1', 'auto');
 ga('send', 'pageview');
 </script>
+<!-- Google Remarketing -->
+<script type="text/javascript">
+  /* <![CDATA[ */
+  var google_conversion_id = 956335221;
+  var google_custom_params = window.google_tag_params;
+  var google_remarketing_only = true;
+  /* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+  <div style="display:inline;">
+  <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/956335221/?value=0&amp;guid=ON&amp;script=0"/>
+  </div>
+</noscript>
+<!-- End Google Remarketing -->
 <!-- FB Conversion-->
 <script>
   (function() {
@@ -77,14 +92,22 @@ document.createElement( "picture" );
 <script src="{% static 'js/vendor/picturefill.min.js' %}" async></script>
   <!-- Pinterest Verification -->
   <meta name="p:domain_verify" content="a087ecb11ad56c7333a66143ad5481c5"/>
+  <!-- End Pinterest Verification -->
 {% block beginjs %}{% endblock beginjs %}
 {% analytical_head_bottom %}
 </head>
 <body class="{% block bodyclass %}{% endblock %}">
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=380931628745745&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 {% analytical_body_top %}
-
-
-
 
 <div class="wrap">
 <header class="top-bar">

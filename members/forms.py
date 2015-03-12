@@ -101,6 +101,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 
         )
 
+
     def clean(self):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
