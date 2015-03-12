@@ -1,6 +1,6 @@
 #index-banner {
   position: relative;
-  margin-bottom: 40px;
+  //margin-bottom: 40px;
   margin-top: 60px;
   padding: 0px;
   max-height: 375px;
@@ -132,13 +132,16 @@
   }
 }
 
-#how-it-works, #how-it-works-mobile {
-  margin-bottom: 25px;
+#how-it-works {
+    background: #91c3c3;
+}
 
-  .row {
-    @include breakpoint(sm) {
-      padding: 10% 0 0;
-    }
+#how-it-works, #how-it-works-mobile {
+  padding-top: 40px;
+
+  @include breakpoint(sm) {
+      padding-top: 0px;
+
   }
 
   .info {
@@ -146,6 +149,7 @@
     font-size: 15px;
     font-family: "Droid Serif";
     font-weight: bold;
+    margin-top: 30px;
 
     @include breakpoint(md, True) {
       float: none;
@@ -157,7 +161,6 @@
     }
 
     &:not(:last-child) {
-      padding-right: 30px;
 
       @include breakpoint(sm) {
 	padding-right: 15px;
@@ -231,8 +234,6 @@
       }
 
       &.reserve {
-	background: #FFF;
-	color: $lily;
 
 	&:before {
 	  font-size: 19px;
@@ -243,9 +244,6 @@
 	  }
 	}
 
-	header {
-	  border-bottom: 1px solid $lily;
-	}
       }
     }
 
