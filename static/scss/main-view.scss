@@ -296,6 +296,17 @@
             //padding-bottom: 80px;
             overflow: auto;
 
+            li {
+                padding-left: 10px;
+            }
+
+            @include breakpoint(sm) {
+                li {
+                    padding-left: 0px;
+                }
+
+            }
+
         }
 
     #filter-container-furnituretype {

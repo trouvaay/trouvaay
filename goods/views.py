@@ -25,61 +25,9 @@ logger = logging.getLogger(__name__)
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
 
-class LandingView(generic.ListView):
-    template_name = 'goods/landing/landing.html'
-    context_object_name = 'products'
-    model = Product
-
-    def get_queryset(self):
-        queryset = self.model.objects.filter(is_landing=True, store__is_featured=True)[:6]
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(LandingView, self).get_context_data(**kwargs)
-
-        if(not self.request.session.get('cid', None)):
-            self.request.session['cid'] = str(uuid.uuid4())
-
-        context['BaseUrl'] = BASE_URL
-        if(settings.ENABLE_REFERRAL):
-            if(self.request.user.is_authenticated()):
-                if(is_time_to_show_modal(self.request, 'referral2')):
-                    logger.info('we should be showing 2nd modal')
-                    context['show_referral_second_modal'] = True
-                    hide_modal(self.request, 'referral2', settings.SECOND_REFERRAL_MODAL_EXP)
-            else:
-                if(is_time_to_show_modal(self.request, 'referral1')):
-                    logger.info('we should be showing 1st modal')
-                    context['show_referral_first_modal'] = True
-                    hide_modal(self.request, 'referral1', settings.FIRST_REFERRAL_MODAL_EXP)
-
-
-        context['SIGNUP_OFFER'] = settings.SIGNUP_OFFER
-
-        # add any "First time" offers
-        #only FIRST_ORDERs. DISCOUNT_PROMOs arent rendered
-        # if there is more than one get the first one
-        print('show_modal: ', is_time_to_show_modal(self.request, 'offer_modal'))
-        if(is_time_to_show_modal(self.request, 'offer_modal')):
-#         if(not self.request.session.get('seen_offers', False)):
-            offers = PromotionOffer.get_current_offers(user=self.request.user, offer_type=OfferType.FIRST_ORDER)
-            print('offers:', offers)
-            if(offers):
-                context['promotion_offer'] = offers[0]
-
-                # seen_offers flag in session will tell us next time
-                # whether we should show this offer or not
-                # expiration is needed so that after this flag expires
-                # we will show the offer again
-                hide_modal(self.request, 'offer_modal', settings.OFFER_MODAL_EXPIRATION)
-#                 self.request.session['seen_offers'] = True
-#                 self.request.session.set_expiry(settings.OFFER_MODAL_EXPIRATION)
-
-        return context
-
-class LandingTestView(AjaxListView):
-    template_name = 'goods/landingtest/landingtest_ajax.html'
-    page_template = 'goods/landingtest/landingtest_ajax_page.html'
+class LandingView(AjaxListView):
+    template_name = 'goods/main/landing_ajax.html'
+    page_template = 'goods/main/landing_ajax_page.html'
     context_object_name = 'products'
     model = Product
     key = 'page'
@@ -100,7 +48,7 @@ class LandingTestView(AjaxListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        context = super(LandingTestView, self).get_context_data(**kwargs)
+        context = super(LandingView, self).get_context_data(**kwargs)
         context['BaseUrl'] = BASE_URL
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
         context['searchfilter'] = {
@@ -128,8 +76,8 @@ class LandingTestView(AjaxListView):
 
 
 class SearchFilterView(AjaxListView):
-    template_name = 'goods/main/main_ajax_page.html'
-    page_template = 'goods/main/main_ajax_page.html'
+    template_name = 'goods/main/landing_ajax_page.html'
+    page_template = 'goods/main/landing_ajax_page.html'
 
     context_object_name = 'products'
     model = Product
@@ -225,58 +173,7 @@ class DetailView(generic.DetailView):
             product.click_count += 1
             product.save()
             logger.debug('added to click-count')
-        
-        return context
 
-
-class MainView(AjaxListView):
-    template_name = 'goods/main/main_ajax.html'
-    page_template = 'goods/main/main_ajax_page.html'
-    context_object_name = 'products'
-    model = Product
-    key = 'page'
-
-
-    def get_queryset(self):
-        try:
-            furn_type = self.request.GET['type']
-            try:
-                furniture_type_object = FurnitureType.objects.get(select=furn_type)
-            except Exception, e:
-                logger.debug(str(e))
-                furniture_type_object = None
-            queryset = list(self.model.objects.filter(is_published=True, furnituretype = furniture_type_object, store__is_featured=True))
-        except:
-            queryset = self.model.objects.filter(is_published=True, store__is_featured=True)
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(MainView, self).get_context_data(**kwargs)
-        context['BaseUrl'] = BASE_URL
-        context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
-        context['searchfilter'] = {
-                                   'price_slider_min': 0,
-                                   'price_slider_max': 10000,
-                                   'height_slider_min': 0,
-                                   'height_slider_max': 1000,
-                                   'width_slider_min': 0,
-                                   'width_slider_max': 1000,
-                                   'depth_slider_min': 0,
-                                   'depth_slider_max': 1000,
-                                   'segments': Segment.objects.all(),
-                                   'subcategory': Subcategory.objects.all(),
-                                   'colors': Color.objects.all(),
-                                   'styles': Style.objects.all(),
-                                   'furnituretypes': FurnitureType.objects.all(),
-                                   'neighborhoods': Neighborhoods['SF']
-                                   }
-
-        # TODO: do not add 'site_name' to context
-        # once the 'sites' are setup in settings
-        context['site_name'] = settings.SITE_NAME
-        # removed until profile page implemented
-        # context['liked_items'] = get_liked_items(self.request.user)
         return context
 
 
