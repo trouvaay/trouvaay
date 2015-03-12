@@ -186,6 +186,25 @@
 
 }
 
+#close-filter {
+    color: #000;
+    font-family: "Ostrich Sans";
+    text-decoration: none;
+
+    position: absolute;
+    top: 80px;
+
+    &:before {
+        content: '×';
+        display: inline-block;
+        font-size: 20px;
+
+    }
+    span {
+        display: none;
+    }
+}
+
 
 #searchfilter-form {
 
@@ -391,6 +410,7 @@
         text-overflow: ellipsis;
         max-width: 100%;
         white-space: nowrap;
+        line-height: 17px;
         @include breakpoint(sm) {
             padding-left: 0px;
         }
@@ -634,7 +654,7 @@
         font-family: "Droid Serif"; 
         font-weight: bold;
         font-size: 11px;
-        color: #888;
+        color: #000;
 
         input {
             display: none;
@@ -649,7 +669,7 @@
             font-size: 16px;
             display: block;
             position: absolute;
-            top: -3px;
+            top: 0px;
             left: -20px;
 
             @include breakpoint (sm) {

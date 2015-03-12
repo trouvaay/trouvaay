@@ -88,6 +88,13 @@ header.top-bar {
 
     border: 1px solid #FFF;
     border-radius: 0px;
+    
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -o-transition: all 0.1s;
+
+    
 
     @include breakpoint(md) {
       margin-top: -10px;
@@ -97,11 +104,29 @@ header.top-bar {
       color: #FFF;
     }
 
+    &:hover {
+      border-color: $gold;
+
+    }
+
   }
 
   a.btn + a.btn {
     margin-left: 10px;
 
+  }
+
+  #filter-btn {
+      &:before {  
+          position: relative;
+          font-size: 21px;
+          line-height: 15px;
+          vertical-align: top;
+          top: 0px;
+          margin-right: 9px;
+          left: -2px;
+
+      }
   }
 
   .right-bottom-buttons-cnt {
@@ -300,5 +325,6 @@ input#mobile-menu-switch {
 
   a {
     color: #000;
+    font-weight: 800;
   }
 }

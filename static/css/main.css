@@ -1,5 +1,9 @@
 @charset "UTF-8";
 /* Colors */
+a:focus {
+  text-decoration: none;
+}
+
 .arrow-link {
   font-family: "Ostrich Sans";
   font-weight: 800;
@@ -181,6 +185,10 @@ html, body {
 
 .icon-hamburger-icon:before {
   content: "m";
+}
+
+.icon-down-arrow:before {
+  content: "n";
 }
 
 /* Ion.RangeSlider, Flat UI Skin
@@ -470,6 +478,10 @@ header.top-bar a.btn {
   padding: 5px 13px;
   border: 1px solid #FFF;
   border-radius: 0px;
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -o-transition: all 0.1s;
 }
 @media (max-width: 992px) {
   header.top-bar a.btn {
@@ -479,8 +491,20 @@ header.top-bar a.btn {
 header.top-bar a.btn:focus {
   color: #FFF;
 }
+header.top-bar a.btn:hover {
+  border-color: #e6be46;
+}
 header.top-bar a.btn + a.btn {
   margin-left: 10px;
+}
+header.top-bar #filter-btn:before {
+  position: relative;
+  font-size: 21px;
+  line-height: 15px;
+  vertical-align: top;
+  top: 0px;
+  margin-right: 9px;
+  left: -2px;
 }
 header.top-bar .right-bottom-buttons-cnt {
   position: absolute;
@@ -635,6 +659,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #mobile-menu a {
   color: #000;
+  font-weight: 800;
 }
 
 #index-banner {
@@ -733,10 +758,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #index-banner .text {
   font-family: "Droid Serif";
   font-size: 24px;
-  color: #000;
+  color: #FFF;
   top: 25%;
   position: relative;
-  margin-top: -62px;
+}
+#index-banner .text > * {
+  background: #e6be46;
+  padding: 0px 10px;
 }
 @media (max-width: 767px) {
   #index-banner .text {
@@ -748,13 +776,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 #index-banner .text strong {
-  display: block;
   /*color: $gold;*/
-  color: #000;
-  font-family: "Ostrich Sans";
-  font-weight: bold;
-  font-size: 80px;
-  line-height: 80px;
+  font-family: "Droid Serif";
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 65px;
+  font-style: italic;
 }
 @media (max-width: 767px) {
   #index-banner .text strong {
@@ -1331,6 +1359,22 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 
+#close-filter {
+  color: #000;
+  font-family: "Ostrich Sans";
+  text-decoration: none;
+  position: absolute;
+  top: 80px;
+}
+#close-filter:before {
+  content: '×';
+  display: inline-block;
+  font-size: 20px;
+}
+#close-filter span {
+  display: none;
+}
+
 #searchfilter-form {
   width: 245px;
   background: #e6e7e8;
@@ -1483,6 +1527,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-overflow: ellipsis;
   max-width: 100%;
   white-space: nowrap;
+  line-height: 17px;
 }
 @media (max-width: 767px) {
   #searchfilter-form li {
@@ -1659,7 +1704,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   font-weight: bold;
   font-size: 11px;
-  color: #888;
+  color: #000;
 }
 #searchfilter-form .c-checkbox input {
   display: none;
@@ -1672,7 +1717,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-size: 16px;
   display: block;
   position: absolute;
-  top: -3px;
+  top: 0px;
   left: -20px;
 }
 @media (max-width: 767px) {

@@ -5,6 +5,7 @@
 
   {% if searchfilter.furnituretypes %}
   <div id="filter-container-furnituretype" class="category">
+      <a href="#" id="close-filter" class="hidden-xs"><span>Close filter</span></a>
     <header class="header-group"><label for="display-categories">Categories</a> <a href="#" class="reset hidden-xs"><span>Reset</span></a></header>
 
     <input type="checkbox" id="display-categories">
@@ -15,7 +16,7 @@
       <div class="c-checkbox">
         <input type="checkbox" class="checkbox searchfilter-control" name="filter-furnituretype" value="{{ segment.id }}" id="filter-furnituretype-{{ furnituretype.id }}">
         <label for="filter-furnituretype-{{ furnituretype.id }}" class="checkbox-label">
-          {{ furnituretype.select }}
+          {{ furnituretype.select|capfirst }}
         </label>
       </div>
 
