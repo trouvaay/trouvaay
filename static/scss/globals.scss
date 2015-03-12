@@ -6,6 +6,10 @@ $product-title-border: #7f7f7f;
 $light-brown-gray: #989190;
 $yellow: #e6be46;
 
+a:focus {
+    text-decoration: none;
+}
+
 .arrow-link {
   font-family: "Ostrich Sans";
   font-weight: 800;

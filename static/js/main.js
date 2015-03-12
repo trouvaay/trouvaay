@@ -131,6 +131,11 @@ $(document).ready(function() {
       $("#mobile-menu-switch").prop('checked', false); 
 
     });
+
+    $('#close-filter').click(function(event) {
+        $('#searchfilter-form').toggleClass('open');
+        event.preventDefault();
+    });
 });
 
 // selectBar = $('.select-bar')[0];

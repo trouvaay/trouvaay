@@ -96,10 +96,15 @@
   .text {
     font-family: "Droid Serif";
     font-size: 24px;
-    color: #000;
+    color: #FFF;
     top: 25%;
     position: relative;
-    margin-top: -62px;
+
+    > * {
+        background: $gold;
+        padding: 0px 10px;
+
+    }
 
     @include breakpoint(sm) {
       font-size: 18px;
@@ -109,13 +114,15 @@
       padding: 10px
     }
     strong {
-      display: block;
+      //display: block;
       /*color: $gold;*/
-      color: #000;
-      font-family: "Ostrich Sans";
-      font-weight: bold;
-      font-size: 80px;
-      line-height: 80px;
+      //font-family: "Ostrich Sans";
+    font-family: "Droid Serif";
+    text-transform: uppercase;
+    font-weight: normal;
+      font-size: 36px;
+      line-height: 65px;
+      font-style: italic;
       @include breakpoint(sm) {
 	font-size: 60px;
 	line-height: 49px;
