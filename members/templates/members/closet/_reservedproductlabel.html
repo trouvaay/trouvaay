@@ -38,20 +38,28 @@
       </div>
     </div>
     <div class="row" style="margin: 5% 0">
+        <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
+        <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
+        
         <div class="col-xs-12 pic-detail-home" style="text-align: center">
             <!-- need these so that we can pass product name and price to stripe checkout -->
-            <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
-            <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
-    
-            {% if product.is_sold %}
-                <span class="sold">{{ 'Sold' }}</span>
-            {% else %}
-                <button type="button" class="btn btn-primary buy buy" id="buy_{{ product.id }}">
-                    Buy
-                </button>
-                <button type="button" class="btn btn-danger buy reserve" id="cancel_reserve_{{ product.id }}">
-                    Cancel
-                </button>
-            {% endif %}
+            <div class="row">
+                {% if product.is_sold %}
+                    <div class="col-xs-12">
+                        <span class="sold">{{ 'Sold' }}</span>
+                    </div>
+                {% else %}
+                    <div class="col-xs-12 col-sm-6">
+                        <button type="button" class="btn btn-primary buy buy" id="buy_{{ product.id }}">
+                            Buy
+                        </button>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <button type="button" class="btn btn-danger buy reserve" id="cancel_reserve_{{ product.id }}">
+                            Cancel
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
         </div>                   
     </div>
