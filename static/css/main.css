@@ -293,7 +293,6 @@ html, body {
   font-family: "Ostrich Sans";
   letter-spacing: 1px;
   text-shadow: none;
-  padding: 1px 5px;
 }
 
 .info-page {
@@ -1431,6 +1430,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .filters-container {
   position: relative;
   overflow: auto;
+}
+#searchfilter-form .filters-container li {
+  padding-left: 10px;
+}
+@media (max-width: 767px) {
+  #searchfilter-form .filters-container li {
+    padding-left: 0px;
+  }
 }
 #searchfilter-form #filter-container-furnituretype label {
   width: 100%;
