@@ -121,6 +121,7 @@ class AjaxLoginView(generic.TemplateView):
         context = super(AjaxLoginView, self).get_context_data(**kwargs)
         context['login_form'] = CustomAuthenticationForm()
         context['signup_form'] = RegistrationForm()
+        context['social_login'] = settings.ENABLE_SOCIAL_AUTH
         return context
     
 
@@ -709,18 +710,21 @@ def custom_login(request, template_name='registration/login.html',
     # only for rendering of the template by login 'GET'
     # the actual login 'POST' will be using authentication_form
     # from above
+    print('social auth settings', settings.ENABLE_SOCIAL_AUTH)
     extra_context = {
                      'login_form': CustomAuthenticationForm(),
-                     'signup_form': RegistrationForm()
+                     'signup_form': RegistrationForm(),
+                     'social_login': settings.ENABLE_SOCIAL_AUTH,
                      }
     if request.method == "GET":
         next_param = request.GET.get('next', None)
         if(next_param):
             extra_context = {
                              'login_form': CustomAuthenticationForm(initial={'next':next_param}),
-                             'signup_form': RegistrationForm()
+                             'signup_form': RegistrationForm(),
+                             'social_login': settings.ENABLE_SOCIAL_AUTH,
                              }
-
+    print 
     return django_login(request=request,
                         template_name=template_name,
                         authentication_form=authentication_form,

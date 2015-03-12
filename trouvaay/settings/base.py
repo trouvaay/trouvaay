@@ -131,6 +131,96 @@ CRISPY_FAIL_SILENTLY = not DEBUG
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
+
+
+# registration settings
+ACCOUNT_ACTIVATION_DAYS = 30
+REGISTRATION_AUTO_LOGIN = True
+
+
+# Analytics
+STRIPE_SECRET_KEY = ''
+STRIPE_PUBLISHABLE_KEY = ''
+# OLARK_SITE_ID = ''
+MIXPANEL_API_TOKEN = ''
+ANALYTICAL_INTERNAL_IPS = []
+#list of email for user to exclude from trick counting
+CLICK_EXCLUSIONS = []
+
+#transaction and offer settings
+SALES_TAX = Decimal('0.0875')
+FEATURE_NAME_RESERVE = "Reserve"
+FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-store. 3 reservation limit"
+TOOLTIP_HEART = "Save to your profile page."
+RETURN_POLICY = {
+    'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
+    'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
+}
+RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
+RESERVATION_PERIOD = 48  # hours
+
+
+# Offer settings
+OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many seconds
+SIGNUP_OFFER = "Get 10% off your 1st purchase"
+
+RECENT_PRODUCT_AGE = 72  # products published less than this many hours ago qualify as recent
+
+
+# referral settings
+SHARE_URL = ''
+ENABLE_REFERRAL = True
+LIMIT_REFERRAL_PER_CLIENT_ID = 3
+FIRST_REFERRAL_MODAL_EXP = 1  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
+SECOND_REFERRAL_MODAL_EXP = 1  # do not show second referral modal again within this many seconds
+
+# email settings are another good candidate to have
+# each developer define in their own dev_settings.py
+# here are what could be production settings
+GMAIL_EMAIL =''
+GMAIL_PASSWORD = ''
+DEFAULT_FROM_EMAIL = ''  # e.g. 'support@raredoor.com'
+EMAIL_HOST = ''  # 'smtp.gmail.com'
+EMAIL_PORT = ''  # 587 - for gmail
+EMAIL_HOST_USER = ''  # e.g. 'support@raredoor.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True  # google requires True
+
+# social login
+ENABLE_SOCIAL_AUTH = True
+SOCIAL_AUTH_FACEBOOK_KEY = '380931628745745'
+SOCIAL_AUTH_FACEBOOK_SECRET = '5f84a4d1c72e2962331fb358d3685572'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['email', 'first_name', 'last_name']
+SOCIAL_AUTH_LOGIN_URL = LOGIN_URL
+SOCIAL_AUTH_LOGIN_ERROR_URL = LOGIN_URL
+SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.social_auth.associate_by_email',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+
+    # this is the default that's why we didn't have it before
+    # now that we are explicitly defining AUTHENTICATION_BACKENDS
+    # we have to list the default one here as well
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
 
@@ -202,93 +292,6 @@ LOGGING = {
         },
     }
 }
-
-# registration settings
-ACCOUNT_ACTIVATION_DAYS = 30
-REGISTRATION_AUTO_LOGIN = True
-
-
-# Analytics
-STRIPE_SECRET_KEY = ''
-STRIPE_PUBLISHABLE_KEY = ''
-# OLARK_SITE_ID = ''
-MIXPANEL_API_TOKEN = ''
-ANALYTICAL_INTERNAL_IPS = []
-#list of email for user to exclude from trick counting
-CLICK_EXCLUSIONS = []
-
-#transaction and offer settings
-SALES_TAX = Decimal('0.0875')
-FEATURE_NAME_RESERVE = "Reserve"
-FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-store. 3 reservation limit"
-TOOLTIP_HEART = "Save to your profile page."
-RETURN_POLICY = {
-    'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
-    'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'
-}
-RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
-RESERVATION_PERIOD = 48  # hours
-
-
-# Offer settings
-OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many seconds
-SIGNUP_OFFER = "Get 10% off your 1st purchase"
-
-RECENT_PRODUCT_AGE = 72  # products published less than this many hours ago qualify as recent
-
-
-# referral settings
-SHARE_URL = ''
-ENABLE_REFERRAL = True
-LIMIT_REFERRAL_PER_CLIENT_ID = 3
-FIRST_REFERRAL_MODAL_EXP = 1  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
-SECOND_REFERRAL_MODAL_EXP = 1  # do not show second referral modal again within this many seconds
-
-# email settings are another good candidate to have
-# each developer define in their own dev_settings.py
-# here are what could be production settings
-GMAIL_EMAIL =''
-GMAIL_PASSWORD = ''
-DEFAULT_FROM_EMAIL = ''  # e.g. 'support@raredoor.com'
-EMAIL_HOST = ''  # 'smtp.gmail.com'
-EMAIL_PORT = ''  # 587 - for gmail
-EMAIL_HOST_USER = ''  # e.g. 'support@raredoor.com'
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = True  # google requires True
-
-# social login
-SOCIAL_AUTH_FACEBOOK_KEY = '380931628745745'
-SOCIAL_AUTH_FACEBOOK_SECRET = '5f84a4d1c72e2962331fb358d3685572'
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
-SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['email', 'first_name', 'last_name']
-SOCIAL_AUTH_LOGIN_URL = LOGIN_URL
-SOCIAL_AUTH_LOGIN_ERROR_URL = LOGIN_URL
-SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
-SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
-SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-
-SOCIAL_AUTH_PIPELINE = (
-    'social.pipeline.social_auth.social_details',
-    'social.pipeline.social_auth.social_uid',
-    'social.pipeline.social_auth.auth_allowed',
-    'social.pipeline.social_auth.social_user',
-    'social.pipeline.user.get_username',
-    'social.pipeline.social_auth.associate_by_email',
-    'social.pipeline.user.create_user',
-    'social.pipeline.social_auth.associate_user',
-    'social.pipeline.social_auth.load_extra_data',
-    'social.pipeline.user.user_details',
-)
-
-AUTHENTICATION_BACKENDS = (
-    'social.backends.facebook.FacebookOAuth2',
-
-    # this is the default that's why we didn't have it before
-    # now that we are explicitly defining AUTHENTICATION_BACKENDS
-    # we have to list the default one here as well
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 PROJECT_ENV = os.getenv('PROJECT_ENV', None)
 if(PROJECT_ENV == 'dev'):
