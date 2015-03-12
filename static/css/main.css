@@ -664,7 +664,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 
 #index-banner {
   position: relative;
-  margin-bottom: 40px;
   margin-top: 60px;
   padding: 0px;
   max-height: 375px;
@@ -791,12 +790,16 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 
+#how-it-works {
+  background: #91c3c3;
+}
+
 #how-it-works, #how-it-works-mobile {
-  margin-bottom: 25px;
+  padding-top: 40px;
 }
 @media (max-width: 767px) {
-  #how-it-works .row, #how-it-works-mobile .row {
-    padding: 10% 0 0;
+  #how-it-works, #how-it-works-mobile {
+    padding-top: 0px;
   }
 }
 #how-it-works .info, #how-it-works-mobile .info {
@@ -804,6 +807,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-size: 15px;
   font-family: "Droid Serif";
   font-weight: bold;
+  margin-top: 30px;
 }
 @media (min-width: 769px) {
   #how-it-works .info, #how-it-works-mobile .info {
@@ -815,9 +819,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #how-it-works .info, #how-it-works-mobile .info {
     font-size: 12px;
   }
-}
-#how-it-works .info:not(:last-child), #how-it-works-mobile .info:not(:last-child) {
-  padding-right: 30px;
 }
 @media (max-width: 767px) {
   #how-it-works .info:not(:last-child), #how-it-works-mobile .info:not(:last-child) {
@@ -887,10 +888,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
     font-size: 18px;
   }
 }
-#how-it-works .info > div.reserve, #how-it-works-mobile .info > div.reserve {
-  background: #FFF;
-  color: #91c3c3;
-}
 #how-it-works .info > div.reserve:before, #how-it-works-mobile .info > div.reserve:before {
   font-size: 19px;
   content: 'h';
@@ -899,9 +896,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #how-it-works .info > div.reserve:before, #how-it-works-mobile .info > div.reserve:before {
     font-size: 16px;
   }
-}
-#how-it-works .info > div.reserve header, #how-it-works-mobile .info > div.reserve header {
-  border-bottom: 1px solid #91c3c3;
 }
 #how-it-works .info header, #how-it-works-mobile .info header {
   border-bottom: 1px solid #FFF;
