@@ -223,8 +223,17 @@ class Product(models.Model):
         print('current score: ', score)
 
         #add click count
-        score+=(self.click_count/3)
+        click_score = 0
+        if self.click_count > 20:
+            click_score = 8
+        elif self.click_count > 10:
+            click_score = 4
+        elif self.click_count > 5:
+            click_score = 2
+        
+        score+=click_score
         print('click count = ', self.click_count)
+        
         print(' final score = ', score)
         
         self.display_score = score
