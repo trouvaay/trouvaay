@@ -96,7 +96,7 @@ class CustomAuthenticationForm(AuthenticationForm):
                 Field('email', placeholder='Email address'),
                 Field('password', placeholder='Password'),
                 Field('next'),
-                Submit('button-login', 'Step Inside', css_class="btn-default"),
+                Submit('button-login', 'Shop Now!', css_class="btn-default"),
             ),
 
         )
