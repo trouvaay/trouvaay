@@ -743,6 +743,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #index-banner .text-container {
     padding-left: 0px;
     margin-left: 0px;
+    margin-top: 50px;
     left: 0%;
     width: 100%;
     background: #faf7f7;
@@ -779,14 +780,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-transform: uppercase;
   font-weight: normal;
   font-size: 36px;
-  line-height: 65px;
+  line-height: 40px;
   font-style: italic;
-}
-@media (max-width: 767px) {
-  #index-banner .text strong {
-    font-size: 60px;
-    line-height: 49px;
-  }
 }
 
 #how-it-works {

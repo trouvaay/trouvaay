@@ -81,8 +81,9 @@
     }
 
     @include breakpoint(sm) {
-	padding-left: 0px;
+	    padding-left: 0px;
       margin-left: 0px;
+      margin-top: 50px;
       left: 0%;
       width: 100%;
       background: rgb(250, 247, 247);
@@ -117,15 +118,13 @@
       //display: block;
       /*color: $gold;*/
       //font-family: "Ostrich Sans";
-    font-family: "Droid Serif";
-    text-transform: uppercase;
-    font-weight: normal;
+      font-family: "Droid Serif";
+      text-transform: uppercase;
+      font-weight: normal;
       font-size: 36px;
-      line-height: 65px;
+      line-height: 40px;
       font-style: italic;
       @include breakpoint(sm) {
-	font-size: 60px;
-	line-height: 49px;
       }
     }
 
