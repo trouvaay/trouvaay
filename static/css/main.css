@@ -743,10 +743,10 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #index-banner .text-container {
     padding-left: 0px;
     margin-left: 0px;
-    margin-top: 50px;
+    margin-top: 60px;
     left: 0%;
     width: 100%;
-    background: #faf7f7;
+    background: #939598;
   }
 }
 @media (min-width: 1200px) {
