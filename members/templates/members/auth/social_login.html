@@ -1,5 +1,6 @@
 {% load staticfiles %}
 
+
 {% if social_login %}
 <div style="margin-bottom: 10px;">
 	<a class="fb-signup btn btn-primary btn-primary" href="{% url 'social:begin' 'facebook' %}?next={% url "goods:landing" %}">
@@ -7,7 +8,9 @@
 		Login with Facebook
 	</a>
 </div>
+<<<<<<< HEAD
 {% endif %}
+
 
 {% comment %}
 <div>

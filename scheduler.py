@@ -66,6 +66,7 @@ def clear_expired_reservations():
     for reservation in expired_reservations:
         reservation.cancel_reservation()
         print 'Cleared expired reservation for product {0}'.format(reservation.order.product.short_name)
+<<<<<<< HEAD
 
 @sched.scheduled_job('interval', hours=1)
 def calc_display_score():
@@ -83,8 +84,6 @@ def calc_display_score():
     from goods.models import Product
     for product in Product.objects.all():
         product.calc_display_score()
-
-
 
 
 # sched.start()

@@ -325,7 +325,6 @@ button.home-buttons > a > h5 {
 }
 .reserved,
 .sold {
-  font-weight: 600;
   color: rgb(235, 27, 27);
 }
 .icon-label {

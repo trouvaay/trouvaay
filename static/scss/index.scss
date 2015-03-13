@@ -1,6 +1,7 @@
 #index-banner {
   position: relative;
-  margin-bottom: 40px;
+  //margin-bottom: 40px;
+  margin-top: 60px;
   padding: 0px;
   max-height: 375px;
   height: auto;
@@ -11,6 +12,10 @@
   @include breakpoint(sm) {
     margin-bottom: 0px;
     min-height: 282px;
+  }
+  
+  @include breakpoint(md) {
+    margin-top: 50px;
   }
 
   img {
@@ -76,11 +81,12 @@
     }
 
     @include breakpoint(sm) {
-	padding-left: 0px;
+	    padding-left: 0px;
       margin-left: 0px;
+      margin-top: 60px;
       left: 0%;
       width: 100%;
-      background: rgb(250, 247, 247);
+      background: #939598;
     }
     
     @include breakpoint(lg) {
@@ -91,10 +97,15 @@
   .text {
     font-family: "Droid Serif";
     font-size: 24px;
-    color: #000;
+    color: #FFF;
     top: 25%;
     position: relative;
-    margin-top: -62px;
+
+    > * {
+        background: $gold;
+        padding: 0px 10px;
+
+    }
 
     @include breakpoint(sm) {
       font-size: 18px;
@@ -104,29 +115,32 @@
       padding: 10px
     }
     strong {
-      display: block;
+      //display: block;
       /*color: $gold;*/
-      color: #000;
-      font-family: "Ostrich Sans";
-      font-weight: bold;
-      font-size: 80px;
-      line-height: 80px;
+      //font-family: "Ostrich Sans";
+      font-family: "Droid Serif";
+      text-transform: uppercase;
+      font-weight: normal;
+      font-size: 36px;
+      line-height: 40px;
+      font-style: italic;
       @include breakpoint(sm) {
-	font-size: 60px;
-	line-height: 49px;
       }
     }
 
   }
 }
 
-#how-it-works, #how-it-works-mobile {
-  margin-bottom: 25px;
+#how-it-works {
+    background: #91c3c3;
+}
 
-  .row {
-    @include breakpoint(sm) {
-      padding: 10% 0 0;
-    }
+#how-it-works, #how-it-works-mobile {
+  padding-top: 35px;
+
+  @include breakpoint(sm) {
+      padding-top: 0px;
+
   }
 
   .info {
@@ -134,6 +148,7 @@
     font-size: 15px;
     font-family: "Droid Serif";
     font-weight: bold;
+    margin-top: 30px;
 
     @include breakpoint(md, True) {
       float: none;
@@ -145,7 +160,6 @@
     }
 
     &:not(:last-child) {
-      padding-right: 30px;
 
       @include breakpoint(sm) {
 	padding-right: 15px;
@@ -156,7 +170,7 @@
       background: $lily;
       border: 2px solid $lily;
       color: #FFF;
-      padding: 28px 18px 10px;
+      padding: 28px 18px 5px;
       position: relative;
 
       @include breakpoint(md, True) {
@@ -219,8 +233,6 @@
       }
 
       &.reserve {
-	background: #FFF;
-	color: $lily;
 
 	&:before {
 	  font-size: 19px;
@@ -231,9 +243,6 @@
 	  }
 	}
 
-	header {
-	  border-bottom: 1px solid $lily;
-	}
       }
     }
 
@@ -263,7 +272,7 @@
     font-size: 23px;
     font-weight: bold;
     line-height: 25px;
-    padding: 2px 0px;
+    padding: 10px 0px;
     text-align: center;
     text-transform: uppercase;
 

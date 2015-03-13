@@ -5,7 +5,7 @@ Created on Feb 6, 2015
 """
 
 import os
-
+from selenium import webdriver
 
 EXISTING_USER_EMAIL = ''  # test@gmail.com
 EXISTING_USER_EMAIL_PASSWORD = ''  # password for email, e.g. for gmail
