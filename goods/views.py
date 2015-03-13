@@ -91,7 +91,7 @@ class SearchFilterView(AjaxListView):
             queryset = queryset.filter(segment__in=segments)
 
         subcategories = [int(i) for i in self.request.GET.getlist('filter-subcategory')]
-        if(segments):
+        if(subcategories):
             queryset = queryset.filter(subcategory__in=subcategories)
 
         colors = [int(i) for i in self.request.GET.getlist('filter-color')]
