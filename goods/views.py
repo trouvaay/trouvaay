@@ -107,7 +107,7 @@ class LandingTestView(AjaxListView):
         return context
 
 
-class DetailView(LoginRequiredMixin, generic.DetailView):
+class DetailView(generic.DetailView):
     template_name = 'goods/detail/detail.html'
     context_object_name = 'product'
     model = Product
