@@ -794,7 +794,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 
 #how-it-works, #how-it-works-mobile {
-  padding-top: 40px;
+  padding-top: 35px;
 }
 @media (max-width: 767px) {
   #how-it-works, #how-it-works-mobile {
@@ -828,7 +828,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   background: #91c3c3;
   border: 2px solid #91c3c3;
   color: #FFF;
-  padding: 28px 18px 10px;
+  padding: 28px 18px 5px;
   position: relative;
 }
 @media (min-width: 769px) {
@@ -919,7 +919,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-size: 23px;
   font-weight: bold;
   line-height: 25px;
-  padding: 22px 0px;
+  padding: 10px 0px;
   text-align: center;
   text-transform: uppercase;
 }
@@ -1197,7 +1197,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   width: auto;
 }
 
-.grid-products-wrapper, #filter-container {
+#filter-container {
   margin-top: 60px;
 }
 

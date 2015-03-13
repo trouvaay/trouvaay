@@ -137,7 +137,7 @@
 }
 
 #how-it-works, #how-it-works-mobile {
-  padding-top: 40px;
+  padding-top: 35px;
 
   @include breakpoint(sm) {
       padding-top: 0px;
@@ -171,7 +171,7 @@
       background: $lily;
       border: 2px solid $lily;
       color: #FFF;
-      padding: 28px 18px 10px;
+      padding: 28px 18px 5px;
       position: relative;
 
       @include breakpoint(md, True) {
@@ -273,7 +273,7 @@
     font-size: 23px;
     font-weight: bold;
     line-height: 25px;
-    padding: 22px 0px;
+    padding: 10px 0px;
     text-align: center;
     text-transform: uppercase;
 
