@@ -192,9 +192,9 @@ class Product(models.Model):
         hrs_since_pub = self.hours_since_add()
         if hrs_since_pub:
             if hrs_since_pub < 72:
-                pub_dt_score = 20
-            elif self.current_price < 240:
                 pub_dt_score = 10
+            elif self.current_price < 240:
+                pub_dt_score = 5
             elif self.current_price < 504:
                 pub_dt_score = 5
 
