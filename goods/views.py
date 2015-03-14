@@ -24,6 +24,8 @@ logger = logging.getLogger(__name__)
 
 BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 
+price_slider_max = 2000
+
 
 class LandingView(AjaxListView):
     template_name = 'goods/main/landing_ajax.html'
@@ -53,7 +55,7 @@ class LandingView(AjaxListView):
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
         context['searchfilter'] = {
                                    'price_slider_min': 0,
-                                   'price_slider_max': 10000,
+                                   'price_slider_max': price_slider_max,
                                    'height_slider_min': 0,
                                    'height_slider_max': 1000,
                                    'width_slider_min': 0,
@@ -126,7 +128,8 @@ class SearchFilterView(AjaxListView):
 
         if(price_max):
             price_max = int(price_max)
-            queryset = queryset.filter(current_price__lte=price_max)
+            if price_max < price_slider_max:
+                queryset = queryset.filter(current_price__lte=price_max)
 
 
         # Filtering height

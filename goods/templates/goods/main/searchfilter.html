@@ -75,7 +75,7 @@
         <header><a data-toggle="collapse" href="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice" class="collapsed">Price <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
         <div id="collapsePrice" class="collapse fold" role="tabpanel" aria-labelledby="headingPrice">
           <div class="desktop hidden-xs">
-            <input type="text" id="filter-price" name="filter-price" data-min="500" data-max="5000" data-from="0" data-to="5000" data-type="double" data-prefix="$" class="searchfilter-control slider" value="" />
+              <input type="text" id="filter-price" name="filter-price" data-min="{{searchfilter.price_slider_min}}" data-max="{{searchfilter.price_slider_max}}" data-from="0" data-to="5000" data-type="double" data-prefix="$" data-max-postfix="+" class="searchfilter-control slider" value="" />
           </div>
           <div class="mobile row hidden-md hidden-lg hidden-sm">
             <div class="col-xs-6">
