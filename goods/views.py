@@ -111,45 +111,77 @@ class SearchFilterView(AjaxListView):
         if(neighborhoods):
             queryset = queryset.filter(store__neighborhood__in=neighborhoods)
 
-        price_min = self.request.GET.get('filter-price-min', None)
+        # Filtering price
+        price_filter = self.request.GET.get('filter-price', None)
+        if price_filter:
+            price_min = price_filter.split(';')[0]
+            price_max = price_filter.split(';')[1]
+        else:
+            price_min = self.request.GET.get('filter-price-min', None)
+            price_max = self.request.GET.get('filter-price-max', None)
+
         if(price_min):
             price_min = int(price_min)
             queryset = queryset.filter(current_price__gte=price_min)
 
-        price_max = self.request.GET.get('filter-price-max', None)
         if(price_max):
             price_max = int(price_max)
             queryset = queryset.filter(current_price__lte=price_max)
 
-        height_min = self.request.GET.get('filter-height-min', None)
+
+        # Filtering height
+        height_filter = self.request.GET.get('filter-height', None)
+        if height_filter:
+            height_min = height_filter.split(';')[0]
+            height_max = height_filter.split(';')[1]
+        else:
+            height_min = self.request.GET.get('filter-height-min', None)
+            height_max = self.request.GET.get('filter-height-max', None)
+
         if(height_min):
             height_min = int(height_min)
             queryset = queryset.filter(height__gte=height_min)
 
-        height_max = self.request.GET.get('filter-height-max', None)
         if(height_max):
             height_max = int(height_max)
             queryset = queryset.filter(height__lte=height_max)
 
-        width_min = self.request.GET.get('filter-width-min', None)
+
+        # Filtering width
+        width_filter = self.request.GET.get('filter-width', None)
+        if width_filter:
+            width_min = width_filter.split(';')[0]
+            width_max = width_filter.split(';')[1]
+        else:
+            width_min = self.request.GET.get('filter-width-min', None)
+            width_max = self.request.GET.get('filter-width-max', None)
+
         if(width_min):
             width_min = int(width_min)
             queryset = queryset.filter(width__gte=width_min)
 
-        width_max = self.request.GET.get('filter-width-max', None)
         if(width_max):
             width_max = int(width_max)
             queryset = queryset.filter(width__lte=width_max)
 
-        depth_min = self.request.GET.get('filter-depth-min', None)
+
+        # Filtering depth
+        depth_filter = self.request.GET.get('filter-depth', None)
+        if depth_filter:
+            depth_min = depth_filter.split(';')[0]
+            depth_max = depth_filter.split(';')[1]
+        else:
+            depth_min = self.request.GET.get('filter-depth-min', None)
+            depth_max = self.request.GET.get('filter-depth-max', None)
+
         if(depth_min):
             depth_min = int(depth_min)
             queryset = queryset.filter(depth__gte=depth_min)
 
-        depth_max = self.request.GET.get('filter-depth-max', None)
         if(depth_max):
             depth_max = int(depth_max)
             queryset = queryset.filter(depth__lte=depth_max)
+
 
         return queryset
 
