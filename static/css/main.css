@@ -269,10 +269,10 @@ html, body {
 }
 
 .irs-slider {
-  width: 8px;
-  height: 8px;
-  top: 15px;
-  border-radius: 4px;
+  width: 11px;
+  height: 11px;
+  top: 13px;
+  border-radius: 6px;
 }
 
 .irs-min, .irs-max {
@@ -1420,11 +1420,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form b {
   font-family: "Droid Serif";
   font-weight: bold;
-  font-size: 11px;
+  font-size: 13px;
 }
 #searchfilter-form .filters-container {
   position: relative;
-  overflow: auto;
+  overflow: hidden;
 }
 #searchfilter-form .filters-container li {
   padding-left: 10px;
@@ -1523,7 +1523,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-overflow: ellipsis;
   max-width: 100%;
   white-space: nowrap;
-  line-height: 17px;
+  line-height: 19px;
 }
 @media (max-width: 767px) {
   #searchfilter-form li {
@@ -1539,6 +1539,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   letter-spacing: inherit;
   margin-bottom: 0px;
   height: auto;
+  white-space: normal;
 }
 #searchfilter-form header {
   font-family: "Ostrich Sans";
@@ -1576,7 +1577,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .category.filters div a {
   font-family: "Droid Serif";
   color: #000;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: bold;
   display: block;
 }
@@ -1634,12 +1635,12 @@ input#mobile-menu-switch:checked + #mobile-menu {
   display: block;
 }
 #searchfilter-form .category.filters .fold .c-checkbox .checkbox-pseudocheckbox {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   border: 1px solid #939598;
   display: inline-block;
-  vertical-align: middle;
-  margin-top: 0px;
+  vertical-align: top;
+  margin-top: 8px;
   margin-right: 4px;
 }
 @media (max-width: 767px) {
@@ -1649,6 +1650,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #searchfilter-form .category.filters .fold .c-checkbox input:checked + .checkbox-pseudocheckbox {
   background: #939598;
+}
+#searchfilter-form .category.filters .fold .c-checkbox .checkbox-label {
+  max-width: 138px;
 }
 @media (max-width: 767px) {
   #searchfilter-form .category.filters .fold .c-checkbox .checkbox-label {
@@ -1699,7 +1703,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .c-checkbox {
   font-family: "Droid Serif";
   font-weight: bold;
-  font-size: 11px;
+  font-size: 13px;
   color: #000;
 }
 #searchfilter-form .c-checkbox input {
