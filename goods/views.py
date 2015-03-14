@@ -78,7 +78,7 @@ class LandingView(generic.ListView):
         return context
 
 
-class LandingTestView(LoginRequiredMixin, AjaxListView):
+class LandingTestView(AjaxListView):
     template_name = 'goods/landingtest/landingtest_ajax.html'
     page_template = 'goods/landingtest/landingtest_ajax_page.html'
     context_object_name = 'products'
