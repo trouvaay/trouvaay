@@ -9,14 +9,16 @@
 
   /*background: url('../static/img/index-banner-photo.jpg');*/
 
-  @include breakpoint(sm) {
-    margin-bottom: 0px;
-    min-height: 282px;
-  }
-  
   @include breakpoint(md) {
     margin-top: 50px;
   }
+  @include breakpoint(sm) {
+    margin-bottom: 0px;
+    min-height: 128px;
+    margin-top: 113px;
+  }
+
+  
 
   img {
     width: 100%;
@@ -121,8 +123,8 @@
       font-family: "Droid Serif";
       text-transform: uppercase;
       font-weight: normal;
-      font-size: 36px;
-      line-height: 40px;
+      font-size: 26px;
+      line-height: 36px;
       font-style: italic;
       @include breakpoint(sm) {
       }
