@@ -65,7 +65,7 @@
 <div class="modal fade" id="signup-login-modal">
 	<div class="modal-dialog">
 		<div class="modal-content col-xs-12">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
 			<div class="modal-body">
 				<!-- this will make sigup and login show side by side -->				
 				<div class="row">
@@ -74,7 +74,8 @@
 					{% if signup_form %}
 					<div class="form-group col-sm-6 text-center">	
 						<div class="text-center">
-							{% crispy signup_form %}
+							{% include 'members/auth/social_login.html' %}
+                            {% crispy signup_form %}cool
 						</div>
 					</div>
 					{% endif %}
@@ -84,7 +85,6 @@
 						<div class="text-center">
 							{% crispy login_form %}
 
-							{% include 'members/auth/social_login.html' %}
 							
 							<div id="div_id_password" class="form-group">
 								<p><a href="{% url "auth_password_reset" %}">Forgot your password?</a></p>							

@@ -12,18 +12,16 @@
 						Signup
 					<div class="form-group col-sm-6 text-center">	
 						<div class="text-center">
+							{% include 'members/auth/social_login.html' %}cool
 							{% crispy signup_form %}
+							
 						</div>
 					</div>
 
 					<!-- Login  -->
 					<div class="form-group col-sm-12 text-center login">	
 						<div class="text-center">
-							{% crispy login_form %}
-
-							
-							{% include 'members/auth/social_login.html' %}
-							
+							{% crispy login_form %}							
 							<div id="div_id_password" class="form-group">
 								<p><a href="{% url "auth_password_reset" %}">Forgot your password?</a></p>							
 							</div>
