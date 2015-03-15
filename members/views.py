@@ -370,62 +370,6 @@ class ReserveView(generic.DetailView):
         send_order_email(request=self.request, order=order, show_password_reset_link=password_reset_link, is_buy=False)
         return render_to_response('members/purchase/reserve_postcheckout.html', locals())
                 
-# class CheckOfferView(generic.View):
-#     """Checks the offer and accepts or rejects it"""
-#
-#     def get(self, request, *args, **kwargs):
-#
-#         product_id = self.request.GET.get('product_id', None)
-#         if(product_id is None):
-#             return JsonResponse({'status': 'error', 'message': "No product"})
-#
-#         product = Product.objects.get(pk=int(product_id))
-#
-#         if(product.minimum_offer_price is None):
-#             return JsonResponse({'status': 'rejected', 'message': "This product does not accept offers below the current price."})
-#
-#         offer_price = self.request.GET.get('offer_price', None)
-#         if(offer_price is None):
-#             return JsonResponse({'status': 'rejected', 'message': "You did not submit an offer price"})
-#
-#         try:
-#             offer_price = Decimal(offer_price)
-#         except:
-#             return JsonResponse({'status': 'rejected', 'message': "Invalid offer amount"})
-#
-#         if(offer_price < product.minimum_offer_price):
-#             return JsonResponse({'status': 'rejected', 'message': "Your offer was rejected because it is too low."})
-#
-#         promo_code = self.request.GET.get('promo_code', None)
-#         promo_is_valid = False
-#         promo_code_message = ''
-#         promo_codes = []
-#         if(promo_code):
-#             promo_is_valid, proper_promo_code, invalid_message = PromotionOffer.is_valid_promo_code(self.request.user, promo_code)
-#             if(promo_is_valid):
-#                 promo_codes = [proper_promo_code]
-#                 promo_code = proper_promo_code
-#             else:
-#                 promo_code_message = invalid_message
-#
-#         discounts, subtotal_dollar_value, taxes, total = Purchase.compute_order_line_items(user=self.request.user,
-#                                                                                            total_price_before_offers=product.current_price,
-#                                                                                            promo_codes=promo_codes)
-#         total_discount = 0
-#         for discount in discounts:
-#             total_discount += discount['dollar_value']
-#
-#         return JsonResponse({'status': 'ok',
-#                              'offer_price': offer_price,
-#                              'stripe_publishable_key': settings.STRIPE_PUBLISHABLE_KEY,
-#                              'site_name': settings.SITE_NAME,
-#                              'total_discount': total_discount
-#                              'subtotal_dollar_value': subtotal_dollar_value,
-#                              'discounts': discounts,
-#                              'taxes': taxes,
-#                              'total': total
-#                              })
-
 
 class BuyView(generic.DetailView):
     """Pre-checkout and post-checkout for the buying process"""
