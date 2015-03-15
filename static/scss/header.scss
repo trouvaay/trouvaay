@@ -21,7 +21,7 @@ header.top-bar {
   @include breakpoint(md) {
     height: 50px;
     position: fixed;
-    z-index: 2;
+    z-index: 10;
     
     & + div {
       margin-top: 50px;
@@ -320,7 +320,8 @@ input#mobile-menu-switch {
   left: 0px;
   background: #FFF;
   line-height: 30px;
-  padding: 10px 0px 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   z-index: 2;
 
   a {

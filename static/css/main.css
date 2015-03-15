@@ -420,7 +420,7 @@ header.top-bar {
   header.top-bar {
     height: 50px;
     position: fixed;
-    z-index: 2;
+    z-index: 10;
   }
   header.top-bar + div {
     margin-top: 50px;
@@ -653,7 +653,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   left: 0px;
   background: #FFF;
   line-height: 30px;
-  padding: 10px 0px 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   z-index: 2;
 }
 #mobile-menu a {
@@ -670,15 +671,16 @@ input#mobile-menu-switch:checked + #mobile-menu {
   overflow: hidden;
   /*background: url('../static/img/index-banner-photo.jpg');*/
 }
-@media (max-width: 767px) {
-  #index-banner {
-    margin-bottom: 0px;
-    min-height: 282px;
-  }
-}
 @media (max-width: 992px) {
   #index-banner {
     margin-top: 50px;
+  }
+}
+@media (max-width: 767px) {
+  #index-banner {
+    margin-bottom: 0px;
+    min-height: 165px;
+    margin-top: 113px;
   }
 }
 #index-banner img {
@@ -743,7 +745,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #index-banner .text-container {
     padding-left: 0px;
     margin-left: 0px;
-    margin-top: 60px;
+    margin-top: 0px;
     left: 0%;
     width: 100%;
     background: #939598;
@@ -779,8 +781,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   text-transform: uppercase;
   font-weight: normal;
-  font-size: 36px;
-  line-height: 40px;
+  font-size: 26px;
+  line-height: 36px;
   font-style: italic;
 }
 
@@ -1420,11 +1422,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form b {
   font-family: "Droid Serif";
   font-weight: bold;
-  font-size: 11px;
+  font-size: 13px;
 }
 #searchfilter-form .filters-container {
   position: relative;
-  overflow: auto;
+  overflow: hidden;
 }
 #searchfilter-form .filters-container li {
   padding-left: 10px;
@@ -1523,7 +1525,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-overflow: ellipsis;
   max-width: 100%;
   white-space: nowrap;
-  line-height: 17px;
+  line-height: 19px;
 }
 @media (max-width: 767px) {
   #searchfilter-form li {
@@ -1539,6 +1541,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   letter-spacing: inherit;
   margin-bottom: 0px;
   height: auto;
+  white-space: normal;
 }
 #searchfilter-form header {
   font-family: "Ostrich Sans";
@@ -1576,7 +1579,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .category.filters div a {
   font-family: "Droid Serif";
   color: #000;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: bold;
   display: block;
 }
@@ -1608,7 +1611,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #searchfilter-form .category.filters > div {
-    padding-left: 70px;
+    padding-left: 35px;
     padding-right: 36px;
   }
 }
@@ -1626,20 +1629,22 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Ostrich Sans";
   font-size: 11px;
   letter-spacing: 1px;
+  font-weight: 800;
 }
 #searchfilter-form .category.filters .mobile label {
   font-family: "Ostrich Sans";
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 1px;
   display: block;
+  font-weight: 800;
 }
 #searchfilter-form .category.filters .fold .c-checkbox .checkbox-pseudocheckbox {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   border: 1px solid #939598;
   display: inline-block;
-  vertical-align: middle;
-  margin-top: 0px;
+  vertical-align: top;
+  margin-top: 8px;
   margin-right: 4px;
 }
 @media (max-width: 767px) {
@@ -1649,6 +1654,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #searchfilter-form .category.filters .fold .c-checkbox input:checked + .checkbox-pseudocheckbox {
   background: #939598;
+}
+@media (max-width: 767px) {
+  #searchfilter-form .category.filters .fold .c-checkbox input:checked + .checkbox-pseudocheckbox + .checkbox-label {
+    background: #e6be46;
+  }
+}
+#searchfilter-form .category.filters .fold .c-checkbox .checkbox-label {
+  max-width: 138px;
 }
 @media (max-width: 767px) {
   #searchfilter-form .category.filters .fold .c-checkbox .checkbox-label {
@@ -1665,6 +1678,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     font-weight: 800;
     font-size: 15px;
     letter-spacing: 1px;
+    max-width: 100%;
   }
 }
 #searchfilter-form #filter-container-color li {
@@ -1699,7 +1713,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .c-checkbox {
   font-family: "Droid Serif";
   font-weight: bold;
-  font-size: 11px;
+  font-size: 13px;
   color: #000;
 }
 #searchfilter-form .c-checkbox input {
@@ -1739,6 +1753,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     display: block;
   }
   #searchfilter-form #display-filters:checked + .filters-container > .category {
+    margin-top: 50px;
     display: block;
   }
   #searchfilter-form #display-filters:checked + .filters-container {
@@ -1749,13 +1764,16 @@ input#mobile-menu-switch:checked + #mobile-menu {
     position: fixed;
     z-index: 3;
     padding-bottom: 80px;
+    overflow-y: scroll;
   }
   #searchfilter-form #display-filters:checked + .filters-container #refine {
     background: #000;
     float: none;
     width: 100%;
-    padding-left: 70px;
+    padding-left: 35px;
     border: 0px;
+    position: fixed;
+    z-index: 2;
   }
   #searchfilter-form #display-filters:checked + .filters-container #refine label {
     padding: 6px 0px;
@@ -1796,6 +1814,7 @@ footer {
   letter-spacing: 1px;
   padding-top: 10px;
   padding-bottom: 10px;
+  overflow: hidden;
 }
 @media (max-width: 992px) {
   footer {

@@ -278,7 +278,7 @@
     b {
         font-family: "Droid Serif";
         font-weight: bold;
-        font-size: 11px;
+        font-size: 13px;
 
     }
 
@@ -293,7 +293,7 @@
             //z-index: 3;
             //padding-top: 15px;
             //padding-bottom: 80px;
-            overflow: auto;
+            overflow: hidden;
 
             li {
                 padding-left: 10px;
@@ -420,7 +420,7 @@
         text-overflow: ellipsis;
         max-width: 100%;
         white-space: nowrap;
-        line-height: 17px;
+        line-height: 19px;
         @include breakpoint(sm) {
             padding-left: 0px;
         }
@@ -436,6 +436,7 @@
         letter-spacing: inherit;
         margin-bottom: 0px;
         height: auto;
+        white-space: normal;
     }
 
     header {
@@ -494,7 +495,7 @@
         div a {
             font-family: "Droid Serif";
             color: #000;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: bold;
 
             display: block;
@@ -539,7 +540,7 @@
             padding-left: 30px;
 
             @include breakpoint (sm) {
-                padding-left: 70px;
+                padding-left: 35px;
                 padding-right: 36px;
             }
 
@@ -562,24 +563,26 @@
                 font-family: "Ostrich Sans";
                 font-size: 11px;
                 letter-spacing: 1px;
+                font-weight: 800;
 
             }
             label {
                 font-family: "Ostrich Sans";
-                font-size: 11px;
+                font-size: 13px;
                 letter-spacing: 1px;
                 display: block;
+                font-weight: 800;
             }
         }
 
         .fold .c-checkbox {
             .checkbox-pseudocheckbox {
-                width: 4px;
-                height: 4px;
+                width: 6px;
+                height: 6px;
                 border: 1px solid #939598;
                 display: inline-block;
-                vertical-align: middle;
-                margin-top: 0px;
+                vertical-align: top;
+                margin-top: 8px;
                 margin-right: 4px;
 
                 @include breakpoint(sm) {
@@ -593,8 +596,16 @@
                 background: #939598;
 
             }
+            
+            @include breakpoint(sm) {
+                input:checked + .checkbox-pseudocheckbox + .checkbox-label {
+                    background: $gold;
+
+                }
+            }
 
             .checkbox-label {
+                max-width: 138px;
                 @include breakpoint(sm) {
                     height: 20px;
                     line-height: 20px;
@@ -609,6 +620,7 @@
                     font-weight: 800;
                     font-size: 15px;
                     letter-spacing: 1px;
+                    max-width: 100%;
 
                 }
 
@@ -663,7 +675,7 @@
     .c-checkbox {
         font-family: "Droid Serif"; 
         font-weight: bold;
-        font-size: 11px;
+        font-size: 13px;
         color: #000;
 
         input {
@@ -717,6 +729,7 @@
         }
 
         &:checked + .filters-container > .category {
+            margin-top: 50px;
             display: block;
         }
 
@@ -730,14 +743,18 @@
             z-index: 3;
             //padding-top: 15px;
             padding-bottom: 80px;
+            overflow-y: scroll;
         }
 
         &:checked + .filters-container #refine {
             background: #000;
             float: none;
             width: 100%;
-            padding-left: 70px;
+            padding-left: 35px;
             border: 0px;
+            
+            position: fixed;
+            z-index: 2;
 
             label {
                 padding: 6px 0px;
