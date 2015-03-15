@@ -9,14 +9,16 @@
 
   /*background: url('../static/img/index-banner-photo.jpg');*/
 
-  @include breakpoint(sm) {
-    margin-bottom: 0px;
-    min-height: 282px;
-  }
-  
   @include breakpoint(md) {
     margin-top: 50px;
   }
+  @include breakpoint(sm) {
+    margin-bottom: 0px;
+    min-height: 128px;
+    margin-top: 113px;
+  }
+
+  
 
   img {
     width: 100%;
@@ -85,7 +87,6 @@
       margin-left: 0px;
       left: 0%;
       width: 100%;
-      background: rgb(250, 247, 247);
     }
     
     @include breakpoint(lg) {
@@ -124,7 +125,8 @@
       line-height: 65px;
       font-style: italic;
       @include breakpoint(sm) {
-	font-size: 60px;
+	//font-size: 60px;
+	font-size: 20px;
 	line-height: 49px;
       }
     }
