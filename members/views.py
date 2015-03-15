@@ -482,7 +482,7 @@ class BuyView(generic.DetailView):
 
         if(is_offer):
             if(product.minimum_offer_price is None):
-                offer_header = "Offer Rejected"
+                offer_header = "Sorry this retailer isnt accepting offers on this product"
                 offer_message = "This product does not accept offers only fixed price."
                 return is_offer, offer_price, is_offer_accepted, offer_header, offer_message
     
