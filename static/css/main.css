@@ -1658,6 +1658,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #searchfilter-form .category.filters .fold .c-checkbox input:checked + .checkbox-pseudocheckbox {
   background: #939598;
 }
+@media (max-width: 767px) {
+  #searchfilter-form .category.filters .fold .c-checkbox input:checked + .checkbox-pseudocheckbox + .checkbox-label {
+    background: #e6be46;
+  }
+}
 #searchfilter-form .category.filters .fold .c-checkbox .checkbox-label {
   max-width: 138px;
 }
@@ -1751,6 +1756,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     display: block;
   }
   #searchfilter-form #display-filters:checked + .filters-container > .category {
+    margin-top: 50px;
     display: block;
   }
   #searchfilter-form #display-filters:checked + .filters-container {
@@ -1769,6 +1775,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
     width: 100%;
     padding-left: 35px;
     border: 0px;
+    position: fixed;
+    z-index: 2;
   }
   #searchfilter-form #display-filters:checked + .filters-container #refine label {
     padding: 6px 0px;

@@ -596,6 +596,13 @@
                 background: #939598;
 
             }
+            
+            @include breakpoint(sm) {
+                input:checked + .checkbox-pseudocheckbox + .checkbox-label {
+                    background: $gold;
+
+                }
+            }
 
             .checkbox-label {
                 max-width: 138px;
@@ -722,6 +729,7 @@
         }
 
         &:checked + .filters-container > .category {
+            margin-top: 50px;
             display: block;
         }
 
@@ -744,6 +752,9 @@
             width: 100%;
             padding-left: 35px;
             border: 0px;
+            
+            position: fixed;
+            z-index: 2;
 
             label {
                 padding: 6px 0px;
