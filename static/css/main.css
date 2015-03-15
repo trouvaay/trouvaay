@@ -670,15 +670,16 @@ input#mobile-menu-switch:checked + #mobile-menu {
   overflow: hidden;
   /*background: url('../static/img/index-banner-photo.jpg');*/
 }
-@media (max-width: 767px) {
-  #index-banner {
-    margin-bottom: 0px;
-    min-height: 282px;
-  }
-}
 @media (max-width: 992px) {
   #index-banner {
     margin-top: 50px;
+  }
+}
+@media (max-width: 767px) {
+  #index-banner {
+    margin-bottom: 0px;
+    min-height: 128px;
+    margin-top: 113px;
   }
 }
 #index-banner img {
@@ -745,7 +746,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
     margin-left: 0px;
     left: 0%;
     width: 100%;
-    background: #faf7f7;
   }
 }
 @media (min-width: 1200px) {
@@ -784,7 +784,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #index-banner .text strong {
-    font-size: 60px;
+    font-size: 20px;
     line-height: 49px;
   }
 }
