@@ -164,6 +164,7 @@ class DetailView(generic.DetailView):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['returns'] = settings.RETURN_POLICY
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+        context['OFFER_IS_ENABLED'] = settings.OFFER_IS_ENABLED
 
         product = self.get_object()
 

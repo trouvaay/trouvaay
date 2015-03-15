@@ -18,6 +18,10 @@ urlpatterns = patterns('',
     url(r'^canreserve/$', views.can_reserve, name='can_reserve'),
     url(r'^reserve/(?P<pk>\d+)/$', views.ReserveView.as_view(), name='reserve'),
     url(r'^buy/$', views.BuyView.as_view(), name='buy'),
+    url(r'^offer/$', views.BuyView.as_view(), name='offer', kwargs={'is_offer': True}),
+
+    # url(r'^checkoffer/$', views.CheckOfferView.as_view(), name='check_offer'),
+
     url(r'^cancel/$', views.CancelReserve, name='cancel_reserve'),
     url(r'^referralsignup/$', views.ReferralSignup.as_view(), name='referral_signup'),
     url(r'^referralinfo/$', views.ReferralInfo.as_view(), name='referral_info'),

@@ -3,7 +3,7 @@ from django.views import generic
 from members.models import AuthUserActivity, AuthUser, \
     AuthUserAddress, RegistrationProfile, \
     PromotionOffer, Join, Profile, AuthOrder, OrderType, \
-    Reservation, OrderAddress, Purchase, Redemption
+    Reservation, OrderAddress, Purchase, Redemption, Offer
 from goods.models import Product
 from members.forms import CustomAuthenticationForm, RegistrationForm, \
     ReserveForm, ReserveFormAuth, ReferralForm, PostCheckoutForm
@@ -29,6 +29,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from decimal import Decimal
 from urllib import urlencode
+import hashlib
+import random
 
 
 logger = logging.getLogger(__name__)
@@ -90,7 +92,16 @@ class SignupView(BaseRegistrationView):
     def register(self, request, **cleaned_data):
         """Creates user"""
 
-        email, password = cleaned_data['email'], cleaned_data['password']
+        email = cleaned_data['email']
+        password = cleaned_data.get('password', None)
+        need_password_reset = False
+        if(password is None):
+            need_password_reset = True
+            # need something for the password
+            # we will hash email, timestamp and a random number
+            random.seed()
+            password = hashlib.sha256('{0}|{1}|{2}'.format(email, timezone.now(), random.randint(0, 1000000000))).hexdigest()
+
         site = get_site(request)
         new_user = RegistrationProfile.objects.create_active_user(
             email, password, site,
@@ -105,6 +116,8 @@ class SignupView(BaseRegistrationView):
 
         Join.create_join(request, user)
         Profile.create_profile(user)
+        if(need_password_reset):
+            send_user_password_change_email(request, new_user)
         return new_user
 
 
@@ -357,6 +370,62 @@ class ReserveView(generic.DetailView):
         send_order_email(request=self.request, order=order, show_password_reset_link=password_reset_link, is_buy=False)
         return render_to_response('members/purchase/reserve_postcheckout.html', locals())
                 
+# class CheckOfferView(generic.View):
+#     """Checks the offer and accepts or rejects it"""
+#
+#     def get(self, request, *args, **kwargs):
+#
+#         product_id = self.request.GET.get('product_id', None)
+#         if(product_id is None):
+#             return JsonResponse({'status': 'error', 'message': "No product"})
+#
+#         product = Product.objects.get(pk=int(product_id))
+#
+#         if(product.minimum_offer_price is None):
+#             return JsonResponse({'status': 'rejected', 'message': "This product does not accept offers below the current price."})
+#
+#         offer_price = self.request.GET.get('offer_price', None)
+#         if(offer_price is None):
+#             return JsonResponse({'status': 'rejected', 'message': "You did not submit an offer price"})
+#
+#         try:
+#             offer_price = Decimal(offer_price)
+#         except:
+#             return JsonResponse({'status': 'rejected', 'message': "Invalid offer amount"})
+#
+#         if(offer_price < product.minimum_offer_price):
+#             return JsonResponse({'status': 'rejected', 'message': "Your offer was rejected because it is too low."})
+#
+#         promo_code = self.request.GET.get('promo_code', None)
+#         promo_is_valid = False
+#         promo_code_message = ''
+#         promo_codes = []
+#         if(promo_code):
+#             promo_is_valid, proper_promo_code, invalid_message = PromotionOffer.is_valid_promo_code(self.request.user, promo_code)
+#             if(promo_is_valid):
+#                 promo_codes = [proper_promo_code]
+#                 promo_code = proper_promo_code
+#             else:
+#                 promo_code_message = invalid_message
+#
+#         discounts, subtotal_dollar_value, taxes, total = Purchase.compute_order_line_items(user=self.request.user,
+#                                                                                            total_price_before_offers=product.current_price,
+#                                                                                            promo_codes=promo_codes)
+#         total_discount = 0
+#         for discount in discounts:
+#             total_discount += discount['dollar_value']
+#
+#         return JsonResponse({'status': 'ok',
+#                              'offer_price': offer_price,
+#                              'stripe_publishable_key': settings.STRIPE_PUBLISHABLE_KEY,
+#                              'site_name': settings.SITE_NAME,
+#                              'total_discount': total_discount
+#                              'subtotal_dollar_value': subtotal_dollar_value,
+#                              'discounts': discounts,
+#                              'taxes': taxes,
+#                              'total': total
+#                              })
+
 
 class BuyView(generic.DetailView):
     """Pre-checkout and post-checkout for the buying process"""
@@ -441,6 +510,63 @@ class BuyView(generic.DetailView):
         if(update_user):
             user.save()
 
+    def __process_stripe_create_order(self):
+        pass
+
+    def __check_offer(self, request, *args, **kwargs):
+        """Checks the offer and determines if it is accepted or rejected
+        
+        returns tuple: (is_offer, offer_price, is_offer_accepted, offer_header, offer_message)
+        where
+            is_offer - boolean, True - request contains an offer, False - otherwise
+            offer_price - Decimal, dollar amount of the offer, or None if offer is invalid
+            is_offer_accepted - boolean, offer in the request is accepted, False otherwise
+            offer_header - in case offer is rejected this contaisn the header of the modal that should be shown to user
+            offer_message - in case offer is rejected this is a message containing reason why
+        """
+
+        product = self.get_object()
+
+        is_offer = False
+        offer_price = None
+        is_offer_accepted = False
+        offer_header = None
+        offer_message = None
+        
+        if('is_offer' in kwargs.keys() and kwargs['is_offer']):
+            is_offer = True
+
+        if(is_offer):
+            if(product.minimum_offer_price is None):
+                offer_header = "Offer Rejected"
+                offer_message = "This product does not accept offers only fixed price."
+                return is_offer, offer_price, is_offer_accepted, offer_header, offer_message
+    
+            if(request.method == 'GET'):
+                offer_price = request.GET.get('offer_price', None)
+            elif(request.method == 'POST'):
+                offer_price = request.POST.get('offer_price', None)
+            if(offer_price is None):
+                offer_header = "Offer Rejected"
+                offer_message = "You did not submit an offer price."
+                return is_offer, offer_price, is_offer_accepted, offer_header, offer_message
+    
+            try:
+                offer_price = Decimal(offer_price)
+            except:
+                offer_header = "Offer Rejected"
+                offer_message = "Invalid offer amount"
+                return is_offer, offer_price, is_offer_accepted, offer_header, offer_message
+    
+            if(offer_price < product.minimum_offer_price):
+                offer_header = "Offer Rejected"
+                offer_message = "Your offer was rejected because it is too low."
+                return is_offer, offer_price, is_offer_accepted, offer_header, offer_message
+
+            is_offer_accepted = True
+        
+        return is_offer, offer_price, is_offer_accepted, offer_header, offer_message
+            
     def get_object(self):
         """Returns the object that this view is working with"""
 
@@ -467,6 +593,10 @@ class BuyView(generic.DetailView):
         if(not can_buy_status):
             return render_to_response('members/purchase/buy_notavailable.html', locals())
 
+        is_offer, offer_price, is_offer_accepted, buy_notavailable_header, buy_notavailable_message = self.__check_offer(request, *args, **kwargs)
+        if(is_offer and offer_price and not is_offer_accepted):
+            return render_to_response('members/purchase/buy_notavailable.html', locals())
+
         promo_code = self.request.GET.get('promo_code', None)
         promo_is_valid = False
         promo_code_message = ''
@@ -479,8 +609,12 @@ class BuyView(generic.DetailView):
             else:
                 promo_code_message = invalid_message
 
+        total_price_before_offers = product.current_price
+        if(is_offer and offer_price):
+            total_price_before_offers = offer_price
+
         discounts, subtotal_dollar_value, taxes, total = Purchase.compute_order_line_items(user=self.request.user,
-                                                                                           total_price_before_offers=product.current_price,
+                                                                                           total_price_before_offers=total_price_before_offers,
                                                                                            promo_codes=promo_codes)
         total_discount = 0
         for discount in discounts:
@@ -489,6 +623,7 @@ class BuyView(generic.DetailView):
         stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
         feature_name_reserve = settings.FEATURE_NAME_RESERVE
         site_name = settings.SITE_NAME
+
         return render_to_response('members/purchase/buy_precheckout.html', locals())
 
     def post(self, request, *args, **kwargs):
@@ -533,13 +668,20 @@ class BuyView(generic.DetailView):
                 promo_codes_param = request.POST['promo_codes'].strip()
                 if(promo_codes_param):
                     promo_codes = [i for i in promo_codes_param.split(',')]
-                discounts, subtotal_dollar_value, taxes, total = Purchase.compute_order_line_items(user=self.request.user,
-                                                                                                   total_price_before_offers=product.current_price,
-                                                                                                   promo_codes=promo_codes)
 
+                total_price_before_offers = product.current_price
+                is_offer, offer_price, is_offer_accepted, _header, _message = self.__check_offer(request, *args, **kwargs)
+
+                if(is_offer_accepted):
+                    total_price_before_offers = offer_price
+
+                discounts, subtotal_dollar_value, taxes, total = Purchase.compute_order_line_items(user=self.request.user,
+                                                                                                   total_price_before_offers=total_price_before_offers,
+                                                                                                   promo_codes=promo_codes)
                 logger.debug('discounts %s' % str(discounts))
                 logger.debug('subtotal_dollar_value %s' % str(subtotal_dollar_value))
                 logger.debug('total %s' % str(total))
+                logger.debug('total %s' % str(total_amount_in_cents))
 
                 if(total_amount_in_cents != total['in_cents']):
                     # either product price has changed since payment or
@@ -577,7 +719,11 @@ class BuyView(generic.DetailView):
                 else:
                     order.converted_from_reservation = False
 
-                order.order_type = OrderType.PURCHASE_ORDER
+                if(is_offer_accepted):
+                    order.order_type = OrderType.OFFER_ORDER
+                else:
+                    order.order_type = OrderType.PURCHASE_ORDER
+
                 order.save()
                 logger.debug('saved order {0}'.format(order.id))
 
@@ -592,9 +738,13 @@ class BuyView(generic.DetailView):
                 self.__create_or_update_default_address(self.request, order_user)
                 self.__create_order_address(request, order)
 
-                # add item to order
-                Purchase.create_purchase(order=order, taxes=taxes['dollar_value'], transaction_price=total['in_dollars'])
-
+                # complete the order by creating Purchase or Offer
+                do_order_capture = True
+                if(is_offer_accepted):
+                    do_order_capture = False
+                    Offer.create_offer(order=order, taxes=taxes['dollar_value'], transaction_price=total['in_dollars'], offer_price=offer_price)
+                else:
+                    Purchase.create_purchase(order=order, taxes=taxes['dollar_value'], transaction_price=total['in_dollars'])
 
                 # create credit card charge with stripe
                 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -603,11 +753,11 @@ class BuyView(generic.DetailView):
                     currency="usd",
                     description=product.short_name,
                     card=token_id,
-                    capture=True,
+                    capture=do_order_capture,
                     receipt_email=order_user.email,
                     metadata={
                         'order_id': order.id,
-                        'order_type': 'buy'
+                        'order_type': 'buy' if do_order_capture else 'offer'
                         })
 
             except Exception, e:

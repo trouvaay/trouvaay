@@ -6,18 +6,26 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-				<div class="form-group text-center">	
+				<div id="precheckout-contents" class="form-group text-center">	
 					<div class="text-center">
 						<fieldset>
 							<legend>
-								<h2>Purchase Details</h2>
+								<h2>{% if is_offer %}Make an Offer{% else %}Purchase Details{% endif %}</h2>
 							</legend>
 							<div class="row">
 							<div class="col-xs-12">
 								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
 		                            <p class="text-center">
+		                            {% if is_offer %}
+		                            <b>{{ product.short_name }}</b>
+		                            <br />
+		                            Your card will not be carched until the retailer has 
+		                            received your offer. If the retailer rejects your offer	
+		                            your card will be refunded immediately.
+		                            {% else %}
 		                            You're one step away from your</br>
 		                            <b>{{ product.short_name }}</b>
+		                            {% endif %}
 		                            </p>
 	                        	</div>
 							</div>
@@ -33,12 +41,27 @@
 							      	</thead>
 							      	<tbody>
 										<tr>
-											<th scope="row">{{ product.short_name }}</td>
+											<th scope="row">Asking Price</th>
 											<td align="right">${{ product.current_price|floatformat:2 }}</td>
 										</tr>
+										{% if is_offer %}
+										<tr>
+											<th scope="row">Your Offer</th>
+											<td align="right">
+											{% if is_offer_accepted %}
+												<b>${{ offer_price|floatformat:2 }}</b>
+												<input type="hidden" name="input_offer_price" id="input_offer_price" value="{{ offer_price }}" />
+											{% else %}
+												<label id="label_offer_price" style="color:red" for="input-offer-price">{% if offer_message %}<b>{{ offer_message }}</b>{% endif %}</label>
+												<input type="text" name="input_offer_price" id="input_offer_price" placeholder="$" />
+											{% endif %}
+											</td>
+										</tr>
+										{% endif %}
+										
 										{% for discount in discounts %}
 										<tr>
-											<th scope="row">Discount ({{ discount.name }})</td>
+											<th scope="row">Discount ({{ discount.name }})</th>
 											<td align="right">(${{ discount.dollar_value|floatformat:2 }})</td>
 											{% if discount.promo_code %}
 											<span style="display: none;" class="promo-code-pass-through">{{ discount.promo_code }}</span>
@@ -46,14 +69,14 @@
 										</tr>
 										{% endfor %}
 										<tr>
-											<th scope="row">Subtotal</td>
+											<th scope="row">Subtotal</th>
 											<td align="right">${{ subtotal_dollar_value|floatformat:2 }}</td>
 										</tr>
 										{% if not promo_is_valid %}
 										<tr>
 											<th scope="row">
 												{% if promo_code_message %}<label style="color:red" for="input-promo-code"><b>{{ promo_code_message }}</b></label>{% endif %}
-												<input type="text" name="promo_code" id="input-promo-code" placeholder="Promo code" /></td>
+												<input type="text" name="promo_code" id="input-promo-code" placeholder="Promo code" /></th>
 											<td align="right"><button id="buy_withpromocode_{{ product.id }}" 
 													type="button" class="btn btn-primary btn-xs apply-promo-code">Apply</button></td>
 										</tr>
@@ -62,19 +85,30 @@
 										{% endif %}
 										{% if taxes %}
 										<tr>
-											<th scope="row">Taxes ({{ taxes.percentage|floatformat:2 }}%)</td>
+											<th scope="row">Taxes ({{ taxes.percentage|floatformat:2 }}%)</th>
 											<td align="right">${{ taxes.dollar_value|floatformat:2 }}</td>
 										</tr>
 										{% endif %}
 										<tr class="success">
-											<th scope="row"><strong>Total</strong></td>
+											<th scope="row"><strong>Total</strong></th>
 											<td align="right">${{ total.in_dollars|floatformat:2 }}</td>
 										</tr>										
 							      	</tbody>
 							    </table>
+							    {% if is_offer %}
+							    	<span id="order-buy-or-offer" style="display:none">offer</span>
+							    {% else %}
+							    	<span id="order-buy-or-offer" style="display:none">buy</span>
+							    {% endif %}
 							    <button id="button-precheckout-submit" type="button" class="btn btn-success">
 								    {% if order_type == 'reserve' %}
 										Reserve
+									{% elif is_offer %}
+										{% if is_offer_accepted %}
+											Purchase
+										{% else %}
+											Make an Offer
+										{% endif %}
 									{% else %}
 										Purchase
 		                        	{% endif %}
@@ -84,6 +118,20 @@
 						</fieldset>
 					</div>
 				</div>
+				<div id="precheckout-status" class="form-group text-center" style="display:none">	
+					<div class="text-center">
+						<fieldset>
+							<legend>
+								<h2><span id="status-title"></span></h2>
+							</legend>
+							<div class="row">
+								<div class="col-xs-12">
+		                            <p id="status-message" class="text-center"></p>
+		                        </div>
+		                    </div>
+		                <fieldset>
+		            </div>
+		        </div>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -95,7 +143,7 @@ $(document).ready(function() {
 	var productName = "{{ product.short_name }}";
 	var productPrice = {{ total.in_cents }};
 	var orderType = "{{ order_type }}";
-	
+	 
 	console.log('pre-checkout is loaded');
 	console.log('productPrice: ' + productPrice);
 	console.log('total_purchase_price: ' + {{ total.in_cents }});
@@ -103,6 +151,55 @@ $(document).ready(function() {
 	$('.btn.apply-promo-code').on('click', handleBuyButtonClick);
 	
 	$('#button-precheckout-submit').on('click', function(e) {
+		
+		console.log("clicked on purchase");
+		
+		{% if is_offer %}
+  		var buyUrl = "{% url "members:offer" %}";
+  		{% else %}
+  		var buyUrl = "{% url "members:buy" %}";
+  		{% endif %}
+  		
+  		{% if is_offer and not is_offer_accepted %}
+  			if($("#input_offer_price") && 
+  				 $("#input_offer_price").val() && 
+  				 $("#input_offer_price").val().length > 0 &&
+  				 $.trim($("#input_offer_price").val()).length > 0) {
+  				
+				var promoCode = ''
+				if($("#input-promo-code")) {
+					promoCode = $("#input-promo-code").val()
+				}
+
+				$.ajax({
+					type: "GET",
+					url: "{% url "members:offer" %}",
+					dataType: "html",
+					data: {
+						product_id: {{ product.id }},
+		                order_type: 'offer',
+		                promo_code: promoCode,
+		                offer_price: $("#input_offer_price").val()
+					},
+					success: function(response, status){
+						// console.log('response from pre-checkout call: '+status );
+						$("#pre-checkout-modal-container").html(response);
+						$("#buy_precheckout-modal").modal({
+							show: true,
+							keyboard: true
+						});
+					},
+				});
+				
+				return;
+  			}
+  			else {
+  				$("#label_offer_price").text("Please enter your offer amount");
+  				$("#input_offer_price").focus();
+  				return;
+  			}
+  		{% endif %}
+		
 		
 		//buy event tracking
 
@@ -122,8 +219,7 @@ $(document).ready(function() {
 			
 			var promoCodes = promoCodesArray.join(",");
 			console.log('promoCodes: '+promoCodes);
-		
-		
+			
 	  		$('#buy_precheckout-modal').modal('hide');
 	  		console.log('pre-checkout modal hidden');
 	  		
@@ -137,13 +233,14 @@ $(document).ready(function() {
 				token: function(token, args) {
 					$.ajax({
 						type: "POST",
-						url: {% url "members:buy" %},
+						url: buyUrl,
 						data: {
 							token: token,
 							args: args,
 							total_amount: productPrice,
 							order_type: orderType,
 							product_id: {{ product.id }},
+							{% if is_offer_accepted %}offer_price: {{ offer_price }},{% endif %}
 							promo_codes: promoCodes
 						},
 						success: function(data){
