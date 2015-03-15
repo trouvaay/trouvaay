@@ -86,7 +86,6 @@
     }
 
     .pic-detail-home {
-      text-align: center;
       margin: 2px 0px 3px;
       clear: both;
       float: none;
@@ -100,8 +99,9 @@
 
     .price {
         font-family: "Droid Serif";
-        font-size: 13px;
+        font-size: 10px;
         margin-bottom: 3px;
+        text-align: center;
     }
 
     .name {
@@ -128,7 +128,7 @@
       border-top: 1px solid #636466;
       border-top: 1px solid rgba(99, 100, 102, 0.25);
       font-family: "Droid Serif";
-      font-size: 13px;
+      font-size: 11px;
       font-style: italic;
       text-transform: uppercase;
       text-align: center; 
