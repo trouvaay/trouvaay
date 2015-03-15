@@ -203,6 +203,7 @@ function handleBuyButtonClick(e) {
 	if(e.target.id.substr(0, 4) == 'buy_'){
 		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
         var orderType = 'buy';
+		
 		mixpanel.track(
             "Clicked Buy Button",
             { "productId": productId }
@@ -220,10 +221,65 @@ function handleBuyButtonClick(e) {
 			
 			console.log('promoCode: '+promoCode);
 			
+			var buyUrl = "{% url "members:buy" %}";
+			var dataToSubmit = {
+					product_id: productId,
+	                order_type: orderType,
+	                promo_code: promoCode
+			}
+			
+			if(typeof($("#order-buy-or-offer")) != "undefined" && $("#order-buy-or-offer").text() == "offer"){
+				buyUrl = "{% url "members:offer" %}";
+				orderType = 'offer';
+				dataToSubmit = {
+						product_id: productId,
+		                order_type: orderType,
+		                promo_code: promoCode,
+		                offer_price: $("#input_offer_price").val()
+				}
+				console.log("offer price: "+$("#input_offer_price").val());
+			} 
+			
 			// call pre-checkout
 			$.ajax({
 				type: "GET",
-				url: "{% url "members:buy" %}",
+				url: buyUrl,
+				dataType: "html",
+				data: dataToSubmit,
+				success: function(response, status){
+					// console.log('response from pre-checkout call: '+status );
+					$("#pre-checkout-modal-container").html(response);
+					$("#buy_precheckout-modal").modal({
+						show: true,
+						keyboard: true
+					});
+				},
+	            error: function(response, status, error) {
+	              var err = eval("(" + response.responseText + ")");
+	              alert(err.Message);
+	            }
+			});
+		}
+    }
+	else if(e.target.id.substr(0, 6) == 'offer_'){
+		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
+		
+        var orderType = 'offer';
+
+		if(productId && !(typeof productId === 'undefined')){
+		    console.log('this is the ordertype ', orderType)
+	
+			var promoCode = ''
+			if($("#input-promo-code")) {
+				promoCode = $("#input-promo-code").val()
+			}
+			
+			console.log('promoCode: '+promoCode);
+			
+			// call pre-checkout
+			$.ajax({
+				type: "GET",
+				url: "{% url "members:offer" %}",
 				dataType: "html",
 				data: {
 					product_id: productId,
@@ -243,7 +299,7 @@ function handleBuyButtonClick(e) {
 	              alert(err.Message);
 	            }
 			});
-		}        
+		} 
     }
     else if(e.target.id.substr(0, 8) == 'reserve_'){
         var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);

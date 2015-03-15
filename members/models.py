@@ -366,10 +366,12 @@ class OrderType(object):
     """
     RESERVATION_ORDER = 'RESERVATION'
     PURCHASE_ORDER = 'PURCHASE'
+    OFFER_ORDER = 'OFFER'
 
 ORDER_TYPES = (
     (OrderType.RESERVATION_ORDER, 'Reservation'),
     (OrderType.PURCHASE_ORDER, 'Purchase'),
+    (OrderType.OFFER_ORDER, 'Offer'),
 )
 
 class AuthOrder(TimestampedModel):
@@ -426,11 +428,8 @@ class Reservation(TimestampedModel):
         product.save()
 
 
-
-
-class Purchase(TimestampedModel):
-    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, related_name='purchases')
-    order = models.OneToOneField(AuthOrder, related_name='purchase')
+class PurchaseBase(TimestampedModel):
+    authuser = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, related_name='%(class)s')
     taxes = models.DecimalField(max_digits=8, decimal_places=2, blank=None, null=None, default=0.00, help_text="Taxes in dollars")
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, help_text='Price of the product at the time of purchase')
     transaction_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, help_text='Total purchase price the user paid including promotions and taxes')
@@ -465,6 +464,15 @@ class Purchase(TimestampedModel):
 
         return discounts, subtotal_dollar_value, taxes, total
 
+
+    class Meta:
+        abstract = True
+
+
+class Purchase(PurchaseBase):
+
+    order = models.OneToOneField(AuthOrder, related_name='purchase')
+
     @classmethod
     def create_purchase(cls, order, taxes, transaction_price):
         purchase = Purchase()
@@ -482,8 +490,31 @@ class Purchase(TimestampedModel):
         
         return purchase
 
+
+class Offer(PurchaseBase):
+    order = models.OneToOneField(AuthOrder, related_name='offer')
+    offer_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, help_text='Price offered by user')
+
+    @classmethod
+    def create_offer(cls, order, taxes, transaction_price, offer_price):
+        offer = Offer()
+        offer.authuser = order.authuser
+        offer.order = order
+        offer.taxes = taxes
+        offer.original_price = order.product.current_price
+        offer.transaction_price = transaction_price
+        offer.offer_price = offer_price
+        offer.save()
+
+        product = order.product
+        product.is_reserved = True
+        product.save()
+
+        return offer
+
+
 class OfferType(object):
-    """This class maintains a list of all offer types
+    """This class maintains a list of all Promotion Offer types
     
     Having this class allows us to use "constants" in our code.
     This is better because in case of a typo the compiler will catch it
