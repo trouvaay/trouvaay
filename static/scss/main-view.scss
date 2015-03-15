@@ -540,7 +540,7 @@
             padding-left: 30px;
 
             @include breakpoint (sm) {
-                padding-left: 70px;
+                padding-left: 35px;
                 padding-right: 36px;
             }
 
@@ -563,13 +563,15 @@
                 font-family: "Ostrich Sans";
                 font-size: 11px;
                 letter-spacing: 1px;
+                font-weight: 800;
 
             }
             label {
                 font-family: "Ostrich Sans";
-                font-size: 11px;
+                font-size: 13px;
                 letter-spacing: 1px;
                 display: block;
+                font-weight: 800;
             }
         }
 
@@ -611,6 +613,7 @@
                     font-weight: 800;
                     font-size: 15px;
                     letter-spacing: 1px;
+                    max-width: 100%;
 
                 }
 
@@ -732,13 +735,14 @@
             z-index: 3;
             //padding-top: 15px;
             padding-bottom: 80px;
+            overflow-y: scroll;
         }
 
         &:checked + .filters-container #refine {
             background: #000;
             float: none;
             width: 100%;
-            padding-left: 70px;
+            padding-left: 35px;
             border: 0px;
 
             label {

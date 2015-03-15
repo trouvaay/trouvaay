@@ -1614,7 +1614,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #searchfilter-form .category.filters > div {
-    padding-left: 70px;
+    padding-left: 35px;
     padding-right: 36px;
   }
 }
@@ -1632,12 +1632,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Ostrich Sans";
   font-size: 11px;
   letter-spacing: 1px;
+  font-weight: 800;
 }
 #searchfilter-form .category.filters .mobile label {
   font-family: "Ostrich Sans";
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 1px;
   display: block;
+  font-weight: 800;
 }
 #searchfilter-form .category.filters .fold .c-checkbox .checkbox-pseudocheckbox {
   width: 6px;
@@ -1674,6 +1676,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     font-weight: 800;
     font-size: 15px;
     letter-spacing: 1px;
+    max-width: 100%;
   }
 }
 #searchfilter-form #filter-container-color li {
@@ -1758,12 +1761,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
     position: fixed;
     z-index: 3;
     padding-bottom: 80px;
+    overflow-y: scroll;
   }
   #searchfilter-form #display-filters:checked + .filters-container #refine {
     background: #000;
     float: none;
     width: 100%;
-    padding-left: 70px;
+    padding-left: 35px;
     border: 0px;
   }
   #searchfilter-form #display-filters:checked + .filters-container #refine label {
