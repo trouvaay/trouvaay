@@ -8,6 +8,6 @@ latest.dump
 dev_settings.py
 dev_config.py
 node_modules/*
-orders.json
-user.json
-dumpdata.json
+fixtures/orders.json
+fixtures/user.json
+fixtures/dumpdata.json
