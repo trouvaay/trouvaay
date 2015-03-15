@@ -160,7 +160,7 @@ RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reserv
 RESERVATION_PERIOD = 48  # hours
 
 
-# Offer settings
+# Promotional Offer settings
 OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many seconds
 SIGNUP_OFFER = "Get 10% off your 1st purchase"
 
@@ -173,6 +173,10 @@ ENABLE_REFERRAL = True
 LIMIT_REFERRAL_PER_CLIENT_ID = 3
 FIRST_REFERRAL_MODAL_EXP = 1  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
 SECOND_REFERRAL_MODAL_EXP = 1  # do not show second referral modal again within this many seconds
+
+# Purchase offer settings
+OFFER_THRESHOLD = Decimal('0.75')
+OFFER_IS_ENABLED = True
 
 # email settings are another good candidate to have
 # each developer define in their own dev_settings.py

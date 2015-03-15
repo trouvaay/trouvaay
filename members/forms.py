@@ -156,6 +156,7 @@ class ReserveForm(ReserveFormAuth):
             Button('button-reserve', 'Submit', css_class="btn-success"),
         )
 
+
 class PostCheckoutForm(forms.Form):
     email = forms.CharField(widget=forms.HiddenInput)
     post_checkout_hash = forms.CharField(widget=forms.HiddenInput)
@@ -178,14 +179,15 @@ class PostCheckoutForm(forms.Form):
             Button('post-checkout', 'Submit', css_class="btn-success"),
         )
 
-class RegistrationForm(forms.ModelForm):
+
+class RegistrationFormWithPassword(forms.ModelForm):
 
     email = forms.EmailField(widget=forms.TextInput, required=True)
     password = forms.CharField(widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(widget=forms.PasswordInput, required=True)
 
     def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
+        super(RegistrationFormWithPassword, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_show_labels = False
@@ -205,7 +207,7 @@ class RegistrationForm(forms.ModelForm):
         )
 
     def clean(self):
-        cleaned_data = super(RegistrationForm, self).clean()
+        cleaned_data = super(RegistrationFormWithPassword, self).clean()
 
         password = cleaned_data.get("password")
         password2 = cleaned_data.get("password2")
@@ -218,9 +220,7 @@ class RegistrationForm(forms.ModelForm):
 
     def save(self, commit=True):
 
-        print 'in form.save()'
-
-        user = super(RegistrationForm, self).save(commit=False)
+        user = super(RegistrationFormWithPassword, self).save(commit=False)
         user.set_password(self.cleaned_data['password'])
         if commit:
             user.save()
@@ -229,6 +229,32 @@ class RegistrationForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ('email', 'password', 'password2')
+
+
+class RegistrationForm(forms.ModelForm):
+    email = forms.EmailField(widget=forms.TextInput, required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False
+        self.helper.form_show_errors = True
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'registration_register'
+        self.helper.form_id = 'form-signup'
+
+        self.helper.layout = Layout(
+            Fieldset(
+                'Create an account',
+                Field('email', placeholder='Email address'),
+                Submit('submit', 'Join', css_class="btn-primary"),
+            ),
+        )
+
+    class Meta:
+        model = get_user_model()
+        fields = ('email',)
 
 
 class ReferralForm(forms.Form):

@@ -122,6 +122,7 @@ class Product(models.Model):
     manufacturer = models.CharField(max_length=25, null=True, blank=True)
     units = models.IntegerField(default=1)
     url = models.URLField(null=True, blank=True, max_length=255)
+    minimum_offer_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, default=None)
 
     # Dimensions & Attributes
     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
@@ -238,8 +239,6 @@ class Product(models.Model):
         
         self.display_score = score
         self.save()
-        
-
 
     def save(self, *args, **kwargs):
         self.lat = self.store.lat
@@ -248,6 +247,9 @@ class Product(models.Model):
         # Check to see if pub date us missing if item is published.
         if self.is_published and (not self.pub_date):
             self.pub_date = timezone.now()
+
+        if(self.minimum_offer_price is None):
+            self.minimum_offer_price = self.current_price * settings.OFFER_THRESHOLD
 
         # create slug once, only if we don't have it yet
         if(not self.slug):
