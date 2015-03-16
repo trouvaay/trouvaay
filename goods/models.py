@@ -16,6 +16,7 @@ from decimal import Decimal
 from members.models import PromotionOffer
 import logging
 from datetime import timedelta
+import math
 
 logger = logging.getLogger(__name__)
 
@@ -325,6 +326,12 @@ class Product(models.Model):
             delta = delist_date - timezone.now()
             time_lapse = delta.total_seconds() // 3600
             return int(time_lapse)
+
+    def get_days_left(self):
+        if self.hours_left / 24.0 > 1:
+            return ('{}days left'.format(int(math.ceil(self.hours_left / 24.0))))
+        else:
+            return 'last day'
 
 
     def has_returns(self):
