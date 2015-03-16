@@ -148,7 +148,7 @@
 
   .info {
     text-align: center;
-    font-size: 15px;
+    font-size: 14px;
     font-family: "Droid Serif";
     font-weight: bold;
     margin-top: 30px;
@@ -227,7 +227,8 @@
       }
 
       &.purchase:before {
-	content: 'g';
+	//content: 'g';
+  content: url('/static/img/calendar.svg');
 	font-size: 20px;
 
 	@include breakpoint(sm) {
@@ -255,6 +256,8 @@
       font-style: italic;
       text-transform: uppercase;
       margin-bottom: 5px;
+      color: #333;
+
 
       @include breakpoint(sm) {
 	font-size: 16px;

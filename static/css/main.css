@@ -799,7 +799,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #how-it-works .info, #how-it-works-mobile .info {
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   font-family: "Droid Serif";
   font-weight: bold;
   margin-top: 30px;
@@ -875,7 +875,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 #how-it-works .info > div.purchase:before, #how-it-works-mobile .info > div.purchase:before {
-  content: 'g';
+  content: url("/static/img/calendar.svg");
   font-size: 20px;
 }
 @media (max-width: 767px) {
@@ -898,6 +898,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-style: italic;
   text-transform: uppercase;
   margin-bottom: 5px;
+  color: #333;
 }
 @media (max-width: 767px) {
   #how-it-works .info header, #how-it-works-mobile .info header {
@@ -1275,6 +1276,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin: 2px 0px 3px;
   clear: both;
   float: none;
+  text-align: center;
 }
 @media (max-width: 480px) {
   .grid-products-wrapper .pic-detail-home {
@@ -1284,13 +1286,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 .grid-products-wrapper .price {
   font-family: "Droid Serif";
-  font-size: 10px;
+  font-size: 12px;
   margin-bottom: 3px;
-  text-align: center;
 }
 .grid-products-wrapper .name {
   font-family: "Droid Serif";
-  font-size: 9px;
+  font-size: 11px;
+}
+.grid-products-wrapper .name .days-left {
   font-style: italic;
 }
 .grid-products-wrapper .name a {
@@ -1306,9 +1309,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   border-top: 1px solid #636466;
   border-top: 1px solid rgba(99, 100, 102, 0.25);
   font-family: "Droid Serif";
-  font-size: 11px;
+  font-size: 10px;
   font-style: italic;
-  text-transform: uppercase;
   text-align: center;
 }
 .grid-products-wrapper .neighborhood, .grid-products-wrapper .actions {

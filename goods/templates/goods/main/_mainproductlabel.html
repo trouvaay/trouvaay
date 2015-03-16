@@ -1,12 +1,7 @@
 {% load staticfiles %}
     <div class="col-xs-12 pic-detail-home">
         <div class="price">
-        {{ product.short_name|truncatechars:25 }}
-        </div>
-      <div class="name row">
-        <div class="col-xs-offset-1 col-xs-5">
-	     
-       {% if product.current_price %}
+        {% if product.current_price %}
             {% if product.is_sold %}
                 <span class="sold">{{ 'Sold' }}</span>                
             {% elif product.is_reserved %}
@@ -15,14 +10,17 @@
                 <strike>{{' - $'}}{{ product.original_price|floatformat:"0" }}</strike>
                 <span class="discount">{{' - $'}}{{ product.current_price|floatformat:"0" }}<span>
             {% else %}
-                {{'$'}}{{ product.current_price|floatformat:"0" }}
+                {{'$'}}{{ product.current_price|floatformat:"0" }} 
             {% endif %}
+        {% else %}
+          Call for details
         {% endif %}
+        
+        </div>
+      <div class="name">
+	       {{ product.short_name|truncatechars:30 }} - <span style="font-style:italic">{{ product.get_days_left }}</span>
        </div>
-       <div class="col-xs-5 text-right">
-          {{ product.get_days_left }}
-       </div>
-      </div>
+          
 
         <!-- need these so that we can pass product name and price to stripe checkout -->
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
