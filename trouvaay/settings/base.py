@@ -177,7 +177,7 @@ SECOND_REFERRAL_MODAL_EXP = 1  # do not show second referral modal again within 
 
 # Purchase offer settings
 OFFER_THRESHOLD = Decimal('0.50')
-OFFER_IS_ENABLED = False
+OFFER_IS_ENABLED = True
 
 # email settings are another good candidate to have
 # each developer define in their own dev_settings.py
