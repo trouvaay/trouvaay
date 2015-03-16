@@ -1237,12 +1237,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   .grid-products-wrapper .product-container {
     padding-bottom: 0px;
   }
-  .grid-products-wrapper .product-container:nth-child(odd) {
-    padding-left: 0px;
-  }
-  .grid-products-wrapper .product-container:nth-child(even) {
-    padding-right: 0px;
-  }
 }
 .grid-products-wrapper .product-container:hover {
   background: #FFF;
