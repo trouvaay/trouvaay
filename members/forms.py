@@ -92,7 +92,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 
         self.helper.layout = Layout(
             Fieldset(
-                'Already a member? Log in',
+                "",
                 Field('email', placeholder='Email address'),
                 Field('password', placeholder='Password'),
                 Field('next'),
@@ -246,7 +246,7 @@ class RegistrationForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Fieldset(
-                'Create an account',
+                '',
                 Field('email', placeholder='Email address'),
                 Submit('submit', 'Join', css_class="btn-primary"),
             ),

@@ -366,7 +366,7 @@ html, body {
 }
 
 .want-join-container {
-  margin-top: 10%;
+  margin-top: 2%;
   margin-bottom: 20px;
   font-family: "Droid Serif";
 }
@@ -914,7 +914,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-style: italic;
   text-transform: uppercase;
   margin-bottom: 5px;
-  color: #333;
+  color: white;
 }
 @media (max-width: 767px) {
   #how-it-works .info header, #how-it-works-mobile .info header {
@@ -1249,6 +1249,25 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .product-container:hover .actions {
   display: block;
 }
+@media (max-width: 767px) {
+  .grid-products-wrapper .product-container {
+    padding-bottom: 0px;
+    padding-left: 2%;
+    padding-right: 2%;
+            /*&:nth-child(odd) {
+                padding-left: 0px;
+
+            }
+
+            &:nth-child(even) {
+                padding-right: 0px;
+            }*/
+  }
+  .grid-products-wrapper .product-container:hover {
+    background: none;
+    box-shadow: none;
+  }
+}
 .grid-products-wrapper .grid-product {
   padding: 10px 15px;
 }
@@ -1313,6 +1332,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .neighborhood-like-container {
   position: relative;
 }
+@media (max-width: 767px) {
+  .grid-products-wrapper .neighborhood-like-container {
+    margin: 0 5%;
+  }
+}
 .grid-products-wrapper .neighborhood {
   border-top: 1px solid #636466;
   border-top: 1px solid rgba(99, 100, 102, 0.25);
@@ -1345,6 +1369,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 .grid-products-wrapper .actions .like-btn:hover {
   text-decoration: none;
+}
+@media (max-width: 767px) {
+  .grid-products-wrapper .actions {
+    display: block;
+  }
 }
 
 #display-categories {

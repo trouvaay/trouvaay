@@ -43,6 +43,28 @@
             }
 
         }
+
+        @include breakpoint(sm) {
+            
+            padding-bottom: 0px;
+            padding-left: 2%;
+            padding-right: 2%;
+
+            /*&:nth-child(odd) {
+                padding-left: 0px;
+
+            }
+
+            &:nth-child(even) {
+                padding-right: 0px;
+            }*/
+
+            &:hover {
+                background: none;
+                box-shadow: none;
+            }
+
+        }
     }
 
     .grid-product {
@@ -117,6 +139,10 @@
 
     .neighborhood-like-container {
       position: relative;
+
+      @include breakpoint(sm){
+          margin: 0 5%;
+      }
     }
 
     .neighborhood {
@@ -160,6 +186,9 @@
 
       }
 
+    @include breakpoint(sm) {
+        display: block;
+    }
 
     }
 

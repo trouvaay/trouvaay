@@ -151,6 +151,7 @@ CLICK_EXCLUSIONS = []
 SALES_TAX = Decimal('0.0875')
 FEATURE_NAME_RESERVE = "Reserve"
 FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-store. 3 reservation limit"
+FEATURE_TOOLTIP_OFFER = "Offer must be above minimum reserve price for this item.  Your card wont be charged until the retailer has received your offer. If offer is rejected your card will be refunded."
 TOOLTIP_HEART = "Save to your profile page."
 RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
@@ -165,7 +166,7 @@ OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many s
 SIGNUP_OFFER = "Get 10% off your 1st purchase"
 
 RECENT_PRODUCT_AGE = 72  # products published less than this many hours ago qualify as recent
-SHELF_LIFE = 336 # hours
+SHELF_LIFE = 720 # hours
 
 
 # referral settings
@@ -177,7 +178,7 @@ SECOND_REFERRAL_MODAL_EXP = 1  # do not show second referral modal again within 
 
 # Purchase offer settings
 OFFER_THRESHOLD = Decimal('0.50')
-OFFER_IS_ENABLED = False
+OFFER_IS_ENABLED = True
 
 # email settings are another good candidate to have
 # each developer define in their own dev_settings.py
