@@ -898,7 +898,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-style: italic;
   text-transform: uppercase;
   margin-bottom: 5px;
-  color: #333;
+  color: white;
 }
 @media (max-width: 767px) {
   #how-it-works .info header, #how-it-works-mobile .info header {
