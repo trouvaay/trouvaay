@@ -187,29 +187,34 @@ header.top-bar {
       background: #FFF;
       border-radius: 14px;
       color: #000;
+      font-size: 13px;
       
       width: 28px;
       height: 28px;
       min-width: 28px;
+      min-height: 28px;
       position: relative;
       
       &:before {
         position: absolute;
         left: 0px;
+        top: 0px;
         display: inline-block;
         text-align: center;
         width: 28px;
         color: #000;
+        line-height: 28px;
       }
       
       @include breakpoint(sm) {
-	      width: 24px;
-	      height: 24px;
-	      min-width: 24px;
+	      width: 28px;
+	      height: 28px;
+	      min-width: 28px;
 
 
           &:before {
-            width: 24px;
+            width: 28px;
+              left: -1px;
           }
 
       }

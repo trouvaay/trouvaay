@@ -146,6 +146,11 @@
 
   }
 
+  @include breakpoint(md, True) {
+      padding-bottom: 35px;
+      
+  }
+
   .info {
     text-align: center;
     font-size: 14px;
@@ -156,6 +161,10 @@
     @include breakpoint(md, True) {
       float: none;
       display: table-cell;
+      &:not(:last-child) {
+          border-right: 1px solid #FFF;
+      }
+
     }
 
     @include breakpoint(sm) {
@@ -227,8 +236,8 @@
       }
 
       &.purchase:before {
-	//content: 'g';
-  content: url('/static/img/calendar.svg');
+	content: 'o';
+  //content: url('/static/img/calendar.svg');
 	font-size: 20px;
 
 	@include breakpoint(sm) {
