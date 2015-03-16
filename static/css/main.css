@@ -651,7 +651,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   position: fixed;
   top: 50px;
   left: 0px;
-  background: #FFF;
+  background: #EFEFEF;
   line-height: 30px;
   padding-top: 10px;
   padding-bottom: 10px;
