@@ -801,6 +801,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
     padding-top: 0px;
   }
 }
+@media (min-width: 769px) {
+  #how-it-works, #how-it-works-mobile {
+    padding-bottom: 35px;
+  }
+}
 #how-it-works .info, #how-it-works-mobile .info {
   text-align: center;
   font-size: 14px;
@@ -812,6 +817,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #how-it-works .info, #how-it-works-mobile .info {
     float: none;
     display: table-cell;
+  }
+  #how-it-works .info:not(:last-child), #how-it-works-mobile .info:not(:last-child) {
+    border-right: 1px solid #FFF;
   }
 }
 @media (max-width: 767px) {
