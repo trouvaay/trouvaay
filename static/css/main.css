@@ -191,6 +191,10 @@ html, body {
   content: "n";
 }
 
+.icon-calendar:before {
+  content: "o";
+}
+
 /* Ion.RangeSlider, Flat UI Skin
 // css version 2.0.3
 // © Denis Ineshin, 2014    https://github.com/IonDen
@@ -550,27 +554,32 @@ header.top-bar .icon-question-mark, header.top-bar a.icon-question-mark {
   background: #FFF;
   border-radius: 14px;
   color: #000;
+  font-size: 13px;
   width: 28px;
   height: 28px;
   min-width: 28px;
+  min-height: 28px;
   position: relative;
 }
 header.top-bar .icon-question-mark:before, header.top-bar a.icon-question-mark:before {
   position: absolute;
   left: 0px;
+  top: 0px;
   display: inline-block;
   text-align: center;
   width: 28px;
   color: #000;
+  line-height: 28px;
 }
 @media (max-width: 767px) {
   header.top-bar .icon-question-mark, header.top-bar a.icon-question-mark {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
   }
   header.top-bar .icon-question-mark:before, header.top-bar a.icon-question-mark:before {
-    width: 24px;
+    width: 28px;
+    left: -1px;
   }
 }
 header.top-bar .icon-question-mark:focus, header.top-bar a.icon-question-mark:focus {
@@ -797,6 +806,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
     padding-top: 0px;
   }
 }
+@media (min-width: 769px) {
+  #how-it-works, #how-it-works-mobile {
+    padding-bottom: 35px;
+  }
+}
 #how-it-works .info, #how-it-works-mobile .info {
   text-align: center;
   font-size: 14px;
@@ -808,6 +822,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #how-it-works .info, #how-it-works-mobile .info {
     float: none;
     display: table-cell;
+  }
+  #how-it-works .info:not(:last-child), #how-it-works-mobile .info:not(:last-child) {
+    border-right: 1px solid #FFF;
   }
 }
 @media (max-width: 767px) {
@@ -875,7 +892,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 #how-it-works .info > div.purchase:before, #how-it-works-mobile .info > div.purchase:before {
-  content: url("/static/img/calendar.svg");
+  content: 'o';
   font-size: 20px;
 }
 @media (max-width: 767px) {
@@ -1222,11 +1239,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
     padding-bottom: 0px;
   }
   .grid-products-wrapper .product-container:nth-child(odd) {
-    padding-right: 10px;
     padding-left: 0px;
   }
   .grid-products-wrapper .product-container:nth-child(even) {
-    padding-left: 10px;
     padding-right: 0px;
   }
 }
