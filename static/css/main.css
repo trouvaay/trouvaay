@@ -680,7 +680,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #index-banner {
     margin-bottom: 0px;
     min-height: 165px;
-    margin-top: 113px;
   }
 }
 #index-banner img {
@@ -1196,6 +1195,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 
 #filter-container {
   margin-top: 60px;
+  display: none;
 }
 
 .grid-products-wrapper {
