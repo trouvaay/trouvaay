@@ -1239,11 +1239,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
     padding-bottom: 0px;
   }
   .grid-products-wrapper .product-container:nth-child(odd) {
-    padding-right: 10px;
     padding-left: 0px;
   }
   .grid-products-wrapper .product-container:nth-child(even) {
-    padding-left: 10px;
     padding-right: 0px;
   }
 }

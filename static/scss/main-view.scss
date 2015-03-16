@@ -25,13 +25,11 @@
         @include breakpoint(sm) {
             padding-bottom: 0px;
             &:nth-child(odd) {
-                padding-right: 10px;
                 padding-left: 0px;
 
             }
 
             &:nth-child(even) {
-                padding-left: 10px;
                 padding-right: 0px;
             }
 
