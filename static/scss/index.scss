@@ -227,8 +227,8 @@
       }
 
       &.purchase:before {
-	//content: 'g';
-  content: url('/static/img/calendar.svg');
+	content: 'o';
+  //content: url('/static/img/calendar.svg');
 	font-size: 20px;
 
 	@include breakpoint(sm) {
