@@ -675,7 +675,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   position: relative;
   margin-top: 60px;
   padding: 0px;
-  max-height: 375px;
+  max-height: 452px;
   height: auto;
   overflow: hidden;
   /*background: url('../static/img/index-banner-photo.jpg');*/
@@ -704,7 +704,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #index-banner a {
   color: #FFF;
-  text-transform: uppercase;
 }
 #index-banner .arrow-link {
   background-color: #333;
