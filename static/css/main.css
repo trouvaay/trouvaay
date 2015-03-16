@@ -235,13 +235,11 @@ html, body {
   padding: 22px 0px;
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 25px;
 }
 @media (max-width: 992px) {
   .more-questions-container header {
     background: #91c3c3;
     font-size: 17px;
-    margin-bottom: 10px;
   }
 }
 .more-questions-container a {
@@ -584,7 +582,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 @media (max-width: 767px) {
   #index-banner .text {
     font-size: 18px;
-    line-height: 18px;
     text-align: center;
     margin-top: 25px;
     top: auto;
@@ -837,6 +834,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-weight: bold;
   text-align: center;
   padding: 13px;
+  height: 100%;
+  min-height: 72px;
 }
 @media (max-width: 767px) {
   .grid .name-container {
@@ -990,7 +989,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 .team-members-container .name-container {
-  padding: 25px;
+  padding: 15px;
 }
 .team-members-container .name-container .name {
   font-size: 20px;
@@ -1003,7 +1002,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 .team-members-container .name-container .subline {
-  font-size: 20px;
+  font-size: 14px;
 }
 .team-members-container .grid-item {
   margin-bottom: 40px;
