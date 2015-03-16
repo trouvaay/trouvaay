@@ -165,7 +165,7 @@ OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many s
 SIGNUP_OFFER = "Get 10% off your 1st purchase"
 
 RECENT_PRODUCT_AGE = 72  # products published less than this many hours ago qualify as recent
-SHELF_LIFE = 336 # hours
+SHELF_LIFE = 720 # hours
 
 
 # referral settings
