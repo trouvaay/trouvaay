@@ -1245,7 +1245,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .product-container:hover .actions {
   display: block;
 }
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   .grid-products-wrapper .product-container {
     padding-bottom: 0px;
     padding-left: 2%;
@@ -1328,6 +1328,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .neighborhood-like-container {
   position: relative;
 }
+@media (max-width: 767px) {
+  .grid-products-wrapper .neighborhood-like-container {
+    margin: 0 5%;
+  }
+}
 .grid-products-wrapper .neighborhood {
   border-top: 1px solid #636466;
   border-top: 1px solid rgba(99, 100, 102, 0.25);
@@ -1361,7 +1366,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .actions .like-btn:hover {
   text-decoration: none;
 }
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   .grid-products-wrapper .actions {
     display: block;
   }

@@ -10,10 +10,11 @@
     <div class="centered-child">
         <picture>
             <!--[if IE 9]><video style="display: none;"><![endif]-->
-            <source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop='fit' overlay='text:arial_35_bold:test' %}" media="(min-width: 992px)">
+            <!-- <source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop='fit' overlay='text:arial_35_bold:test' %}" media="(min-width: 992px)"> -->
+            <source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop='fit' %}" media="(min-width: 992px)">
             <source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop='fit'  %}" media="(min-width: 413px)">
             <!--[if IE 9]></video><![endif]-->
-            <img class="main-image" srcset='{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop="fit" %}' alt="">
+            <img class="main-image" srcset='{% cloudinary_url product.productimage_set.first.image width=275 height=250 crop="fit" %}' alt="">
         </picture>
 
     </div>
