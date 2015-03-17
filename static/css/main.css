@@ -1220,6 +1220,19 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .product-container.saved {
   height: 509px;
 }
+@media (max-width: 767px) {
+  .grid-products-wrapper .product-container.saved {
+    height: 100%;
+  }
+}
+.grid-products-wrapper .product-container.reserved {
+  height: 367px;
+}
+@media (max-width: 767px) {
+  .grid-products-wrapper .product-container.reserved {
+    height: 100%;
+  }
+}
 .grid-products-wrapper .product-container:hover {
   background: #FFF;
   box-shadow: #AAA 0px 0px 5px;

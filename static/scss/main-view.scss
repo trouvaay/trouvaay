@@ -24,7 +24,18 @@
 
         &.saved {
             height: 509px;
+            @include breakpoint(sm) {
+                height: 100%;
+            }
         }
+
+        &.reserved {
+            height: 367px;
+            @include breakpoint(sm) {
+                height: 100%;
+            }
+        }
+
         &:hover {
             background: #FFF;
             box-shadow: #AAA 0px 0px 5px;
