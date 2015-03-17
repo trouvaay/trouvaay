@@ -4446,6 +4446,16 @@ footer ul li a:hover {
   /*margin-left: 10%;*/
   max-width: 100%;
   }
+  .how-it-works .col-md-12.statement h3 {
+    font-size: 14px;
+  }
+  .how-it-works h4 {
+    padding: 0 5px;
+    font-size: 14px;
+  }
+  .how-it-works .statement {
+    margin-top: 15px;
+  }
   .product-container {
     padding-left: 0;
     padding-right: 0;
