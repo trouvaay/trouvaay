@@ -74,6 +74,21 @@
 }
 
 @font-face {
+    font-family: 'ralewaylight';
+    src: url('../fonts/Raleway-Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+} 
+@font-face {
+    font-family: 'Chunkfive';
+    src: url('../fonts/Chunkfive.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+@font-face {
   font-family: "raredoor";
   src:url("../fonts/raredoor.eot");
   src:url("../fonts/raredoor.eot?#iefix") format("embedded-opentype"),

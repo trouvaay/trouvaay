@@ -95,3 +95,61 @@
 }
 
 
+/* Image slider styles */
+
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  }
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+  }
+
+.rslides_nav {
+	font-family: "raredoor";
+	position: absolute;
+	top: 50%;
+	font-size: 34px;
+	z-index: 100;
+	color: #FFF;
+	text-shadow: #000 0px 0px 2px;
+	margin-top: -24px;
+}
+
+.rslides_nav:hover {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.rslides_nav.prev {
+	left: 34px;
+}
+
+.rslides_nav.next {
+	right: 34px;
+}
+
