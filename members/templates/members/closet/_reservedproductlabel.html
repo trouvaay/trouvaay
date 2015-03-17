@@ -10,13 +10,16 @@
                 <strike>{{' - $'}}{{ product.original_price|floatformat:"0" }}</strike>
                 <span class="discount">{{' - $'}}{{ product.current_price|floatformat:"0" }}<span>
             {% else %}
-                {{'$'}}{{ product.current_price|floatformat:"0" }}
+                {{'$'}}{{ product.current_price|floatformat:"0" }} 
             {% endif %}
-        {% endif %}</div>
+        {% else %}
+          Call for details
+        {% endif %}
+        
+        </div>
       <div class="name">
-    {{ product.short_name|truncatechars:26 }}
-      </div>
-
+           {{ product.short_name|truncatechars:30 }} - <span style="font-style:italic">({{ product.store.neighborhood }})</span>
+       </div>
         <!-- need these so that we can pass product name and price to stripe checkout -->
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
         <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
@@ -24,17 +27,20 @@
     <!-- Like funtionality on hold until ProfileView implemented -->
     <div class="neighborhood-like-container">
       <div class="neighborhood">
-      {{ product.store.neighborhood }}
+        {% if product.hours_left >= 0 %}
+            {{ product.get_days_left }}
+        {% else %}
+            Off the Market!
+        {% endif %}
       </div>
-      <div class="actions hidden-xs">
-    <a href="https://www.pinterest.com/pin/create/button/
-        ?url=https://www.raredoor.com/piece/{{ product.slug }}&media={{ product.productimage_set.first.image.url }}&description={{ product.short_name }} | Rare Door"
-        data-pin-do="buttonPin"
-        data-pin-config="hide">
-        <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
-  </a>
-    <a href="#" id="heart_{{ product.id }}" class="glyphicon glyphicon-heart like-btn pull-right"><span>Like</span></a>
-
+      <div class="actions">
+        <a href="https://www.pinterest.com/pin/create/button/
+              ?url=https://www.raredoor.com/piece/{{ product.slug }}&media={{ product.productimage_set.first.image.url }}&description={{ product.short_name }} | Rare Door"
+              data-pin-do="buttonPin"
+              data-pin-config="hide">
+              <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
+        </a>
+        <a href="#" id="heart_{{ product.id }}" class="glyphicon glyphicon-heart like-btn pull-right"><span>Like</span></a>
       </div>
     </div>
     <div class="row" style="margin: 5% 0">

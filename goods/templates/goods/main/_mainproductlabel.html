@@ -18,7 +18,7 @@
         
         </div>
       <div class="name">
-	       {{ product.short_name|truncatechars:30 }} - <span style="font-style:italic">(in {{ product.store.neighborhood }})</span>
+	       {{ product.short_name|truncatechars:30 }} - <span style="font-style:italic">({{ product.store.neighborhood }})</span>
        </div>
           
 
@@ -29,7 +29,11 @@
     <!-- Like funtionality on hold until ProfileView implemented -->
     <div class="neighborhood-like-container">
       <div class="neighborhood">
-      {{ product.get_days_left }}
+        {% if product.hours_left >= 0 %}
+            {{ product.get_days_left }}
+        {% else %}
+            Off the Market
+        {% endif %}
       </div>
       <div class="actions">
       	<a href="https://www.pinterest.com/pin/create/button/

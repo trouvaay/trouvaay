@@ -70,6 +70,7 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
         
         # diff from liked_items context function in context_processors.py
         context['liked_products'] = user_activity.saved_items.exclude(id__in=[i.id for i in ordered_items])
+        context['OFFER_IS_ENABLED'] = settings.OFFER_IS_ENABLED
         return context
 
 

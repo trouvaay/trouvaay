@@ -2508,7 +2508,6 @@ form .form-checkbox-wrap .checkbox-label {
 .btn.btn-default.sold,
 .btn.btn-primary.buy,
 .btn.btn-danger.buy.reserve {
-  width: 30%;
   max-width: 140px;
   height: 2.75em;
   font-weight: 800;
@@ -2520,6 +2519,11 @@ form .form-checkbox-wrap .checkbox-label {
 .btn.btn-primary.buy.offer {
   background-color: green;
 }
+.btn.btn-primary.buy.profile {
+  width: 100%;
+  max-width: 100%
+}
+
 .btn.btn-success.dist {
   width: 60px;
   padding: 6px 10px;
