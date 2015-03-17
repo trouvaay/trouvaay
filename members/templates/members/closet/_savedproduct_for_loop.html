@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% load cloudinary %}
-<div class="col-xs-6 col-sm-6 col-md-4 product-container" id="saved-product-container_{{ product.id }}">
+<div class="col-xs-12 col-sm-6 col-md-4 product-container" id="saved-product-container_{{ product.id }}">
     <!--    <div class="vintage-label" style="text-align:center; margin-top: 5px; margin-bottom:-10px;"></div> -->
     <div class="grid-product centered-parent {% if product.is_vintage %}vintage-product{% endif %}">
         <!-- <img class="img-responsive" src="{{ product.productimage_set.first.image.url }}"> -->
