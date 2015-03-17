@@ -329,7 +329,7 @@ class Product(models.Model):
 
     def get_days_left(self):
         if self.hours_left / 24.0 > 1:
-            return ('{}days left'.format(int(math.ceil(self.hours_left / 24.0))))
+            return ('{} days left'.format(int(math.ceil(self.hours_left / 24.0))))
         else:
             return 'last day'
 

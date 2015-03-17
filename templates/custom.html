@@ -129,7 +129,7 @@ var trouvaay = {
                 data,
                 function(response){
                     if(response == 'loginrequired'){
-                        window.location.replace("{% url 'members:login' %}");
+                        $('.nav-login-button').click();
                     }
                 }
             );
@@ -343,7 +343,7 @@ function handleBuyButtonClick(e) {
                 {'id': productId},
                 function(response){
                     if(response == 'loginrequired'){
-                        window.location.replace("{% url 'members:login' %}");
+                        $('.nav-login-button').click();
                     } else if (response == 'success') {
                         var prodContainer = "reserved-product-container_" + productId;
                         $("#"+prodContainer).remove();
