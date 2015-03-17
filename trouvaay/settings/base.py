@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = 'bloopers'
 GOOG_MAP_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -151,6 +151,7 @@ CLICK_EXCLUSIONS = []
 SALES_TAX = Decimal('0.0875')
 FEATURE_NAME_RESERVE = "Reserve"
 FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-store. 3 reservation limit"
+FEATURE_TOOLTIP_OFFER = "Offer must be above minimum reserve price for this item.  Your card wont be charged until the retailer has received your offer. If offer is rejected your card will be refunded."
 TOOLTIP_HEART = "Save to your profile page."
 RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
@@ -159,12 +160,13 @@ RETURN_POLICY = {
 RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
 RESERVATION_PERIOD = 48  # hours
 
-
-# Offer settings
+LOGIN_MODAL_EXP = 3600 # seconds
+# Promotional Offer settings
 OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many seconds
 SIGNUP_OFFER = "Get 10% off your 1st purchase"
 
 RECENT_PRODUCT_AGE = 72  # products published less than this many hours ago qualify as recent
+SHELF_LIFE = 720 # hours
 
 
 # referral settings
@@ -173,6 +175,10 @@ ENABLE_REFERRAL = True
 LIMIT_REFERRAL_PER_CLIENT_ID = 3
 FIRST_REFERRAL_MODAL_EXP = 1  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
 SECOND_REFERRAL_MODAL_EXP = 1  # do not show second referral modal again within this many seconds
+
+# Purchase offer settings
+OFFER_THRESHOLD = Decimal('0.50')
+OFFER_IS_ENABLED = True
 
 # email settings are another good candidate to have
 # each developer define in their own dev_settings.py
@@ -192,6 +198,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = '380931628745745'
 SOCIAL_AUTH_FACEBOOK_SECRET = '5f84a4d1c72e2962331fb358d3685572'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['email', 'first_name', 'last_name']
+SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email']
 SOCIAL_AUTH_LOGIN_URL = LOGIN_URL
 SOCIAL_AUTH_LOGIN_ERROR_URL = LOGIN_URL
 SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL

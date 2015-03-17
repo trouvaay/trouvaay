@@ -8,31 +8,36 @@
 			<div class="modal-body">
 				<!-- this will make sigup and login show side by side -->
 				<div class="row">
-					{% block modalforms %}
-						Signup
-					<div class="form-group col-sm-6 text-center">	
-						<div class="text-center">
-							{% crispy signup_form %}
-						</div>
-					</div>
+				{% block modalforms %}
+                    <!-- Signup -->
+                    {% if signup_form %}
 
-					<!-- Login  -->
-					<div class="form-group col-sm-12 text-center login">	
-						<div class="text-center">
-							{% crispy login_form %}
-
-							
-							{% include 'members/auth/social_login.html' %}
-							
-							<div id="div_id_password" class="form-group">
-								<p><a href="{% url "auth_password_reset" %}">Forgot your password?</a></p>							
-							</div>
-						</div>
-						{% endblock %}						
-					</div>
+                    <div class="form-group col-sm-6 text-center">
+                        <div class="text-center">
+                        	<p><b>Signup</b></p>
+                            {% crispy signup_form %}
+                            <div>or</div>
+                            {% include 'members/auth/social_login.html' %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <!-- Login  -->
+                    </hr>
+                    {% if login_form %}
+                    <div class="form-group col-sm-6 text-center login"> 
+                        <div class="text-center">
+                        	<p><b>Login</b></p>
+                            {% crispy login_form %}
+                            
+                            <div id="div_id_password" class="form-group">
+                                <p><a href="{% url "auth_password_reset" %}">Forgot your password?</a></p>                          
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endblock %} 						
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /. end signup modal -->	
 </div>
-

@@ -45,6 +45,47 @@ def update_product_is_recent():
             product.save()
             print 'Marked product {0} as recent'.format(product.short_name)
 
+
+@sched.scheduled_job('interval', hours=1)
+def update_product_days_left():
+    """Updates product's days_left field and unpublishing product
+    if days_left is <= 0"""
+
+    # need the following because we are running
+    # this in a stand-alone script
+    # not part of the django application
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "trouvaay.settings.base")
+    import django
+    django.setup()  # this makes our django models available to our script
+
+    
+    from goods.models import Product
+    products = Product.objects.all()
+
+    for product in products:
+        print('working on product {}'.format(product.short_name))
+        # skip if product isnt published
+        if(not product.is_published):
+            print('skipping- its not published')
+            continue
+        else:
+            product.save()
+        # hours_left = product.hours_to_delist()
+        # print('{} hours left to delist'.format(hours_left))
+        # if(hours_left > 0):
+        #     product.hours_left = hours_left
+        #     # product.days_left = (delist_date - timezone.now()).days+1
+        #     # caculate days_left
+        #     product.save()
+        #     print 'Updated day_left for product {0} to {1}'.format(product.short_name, product.hours_left)
+        # else:
+        #     product.is_published = False
+        #     product.hours_left = None
+        #     product.pub_date = None
+        #     product.save()
+        #     print 'Delisted Product {0} '.format(product.short_name)
+
+
 # runs every 5 minutes of every hour of every day
 @sched.scheduled_job('cron', minute='0,5,10,15,20,25,30,35,40,45,50,55')
 def clear_expired_reservations():
@@ -67,6 +108,7 @@ def clear_expired_reservations():
         reservation.cancel_reservation()
         print 'Cleared expired reservation for product {0}'.format(reservation.order.product.short_name)
 
+
 @sched.scheduled_job('interval', hours=1)
 def calc_display_score():
     """Calculates display score for all products
@@ -85,12 +127,11 @@ def calc_display_score():
         product.calc_display_score()
 
 
-
-
 # sched.start()
 
 if __name__ == "__main__":
-    clear_expired_reservations()
-    update_product_is_recent()
-    calc_display_score()
+    # clear_expired_reservations()
+    # update_product_is_recent()
+    # calc_display_score()
+    update_product_days_left()
 

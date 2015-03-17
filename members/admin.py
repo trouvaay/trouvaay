@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
 from members.models import AuthUser, AuthUserActivity, \
-    PromotionOffer, Redemption, Join, Profile, AuthOrder, Reservation, Purchase, OrderAddress
+    PromotionOffer, Redemption, Join, Profile, AuthOrder, Reservation, Purchase, OrderAddress, Offer
 
 from django import forms
 
@@ -101,6 +101,10 @@ class PurchaseInline(admin.TabularInline):
     model = Purchase
     fields = ('authuser', 'taxes', 'original_price', 'transaction_price')
 
+class OfferInline(admin.TabularInline):
+    model = Offer
+    fields = ('authuser', 'taxes', 'original_price', 'offer_price', 'transaction_price',)
+
 class ReservationInline(admin.TabularInline):
     model = Reservation
     fields = ('authuser', 'reservation_price', 'is_active', 'reservation_expiration')
@@ -109,7 +113,7 @@ class AuthOrderAdmin(admin.ModelAdmin):
     model = AuthOrder
     list_display = ('product', 'authuser', 'order_type', 'created_at', 'updated_at', 'converted_from_reservation')
     fields = ('product', 'authuser', ('order_type', 'converted_from_reservation'), ('created_at', 'updated_at'))
-    inlines = (PurchaseInline, ReservationInline, OrderAddressInline)
+    inlines = (PurchaseInline, OfferInline, ReservationInline, OrderAddressInline)
 
     # def get_formsets_with_inlines(self, request, obj=None):
     #     for inline in self.get_inline_instances(request, obj):
@@ -126,6 +130,11 @@ class AuthOrderAdmin(admin.ModelAdmin):
 class PurchaseAdmin(admin.ModelAdmin):
     model = Purchase
     list_display = ('authuser', 'order', 'taxes', 'original_price', 'transaction_price')
+
+
+class OfferAdmin(admin.ModelAdmin):
+    model = Offer
+    list_display = ('authuser', 'order', 'taxes', 'original_price', 'offer_price', 'transaction_price')
 
 
 class ReservationAdmin(admin.ModelAdmin):
@@ -165,6 +174,7 @@ admin.site.register(AuthUser, AuthUserAdmin)
 admin.site.register(AuthUserActivity)
 admin.site.register(Join, JoinAdmin)
 admin.site.register(PromotionOffer, PromotionOfferAdmin)
-admin.site.register(Purchase)
+admin.site.register(Purchase, PurchaseAdmin)
+admin.site.register(Offer, OfferAdmin)
 admin.site.register(Redemption, RedemptionAdmin)
-admin.site.register(Reservation)
+admin.site.register(Reservation, ReservationAdmin)

@@ -15,6 +15,8 @@ from django.conf import settings
 from decimal import Decimal
 from members.models import PromotionOffer
 import logging
+from datetime import timedelta
+import math
 
 logger = logging.getLogger(__name__)
 
@@ -122,6 +124,7 @@ class Product(models.Model):
     manufacturer = models.CharField(max_length=25, null=True, blank=True)
     units = models.IntegerField(default=1)
     url = models.URLField(null=True, blank=True, max_length=255)
+    minimum_offer_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, default=None)
 
     # Dimensions & Attributes
     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
@@ -154,6 +157,7 @@ class Product(models.Model):
     is_published = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
     is_recent = models.BooleanField(default=True)
+    hours_left = models.IntegerField(default=settings.SHELF_LIFE, null=True, blank=True)
     is_landing = models.BooleanField(default=False)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
@@ -238,16 +242,36 @@ class Product(models.Model):
         
         self.display_score = score
         self.save()
-        
-
 
     def save(self, *args, **kwargs):
         self.lat = self.store.lat
         self.lng = self.store.lng
 
-        # Check to see if pub date us missing if item is published.
-        if self.is_published and (not self.pub_date):
-            self.pub_date = timezone.now()
+        # Check to see if pub date is missing if item is published.
+        if self.is_published:
+            if (not self.pub_date):
+                self.pub_date = timezone.now()
+
+            hours_left = self.hours_to_delist()
+            print('{} hours left to delist'.format(hours_left))
+            
+            if(hours_left > 0):
+                self.hours_left = hours_left
+                print 'Updated day_left for product {0} to {1}'.format(self.short_name, self.hours_left)
+            else:
+                self.is_published = False
+                self.hours_left = None
+                self.pub_date = None
+                print 'Delisted Product {0} '.format(self.short_name)
+        # if item is not published, pub_date should be blank
+        elif (not self.is_published):
+            self.pub_date = None
+            self.hours_left = None
+        else:
+            pass
+
+        if(self.minimum_offer_price is None):
+            self.minimum_offer_price = self.current_price * settings.OFFER_THRESHOLD
 
         # create slug once, only if we don't have it yet
         if(not self.slug):
@@ -295,6 +319,20 @@ class Product(models.Model):
             return int(time_lapse)
         else:
             return None
+
+    def hours_to_delist(self):
+        if self.is_published:
+            delist_date =  self.pub_date + timedelta(seconds=settings.SHELF_LIFE*3600)
+            delta = delist_date - timezone.now()
+            time_lapse = delta.total_seconds() // 3600
+            return int(time_lapse)
+
+    def get_days_left(self):
+        if self.hours_left / 24.0 > 1:
+            return ('{} days left'.format(int(math.ceil(self.hours_left / 24.0))))
+        else:
+            return 'last day'
+
 
     def has_returns(self):
         return self.store.has_returns

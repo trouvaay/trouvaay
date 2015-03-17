@@ -11,7 +11,7 @@
 						<fieldset>
 							<legend>
 								{% if buy_notavailable_message %}
-									<h2>Item not available</h2>
+									<h2>{% if buy_notavailable_header %}{{ buy_notavailable_header }}{% else %}Item not available{% endif %}</h2>
 								{% endif %}
 							</legend>
 							<div class="row">

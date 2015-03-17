@@ -26,5 +26,6 @@ def get_feature_context(request):
     return {
         'FEATURE_NAME_RESERVE': settings.FEATURE_NAME_RESERVE,
         'FEATURE_TOOLTIP_RESERVE': settings.FEATURE_TOOLTIP_RESERVE,
+        'FEATURE_TOOLTIP_OFFER': settings.FEATURE_TOOLTIP_OFFER,
         'TOOLTIP_HEART': settings.TOOLTIP_HEART
     }

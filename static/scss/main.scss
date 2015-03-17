@@ -1,11 +1,13 @@
 @import '_mixin';
 @import 'globals';
 @import 'fonts';
+@import 'ui';
 @import 'static-pages';
 
 @import 'header';
 @import 'index';
 @import 'about';
+@import 'detail';
 @import 'productpage';
 @import 'main-view';
 @import 'footer';

@@ -128,6 +128,12 @@ h4, h5, h6, .h4, .h5, .h6 {
   font-weight: 600;
   font-size: 1.1em;
 } 
+.neighborhood.detail {
+  color: rgb(218,182,97);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1em;
+} 
 .select-bar .hp-tabs {
 	padding: 0px;
 }
@@ -325,7 +331,6 @@ button.home-buttons > a > h5 {
 }
 .reserved,
 .sold {
-  font-weight: 600;
   color: rgb(235, 27, 27);
 }
 .icon-label {
@@ -515,6 +520,9 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   padding-bottom: 40px;
   min-height: 100%;
   margin-top: 10%
+}
+.container.detail {
+  margin-top: 8%;
 }
 .main-container.comment-block {
   padding-top: 0px 0 40px;
@@ -1020,6 +1028,13 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   border: black 2px solid;
   font-size: 16px;
   font-weight: 600;
+}
+.detail-neighborhood {
+  font-style: italic;
+}
+.product-description .heading .detail-neighborhood {
+  font-size: 12px;
+  font-weight: normal;
 }
 .product-description.hours .heading {
   float: left;
@@ -2504,19 +2519,27 @@ form .form-checkbox-wrap .checkbox-label {
   height: 32px;
 }
 .btn.btn-primary.buy {
-  width: 70px;
+  width: 100px;
 }
 .btn.btn-default.sold,
 .btn.btn-primary.buy,
 .btn.btn-danger.buy.reserve {
-  width: 40%;
   max-width: 140px;
-  height: 3em;
+  height: 2.75em;
+  font-weight: 800;
   /*background-color: rgb(201,177,62);*/
 }
 .btn.btn-primary.buy.reserve {
   background-color: black;
 }
+.btn.btn-primary.buy.offer {
+  background-color: green;
+}
+.btn.btn-primary.buy.profile {
+  width: 100%;
+  max-width: 100%
+}
+
 .btn.btn-success.dist {
   width: 60px;
   padding: 6px 10px;
@@ -4250,6 +4273,9 @@ footer ul li a:hover {
   .tooltip {
     display: none !important;
   }
+  .col-sm-5.product-description {
+    margin-top: 20px;
+  }
   .grid-product .view-product .hover-text {
     display: none;
   }
@@ -4443,6 +4469,16 @@ footer ul li a:hover {
   /*margin-left: 10%;*/
   max-width: 100%;
   }
+  .how-it-works .col-md-12.statement h3 {
+    font-size: 14px;
+  }
+  .how-it-works h4 {
+    padding: 0 5px;
+    font-size: 14px;
+  }
+  .how-it-works .statement {
+    margin-top: 15px;
+  }
   .product-container {
     padding-left: 0;
     padding-right: 0;
@@ -4507,9 +4543,6 @@ footer ul li a:hover {
   }
   .col-sm-7.product-description {
     width: 100%;
-  }
-  .col-sm-5.product-description {
-    margin-top: 20px
   }
   .info-block.image {
     margin-left: 25%;

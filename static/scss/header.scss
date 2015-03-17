@@ -12,14 +12,16 @@ header.top-bar {
   background: #333;
   line-height: 60px;
   height: 60px;
-  position: relative;
+  position: fixed;
   width: 100%;
+  top: 0px;
+  z-index: 10;
+  left: 0px;
 
   @include breakpoint(md) {
     height: 50px;
     position: fixed;
-    top: 0px;
-    z-index: 2;
+    z-index: 10;
     
     & + div {
       margin-top: 50px;
@@ -45,6 +47,14 @@ header.top-bar {
       margin-top: 16px;
     }
 
+    @include breakpoint(md) {
+      height: 50px;
+
+      img {
+        margin-top: 11px;
+      }
+    }
+
     @include breakpoint(sm) {
       text-align: center;
       height: 50px;
@@ -68,26 +78,78 @@ header.top-bar {
     font-family: "Ostrich Sans";
   }
 
-  a.about-us {
-    border: 1px solid #FFF;
+  a.btn {
     font-size: 17px;
     font-weight: 800;
-    padding: 5px 13px;
+    line-height: 17px;
     text-transform: uppercase;
+
+    padding: 5px 13px;
+
+    border: 1px solid #FFF;
+    border-radius: 0px;
+    
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -o-transition: all 0.1s;
+
+    
+
+    @include breakpoint(md) {
+      margin-top: -10px;
+    }
+
+    &:focus {
+      color: #FFF;
+    }
+
+    &:hover {
+      border-color: $gold;
+
+    }
 
   }
 
-  a.login {
+  a.btn + a.btn {
+    margin-left: 10px;
+
+  }
+
+  #filter-btn {
+      &:before {  
+          position: relative;
+          font-size: 21px;
+          line-height: 15px;
+          vertical-align: top;
+          top: 0px;
+          margin-right: 9px;
+          left: -2px;
+
+      }
+  }
+
+  .right-bottom-buttons-cnt {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    line-height: 25px;
+
+    a {
+      display: inline-block;
+    }
+
+  }
+
+  a.white-right-button {
     background-color: #FFF;
     color: #000;
-    position: absolute;
-    bottom: 0px;
+    font-weight: 800;
     padding: 0px 8px;
-    right: 0px;
-    height: 25px;
     line-height: 25px;
     width: 91px;
     text-align: center;
+    margin-right: 0px;
   }
 
   .mobile-about, .mobile-menu {
@@ -121,22 +183,50 @@ header.top-bar {
 
   }
 
-  .mobile-about {
-    label {
+  .icon-question-mark, a.icon-question-mark {
       background: #FFF;
       border-radius: 14px;
       color: #000;
+      font-size: 13px;
       
       width: 28px;
       height: 28px;
       min-width: 28px;
+      min-height: 28px;
+      position: relative;
+      
+      &:before {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        display: inline-block;
+        text-align: center;
+        width: 28px;
+        color: #000;
+        line-height: 28px;
+      }
       
       @include breakpoint(sm) {
-	      width: 24px;
-	      height: 24px;
-	      min-width: 24px;
+	      width: 28px;
+	      height: 28px;
+	      min-width: 28px;
+
+
+          &:before {
+            width: 28px;
+              left: -1px;
+          }
 
       }
+
+      &:focus {
+        color: #000;
+      }
+
+      
+    span {
+      display: none;
+
     }
   }
 
@@ -180,27 +270,6 @@ header.top-bar {
 
 }
 
-#how-it-works-mobile {
-  
-  @include breakpoint(sm) {
-    background: #FFF;
-    position: fixed;
-    top: 50px;
-    width: 100%;
-    z-index: 2;
-    padding-top: 30px;
-
-  }
-  .statement {
-    
-    text-align: center;
-
-    h3 {
-      font-size: 18px;
-    }
-  }
-}
-
 input#display-how-it-works {
   display: none;
 
@@ -233,12 +302,14 @@ input#mobile-menu-switch {
   position: fixed;
   top: 50px;
   left: 0px;
-  background: #FFF;
+  background: #EFEFEF;
   line-height: 30px;
-  padding: 10px 0px 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   z-index: 2;
 
   a {
     color: #000;
+    font-weight: 800;
   }
 }

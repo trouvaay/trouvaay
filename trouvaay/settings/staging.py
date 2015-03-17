@@ -11,7 +11,7 @@ SSLIFY_DISABLE = False
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
-DEBUG = False
+DEBUG = True
 #STATIC_ROOT = 'static'
 SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('SOCIAL_AUTH_FACEBOOK_KEY', None)
 SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('SOCIAL_AUTH_FACEBOOK_SECRET', None)
@@ -21,6 +21,8 @@ ENABLE_REFERRAL = False
 LIMIT_REFERRAL_PER_CLIENT_ID = 10
 FIRST_REFERRAL_MODAL_EXP = 1  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
 SECOND_REFERRAL_MODAL_EXP = 1
+
+OFFER_IS_ENABLED = False
 
 OFFER_MODAL_EXPIRATION = 10
 CLICK_EXCLUSIONS = ['blakesadams@gmail.com', 'adavis@goturnsile.co', 'and2eyes@gmail.com', 'brennaadams@gmail.com']

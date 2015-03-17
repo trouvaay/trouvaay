@@ -7,6 +7,7 @@ footer {
   letter-spacing: 1px;
   padding-top: 10px;
   padding-bottom: 10px;
+  overflow: hidden;
 
   @include breakpoint(md) {
     height: 130px;

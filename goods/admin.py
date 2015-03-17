@@ -64,15 +64,15 @@ class ProductImageAdmin(CustomAdmin):
 class ProductAdmin(CustomAdmin):
     model = Product
 
-    list_display = ['short_name', 'id', 'first_image', 'store', 'is_recent', 'display_score', 'click_count', 'is_published', 'is_featured', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date']
+    list_display = ['short_name', 'id', 'first_image', 'store', 'hours_left', 'display_score', 'click_count', 'is_published', 'is_featured', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date']
 
     fields = [('short_name', 'is_published', 'is_sold', 'is_featured'), ('store', 'units'),('original_price', 'current_price'), 
-                'pub_date', 'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),
+            'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),
                 'width', 'depth', 'height', 'seat_height', 'diameter', 'bed_size']
     inlines = [ProductImageInline, AuthOrderInline]
 
     search_fields = ['short_name', 'id']
-    list_filter = ['is_recent', 'store', 'is_published', 'furnituretype']
+    list_filter = ['store', 'is_published', 'furnituretype']
 
     list_editable = ['current_price', 'is_published', 'is_reserved', 'is_sold', 'is_featured', 'pub_date']
     
