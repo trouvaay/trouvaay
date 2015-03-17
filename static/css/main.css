@@ -791,15 +791,10 @@ input#mobile-menu-switch:checked + #mobile-menu {
     min-height: 165px;
   }
 }
-#index-banner img {
-  width: 100%;
-}
 @media (max-width: 767px) {
   #index-banner img {
-    width: 766px;
-    position: absolute;
-    left: 50%;
-    margin-left: -383px;
+    width: 1667px;
+    max-width: inherit;
   }
 }
 #index-banner a {
@@ -827,13 +822,22 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 #index-banner .text-container {
-  position: absolute;
+  position: relative;
   /*left: 50%;*/
-  top: 0px;
   width: 100%;
   height: 100%;
-  padding-left: 35px;
   /*margin-left: -585px;*/
+}
+#index-banner .text-container .text {
+  position: absolute;
+  top: 50%;
+  margin-top: -35px;
+  padding-left: 35px;
+}
+@media (max-width: 767px) {
+  #index-banner .text-container .text {
+    width: 100%;
+  }
 }
 #index-banner .text-container.landingtest {
   margin-top: 30px;
@@ -867,7 +871,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   font-size: 24px;
   color: #FFF;
-  top: 25%;
+  top: 128px;
   position: relative;
 }
 #index-banner .text > * {
@@ -895,6 +899,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 
 #how-it-works {
   background: #91c3c3;
+}
+@media (max-width: 767px) {
+  #how-it-works {
+    display: none;
+  }
 }
 
 #how-it-works, #how-it-works-mobile {
