@@ -515,6 +515,9 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   min-height: 100%;
   margin-top: 10%
 }
+.container.detail {
+  margin-top: 8%;
+}
 .main-container.comment-block {
   padding-top: 0px 0 40px;
 }
