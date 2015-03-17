@@ -1217,6 +1217,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
+.grid-products-wrapper .product-container.saved {
+  height: 509px;
+}
 .grid-products-wrapper .product-container:hover {
   background: #FFF;
   box-shadow: #AAA 0px 0px 5px;
