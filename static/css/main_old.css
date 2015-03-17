@@ -4267,6 +4267,9 @@ footer ul li a:hover {
   .tooltip {
     display: none !important;
   }
+  .col-sm-5.product-description {
+    margin-top: 20px;
+  }
   .grid-product .view-product .hover-text {
     display: none;
   }
@@ -4534,9 +4537,6 @@ footer ul li a:hover {
   }
   .col-sm-7.product-description {
     width: 100%;
-  }
-  .col-sm-5.product-description {
-    margin-top: 20px
   }
   .info-block.image {
     margin-left: 25%;

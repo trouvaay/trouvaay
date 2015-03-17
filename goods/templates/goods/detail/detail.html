@@ -8,7 +8,7 @@
 <section class="container detail">
     <div class="container-fluid detail-margin" id="first-content-after-nav">
         <div class="row">
-            <div class="col-sm-7 col-xs-12" style="text-align:center">
+            <div class="col-sm-6 col-xs-12" style="text-align:center">
                 <div class="row">
                 
                 </div>
@@ -29,7 +29,7 @@
 		
 	</ul>
             </div>
-            <div class="col-sm-5 col-xs-12 product-description">
+            <div class="col-sm-6 col-xs-12 product-description">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="heading">{{ product.short_name }}</br><span class="detail-neighborhood">({{ product.store.neighborhood }})</span></div></br>
@@ -43,7 +43,7 @@
                            </div>
                         </div>
                         <div class="row">
-                           <div id="first" class="col-xs-5 product-description">
+                           <div id="first" class="col-xs-3 product-description">
                               <em><p>
                                 {% if product.current_price %}
                                     {% if product.is_sold %}
@@ -59,23 +59,20 @@
                                 {% endif %}
                               </em></p>
                            </div>
-                           <div class="col-xs-6">
+                           <div class="col-xs-5">
                               <span class="neighborhood">{{ product.get_days_left }}</span>
                            </div>
-                        </div>   
-                        <div class="row product-description">
-                          <div class="col-xs-3">
-                             <a href="https://www.pinterest.com/pin/create/button/
-                                  ?url=https://www.raredoor.com/piece/{{ product.slug }}&media={{ product.productimage_set.first.image.url }}&description={{ product.short_name }} | Rare Door"
-                                  data-pin-do="buttonPin"
-                                  data-pin-config="hide">
-                                  <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
-                            </a>
-                          </div>
-                           <div class="col-xs-2 pull-right">
-                                <a href="" id="heart_{{ product.id }}" class="glyphicon glyphicon-heart like-btn pull-right" title="{{ TOOLTIP_HEART }}" data-toggle="tooltip"><span>Like</span></a>
+                            <div class="col-xs-3">
+                               <a href="https://www.pinterest.com/pin/create/button/
+                                    ?url=https://www.raredoor.com/piece/{{ product.slug }}&media={{ product.productimage_set.first.image.url }}&description={{ product.short_name }} | Rare Door"
+                                    data-pin-do="buttonPin"
+                                    data-pin-config="hide">
+                                    <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
+                              </a>
+                              <a href="" id="heart_{{ product.id }}" class="glyphicon glyphicon-heart like-btn pull-right" title="{{ TOOLTIP_HEART }}" data-toggle="tooltip"><span>Like</span></a>
                             </div>
-                        </div>
+                        </div>   
+                        
                         <div class="row" style="margin-bottom: 8%">
                             <!-- Start Product labeling -->
                             <div class="col-xs-12 pic-detail-home">

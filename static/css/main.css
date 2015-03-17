@@ -1187,6 +1187,28 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding-right: 20px;
 }
 
+.product-description .heading {
+  float: left;
+  color: white;
+  width: 100%;
+  padding: 12px 10%;
+  letter-spacing: 2px;
+  background: none;
+  color: black;
+  border: black 2px solid;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 25px;
+}
+@media (max-width: 767px) {
+  .product-description .heading {
+    padding: 12px 5%;
+    max-width: 500px;
+    text-align: center;
+    margin-top: 2em;
+  }
+}
+
 .rslides img {
   float: none;
   max-width: 100%;
