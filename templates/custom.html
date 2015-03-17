@@ -228,7 +228,9 @@ function handleBuyButtonClick(e) {
 	                promo_code: promoCode
 			}
 			
-			if(typeof($("#order-buy-or-offer")) != "undefined" && $("#order-buy-or-offer").text() == "offer"){
+			if(typeof($("#order-buy-or-offer")) != "undefined" && 
+				$("#order-buy-or-offer").text() == "offer" &&
+				e.target.id.substr(0, 18) == 'buy_withpromocode_'){
 				buyUrl = "{% url "members:offer" %}";
 				orderType = 'offer';
 				dataToSubmit = {
