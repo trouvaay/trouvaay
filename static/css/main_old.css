@@ -128,6 +128,12 @@ h4, h5, h6, .h4, .h5, .h6 {
   font-weight: 600;
   font-size: 1.1em;
 } 
+.neighborhood.detail {
+  color: rgb(218,182,97);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1em;
+} 
 .select-bar .hp-tabs {
 	padding: 0px;
 }

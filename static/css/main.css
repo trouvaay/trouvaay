@@ -1206,6 +1206,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     max-width: 500px;
     text-align: center;
     margin-top: 2em;
+    font-size: 14px;
   }
 }
 
