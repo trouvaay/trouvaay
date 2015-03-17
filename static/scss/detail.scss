@@ -1,0 +1,25 @@
+.product-description {
+  
+  .heading {
+    float: left;
+    color: white;
+    width: 100%;
+    padding: 12px 10%;
+    letter-spacing: 2px;
+    background: none;
+    color: black;
+    border: black 2px solid;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 25px;
+
+    @include breakpoint(sm) {
+      padding: 12px 5%;
+      max-width: 500px;
+      text-align: center;
+      margin-top: 2em;
+      font-size: 14px;
+    }
+  }
+
+}
