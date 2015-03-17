@@ -1020,6 +1020,13 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
   font-size: 16px;
   font-weight: 600;
 }
+.detail-neighborhood {
+  font-style: italic;
+}
+.product-description .heading .detail-neighborhood {
+  font-size: 12px;
+  font-weight: normal;
+}
 .product-description.hours .heading {
   float: left;
   color: rgb(218,182,97);
@@ -2503,7 +2510,7 @@ form .form-checkbox-wrap .checkbox-label {
   height: 32px;
 }
 .btn.btn-primary.buy {
-  width: 70px;
+  width: 100px;
 }
 .btn.btn-default.sold,
 .btn.btn-primary.buy,

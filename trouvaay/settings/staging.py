@@ -22,6 +22,8 @@ LIMIT_REFERRAL_PER_CLIENT_ID = 10
 FIRST_REFERRAL_MODAL_EXP = 1  # do not show first referral modal again within this many seconds, 86400 seconds is 1 day
 SECOND_REFERRAL_MODAL_EXP = 1
 
+OFFER_IS_ENABLED = False
+
 OFFER_MODAL_EXPIRATION = 10
 CLICK_EXCLUSIONS = ['blakesadams@gmail.com', 'adavis@goturnsile.co', 'and2eyes@gmail.com', 'brennaadams@gmail.com']
 SECRET_KEY = os.getenv('SECRET_KEY', None)
