@@ -78,6 +78,11 @@ document.createElement( "picture" );
   <!-- End Pinterest Verification -->
 {% block beginjs %}{% endblock beginjs %}
 {% analytical_head_bottom %}
+<script type="text/javascript">
+    if (window.location.hash && window.location.hash == '#_=_') {
+        window.location.hash = '';
+    }
+</script>
 </head>
 <body class="{% block bodyclass %}{% endblock %}">
 
