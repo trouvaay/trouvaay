@@ -77,7 +77,7 @@ def send_email_from_template(to_email, context, subject_template, plain_text_bod
                                            body=message_txt, 
                                            from_email=settings.DEFAULT_FROM_EMAIL, 
                                            to=[to_email], 
-                                           bcc=[settings.DEFAULT_FROM_EMAIL])
+                                           bcc=[settings.DEFAULT_BCC_EMAIL])
 
     if(html_body_template):
         message_html = render_to_string(html_body_template, context)

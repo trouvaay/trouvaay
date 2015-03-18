@@ -70,20 +70,6 @@ def update_product_days_left():
             continue
         else:
             product.save()
-        # hours_left = product.hours_to_delist()
-        # print('{} hours left to delist'.format(hours_left))
-        # if(hours_left > 0):
-        #     product.hours_left = hours_left
-        #     # product.days_left = (delist_date - timezone.now()).days+1
-        #     # caculate days_left
-        #     product.save()
-        #     print 'Updated day_left for product {0} to {1}'.format(product.short_name, product.hours_left)
-        # else:
-        #     product.is_published = False
-        #     product.hours_left = None
-        #     product.pub_date = None
-        #     product.save()
-        #     print 'Delisted Product {0} '.format(product.short_name)
 
 
 # runs every 5 minutes of every hour of every day
@@ -130,8 +116,8 @@ def calc_display_score():
 # sched.start()
 
 if __name__ == "__main__":
-    # clear_expired_reservations()
-    # update_product_is_recent()
-    # calc_display_score()
+    clear_expired_reservations()
+    update_product_is_recent()
+    calc_display_score()
     update_product_days_left()
 

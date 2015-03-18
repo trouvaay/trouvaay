@@ -186,6 +186,7 @@ OFFER_IS_ENABLED = True
 GMAIL_EMAIL =''
 GMAIL_PASSWORD = ''
 DEFAULT_FROM_EMAIL = ''  # e.g. 'support@raredoor.com'
+DEFAULT_BCC_EMAIL = ''  # e.g. 'support@raredoor.com'
 EMAIL_HOST = ''  # 'smtp.gmail.com'
 EMAIL_PORT = ''  # 587 - for gmail
 EMAIL_HOST_USER = ''  # e.g. 'support@raredoor.com'

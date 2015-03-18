@@ -494,6 +494,7 @@ class Purchase(PurchaseBase):
 class Offer(PurchaseBase):
     order = models.OneToOneField(AuthOrder, related_name='offer')
     offer_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, help_text='Price offered by user')
+    is_captured = models.BooleanField(default=False)
 
     @classmethod
     def create_offer(cls, order, taxes, transaction_price, offer_price):

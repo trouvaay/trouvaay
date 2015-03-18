@@ -257,21 +257,27 @@ class Product(models.Model):
             
             if(hours_left > 0):
                 self.hours_left = hours_left
-                print 'Updated day_left for product {0} to {1}'.format(self.short_name, self.hours_left)
+                print 'Updated hours_left for product {0} to {1}'.format(self.short_name, self.hours_left)
             else:
                 self.is_published = False
                 self.hours_left = None
                 self.pub_date = None
                 print 'Delisted Product {0} '.format(self.short_name)
+        
         # if item is not published, pub_date should be blank
         elif (not self.is_published):
             self.pub_date = None
             self.hours_left = None
+        # Update is_recent Field
         else:
-            pass
+            if((self.pub_date <= (timezone.now() - timedelta(hours=settings.RECENT_PRODUCT_AGE))) and self.is_recent):
+                self.is_recent = False
 
-        if(self.minimum_offer_price is None):
-            self.minimum_offer_price = self.current_price * settings.OFFER_THRESHOLD
+            elif((self.pub_date > (timezone.now() - timedelta(hours=settings.RECENT_PRODUCT_AGE))) and (not self.is_recent)):
+                self.is_recent = True
+
+        #Update minimumim_offer_price field
+        self.minimum_offer_price = self.current_price * settings.OFFER_THRESHOLD
 
         # create slug once, only if we don't have it yet
         if(not self.slug):

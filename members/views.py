@@ -492,8 +492,8 @@ class BuyView(generic.DetailView):
             elif(request.method == 'POST'):
                 offer_price = request.POST.get('offer_price', None)
             if(offer_price is None):
-                offer_header = "Offer Rejected"
-                offer_message = "You did not submit an offer price."
+                offer_header = "No Offer Submitted"
+                offer_message = "Please submit offer price."
                 return is_offer, offer_price, is_offer_accepted, offer_header, offer_message
     
             try:
@@ -505,7 +505,7 @@ class BuyView(generic.DetailView):
     
             if(offer_price < product.minimum_offer_price):
                 offer_header = "Offer Rejected"
-                offer_message = "Your offer was rejected because it is too low."
+                offer_message = "Sorry your offer was rejected because it is too low."
                 return is_offer, offer_price, is_offer_accepted, offer_header, offer_message
 
             is_offer_accepted = True

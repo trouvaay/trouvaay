@@ -241,8 +241,6 @@ $(document).ready(function() {
 						},
 						success: function(data){
 							
-							
-
 							console.log('Buy callback returned: ' + data['status']);
 						
 						  	if(data['status'] == "ok"){
@@ -289,7 +287,7 @@ $(document).ready(function() {
 								});
 								
 								if(data['ask_phone']){
-									console.log('we have a post checkout form');
+									console.log('We need to ask for phone on post checkout form');
 									$("#id_email").val(data['email'])
 									$("#id_post_checkout_hash").val(data['post_checkout_hash'])
 									$("#post-checkout-form-contents").show();
@@ -297,7 +295,7 @@ $(document).ready(function() {
 								}
 								else{
 									$("#post-checkout-form-contents").hide();
-									console.log('no post checkout form');
+									console.log('we dont need phone on post checkout form');
 								}
 						  	}
 						},

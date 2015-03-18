@@ -103,7 +103,7 @@ class PurchaseInline(admin.TabularInline):
 
 class OfferInline(admin.TabularInline):
     model = Offer
-    fields = ('authuser', 'taxes', 'original_price', 'offer_price', 'transaction_price',)
+    fields = ('authuser', 'taxes', 'original_price', 'offer_price', 'transaction_price','is_captured')
 
 class ReservationInline(admin.TabularInline):
     model = Reservation
@@ -115,17 +115,16 @@ class AuthOrderAdmin(admin.ModelAdmin):
     fields = ('product', 'authuser', ('order_type', 'converted_from_reservation'), ('created_at', 'updated_at'))
     inlines = (PurchaseInline, OfferInline, ReservationInline, OrderAddressInline)
 
-    # def get_formsets_with_inlines(self, request, obj=None):
-    #     for inline in self.get_inline_instances(request, obj):
-    #         # FILTER THE INLINE FORMSET TO YIELD HERE 
-    #         # For example, given obj.related_instances value
-    #         if inline == OrderAddressInline:
-    #             yield inline.get_formset(request, obj), inline
+    def get_formsets_with_inlines(self, request, obj=None):
+        for inline in self.get_inline_instances(request, obj):
+            # FILTER THE INLINE FORMSET TO YIELD HERE 
+            # For example, given obj.related_instances value
+            if inline == OrderAddressInline:
+                yield inline.get_formset(request, obj), inline
 
-    #         elif inline.model.objects.filter(order=obj):
-    #             yield inline.get_formset(request, obj), inline
+            elif inline.model.objects.filter(order=obj):
+                yield inline.get_formset(request, obj), inline
                 
-
 
 class PurchaseAdmin(admin.ModelAdmin):
     model = Purchase
@@ -134,7 +133,7 @@ class PurchaseAdmin(admin.ModelAdmin):
 
 class OfferAdmin(admin.ModelAdmin):
     model = Offer
-    list_display = ('authuser', 'order', 'taxes', 'original_price', 'offer_price', 'transaction_price')
+    list_display = ('authuser', 'order', 'taxes', 'original_price', 'offer_price', 'transaction_price','is_captured')
 
 
 class ReservationAdmin(admin.ModelAdmin):

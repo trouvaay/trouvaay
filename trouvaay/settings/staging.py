@@ -35,6 +35,7 @@ ANALYTICAL_INTERNAL_IPS = ('ANALYTICAL_INTERNAL_IPS', None)
 GMAIL_EMAIL = os.getenv('GMAIL_EMAIL', None)
 GMAIL_PASSWORD = os.getenv('GMAIL_PASSWORD', None)
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', None)
+DEFAULT_BCC_EMAIL = DEFAULT_FROM_EMAIL
 EMAIL_HOST = os.getenv('EMAIL_HOST', None)  # 'smtp.gmail.com'
 EMAIL_PORT = os.getenv('EMAIL_PORT', None)  # 587 - for gmail
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', None)  # e.g. 'support@raredoor.com'
