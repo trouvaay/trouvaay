@@ -33,15 +33,9 @@
 							<div class="row">
 							<div class="col-xs-12">
 								<table class="table">
-							      	<thead>
-							        	<tr>
-							          		<th>Product</th>
-							          		<td align="right"><strong>Price</strong></td>
-							        	</tr>
-							      	</thead>
 							      	<tbody>
 										<tr>
-											<th scope="row">Asking Price</th>
+											<th scope="row">{% if is_offer %}Asking{% endif %} Price</th>
 											<td align="right">${{ product.current_price|floatformat:2 }}</td>
 										</tr>
 										{% if is_offer %}
@@ -72,16 +66,18 @@
 											<th scope="row">Subtotal</th>
 											<td align="right">${{ subtotal_dollar_value|floatformat:2 }}</td>
 										</tr>
-										{% if not promo_is_valid %}
-										<tr>
-											<th scope="row">
-												{% if promo_code_message %}<label style="color:red" for="input-promo-code"><b>{{ promo_code_message }}</b></label>{% endif %}
-												<input type="text" name="promo_code" id="input-promo-code" placeholder="Promo code" /></th>
-											<td align="right"><button id="buy_withpromocode_{{ product.id }}" 
-													type="button" class="btn btn-primary btn-xs apply-promo-code">Apply</button></td>
-										</tr>
-										{% endif %}
-										{% if can_enter_promo_code %}
+										{% if not is_offer %}
+											{% if not promo_is_valid %}
+											<tr>
+												<th scope="row">
+													{% if promo_code_message %}<label style="color:red" for="input-promo-code"><b>{{ promo_code_message }}</b></label>{% endif %}
+													<input type="text" name="promo_code" id="input-promo-code" placeholder="Promo code" /></th>
+												<td align="right"><button id="buy_withpromocode_{{ product.id }}" 
+														type="button" class="btn btn-primary btn-xs apply-promo-code">Apply</button></td>
+											</tr>
+											{% endif %}
+											{% if can_enter_promo_code %}
+											{% endif %}
 										{% endif %}
 										{% if taxes %}
 										<tr>
