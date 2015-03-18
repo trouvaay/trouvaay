@@ -238,12 +238,43 @@ document.createElement( "picture" );
                                 <!-- <span class="hide">Close</span> -->
                             </button>
                         <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-                            <p class="text-center" style="text-align:center"><h2 style="text-align:center">Thank you for your <span id="product-purchase-try">reservation</span><span id="product-purchase-buy" style="display:none">purchase</span></h2></p>
+                            <p class="text-center" style="text-align:center"><h2 style="text-align:center">Thank you for your <span id="product-purchase-try">reservation</span><span id="product-purchase-buy" style="display:none">purchase</span><span id="product-purchase-offer">offer</span></h2></p>
                         </div>
                         <div class="text-center">
                             <h5>You will recieve an order confirmation via email and hear from us shortly to coordinate pickup</h5>
                             <div id="post-checkout-form-contents">
                                 <h5>Please enter your phone number</h5>
+                                <form  action="{% url "members:post_checkout_update" %}" id="form-post-checkout" method="post" >{% csrf_token %}
+                                    <input id="id_email" name="email" type="hidden" />
+                                    <input id="id_post_checkout_hash" name="post_checkout_hash" type="hidden" />
+                                    <div id="div_id_phone" class="form-group">
+                                        <div class="controls ">
+                                            <input class="textinput textInput form-control" id="id_phone" name="phone" placeholder="Phone number" type="text" />
+                                        </div>
+                                    </div>
+                                    <input type="button" name="post-checkout" value="Submit" class="btn btn-success" id="button-id-post-checkout">
+                                </form>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+              </div>
+          </div>
+          <div class="modal" id="offer-post-checkout-modal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px; padding-bottom:2px">
+                                <span aria-hidden="true">&times;</span>
+                                <!-- <span class="hide">Close</span> -->
+                            </button>
+                        <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+                            <p class="text-center" style="text-align:center"><h2 style="text-align:center">Thank you for your offer</h2></p>
+                        </div>
+                        <div class="text-center">
+                            <h5>We are notifying the retailer carrying your piece.</br>You card has not been charged.</h5>
+                            <div id="post-checkout-form-contents">
+                                <h5>Please enter your phone number for us to follow up if it is accepted.</h5>
                                 <form  action="{% url "members:post_checkout_update" %}" id="form-post-checkout" method="post" >{% csrf_token %}
                                     <input id="id_email" name="email" type="hidden" />
                                     <input id="id_post_checkout_hash" name="post_checkout_hash" type="hidden" />

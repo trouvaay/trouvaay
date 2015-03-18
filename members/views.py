@@ -719,14 +719,14 @@ class BuyView(generic.DetailView):
             json_result = {
                 'status': 'ok',
                 'product_name': product.short_name,
-                'image_src': product.productimage_set.first().image.build_url(width=200, height=200, crop="fit"),
                 'store_name': product.store.retailer.short_name,
                 'store_street': product.store.street,
                 'store_street2': product.store.street2 if product.store.street2 else '',
                 'store_city': product.store.city,
                 'store_state': product.store.state,
                 'store_zipcode': product.store.zipcd,
-                'ask_phone': False
+                'ask_phone': False,
+                'is_offer': is_offer_accepted
             }
 
             if(not order.authuser.profile.phone):

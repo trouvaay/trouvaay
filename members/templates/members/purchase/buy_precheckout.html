@@ -279,12 +279,22 @@ $(document).ready(function() {
 								$("#reserved-product-capture-date").hide();
 								$("#product-purchase-try").hide();
 								$("#product-purchase-buy").show();
+
+								if(data['is_offer']) {
+									$("#offer-post-checkout-modal").modal({
+										show: true,
+										keyboard: true
+									})
+								}
+								else {
+									$("#post-checkout-modal").modal({
+										show: true,
+										keyboard: true
+									})	
+								}
 								
-								$("#reserved-product-image").attr('src', (data['image_src']));
-								$("#post-checkout-modal").modal({
-									show: true,
-									keyboard: true
-								});
+								// $("#reserved-product-image").attr('src', (data['image_src']));
+								
 								
 								if(data['ask_phone']){
 									console.log('We need to ask for phone on post checkout form');
