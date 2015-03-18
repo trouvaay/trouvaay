@@ -836,6 +836,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #index-banner .text-container .text {
+    padding-left: 10px;
     width: 100%;
   }
 }
@@ -1487,7 +1488,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 480px) {
   .grid-products-wrapper .grid-product {
-    height: 165px;
+    height: 284px;
     padding: 0px;
   }
 }
@@ -1513,7 +1514,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 480px) {
   .grid-products-wrapper .grid-product .centered-child img {
-    max-height: 165px;
+    max-height: 284px;
   }
 }
 .grid-products-wrapper .grid-product .view-product {

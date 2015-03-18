@@ -72,6 +72,7 @@
         padding-left: 35px;
 
         @include breakpoint(sm) {
+            padding-left: 10px;
             width: 100%;
         }
     }
