@@ -12,6 +12,7 @@ SSLIFY_DISABLE = False
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 DEBUG = os.getenv('DEBUG', False)
+DEBUG = True
 #STATIC_ROOT = 'static'
 SOCIAL_AUTH_FACEBOOK_KEY = os.getenv('SOCIAL_AUTH_FACEBOOK_KEY', None)
 SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('SOCIAL_AUTH_FACEBOOK_SECRET', None)
