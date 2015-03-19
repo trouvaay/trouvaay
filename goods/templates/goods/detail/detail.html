@@ -73,8 +73,7 @@
                         </div>   
                         
                         <div class="row" style="margin-bottom: 8%">
-                            <!-- Start Product labeling -->
-                            <div class="col-xs-12 pic-detail-home">
+                          <div class="col-xs-12 pic-detail-home" style="text-align: center">
                                 <!-- need these so that we can pass product name and price to stripe checkout -->
                                 <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
                                 <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
@@ -82,17 +81,25 @@
                                 {% if product.is_sold %}
                                 {% elif product.is_reserved %}
                                 {% elif product.current_price %}
-                                    <button type="button" class="btn btn-primary buy buy" id="buy_{{ product.id }}">
-                                        Buy
-                                    </button>
-                                    {% if OFFER_IS_ENABLED %}
-                                      <button type="button" class="btn btn-primary buy offer" id="offer_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_OFFER }}">
-                                          Make Offer
-                                      </button>
-                                    {% endif %}
-                                    <button type="button" class="btn btn-primary buy reserve" id="reserve_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_RESERVE }}">
-                                        {{ FEATURE_NAME_RESERVE }}
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-md-4" style="margin-bottom: 10px">                      
+                                            <button type="button" class="btn btn-primary buy buy profile" id="buy_{{ product.id }}">
+                                                Buy
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-6 col-md-4">                      
+                                            <button type="button" class="btn btn-primary buy reserve profile" id="reserve_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_RESERVE }}">
+                                                {{ FEATURE_NAME_RESERVE }}
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-12 col-md-4">                      
+                                            {% if OFFER_IS_ENABLED %}
+                                              <button type="button" class="btn btn-primary buy offer profile" id="offer_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_OFFER }}">
+                                                  Make an Offer
+                                              </button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 {% else %}
                                     <button type="button" class="btn btn-primary request" id="buy_{{ product.id }}">
                                     Request Price
@@ -100,6 +107,7 @@
                                 {% endif %}
                             </div>
                         </div>
+
                         <!-- End Product labeling -->
                         <!-- Start Product Attributes -->
                         <div>
