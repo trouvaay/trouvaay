@@ -66,8 +66,8 @@
   font-size: 20px;
 }
 .btn.btn-default.sold, .btn.btn-primary.buy, .btn.btn-danger.buy.reserve {
-  width: 30%;
   max-width: 140px;
+  min-width: 90px;
   height: 2.75em;
   font-weight: 800;
   /* background-color: rgb(201,177,62); */
@@ -75,7 +75,10 @@
 .btn.btn-primary.buy.reserve {
   background-color: black;
 }
-
+.btn.btn-primary.buy.profile {
+  width: 100%;
+  max-width: 100%;
+}
 .attr {
   font-size: 14px;
   line-height: 50px;
