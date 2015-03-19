@@ -6,8 +6,6 @@ latest.dump
 *.log
 *.orig
 dev_settings.py
-staging.py
-production.py
 dev_config.py
 node_modules/*
 fixtures/orders.json
