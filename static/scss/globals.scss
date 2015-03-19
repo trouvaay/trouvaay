@@ -6,72 +6,100 @@ $product-title-border: #7f7f7f;
 $light-brown-gray: #989190;
 $yellow: #e6be46;
 
+body {
+    font-size: 13px;
+    font-family: 'ralewaylight';
+}
+
+h4 {
+    font-family: 'ralewaylight';
+}
+
+
+.discount {
+    color: rgb(235, 27, 27);
+    font-weight: 600px;
+}
+
+.neighborhood {
+    
+              color: rgb(218,182,97);
+              font-style: italic;
+              font-weight: 600;
+          }
 a:focus {
     text-decoration: none;
 }
+.btn.btn-primary {
+  background-color: #0080b7;
+  border-color: #0080b7;
+}
+.btn.btn-primary.buy.offer {
+  background-color: green;
+}
 
 .arrow-link {
-  font-family: "Ostrich Sans";
-  font-weight: 800;
-  letter-spacing: 1px;
+    font-family: "Ostrich Sans";
+    font-weight: 800;
+    letter-spacing: 1px;
 
-  &:before {
-    content: 'i';
-    font-size: 33px;
-    display: inline-block;
-    position: relative;
-    top: 6px;
-    margin-right: 11px;
+    &:before {
+        content: 'i';
+        font-size: 33px;
+        display: inline-block;
+        position: relative;
+        top: 6px;
+        margin-right: 11px;
 
 
-    font-family: "raredoor" !important;
-    font-style: normal !important;
-    font-weight: normal !important;
-    font-variant: normal !important;
-    text-transform: none !important;
-    speak: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+        font-family: "raredoor" !important;
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-variant: normal !important;
+        text-transform: none !important;
+        speak: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
 
-  }
+    }
 
-  &:hover {
-    text-decoration: none;
-  }
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 .social-icons {
-  a {
-    span {
-      display: none;
+    a {
+        span {
+            display: none;
 
+        }
     }
-  }
 
 }
 
 
 html, body {
-  height: 100%;
-  -webkit-font-smoothing: antialiased;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
 }
 
 .wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -150px;
-  
-  @include breakpoint(md) {
-    margin: 0 auto -70px;
-  }
-  
-  @include breakpoint(xs) {
-    margin: 0 auto -130px;
-  }
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -150px;
+
+    @include breakpoint(md) {
+        margin: 0 auto -70px;
+    }
+
+    @include breakpoint(xs) {
+        margin: 0 auto -130px;
+    }
 }
 
 .like-btn span {
-  display: none;
+    display: none;
 }

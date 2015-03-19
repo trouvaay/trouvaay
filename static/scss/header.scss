@@ -17,6 +17,7 @@ header.top-bar {
   top: 0px;
   z-index: 10;
   left: 0px;
+  padding: 0px 15px;
 
   @include breakpoint(md) {
     height: 50px;
@@ -58,6 +59,7 @@ header.top-bar {
     @include breakpoint(sm) {
       text-align: center;
       height: 50px;
+      padding-top: 3px;
 
       img {
 	margin-top: 10px;
