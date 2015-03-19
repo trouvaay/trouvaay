@@ -147,7 +147,7 @@ function handlePostCheckoutClick(e){
 		data: $("#form-post-checkout").serialize(),
 		dataType: "html",
 		success: function(response, status){
-			$("#post-checkout-form-contents").html(response);
+			$(".post-checkout-form-contents").html(response);
 		},
 	});
 	e.preventDefault();

@@ -242,7 +242,7 @@ document.createElement( "picture" );
                         </div>
                         <div class="text-center">
                             <h5>You will recieve an order confirmation via email and hear from us shortly to coordinate pickup</h5>
-                            <div id="post-checkout-form-contents">
+                            <div class="post-checkout-form-contents">
                                 <h5>Please enter your phone number</h5>
                                 <form  action="{% url "members:post_checkout_update" %}" id="form-post-checkout" method="post" >{% csrf_token %}
                                     <input id="id_email" name="email" type="hidden" />
@@ -273,7 +273,7 @@ document.createElement( "picture" );
                         </div>
                         <div class="text-center">
                             <h5>We are notifying the retailer carrying your piece.</br>You card has not been charged.</h5>
-                            <div id="post-checkout-form-contents">
+                            <div class="post-checkout-form-contents">
                                 <h5>Please enter your phone number for us to follow up if it is accepted.</h5>
                                 <form  action="{% url "members:post_checkout_update" %}" id="form-post-checkout" method="post" >{% csrf_token %}
                                     <input id="id_email" name="email" type="hidden" />

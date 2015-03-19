@@ -299,11 +299,11 @@ $(document).ready(function() {
 									console.log('We need to ask for phone on post checkout form');
 									$("#id_email").val(data['email'])
 									$("#id_post_checkout_hash").val(data['post_checkout_hash'])
-									$("#post-checkout-form-contents").show();
+									$(".post-checkout-form-contents").show();
 									$('#button-id-post-checkout').on('click', handlePostCheckoutClick);
 								}
 								else{
-									$("#post-checkout-form-contents").hide();
+									$(".post-checkout-form-contents").hide();
 									console.log('we dont need phone on post checkout form');
 								}
 						  	}
