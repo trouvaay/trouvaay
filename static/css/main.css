@@ -2222,8 +2222,9 @@ footer, .push {
   font-family: 'Chunkfive';
 }
 
-.modal-dialog .modal-content h3 {
+.modal-dialog .modal-content h3, .modal-dialog .modal-content h2 {
   margin: 0;
+  font-family: 'Chunkfive';
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;

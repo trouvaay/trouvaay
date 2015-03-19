@@ -24,13 +24,17 @@
 .how-it-works .col-md-12.statement h3 {
   font-family: 'Chunkfive';
 }
-.modal-dialog .modal-content h3 {
-  margin: 0;
-  font-size: 18px;
-  line-height: 22px;
-  font-weight: 700;
-  color: #333;
-  letter-spacing: 2px;
-  text-align: center;
-  /* margin-bottom: 20px; */
+.modal-dialog .modal-content {
+  
+  h3, h2 {
+    margin: 0;
+    font-family: 'Chunkfive';
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 700;
+    color: #333;
+    letter-spacing: 2px;
+    text-align: center;
+    /* margin-bottom: 20px; */
+  }
 }
