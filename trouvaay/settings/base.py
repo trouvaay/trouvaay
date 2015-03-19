@@ -177,7 +177,7 @@ FIRST_REFERRAL_MODAL_EXP = 1  # do not show first referral modal again within th
 SECOND_REFERRAL_MODAL_EXP = 1  # do not show second referral modal again within this many seconds
 
 # Purchase offer settings
-OFFER_THRESHOLD = Decimal('0.73')
+OFFER_THRESHOLD = Decimal('0.66')
 OFFER_IS_ENABLED = True
 
 # email settings are another good candidate to have

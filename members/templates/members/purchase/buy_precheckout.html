@@ -20,8 +20,7 @@
 		                            <b>{{ product.short_name }}</b>
 		                            <br />
 		                            Your card will not be charged until the retailer has 
-		                            received your offer. If the retailer rejects your offer	
-		                            your card will be refunded immediately.
+		                            received your offer.
 		                            {% else %}
 		                            You're one step away from your</br>
 		                            <b>{{ product.short_name }}</b>
@@ -101,7 +100,7 @@
 										Reserve
 									{% elif is_offer %}
 										{% if is_offer_accepted %}
-											Purchase
+											Submit Offer
 										{% else %}
 											Make an Offer
 										{% endif %}

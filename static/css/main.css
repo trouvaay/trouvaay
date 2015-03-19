@@ -1321,6 +1321,12 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: 'Chunkfive';
 }
 
+.btn.btn-primary.buy.profile {
+  width: 100%;
+  max-width: 100%;
+  min-width: 90px;
+}
+
 .main-container {
   width: 100%;
   background: white;
@@ -1403,6 +1409,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .btn.btn-primary.buy.profile {
   width: 100%;
   max-width: 100%;
+  min-width: 90px;
 }
 
 .attr {
@@ -2203,7 +2210,7 @@ footer, .push {
   padding: 0 2.5em;
 }
 
-#input-promo-code {
+#input-promo-code, #input_offer_price {
   max-width: 95px;
 }
 
