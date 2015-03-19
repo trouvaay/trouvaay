@@ -2203,6 +2203,10 @@ footer, .push {
   padding: 0 2.5em;
 }
 
+#input-promo-code {
+  max-width: 95px;
+}
+
 .how-it-works h4 {
   padding: 0 15px;
   text-align: center;
