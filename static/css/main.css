@@ -1332,7 +1332,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .btn.btn-primary.buy.profile {
   width: 100%;
   max-width: 100%;
-  min-width: 90px;
 }
 
 .main-container {
@@ -1414,12 +1413,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   background-color: black;
 }
 
-.btn.btn-primary.buy.profile {
-  width: 100%;
-  max-width: 100%;
-  min-width: 90px;
-}
-
 .attr {
   font-size: 14px;
   line-height: 50px;
@@ -1474,7 +1467,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 .grid-products-wrapper .product-container.reserved {
-  height: 367px;
+  height: 468px;
 }
 @media (max-width: 767px) {
   .grid-products-wrapper .product-container.reserved {
@@ -1585,10 +1578,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
     margin-top: 10px;
   }
 }
-.grid-products-wrapper .price {
+.grid-products-wrapper .price, .grid-products-wrapper .reserved {
   font-family: "Droid Serif";
   font-size: 12px;
   margin-bottom: 3px;
+  font-weight: 800px;
+}
+.grid-products-wrapper .reserved {
+  color: red;
 }
 .grid-products-wrapper .name {
   font-family: "Droid Serif";

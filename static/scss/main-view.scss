@@ -30,7 +30,7 @@
         }
 
         &.reserved {
-            height: 367px;
+            height: 468px;
             @include breakpoint(sm) {
                 height: 100%;
             }
@@ -155,11 +155,15 @@
 
     }
 
-    .price {
+    .price, .reserved {
         font-family: "Droid Serif";
         font-size: 12px;
         margin-bottom: 3px;
-
+        font-weight: 800px
+    }
+    
+    .reserved {
+        color: red;
     }
 
     .name {

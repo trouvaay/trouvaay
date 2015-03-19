@@ -2535,11 +2535,6 @@ form .form-checkbox-wrap .checkbox-label {
 .btn.btn-primary.buy.offer {
   background-color: green;
 }
-.btn.btn-primary.buy.profile {
-  width: 100%;
-  max-width: 100%
-}
-
 .btn.btn-success.dist {
   width: 60px;
   padding: 6px 10px;
