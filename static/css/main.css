@@ -1313,6 +1313,10 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 
+.container.detail {
+  margin-top: 8%;
+}
+
 .featured-icons {
   padding: 5px;
   background: #EFEEEE;
