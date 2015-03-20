@@ -181,7 +181,7 @@ class Product(models.Model):
         # get price score
         price_score = 0
         if self.current_price < 200.00:
-            price_score = 10
+            price_score = 8
         elif self.current_price < 400.00:
             price_score = 5
         elif self.current_price < 500.00:
@@ -195,12 +195,14 @@ class Product(models.Model):
         pub_dt_score = 0
         hrs_since_pub = self.hours_since_add()
         if hrs_since_pub:
-            if hrs_since_pub < 72:
+            if hrs_since_pub < 25:
+                pub_dt_score = 20
+            elif hrs_since_pub < 72:
                 pub_dt_score = 10
-            elif self.current_price < 240:
+            elif hrs_since_pub < 240:
                 pub_dt_score = 5
-            elif self.current_price < 504:
-                pub_dt_score = 5
+            elif hrs_since_pub < 504:
+                pub_dt_score = 3
 
         print('pub_dt_score = ', pub_dt_score)
         score+=pub_dt_score
