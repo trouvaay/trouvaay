@@ -193,16 +193,19 @@ class Product(models.Model):
         
         # get date added score
         pub_dt_score = 0
-        hrs_since_pub = self.hours_since_add()
-        if hrs_since_pub:
-            if hrs_since_pub < 25:
-                pub_dt_score = 20
-            elif hrs_since_pub < 72:
-                pub_dt_score = 10
-            elif hrs_since_pub < 240:
-                pub_dt_score = 5
-            elif hrs_since_pub < 504:
-                pub_dt_score = 3
+        try:
+            days_left = self.hours_to_delist()/24.0
+            if days_left:
+                if days_left > 29:
+                    pub_dt_score = 20
+                elif days_left > 25:
+                    pub_dt_score = 10
+                elif days_left > 20:
+                    pub_dt_score = 5
+                elif days_left > 15:
+                    pub_dt_score = 3
+        except:
+            pass
 
         print('pub_dt_score = ', pub_dt_score)
         score+=pub_dt_score

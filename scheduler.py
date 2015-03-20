@@ -119,5 +119,5 @@ if __name__ == "__main__":
     clear_expired_reservations()
     update_product_is_recent()
     calc_display_score()
-    update_product_days_left()
+    # update_product_days_left()
 
