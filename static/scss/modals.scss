@@ -28,6 +28,22 @@
 .how-it-works .col-md-12.statement h3 {
   font-family: 'Chunkfive';
 }
+#signup-login-modal .modal-dialog {
+  &.modal-content {
+    float: left;
+    padding: 20px;
+    border: 0;
+    max-width: 100%;
+    width: 100%;
+
+    &button.close {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+    }
+  }
+
+}
 .modal-dialog .modal-content {
   
   h3, h2 {

@@ -2239,6 +2239,19 @@ footer, .push {
   font-family: 'Chunkfive';
 }
 
+#signup-login-modal .modal-dialog.modal-content {
+  float: left;
+  padding: 20px;
+  border: 0;
+  max-width: 100%;
+  width: 100%;
+}
+#signup-login-modal .modal-dialog.modal-contentbutton.close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
 .modal-dialog .modal-content h3, .modal-dialog .modal-content h2 {
   margin: 0;
   font-family: 'Chunkfive';

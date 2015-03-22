@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="{% static 'css/flexslider.css' %}">
 <link rel="stylesheet" href="{% static 'css/jquery.selectBoxIt.css' %}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!--<link rel="stylesheet" href="{% static 'css/main_old.css' %}">-->
+<link rel="stylesheet" href="{% static 'css/main_old.css' %}">
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <script src="{% static 'js/vendor/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
 <!-- Google Analytics -->
@@ -316,6 +316,7 @@ document.createElement( "picture" );
     </div>
   </div> -->
   <div id="pre-checkout-modal-container"></div>
+  {% block ajax_login_modal %}<div id="ajax-login-modal-container"></div>{% endblock %}
 {% endblock modal %}
 
 
@@ -480,7 +481,6 @@ document.createElement( "picture" );
       </div>
     </noscript>
     <!-- End Google Remarketing -->
-    {% block ajax_login_modal %}<div id="ajax-login-modal-container"></div>{% endblock %}
     </body>
 </html>
 
