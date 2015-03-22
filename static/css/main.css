@@ -2223,6 +2223,7 @@ footer, .push {
   padding: 0 15px;
   text-align: center;
   font-family: 'ralewaylight';
+  font-size: 16px;
 }
 
 #how-it-works-modal .how-it-works .statement:not(:last-child) {

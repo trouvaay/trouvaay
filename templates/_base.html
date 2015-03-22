@@ -30,6 +30,7 @@
  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 ga('create', 'UA-58538929-1', 'auto');
 ga('send', 'pageview');
+</script>
 <!-- FB Conversion-->
 <script>
   (function() {
@@ -202,8 +203,9 @@ document.createElement( "picture" );
                                     <h4>Looking for that perfect piece with character?  We partner with independent furniture stores in the Bay to bring the best pieces together in one place.  Dont spin your wheels looking for that perfect piece - we tell you what store has what you need.</h4>
                                 </div>
                                 <div class="col-md-12 statement">
-                                    <h3>Make an Offer or Reserve</h3>
-                                    <h4>If you're getting hot and heavy but scared to commit (we've been there), reserve your item to take it off the market.  You have 48 hours and can go see it in person if you like.  The convenience of online shopping without the regret.</h4>
+                                    <h3>Reserve or Make an Offer</h3>
+                                    <h4><b>Reserve:</b>  If you're getting hot and heavy but scared to commit (we've been there), reserve your item to see what store carries it and go see it in person.  The convenience of online shopping without the regret.</h4>
+                                    <h4><b>Make an Offer:</b>  Really like an item but think the asking price is a shade high?  Make an offer - your card is only charged if accepted by the selling retailer.</h4>
                                 </div>
                                 <div class="col-md-12 statement">
                                     <h3>New Items Available Daily</h3>
@@ -316,7 +318,7 @@ document.createElement( "picture" );
   <div id="pre-checkout-modal-container"></div>
 {% endblock modal %}
 
-{% block ajax_login_modal %}<div id="ajax-login-modal-container"></div>{% endblock %}
+
 <!--closing js -->
 <div>
   <script src="{% static 'js/vendor/jquery-1.10.1.min.js' %}"></script>
@@ -478,6 +480,7 @@ document.createElement( "picture" );
       </div>
     </noscript>
     <!-- End Google Remarketing -->
+    {% block ajax_login_modal %}<div id="ajax-login-modal-container"></div>{% endblock %}
     </body>
 </html>
 
