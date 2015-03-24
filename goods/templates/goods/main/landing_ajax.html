@@ -8,21 +8,71 @@
 <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}">
 {% endblock beginjs %}
 
-{% block content %}
-<div class="container-fluid" id="index-banner">
-    <!--    <picture>
-    [if IE 9]><video style="display: none;"><![endif]
-    <source srcset="https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_1000,h_375/v1422902656/shutterstock_160709951_hsvzx9.jpg" media="(min-width: 992px)">
-    [if IE 9]></video><![endif]
-    <img srcset='https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_766,h_282/v1422902656/shutterstock_160709951_hsvzx9.jpg' alt="">
-    <img srcset="{% static 'img/landing image_MAP_NO_PIN2.jpg' %}" alt="">
-    </picture> -->
-    
-    <img src="{% static 'img/landing-header.jpg' %}" alt="">
-    <div class="row-fluid text-container">
-        <div class="text "><div style="display: inline-block; letter-spacing: 1px;'">The best vintage and one-of-a-kind furniture </div><br /><strong>available in Bay Area stores</strong></div>
-    </div>
+{% block bodyid %}thehuntsf{% endblock %}
 
+{% block content %}
+<div class="container-fluid" id="promo-hunt">
+    <div class="row-fluid">
+        <div class="col-xs-12 col-md-3" id="solve-the-clues">
+            Solve the clues and<br class="hidden-sm hidden-xs" /> win free<br  class="hidden-sm hidden-xs" /> <span class="gold-text">furniture</span>
+        </div>
+        <div class="col-xs-12 col-md-9" id="the-hunt">
+            <div class="content">
+                <img src="{% static 'img/thehuntsf.svg' %}" />
+                <div class="social">
+                    <div class="social-icons">
+                      <a href="https://www.facebook.com/RareDoor" class="icon-facebook"><span>Facebook</span></a>
+                      <a href="https://www.twitter.com/RareDoor" class="icon-twitter"><span>Twitter</span></a>
+                      <a href="https://www.pinterest.com/raredoor/" class="icon-instagram"><span>Instagram</span></a>
+                    </div>
+                </div>
+                <div class="call">Follow our posts for more clues</div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div id="hunt-image">
+            <img src="{% static 'img/thehunt-bg.jpg' %}" />
+            <div class="text">
+                <span>There's a furniture piece hidden in <i>San Francisco</i>.</span><br />
+                <span><strong>Solve the clue. Figure out the location and it's yours.</strong></span><br />
+                <span>Finders Keepers...</span>
+            </div>
+        </div>
+        <div id="find-clues">
+            <div class="container">
+                <span>Find clues, plus receive</span><br />
+                <strong>10% OFF</strong><span style="font-size: 13px"> (up to $50)</span><br />
+            featured items from these<br />
+            <span style="font-size: 22px;">participating retailers</span>
+            </div>
+        </div>
+        <div id="stores" class="col-xs-12">
+            <ul>
+                <li>store 1</li>
+                <li>store 2</li>
+                <li>store 3</li>
+                <li>store 4</li>
+                <li>store 5</li>
+                <li>store 6</li>
+                <li>store 7</li>
+                <li>store 8</li>
+                <li>store 9</li>
+                <li>store 10</li>
+                <li>store 11</li>
+                <li>store 12</li>
+                <li>store 13</li>
+                <li>store 14</li>
+                <li>store 15</li>
+                <li>store 16</li>
+                <li>store 17</li>
+                <li>store 18</li>
+                <li>store 19</li>
+                <li>store 20</li>
+            </ul>
+        
+        </div>
+    </div>
 </div>
 
 <div id="how-it-works">
