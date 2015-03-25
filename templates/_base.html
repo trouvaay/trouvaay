@@ -85,7 +85,7 @@ document.createElement( "picture" );
     }
 </script>
 </head>
-<body class="{% block bodyclass %}{% endblock %}">
+<body class="{% block bodyclass %}{% endblock %}" id="{% block bodyid %}{% endblock %}">
 
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -132,10 +132,10 @@ document.createElement( "picture" );
     	  <div class="row">
 
     	    <div class="col-xs-12 social-icons">
-    	      <a href="#" class="icon-facebook"><span>Facebook</span></a>
-    	      <a href="#" class="icon-twitter"><span>Twitter</span></a>
-    	      <a href="#" class="icon-instagram"><span>Instagram</span></a>
-    	      <a href="#" class="icon-pinterest"><span>Pinterest</span></a>
+    	      <a href="https://www.facebook.com/RareDoor" class="icon-facebook"><span>Facebook</span></a>
+    	      <a href="https://www.twitter.com/RareDoor" class="icon-twitter"><span>Twitter</span></a>
+    	      <a href="http://instagram.com/raredoor/" class="icon-instagram"><span>Instagram</span></a>
+    	      <a href="https://www.pinterest.com/raredoor/" class="icon-pinterest"><span>Pinterest</span></a>
     	    </div>
     	    <div class="col-xs-12 links">
             {% if user.is_authenticated %}
