@@ -26,7 +26,6 @@
     @include breakpoint(sm) {
 	    width: 1667px;
       max-width: inherit;
-      position: absolute;
 
     }
   }
@@ -60,7 +59,7 @@
   }
 
   .text-container {
-    position: absolute;
+    position: relative;
     /*left: 50%;*/
     top: 0px;
     width: 100%;
@@ -68,7 +67,9 @@
     /*margin-left: -585px;*/
 
     .text {
-        position: relative;
+        position: absolute;
+        top: 50%;
+        margin-top: -35px;
         padding-left: 35px;
 
         @include breakpoint(sm) {
@@ -106,7 +107,7 @@
     font-family: "Droid Serif";
     font-size: 24px;
     color: #FFF;
-    top: 25%;
+    top: 128px;
     position: relative;
 
     > * {
@@ -141,6 +142,11 @@
 
 #how-it-works {
     background: #91c3c3;
+    
+
+    @include breakpoint(sm) {
+        display: none;
+    }
 }
 
 #how-it-works, #how-it-works-mobile {

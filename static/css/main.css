@@ -818,7 +818,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   #index-banner img {
     width: 1667px;
     max-width: inherit;
-    position: absolute;
   }
 }
 #index-banner a {
@@ -846,7 +845,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 #index-banner .text-container {
-  position: absolute;
+  position: relative;
   /*left: 50%;*/
   top: 0px;
   width: 100%;
@@ -854,7 +853,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   /*margin-left: -585px;*/
 }
 #index-banner .text-container .text {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  margin-top: -35px;
   padding-left: 35px;
 }
 @media (max-width: 767px) {
@@ -895,7 +896,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   font-family: "Droid Serif";
   font-size: 24px;
   color: #FFF;
-  top: 25%;
+  top: 128px;
   position: relative;
 }
 #index-banner .text > * {
@@ -923,6 +924,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 
 #how-it-works {
   background: #91c3c3;
+}
+@media (max-width: 767px) {
+  #how-it-works {
+    display: none;
+  }
 }
 
 #how-it-works, #how-it-works-mobile {
