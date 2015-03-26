@@ -221,25 +221,26 @@ body#thehuntsf {
     }
 
 
-    > ul {
+    ul {
         list-style: none;
         max-width: 880px;
         margin: 0 auto;
         text-align: center;
         padding-left: 0px;
 
+        a {
 
-        li {
-            display: inline-block;
-            text-align: center;
+            li {
+                display: inline-block;
+                text-align: center;
 
-            &:not(:first-child):before {
-                content: "|";
-                margin-right: 10px;
-                margin-left: 5px;
+                &:not(:first-child):before {
+                    content: "|";
+                    margin-right: 10px;
+                    margin-left: 5px;
+                }
             }
         }
-
     }
 
 }
