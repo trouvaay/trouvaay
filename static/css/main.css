@@ -798,6 +798,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   max-height: 452px;
   height: auto;
   overflow: hidden;
+  background: #939598;
   /*background: url('../static/img/index-banner-photo.jpg');*/
 }
 @media (max-width: 992px) {
@@ -855,7 +856,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #index-banner .text-container .text {
   position: absolute;
   top: 50%;
-  margin-top: -35px;
+  margin-top: 25px;
   padding-left: 35px;
 }
 @media (max-width: 767px) {
@@ -2422,7 +2423,7 @@ body#thehuntsf header.top-bar {
   margin: 0 auto;
   width: 100%;
   top: 50%;
-  margin-top: -115px;
+  margin-top: -200px;
 }
 #hunt-image .text span {
   color: #FFF;
@@ -2432,7 +2433,7 @@ body#thehuntsf header.top-bar {
 }
 @media (max-width: 992px) {
   #hunt-image .text {
-    font-size: 30px;
+    font-size: 28px;
   }
   #hunt-image .text span {
     line-height: 55px;
@@ -2442,8 +2443,9 @@ body#thehuntsf header.top-bar {
 @media (max-width: 480px) {
   #hunt-image .text {
     font-size: 27px;
-    padding-left: 2%;
-    padding-right: 2%;
+    margin-top: -115px;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
   }
   #hunt-image .text span {
     line-height: 40px;
