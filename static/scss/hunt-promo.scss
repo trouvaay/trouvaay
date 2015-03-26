@@ -208,7 +208,7 @@ body#thehuntsf {
 
 #stores {
     margin-top: 10px;
-    padding: 90px 15px 30px;
+    padding: 20px 15px 30px;
     background: #939598;
     color: #FFF;
     text-align: center;
@@ -220,6 +220,10 @@ body#thehuntsf {
         padding: 10px 15px 30px;
     }
 
+    h3 {
+        display: inline-block;
+        margin-left: 10px
+    }
 
     ul {
         list-style: none;
@@ -231,7 +235,7 @@ body#thehuntsf {
         a {
 
             li {
-                display: inline-block;
+                //display: inline-block;
                 text-align: center;
 
                 &:not(:first-child):before {

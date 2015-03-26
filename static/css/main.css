@@ -2491,7 +2491,7 @@ body#thehuntsf header.top-bar {
 
 #stores {
   margin-top: 10px;
-  padding: 90px 15px 30px;
+  padding: 20px 15px 30px;
   background: #939598;
   color: #FFF;
   text-align: center;
@@ -2504,6 +2504,10 @@ body#thehuntsf header.top-bar {
     padding: 10px 15px 30px;
   }
 }
+#stores h3 {
+  display: inline-block;
+  margin-left: 10px;
+}
 #stores ul {
   list-style: none;
   max-width: 880px;
@@ -2512,7 +2516,6 @@ body#thehuntsf header.top-bar {
   padding-left: 0px;
 }
 #stores ul a li {
-  display: inline-block;
   text-align: center;
 }
 #stores ul a li:not(:first-child):before {
