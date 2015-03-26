@@ -925,11 +925,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #how-it-works {
   background: #91c3c3;
 }
-@media (max-width: 767px) {
-  #how-it-works {
-    display: none;
-  }
-}
 
 #how-it-works, #how-it-works-mobile {
   padding-top: 35px;
