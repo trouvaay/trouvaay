@@ -153,7 +153,10 @@ body#thehuntsf {
           
 
           @include breakpoint(xs) {
-              font-size: 22px;
+              font-size: 27px;
+              padding-left: 2%;
+              padding-right: 2%;
+              margin-top: -115px;
               span {
                   line-height: 40px;
                   padding: 4px 10px 2px;

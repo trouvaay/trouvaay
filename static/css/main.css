@@ -2446,7 +2446,10 @@ body#thehuntsf header.top-bar {
 }
 @media (max-width: 480px) {
   #hunt-image .text {
-    font-size: 22px;
+    font-size: 27px;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: -115px;
   }
   #hunt-image .text span {
     line-height: 40px;
