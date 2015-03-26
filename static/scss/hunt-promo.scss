@@ -238,10 +238,13 @@ body#thehuntsf {
 
             > h3 {
                 color: $gold;
+                display: inline;
+                font-size: 20px
             }
 
             > a {
                 color: white;
+                font-size: 18px;
             }
 
             &:not(:first-child):before {

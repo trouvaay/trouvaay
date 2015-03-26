@@ -2516,9 +2516,12 @@ body#thehuntsf header.top-bar {
 }
 #stores ul li > h3 {
   color: #e6be46;
+  display: inline;
+  font-size: 20px;
 }
 #stores ul li > a {
   color: white;
+  font-size: 18px;
 }
 #stores ul li:not(:first-child):before {
   content: "|";
