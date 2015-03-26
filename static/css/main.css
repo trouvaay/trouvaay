@@ -2427,7 +2427,7 @@ body#thehuntsf header.top-bar {
   margin: 0 auto;
   width: 100%;
   top: 50%;
-  margin-top: -93px;
+  margin-top: -115px;
 }
 #hunt-image .text span {
   color: #FFF;
@@ -2449,7 +2449,6 @@ body#thehuntsf header.top-bar {
     font-size: 27px;
     padding-left: 2%;
     padding-right: 2%;
-    margin-top: -115px;
   }
   #hunt-image .text span {
     line-height: 40px;
@@ -2476,7 +2475,7 @@ body#thehuntsf header.top-bar {
   text-transform: uppercase;
   font-family: "Droid Serif";
   font-style: italic;
-  font-size: 15px;
+  font-size: 18px;
   padding: 10px 0px;
 }
 @media (max-width: 480px) {
@@ -2504,10 +2503,6 @@ body#thehuntsf header.top-bar {
     padding: 10px 15px 30px;
   }
 }
-#stores h3 {
-  display: inline-block;
-  margin-left: 10px;
-}
 #stores ul {
   list-style: none;
   max-width: 880px;
@@ -2515,10 +2510,16 @@ body#thehuntsf header.top-bar {
   text-align: center;
   padding-left: 0px;
 }
-#stores ul a li {
-  text-align: center;
+#stores ul li {
+  display: inline;
 }
-#stores ul a li:not(:first-child):before {
+#stores ul li > h3 {
+  color: #e6be46;
+}
+#stores ul li > a {
+  color: white;
+}
+#stores ul li:not(:first-child):before {
   content: "|";
   margin-right: 10px;
   margin-left: 5px;

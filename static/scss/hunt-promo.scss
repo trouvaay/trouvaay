@@ -131,7 +131,7 @@ body#thehuntsf {
         margin: 0 auto;
         width: 100%;
           top: 50%;
-          margin-top: -93px;
+          margin-top: -115px;
           
         span {
             color: #FFF;
@@ -156,7 +156,6 @@ body#thehuntsf {
               font-size: 27px;
               padding-left: 2%;
               padding-right: 2%;
-              margin-top: -115px;
               span {
                   line-height: 40px;
                   padding: 4px 10px 2px;
@@ -189,7 +188,7 @@ body#thehuntsf {
         text-transform: uppercase;
         font-family: "Droid Serif";
         font-style: italic;
-        font-size: 15px;
+        font-size: 18px;
         padding: 10px 0px;
 
     }
@@ -220,10 +219,6 @@ body#thehuntsf {
         padding: 10px 15px 30px;
     }
 
-    h3 {
-        display: inline-block;
-        margin-left: 10px
-    }
 
     ul {
         list-style: none;
@@ -232,17 +227,21 @@ body#thehuntsf {
         text-align: center;
         padding-left: 0px;
 
-        a {
+        li {
+            display: inline;
 
-            li {
-                //display: inline-block;
-                text-align: center;
+            > h3 {
+                color: $gold;
+            }
 
-                &:not(:first-child):before {
-                    content: "|";
-                    margin-right: 10px;
-                    margin-left: 5px;
-                }
+            > a {
+                color: white;
+            }
+
+            &:not(:first-child):before {
+                content: "|";
+                margin-right: 10px;
+                margin-left: 5px;
             }
         }
     }
