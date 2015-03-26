@@ -25,9 +25,7 @@
     width: 100%;
 
     @include breakpoint(sm) {
-	    width: 1667px;
-      max-width: inherit;
-
+      display:none;
     }
   }
 
@@ -71,12 +69,13 @@
     .text {
         position: absolute;
         top: 50%;
-        margin-top: 25px;
+        margin-top: -120px;
         padding-left: 35px;
 
         @include breakpoint(sm) {
             padding-left: 10px;
             width: 100%;
+            margin-top: 25px;
         }
     }
     &.landingtest {

@@ -817,8 +817,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #index-banner img {
-    width: 1667px;
-    max-width: inherit;
+    display: none;
   }
 }
 #index-banner a {
@@ -856,13 +855,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #index-banner .text-container .text {
   position: absolute;
   top: 50%;
-  margin-top: 25px;
+  margin-top: -120px;
   padding-left: 35px;
 }
 @media (max-width: 767px) {
   #index-banner .text-container .text {
     padding-left: 10px;
     width: 100%;
+    margin-top: 25px;
   }
 }
 #index-banner .text-container.landingtest {
