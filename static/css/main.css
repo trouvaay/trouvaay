@@ -2529,4 +2529,19 @@ body#thehuntsf header.top-bar {
   margin-left: 5px;
 }
 
+#featured-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #91c3c3;
+}
+#featured-container #featured-item {
+  color: #939598;
+  color: white;
+  text-align: center;
+  font-family: "Droid Serif";
+  font-style: italic;
+  font-size: 18px;
+  padding: 5px 0px;
+}
+
 /*# sourceMappingURL=main.css.map */
