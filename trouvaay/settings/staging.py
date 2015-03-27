@@ -61,4 +61,5 @@ INSTALLED_APPS = (
     'analytical',
     'endless_pagination',
     'social.apps.django_app.default',
+    'import_export',
 )
