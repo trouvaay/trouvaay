@@ -102,7 +102,8 @@ class LandingView(AjaxListView):
 
     #     return queryset
     def get_queryset(self):
-        queryset = self.model.objects.filter(is_published=True, hours_left__gte=0, store__is_featured=True, short_name='exclude all').exclude(description__isnull=True)
+        queryset = self.model.objects.filter(is_published=True, the_hunt=True)
+        print(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
