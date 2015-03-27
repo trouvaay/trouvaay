@@ -1,7 +1,7 @@
 from django.contrib import admin
 from members.models import AuthOrder
 from goods.models import Product, Color, Segment, Style, FurnitureType, ValueTier, Category, Subcategory, Material, ProductImage
-from import_export import resources
+
 
 class CustomAdmin(admin.ModelAdmin):
     """
