@@ -164,6 +164,7 @@ class Product(models.Model):
     md5_order = models.CharField(max_length=32, null=True, blank=True)
     click_count = models.IntegerField(blank=False, null=False, default=0)
     display_score = models.IntegerField(blank=False, null=False, default=0)
+    the_hunt = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-display_score', 'md5_order']
