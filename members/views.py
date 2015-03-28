@@ -394,7 +394,7 @@ class BuyView(generic.DetailView):
         default_address.street = request.POST['args[shipping_address_line1]']
         default_address.city = request.POST['args[shipping_address_city]']
         default_address.state = request.POST['args[shipping_address_state]']
-        default_address.zipcd = request.POST['args[shipping_address_zip]']
+        default_address.zipcd = int(request.POST['args[shipping_address_zip]'][:5])
         default_address.shipping = True
         default_address.save()
 
@@ -432,7 +432,7 @@ class BuyView(generic.DetailView):
         order_address.street = request.POST['args[shipping_address_line1]']
         order_address.city = request.POST['args[shipping_address_city]']
         order_address.state = request.POST['args[shipping_address_state]']
-        order_address.zipcd = request.POST['args[shipping_address_zip]']
+        order_address.zipcd = int(request.POST['args[shipping_address_zip]'][:5])
         order_address.shipping = True
         order_address.save()
 
