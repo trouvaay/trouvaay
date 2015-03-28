@@ -363,8 +363,6 @@ class ReserveView(generic.DetailView):
         # create reservation
         Reservation.create_reservation(order)
         
-        product.is_reserved = True
-        product.save()
         logger.debug('product is_reserved field set to True')
 
         # send order confirmation email

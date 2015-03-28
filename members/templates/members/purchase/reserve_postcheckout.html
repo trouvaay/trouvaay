@@ -11,9 +11,9 @@
 						<fieldset>
 							<legend>
 								{% if reservation_message %}
-									<h2>Reservation</h2>
+									<h2>Go See</h2>
 								{% else %}
-									<h2>Thank you for your reservation</h2>
+									<h3>We'll be in touch momentarily to let you know the deets on your item.</h3>
 								{% endif %}
 							</legend>
 							<div class="row">
@@ -22,8 +22,7 @@
 		                            {% if reservation_message %}
 		                            	{{ reservation_message }}
 		                            {% else %}
-		                            	Your item has been added to your profile page.  You have {{ order_user.get_number_of_reservations_left }} reservtions left.<br />
-		                            	You're receive an email to schedule a time to see your piece shortly.
+		                            	In the meantime your item has been added to your profile page.  You have {{ order_user.get_number_of_reservations_left }} reveals left.<br />
 		                            {% endif %}
 		                            </h5>
 	                        	</div>
