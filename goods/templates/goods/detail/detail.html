@@ -44,7 +44,7 @@
                            </div>
                         </div>
                         <div class="row">
-                           <div id="first" class="col-xs-3 product-description">
+                           <div id="first" class="col-xs-4 product-description">
                               <em><p>
                                 {% if product.current_price %}
                                     {% if product.is_sold %}
@@ -60,7 +60,7 @@
                                 {% endif %}
                               </em></p>
                            </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-4">
                                <a href="https://www.pinterest.com/pin/create/button/
                                     ?url=https://www.raredoor.com/piece/{{ product.slug }}&media={{ product.productimage_set.first.image.url }}&description={{ product.short_name }} | Rare Door"
                                     data-pin-do="buttonPin"
@@ -68,8 +68,8 @@
                                     <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
                               </a>                             
                             </div>
-                            <div class="col-xs-2">
-                              <a href="" id="heart_{{ product.id }}" class="glyphicon glyphicon-heart like-btn pull-right" title="{{ TOOLTIP_HEART }}" data-toggle="tooltip"><span>Like</span></a>
+                            <div class="col-xs-4">
+                              <a href="" id="heart_{{ product.id }}" class="glyphicon glyphicon-heart like-btn" title="{{ TOOLTIP_HEART }}" data-toggle="tooltip"><span>Like</span></a>
                             </div>
                         </div>   
                         
