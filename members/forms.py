@@ -123,7 +123,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 class ReserveFormAuth(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput, required=True)
     last_name = forms.CharField(widget=forms.TextInput, required=True)
-    phone = USPhoneNumberField(required=True)
+    # phone = USPhoneNumberField(required=True)
 
     def __init__(self, *args, **kwargs):
         super(ReserveFormAuth, self).__init__(*args, **kwargs)
@@ -138,7 +138,7 @@ class ReserveFormAuth(forms.Form):
         self.helper.layout = Layout(
             Field('first_name', placeholder='First name'),
             Field('last_name', placeholder='Last name'),
-            Field('phone', placeholder='Phone number'),
+            # Field('phone', placeholder='Phone number'),
             Button('button-reserve', 'Submit', css_class="btn-success"),
         )
 
@@ -152,7 +152,7 @@ class ReserveForm(ReserveFormAuth):
             Field('first_name', placeholder='First name'),
             Field('last_name', placeholder='Last name'),
             Field('email', placeholder='Email address'),
-            Field('phone', placeholder='Phone number'),
+            # Field('phone', placeholder='Phone number'),
             Button('button-reserve', 'Submit', css_class="btn-success"),
         )
 

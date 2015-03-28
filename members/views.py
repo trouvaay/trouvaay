@@ -284,7 +284,7 @@ class ReserveView(generic.DetailView):
             Profile.create_profile(request.user)
             form = ReserveFormAuth(initial={'first_name': request.user.first_name,
                                             'last_name': request.user.last_name,
-                                            'phone': request.user.profile.phone
+                                            # 'phone': request.user.profile.phone
                                             })
         else:
             form = ReserveForm()
@@ -296,10 +296,12 @@ class ReserveView(generic.DetailView):
 
         product = self.get_object()
         order_user = None
+
         if(request.user.is_authenticated()):
 
             form = ReserveFormAuth(request.POST)
             if(not form.is_valid()):
+                print form.errors
                 return render_to_response('members/purchase/reserve_precheckout.html', locals())
 
             order_user = request.user
@@ -309,6 +311,7 @@ class ReserveView(generic.DetailView):
         else:        
             form = ReserveForm(request.POST)
             if(not form.is_valid()):
+                print form.errors
                 return render_to_response('members/purchase/reserve_precheckout.html', locals())
     
             # create user if needed
@@ -327,13 +330,15 @@ class ReserveView(generic.DetailView):
                 update_user = True
             if(update_user):
                 order_user.save()
-            phone = form.cleaned_data['phone']
-            if(not phone is None):
-                profile = order_user.profile
-                profile.phone = phone
-                profile.save()
+            # phone = form.cleaned_data['phone']
+            # if(not phone is None):
+            #     profile = order_user.profile
+            #     profile.phone = phone
+            #     profile.save()
         
         # If new user need to set send_password link param to true 
+        print "got here"
+
         if is_existing:
             password_reset_link = False
         else:
@@ -737,7 +742,7 @@ class BuyView(generic.DetailView):
                 # to prevent that we'd compute this hash
                 # when the client submits the phone number the hash has to match with
                 # what we compute here
-                json_result['ask_phone'] = True
+                # json_result['ask_phone'] = True
                 json_result['email'] = order.authuser.email
                 json_result['post_checkout_hash'] = AuthUser.compute_post_checkout_hash(order.authuser)
             else:
