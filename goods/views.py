@@ -196,7 +196,7 @@ class ShopView(AjaxListView):
 
     #     return queryset
     def get_queryset(self):
-        queryset = self.model.objects.filter(is_published=True, hours_left__gte=0, store__is_featured=True).exclude(description__isnull=True)
+        queryset = self.model.objects.filter(is_published=True, hours_left__gte=0, store__is_featured=True).exclude(description__isnull=True, the_hunt=True)
         return queryset
 
     def get_context_data(self, **kwargs):
