@@ -507,9 +507,10 @@ class Offer(PurchaseBase):
         offer.offer_price = offer_price
         offer.save()
 
-        product = order.product
-        product.is_reserved = True
-        product.save()
+        # removed for reveal/reservation feature change
+        # product = order.product
+        # product.is_reserved = True
+        # product.save()
 
         return offer
 

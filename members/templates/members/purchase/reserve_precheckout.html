@@ -10,12 +10,12 @@
 					<div class="text-center">
 						<fieldset>
 							<legend>
-								<h2>Reservation</h2>
+								<h2>Go See</h2>
 							</legend>
 							<div class="row">
 								<div class="col-xs-12" class="text-center">
 		                            <h5>
-		                            Please provide the following info to reserve the item and we'll tell you where you can see this piece in person.
+		                            Please provide the following info to make an appointment to go see the item in person.
 		                            </h5>
 		                            <br />
 									{% crispy form %}
@@ -72,6 +72,7 @@ $(document).ready(function() {
 	                { "product": productName }
 	            	);
 					FBReservationEvent();
+					console.log(response);
 				},
 			});
 		}        

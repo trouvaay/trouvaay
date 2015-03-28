@@ -81,8 +81,8 @@ price_slider_max = 2000
 #         return context
 
 class LandingView(AjaxListView):
-    template_name = 'goods/main/landing_ajax.html'
-    page_template = 'goods/main/landing_ajax_page.html'
+    template_name = 'goods/main/hunt_ajax.html'
+    page_template = 'goods/main/hunt_ajax_page.html'
     context_object_name = 'products'
     model = Product
     key = 'page'
@@ -103,7 +103,6 @@ class LandingView(AjaxListView):
     #     return queryset
     def get_queryset(self):
         queryset = self.model.objects.filter(is_published=True, the_hunt=True)
-        print(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
