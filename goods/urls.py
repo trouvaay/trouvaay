@@ -3,8 +3,8 @@ from goods import views
 
 
 urlpatterns = patterns('',
-    url(r'^$', views.LandingView.as_view(), name='landing'),
-    url(r'^shop/$', views.ShopView.as_view(), name='shop'),
+    url(r'^$', views.ShopView.as_view(), name='landing'),
+    url(r'^hunt/$', views.LandingView.as_view(), name='hunt'),
     url(r'^piece/(?P<slug>[-\w\d]+)/$', views.DetailView.as_view(), name='detail'),
     url(r'^about/$', views.AboutView.as_view(), name='about'),
     url(r'^returns/$', views.ReturnsView.as_view(), name='returns'),
