@@ -10,7 +10,7 @@
     <div class="container pic-tabs main">
         <div class="container-fluid featured-icons">        
           <div class="span7 text-center">
-              <h3>Reserved Items</h3>
+              <h3>Offer & Go See Items</h3>
           </div>
         </div>
         {% if user_order_items %}        
@@ -22,10 +22,10 @@
                               <div class="row">
                                   {% for product in user_order_items %}
                                     <!-- bellow if statement is temporary as backend would be changed later -->
-                                    {% if product.is_reserved %}
+                                    <!-- {% if product.is_reserved %} -->
                                       <!-- for now there is only 1 orderitem per order -->
                                       {% include 'members/closet/_reservedproduct_for_loop.html' %}
-                                    {% endif %}
+                                    <!-- {% endif %} -->
                                   {% endfor %}
                               </div>
                           </div>

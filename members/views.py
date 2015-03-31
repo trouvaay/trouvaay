@@ -63,7 +63,7 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
         user = self.get_object()
         ordered_items = Product.objects.filter(product_orders__in=user.user_orders.filter(order_type=OrderType.RESERVATION_ORDER,
                                                                                           reservation__is_active=True))
-        print ordered_items.query
+        # print ordered_items.query
         context['user_order_items'] = ordered_items
         print (context['user_order_items'])
         user_activity = AuthUserActivity.objects.get(authuser=user)
@@ -371,7 +371,7 @@ class ReserveView(generic.DetailView):
         logger.debug('product is_reserved field set to True')
 
         # send order confirmation email
-        send_order_email(request=self.request, order=order, show_password_reset_link=password_reset_link, is_buy=False)
+        send_order_email(request=self.request, order=order, show_password_reset_link=password_reset_link, is_buy=False, is_offer=False)
         return render_to_response('members/purchase/reserve_postcheckout.html', locals())
                 
 
@@ -717,7 +717,7 @@ class BuyView(generic.DetailView):
             send_order_email(request=self.request, 
                              order=order,
                              show_password_reset_link=(not is_existing),
-                             is_buy=True)
+                             is_buy=do_order_capture, is_offer=(not do_order_capture))
 
             json_result = {
                 'status': 'ok',
