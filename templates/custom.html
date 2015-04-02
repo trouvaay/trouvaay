@@ -315,20 +315,21 @@ function handleBuyButtonClick(e) {
         
 		if(productId && !(typeof productId === 'undefined')){
 		    console.log('ordertype: ', orderType)
-			$.ajax({
-				type: "GET",
-                // pass to ReservePreCheckout
-				url: urlToLoad,
-				dataType: "html",
-				success: function(response, status){
-					// console.log('response from pre-checkout call: '+status );
-					$("#pre-checkout-modal-container").html(response);
-					$("#reservation-modal").modal({
-						show: true,
-						keyboard: true
-					});
-				},
-			});
+            console.log("{{ user.is_authenticated }}")
+                $.ajax({
+    				type: "GET",
+                    // pass to ReservePreCheckout
+    				url: urlToLoad,
+    				dataType: "html",
+    				success: function(response, status){
+    					// console.log('response from pre-checkout call: '+status );
+    					$("#pre-checkout-modal-container").html(response);
+    					$("#reservation-modal").modal({
+    						show: true,
+    						keyboard: true
+    					});
+    				},
+    			});
 		}        
     }
     else if(e.target.id.substr(0, 15) == 'cancel_reserve_'){

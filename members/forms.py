@@ -121,9 +121,9 @@ class CustomAuthenticationForm(AuthenticationForm):
         return self.cleaned_data
 
 class ReserveFormAuth(forms.Form):
-    first_name = forms.CharField(widget=forms.TextInput, required=True)
-    last_name = forms.CharField(widget=forms.TextInput, required=True)
-    # phone = USPhoneNumberField(required=True)
+    # first_name = forms.CharField(widget=forms.TextInput, required=True)
+    # last_name = forms.CharField(widget=forms.TextInput, required=True)
+    # # phone = USPhoneNumberField(required=True)
 
     def __init__(self, *args, **kwargs):
         super(ReserveFormAuth, self).__init__(*args, **kwargs)
@@ -136,14 +136,16 @@ class ReserveFormAuth(forms.Form):
         self.helper.form_id = 'form-reserve'
 
         self.helper.layout = Layout(
-            Field('first_name', placeholder='First name'),
-            Field('last_name', placeholder='Last name'),
+            # Field('first_name', placeholder='First name'),
+            # Field('last_name', placeholder='Last name'),
             # Field('phone', placeholder='Phone number'),
             Button('button-reserve', 'Submit', css_class="btn-success"),
         )
 
 class ReserveForm(ReserveFormAuth):
     email = forms.EmailField(widget=forms.TextInput, required=True)
+    first_name = forms.CharField(widget=forms.TextInput, required=True)
+    last_name = forms.CharField(widget=forms.TextInput, required=True)
 
     def __init__(self, *args, **kwargs):
         super(ReserveForm, self).__init__(*args, **kwargs)

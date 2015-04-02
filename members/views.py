@@ -285,7 +285,6 @@ class ReserveView(generic.DetailView):
             Profile.create_profile(request.user)
             form = ReserveFormAuth(initial={'first_name': request.user.first_name,
                                             'last_name': request.user.last_name,
-                                            # 'phone': request.user.profile.phone
                                             })
         else:
             form = ReserveForm()
