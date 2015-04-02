@@ -349,7 +349,7 @@ class ReserveView(generic.DetailView):
         logger.debug('number of reservations that user already has: %d' % order_user.get_number_of_reservations())
         logger.debug('reservations limit in settings: %d' % settings.RESERVATION_LIMIT)
         if(order_user.get_number_of_reservations() >= settings.RESERVATION_LIMIT):
-            reservation_message = "Sorry it looks like you've hit your reservation limit - save something for the rest of us!.  On a serious note email us to extend your limit and we're generally happy to accomodate.  Unless you're a robot..."
+            reservation_message = "Sorry it looks like you've hit your 'reveal limit' - save something for the rest of us!.  If you're seriously interested email us to extend your limit and we're generally happy to accomodate.  Unless you're a robot..."
             return render_to_response('members/purchase/reserve_postcheckout.html', locals())
 
         can_reserve_check, reservation_message = self.__can_reserve(product, order_user)
