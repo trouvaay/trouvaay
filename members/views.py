@@ -61,8 +61,9 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
 
         context = super(ProfileView, self).get_context_data(**kwargs)
         user = self.get_object()
-        ordered_items = Product.objects.filter(product_orders__in=user.user_orders.filter(order_type=OrderType.RESERVATION_ORDER,
-                                                                                          reservation__is_active=True))
+        user_orders = AuthOrder.objects.filter(authuser=user)
+        ordered_items = list(set([i.product for i in user_orders]))
+
         # print ordered_items.query
         context['user_order_items'] = ordered_items
         print (context['user_order_items'])

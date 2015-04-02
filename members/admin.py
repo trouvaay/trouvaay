@@ -114,7 +114,7 @@ class PurchaseInline(admin.TabularInline):
 
 class OfferInline(admin.TabularInline):
     model = Offer
-    fields = ('authuser', 'taxes', 'original_price', 'offer_price', 'transaction_price','is_captured')
+    fields = ('authuser', 'taxes', 'original_price', 'offer_price', 'transaction_price','is_active', 'is_captured')
 
 class ReservationInline(admin.TabularInline):
     model = Reservation
@@ -123,7 +123,7 @@ class ReservationInline(admin.TabularInline):
 class AuthOrderAdmin(admin.ModelAdmin):
     model = AuthOrder
     list_display = ('product', 'authuser', 'order_type', 'created_at', 'updated_at', 'converted_from_reservation')
-    fields = ('product', 'authuser', ('order_type', 'converted_from_reservation'), ('created_at', 'updated_at'))
+    # fields = ('product', 'authuser', ('order_type', 'converted_from_reservation'), ('created_at', 'updated_at'))
     inlines = (PurchaseInline, OfferInline, ReservationInline, OrderAddressInline)
 
     def get_formsets_with_inlines(self, request, obj=None):
@@ -144,7 +144,7 @@ class PurchaseAdmin(admin.ModelAdmin):
 
 class OfferAdmin(admin.ModelAdmin):
     model = Offer
-    list_display = ('authuser', 'order', 'taxes', 'original_price', 'offer_price', 'transaction_price','is_captured')
+    list_display = ('authuser', 'order', 'taxes', 'original_price', 'offer_price', 'transaction_price','is_active','is_captured')
 
 
 class ReservationAdmin(admin.ModelAdmin):
