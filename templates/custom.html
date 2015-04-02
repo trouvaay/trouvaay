@@ -265,8 +265,12 @@ function handleBuyButtonClick(e) {
     }
 	else if(e.target.id.substr(0, 6) == 'offer_'){
 		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
-		
         var orderType = 'offer';
+        mixpanel.track(
+            "Clicked Offer Button",
+            { "productId": productId }
+        );
+        console.log('mixpanel: offer-button.onclick event fired');
 
 		if(productId && !(typeof productId === 'undefined')){
 		    console.log('this is the ordertype ', orderType)
