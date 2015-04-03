@@ -89,6 +89,7 @@ class ProductAdmin(CustomAdmin):
         return obj.store.neighborhood
     
     first_image.allow_tags = True
+    
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)
