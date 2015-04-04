@@ -118,9 +118,18 @@ document.createElement( "picture" );
     <div class="col-xs-2 col-sm-1 mobile-menu visible-xs-block">
 	   <label for="mobile-menu-switch" class="icon-hamburger-icon"><span>Menu</span></a>
       </div>
+
       <div class="right-bottom-buttons-cnt">
+        
       {% if user.is_authenticated %}
-      <a href="{% url 'members:profile' %}" class="white-right-button hidden-xs">Profile - {{ request.user }}</a>
+        <div class="hidden-xs" style="color:white; font-weight: 800; text-align:center">
+          {% if request.user.first_name %}
+            Hi {{ request.user.first_name }}
+          {% else %}
+            Welcome
+          {% endif %}
+        </div>
+      <a href="{% url 'members:profile' %}" class="white-right-button hidden-xs">Profile</a>
       <a href="{% url 'members:logout' %}" class="white-right-button login hidden-xs nav-logout-button">Logout</a>
       {% else %}
       <a href="#" class="white-right-button hidden-xs nav-login-button">Login or sign up</a>
