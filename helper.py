@@ -258,6 +258,7 @@ Neighborhoods = {'SF': [
     ('Russian Hill', 'Russian Hill'),
     ('Saint Francis Wood', 'Saint Francis Wood'),
     ('San Jose', 'San Jose'),
+    ('San Leandro', 'San Leandro'),
     ('San Mateo', 'San Mateo'),
     ('Sea Cliff', 'Sea Cliff'),
     ('Sherwood Forest', 'Sherwood Forest'),
