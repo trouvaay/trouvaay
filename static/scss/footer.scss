@@ -8,18 +8,31 @@ footer {
   padding-top: 10px;
   //padding-bottom: 10px;
   overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 
-  @include breakpoint(md) {
-    height: 130px;
+
+  .container { 
+    max-width: 100%;
+   
+    .row {
+      padding-top: 10px;
+
+      @include breakpoint(md) {
+        padding-top: 0px;
+      }
+    }
   }
 
   .social-icons {
-    line-height: 100px;
-    font-size: 45px;
+    //line-height: 100px;
+    font-size: 35px;
   }
 
   .help-info {
-    line-height: 100px;
+    //line-height: 100px;
+    padding-top: 15px;
 
     @include breakpoint(md) {
       text-align: center;
@@ -40,12 +53,12 @@ footer {
 	padding-left: 0px;
     }
        &:not(:last-child) {
-	margin-right: 50px;
+	//margin-right: 50px;
       padding-right: 50px;
 	border-right: 1px solid #FFF;
 	@include breakpoint(md) {
 	  padding-right: 10px;
-	  margin-right: 10px;
+	  //margin-right: 10px;
 
 	}
 	@include breakpoint(xs) {
@@ -81,15 +94,17 @@ footer {
 }
 
 footer, .push {
-  height: 150px;
+  height: 110px;
   
 
   @include breakpoint(md) {
     height: 70px;
+    font-size: 13px;
   }
   
   @include breakpoint(xs) {
-    height: 130px;
+    height: 90px;
+    padding-top:0px;
   }
 
 

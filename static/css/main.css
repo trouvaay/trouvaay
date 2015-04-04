@@ -2164,18 +2164,26 @@ footer {
   letter-spacing: 1px;
   padding-top: 10px;
   overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+footer .container {
+  max-width: 100%;
+}
+footer .container .row {
+  padding-top: 10px;
 }
 @media (max-width: 992px) {
-  footer {
-    height: 130px;
+  footer .container .row {
+    padding-top: 0px;
   }
 }
 footer .social-icons {
-  line-height: 100px;
-  font-size: 45px;
+  font-size: 35px;
 }
 footer .help-info {
-  line-height: 100px;
+  padding-top: 15px;
 }
 @media (max-width: 992px) {
   footer .help-info {
@@ -2192,14 +2200,12 @@ footer .help-info {
   }
 }
 footer .help-info .row > *:not(:last-child) {
-  margin-right: 50px;
   padding-right: 50px;
   border-right: 1px solid #FFF;
 }
 @media (max-width: 992px) {
   footer .help-info .row > *:not(:last-child) {
     padding-right: 10px;
-    margin-right: 10px;
   }
 }
 @media (max-width: 480px) {
@@ -2230,16 +2236,18 @@ footer a:hover {
 }
 
 footer, .push {
-  height: 150px;
+  height: 110px;
 }
 @media (max-width: 992px) {
   footer, .push {
     height: 70px;
+    font-size: 13px;
   }
 }
 @media (max-width: 480px) {
   footer, .push {
-    height: 130px;
+    height: 90px;
+    padding-top: 0px;
   }
 }
 
