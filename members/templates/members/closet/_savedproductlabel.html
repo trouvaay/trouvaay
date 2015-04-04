@@ -1,10 +1,10 @@
 {% load staticfiles %}
 <div class="col-xs-12 pic-detail-home">
         <div class="price">
-        {% if product.current_price %}
-            {% if product.is_sold %}
-                <span class="sold">{{ 'Sold' }}</span>                
-            {% elif product.is_reserved %}
+        {% if product.is_sold %}
+          <span class="sold">{{ 'Sold' }}</span>                
+        {% elif product.current_price %}
+            {% if product.is_reserved %}
                 <span class="reserved">{{ 'Reserved' }}</span>                
             {% elif product.is_discounted %}
                 <strike>{{' - $'}}{{ product.original_price|floatformat:"0" }}</strike>
@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="col-xs-6 col-lg-3" style="margin-bottom: 10px">                      
                                             <button type="button" class="btn btn-primary buy reserve profile" id="reserve_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_RESERVE }}">
-                                                {{ FEATURE_NAME_RESERVE }}
+                                                Go See
                                             </button>
                                         </div>
                                         <div class="col-xs-12 col-lg-6">                      

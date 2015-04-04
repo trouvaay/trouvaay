@@ -1,1 +1,1 @@
-{% if is_buy %}Order{% else %}Reservation{% endif %} confirmation from {{ site.name }}
+{% if is_buy %}Order{% elif is_offer %}Offer{% else %}'Go See'{% endif %} confirmation from {{ site.name }}

@@ -1,0 +1,278 @@
+body#thehuntsf {
+
+    header.top-bar {
+        background: #000;
+    }
+
+}
+#promo-hunt {
+    padding: 0px;
+}
+#solve-the-clues {
+    background: #000;
+    color: #FFF;
+    text-align: center;
+    font-family: "Ostrich Sans";
+    font-weight: 800;
+    font-size: 27px;
+    letter-spacing: 1px;
+    line-height: 27px;
+
+    padding: 8px 0px 4px 0px;
+
+    .gold-text {
+        font-size: 35px;
+        line-height: 33px;
+    }
+
+}
+
+#the-hunt {
+    padding-top: 18px;
+
+    .call {
+        font-size: 15px;
+        color: #d2ac2b;
+        font-family: "Droid Serif";
+        text-align: right;
+        
+        margin-top: 4px;
+
+        @include breakpoint(xs) {
+
+            margin-top: 0px;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+    }
+
+    .content {
+        max-width: 700px;
+        position: relative;
+
+        img {
+            width: auto;
+
+        }
+
+        @include breakpoint(md) {
+            margin: 0 auto;
+        }
+
+        @include breakpoint(sm) {
+            width: 560px;
+            img {
+                width: 440px;
+            }
+        }
+
+        @include breakpoint(xs) {
+            width: 270px;
+            img {  
+                width: 265px;
+  display: block;
+            }
+        }
+
+
+    }
+
+    .social {
+          right: 0px;
+          position: absolute;
+          bottom: 15px;
+          letter-spacing: 2px;
+        a {
+            color: #000;
+            font-size: 30px;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        @include breakpoint(xs) {
+            right: 0px;
+  position: relative;
+  bottom: 0px;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 17px;
+  }
+    }
+
+}
+
+#hunt-image {
+    max-height: 415px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    img {
+        width: 100%;
+
+        @include breakpoint(xs) {
+            width: 600px;
+
+        }
+    }
+
+    .text {
+        display: block;
+        position: absolute;
+        top: 0px;
+        text-align: center;
+        font-size: 37px;
+        font-family: "Ostrich Sans", sans;
+        font-weight: 800;
+        line-height: 0px;
+        margin: 0 auto;
+        width: 100%;
+        top: 50%;
+        margin-top: -185px;
+
+        h1 {
+            font-size:26px;
+        }
+          
+        span {
+            color: #FFF;
+            background: $gold;
+            line-height: 62px;
+            padding: 8px 10px 6px;
+
+        }
+
+
+          @include breakpoint(md) {
+              font-size: 28px;
+              margin-top: -145px;
+              span {
+                  line-height: 40px;
+                  padding: 6px 10px 4px;
+
+              }
+          }
+          
+
+          @include breakpoint(xs) {
+              font-size: 27px;
+              margin-top: -115px;
+              padding-left: 2.5%;
+              padding-right: 2.5%;
+              span {
+                  line-height: 30px;
+                  padding: 4px 10px 2px;
+
+              }
+          }
+
+
+        strong {
+            font-weight: 800;
+        }
+
+    }
+
+}
+#featured-items {
+    
+}
+
+.wrap #find-clues {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    
+    .container {
+        background: #FFF;
+        color: #939598;
+        position: relative;
+        margin: 0 auto;
+        width: 330px;
+        margin-top: -51px;
+        text-align: center;
+        text-transform: uppercase;
+        font-family: "Droid Serif";
+        font-style: italic;
+        font-size: 18px;
+        padding: 10px 0px;
+
+    }
+
+    @include breakpoint(xs) {
+    overflow: hidden;
+    position: relative;
+
+    .container {
+        margin-top: 0px;
+    }
+
+}
+
+}
+
+#stores {
+    margin-top: 10px;
+    padding: 20px 15px 30px;
+    background: #939598;
+    color: #FFF;
+    text-align: center;
+    font-family: "Droid Serif";
+    font-size: 20px;
+
+    @include breakpoint(xs) {
+        margin-top: 0px;
+        padding: 10px 15px 30px;
+    }
+
+
+    ul {
+        list-style: none;
+        max-width: 880px;
+        margin: 0 auto;
+        text-align: center;
+        padding-left: 0px;
+
+        li {
+            display: inline;
+
+            > h3 {
+                color: $gold;
+                display: inline;
+                font-size: 20px
+            }
+
+            > a {
+                color: white;
+                font-size: 18px;
+            }
+
+            &:not(:first-child):before {
+                content: "|";
+                margin-right: 10px;
+                margin-left: 5px;
+            }
+        }
+    }
+
+}
+
+#featured-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #91c3c3;
+
+    #featured-item {
+        color: #939598;
+        color: white;
+        //width: 330px;
+        text-align: center;
+        font-family: "Droid Serif";
+        font-style: italic;
+        font-size: 18px;
+        padding: 5px 0px;
+    }
+}

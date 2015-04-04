@@ -265,8 +265,12 @@ function handleBuyButtonClick(e) {
     }
 	else if(e.target.id.substr(0, 6) == 'offer_'){
 		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
-		
         var orderType = 'offer';
+        mixpanel.track(
+            "Clicked Offer Button",
+            { "productId": productId }
+        );
+        console.log('mixpanel: offer-button.onclick event fired');
 
 		if(productId && !(typeof productId === 'undefined')){
 		    console.log('this is the ordertype ', orderType)
@@ -315,20 +319,21 @@ function handleBuyButtonClick(e) {
         
 		if(productId && !(typeof productId === 'undefined')){
 		    console.log('ordertype: ', orderType)
-			$.ajax({
-				type: "GET",
-                // pass to ReservePreCheckout
-				url: urlToLoad,
-				dataType: "html",
-				success: function(response, status){
-					// console.log('response from pre-checkout call: '+status );
-					$("#pre-checkout-modal-container").html(response);
-					$("#reservation-modal").modal({
-						show: true,
-						keyboard: true
-					});
-				},
-			});
+            console.log("{{ user.is_authenticated }}")
+                $.ajax({
+    				type: "GET",
+                    // pass to ReservePreCheckout
+    				url: urlToLoad,
+    				dataType: "html",
+    				success: function(response, status){
+    					// console.log('response from pre-checkout call: '+status );
+    					$("#pre-checkout-modal-container").html(response);
+    					$("#reservation-modal").modal({
+    						show: true,
+    						keyboard: true
+    					});
+    				},
+    			});
 		}        
     }
     else if(e.target.id.substr(0, 15) == 'cancel_reserve_'){

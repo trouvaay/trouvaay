@@ -10,14 +10,21 @@
 					<div class="text-center">
 						<fieldset>
 							<legend>
-								<h2>Reservation</h2>
+								<h2>Go See</h2>
 							</legend>
 							<div class="row">
 								<div class="col-xs-12" class="text-center">
-		                            <h5>
-		                            Please provide the following info to reserve the item and we'll tell you where you can see this piece in person.
-		                            </h5>
-		                            <br />
+									{{ user.is_authenticated }}
+		                            {% if request.user.is_authenticated %}
+		                            	<h5>
+			                            Looks like you're logged in - please submit to go see your {{ product.short_name }}
+			                            </h5>
+		                            {% else %}
+			                            <h5>
+			                            please submit to go see your {{ product.short_name }}
+			                            </h5>
+			                            <br />
+		                            {% endif %}
 									{% crispy form %}
 	                        	</div>
 							</div>

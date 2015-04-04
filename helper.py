@@ -99,9 +99,10 @@ def send_user_password_change_email(request, user):
         plain_text_body_template='members/implicit_user_creation/email_body.txt',
         html_body_template='members/implicit_user_creation/email_body.html')
 
-def send_order_email(request, order, show_password_reset_link, is_buy):
+def send_order_email(request, order, show_password_reset_link, is_buy, is_offer):
     email_context = {
                      'is_buy': is_buy,
+                     'is_offer': is_offer,
                      'product': order.product,
                      'site': get_site(request),
                      }

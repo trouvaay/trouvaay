@@ -1,10 +1,10 @@
 {% load staticfiles %}
     <div class="col-xs-12 pic-detail-home">
         <div class="price">
-        {% if product.current_price %}
-            {% if product.is_sold %}
-                <span class="sold">{{ 'Sold' }}</span>                
-            {% elif product.is_reserved %}
+        {% if product.is_sold %}
+          <span class="sold">{{ 'Sold' }}</span>                
+        {% elif product.current_price %}
+            {% if product.is_reserved %}
                 <span class="reserved">{{ 'Reserved' }}</span>                
             {% elif product.is_discounted %}
                 <strike>{{' - $'}}{{ product.original_price|floatformat:"0" }}</strike>
@@ -51,21 +51,29 @@
             <!-- need these so that we can pass product name and price to stripe checkout -->
             <div class="row">
                 {% if product.is_sold %}
-                    <div class="col-xs-6">
+                    <div class="col-xs-12">
                         <span class="sold">{{ 'Sold' }}</span>
                     </div>
                 {% else %}
-                    <div class="col-xs-6 col-sm-6">
+
+                    <div class="col-xs-12 col-sm-12">
                         <button type="button" class="btn btn-primary buy buy profile" id="buy_{{ product.id }}">
                             Buy
                         </button>
                     </div>
-                    <div class="col-xs-6 col-sm-6">
+                   <!--  <div class="col-xs-6 col-sm-6">
                         <button type="button" class="btn btn-danger buy reserve profile" id="cancel_reserve_{{ product.id }}">
                             Cancel
                         </button>
-                    </div>
+                    </div> -->
                 {% endif %}
+               <!--  <div class="col-xs-12 col-lg-6">                      
+                    {% if OFFER_IS_ENABLED %}
+                      <button type="button" class="btn btn-primary buy offer profile" id="offer_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_OFFER }}">
+                          Make an Offer
+                      </button>
+                    {% endif %}
+                </div> -->
             </div>
         </div>                   
     </div>

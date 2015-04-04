@@ -1031,6 +1031,7 @@ ul.nav.navbar-nav.navbar-right > li > a.current {
 }
 .detail-neighborhood {
   font-style: italic;
+  font-family: "Droid Serif";
 }
 .product-description .heading .detail-neighborhood {
   font-size: 12px;

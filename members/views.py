@@ -61,9 +61,10 @@ class ProfileView(LoginRequiredMixin, generic.DetailView):
 
         context = super(ProfileView, self).get_context_data(**kwargs)
         user = self.get_object()
-        ordered_items = Product.objects.filter(product_orders__in=user.user_orders.filter(order_type=OrderType.RESERVATION_ORDER,
-                                                                                          reservation__is_active=True))
-        print ordered_items.query
+        user_orders = AuthOrder.objects.filter(authuser=user)
+        ordered_items = list(set([i.product for i in user_orders]))
+
+        # print ordered_items.query
         context['user_order_items'] = ordered_items
         print (context['user_order_items'])
         user_activity = AuthUserActivity.objects.get(authuser=user)
@@ -284,7 +285,6 @@ class ReserveView(generic.DetailView):
             Profile.create_profile(request.user)
             form = ReserveFormAuth(initial={'first_name': request.user.first_name,
                                             'last_name': request.user.last_name,
-                                            'phone': request.user.profile.phone
                                             })
         else:
             form = ReserveForm()
@@ -296,10 +296,12 @@ class ReserveView(generic.DetailView):
 
         product = self.get_object()
         order_user = None
+
         if(request.user.is_authenticated()):
 
             form = ReserveFormAuth(request.POST)
             if(not form.is_valid()):
+                print form.errors
                 return render_to_response('members/purchase/reserve_precheckout.html', locals())
 
             order_user = request.user
@@ -309,6 +311,7 @@ class ReserveView(generic.DetailView):
         else:        
             form = ReserveForm(request.POST)
             if(not form.is_valid()):
+                print form.errors
                 return render_to_response('members/purchase/reserve_precheckout.html', locals())
     
             # create user if needed
@@ -327,13 +330,15 @@ class ReserveView(generic.DetailView):
                 update_user = True
             if(update_user):
                 order_user.save()
-            phone = form.cleaned_data['phone']
-            if(not phone is None):
-                profile = order_user.profile
-                profile.phone = phone
-                profile.save()
+            # phone = form.cleaned_data['phone']
+            # if(not phone is None):
+            #     profile = order_user.profile
+            #     profile.phone = phone
+            #     profile.save()
         
         # If new user need to set send_password link param to true 
+        print "got here"
+
         if is_existing:
             password_reset_link = False
         else:
@@ -344,7 +349,7 @@ class ReserveView(generic.DetailView):
         logger.debug('number of reservations that user already has: %d' % order_user.get_number_of_reservations())
         logger.debug('reservations limit in settings: %d' % settings.RESERVATION_LIMIT)
         if(order_user.get_number_of_reservations() >= settings.RESERVATION_LIMIT):
-            reservation_message = "Sorry it looks like you've hit your reservation limit - save something for the rest of us!.  On a serious note email us to extend your limit and we're generally happy to accomodate.  Unless you're a robot..."
+            reservation_message = "Sorry it looks like you've hit your 'reveal limit' - save something for the rest of us!.  If you're seriously interested email us to extend your limit and we're generally happy to accomodate.  Unless you're a robot..."
             return render_to_response('members/purchase/reserve_postcheckout.html', locals())
 
         can_reserve_check, reservation_message = self.__can_reserve(product, order_user)
@@ -363,12 +368,10 @@ class ReserveView(generic.DetailView):
         # create reservation
         Reservation.create_reservation(order)
         
-        product.is_reserved = True
-        product.save()
         logger.debug('product is_reserved field set to True')
 
         # send order confirmation email
-        send_order_email(request=self.request, order=order, show_password_reset_link=password_reset_link, is_buy=False)
+        send_order_email(request=self.request, order=order, show_password_reset_link=password_reset_link, is_buy=False, is_offer=False)
         return render_to_response('members/purchase/reserve_postcheckout.html', locals())
                 
 
@@ -391,7 +394,7 @@ class BuyView(generic.DetailView):
         default_address.street = request.POST['args[shipping_address_line1]']
         default_address.city = request.POST['args[shipping_address_city]']
         default_address.state = request.POST['args[shipping_address_state]']
-        default_address.zipcd = request.POST['args[shipping_address_zip]']
+        default_address.zipcd = int(request.POST['args[shipping_address_zip]'][:5])
         default_address.shipping = True
         default_address.save()
 
@@ -429,7 +432,7 @@ class BuyView(generic.DetailView):
         order_address.street = request.POST['args[shipping_address_line1]']
         order_address.city = request.POST['args[shipping_address_city]']
         order_address.state = request.POST['args[shipping_address_state]']
-        order_address.zipcd = request.POST['args[shipping_address_zip]']
+        order_address.zipcd = int(request.POST['args[shipping_address_zip]'][:5])
         order_address.shipping = True
         order_address.save()
 
@@ -714,7 +717,7 @@ class BuyView(generic.DetailView):
             send_order_email(request=self.request, 
                              order=order,
                              show_password_reset_link=(not is_existing),
-                             is_buy=True)
+                             is_buy=do_order_capture, is_offer=(not do_order_capture))
 
             json_result = {
                 'status': 'ok',
@@ -739,7 +742,7 @@ class BuyView(generic.DetailView):
                 # to prevent that we'd compute this hash
                 # when the client submits the phone number the hash has to match with
                 # what we compute here
-                json_result['ask_phone'] = True
+                # json_result['ask_phone'] = True
                 json_result['email'] = order.authuser.email
                 json_result['post_checkout_hash'] = AuthUser.compute_post_checkout_hash(order.authuser)
             else:

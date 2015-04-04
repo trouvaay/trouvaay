@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'analytical',
     'endless_pagination',
     'social.apps.django_app.default',
+    'import_export',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -151,6 +152,7 @@ CLICK_EXCLUSIONS = []
 SALES_TAX = Decimal('0.0875')
 FEATURE_NAME_RESERVE = "Reserve"
 FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-store. 3 reservation limit"
+FEATURE_TOOLTIP_REVEAL = "See where to pick up this item"
 FEATURE_TOOLTIP_OFFER = "Offer must be above minimum reserve price for this item.  Your card wont be charged until the retailer has received your offer. If offer is rejected your card will be refunded."
 TOOLTIP_HEART = "Save to your profile page."
 RETURN_POLICY = {

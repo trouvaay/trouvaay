@@ -151,8 +151,16 @@ $(document).ready(function() {
 		
 		{% if is_offer %}
   		var buyUrl = "{% url "members:offer" %}";
+  		mixpanel.track(
+                "Offer Pre-checkout Submitted",
+                { "product": productName }
+            );
   		{% else %}
   		var buyUrl = "{% url "members:buy" %}";
+  		mixpanel.track(
+                "Buy Pre-checkout Submitted",
+                { "product": productName }
+            );
   		{% endif %}
   		
   		{% if is_offer and not is_offer_accepted %}
@@ -199,10 +207,7 @@ $(document).ready(function() {
 		//buy event tracking
 
 		//fire mixpanel event
-		mixpanel.track(
-                "Buy Pre-checkout Submitted",
-                { "product": productName }
-            );
+		
 
 		if(productName != '' && !(typeof productName === 'undefined') && productPrice != '' && !(typeof productPrice === 'undefined')){
 

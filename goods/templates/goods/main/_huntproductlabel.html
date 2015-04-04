@@ -1,10 +1,10 @@
 {% load staticfiles %}
     <div class="col-xs-12 pic-detail-home">
         <div class="price">
-        {% if product.is_sold %}
-          <span class="sold">{{ 'Sold' }}</span>                
-        {% elif product.current_price %}
-            {% if product.is_reserved %}
+        {% if product.current_price %}
+            {% if product.is_sold %}
+                <span class="sold">{{ 'Sold' }}</span>                
+            {% elif product.is_reserved %}
                 <span class="reserved">{{ 'Reserved' }}</span>                
             {% elif product.is_discounted %}
                 <strike>{{' - $'}}{{ product.original_price|floatformat:"0" }}</strike>
@@ -17,9 +17,11 @@
         {% endif %}
         
         </div>
-      <div class="name">
-	       {{ product.short_name|truncatechars:30 }}</br>
-         <img src="{% static 'img/loco_pin.svg' %}" style="height:18px"> in <span class="detail-neighborhood"><b>{{ product.store.neighborhood }}</b></span>
+      <!-- <div class="name">
+	       {{ product.short_name|truncatechars:30 }} - <span class="detail-neighborhood">({{ product.store.neighborhood }})</span>
+       </div> -->
+       <div class="name">
+         {{ product.short_name|truncatechars:30 }}
        </div>
           
 
@@ -30,11 +32,7 @@
     <!-- Like funtionality on hold until ProfileView implemented -->
     <div class="neighborhood-like-container">
       <div class="neighborhood">
-        {% if product.hours_left >= 0 %}
-            {{ product.get_days_left }}
-        {% else %}
-            Off the Market
-        {% endif %}
+        {{ product.store.neighborhood }}
       </div>
       <div class="actions">
       	<a href="https://www.pinterest.com/pin/create/button/

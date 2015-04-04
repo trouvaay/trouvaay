@@ -85,7 +85,7 @@ document.createElement( "picture" );
     }
 </script>
 </head>
-<body class="{% block bodyclass %}{% endblock %}">
+<body class="{% block bodyclass %}{% endblock %}" id="{% block bodyid %}{% endblock %}">
 
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -132,16 +132,17 @@ document.createElement( "picture" );
     	  <div class="row">
 
     	    <div class="col-xs-12 social-icons">
-    	      <a href="#" class="icon-facebook"><span>Facebook</span></a>
-    	      <a href="#" class="icon-twitter"><span>Twitter</span></a>
-    	      <a href="#" class="icon-instagram"><span>Instagram</span></a>
-    	      <a href="#" class="icon-pinterest"><span>Pinterest</span></a>
+    	      <a href="https://www.facebook.com/RareDoor" class="icon-facebook"><span>Facebook</span></a>
+    	      <a href="https://www.twitter.com/RareDoor" class="icon-twitter"><span>Twitter</span></a>
+    	      <a href="http://instagram.com/raredoor/" class="icon-instagram"><span>Instagram</span></a>
+    	      <a href="https://www.pinterest.com/raredoor/" class="icon-pinterest"><span>Pinterest</span></a>
     	    </div>
     	    <div class="col-xs-12 links">
             {% if user.is_authenticated %}
               <a href="{% url 'members:profile' %}">Profile</a>
             {% endif %}
     	      <a href="{% url 'goods:about' %}">About</a>
+
 
     	      {% if user.is_authenticated %}
     	      <a href="{% url 'members:logout' %}" class="nav-logout-button">Logout</a>
@@ -172,7 +173,7 @@ document.createElement( "picture" );
       <div class="col-xs-12 col-md-8 help-info text-right">
 	<div class="row">
 	<a href="{% url 'goods:returns' %}" class="col-xs-12 col-sm-4">Returns</a>
-	<span class="col-xs-12 col-sm-4">650.603.0386</span>
+	<span class="col-xs-12 col-sm-4">650.409.1595</span>
 	<a href="mailto:help@raredoor.com" class="col-xs-12 col-sm-4">help@raredoor.com</a>
 	</div>
       </div>
@@ -242,7 +243,7 @@ document.createElement( "picture" );
                             <p class="text-center" style="text-align:center"><h2 style="text-align:center">Thank you for your <span id="product-purchase-try">reservation</span><span id="product-purchase-buy" style="display:none">purchase</span></h2></p>
                         </div>
                         <div class="text-center">
-                            <h5>You will recieve an order confirmation via email and hear from us shortly to coordinate pickup</h5>
+                            <h5>You will recieve an order confirmation via email and hear from us shortly to coordinate pickup/delivery with the retailer</h5>
                             <div class="post-checkout-form-contents">
                                 <h5>Please enter your phone number</h5>
                                 <form  action="{% url "members:post_checkout_update" %}" id="form-post-checkout" method="post" >{% csrf_token %}

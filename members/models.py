@@ -495,6 +495,7 @@ class Offer(PurchaseBase):
     order = models.OneToOneField(AuthOrder, related_name='offer')
     offer_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, help_text='Price offered by user')
     is_captured = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     @classmethod
     def create_offer(cls, order, taxes, transaction_price, offer_price):
@@ -507,9 +508,10 @@ class Offer(PurchaseBase):
         offer.offer_price = offer_price
         offer.save()
 
-        product = order.product
-        product.is_reserved = True
-        product.save()
+        # removed for reveal/reservation feature change
+        # product = order.product
+        # product.is_reserved = True
+        # product.save()
 
         return offer
 

@@ -8,6 +8,33 @@
   }
 }
 
+#shop-now {
+      position: relative;
+  padding: 5px 13px 5px 50px;
+  &:before {
+      content: 'i';
+  font-size: 28px;
+  display: inline-block;
+  position: absolute;
+  top: -2px;
+  line-height: 29px;
+  margin-right: 11px;
+  left: 15px;
+  font-family: "raredoor" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  }
+
+  }
+
+
+
 header.top-bar {
   background: #333;
   line-height: 60px;

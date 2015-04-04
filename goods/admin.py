@@ -64,7 +64,7 @@ class ProductImageAdmin(CustomAdmin):
 class ProductAdmin(CustomAdmin):
     model = Product
 
-    list_display = ['short_name', 'id', 'first_image', 'description', 'store', 'hours_left', 'display_score', 'click_count', 'is_published', 'is_featured', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date']
+    list_display = ['short_name', 'id', 'first_image', 'description', 'store', 'hours_left','display_score', 'click_count', 'is_published', 'is_featured', 'is_reserved', 'is_sold', 'current_price', 'added_date', 'pub_date']
 
     fields = [('short_name', 'is_published', 'is_sold', 'is_featured'), ('store', 'units'),('original_price', 'current_price'), 
             'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),
@@ -72,9 +72,9 @@ class ProductAdmin(CustomAdmin):
     inlines = [ProductImageInline, AuthOrderInline]
 
     search_fields = ['short_name', 'id']
-    list_filter = ['store', 'is_published', 'furnituretype']
+    list_filter = ['store', 'the_hunt', 'is_published', 'furnituretype']
 
-    list_editable = ['current_price', 'is_published', 'is_reserved', 'is_sold', 'is_featured', 'pub_date']
+    list_editable = ['current_price', 'is_published', 'description', 'is_reserved', 'is_sold', 'is_featured', 'pub_date']
     
     prepopulated_fields = {"current_price": ("original_price",)}
 
@@ -89,6 +89,7 @@ class ProductAdmin(CustomAdmin):
         return obj.store.neighborhood
     
     first_image.allow_tags = True
+    
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)
