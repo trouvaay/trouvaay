@@ -744,6 +744,14 @@ header.top-bar .social-icons a {
 header.top-bar .social-icons a:before {
   line-height: 40px;
 }
+header.top-bar .social-icons #number {
+  display: inline;
+  text-align: right;
+  margin-left: 10%;
+  font-size: 16px;
+  font-family: "Ostrich Sans";
+  font-weight: 800;
+}
 header.top-bar .links a {
   font-size: 16px;
 }
