@@ -745,7 +745,7 @@ header.top-bar .social-icons a:before {
   line-height: 40px;
 }
 header.top-bar .links a {
-  font-size: 18px;
+  font-size: 16px;
 }
 header.top-bar .links a:not(:last-child) {
   border-right: 1px solid #000;
@@ -2246,8 +2246,9 @@ footer, .push {
 }
 @media (max-width: 480px) {
   footer, .push {
-    height: 90px;
+    height: 110px;
     padding-top: 0px;
+    position: initial;
   }
 }
 

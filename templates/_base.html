@@ -131,24 +131,26 @@ document.createElement( "picture" );
     	<div class="container">
     	  <div class="row">
 
-    	    <div class="col-xs-12 social-icons">
+    	    <div class="col-xs-8 social-icons">
     	      <a href="https://www.facebook.com/RareDoor" class="icon-facebook"><span>Facebook</span></a>
     	      <a href="https://www.twitter.com/RareDoor" class="icon-twitter"><span>Twitter</span></a>
     	      <a href="http://instagram.com/raredoor/" class="icon-instagram"><span>Instagram</span></a>
     	      <a href="https://www.pinterest.com/raredoor/" class="icon-pinterest"><span>Pinterest</span></a>
     	    </div>
+          <div class="col-xs-4">
+            650.409.1595
+          </div>
     	    <div class="col-xs-12 links">
             {% if user.is_authenticated %}
               <a href="{% url 'members:profile' %}">Profile</a>
             {% endif %}
     	      <a href="{% url 'goods:about' %}">About</a>
-
-
     	      {% if user.is_authenticated %}
     	      <a href="{% url 'members:logout' %}" class="nav-logout-button">Logout</a>
     	      {% else %}
     	      <a href="#" class="nav-login-button">Login / Sign up</a>
     	      {% endif %}
+            <a href="mailto:help@raredoor.com">help@raredoor.com</a>
     	    </div>
     	  </div>
     	</div>
@@ -172,8 +174,8 @@ document.createElement( "picture" );
       </div>
       <div class="col-xs-12 col-md-8 help-info text-right">
 	<div class="row">
-	<a href="{% url 'goods:returns' %}" class="col-xs-6 col-sm-4">Returns</a>
-	<span class="col-xs-6 col-sm-4">650.409.1595</span>
+	<a href="{% url 'goods:returns' %}" class="col-xs-12 col-sm-4">Returns</a>
+	<span class="col-xs-12 col-sm-4">650.409.1595</span>
 	<a href="mailto:help@raredoor.com" class="col-xs-12 col-sm-4">help@raredoor.com</a>
 	</div>
       </div>
