@@ -19,7 +19,7 @@
         </div>
       <div class="name">
 	       {{ product.short_name|truncatechars:30 }}</br>
-         Store located in <span class="detail-neighborhood"><b>{{ product.store.neighborhood }}</b></span>
+         <img src="{% static 'img/loco_pin.svg' %}" style="height:18px"> in <span class="detail-neighborhood"><b>{{ product.store.neighborhood }}</b></span>
        </div>
           
 
