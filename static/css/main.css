@@ -1398,8 +1398,10 @@ input#mobile-menu-switch:checked + #mobile-menu {
   text-align: center;
   font-weight: 400;
   line-height: 30px;
-  font-family: "Chunkfive";
   /* text-transform: uppercase; */
+}
+.heading h3 {
+  font-size: 20px;
 }
 
 .product-description .heading {
