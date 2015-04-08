@@ -2165,7 +2165,8 @@ footer {
 }
 @media (max-width: 992px) {
   footer {
-    height: 130px;
+    height: 170px;
+    padding-top: 25px;
   }
 }
 footer .social-icons {
@@ -2237,7 +2238,7 @@ footer, .push {
 }
 @media (max-width: 480px) {
   footer, .push {
-    height: 130px;
+    height: 170px;
   }
 }
 
