@@ -28,22 +28,40 @@
 .how-it-works .col-md-12.statement h3 {
   font-family: 'Chunkfive';
 }
-#signup-login-modal .modal-dialog {
-  &.modal-content {
-    float: left;
-    padding: 20px;
-    border: 0;
-    max-width: 100%;
-    width: 100%;
-
-    &button.close {
-      position: absolute;
-      right: 8px;
-      top: 8px;
+.signup-login {
+    .btn {
+        width: 100%;
     }
+
+    h5 {
+      font-size: 18px;
   }
 
+    .login form {
+        margin-bottom: 20px;
+
+    }
+
+    .login .btn-primary {
+        background: #999;
+        border: 1px solid #999;
+
+    }
+
+    .modal-content {
+        padding: 0px 20px;
+
+        .col-sm-6 {
+            text-align: center;
+
+            &:first-child {
+                border-right: 1px solid #eee;
+            }
+        }
+    }
+
 }
+
 .modal-dialog .modal-content {
   
   h3, h2 {

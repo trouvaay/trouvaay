@@ -13,16 +13,10 @@ footer {
   width: 100%;
 
 
-  .container { 
-    max-width: 100%;
-   
-    .row {
-      padding-top: 10px;
+  @include breakpoint(md) {
+    height: 170px;
+    padding-top: 25px;
 
-      @include breakpoint(md) {
-        padding-top: 0px;
-      }
-    }
   }
 
   .social-icons {
@@ -103,9 +97,7 @@ footer, .push {
   }
   
   @include breakpoint(xs) {
-    height: 110px;
-    padding-top:0px;
-    position: initial
+    height: 170px;
   }
 
 

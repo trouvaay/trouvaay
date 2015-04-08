@@ -1,117 +1,73 @@
 {% extends '_base.html' %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags static %}
 
 
- {% block content %}
- 	<div class="container-fluid" id="index-banner" style="margin-top:50px">
-	   <picture>
-    <!--[if IE 9]><video style="display: none;"><![endif]-->
+{% block content %}
+
+<div class="container-fluid" id="index-banner">
+    <!--    <picture>
+    [if IE 9]><video style="display: none;"><![endif]
     <source srcset="https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_1000,h_375/v1422902656/shutterstock_160709951_hsvzx9.jpg" media="(min-width: 992px)">
-    <!--[if IE 9]></video><![endif]-->
+    [if IE 9]></video><![endif]
     <img srcset='https://res.cloudinary.com/trouvaay/image/upload/c_fill,w_766,h_282/v1422902656/shutterstock_160709951_hsvzx9.jpg' alt="">
-    </picture>
+    <img srcset="{% static 'img/landing image_MAP_NO_PIN2.jpg' %}" alt="">
+    </picture> -->
+    
+    <img src="{% static 'img/landing-header.jpg' %}" alt="">
     <div class="row-fluid text-container">
-        <div class="text "><div style="font-style: italic; text-transform: uppercase;'">Find one of a kind furniture available in </div><strong>Bay Area stores</strong></div>
+        <div class="text "><div style="display: inline-block; letter-spacing: 1px;'">The best vintage and one-of-a-kind home decor </div><br /><strong>available in Bay Area stores</strong></div>
     </div>
 
 </div>
-
-<div class="container" id="how-it-works">
-	<div class="row">
-		<div class="col-sm-4 info">
-			<div class="browse">
-				<header>Browse</header>
-				<p>A curated selection of new and vintage furniture — all currently available in local stores — at <i>Raredoor.com.</i></p>
-			</div>
-		</div>
-		<div class="col-sm-4 info">
-			<div class="reserve">
-				<header>Reserve</header>
-				<p>Your perfect pieces online and take a few days to see the items in a store nearby.</p>
-			</div>
-		</div>
-		<div class="col-sm-4 info">
-			<div class="purchase">
-				<header>Purchase</header>
-				<p>Through us and receive great deals, as well as affordable delivery.</p>
-			</div>
-		</div>
-	</div>
-</div>
-    <div class="container-fluid pic-tabs main" id="products">        
-        <div class="row-fluid">
-		<header class="col-md-12"></header>
-            <div class="container" id="products-grid">
-                <div class="tab-content">
-                    <div class="tab-pane fade in active">
-                        <div class="grid-products-wrapper">
-                            <div class="row">
-                    			{% for product in products %}
-                                    {% include 'goods/main/_mainproduct_for_loop.html' %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div><!-- end tab1 -->
-                </div>
-            </div>
-        </div>
-    </div>
- {% endblock content %}
-{% block modal %}
-{{ block.super }}
 
 <!-- Signup modal -->
 
-<div class="modal fade" id="signup-login-modal">
-    <div class="modal-dialog">
-        <div class="modal-content col-xs-12">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="modal-body">
-                <!-- this will make sigup and login show side by side -->
-                <div class="row">
-                {% block modalforms %}
-                    <!-- Signup -->
-                    {% if signup_form %}
+<div class="container signup-login" style="margin-top: 0px">
+    <div class="modal-body">
+        <!-- this will make sigup and login show side by side -->
+        <div class="row">
+            {% block modalforms %}
+            <!-- Signup -->
+            {% if signup_form %}
 
-                    <div class="form-group col-sm-6 text-center">
-                        <div class="text-center">
-                            <p><b>Signup</b></p>
-                            {% crispy signup_form %}
-                            <div>or</div>
-                            {% include 'members/auth/social_login.html' %}
-                        </div>
-                    </div>
-                    {% endif %}
-                    <!-- Login  -->
-                    </hr>
-                    {% if login_form %}
-                    <div class="form-group col-sm-6 text-center login"> 
-                        <div class="text-center">
-                            <p><b>Login</b></p>
-                            {% crispy login_form %}
-                            
-                            <div id="div_id_password" class="form-group">
-                                <p><a href="{% url "auth_password_reset" %}">Forgot your password?</a></p>                          
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-                {% endblock %}                      
+            <div class="form-group col-sm-6 text-center">
+                <div class="text-center">
+                    <p><b>Signup</b></p>
+                    {% crispy signup_form %}
+                    <div>or</div>
+                    {% include 'members/auth/social_login.html' %}
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /. end signup modal -->  
-</div>
+            </div>
+            {% endif %}
+            <!-- Login  -->
+            </hr>
+            {% if login_form %}
+            <div class="form-group col-sm-6 text-center login"> 
+                <div class="text-center">
+                    <p><b>Login</b></p>
+                    {% crispy login_form %}
 
-{% endblock %}
+                    <div id="div_id_password" class="form-group">
+                        <p><a href="{% url "auth_password_reset" %}">Forgot your password?</a></p>                          
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endblock %}                      
+        </div>
+    </div><!-- /.modal-content -->
+</div>
+{% endblock content %}
+
+
 {% block endjs %}
 {{ block.super }}
 <script type="text/javascript">
 $(document).ready(function () {
-	$('#signup-login-modal').modal({"show": true});
-	$('#signup-login-modal').on('hidden.bs.modal', function () {
-		window.location.replace("{% url "goods:landing" %}");
-	})
-});
+        $('#signup-login-modal').modal({"show": true});
+        $('#signup-login-modal').on('hidden.bs.modal', function () {
+            window.location.replace("{% url "goods:landing" %}");
+            })
+        });
 </script>
 {% endblock %}
