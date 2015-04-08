@@ -10,7 +10,8 @@ footer {
   overflow: hidden;
 
   @include breakpoint(md) {
-    height: 130px;
+    height: 170px;
+    padding-top: 25px;
   }
 
   .social-icons {
@@ -89,7 +90,7 @@ footer, .push {
   }
   
   @include breakpoint(xs) {
-    height: 130px;
+    height: 170px;
   }
 
 

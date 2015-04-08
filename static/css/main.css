@@ -2165,7 +2165,8 @@ footer {
 }
 @media (max-width: 992px) {
   footer {
-    height: 130px;
+    height: 170px;
+    padding-top: 25px;
   }
 }
 footer .social-icons {
@@ -2237,7 +2238,7 @@ footer, .push {
 }
 @media (max-width: 480px) {
   footer, .push {
-    height: 130px;
+    height: 170px;
   }
 }
 
@@ -2277,17 +2278,27 @@ footer, .push {
   font-family: 'Chunkfive';
 }
 
-#signup-login-modal .modal-dialog.modal-content {
-  float: left;
-  padding: 20px;
-  border: 0;
-  max-width: 100%;
+.signup-login .btn {
   width: 100%;
 }
-#signup-login-modal .modal-dialog.modal-contentbutton.close {
-  position: absolute;
-  right: 8px;
-  top: 8px;
+.signup-login h5 {
+  font-size: 18px;
+}
+.signup-login .login form {
+  margin-bottom: 20px;
+}
+.signup-login .login .btn-primary {
+  background: #999;
+  border: 1px solid #999;
+}
+.signup-login .modal-content {
+  padding: 0px 20px;
+}
+.signup-login .modal-content .col-sm-6 {
+  text-align: center;
+}
+.signup-login .modal-content .col-sm-6:first-child {
+  border-right: 1px solid #eee;
 }
 
 .modal-dialog .modal-content h3, .modal-dialog .modal-content h2 {
