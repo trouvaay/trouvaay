@@ -9,6 +9,7 @@ from random import randint
 import logging
 from django.conf import settings
 from random import shuffle
+from django.utils import timezone
 
 from helper import is_time_to_show_modal, hide_modal, Neighborhoods
 import uuid
@@ -196,7 +197,7 @@ class ShopView(AjaxListView):
 
     #     return queryset
     def get_queryset(self):
-        queryset = self.model.objects.filter(is_published=True, hours_left__gte=0, store__is_featured=True).exclude(description__isnull=True)
+        queryset = self.model.objects.filter(is_published=True, pub_date__lte=timezone.now(), hours_left__gte=0, store__is_featured=True).exclude(description__isnull=True)
         return queryset
 
     def get_context_data(self, **kwargs):
