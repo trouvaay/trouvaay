@@ -1,6 +1,15 @@
 #filter-container {
-    margin-top: 60px;
-    display: none;
+    margin-top: 40px;
+    //display: none;
+
+    .filters-container {
+        display:none;
+    }
+
+    #close-filter {
+        color: $gold;
+        left: 87%;
+    }
 }
 .grid-products-wrapper {
     //padding-top: 20px;

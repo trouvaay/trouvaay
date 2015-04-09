@@ -1485,8 +1485,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 
 #filter-container {
-  margin-top: 60px;
+  margin-top: 40px;
+}
+#filter-container .filters-container {
   display: none;
+}
+#filter-container #close-filter {
+  color: #e6be46;
+  left: 87%;
 }
 
 .grid-products-wrapper {
