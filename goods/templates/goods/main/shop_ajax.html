@@ -102,23 +102,14 @@
     {% endif %}
 
 
-    {% if promotion_offer and not request.user.is_authenticated %}
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#promotion-offer-modal').modal({"show": true});
-            });
-        </script>
-    {% endif %}
-
 
 {% if promotion_offer and not request.user.is_authenticated %}
-<script type="text/javascript">
-$(document).ready(function () {
-        $('#promotion-offer-modal').modal({"show": true});
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#promotion-offer-modal').modal({"show": true});
         });
-</script>
+    </script>
 {% endif %}
-
 
 <link rel="stylesheet" href="{% static 'css/bootstrap-slider.min.css' %}">
 <script src="{% static 'js/vendor/bootstrap-slider.min.js' %}"></script>
@@ -198,6 +189,7 @@ $("#ajax-product-container").html(response);
                 }, 2000);
 
 console.log('timer is set: ');
+
 console.log(searchFilterTimer);
 });
 
@@ -254,5 +246,12 @@ nextText: 'a',
 });
         });
 </script>
+{% if not request.user.is_authenticated %}
+    <script type="text/javascript">
+        console.log('clicking nav button now');
+        $('.nav-login-button').click();
+        console.log('Modal should show now');
+    </script>
+{% endif %}
 {% endblock endjs %}
 
