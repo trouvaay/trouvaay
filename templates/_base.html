@@ -111,7 +111,7 @@ document.createElement( "picture" );
       	<a href="/">
       	  <img src="{% static 'img/logos/raredoor-gold-logo.svg' %}" id="logo" alt="Raredoor" />
       	</a>
-        <a href="#searchfilter-form" id="filter-btn" class="btn hidden-xs icon-down-arrow">Filter items</a>
+        <!-- <a href="#searchfilter-form" id="filter-btn" class="btn hidden-xs icon-down-arrow">Filter items</a> -->
         <a href="{% url 'goods:about' %}" class="btn hidden-xs">About us</a>
         <a href="#" data-toggle="modal" data-target="#how-it-works-modal" class="btn hidden-xs icon-question-mark"><span>How it works</span></a>
       </div>
@@ -155,8 +155,7 @@ document.createElement( "picture" );
     	      {% if user.is_authenticated %}
     	      <a href="{% url 'members:logout' %}" class="nav-logout-button">Logout</a>
     	      {% else %}
-            <a href="#" class="white-right-button hidden-xs nav-login-button">Login or sign up</a>
-    	      <!-- <a href="/login" class="">Login / Sign up</a> -->
+    	      <a href="/login" class="">Login / Sign up</a>
     	      {% endif %}
             <a href="mailto:help@raredoor.com">help@raredoor.com</a>
     	    </div>
