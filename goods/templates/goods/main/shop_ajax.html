@@ -64,6 +64,7 @@
             </div>
         </div>
     </div>
+    <div class="invisible" id="products-spinner"></div>
 </div>
 {% endblock content %}
 {% block endjs %}
@@ -162,6 +163,21 @@ function colourNameToHex(colour)
     return false;
 }
 
+var $spinner = $('#products-spinner');
+
+$(window).scroll(function() {
+        e_top = $('#index-banner').height() + $('#how-it-works').height();
+        console.log($spinner.offset().top);
+    console.log($(window).scrollTop());
+    console.log($(window).scrollTop() - $(window).height/2 - e_top + 64);
+    console.log($spinner.offset().top - $(window).scrollTop());
+    if ($(window).scrollTop() >= -$(window).height()/2 + ($('#index-banner').outerHeight() + $('#how-it-works').outerHeight() + 60 + 64 + 120)) {
+        $('#products-spinner').addClass('fixed');
+    } else {
+        $('#products-spinner').removeClass('fixed');
+    }
+});
+
 $(document).ready(function() {        
 
         $('#filter-btn').click(function() {
@@ -170,6 +186,8 @@ $(document).ready(function() {
 
         var searchFilterTimer;
         $(".searchfilter-control" ).change(function(e) {
+            $('#products').addClass('loading');
+            $('#products-spinner').removeClass('invisible');
             console.log("searchfilter-control changed: "+e.target.id);
 
             // wait for other changes before we search
@@ -193,6 +211,8 @@ data: $("#searchfilter-form").serialize(),
 success: function(response, status){
 console.log('status from searchfilter call: '+status);
 $("#ajax-product-container").html(response);
+$('#products').removeClass('loading');
+$('#products-spinner').addClass('invisible');
 },
 });					
                 }, 2000);
