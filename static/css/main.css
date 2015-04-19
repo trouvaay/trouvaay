@@ -1517,7 +1517,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 
 #filter-container {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 #filter-container .filters-container {
   display: none;
@@ -1788,7 +1788,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 @media (max-width: 767px) {
   #searchfilter-form + .wrap {
     margin-left: auto;
-    margin-top: 50px;
+    margin-top: 110px;
   }
 }
 #searchfilter-form + .wrap .container {
@@ -2117,6 +2117,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #searchfilter-form .c-checkbox .checkbox-label {
   position: relative;
+}
+@media (max-width: 767px) {
+  #searchfilter-form .c-checkbox input:checked + .checkbox-label {
+    color: #e6be46;
+  }
 }
 #searchfilter-form .c-checkbox input:checked + .checkbox-label:before {
   content: '×';

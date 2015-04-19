@@ -1,5 +1,5 @@
 #filter-container {
-    margin-top: 40px;
+    margin-top: 60px;
     //display: none;
 
     .filters-container {
@@ -319,7 +319,7 @@
 
         @include breakpoint(sm) {
             margin-left: auto;
-            margin-top: 50px;
+            margin-top: 110px;
 
         }
 
@@ -768,6 +768,12 @@
             position: relative;
         }
 
+        input:checked + .checkbox-label {
+            @include breakpoint(sm) {
+                color: $gold;
+            }
+
+        }
         input:checked + .checkbox-label:before {
             content: '×';
             font-size: 16px;
