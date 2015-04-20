@@ -64,6 +64,7 @@
             </div>
         </div>
     </div>
+    <div class="invisible" id="products-spinner"></div>
 </div>
 {% endblock content %}
 {% block endjs %}
@@ -101,6 +102,16 @@
         </script>
     {% endif %}
 
+    
+
+    {% if show_login_modal %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                console.log('clicking login modal');
+               $('.nav-login-button').click();
+            });
+        </script>
+    {% endif %}
 
 
 {% if promotion_offer and not request.user.is_authenticated %}
@@ -153,15 +164,28 @@ function colourNameToHex(colour)
     return false;
 }
 
-$(document).ready(function() {        
+var $spinner = $('#products-spinner');
 
-        $('#filter-btn').click(function() {
-            $('#searchfilter-form').toggleClass('open');
-            });
+$(window).scroll(function() {
+        e_top = $('#index-banner').height() + $('#how-it-works').height();
+        console.log($spinner.offset().top);
+    console.log($(window).scrollTop());
+    console.log($(window).scrollTop() - $(window).height/2 - e_top + 64);
+    console.log($spinner.offset().top - $(window).scrollTop());
+    if ($(window).scrollTop() >= -$(window).height()/2 + ($('#index-banner').outerHeight() + $('#how-it-works').outerHeight() + 60 + 64 + 120)) {
+        $('#products-spinner').addClass('fixed');
+    } else {
+        $('#products-spinner').removeClass('fixed');
+    }
+});
 
-        var searchFilterTimer;
-        $(".searchfilter-control" ).change(function(e) {
-            console.log("searchfilter-control changed: "+e.target.id);
+var searchFilterTimer;
+
+function reloadItems() {
+    
+            $('#products').addClass('loading');
+            $('#products-spinner').removeClass('invisible');
+            /*console.log("searchfilter-control changed: "+e.target.id);*/
 
             // wait for other changes before we search
             // if user is clicking on filter we don't
@@ -184,6 +208,8 @@ data: $("#searchfilter-form").serialize(),
 success: function(response, status){
 console.log('status from searchfilter call: '+status);
 $("#ajax-product-container").html(response);
+$('#products').removeClass('loading');
+$('#products-spinner').addClass('invisible');
 },
 });					
                 }, 2000);
@@ -191,6 +217,17 @@ $("#ajax-product-container").html(response);
 console.log('timer is set: ');
 
 console.log(searchFilterTimer);
+
+}
+
+$(document).ready(function() {        
+
+        $('#filter-btn').click(function() {
+            $('#searchfilter-form').toggleClass('open');
+            });
+
+        $(".searchfilter-control" ).change(function(e) {
+            reloadItems();
 });
 
 $('.slider').ionRangeSlider({'prettify_enabled': false, 'force_edges': true});
@@ -204,16 +241,18 @@ $('#filter-container-color').find('.checkbox-label').each(function() {
         });
 
 $('.category .reset').click(function(event) {
-        if ($(event.target).parent().hasClass("header-group")) {
-        $(this).parent().parent().find('.filter-group .reset').addClass('hidden');
+        if ($(event.target).parent().parent().hasClass("header-group")) {
+        $(this).parent().parent().parent().find('.filter-group .reset').addClass('hidden');
 
         }
-        $(this).parent().parent().find('input[type="checkbox"]').attr('checked', false);
-        $(this).parent().parent().find('.slider').each(function() {
+        $(this).parent().parent().parent().find('input[type="checkbox"]').attr('checked', false);
+        $(this).parent().parent().parent().find('.slider').each(function() {
             $(this).data("ionRangeSlider").reset();
             });
 
         $(this).closest('.filter-group').find('header .reset').addClass('hidden');
+
+        reloadItems();
 
         });
 

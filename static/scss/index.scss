@@ -291,6 +291,25 @@
 
 #products {
   padding: 20px 0 0px;
+  position: relative;
+
+  .row-fluid {
+      transition: all .4s;
+      -o-transition: all .4s;
+      -moz-transition: all .4s;
+      -webkit-transition: all .4s;
+  }
+
+
+  &.loading .row-fluid {
+      opacity: 0.3;
+      pointer-events: none;
+      
+      transition: all .4s;
+      -o-transition: all .4s;
+      -moz-transition: all .4s;
+      -webkit-transition: all .4s;
+  }
 
   header {
     background: #979391;
@@ -336,6 +355,26 @@
 
   }
 
+
+}
+
+#products-spinner {
+    width: 128px;
+    height: 128px;
+    position: absolute;
+    left: 50%;
+    margin-left: - 64px;
+    top: 0px;
+    top: 120px;
+    background: url('/static/img/335.GIF');
+
+    &.fixed {
+        position: fixed;
+        top: 50%;
+        margin-left: 60px;
+        margin-top: -64px;
+
+    }
 
 }
 
