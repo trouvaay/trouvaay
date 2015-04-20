@@ -102,6 +102,16 @@
         </script>
     {% endif %}
 
+    
+
+    {% if show_login_modal %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                console.log('clicking login modal');
+               $('.nav-login-button').click();
+            });
+        </script>
+    {% endif %}
 
     {% if promotion_offer and not request.user.is_authenticated %}
         <script type="text/javascript">
@@ -178,17 +188,13 @@ $(window).scroll(function() {
     }
 });
 
-$(document).ready(function() {        
+var searchFilterTimer;
 
-        $('#filter-btn').click(function() {
-            $('#searchfilter-form').toggleClass('open');
-            });
-
-        var searchFilterTimer;
-        $(".searchfilter-control" ).change(function(e) {
+function reloadItems() {
+    
             $('#products').addClass('loading');
             $('#products-spinner').removeClass('invisible');
-            console.log("searchfilter-control changed: "+e.target.id);
+            /*console.log("searchfilter-control changed: "+e.target.id);*/
 
             // wait for other changes before we search
             // if user is clicking on filter we don't
@@ -219,6 +225,17 @@ $('#products-spinner').addClass('invisible');
 
 console.log('timer is set: ');
 console.log(searchFilterTimer);
+
+}
+
+$(document).ready(function() {        
+
+        $('#filter-btn').click(function() {
+            $('#searchfilter-form').toggleClass('open');
+            });
+
+        $(".searchfilter-control" ).change(function(e) {
+            reloadItems();
 });
 
 $('.slider').ionRangeSlider({'prettify_enabled': false, 'force_edges': true});
@@ -232,16 +249,18 @@ $('#filter-container-color').find('.checkbox-label').each(function() {
         });
 
 $('.category .reset').click(function(event) {
-        if ($(event.target).parent().hasClass("header-group")) {
-        $(this).parent().parent().find('.filter-group .reset').addClass('hidden');
+        if ($(event.target).parent().parent().hasClass("header-group")) {
+        $(this).parent().parent().parent().find('.filter-group .reset').addClass('hidden');
 
         }
-        $(this).parent().parent().find('input[type="checkbox"]').attr('checked', false);
-        $(this).parent().parent().find('.slider').each(function() {
+        $(this).parent().parent().parent().find('input[type="checkbox"]').attr('checked', false);
+        $(this).parent().parent().parent().find('.slider').each(function() {
             $(this).data("ionRangeSlider").reset();
             });
 
         $(this).closest('.filter-group').find('header .reset').addClass('hidden');
+
+        reloadItems();
 
         });
 
