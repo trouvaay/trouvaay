@@ -155,6 +155,7 @@ FEATURE_TOOLTIP_RESERVE = "You'll have 2 days to hold this item and see it in-st
 FEATURE_TOOLTIP_REVEAL = "See where to pick up this item"
 FEATURE_TOOLTIP_OFFER = "Offer must be above minimum reserve price for this item.  Your card wont be charged until the retailer has received your offer. If offer is rejected your card will be refunded."
 TOOLTIP_HEART = "Save to your profile page."
+TOOLTIP_PURCHASE = "Submit payment info"
 RETURN_POLICY = {
     'allowed' : '15 day, no hassle return policy. Payment in the form of store credit only.',
     'not_allowed' : 'Sorry, there are no returns on this item. Please email us if you have any specific questions about the product.'

@@ -28,5 +28,6 @@ def get_feature_context(request):
         'FEATURE_TOOLTIP_RESERVE': settings.FEATURE_TOOLTIP_RESERVE,
         'FEATURE_TOOLTIP_REVEAL': settings.FEATURE_TOOLTIP_REVEAL,
         'FEATURE_TOOLTIP_OFFER': settings.FEATURE_TOOLTIP_OFFER,
-        'TOOLTIP_HEART': settings.TOOLTIP_HEART
+        'TOOLTIP_HEART': settings.TOOLTIP_HEART,
+        'TOOLTIP_PURCHASE': settings.TOOLTIP_PURCHASE,
     }

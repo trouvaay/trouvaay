@@ -571,6 +571,7 @@ class BuyView(generic.DetailView):
         stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
         feature_name_reserve = settings.FEATURE_NAME_RESERVE
         site_name = settings.SITE_NAME
+        TOOLTIP_PURCHASE = settings.TOOLTIP_PURCHASE
 
         return render_to_response('members/purchase/buy_precheckout.html', locals())
 

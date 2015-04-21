@@ -14,22 +14,15 @@
 							</legend>
 							<div class="row">
 							<div class="col-xs-12">
-								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+								<div class="alert alert-success" role="alert" style="margin-bottom:5px; height:100%">
 		                            <p class="text-center">
-		                            {% if is_offer %}
-		                            <b>{{ product.short_name }}</b>
-		                            <br />
-		                            Your card will not be charged until the retailer has 
-		                            received your offer.
-		                            {% else %}
-		                            You're one step away from your</br>
-		                            <b>{{ product.short_name }}</b>
-		                            <p>
-		                            	Once your purchase is complete we will email you to coordinate delivery. You can either pickup directly or use Rare Door delivery - $5 for small items, $65 for bulk item for in-town delivery (eg. SF to SF, or East Bay to East Bay). 
-		                            	outside-town deliveries are $20 and $80, respectively.  
-		                            </p>
-		                            <p>If you have any questions about your item please call us at <b>650.409.1595</b></p>
-		                            {% endif %}
+			                            {% if is_offer %}
+			                            <b>{{ product.short_name }}</b>
+			                            <br />
+			                            {% else %}
+			                            You're one step away from your</br>
+			                            <b>{{ product.short_name }}</b>
+			                            {% endif %}
 		                            </p>
 	                        	</div>
 							</div>
@@ -100,7 +93,7 @@
 							    {% else %}
 							    	<span id="order-buy-or-offer" style="display:none">buy</span>
 							    {% endif %}
-							    <button id="button-precheckout-submit" type="button" class="btn btn-success">
+							    <button id="button-precheckout-submit" type="button" class="btn btn-success" data-toggle="tooltip" title="{{ TOOLTIP_PURCHASE }}">
 								    {% if order_type == 'reserve' %}
 										Reserve
 									{% elif is_offer %}
@@ -113,6 +106,26 @@
 										Purchase
 		                        	{% endif %}
 	                        	</button>		
+							</div>
+							</div></br>
+							<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+									{% if is_offer %}
+			                            <p>Proceed to enter credit card info to submit offer.</p>
+			                            <p>Your card will not be charged until the retailer has received your offer.  If your offer is rejected your card will be refunded immediately.</p>
+			                            
+			                        {% else %}
+			                        	<p>
+			                            	Once your purchase is complete we will email you to coordinate delivery.
+			                            </p>
+			                            <p>
+			                            	Pickup (for free) or use Rare Door delivery: $5 for small items, $65 for bulk items for in-town delivery.  $20 and $80 for delivery anywhere in the Bay.  
+			                            </p>
+			                        {% endif %}
+			                            <p>If you have any questions about your item please call us at <b>650.409.1595
+			                            </p>
+	                        	</div>
 							</div>
 							</div>
 						</fieldset>
