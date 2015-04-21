@@ -12,6 +12,11 @@
                 <div class="row">
                 {% block modalforms %}
                     <!-- Signup -->
+                    <div class="form-group col-xs-12 text-center">  
+                        <div class="text-center">
+                        {% block registration %}{% endblock %}
+                        </div>
+                    </div>
                     {% if signup_form %}
 
                     <div class="form-group visible-xs-block text-center" style="margin-top: 20px;">
