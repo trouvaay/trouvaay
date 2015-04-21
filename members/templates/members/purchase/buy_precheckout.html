@@ -303,10 +303,12 @@ $(document).ready(function() {
 								$("#product-purchase-buy").show();
 
 								if(data['is_offer']) {
+									$("#retailer").text(data['store_name']);
 									$("#offer-post-checkout-modal").modal({
 										show: true,
 										keyboard: true
 									})
+
 								}
 								else {
 									$("#post-checkout-modal").modal({
@@ -320,8 +322,8 @@ $(document).ready(function() {
 								
 								if(data['ask_phone']){
 									console.log('We need to ask for phone on post checkout form');
-									$("#id_email").val(data['email'])
-									$("#id_post_checkout_hash").val(data['post_checkout_hash'])
+									$("#id_email").val(data['email']);
+									$("#id_post_checkout_hash").val(data['post_checkout_hash']);
 									$(".post-checkout-form-contents").show();
 									$('#button-id-post-checkout').on('click', handlePostCheckoutClick);
 								}
