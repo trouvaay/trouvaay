@@ -264,6 +264,10 @@ $('.category .reset').click(function(event) {
 
         });
 
+$('.checkbox-label._all').click(function() {
+        $(this).parents('.category').find('.reset').click();
+});
+
 $('.filter-group input').change(function() {
         if ($(this).closest('.filter-group').find('input:checked').length) {
         $(this).closest('.filter-group').find('header .reset').removeClass('hidden');
