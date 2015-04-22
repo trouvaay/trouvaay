@@ -2,6 +2,16 @@
 {% load crispy_forms_tags %}
 
 {% block registration %}
-	<h1>Account Created - Welcome!</h1>
+    <h2>Account Created - Welcome!</h2>
+    <div class="form-group col-sm-offset-3 col-sm-6 text-center login"> 
+    <div class="text-center">
+        <div id="div_id_password" class="form-group">
+            <a href="{% url 'goods:landing' %}">
+                <button type="button" class="btn btn-success"><b>Go Shop</b></button>
+            </a>
+        </div>
+    </div>
+    </div>
 {% endblock %}
+
 

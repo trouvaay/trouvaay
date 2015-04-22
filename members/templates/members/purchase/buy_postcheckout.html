@@ -7,10 +7,10 @@
                     <!-- <span class="hide">Close</span> -->
                 </button>
             <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
-                ><h2 style="text-align:center">Thank you for your <span id="product-purchase-try">reservation.</span><span id="product-purchase-buy" style="display:none">purchase</span></h2>
+                <h2 style="text-align:center">Thank you for your <span id="product-purchase-try">reservation.</span><span id="product-purchase-buy" style="display:none">purchase</span></h2>
             </div>
             <div class="text-center">
-                <h5>You will recieve an order confirmation via email and hear from us shortly to coordinate delivery</h5>
+                <h5>You'll recieve a confirmation via email & hear from us shortly to coordinate delivery</h5>
                 <div id="post-checkout-form-contents" style="display:none">
                     <h5>Please enter your phone number</h5>
                     <form  action="{% url "members:post_checkout_update" %}" id="form-post-checkout" method="post" >{% csrf_token %}
