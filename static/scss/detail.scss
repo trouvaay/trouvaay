@@ -29,10 +29,17 @@
 }
 
 fieldset{
-  legend {
-    margin-bottom: 5px;
-  }
-  .table {
-    margin-bottom: 5px;
+
+  @include breakpoint(sm) {
+
+    legend {
+      margin-bottom: 5px;
+    }
+    .table {
+      margin-bottom: 5px;
+    }
+    .alert {
+      padding: 10px 5px;
+    }
   }
 }

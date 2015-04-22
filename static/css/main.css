@@ -1405,11 +1405,16 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin-top: 8%;
 }
 
-fieldset legend {
-  margin-bottom: 5px;
-}
-fieldset .table {
-  margin-bottom: 5px;
+@media (max-width: 767px) {
+  fieldset legend {
+    margin-bottom: 5px;
+  }
+  fieldset .table {
+    margin-bottom: 5px;
+  }
+  fieldset .alert {
+    padding: 10px 5px;
+  }
 }
 
 .featured-icons {
