@@ -1136,6 +1136,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
   margin-left: 60px;
   margin-top: -64px;
 }
+@media (max-width: 767px) {
+  #products-spinner {
+    left: 45%;
+  }
+}
 
 @media (max-width: 767px) {
   .grid {
