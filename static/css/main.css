@@ -1138,7 +1138,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #products-spinner {
-    left: 45%;
+    left: 35%;
   }
 }
 
