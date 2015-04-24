@@ -5,8 +5,7 @@ from members.models import AuthUser, AuthUserActivity, \
     PromotionOffer, Redemption, Join, Profile, AuthOrder, Reservation, Purchase, OrderAddress, Offer
 
 from django import forms
-from import_export import resources
-from import_export.admin import ImportExportModelAdmin, ExportMixin
+from import_export.admin import ExportMixin
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -93,14 +92,6 @@ class AuthUserAdmin(ExportMixin, UserAdmin):
     ordering = ('-date_joined', 'email',)
     filter_horizontal = ('groups', 'user_permissions',)
 
-class AuthUserResource(resources.ModelResource):
-
-    class Meta:
-        model = AuthUser
-
-class AuthUserResourceAdmin(ImportExportModelAdmin):
-    resource_class = AuthUserResource
-    pass
 
 class AuthUserInline(admin.TabularInline):
     model = AuthUser

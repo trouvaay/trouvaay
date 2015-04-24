@@ -1,6 +1,7 @@
 from django.contrib import admin
 from members.models import AuthOrder
 from goods.models import Product, Color, Segment, Style, FurnitureType, ValueTier, Category, Subcategory, Material, ProductImage
+from import_export.admin import ExportMixin
 
 
 class CustomAdmin(admin.ModelAdmin):
@@ -61,7 +62,7 @@ class ProductImageAdmin(CustomAdmin):
     list_display = ['image', 'is_main']
 
 
-class ProductAdmin(CustomAdmin):
+class ProductAdmin(ExportMixin, CustomAdmin):
     model = Product
 
     list_display = ['short_name', 'id', 'first_image', 'description', 'store', 'added_date', 'pub_date', 'is_published', 'is_sold', 'current_price', 'hours_left','display_score', 'click_count']
