@@ -1378,6 +1378,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
   padding-right: 20px;
 }
 
+.product-description {
+  font-family: "Droid Serif";
+}
 .product-description .heading {
   float: left;
   color: white;
@@ -1387,9 +1390,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
   background: none;
   color: black;
   border: black 2px solid;
-  font-size: 16px;
-  font-weight: 600;
   line-height: 25px;
+}
+.product-description .heading h4 {
+  font-size: 15px;
+  font-weight: 800;
 }
 @media (max-width: 767px) {
   .product-description .heading {

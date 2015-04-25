@@ -1,5 +1,7 @@
 .product-description {
   
+  font-family: "Droid Serif";
+  
   .heading {
     float: left;
     color: white;
@@ -9,9 +11,12 @@
     background: none;
     color: black;
     border: black 2px solid;
-    font-size: 16px;
-    font-weight: 600;
     line-height: 25px;
+
+    h4 {
+      font-size: 15px;
+      font-weight: 800;
+    }
 
     @include breakpoint(sm) {
       padding: 12px 5%;
