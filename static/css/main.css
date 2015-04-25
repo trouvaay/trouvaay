@@ -1536,7 +1536,12 @@ input#mobile-menu-switch:checked + #mobile-menu {
 #filter-container {
   margin-top: 60px;
 }
-#filter-container .filters-container {
+#filter-container .filters-container #filter-container-neighborhood,
+#filter-container .filters-container #filter-container-color,
+#filter-container .filters-container #filter-container-style {
+  display: none;
+}
+#filter-container .filters-container #filter-container-price > input {
   display: none;
 }
 #filter-container #close-filter {

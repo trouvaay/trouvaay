@@ -3,7 +3,15 @@
     //display: none;
 
     .filters-container {
-        display:none;
+
+        #filter-container-neighborhood,
+        #filter-container-color,
+        #filter-container-style {
+            display: none;
+        }
+        #filter-container-price > input {
+            display: none;
+        }
     }
 
     #close-filter {
