@@ -1,6 +1,8 @@
 .product-description {
   
   font-family: "Droid Serif";
+  font-weight: 600;
+  font-size: 12px;
   
   .heading {
     float: left;
@@ -30,6 +32,10 @@
   .row-attrs.descrip-detail > .col-sm-12 {
     padding-right: 28px;
     padding-left: 28px;  
+  }
+
+  .attr {
+    font-weight: 500;
   }
 
 }

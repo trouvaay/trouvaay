@@ -1378,6 +1378,8 @@ input#mobile-menu-switch:checked + #mobile-menu {
 
 .product-description {
   font-family: "Droid Serif";
+  font-weight: 600;
+  font-size: 12px;
 }
 .product-description .heading {
   float: left;
@@ -1406,6 +1408,9 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .product-description .row-attrs.descrip-detail > .col-sm-12 {
   padding-right: 28px;
   padding-left: 28px;
+}
+.product-description .attr {
+  font-weight: 500;
 }
 
 .container.detail {
