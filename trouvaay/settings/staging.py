@@ -9,6 +9,7 @@ DATABASES['default'] =  dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SSLIFY_DISABLE = False
 SITE_ID = 2
+SITE_DOMAIN = "raredoor-staging.herokuapp.com"
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 DEBUG = os.getenv('DEBUG', False)
