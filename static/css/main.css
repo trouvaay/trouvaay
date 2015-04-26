@@ -1403,6 +1403,10 @@ input#mobile-menu-switch:checked + #mobile-menu {
     font-size: 14px;
   }
 }
+.product-description .row-attrs.descrip-detail > .col-sm-12 {
+  padding-right: 28px;
+  padding-left: 28px;
+}
 
 .container.detail {
   margin-top: 8%;
@@ -2248,7 +2252,7 @@ footer {
 }
 @media (max-width: 992px) {
   footer {
-    height: 170px;
+    height: 130px;
     padding-top: 15px;
   }
 }
