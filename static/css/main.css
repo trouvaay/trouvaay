@@ -327,10 +327,10 @@ html, body {
 }
 
 .irs-slider {
-  width: 11px;
-  height: 11px;
-  top: 13px;
-  border-radius: 6px;
+  width: 14px;
+  height: 14px;
+  top: 14px;
+  border-radius: 6.5px;
 }
 
 .irs-min, .irs-max {
@@ -346,8 +346,8 @@ html, body {
 
 .irs-from, .irs-to, .irs-single {
   color: #000;
-  font-size: 11px;
-  line-height: 1.333;
+  font-size: 13px;
+  line-height: 1.5;
   font-family: "Ostrich Sans";
   letter-spacing: 1px;
   text-shadow: none;
