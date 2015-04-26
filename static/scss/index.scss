@@ -368,16 +368,13 @@
     top: 120px;
     background: url('/static/img/335.GIF');
 
-    &.fixed {
-      position: fixed;
-      top: 50%;
-      margin-left: 60px;
-      margin-top: -64px;
-
-    }
+    position: fixed;
+    top: 50%;
+    margin-left: 60px;
+    margin-top: -64px;
 
     @include breakpoint(sm) {
-      left: 40%;
+      left: 20%;
     }
 
 }

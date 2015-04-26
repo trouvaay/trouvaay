@@ -1129,8 +1129,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
   top: 0px;
   top: 120px;
   background: url("/static/img/335.GIF");
-}
-#products-spinner.fixed {
   position: fixed;
   top: 50%;
   margin-left: 60px;
@@ -1138,7 +1136,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (max-width: 767px) {
   #products-spinner {
-    left: 40%;
+    left: 20%;
   }
 }
 
