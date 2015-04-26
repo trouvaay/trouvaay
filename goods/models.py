@@ -2,6 +2,7 @@ from django.db import models
 from helper import AbstractImageModel
 from django.utils import timezone
 from django.db.models.signals import post_save, m2m_changed
+from django.core.urlresolvers import reverse
 import itertools
 import hashlib
 import requests
@@ -174,7 +175,8 @@ class Product(models.Model):
         return self.short_name
 
     def get_absolute_url(self):
-        return self.slug
+        # return self.slug
+        return reverse('goods:detail', args=[self.slug])
 
     def calc_display_score(self):
         score = 0
