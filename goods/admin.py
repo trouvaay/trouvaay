@@ -84,7 +84,7 @@ class ProductAdmin(ExportMixin, CustomAdmin):
         try:
             url = obj.productimage_set.first().image.build_url()
             print(url)
-            return '<a href=http://{}{}><img src={} style="width: 100px"/></a>'.format(settings.SITE_DOMAIN, obj.get_absolute_url(), url)
+            return '<a href=http://{}{} target="_blank"><img src={} style="width: 100px"/></a>'.format(settings.SITE_DOMAIN, obj.get_absolute_url(), url)
         except:
             return None
 
