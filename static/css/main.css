@@ -1379,7 +1379,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .product-description {
   font-family: "Droid Serif";
   font-weight: 600;
-  font-size: 12px;
+  font-size: 13px;
 }
 .product-description .heading {
   float: left;
