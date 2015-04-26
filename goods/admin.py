@@ -2,6 +2,7 @@ from django.contrib import admin
 from members.models import AuthOrder
 from goods.models import Product, Color, Segment, Style, FurnitureType, ValueTier, Category, Subcategory, Material, ProductImage
 from import_export.admin import ExportMixin
+from django.conf import settings
 
 
 class CustomAdmin(admin.ModelAdmin):
@@ -65,7 +66,7 @@ class ProductImageAdmin(CustomAdmin):
 class ProductAdmin(ExportMixin, CustomAdmin):
     model = Product
 
-    list_display = ['short_name', 'detail_url', 'id', 'first_image', 'description', 'store', 'added_date', 'pub_date', 'is_published', 'is_sold', 'current_price', 'hours_left','display_score', 'click_count']
+    list_display = ['short_name', 'id', 'first_image', 'description', 'store', 'added_date', 'pub_date', 'is_published', 'is_sold', 'current_price', 'hours_left','display_score', 'click_count']
 
     fields = [('short_name', 'is_published', 'is_sold', 'is_featured'), ('store', 'units'),('original_price', 'current_price'), 
             'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),
@@ -82,12 +83,11 @@ class ProductAdmin(ExportMixin, CustomAdmin):
     def first_image(self, obj):
         try:
             url = obj.productimage_set.first().image.build_url()
-            return '<img src={} style="width: 100px"/>'.format(url)
+            print(url)
+            return '<a href=http://{}{}><img src={} style="width: 100px"/></a>'.format(settings.SITE_DOMAIN, obj.get_absolute_url(), url)
         except:
             return None
 
-    def detail_url(self, obj):
-        return obj.get_absolute_url()
 
     def neighborhood(self, obj):
         return obj.store.neighborhood

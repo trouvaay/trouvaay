@@ -235,7 +235,7 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 SITE_NAME = 'Rare Door'
-
+SITE_DOMAIN = ''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
