@@ -28,59 +28,6 @@ BASE_URL = 'http://res.cloudinary.com/trouvaay/image/upload/'
 price_slider_max = 2000
 
 
-# <<<<<<< HEAD
-# class LandingView(generic.ListView):
-#     template_name = 'goods/landing/landing.html'
-#     context_object_name = 'products'
-#     model = Product
-
-#     def get_queryset(self):
-#         queryset = self.model.objects.filter(is_landing=True, store__is_featured=True)[:6]
-#         return queryset
-
-#     def get_context_data(self, **kwargs):
-#         context = super(LandingView, self).get_context_data(**kwargs)
-
-#         if(not self.request.session.get('cid', None)):
-#             self.request.session['cid'] = str(uuid.uuid4())
-
-#         context['BaseUrl'] = BASE_URL
-#         if(settings.ENABLE_REFERRAL):
-#             if(self.request.user.is_authenticated()):
-#                 if(is_time_to_show_modal(self.request, 'referral2')):
-#                     logger.info('we should be showing 2nd modal')
-#                     context['show_referral_second_modal'] = True
-#                     hide_modal(self.request, 'referral2', settings.SECOND_REFERRAL_MODAL_EXP)
-#             else:
-#                 if(is_time_to_show_modal(self.request, 'referral1')):
-#                     logger.info('we should be showing 1st modal')
-#                     context['show_referral_first_modal'] = True
-#                     hide_modal(self.request, 'referral1', settings.FIRST_REFERRAL_MODAL_EXP)
-
-
-#         context['SIGNUP_OFFER'] = settings.SIGNUP_OFFER
-
-#         # add any "First time" offers
-#         #only FIRST_ORDERs. DISCOUNT_PROMOs arent rendered
-#         # if there is more than one get the first one
-#         print('show_modal: ', is_time_to_show_modal(self.request, 'offer_modal'))
-#         if(is_time_to_show_modal(self.request, 'offer_modal')):
-# #         if(not self.request.session.get('seen_offers', False)):
-#             offers = PromotionOffer.get_current_offers(user=self.request.user, offer_type=OfferType.FIRST_ORDER)
-#             print('offers:', offers)
-#             if(offers):
-#                 context['promotion_offer'] = offers[0]
-
-#                 # seen_offers flag in session will tell us next time
-#                 # whether we should show this offer or not
-#                 # expiration is needed so that after this flag expires
-#                 # we will show the offer again
-#                 hide_modal(self.request, 'offer_modal', settings.OFFER_MODAL_EXPIRATION)
-# #                 self.request.session['seen_offers'] = True
-# #                 self.request.session.set_expiry(settings.OFFER_MODAL_EXPIRATION)
-
-#         return context
-
 class LandingView(AjaxListView):
     template_name = 'goods/main/hunt_ajax.html'
     page_template = 'goods/main/hunt_ajax_page.html'
@@ -197,7 +144,7 @@ class ShopView(AjaxListView):
 
     #     return queryset
     def get_queryset(self):
-        queryset = self.model.objects.filter(is_published=True, pub_date__lte=timezone.now(), hours_left__gte=0, store__is_featured=True).exclude(description__isnull=True)
+        queryset = self.model.objects.filter(is_published=True, pub_date__lte=timezone.now(), store__is_featured=True).exclude(description__isnull=True)
         return queryset
 
     def get_context_data(self, **kwargs):

@@ -30,8 +30,8 @@
     <!-- Like funtionality on hold until ProfileView implemented -->
     <div class="neighborhood-like-container">
       <div class="neighborhood">
-        {% if product.hours_left >= 0 %}
-            {{ product.get_days_left }}
+        {% if product.hours_since_add <= 120 %}
+            Recently Added
         {% else %}
             Off the Market
         {% endif %}
