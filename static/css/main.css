@@ -1713,6 +1713,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 .grid-products-wrapper .neighborhood-like-container {
   position: relative;
+  min-height: 35px;
 }
 @media (max-width: 767px) {
   .grid-products-wrapper .neighborhood-like-container {
@@ -1743,7 +1744,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .actions .like-btn {
   display: block;
   color: #e6be46;
-  font-size: 15px;
+  font-size: 25px;
   line-height: inherit;
 }
 .grid-products-wrapper .actions .like-btn.active {

@@ -204,6 +204,7 @@
 
     .neighborhood-like-container {
         position: relative;
+        min-height: 35px;
 
         @include breakpoint(sm){
             margin: 0 5%;
@@ -239,7 +240,7 @@
         .like-btn {
             display: block;
             color: $gold;
-            font-size: 15px;
+            font-size: 25px;
             line-height: inherit;
 
             &.active {
