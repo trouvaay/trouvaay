@@ -799,7 +799,8 @@ def can_reserve(request):
 @csrf_protect
 @never_cache
 def custom_login(request, template_name='registration/login.html',
-          authentication_form=CustomAuthenticationForm):
+          authentication_form=CustomAuthenticationForm,
+          is_missing_email=False):
     """This is a wrapper for django's login view.
     It allows us to pass "next" parameter properly.
     
@@ -815,6 +816,7 @@ def custom_login(request, template_name='registration/login.html',
                      'signup_form': RegistrationForm(),
                      'social_login': settings.ENABLE_SOCIAL_AUTH,
                      }
+
     if request.method == "GET":
         next_param = request.GET.get('next', None)
         if(next_param):
@@ -823,6 +825,9 @@ def custom_login(request, template_name='registration/login.html',
                              'signup_form': RegistrationForm(),
                              'social_login': settings.ENABLE_SOCIAL_AUTH,
                              }
+
+    extra_context['is_missing_email'] = is_missing_email
+
     print 
     return django_login(request=request,
                         template_name=template_name,
