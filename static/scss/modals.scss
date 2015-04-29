@@ -74,5 +74,12 @@
     letter-spacing: 2px;
     text-align: center;
     /* margin-bottom: 20px; */
+    
+  }
+
+  @include breakpoint(sm) {
+    .form-group {
+        margin-bottom: 0px;
+      }
   }
 }

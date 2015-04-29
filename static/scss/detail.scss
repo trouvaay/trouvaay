@@ -48,6 +48,10 @@
 fieldset{
 
   @include breakpoint(sm) {
+    
+    .form-group {
+      margin-bottom: 0px;
+    }
 
     legend {
       margin-bottom: 5px;
@@ -61,7 +65,6 @@ fieldset{
         font-size: 11px;
       }
     }
-
     .table > tbody > tr {
       th, td {
         padding: 4px 8px;
