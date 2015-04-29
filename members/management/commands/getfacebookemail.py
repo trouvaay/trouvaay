@@ -82,7 +82,7 @@ class Command(BaseCommand):
             if(not user.email or '@' not in user.email):
                 # user is missing email
                 
-                print 'getting email for {}'.format(user.encode('utf-8').strip())
+                print 'getting email for {}'.format(user.email.encode('utf-8').strip())
 
                 email = get_facebook_email(user)
                 if(email):
