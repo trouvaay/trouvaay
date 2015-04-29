@@ -56,7 +56,17 @@ fieldset{
       margin-bottom: 5px;
     }
     .alert {
-      padding: 10px 5px;
+      padding: 5px 5px;
+      &.alert-info {
+        font-size: 11px;
+      }
+    }
+
+    .table > tbody > tr {
+      th, td {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
     }
   }
 }

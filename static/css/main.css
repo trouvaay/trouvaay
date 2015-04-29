@@ -1425,7 +1425,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
     margin-bottom: 5px;
   }
   fieldset .alert {
-    padding: 10px 5px;
+    padding: 5px 5px;
+  }
+  fieldset .alert.alert-info {
+    font-size: 11px;
+  }
+  fieldset .table > tbody > tr th, fieldset .table > tbody > tr td {
+    padding: 4px 8px;
+    font-size: 12px;
   }
 }
 
