@@ -37,8 +37,11 @@ def get_facebook_email(user):
                     data = backend.user_data(access_token=fb_token)
                     if(data and isinstance(data, dict)):
                         email = data.get('email', None)
-                        if('@' in email):
-                            return email
+                        if (not email):
+                            raise Exception('No email present in facebook email data')
+                        else:
+                            if('@' in email):
+                                return email
                 except Exception, e:
                     if('400 Client Error' in str(e)):
                         # this is most likely bad access_token, nothing we can do
@@ -85,7 +88,7 @@ class Command(BaseCommand):
 
                     try:
                         existing_user = AuthUser.objects.get(email=email)
-                        print 'cannot set email to', email, 'for user id', user.id, 'because there is alaredy another user', existing_user.id, 'with such email'
+                        print 'cannot set email to', email, 'for user id', user.id, 'because there is already another user', existing_user.id, 'with such email'
                         count_skipped_users += 1
 
                     except AuthUser.DoesNotExist:
