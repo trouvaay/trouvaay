@@ -20,10 +20,21 @@
 
 </div>
 
+
 <!-- Signup modal -->
 
 <div class="container signup-login" style="margin-top: 0px">
     <div class="modal-body">
+		
+		{% if is_missing_email %}
+        <div clas="row">
+        	<div class="col-xs-12 text-center">
+				<h3>Missing email permission during Facebook login.</h3>
+			</div>
+		</div> 
+		{% endif %}
+        		
+        
         <!-- this will make sigup and login show side by side -->
         <div class="row">
             {% block modalforms %}
