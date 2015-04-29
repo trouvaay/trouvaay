@@ -200,6 +200,8 @@ function handleLightingClick(e) {
 function handleBuyButtonClick(e) {
 	console.log('clicked on buy button: '+e.target.id);
 
+    $('#loader').removeClass('invisible');
+
 	if(e.target.id.substr(0, 4) == 'buy_'){
 		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
         var orderType = 'buy';
@@ -250,6 +252,7 @@ function handleBuyButtonClick(e) {
 				data: dataToSubmit,
 				success: function(response, status){
 					// console.log('response from pre-checkout call: '+status );
+                    $('#loader').addClass('invisible');
 					$("#pre-checkout-modal-container").html(response);
 					$("#buy_precheckout-modal").modal({
 						show: true,
@@ -294,6 +297,7 @@ function handleBuyButtonClick(e) {
 				},
 				success: function(response, status){
 					// console.log('response from pre-checkout call: '+status );
+                    $('#loader').addClass('invisible');
 					$("#pre-checkout-modal-container").html(response);
 					$("#buy_precheckout-modal").modal({
 						show: true,
@@ -327,6 +331,7 @@ function handleBuyButtonClick(e) {
     				dataType: "html",
     				success: function(response, status){
     					// console.log('response from pre-checkout call: '+status );
+                        $('#loader').addClass('invisible');
     					$("#pre-checkout-modal-container").html(response);
     					$("#reservation-modal").modal({
     						show: true,
@@ -349,6 +354,7 @@ function handleBuyButtonClick(e) {
                 "{% url 'members:cancel_reserve' %}", 
                 {'id': productId},
                 function(response){
+                    $('#loader').addClass('invisible');
                     if(response == 'loginrequired'){
                         $('.nav-login-button').click();
                     } else if (response == 'success') {
