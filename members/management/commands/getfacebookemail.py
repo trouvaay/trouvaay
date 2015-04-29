@@ -37,11 +37,11 @@ def get_facebook_email(user):
                     data = backend.user_data(access_token=fb_token)
                     if(data and isinstance(data, dict)):
                         email = data.get('email', None)
-                        if (not email):
-                            raise Exception('No email present in facebook email data')
-                        else:
-                            if('@' in email):
-                                return email
+                        # if (not email):
+                        #     raise Exception('No email present in facebook email data')
+                        # else:
+                        if(email and '@' in email):
+                            return email
                 except Exception, e:
                     if('400 Client Error' in str(e)):
                         # this is most likely bad access_token, nothing we can do
@@ -81,6 +81,8 @@ class Command(BaseCommand):
 
             if(not user.email or '@' not in user.email):
                 # user is missing email
+                
+                print 'getting email for {}'.formate(user)
 
                 email = get_facebook_email(user)
                 if(email):
