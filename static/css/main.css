@@ -1445,7 +1445,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
   position: absolute;
   left: 50%;
   margin-left: -64px;
-  margin-top: -214px;
+  margin-top: -64px;
   top: 0px;
   top: 50%;
   background: url("/static/img/335.GIF");
