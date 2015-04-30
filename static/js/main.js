@@ -136,6 +136,12 @@ $(document).ready(function() {
         $('#searchfilter-form').toggleClass('open');
         event.preventDefault();
     });
+    
+    $('#filter-btn').click(function() {
+        $('#searchfilter-form').toggleClass('open');
+    });
+
+
 });
 
 // selectBar = $('.select-bar')[0];

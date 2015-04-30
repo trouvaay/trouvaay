@@ -225,6 +225,16 @@
 			  nextText: 'a',
 			  
 			  });
+
+        $('.slider').ionRangeSlider({'prettify_enabled': false, 'force_edges': true});
+          
+    
+        $(".searchfilter-control" ).change(function(e) {
+            console.log($('#searchfilter-form').serialize());
+            $('#searchfilter-form')[0].submit();
+            /*window.location.href = "/";*/
+        });
   });
+
 </script>
 {% endblock endjs %}

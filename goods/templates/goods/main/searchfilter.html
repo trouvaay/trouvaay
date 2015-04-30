@@ -1,6 +1,7 @@
 {% if searchfilter %}
-    <form id="searchfilter-form" action="." method="post">
+    <form id="searchfilter-form" action="/" method="post">
 <div id="filter-container">
+    {% csrf_token %}
 
 
   {% if searchfilter.furnituretypes %}
@@ -19,9 +20,9 @@
       <li>
 
       <div class="c-checkbox">
-        <input type="checkbox" class="checkbox searchfilter-control" name="filter-furnituretype" value="{{ furnituretype.id }}" id="filter-furnituretype-{{ furnituretype.id }}">
+          <input type="checkbox" class="checkbox searchfilter-control" name="filter-furnituretype" value="{{ furnituretype.id }}" id="filter-furnituretype-{{ furnituretype.id }}" value="{{furnituretype.id}}" {% if furnituretype.id in filter_furnituretype %}checked{% endif %}>
         <label for="filter-furnituretype-{{ furnituretype.id }}" class="checkbox-label">
-          {{ furnituretype.select|capfirst }}
+            {{ furnituretype.select|capfirst }}
         </label>
       </div>
 
@@ -80,17 +81,17 @@
         <header><a data-toggle="collapse" href="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice" class="collapsed">Price <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
         <div id="collapsePrice" class="collapse fold" role="tabpanel" aria-labelledby="headingPrice">
           <div class="desktop">
-              <input type="text" id="filter-price" name="filter-price" data-min="{{searchfilter.price_slider_min}}" data-max="{{searchfilter.price_slider_max}}" data-from="0" data-to="5000" data-type="double" data-prefix="$" data-max-postfix="+" class="searchfilter-control slider" value="" />
+              <input type="text" id="filter-price" name="filter-price" data-min="{{searchfilter.price_slider_min}}" data-max="{{searchfilter.price_slider_max}}" data-from="{{price_min|default:0}}" data-to="{{price_max|default:2000}}" data-type="double" data-prefix="$" data-max-postfix="+" class="searchfilter-control slider" value="" />
           </div>
           
           <div class="mobile row hidden-xs hidden-md hidden-lg hidden-sm">
             <div class="col-xs-6">
               <label for="filter-price-min">From</label>
-              <input type="number" id="filter-price-min" name="filter-price-min" class="searchfilter-control" value="" placeholder="$" />
+              <input type="number" id="filter-price-min" name="filter-price-min" class="searchfilter-control" value="{{price_min|default:0}}" placeholder="$" />
             </div>
             <div class="col-xs-6 text-right">
               <label for="filter-price-max">To</label>
-              <input type="number" id="filter-price-max" name="filter-price-max" class="searchfilter-control" value="" placeholder="$$$$" />
+              <input type="number" id="filter-price-max" name="filter-price-max" class="searchfilter-control" value="{{price_max|default:2000}}" placeholder="$$$$" />
             </div>
           </div>
 
@@ -161,17 +162,17 @@
 
           <b>Height</b>
           <div class="desktop">
-            <input type="text" name="filter-height" id="filter-height" class="searchfilter-control slider" data-min="{{ searchfilter.height_slider_min }}" data-max="{{ searchfilter.height_slider_max }}" data-from="{{ searchfilter.height_slider_min }}" data-to="{{ searchfilter.height_slider_max }}" data-type="double" data-postfix='"' value="" />
+            <input type="text" name="filter-height" id="filter-height" class="searchfilter-control slider" data-min="{{ searchfilter.height_slider_min }}" data-max="{{ searchfilter.height_slider_max }}" data-from="{{ height_min|default:searchfilter.height_slider_min }}" data-to="{{ height_max|default:searchfilter.height_slider_max }}" data-type="double" data-postfix='"' value="" />
           </div>
 
           <div class="mobile row hidden-xs hidden-md hidden-lg hidden-sm">
             <div class="col-xs-6">
               <label for="filter-height-min">From</label>
-              <input type="number" id="filter-height-min" name="filter-height-min" class="searchfilter-control" value="" placeholder="{{ searchfilter.height_slider_min }} FT" />
+              <input type="number" id="filter-height-min" name="filter-height-min" class="searchfilter-control" value="" placeholder="{{ height_min|default:searchfilter.height_slider_min }} FT" />
             </div>
             <div class="col-xs-6 text-right">
               <label for="filter-height-max">To</label>
-              <input type="number" id="filter-height-max" name="filter-height-max" class="searchfilter-control" value="" placeholder="{{ searchfilter.height_slider_max }} FT" />
+              <input type="number" id="filter-height-max" name="filter-height-max" class="searchfilter-control" value="" placeholder="{{ height_max|default:searchfilter.height_slider_max }} FT" />
             </div>
           </div>
 
@@ -189,17 +190,17 @@
           <b>Width</b>
 
           <div class="desktop">
-            <input type="text" name="filter-width" id="filter-width" class="searchfilter-control slider" data-min="{{ searchfilter.width_slider_min }}" data-max="{{ searchfilter.width_slider_max }}" data-from="{{ searchfilter.width_slider_min }}" data-to="{{ searchfilter.width_slider_max }}" data-type="double" data-postfix='"' value="" />
+            <input type="text" name="filter-width" id="filter-width" class="searchfilter-control slider" data-min="{{ searchfilter.width_slider_min }}" data-max="{{ searchfilter.width_slider_max }}" data-from="{{ width_min|default:searchfilter.width_slider_min }}" data-to="{{ width_max|default:searchfilter.width_slider_max }}" data-type="double" data-postfix='"' value="" />
           </div>
 
           <div class="mobile row hidden-xs hidden-md hidden-lg hidden-sm">
             <div class="col-xs-6">
               <label for="filter-width-min">From</label>
-              <input type="number" id="filter-width-min" name="filter-width-min" class="searchfilter-control" value="" placeholder="{{ searchfilter.width_slider_min }} FT" />
+              <input type="number" id="filter-width-min" name="filter-width-min" class="searchfilter-control" value="{{width_min}}" placeholder="{{ searchfilter.width_slider_min }} FT" />
             </div>
             <div class="col-xs-6 text-right">
               <label for="filter-width-max">To</label>
-              <input type="number" id="filter-width-max" name="filter-width-max" class="searchfilter-control" value="" placeholder="{{ searchfilter.width_slider_max }} FT" />
+              <input type="number" id="filter-width-max" name="filter-width-max" class="searchfilter-control" value="{{width_max}}" placeholder="{{ searchfilter.width_slider_max }} FT" />
             </div>
           </div>
           {% comment %}
@@ -214,17 +215,17 @@
 
           <b>Depth</b>
           <div class="desktop">
-            <input type="text" name="filter-depth" id="filter-depth" class="searchfilter-control slider" data-min="{{ searchfilter.depth_slider_min }}" data-max="{{ searchfilter.depth_slider_max }}" data-from="{{ searchfilter.depth_slider_min }}" data-to="{{ searchfilter.depth_slider_max }}" data-type="double" data-postfix='"' value="" />
+            <input type="text" name="filter-depth" id="filter-depth" class="searchfilter-control slider" data-min="{{ searchfilter.depth_slider_min }}" data-max="{{ searchfilter.depth_slider_max }}" data-from="{{depth_min|default:searchfilter.depth_slider_min }}" data-to="{{ depth_max|default:searchfilter.depth_slider_max }}" data-type="double" data-postfix='"' value="" />
           </div>
 
           <div class="mobile row hidden-xs hidden-md hidden-lg hidden-sm">
             <div class="col-xs-6">
               <label for="filter-depth-min">From</label>
-              <input type="number" id="filter-depth-min" name="filter-depth-min" class="searchfilter-control" value="" placeholder="{{ searchfilter.depth_slider_min }} FT" />
+              <input type="number" id="filter-depth-min" name="filter-depth-min" class="searchfilter-control" value="{{depth_min}}" placeholder="{{ searchfilter.depth_slider_min }} FT" />
             </div>
             <div class="col-xs-6 text-right">
               <label for="filter-depth-max">To</label>
-              <input type="number" id="filter-depth-max" name="filter-depth-max" class="searchfilter-control" value="" placeholder="{{ searchfilter.depth_slider_max }} FT" />
+              <input type="number" id="filter-depth-max" name="filter-depth-max" class="searchfilter-control" value="{{depth_max}}" placeholder="{{ searchfilter.depth_slider_max }} FT" />
             </div>
           </div>
 
