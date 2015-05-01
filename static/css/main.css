@@ -1843,16 +1843,16 @@ input#mobile-menu-switch:checked + #mobile-menu {
     margin-top: 110px;
   }
 }
-#searchfilter-form + .wrap .container {
+#searchfilter-form + .wrap.main .container {
   width: 925px;
 }
 @media (max-width: 992px) {
-  #searchfilter-form + .wrap .container {
+  #searchfilter-form + .wrap.main .container {
     width: 725px;
   }
 }
 @media (max-width: 767px) {
-  #searchfilter-form + .wrap .container {
+  #searchfilter-form + .wrap.main .container {
     width: 505px;
   }
 }

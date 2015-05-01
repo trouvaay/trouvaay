@@ -143,8 +143,117 @@ class ShopView(AjaxListView):
     #         queryset = self.model.objects.filter(is_published=True, store__is_featured=True)
 
     #     return queryset
+    def post(self, request, *args, **kwargs):
+        #context['furnituretypes'] = request.POST['filter-furnituretype']
+        #print context['furnituretypes']
+        return super(ShopView, self).get(request, **kwargs)
+
     def get_queryset(self):
         queryset = self.model.objects.filter(is_published=True, pub_date__lte=timezone.now(), store__is_featured=True).exclude(description__isnull=True)
+
+        if (self.request.POST):
+            furnituretypes = [int(i) for i in self.request.POST.getlist('filter-furnituretype')]
+            if(furnituretypes):
+                queryset = queryset.filter(furnituretype__in=furnituretypes)
+
+            segments = [int(i) for i in self.request.POST.getlist('filter-segment')]
+            if(segments):
+                queryset = queryset.filter(segment__in=segments)
+
+            subcategories = [int(i) for i in self.request.POST.getlist('filter-subcategory')]
+            if(subcategories):
+                queryset = queryset.filter(subcategory__in=subcategories)
+
+            colors = [int(i) for i in self.request.POST.getlist('filter-color')]
+            if(colors):
+                queryset = queryset.filter(color__in=colors)
+
+            # TODO: enable styles, styles are for now disabled
+            # styles = [int(i) for i in self.request.POST.getlist('filter-style')]
+            # if(styles):
+            #    queryset = queryset.filter(style__in=styles)
+
+            furnituretypes = [int(i) for i in self.request.POST.getlist('filter-furnituretype')]
+            if(furnituretypes):
+                queryset = queryset.filter(furnituretype__in=furnituretypes)
+
+            neighborhoods = self.request.POST.getlist('filter-neighborhood')
+            if(neighborhoods):
+                queryset = queryset.filter(store__neighborhood__in=neighborhoods)
+
+            # Filtering price
+            price_filter = self.request.POST.get('filter-price', None)
+            if price_filter:
+                price_min = price_filter.split(';')[0]
+                price_max = price_filter.split(';')[1]
+            else:
+                price_min = self.request.POST.get('filter-price-min', None)
+                price_max = self.request.POST.get('filter-price-max', None)
+
+            if(price_min):
+                price_min = int(price_min)
+                queryset = queryset.filter(current_price__gte=price_min)
+
+            if(price_max):
+                price_max = int(price_max)
+                if price_max < price_slider_max:
+                    queryset = queryset.filter(current_price__lte=price_max)
+
+
+            # Filtering height
+            height_filter = self.request.POST.get('filter-height', None)
+            if height_filter:
+                height_min = height_filter.split(';')[0]
+                height_max = height_filter.split(';')[1]
+            else:
+                height_min = self.request.POST.get('filter-height-min', None)
+                height_max = self.request.POST.get('filter-height-max', None)
+
+            if(height_min):
+                height_min = int(height_min)
+                queryset = queryset.filter(height__gte=height_min)
+
+            if(height_max):
+                height_max = int(height_max)
+                queryset = queryset.filter(height__lte=height_max)
+
+
+            # Filtering width
+            width_filter = self.request.POST.get('filter-width', None)
+            if width_filter:
+                width_min = width_filter.split(';')[0]
+                width_max = width_filter.split(';')[1]
+            else:
+                width_min = self.request.POST.get('filter-width-min', None)
+                width_max = self.request.POST.get('filter-width-max', None)
+
+            if(width_min):
+                width_min = int(width_min)
+                queryset = queryset.filter(width__gte=width_min)
+
+            if(width_max):
+                width_max = int(width_max)
+                queryset = queryset.filter(width__lte=width_max)
+
+
+            # Filtering depth
+            depth_filter = self.request.POST.get('filter-depth', None)
+            if depth_filter:
+                depth_min = depth_filter.split(';')[0]
+                depth_max = depth_filter.split(';')[1]
+            else:
+                depth_min = self.request.POST.get('filter-depth-min', None)
+                depth_max = self.request.POST.get('filter-depth-max', None)
+
+            if(depth_min):
+                depth_min = int(depth_min)
+                queryset = queryset.filter(depth__gte=depth_min)
+
+            if(depth_max):
+                depth_max = int(depth_max)
+                queryset = queryset.filter(depth__lte=depth_max)
+
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -170,6 +279,29 @@ class ShopView(AjaxListView):
         # TODO: do not add 'site_name' to context
         # once the 'sites' are setup in settings
         context['site_name'] = settings.SITE_NAME
+        # getting content types
+        if self.request.POST:
+            context['filter_furnituretype'] = [int(i) for i in self.request.POST.getlist('filter-furnituretype')]
+            context['filter_segment'] = [int(i) for i in self.request.POST.getlist('filter-segment')]
+            context['filter_subcategory'] = [int(i) for i in self.request.POST.getlist('filter-subcategory')]
+            context['filter_color'] = [int(i) for i in self.request.POST.getlist('filter-color')]
+            context['filter_neighborhood'] = self.request.POST.getlist('filter-neighborhood')
+            price_filter = self.request.POST.get('filter-price', None)
+            if ';' in price_filter:
+                context['price_min'] = price_filter.split(';')[0]
+                context['price_max'] = price_filter.split(';')[1]
+            height_filter = self.request.POST.get('filter-height', None)
+            if ';' in height_filter:
+                context['height_min'] = height_filter.split(';')[0]
+                context['height_max'] = height_filter.split(';')[1]
+            width_filter = self.request.POST.get('filter-width', None)
+            if ';' in width_filter:
+                context['width_min'] = width_filter.split(';')[0]
+                context['width_max'] = width_filter.split(';')[1]
+            depth_filter = self.request.POST.get('filter-depth', None)
+            if ';' in depth_filter:
+                context['depth_min'] = depth_filter.split(';')[0]
+                context['depth_max'] = depth_filter.split(';')[1]
         # removed until profile page implemented
         # context['liked_items'] = get_liked_items(self.request.user)
         if(not self.request.session.get('cid', None)):
@@ -339,6 +471,23 @@ class DetailView(generic.DetailView):
         context['returns'] = settings.RETURN_POLICY
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
         context['OFFER_IS_ENABLED'] = settings.OFFER_IS_ENABLED
+
+
+        context['searchfilter'] = {
+                                   'price_slider_min': 0,
+                                   'price_slider_max': price_slider_max,
+                                   'height_slider_min': 0,
+                                   'height_slider_max': 72,
+                                   'width_slider_min': 0,
+                                   'width_slider_max': 120,
+                                   'depth_slider_min': 0,
+                                   'depth_slider_max': 72,
+                                   'segments': Segment.objects.all(),
+                                   'colors': Color.objects.all(),
+                                   'styles': Style.objects.all(),
+                                   'furnituretypes': FurnitureType.objects.all(),
+                                   'neighborhoods': Neighborhoods['SF']
+                                   }
 
         product = self.get_object()
 

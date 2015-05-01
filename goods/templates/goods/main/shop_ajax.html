@@ -5,7 +5,6 @@
 {% load endless %}
 
 {% block beginjs %}
-<link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}">
 {% endblock beginjs %}
 
 {% block content %}
@@ -227,15 +226,6 @@ console.log(searchFilterTimer);
 
 }
 
-$(document).ready(function() {        
-
-        $('#filter-btn').click(function() {
-            $('#searchfilter-form').toggleClass('open');
-            });
-
-        $(".searchfilter-control" ).change(function(e) {
-            reloadItems();
-});
 
 $('.slider').ionRangeSlider({'prettify_enabled': false, 'force_edges': true});
 
@@ -278,7 +268,12 @@ $('.filter-group input').change(function() {
         ($(this).closest('.filter-group').find('input:checked').length);
         }
 
-        });
+});
+
+$(document).ready(function() {
+    $(".searchfilter-control" ).change(function(e) {
+        reloadItems();
+    });
 });
 </script>
 
