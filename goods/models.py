@@ -259,18 +259,6 @@ class Product(models.Model):
         if self.is_published:
             if (not self.pub_date):
                 self.pub_date = timezone.now()
-
-            hours_left = self.hours_to_delist()
-            print('{} hours left to delist'.format(hours_left))
-            
-            if(hours_left > 0):
-                self.hours_left = hours_left
-                print 'Updated hours_left for product {0} to {1}'.format(self.short_name, self.hours_left)
-            else:
-                self.is_published = False
-                self.hours_left = None
-                self.pub_date = None
-                print 'Delisted Product {0} '.format(self.short_name)
         
         # if item is not published, pub_date should be blank
         elif (not self.is_published):

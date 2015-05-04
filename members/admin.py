@@ -67,6 +67,9 @@ class AuthUserActivityInline(admin.TabularInline):
 class ProfileInline(admin.TabularInline):
     model = Profile
 
+class AuthUserActivityAdmin(admin.ModelAdmin):
+    list_display = ('authuser',)    
+
 class AuthUserAdmin(ExportMixin, UserAdmin):
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
@@ -172,7 +175,7 @@ class JoinAdmin(admin.ModelAdmin):
 
 admin.site.register(AuthOrder, AuthOrderAdmin)
 admin.site.register(AuthUser, AuthUserAdmin)
-admin.site.register(AuthUserActivity)
+admin.site.register(AuthUserActivity, AuthUserActivityAdmin)
 admin.site.register(Join, JoinAdmin)
 admin.site.register(PromotionOffer, PromotionOfferAdmin)
 admin.site.register(Purchase, PurchaseAdmin)
