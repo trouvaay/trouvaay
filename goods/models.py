@@ -154,6 +154,7 @@ class Product(models.Model):
     # Availability
     added_date = models.DateTimeField(auto_now_add=True)
     pub_date = models.DateTimeField(null=True, blank=True)
+    sold_date = models.DateTimeField(null=True, blank=True)
     is_sold = models.BooleanField(default=False)
     is_reserved = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
