@@ -139,7 +139,7 @@ var trouvaay = {
 }
 
 function handlePostCheckoutClick(e){
-	console.log('clicked on post-checkout button');
+	// console.log('clicked on post-checkout button');
 
 	$.ajax({
 		type: "POST",
@@ -159,46 +159,46 @@ function FBPurchaseEvent() {
 }
 
 function FBReservationEvent() {
-    console.log('FB reservation event fired');
+    // console.log('FB reservation event fired');
     _fbq.push(['track', '6024578749644', {'value':'0.00','currency':'USD'}]);
 }
 
 function handleSeeMoreClick(e) {
-    console.log('clicked on See More button: '+e.target.id);
+    // console.log('clicked on See More button: '+e.target.id);
     mixpanel.track("Clicked See More Button");
 }
 
 function handleShopNowClick(e) {
-    console.log('clicked on Shop Now button: '+e.target.id);
+    // console.log('clicked on Shop Now button: '+e.target.id);
     mixpanel.track("Clicked Shop Now Button");
 }
 
 function handleSeatingClick(e) {
-    console.log('clicked seating: '+e.target.search);
+    // console.log('clicked seating: '+e.target.search);
     mixpanel.track("Clicked Seating Search");
 }
 
 function handleTablesClick(e) {
-    console.log('clicked tables: '+e.target.search);
+    // console.log('clicked tables: '+e.target.search);
     mixpanel.track("Clicked Tables Search");
 }
 
 function handleBedsClick(e) {
-    console.log('clicked beds: '+e.target.search);
+    // console.log('clicked beds: '+e.target.search);
     mixpanel.track("Clicked Beds Search");
 }
 
 function handleStorageClick(e) {
-    console.log('clicked storage: '+e.target.search);
+    // console.log('clicked storage: '+e.target.search);
     mixpanel.track("Clicked Storage Search");
 }
 
 function handleLightingClick(e) {
-    console.log('clicked lighting: '+e.target.search);
+    // console.log('clicked lighting: '+e.target.search);
     mixpanel.track("Clicked Lighting Search");
 }
 function handleBuyButtonClick(e) {
-	console.log('clicked on buy button: '+e.target.id);
+	// console.log('clicked on buy button: '+e.target.id);
 
     $('#loader').removeClass('invisible');
 
@@ -211,17 +211,17 @@ function handleBuyButtonClick(e) {
             { "productId": productId }
         );
 
-        console.log('mixpanel: buy-button.onclick event fired');
+        // console.log('mixpanel: buy-button.onclick event fired');
         
 		if(productId && !(typeof productId === 'undefined')){
-		    console.log('this is the ordertype!', orderType)
+		    // console.log('this is the ordertype!', orderType)
 	
 			var promoCode = ''
 			if($("#input-promo-code")) {
 				promoCode = $("#input-promo-code").val()
 			}
 			
-			console.log('promoCode: '+promoCode);
+			// console.log('promoCode: '+promoCode);
 			
 			var buyUrl = "{% url "members:buy" %}";
 			var dataToSubmit = {
@@ -241,7 +241,7 @@ function handleBuyButtonClick(e) {
 		                promo_code: promoCode,
 		                offer_price: $("#input_offer_price").val()
 				}
-				console.log("offer price: "+$("#input_offer_price").val());
+				// console.log("offer price: "+$("#input_offer_price").val());
 			} 
 			
 			// call pre-checkout
@@ -273,17 +273,17 @@ function handleBuyButtonClick(e) {
             "Clicked Offer Button",
             { "productId": productId }
         );
-        console.log('mixpanel: offer-button.onclick event fired');
+        // console.log('mixpanel: offer-button.onclick event fired');
 
 		if(productId && !(typeof productId === 'undefined')){
-		    console.log('this is the ordertype ', orderType)
+		    // console.log('this is the ordertype ', orderType)
 	
 			var promoCode = ''
 			if($("#input-promo-code")) {
 				promoCode = $("#input-promo-code").val()
 			}
 			
-			console.log('promoCode: '+promoCode);
+			// console.log('promoCode: '+promoCode);
 			
 			// call pre-checkout
 			$.ajax({
@@ -318,12 +318,12 @@ function handleBuyButtonClick(e) {
             "Clicked Reserve Button",
             { "productId": productId }
         );
-        console.log('mixpanel: reserve-button.onclick event fired');
+        // console.log('mixpanel: reserve-button.onclick event fired');
         var urlToLoad = "/reserve/"+productId;
         
 		if(productId && !(typeof productId === 'undefined')){
-		    console.log('ordertype: ', orderType)
-            console.log("{{ user.is_authenticated }}")
+		    // console.log('ordertype: ', orderType)
+            // console.log("{{ user.is_authenticated }}")
                 $.ajax({
     				type: "GET",
                     // pass to ReservePreCheckout
@@ -347,7 +347,7 @@ function handleBuyButtonClick(e) {
             "Clicked Cancel Reserve Button In Profile",
             { "productId": productId }
         );
-        console.log('mixpanel: cancel_reserve.onclick event fired');
+        // console.log('mixpanel: cancel_reserve.onclick event fired');
         
         if(productId && !(typeof productId === 'undefined')){
             $.post(
@@ -443,7 +443,7 @@ $(document).ready(function() {
                 "Clicked Detail Page",
                 { "productSlug": productSlug }
             );
-        console.log('mixpanel: view-product-detail.onclick event fired');
+        // console.log('mixpanel: view-product-detail.onclick event fired');
     })
 
 	// navigation login
@@ -453,20 +453,20 @@ $(document).ready(function() {
 			dataType: "html",
 			url: "{% url "members:ajax_login" %}",
 			success: function(response, status){
-				console.log('status ['+status+']');
+				// console.log('status ['+status+']');
 				if(status == 'success'){
-					console.log('loaded ajax_login');
+					// console.log('loaded ajax_login');
 					$("#ajax-login-modal-container").html(response);
 					var currentUrl = document.URL;
 					
 					// after login redirect where we were except 'login' itself
 					// so that we don't end up with a loop
 					
-					console.log(currentUrl.indexOf("{% url 'members:login' %}"));
+					// console.log(currentUrl.indexOf("{% url 'members:login' %}"));
 					
 					if(currentUrl.indexOf("{% url 'members:login' %}") === -1){
 						$("#id_next").val(currentUrl);
-						console.log($("#id_next").val());
+						// console.log($("#id_next").val());
 					}
 					$("#signup-login-modal").modal({
 						show: true,

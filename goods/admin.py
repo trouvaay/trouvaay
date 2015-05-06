@@ -66,7 +66,7 @@ class ProductImageAdmin(CustomAdmin):
 class ProductAdmin(ExportMixin, CustomAdmin):
     model = Product
 
-    list_display = ['short_name', 'id', 'first_image', 'description', 'store', 'added_date', 'pub_date', 'is_published', 'is_sold', 'current_price', 'hours_left','display_score', 'click_count']
+    list_display = ['short_name', 'id', 'first_image', 'description', 'store', 'added_date', 'pub_date', 'is_published', 'is_sold', 'list_price','current_price', 'hours_left','display_score', 'click_count']
 
     fields = [('short_name', 'is_published', 'is_sold', 'is_featured'), ('store', 'units'),('original_price', 'current_price'), 
             'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),

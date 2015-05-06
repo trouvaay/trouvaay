@@ -120,6 +120,7 @@ class Product(models.Model):
     slug = models.SlugField(unique=True, max_length=255)
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+    list_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     description = models.TextField(null=True, blank=True)
     store = models.ForeignKey('merchants.Store')
     manufacturer = models.CharField(max_length=25, null=True, blank=True)

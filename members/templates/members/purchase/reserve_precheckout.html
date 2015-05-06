@@ -43,6 +43,8 @@ $(document).ready(function() {
 	var productName = "{{ product.short_name }}";
 	$('#button-id-button-reserve').on('click', function(e) {
 
+		$('#loader').removeClass('invisible');
+
 		//reserve event tracking
 
 		//fire mixpanel event
@@ -61,7 +63,7 @@ $(document).ready(function() {
 		    google_remarketing_only: false,
 		});
 		
-		console.log('clicked on submit reservation');
+		// console.log('clicked on submit reservation');
 		if(productId && !(typeof productId === 'undefined')){
 			$.ajax({
 				type: "POST",
@@ -69,6 +71,7 @@ $(document).ready(function() {
 				data: $("#form-reserve").serialize(),
 				dataType: "html",
 				success: function(response, status){
+					$('#loader').addClass('invisible');
 					$("#pre-checkout-modal-container").html(response);
 					$("#reservation-modal").modal({
 						show: true,

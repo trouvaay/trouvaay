@@ -156,15 +156,16 @@ $(document).ready(function() {
 	var productPrice = {{ total.in_cents }};
 	var orderType = "{{ order_type }}";
 	 
-	console.log('pre-checkout is loaded');
-	console.log('productPrice: ' + productPrice);
-	console.log('total_purchase_price: ' + {{ total.in_cents }});
+	// console.log('pre-checkout is loaded');
+	// console.log('productPrice: ' + productPrice);
+	// console.log('total_purchase_price: ' + {{ total.in_cents }});
 	
 	$('.btn.apply-promo-code').on('click', handleBuyButtonClick);
 	
 	$('#button-precheckout-submit').on('click', function(e) {
 		
-		console.log("clicked on purchase");
+		// console.log("clicked on purchase");
+		$('#loader').removeClass('invisible');
 		
 		{% if is_offer %}
   		var buyUrl = "{% url "members:offer" %}";
@@ -203,6 +204,7 @@ $(document).ready(function() {
 					},
 					success: function(response, status){
 						// console.log('response from pre-checkout call: '+status );
+						$('#loader').addClass('invisible');
 						$("#pre-checkout-modal-container").html(response);
 						$("#buy_precheckout-modal").modal({
 							show: true,
@@ -214,6 +216,7 @@ $(document).ready(function() {
 				return;
   			}
   			else {
+  				$('#loader').addClass('invisible');
   				$("#label_offer_price").text("Please enter your offer amount");
   				$("#input_offer_price").focus();
   				return;
@@ -232,13 +235,13 @@ $(document).ready(function() {
 			$(".promo-code-pass-through").each(function() {
 				promoCodesArray.push($(this).text());
 			});
-			console.log('promoCodesArray: '+promoCodesArray);
+			// console.log('promoCodesArray: '+promoCodesArray);
 			
 			var promoCodes = promoCodesArray.join(",");
-			console.log('promoCodes: '+promoCodes);
+			// console.log('promoCodes: '+promoCodes);
 			
 	  		$('#buy_precheckout-modal').modal('hide');
-	  		console.log('pre-checkout modal hidden');
+	  		// console.log('pre-checkout modal hidden');
 	  		
 			var handler = StripeCheckout.configure({
 				key: '{{ stripe_publishable_key }}',
@@ -261,8 +264,10 @@ $(document).ready(function() {
 							promo_codes: promoCodes
 						},
 						success: function(data){
+
+							$('#loader').addClass('invisible');
 							
-							console.log('Buy callback returned: ' + data['status']);
+							// console.log('Buy callback returned: ' + data['status']);
 						
 						  	if(data['status'] == "ok"){
 								
@@ -275,18 +280,18 @@ $(document).ready(function() {
 									google_conversion_label: "h7XVCP2q5VkQ9YiCyAM",
 								    google_remarketing_only: false,
 								});
-								console.log('google-conversion fired');
+								// console.log('google-conversion fired');
 
 								// fire FB purchase pixel
 								FBPurchaseEvent();
-								console.log('FBPurchaseEvent fired');
+								// console.log('FBPurchaseEvent fired');
 
 								mixpanel.track(
 					                "Purchase Completed",
 					                { "product": data['product_name'] }
 					            	);
 								
-								console.log('mixpanel purchaseevent fired');
+								// console.log('mixpanel purchaseevent fired');
 						  	
 						  		$("#reserved-product-name").text(data['product_name']);
 						  		$("#reserved-product-store-name").text(data['store_name']);
@@ -320,7 +325,7 @@ $(document).ready(function() {
 								
 								
 								if(data['ask_phone']){
-									console.log('We need to ask for phone on post checkout form');
+									// console.log('We need to ask for phone on post checkout form');
 									$("#id_email").val(data['email']);
 									$("#id_post_checkout_hash").val(data['post_checkout_hash']);
 									$(".post-checkout-form-contents").show();
@@ -328,12 +333,12 @@ $(document).ready(function() {
 								}
 								else{
 									$(".post-checkout-form-contents").hide();
-									console.log('we dont need phone on post checkout form');
+									// console.log('we dont need phone on post checkout form');
 								}
 						  	}
 						},
 						error: function(error) {
-							console.log(error.responseText);
+							// console.log(error.responseText);
 						},
 						dataType: "json"
 					});
