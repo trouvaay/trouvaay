@@ -182,32 +182,31 @@ class Product(models.Model):
 
     def calc_display_score(self):
         score = 0
-
+        print (('*****************{}*****************').format(self.short_name))
         # get price score
         price_score = 0
-        if self.current_price < 200.00:
-            price_score = 8
-        elif self.current_price < 400.00:
-            price_score = 5
-        elif self.current_price < 500.00:
-            price_score = 3
+        # if self.current_price < 200.00:
+        #     price_score = 8
+        # elif self.current_price < 400.00:
+        #     price_score = 5
+        # elif self.current_price < 500.00:
+        #     price_score = 3
         
         print('price score = ', price_score)  
         score+=price_score
         print('current score: ', score)
-        
         # get date added score
         pub_dt_score = 0
         try:
-            days_left = self.hours_to_delist()/24.0
-            if days_left:
-                if days_left > 29:
+            hours_since_pub = self.hours_since_pub()
+            if hours_since_pub:
+                if hours_since_pub < 24:
+                    pub_dt_score = 40
+                elif hours_since_pub < 72:
                     pub_dt_score = 20
-                elif days_left > 25:
-                    pub_dt_score = 10
-                elif days_left > 20:
+                elif hours_since_pub < 120:
                     pub_dt_score = 5
-                elif days_left > 15:
+                elif hours_since_pub < 336:
                     pub_dt_score = 3
         except:
             pass
@@ -216,10 +215,10 @@ class Product(models.Model):
         score+=pub_dt_score
         print('current score: ', score)
         
-        # get category score
+        # get category score - correct overrep of chairs
         category_score = 0
-        if self.furnituretype.all() and self.furnituretype.all()[0].select in ['seating', 'tables']:
-            category_score = 3
+        if self.subcategory.all() and self.subcategory.all()[0].select in ['chair - accent', 'chair - desk', 'chair - dining']:
+            category_score = -5
 
         print('cat_score = ', category_score)
         score+=category_score
@@ -227,10 +226,8 @@ class Product(models.Model):
 
         #is_available score
         available_score = 0
-        if self.is_reserved:
-            available_score = -3
-        elif self.is_sold:
-            available_score = -5
+        if self.is_sold:
+            available_score = -10
 
         print('avail_score = ', available_score)
         score+=available_score
@@ -274,6 +271,15 @@ class Product(models.Model):
             elif((self.pub_date > (timezone.now() - timedelta(hours=settings.RECENT_PRODUCT_AGE))) and (not self.is_recent)):
                 self.is_recent = True
 
+        # Check to see if sold date is missing if item is sold.
+        if self.is_sold:
+            if (not self.sold_date):
+                self.sold_date = timezone.now()
+        
+        # if item is not published, pub_date should be blank
+        else:
+            self.sold_date = None
+
         #Update minimumim_offer_price field
         self.minimum_offer_price = self.current_price * settings.OFFER_THRESHOLD
 
@@ -316,7 +322,7 @@ class Product(models.Model):
 #             discounts_in_dollars += offer.get_offer_discount(total_in_dollars)
 #         return int((total_in_dollars - discounts_in_dollars) * 100)
 
-    def hours_since_add(self):
+    def hours_since_pub(self):
         if self.pub_date:
             delta = timezone.now() - self.pub_date
             time_lapse = delta.total_seconds() // 3600
