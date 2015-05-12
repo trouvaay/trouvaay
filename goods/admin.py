@@ -80,6 +80,8 @@ class ProductAdmin(ExportMixin, CustomAdmin):
     
     prepopulated_fields = {"current_price": ("original_price",)}
 
+    ordering = ('-sold_date', '-pub_date')
+
     def first_image(self, obj):
         try:
             url = obj.productimage_set.first().image.build_url()
