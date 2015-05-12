@@ -80,7 +80,7 @@ class ProductAdmin(ExportMixin, CustomAdmin):
     
     prepopulated_fields = {"current_price": ("original_price",)}
 
-    ordering = ('-sold_date', '-pub_date')
+    ordering = ('-added_date', '-pub_date', '-sold_date')
 
     def first_image(self, obj):
         try:
