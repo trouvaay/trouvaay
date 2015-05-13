@@ -114,7 +114,7 @@ class ReservationInline(admin.TabularInline):
     model = Reservation
     fields = ('authuser', 'reservation_price', 'is_active', 'reservation_expiration')
 
-class AuthOrderAdmin(admin.ModelAdmin):
+class AuthOrderAdmin(ExportMixin, admin.ModelAdmin):
     model = AuthOrder
     list_display = ('product', 'authuser', 'order_type', 'created_at', 'updated_at', 'converted_from_reservation')
     # fields = ('product', 'authuser', ('order_type', 'converted_from_reservation'), ('created_at', 'updated_at'))
