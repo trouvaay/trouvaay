@@ -74,7 +74,7 @@ class AuthUserAdmin(ExportMixin, UserAdmin):
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
-    list_display = ('email', 'date_joined', 'is_merchant', 'is_admin', 'is_superuser',)
+    list_display = ('email', 'first_name', 'date_joined', 'is_merchant', 'is_admin', 'is_superuser',)
     list_filter = ('is_admin', 'is_merchant')
 
     # change list
