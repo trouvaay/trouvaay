@@ -2,7 +2,8 @@
 {% load cloudinary %}
 {% load staticfiles %}
 
-{% block title %}{{ product.short_name }} | Rare Door | One-of-a-kind Furniture & Home Decor{% endblock title %}
+{% block title %}<title>{{ product.short_name }} | Rare Door | Vintage Furniture & Home Decor</title>{% endblock title %}
+{% block description %}<meta name="description" content="{{ product.description }}">{% endblock description %}
 {% block searchbutton %}{% endblock searchbutton %}
 
 {% block content %}
