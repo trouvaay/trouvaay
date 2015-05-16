@@ -48,8 +48,13 @@ a:focus {
   background-color: #0080b7;
   border-color: #0080b7;
 }
+.btn.btn-primary.buy {
+  background-color: $lily;
+  border-color: $lily;   
+}
 .btn.btn-primary.buy.offer {
-  background-color: green;
+  background-color: $gold;
+  border-color: $gold;
 }
 
 .arrow-link {

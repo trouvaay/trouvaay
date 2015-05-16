@@ -2533,9 +2533,6 @@ form .form-checkbox-wrap .checkbox-label {
 .btn.btn-primary.buy.reserve {
   background-color: black;
 }
-.btn.btn-primary.buy.offer {
-  background-color: green;
-}
 .btn.btn-success.dist {
   width: 60px;
   padding: 6px 10px;

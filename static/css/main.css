@@ -42,8 +42,14 @@ a:focus {
   border-color: #0080b7;
 }
 
+.btn.btn-primary.buy {
+  background-color: #91c3c3;
+  border-color: #91c3c3;
+}
+
 .btn.btn-primary.buy.offer {
-  background-color: green;
+  background-color: #e6be46;
+  border-color: #e6be46;
 }
 
 .arrow-link {
@@ -1383,7 +1389,6 @@ input#mobile-menu-switch:checked + #mobile-menu {
 
 .product-description {
   font-family: "Droid Serif";
-  font-weight: 600;
   font-size: 13px;
 }
 .product-description .heading {
@@ -1464,6 +1469,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .featured-icons {
   padding: 5px;
   background: #EFEEEE;
+  margin-bottom: 10px;
 }
 .featured-icons h3 {
   font-family: 'Chunkfive';
@@ -1618,11 +1624,11 @@ input#mobile-menu-switch:checked + #mobile-menu {
     height: 100%;
   }
 }
-.grid-products-wrapper .product-container.reserved {
+.grid-products-wrapper .product-container.reserved-block {
   height: 468px;
 }
 @media (max-width: 767px) {
-  .grid-products-wrapper .product-container.reserved {
+  .grid-products-wrapper .product-container.reserved-block {
     height: 100%;
   }
 }
@@ -1785,11 +1791,13 @@ input#mobile-menu-switch:checked + #mobile-menu {
 .grid-products-wrapper .actions .like-btn {
   display: block;
   color: #e6be46;
+  opacity: .45;
   font-size: 25px;
   line-height: inherit;
 }
 .grid-products-wrapper .actions .like-btn.active {
   color: red;
+  opacity: 1;
 }
 .grid-products-wrapper .actions .like-btn:hover {
   text-decoration: none;

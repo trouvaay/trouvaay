@@ -46,7 +46,7 @@
             }
         }
 
-        &.reserved {
+        &.reserved-block {
             height: 468px;
             @include breakpoint(sm) {
                 height: 100%;
@@ -240,11 +240,13 @@
         .like-btn {
             display: block;
             color: $gold;
+            opacity: .45;
             font-size: 25px;
             line-height: inherit;
 
             &.active {
-                color: red
+                color: red;
+                opacity: 1;
             }
             &:hover {
                 text-decoration: none;

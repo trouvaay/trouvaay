@@ -1,8 +1,7 @@
 {% load staticfiles %}
     <div class="col-xs-12 pic-detail-home">
         <div class="price">
-        {% if product.is_sold %}
-          <span class="sold">{{ 'Sold' }}</span>                
+        {% if product.is_sold %}             
         {% elif product.current_price %}
             {% if product.is_reserved %}
                 <span class="reserved">{{ 'Reserved' }}</span>                
@@ -18,31 +17,14 @@
         
         </div>
       <div class="name">
-           {{ product.short_name|truncatechars:30 }} - <span style="font-style:italic">({{ product.store.neighborhood }})</span>
+         {{ product.short_name|truncatechars:30 }}</br>
+         <img src="{% static 'img/loco_pin.svg' %}" style="height:18px"> in <span class="detail-neighborhood"><b>{{ product.store.city }} ({{ product.store.neighborhood }})</b></span>
        </div>
         <!-- need these so that we can pass product name and price to stripe checkout -->
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
         <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>
     </div>
     <!-- Like funtionality on hold until ProfileView implemented -->
-    <div class="neighborhood-like-container">
-      <div class="neighborhood">
-        {% if product.hours_left >= 0 %}
-            {{ product.get_days_left }}
-        {% else %}
-            Off the Market!
-        {% endif %}
-      </div>
-      <div class="actions">
-        <a href="https://www.pinterest.com/pin/create/button/
-              ?url=https://www.raredoor.com/piece/{{ product.slug }}&media={{ product.productimage_set.first.image.url }}&description={{ product.short_name }} | Rare Door"
-              data-pin-do="buttonPin"
-              data-pin-config="hide">
-              <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
-        </a>
-        <a href="#" id="heart_{{ product.id }}" class="glyphicon glyphicon-heart like-btn pull-right"><span>Like</span></a>
-      </div>
-    </div>
     <div class="row" style="margin: 5% 0">
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
         <span style="display: none;" id="product-price-in-cents-{{ product.id }}">{{ product.get_price_in_cents_for_checkout }}</span>

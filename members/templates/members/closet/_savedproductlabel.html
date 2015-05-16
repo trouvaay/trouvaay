@@ -1,8 +1,7 @@
 {% load staticfiles %}
 <div class="col-xs-12 pic-detail-home">
         <div class="price">
-        {% if product.is_sold %}
-          <span class="sold">{{ 'Sold' }}</span>                
+        {% if product.is_sold %}                
         {% elif product.current_price %}
             {% if product.is_reserved %}
                 <span class="reserved">{{ 'Reserved' }}</span>                
@@ -18,7 +17,8 @@
         
         </div>
       <div class="name">
-           {{ product.short_name|truncatechars:30 }} - <span style="font-style:italic">({{ product.store.neighborhood }})</span>
+         {{ product.short_name|truncatechars:30 }}</br>
+         <img src="{% static 'img/loco_pin.svg' %}" style="height:18px"> in <span class="detail-neighborhood"><b>{{ product.store.city }} ({{ product.store.neighborhood }})</b></span>
        </div>
         <!-- need these so that we can pass product name and price to stripe checkout -->
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>
@@ -27,10 +27,8 @@
     <!-- Like funtionality on hold until ProfileView implemented -->
     <div class="neighborhood-like-container">
       <div class="neighborhood">
-        {% if product.hours_left >= 0 %}
-            {{ product.get_days_left }}
-        {% else %}
-            Off the Market!
+       {% if product.hours_since_pub <= 120 %}
+            Recently Added
         {% endif %}
       </div>
       <div class="actions">
