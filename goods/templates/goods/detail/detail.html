@@ -4,6 +4,7 @@
 
 {% block title %}<title>{{ product.short_name }} | Rare Door | Vintage Furniture & Home Decor</title>{% endblock title %}
 {% block description %}<meta name="description" content="{{ product.description }}">{% endblock description %}
+{% block canonical %}<link href="https://raredoor.com/piece/{{ product.slug }}" rel="canonical" />{% endblock canonical %}
 {% block searchbutton %}{% endblock searchbutton %}
 
 {% block content %}
@@ -25,7 +26,7 @@
                     <source srcset="{% cloudinary_url picture.image width=425 height=425 crop="fit" %}" media="(min-width: 992px)">
                     <source srcset="{% cloudinary_url picture.image width=400 height=400 crop="fit" %}" media="(min-width: 413px)">
                     <!--[if IE 9]></video><![endif]-->
-                    <img srcset='{% cloudinary_url picture.image width=275 height=350 crop="fit" %}' alt="">
+                    <img srcset='{% cloudinary_url picture.image width=275 height=350 crop="fit" %}' alt="{{ product.short_name }}">
                 </picture>
 		</li>
 		    {% endfor %}

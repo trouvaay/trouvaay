@@ -14,7 +14,7 @@
             <source srcset="{% cloudinary_url product.productimage_set.first.image width=350 height=300 crop='fit' %}" media="(min-width: 992px)">
             <source srcset="{% cloudinary_url product.productimage_set.first.image width=275 height=275 crop='fit'  %}" media="(max-width: 413px)">
             <!--[if IE 9]></video><![endif]-->
-            <img class="main-image" srcset='{% cloudinary_url product.productimage_set.first.image width=300 height=300 crop="fit" %}' src='{% cloudinary_url product.productimage_set.first.image width=300 height=300 crop="fit" %}' alt="">
+            <img class="main-image" srcset='{% cloudinary_url product.productimage_set.first.image width=300 height=300 crop="fit" %}' src='{% cloudinary_url product.productimage_set.first.image width=300 height=300 crop="fit" %}' alt="{{ product.short_name }}">
         </picture>
 
     </div>
