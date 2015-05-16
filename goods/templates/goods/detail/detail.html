@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="heading"><h4>{{ product.short_name }}</h4>
-                        <img src="{% static 'img/loco_pin.svg' %}" style="height:18px"> in <span class="detail-neighborhood"><b>{{ product.store.city }} ({{ product.store.neighborhood }})</b></span></br>
+                        <img src="{% static 'img/loco_pin.svg' %}" style="height:18px"> in <span class="detail-neighborhood"><b>{{ product.store.city }} {% if product.store.neighborhood %}({{ product.store.neighborhood }}){% endif %}</b></span></br>
                     </div>
                 </div>
                 <div class="row row-attrs descrip-detail">
