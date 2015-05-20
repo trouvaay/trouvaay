@@ -18,7 +18,7 @@
         </div>
       <div class="name">
          {{ product.short_name|truncatechars:30 }}</br>
-         <img src="{% static 'img/loco_pin.svg' %}" style="height:18px"> in <span class="detail-neighborhood"><b>{{ product.store.city }} ({{ product.store.neighborhood }})</b></span>
+         <img src="{% static 'img/loco_pin.svg' %}" style="height:18px"> in <span class="detail-neighborhood"><b>{{ product.store.city }}{% if product.store.neighborhood %}({{ product.store.neighborhood }}){% endif %}</b></span>
        </div>
         <!-- need these so that we can pass product name and price to stripe checkout -->
         <span style="display: none;" id="product-name-{{ product.id }}">{{ product.short_name }}</span>

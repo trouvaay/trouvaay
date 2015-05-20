@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'registration',
     'localflavor',
     'merchants',
@@ -91,6 +92,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 DATABASES = {}
 
+SITE_ID = 1
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
