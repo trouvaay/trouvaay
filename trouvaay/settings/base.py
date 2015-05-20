@@ -64,6 +64,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'middleware.ReferralMiddleware',
+    'middleware.WWWRedirectMiddleware',
 )
 
 ROOT_URLCONF = 'trouvaay.urls'
