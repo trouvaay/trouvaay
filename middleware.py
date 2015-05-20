@@ -20,7 +20,6 @@ class WWWRedirectMiddleware(object):
     def process_request(self, request):
         current_request = request.META['HTTP_HOST']
         if current_request.startswith('www.'):
-            logger.debug('this is the current request: {}'.format(current_request))
-            return HttpResponsePermanentRedirect(current_request[4:])
+            return HttpResponsePermanentRedirect('https://{}'.format(current_request[4:]))
 
 
