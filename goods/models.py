@@ -198,6 +198,7 @@ class Product(models.Model):
         # get date added score
         pub_dt_score = 0
         try:
+            print('entering try loop')
             hours_since_pub = self.hours_since_pub()
             if hours_since_pub:
                 if hours_since_pub < 24:
