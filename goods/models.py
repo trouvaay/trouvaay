@@ -200,19 +200,15 @@ class Product(models.Model):
         try:
             hours_since_pub = self.hours_since_pub()
             if hours_since_pub < 24:
-                print ('less than 24hrs!')
                 pub_dt_score = 40
             elif hours_since_pub < 72:
-                print ('less than 72hrs!')
                 pub_dt_score = 20
             elif hours_since_pub < 120:
-                print ('less than 120hrs!')
                 pub_dt_score = 5
             elif hours_since_pub < 336:
-                print ('less than 336hrs!')
                 pub_dt_score = 3
         except:
-            print('pub_date exception')
+            pass
 
         print('pub_dt_score = ', pub_dt_score)
         score+=pub_dt_score
