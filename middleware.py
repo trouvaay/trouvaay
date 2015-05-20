@@ -1,5 +1,6 @@
 from members.models import Join
-
+from django.http import HttpResponsePermanentRedirect
+from django.conf import settings
 
 class ReferralMiddleware():
 	def process_request(self, request):
@@ -10,3 +11,11 @@ class ReferralMiddleware():
 			friend_obj = None
 		if friend_obj:
 			request.session['join_id_ref'] = friend_obj.id
+
+class WWWRedirectMiddleware(object):
+    def process_request(self, request):
+        current_request = request.META['HTTP_HOST']
+        if current_request.startswith('www.'):
+            return HttpResponsePermanentRedirect(current_request[4:])
+
+
