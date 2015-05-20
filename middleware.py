@@ -1,6 +1,10 @@
 from members.models import Join
 from django.http import HttpResponsePermanentRedirect
 from django.conf import settings
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class ReferralMiddleware():
 	def process_request(self, request):
@@ -16,6 +20,7 @@ class WWWRedirectMiddleware(object):
     def process_request(self, request):
         current_request = request.META['HTTP_HOST']
         if current_request.startswith('www.'):
+            logger.debug('this is the current request: {}'.formate(current_request))
             return HttpResponsePermanentRedirect(current_request[4:])
 
 
