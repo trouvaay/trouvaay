@@ -209,7 +209,7 @@ class Product(models.Model):
                 elif hours_since_pub < 336:
                     pub_dt_score = 3
         except:
-            pass
+            print('pub_date exception')
 
         print('pub_dt_score = ', pub_dt_score)
         score+=pub_dt_score
