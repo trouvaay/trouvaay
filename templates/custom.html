@@ -163,45 +163,45 @@ function FBReservationEvent() {
     _fbq.push(['track', '6024578749644', {'value':'0.00','currency':'USD'}]);
 }
 
-function handleSeeMoreClick(e) {
-    // console.log('clicked on See More button: '+e.target.id);
-    mixpanel.track("Clicked See More Button");
-}
+// function handleSeeMoreClick(e) {
+//     // console.log('clicked on See More button: '+e.target.id);
+//     mixpanel.track("Clicked See More Button");
+// }
 
-function handleShopNowClick(e) {
-    // console.log('clicked on Shop Now button: '+e.target.id);
-    mixpanel.track("Clicked Shop Now Button");
-}
+// function handleShopNowClick(e) {
+//     // console.log('clicked on Shop Now button: '+e.target.id);
+//     mixpanel.track("Clicked Shop Now Button");
+// }
 
-function handleSeatingClick(e) {
-    // console.log('clicked seating: '+e.target.search);
-    mixpanel.track("Clicked Seating Search");
-}
+// function handleSeatingClick(e) {
+//     // console.log('clicked seating: '+e.target.search);
+//     mixpanel.track("Clicked Seating Search");
+// }
 
-function handleTablesClick(e) {
-    // console.log('clicked tables: '+e.target.search);
-    mixpanel.track("Clicked Tables Search");
-}
+// function handleTablesClick(e) {
+//     // console.log('clicked tables: '+e.target.search);
+//     mixpanel.track("Clicked Tables Search");
+// }
 
-function handleBedsClick(e) {
-    // console.log('clicked beds: '+e.target.search);
-    mixpanel.track("Clicked Beds Search");
-}
+// function handleBedsClick(e) {
+//     // console.log('clicked beds: '+e.target.search);
+//     mixpanel.track("Clicked Beds Search");
+// }
 
-function handleStorageClick(e) {
-    // console.log('clicked storage: '+e.target.search);
-    mixpanel.track("Clicked Storage Search");
-}
+// function handleStorageClick(e) {
+//     // console.log('clicked storage: '+e.target.search);
+//     mixpanel.track("Clicked Storage Search");
+// }
 
-function handleLightingClick(e) {
-    // console.log('clicked lighting: '+e.target.search);
-    mixpanel.track("Clicked Lighting Search");
-}
+// function handleLightingClick(e) {
+//     // console.log('clicked lighting: '+e.target.search);
+//     mixpanel.track("Clicked Lighting Search");
+// }
 function handleBuyButtonClick(e) {
 	// console.log('clicked on buy button: '+e.target.id);
 
     $('#loader').removeClass('invisible');
-
+    // buy buttopn clicked
 	if(e.target.id.substr(0, 4) == 'buy_'){
 		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
         var orderType = 'buy';
@@ -210,6 +210,8 @@ function handleBuyButtonClick(e) {
             "Clicked Buy Button",
             { "productId": productId }
         );
+
+        // _trackEvent('Purchase action', 'clicked buy button');
 
         // console.log('mixpanel: buy-button.onclick event fired');
         
@@ -266,6 +268,7 @@ function handleBuyButtonClick(e) {
 			});
 		}
     }
+    // offer buttopn clicked
 	else if(e.target.id.substr(0, 6) == 'offer_'){
 		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
         var orderType = 'offer';
@@ -311,6 +314,7 @@ function handleBuyButtonClick(e) {
 			});
 		} 
     }
+    // go see buttopn clicked
     else if(e.target.id.substr(0, 8) == 'reserve_'){
         var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
         var orderType = 'reserve';
@@ -478,23 +482,23 @@ $(document).ready(function() {
 	});
 
 	$('.btn.buy').on('click', handleBuyButtonClick);
-    $('#see-more').on('click', handleSeeMoreClick);
-    $('#shop-now').on('click', handleShopNowClick);
+    // $('#see-more').on('click', handleSeeMoreClick);
+    // $('#shop-now').on('click', handleShopNowClick);
     
-    $('#desktop-search #seating').on('click', handleSeatingClick);
-    $('.tab-icons #seating > a').on('click', handleSeatingClick);
+    // $('#desktop-search #seating').on('click', handleSeatingClick);
+    // $('.tab-icons #seating > a').on('click', handleSeatingClick);
     
-    $('#desktop-search #tables').on('click', handleTablesClick);
-    $('.tab-icons #tables').on('click', handleTablesClick);
+    // $('#desktop-search #tables').on('click', handleTablesClick);
+    // $('.tab-icons #tables').on('click', handleTablesClick);
 
-    $('#desktop-search #beds').on('click', handleBedsClick);
-    $('.tab-icons #beds').on('click', handleBedsClick);
+    // $('#desktop-search #beds').on('click', handleBedsClick);
+    // $('.tab-icons #beds').on('click', handleBedsClick);
 
-    $('#desktop-search #storage').on('click', handleStorageClick);
-    $('.tab-icons #storage').on('click', handleStorageClick);
+    // $('#desktop-search #storage').on('click', handleStorageClick);
+    // $('.tab-icons #storage').on('click', handleStorageClick);
 
-    $('#desktop-search #lighting').on('click', handleLightingClick);
-    $('.tab-icons #lighting').on('click', handleLightingClick);
+    // $('#desktop-search #lighting').on('click', handleLightingClick);
+    // $('.tab-icons #lighting').on('click', handleLightingClick);
 
 });
 //Unsed formula to append distance from product to user's loco
