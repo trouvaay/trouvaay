@@ -165,7 +165,7 @@ RETURN_POLICY = {
 RESERVATION_LIMIT = 3  # user cannot have more than this many outstanding reservations
 RESERVATION_PERIOD = 48  # hours
 
-LOGIN_MODAL_EXP = 3600 # seconds
+LOGIN_MODAL_EXP = 30 # seconds
 # Promotional Offer settings
 OFFER_MODAL_EXPIRATION = 1  # do not show promo offers again whithin this many seconds
 SIGNUP_OFFER = "Get 10% off your 1st purchase"
