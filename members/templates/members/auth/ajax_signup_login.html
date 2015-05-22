@@ -28,10 +28,12 @@
 
                     <div class="form-group col-sm-6 text-center">
                         <div class="text-center">
-                        	<p><b>Signup</b></p>
-                            {% crispy signup_form %}
-                            <div>or</div>
-                            {% include 'members/auth/social_login.html' %}
+                        	<div class="hidden-xs">
+                                <p><b>Signup</b></p>
+                                {% crispy signup_form %}
+                                <div>or</div>
+                            </div>
+                            {% include 'members/auth/social_login.html' %}  
                         </div>
                     </div>
                     {% endif %}
