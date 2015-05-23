@@ -84,6 +84,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'context_processors.get_liked_items',
     'context_processors.site_name',
     'context_processors.get_feature_context',
+    'context_processors.analytics_tokens',
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
 )
@@ -145,7 +146,7 @@ REGISTRATION_AUTO_LOGIN = True
 STRIPE_SECRET_KEY = ''
 STRIPE_PUBLISHABLE_KEY = ''
 # OLARK_SITE_ID = ''
-# MIXPANEL_API_TOKEN = ''
+MIXPANEL_API_TOKEN = ''
 ANALYTICAL_INTERNAL_IPS = []
 #list of email for user to exclude from trick counting
 CLICK_EXCLUSIONS = []

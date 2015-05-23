@@ -31,3 +31,8 @@ def get_feature_context(request):
         'TOOLTIP_HEART': settings.TOOLTIP_HEART,
         'TOOLTIP_PURCHASE': settings.TOOLTIP_PURCHASE,
     }
+
+def analytics_tokens(request):
+    return {
+        'mixpanel_token': settings.MIXPANEL_API_TOKEN,
+    }
