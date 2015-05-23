@@ -1559,6 +1559,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 
 .btn.btn-primary.buy.reserve {
   background-color: black;
+  border-color: black;
 }
 
 .attr {
