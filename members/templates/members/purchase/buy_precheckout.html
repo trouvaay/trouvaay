@@ -152,7 +152,10 @@
 <script>
 $(document).ready(function() {
 	
-	var productName = "{{ product.short_name }}";
+	var productSlug = "{{ product.slug }}";
+	var productId = "{{ product.id }}";
+	var productName = "{{ product.short_name }}"
+	var email = "{{ user.email }}";
 	var productPrice = {{ total.in_cents }};
 	var orderType = "{{ order_type }}";
 	 
@@ -171,13 +174,19 @@ $(document).ready(function() {
   		var buyUrl = "{% url "members:offer" %}";
   		mixpanel.track(
                 "Offer Pre-checkout Submitted",
-                { "product": productName }
+                { "productSlug": productSlug,
+		                "productId": productId,
+		                "email": email,
+		            }
             );
   		{% else %}
   		var buyUrl = "{% url "members:buy" %}";
   		mixpanel.track(
                 "Buy Pre-checkout Submitted",
-                { "product": productName }
+                 { "productSlug": productSlug,
+		                "productId": productId,
+		                "email": email,
+		            }
             );
   		{% endif %}
   		
@@ -288,7 +297,9 @@ $(document).ready(function() {
 
 								mixpanel.track(
 					                "Purchase Completed",
-					                { "product": data['product_name'] }
+					                { "product": data['product_name'],
+					                	"email": data['email']
+					                 }
 					            	);
 								
 								// console.log('mixpanel purchaseevent fired');

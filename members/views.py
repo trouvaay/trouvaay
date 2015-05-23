@@ -40,6 +40,7 @@ logger = logging.getLogger(__name__)
 
 class OptoutView(generic.TemplateView):
     template_name = 'members/auth/opt-out.html'
+
 class ProfileView(LoginRequiredMixin, generic.DetailView):
     """Displays user profile"""
 
@@ -292,6 +293,8 @@ class ReserveView(generic.DetailView):
                                             })
         else:
             form = ReserveForm()
+
+        user = self.request.user
 
         return render_to_response('members/purchase/reserve_precheckout.html', locals())
 
@@ -576,7 +579,7 @@ class BuyView(generic.DetailView):
         feature_name_reserve = settings.FEATURE_NAME_RESERVE
         site_name = settings.SITE_NAME
         TOOLTIP_PURCHASE = settings.TOOLTIP_PURCHASE
-
+        user = self.request.user
         return render_to_response('members/purchase/buy_precheckout.html', locals())
 
     def post(self, request, *args, **kwargs):
@@ -727,6 +730,7 @@ class BuyView(generic.DetailView):
             json_result = {
                 'status': 'ok',
                 'product_name': product.short_name,
+                'email': order.authuser.email,
                 'store_name': product.store.retailer.short_name,
                 'store_street': product.store.street,
                 'store_street2': product.store.street2 if product.store.street2 else '',

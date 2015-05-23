@@ -40,7 +40,9 @@
 $(document).ready(function() {
 	
 	var productId = "{{ product.id }}";
-	var productName = "{{ product.short_name }}";
+	var productSlug = "{{ product.slug }}";
+	var productName = "{{ product.short_name }}"
+	var email = "{{ user.email }}";
 	$('#button-id-button-reserve').on('click', function(e) {
 
 		$('#loader').removeClass('invisible');
@@ -50,7 +52,10 @@ $(document).ready(function() {
 		//fire mixpanel event
 		mixpanel.track(
 	                "Reserve Pre-checkout Submitted",
-	                { "product": productName }
+	               { "productSlug": productSlug,
+		                "productId": productId,
+		                "email": email,
+		            }
 	            );
 
 		//fire google adwords event
@@ -79,7 +84,10 @@ $(document).ready(function() {
 					});
 					mixpanel.track(
 	                "Reservation Completed",
-	                { "product": productName }
+		               { "productSlug": productSlug,
+			                "productId": productId,
+			                "email": email,
+			            }
 	            	);
 					FBReservationEvent();
 				},

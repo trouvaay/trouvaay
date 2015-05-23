@@ -339,8 +339,10 @@ class DetailView(generic.DetailView):
         context['returns'] = settings.RETURN_POLICY
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
         context['OFFER_IS_ENABLED'] = settings.OFFER_IS_ENABLED
+        
 
         product = self.get_object()
+        context['product_slug'] = product.slug
 
         # click counter
         exclude_emails = settings.CLICK_EXCLUSIONS
@@ -353,7 +355,6 @@ class DetailView(generic.DetailView):
             product.click_count += 1
             product.save()
             logger.debug('added to click-count')
-
         return context
 
 

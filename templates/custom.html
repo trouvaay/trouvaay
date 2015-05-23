@@ -204,11 +204,15 @@ function handleBuyButtonClick(e) {
     // buy buttopn clicked
 	if(e.target.id.substr(0, 4) == 'buy_'){
 		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
+        console.log(productId);
         var orderType = 'buy';
 		
 		mixpanel.track(
             "Clicked Buy Button",
-            { "productId": productId }
+            { "email": "{{ user.email }}",
+                "productSlug": "{{ product_slug }}",
+                "productId": productId,
+            }
         );
 
         // _trackEvent('Purchase action', 'clicked buy button');
@@ -274,7 +278,10 @@ function handleBuyButtonClick(e) {
         var orderType = 'offer';
         mixpanel.track(
             "Clicked Offer Button",
-            { "productId": productId }
+            { "email": "{{ user.email }}",
+                "productSlug": "{{ product_slug }}",
+                "productId": productId,
+            }
         );
         // console.log('mixpanel: offer-button.onclick event fired');
 
@@ -320,7 +327,10 @@ function handleBuyButtonClick(e) {
         var orderType = 'reserve';
         mixpanel.track(
             "Clicked Reserve Button",
-            { "productId": productId }
+            { "email": "{{ user.email }}",
+                "productSlug": "{{ product_slug }}",
+                "productId": productId,
+            }
         );
         // console.log('mixpanel: reserve-button.onclick event fired');
         var urlToLoad = "/reserve/"+productId;
@@ -349,7 +359,10 @@ function handleBuyButtonClick(e) {
         var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
         mixpanel.track(
             "Clicked Cancel Reserve Button In Profile",
-            { "productId": productId }
+            { "email": "{{ user.email }}",
+                "productSlug": "{{ product_slug }}",
+                "productId": productId,
+            }
         );
         // console.log('mixpanel: cancel_reserve.onclick event fired');
         
@@ -445,7 +458,9 @@ $(document).ready(function() {
         // var productSlug = initialProductSlug.substring(0, initialProductSlug.length - 1);
         mixpanel.track(
                 "Clicked Detail Page",
-                { "productSlug": productSlug }
+                { "email": "{{ user.email }}",
+                "productSlug": "{{ product_slug }}",
+            }
             );
         // console.log('mixpanel: view-product-detail.onclick event fired');
     })
