@@ -104,7 +104,6 @@ document.createElement( "picture" );
   <meta name="p:domain_verify" content="a087ecb11ad56c7333a66143ad5481c5"/>
   <!-- End Pinterest Verification -->
 {% block beginjs %}{% endblock beginjs %}
-{% analytical_head_bottom %}
 <script type="text/javascript">
     if (window.location.hash && window.location.hash == '#_=_') {
         window.location.hash = '';
@@ -122,7 +121,6 @@ document.createElement( "picture" );
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-{% analytical_body_top %}
 
 {% include 'goods/main/searchfilter.html' %}
 <div class="wrap">
@@ -435,7 +433,6 @@ $('.filter-group input').change(function() {
 });
   </script>
   {% endblock endjs %}
-    {% analytical_body_bottom %}
     </script>
     <!-- Google Remarketing -->
     <script type="text/javascript">
