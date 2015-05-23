@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^referralsignup/$', views.ReferralSignup.as_view(), name='referral_signup'),
     url(r'^referralinfo/$', views.ReferralInfo.as_view(), name='referral_info'),
     url(r'^postcheckoutupdate/$', views.PostCheckoutUpdate.as_view(), name='post_checkout_update'),
+    url(r'^opt-out/$', views.OptoutView.as_view(), name='opt-out'),
 
     # Unused Cart Feature #
     # url(r'^addtocart/$', views.AddToCart, name='addtocart'),

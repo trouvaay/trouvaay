@@ -24,6 +24,22 @@
 <!-- Google Analytics Old-->
 <script type="text/javascript" src=https://www.googleadservices.com/pagead/conversion_async.js charset="utf-8"></script>
 <script>
+  // Set to the same value as the web property used on the site
+  var gaProperty = 'UA-63269103-1';
+
+  // Disable tracking if the opt-out cookie exists.
+  var disableStr = 'ga-disable-' + gaProperty;
+  if (document.cookie.indexOf(disableStr + '=true') > -1) {
+    window[disableStr] = true;
+    console.log('cookie already set');
+  }
+
+  // Opt-out function
+  {% block gaOptout %}
+  {% endblock %}
+
+</script>
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -33,7 +49,9 @@
   ga('create', 'UA-58538929-1', 'auto', {'name': 'oldTracker'});
   ga('send', 'pageview');
   ga('oldTracker.send', 'pageview');
-  ga('set', '&uid', {{ user.id }}); // Set the user ID using signed-in user_id.
+  // if ({{ user.id }} ? 0) {
+  //   ga('set', '&uid', {{ user.id }}); // Set the user ID using signed-in user_id.
+  // }
 
 </script>
 <!-- Google Analytics New-->
@@ -93,7 +111,7 @@ document.createElement( "picture" );
     }
 </script>
 </head>
-<body class="{% block bodyclass %}{% endblock %}" id="{% block bodyid %}{% endblock %}">
+<body class="{% block bodyclass %}{% endblock %}" id="{% block bodyid %}{% endblock %}" onload="{% block onload %} {% endblock %}">
 
 <div id="fb-root"></div>
 <script>(function(d, s, id) {

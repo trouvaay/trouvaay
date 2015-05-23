@@ -36,6 +36,10 @@ import random
 logger = logging.getLogger(__name__)
 
 # TODO: For profile page
+
+
+class OptoutView(generic.TemplateView):
+    template_name = 'members/auth/opt-out.html'
 class ProfileView(LoginRequiredMixin, generic.DetailView):
     """Displays user profile"""
 
