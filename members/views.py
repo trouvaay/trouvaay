@@ -819,7 +819,7 @@ def custom_login(request, template_name='registration/login.html',
     # only for rendering of the template by login 'GET'
     # the actual login 'POST' will be using authentication_form
     # from above
-    print('social auth settings', settings.ENABLE_SOCIAL_AUTH)
+
     extra_context = {
                      'login_form': CustomAuthenticationForm(),
                      'signup_form': RegistrationForm(),
@@ -837,7 +837,6 @@ def custom_login(request, template_name='registration/login.html',
 
     extra_context['is_missing_email'] = is_missing_email
 
-    print 
     return django_login(request=request,
                         template_name=template_name,
                         authentication_form=authentication_form,

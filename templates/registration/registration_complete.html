@@ -12,6 +12,17 @@
         </div>
     </div>
     </div>
+    {{ user }}
 {% endblock %}
-
-
+{% block endjs %}
+    {{ block.super }}
+    <script>
+    $(document).ready(function() {
+        var email = "{{ user.email }}";
+        mixpanel.track(
+                "User Signup",
+               { "email": email }
+            );
+    });
+    </script>
+{% endblock %}
