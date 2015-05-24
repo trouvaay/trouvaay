@@ -18,8 +18,8 @@
         </picture>
 
     </div>
-    <a href="{% url 'goods:detail' product.slug  %}" class="view-product hidden-xs" style="height: 100%; position:absolute"></a>
-    <a href="{% url 'goods:detail' product.slug  %}" class="view-product hidden-sm hidden-md hidden-lg" style="height: 100%; position:absolute"></a>	    <!--
+    <a href="{% url 'goods:detail' product.slug  %}" class="view-product hidden-xs" style="height: 100%; position:absolute" data-productid="{{ product.id }}"></a>
+    <a href="{% url 'goods:detail' product.slug  %}" class="view-product hidden-sm hidden-md hidden-lg" style="height: 100%; position:absolute" data-productid="{{ product.id }}"></a>	    <!--
     <a href="{% url 'goods:detail' product.slug  %}" target="_blank" class="view-product" style="height:100%">
             <div class="hover-text" style="left:22%; top: 30%;"><span class="details-label"><h4>click to view</h4></span></div>
             

@@ -455,11 +455,12 @@ $(document).ready(function() {
 	$('.view-product').on('click', function(e) {
         var initialProductSlug = $(this).attr("href").substr(7);
         var productSlug = initialProductSlug.substring(0, initialProductSlug.length - 1);
-        // var productSlug = initialProductSlug.substring(0, initialProductSlug.length - 1);
+        var productId = $(this).attr("data-productid");
         mixpanel.track(
                 "Clicked Detail Page",
                 { "email": "{{ user.email }}",
-                "productSlug": "{{ product_slug }}",
+                "productSlug": productSlug,
+                "productId": productId,
             }
             );
         // console.log('mixpanel: view-product-detail.onclick event fired');
