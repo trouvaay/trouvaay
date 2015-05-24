@@ -215,6 +215,8 @@ function handleBuyButtonClick(e) {
             }
         );
 
+        // ga('send', 'event', 'clicked-buy-button', 'click', productSlug);
+
         // _trackEvent('Purchase action', 'clicked buy button');
 
         // console.log('mixpanel: buy-button.onclick event fired');
@@ -463,6 +465,8 @@ $(document).ready(function() {
                 "productId": productId,
             }
             );
+        ga('send', 'event', 'view-product', 'click', productSlug);
+        // console.log('sent mixpanel and GA events');
         // console.log('mixpanel: view-product-detail.onclick event fired');
     })
 
