@@ -294,14 +294,20 @@ $(document).ready(function() {
 								// fire FB purchase pixel
 								FBPurchaseEvent();
 								// console.log('FBPurchaseEvent fired');
+								if(data['is_offer']) {
+									var transactionDescription = 'Offer Completed';
+								}
+								else {
+									var transactionDescription = 'Purchase Completed';
+								}
 
 								mixpanel.track(
-					                "Purchase Completed",
-					                { "product": data['product_name'],
-					                	"email": data['email'],
-					                	"productId": data['product_id']
-					                 }
-					            	);
+						                transactionDescription,
+						                { "product": data['product_name'],
+						                	"email": data['email'],
+						                	"productId": data['product_id']
+						                 }
+						            	);
 								
 								// console.log('mixpanel purchaseevent fired');
 						  	
