@@ -298,7 +298,8 @@ $(document).ready(function() {
 								mixpanel.track(
 					                "Purchase Completed",
 					                { "product": data['product_name'],
-					                	"email": data['email']
+					                	"email": data['email'],
+					                	"productId": data['product_id']
 					                 }
 					            	);
 								

@@ -730,6 +730,7 @@ class BuyView(generic.DetailView):
             json_result = {
                 'status': 'ok',
                 'product_name': product.short_name,
+                'product_id': product.id,
                 'email': order.authuser.email,
                 'store_name': product.store.retailer.short_name,
                 'store_street': product.store.street,
