@@ -48,9 +48,7 @@
   ga('create', 'UA-58538929-1', 'auto', {'name': 'oldTracker'});
   ga('send', 'pageview');
   ga('oldTracker.send', 'pageview');
-  if ({{ user.id }} || 0) {
-    ga('set', '&uid', {{ user.id }}); // Set the user ID using signed-in user_id.
-  }
+  ga('set', '&uid', {{ user.id }}); // Set the user ID using signed-in user_id.
 
 </script>
 <!-- Google Analytics New-->
