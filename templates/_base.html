@@ -371,7 +371,7 @@ $(document).ready(function() {
 
       searchFilterTimer = setTimeout(function() {
         // make ajax request to update the products
-        console.log("ajax request: "+{% url "goods:searchfilter" %});
+        // console.log("ajax request: "+{% url "goods:searchfilter" %});
 
         $.ajax({
 type: "GET",
@@ -385,16 +385,16 @@ $("#ajax-product-container").html(response);
 });         
         }, 2000);
 
-console.log('timer is set: ');
-console.log(searchFilterTimer);
+// console.log('timer is set: ');
+// console.log(searchFilterTimer);
 });
 
 $('.slider').ionRangeSlider({'prettify_enabled': false, 'force_edges': true});
 
 $('#filter-container-color').find('.checkbox-label').each(function() {
     color_hex = colourNameToHex($(this).text());
-    console.log(color_hex);
-    console.log($(this).closest('.checkbox-pseudocheckbox'));
+    // console.log(color_hex);
+    // console.log($(this).closest('.checkbox-pseudocheckbox'));
     $(this).closest('.color-checkbox').find('.checkbox-pseudocheckbox').css('background-color', color_hex);
 
     });

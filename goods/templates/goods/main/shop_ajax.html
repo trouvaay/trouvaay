@@ -177,9 +177,9 @@ var $spinner = $('#products-spinner');
 $(window).scroll(function() {
         e_top = $('#index-banner').height() + $('#how-it-works').height();
         console.log($spinner.offset().top);
-    console.log($(window).scrollTop());
-    console.log($(window).scrollTop() - $(window).height/2 - e_top + 64);
-    console.log($spinner.offset().top - $(window).scrollTop());
+    // console.log($(window).scrollTop());
+    // console.log($(window).scrollTop() - $(window).height/2 - e_top + 64);
+    // console.log($spinner.offset().top - $(window).scrollTop());
     if ($(window).scrollTop() >= -$(window).height()/2 + ($('#index-banner').outerHeight() + $('#how-it-works').outerHeight() + 60 + 64 + 120)) {
         $('#products-spinner').addClass('fixed');
     } else {
@@ -201,12 +201,12 @@ function reloadItems() {
             // clear any previous timer and start a new one
             if(searchFilterTimer && typeof searchFilterTimer != 'undefined'){ 
             clearTimeout(searchFilterTimer);
-            console.log('timer is cleared');
+            // console.log('timer is cleared');
             }
 
             searchFilterTimer = setTimeout(function() {
                 // make ajax request to update the products
-                console.log("ajax request: "+{% url "goods:searchfilter" %});
+                // console.log("ajax request: "+{% url "goods:searchfilter" %});
 
                 $.ajax({
 type: "GET",
@@ -214,7 +214,7 @@ url: "{% url "goods:searchfilter" %}",
 dataType: "html",
 data: $("#searchfilter-form").serialize(),
 success: function(response, status){
-console.log('status from searchfilter call: '+status);
+// console.log('status from searchfilter call: '+status);
 $("#ajax-product-container").html(response);
 $('#products').removeClass('loading');
 $('#products-spinner').addClass('invisible');
@@ -222,8 +222,8 @@ $('#products-spinner').addClass('invisible');
 });					
                 }, 2000);
 
-console.log('timer is set: ');
-console.log(searchFilterTimer);
+// console.log('timer is set: ');
+// console.log(searchFilterTimer);
 
 }
 
@@ -241,8 +241,8 @@ $('.slider').ionRangeSlider({'prettify_enabled': false, 'force_edges': true});
 
 $('#filter-container-color').find('.checkbox-label').each(function() {
         color_hex = colourNameToHex($(this).text());
-        console.log(color_hex);
-        console.log($(this).closest('.checkbox-pseudocheckbox'));
+        // console.log(color_hex);
+        // console.log($(this).closest('.checkbox-pseudocheckbox'));
         $(this).closest('.color-checkbox').find('.checkbox-pseudocheckbox').css('background-color', color_hex);
 
         });
