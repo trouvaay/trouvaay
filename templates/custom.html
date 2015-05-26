@@ -123,6 +123,7 @@ var trouvaay = {
                 mixpanel.track("Liked product",
                     { "productId": id }
                 );
+                ga('send', 'event', 'like-product', 'click', id);
             }
             $.post(
                 "{% url 'members:like' %}", 
@@ -204,18 +205,19 @@ function handleBuyButtonClick(e) {
     // buy buttopn clicked
 	if(e.target.id.substr(0, 4) == 'buy_'){
 		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
+        var productSlug = "{{ product_slug }}";
         console.log(productId);
         var orderType = 'buy';
 		
 		mixpanel.track(
             "Clicked Buy Button",
             { "email": "{{ user.email }}",
-                "productSlug": "{{ product_slug }}",
+                "productSlug": productSlug,
                 "productId": productId,
             }
         );
 
-        // ga('send', 'event', 'clicked-buy-button', 'click', productSlug);
+        ga('send', 'event', 'buy', 'clicked-buy-button', productSlug);
 
         // _trackEvent('Purchase action', 'clicked buy button');
 
@@ -278,14 +280,15 @@ function handleBuyButtonClick(e) {
 	else if(e.target.id.substr(0, 6) == 'offer_'){
 		var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
         var orderType = 'offer';
+        var productSlug = "{{ product_slug }}";
         mixpanel.track(
             "Clicked Offer Button",
             { "email": "{{ user.email }}",
-                "productSlug": "{{ product_slug }}",
+                "productSlug": productSlug,
                 "productId": productId,
             }
         );
-        // console.log('mixpanel: offer-button.onclick event fired');
+        ga('send', 'event', 'offer', 'clicked-offer-button', productSlug);
 
 		if(productId && !(typeof productId === 'undefined')){
 		    // console.log('this is the ordertype ', orderType)
@@ -327,13 +330,15 @@ function handleBuyButtonClick(e) {
     else if(e.target.id.substr(0, 8) == 'reserve_'){
         var productId = e.target.id.substr(e.target.id.lastIndexOf("_") + 1);
         var orderType = 'reserve';
+        var productSlug = "{{ product_slug }}";
         mixpanel.track(
             "Clicked Reserve Button",
             { "email": "{{ user.email }}",
-                "productSlug": "{{ product_slug }}",
+                "productSlug": productSlug,
                 "productId": productId,
             }
         );
+        ga('send', 'event', 'go-see', 'clicked-goSee-button', productSlug);
         // console.log('mixpanel: reserve-button.onclick event fired');
         var urlToLoad = "/reserve/"+productId;
         

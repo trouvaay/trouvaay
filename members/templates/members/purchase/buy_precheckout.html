@@ -179,6 +179,8 @@ $(document).ready(function() {
 		                "email": email,
 		            }
             );
+  		ga('send', 'event', 'offer', 'offer-precheckout-submitted', productSlug);
+
   		{% else %}
   		var buyUrl = "{% url "members:buy" %}";
   		mixpanel.track(
@@ -188,6 +190,7 @@ $(document).ready(function() {
 		                "email": email,
 		            }
             );
+  		ga('send', 'event', 'buy', 'buy-precheckout-submitted', productSlug);
   		{% endif %}
   		
   		{% if is_offer and not is_offer_accepted %}
@@ -296,9 +299,11 @@ $(document).ready(function() {
 								// console.log('FBPurchaseEvent fired');
 								if(data['is_offer']) {
 									var transactionDescription = 'Offer Completed';
+									ga('send', 'event', 'offer', 'offer-completed', data['product_name']);
 								}
 								else {
 									var transactionDescription = 'Purchase Completed';
+									ga('send', 'event', 'buy', 'buy-completed', data['product_name']);
 								}
 
 								mixpanel.track(
@@ -308,6 +313,7 @@ $(document).ready(function() {
 						                	"productId": data['product_id']
 						                 }
 						            	);
+
 								
 								// console.log('mixpanel purchaseevent fired');
 						  	

@@ -56,6 +56,7 @@ $(document).ready(function() {
 		                "email": email,
 		            }
 	            );
+		ga('send', 'event', 'go-see', 'goSee-precheckout-submitted', productSlug);
 
 		//fire google adwords event
 		window.google_trackConversion({
@@ -88,6 +89,7 @@ $(document).ready(function() {
 			                "email": email,
 			            }
 	            	);
+	            	ga('send', 'event', 'go-see', 'goSee-precheckout-submitted', productSlug);
 					FBReservationEvent();
 				},
 			});
