@@ -113,7 +113,9 @@ var trouvaay = {
                     $("#"+prodContainer).remove();
                 }
                 mixpanel.track("Unliked product",
-                    { "productId": id }
+                    { "productId": id,
+                        "email": "{{ user.email }}",
+                    }
                 );
             }
 

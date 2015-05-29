@@ -287,11 +287,15 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 
     def has_perm(self, perm, obj=None):
         """ Users have all model level perm except deleting authuser instances"""
-        if self.is_active and (self.is_admin or self.is_product_admin):
-            if perm == 'members.delete_authuser':
-                return False
-            else:
+        if perm == 'members.delete_authuser':
+            if self.is_superuser:
                 return True
+            else:
+                return False
+                
+        if self.is_active and (self.is_admin or self.is_product_admin):
+            return True
+        
         return super(AuthUser, self).has_perm(perm, obj)
 
 
