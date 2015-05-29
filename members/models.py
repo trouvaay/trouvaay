@@ -272,18 +272,23 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):
         """ Is the user a member of staff?"""
         # Simplest possible answer: All admins are staff
-        return self.is_admin
+        return self.is_admin or self.is_product_admin
 
+    
     def has_module_perms(self, app_label):
         if self.is_admin:
+                return True
+        
+        elif self.is_product_admin:
             if app_label == 'goods':
                 return True
+
         return super(AuthUser, self).has_module_perms(app_label)
 
     def has_perm(self, perm, obj=None):
-        if self.is_active and self.is_admin:
+        if self.is_active and (self.is_admin or self.is_product_admin):
             return True
-        return super(AuthUser, self).has_perm(per, obj)
+        return super(AuthUser, self).has_perm(perm, obj)
 
 
 class Profile(models.Model):

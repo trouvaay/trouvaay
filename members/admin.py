@@ -74,21 +74,21 @@ class AuthUserAdmin(ExportMixin, UserAdmin):
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
-    list_display = ('email', 'first_name', 'date_joined', 'is_merchant', 'is_admin', 'is_superuser',)
+    list_display = ('email', 'first_name', 'date_joined', 'is_merchant', 'is_admin','is_product_admin', 'is_superuser',)
     list_filter = ('is_admin', 'is_merchant')
 
     # change list
     fieldsets = (
         (None, {'fields': ('email', 'password', ('first_name', 'last_name'), ('is_merchant',
                            'is_active'))}),
-        ('Permissions', {'fields': (('is_superuser', 'is_admin'),)}),
+        ('Permissions', {'fields': (('is_superuser', 'is_admin', 'is_product_admin'),)}),
     )
 
     # add list
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'is_merchant', 'password1', 'password2')}),
+            'fields': ('email', 'is_merchant', 'is_admin', 'is_product_admin', 'password1', 'password2')}),
     )
     inlines = [AuthUserActivityInline, ProfileInline]
     search_fields = ('email',)
