@@ -149,6 +149,7 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True, null=False)
     is_admin = models.BooleanField(default=False, null=False)
+    is_product_admin = models.BooleanField(default=False, null=False)
 
     # Sets custom AuthUser manager
     objects = AuthUserManager()

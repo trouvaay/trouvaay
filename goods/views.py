@@ -70,7 +70,8 @@ class LandingView(AjaxListView):
                                    'colors': Color.objects.all(),
                                    'styles': Style.objects.all(),
                                    'furnituretypes': FurnitureType.objects.all(),
-                                   'neighborhoods': Neighborhoods['SF']
+                                   'neighborhoods': Neighborhoods['SF'],
+                                   'subcategory': Subcategory.objects.all(),
                                    }
 
         # TODO: do not add 'site_name' to context
