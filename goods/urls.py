@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     url(r'^about/$', views.AboutView.as_view(), name='about'),
     url(r'^returns/$', views.ReturnsView.as_view(), name='returns'),
     url(r'^searchfilter/$', views.SearchFilterView.as_view(), name='searchfilter'),
+    url(r'^signup/$', views.ShopView.as_view(), name='landing'),
+
 
     #TODO: add unique url generator for vintage sales from IG
     #url(r'^vintage/$', views.VintageView.as_view(), name='vintage'),
