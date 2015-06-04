@@ -1,8 +1,8 @@
 #logo {
-  height: 28px;
+  height: 24px;
 
   @include breakpoint(sm) {
-	  height: 20px;
+	  height: 18px;
 	  margin-top: 10px;
 
   }
@@ -36,7 +36,7 @@
 
 
 header.top-bar {
-  background: #333;
+  background: white;
   line-height: 60px;
   height: 60px;
   position: fixed;
@@ -59,7 +59,7 @@ header.top-bar {
 
 
   a {
-    color: #FFF;
+    color: #000;
 
     &:hover {
       color: #FFF;
@@ -115,7 +115,7 @@ header.top-bar {
 
     padding: 5px 13px;
 
-    border: 1px solid #FFF;
+    border: 1px solid black;
     border-radius: 0px;
     
     transition: all 0.1s;
@@ -171,8 +171,8 @@ header.top-bar {
   }
 
   a.white-right-button {
-    background-color: #FFF;
-    color: #000;
+    color: #FFF;
+    background-color: #000;
     font-weight: 800;
     padding: 0px 8px;
     line-height: 25px;
