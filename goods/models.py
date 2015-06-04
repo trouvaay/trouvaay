@@ -214,7 +214,7 @@ class Product(models.Model):
         try:
             hours_since_pub = self.hours_since_pub()
             if hours_since_pub < 24:
-                pub_dt_score = 40
+                pub_dt_score = 30
             elif hours_since_pub < 72:
                 pub_dt_score = 20
             elif hours_since_pub < 120:
