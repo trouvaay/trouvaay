@@ -74,7 +74,7 @@ class ProductAdmin(ExportMixin, CustomAdmin):
     inlines = [ProductImageInline, AuthOrderInline]
 
     search_fields = ['short_name', 'id']
-    list_filter = ['store', 'is_sold', 'is_published', 'the_hunt', 'furnituretype']
+    list_filter = ['store', 'is_sold', 'is_published', 'is_featured', 'the_hunt', 'furnituretype']
 
     list_editable = ['current_price', 'is_published', 'is_featured', 'pub_date', 'description', 'is_sold']
     
