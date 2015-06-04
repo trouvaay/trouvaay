@@ -45,6 +45,7 @@ header.top-bar {
   z-index: 10;
   left: 0px;
   padding: 0px 15px;
+  border-bottom: 1.5px solid #F0F2F4;
 
   @include breakpoint(md) {
     height: 50px;
@@ -108,15 +109,16 @@ header.top-bar {
   }
 
   a.btn {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 800;
     line-height: 17px;
     text-transform: uppercase;
 
     padding: 5px 13px;
 
-    border: 1px solid black;
+    border: 1px solid $light-brown-gray;
     border-radius: 0px;
+    background-color: #e6e7e8;
     
     transition: all 0.1s;
     -webkit-transition: all 0.1s;
@@ -172,7 +174,7 @@ header.top-bar {
 
   a.white-right-button {
     color: #FFF;
-    background-color: #000;
+    background-color: $lily ;
     font-weight: 800;
     padding: 0px 8px;
     line-height: 25px;
@@ -184,7 +186,7 @@ header.top-bar {
   .mobile-about, .mobile-menu {
     
     label {
-      color: #FFF;
+      color: #989190;
       display: block;
       text-align: center;
       margin-top: 10px;

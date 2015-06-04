@@ -301,7 +301,7 @@
 #searchfilter-form {
 
     width: 245px;
-    background: #e6e7e8;
+    background: white;
     color: #000;
     position: fixed;
     padding: 90px 20px 35px 35px;
@@ -416,6 +416,7 @@
         overflow: visible;
         z-index: 2;
         left: 0px;
+        background: rgb(237, 237, 237);
 
 
         #filter-container-furnituretype header, #refine {

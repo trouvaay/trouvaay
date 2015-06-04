@@ -561,6 +561,7 @@ header.top-bar {
   z-index: 10;
   left: 0px;
   padding: 0px 15px;
+  border-bottom: 1.5px solid #F0F2F4;
 }
 @media (max-width: 992px) {
   header.top-bar {
@@ -617,13 +618,14 @@ header.top-bar a {
   font-family: "Ostrich Sans";
 }
 header.top-bar a.btn {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 800;
   line-height: 17px;
   text-transform: uppercase;
   padding: 5px 13px;
-  border: 1px solid black;
+  border: 1px solid #989190;
   border-radius: 0px;
+  background-color: #e6e7e8;
   transition: all 0.1s;
   -webkit-transition: all 0.1s;
   -moz-transition: all 0.1s;
@@ -663,7 +665,7 @@ header.top-bar .right-bottom-buttons-cnt a {
 }
 header.top-bar a.white-right-button {
   color: #FFF;
-  background-color: #000;
+  background-color: #91c3c3;
   font-weight: 800;
   padding: 0px 8px;
   line-height: 25px;
@@ -672,7 +674,7 @@ header.top-bar a.white-right-button {
   margin-right: 0px;
 }
 header.top-bar .mobile-about label, header.top-bar .mobile-menu label {
-  color: #FFF;
+  color: #989190;
   display: block;
   text-align: center;
   margin-top: 10px;
@@ -1840,7 +1842,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 
 #searchfilter-form {
   width: 245px;
-  background: #e6e7e8;
+  background: white;
   color: #000;
   position: fixed;
   padding: 90px 20px 35px 35px;
@@ -1920,6 +1922,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     overflow: visible;
     z-index: 2;
     left: 0px;
+    background: #ededed;
   }
   #searchfilter-form #filter-container-furnituretype header, #searchfilter-form #refine {
     border: 1px solid #939598;
