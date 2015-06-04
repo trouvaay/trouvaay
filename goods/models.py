@@ -195,12 +195,26 @@ class Product(models.Model):
         print('price score = ', price_score)  
         score+=price_score
         print('current score: ', score)
+
+        feature_score = 0
+        if self.is_featured:
+            feature_score = 30
+        # if self.current_price < 200.00:
+        #     price_score = 8
+        # elif self.current_price < 400.00:
+        #     price_score = 5
+        # elif self.current_price < 500.00:
+        #     price_score = 3
+        
+        print('feature score = ', feature_score)  
+        score+=feature_score
+        print('current score: ', score)
         # get date added score
         pub_dt_score = 0
         try:
             hours_since_pub = self.hours_since_pub()
             if hours_since_pub < 24:
-                pub_dt_score = 60
+                pub_dt_score = 40
             elif hours_since_pub < 72:
                 pub_dt_score = 20
             elif hours_since_pub < 120:
@@ -216,8 +230,8 @@ class Product(models.Model):
         
         # get category score - correct overrep of chairs
         category_score = 0
-        if self.subcategory.all() and self.subcategory.all()[0].select in ['chair - accent', 'chair - desk', 'chair - dining']:
-            category_score = -5
+        if self.subcategory.all() and self.subcategory.all()[0].select in ['decor - other', 'decor - table', 'decor - wall']:
+            category_score = -10
 
         print('cat_score = ', category_score)
         score+=category_score
