@@ -113,12 +113,13 @@ header.top-bar {
     font-weight: 800;
     line-height: 17px;
     text-transform: uppercase;
+    color: white;
 
     padding: 5px 13px;
 
-    border: 1px solid $light-brown-gray;
+    //border: 1px solid $light-brown-gray;
     border-radius: 0px;
-    background-color: #e6e7e8;
+    background-color: $lily;
     
     transition: all 0.1s;
     -webkit-transition: all 0.1s;
@@ -173,8 +174,9 @@ header.top-bar {
   }
 
   a.white-right-button {
-    color: #FFF;
-    background-color: $lily ;
+    color: black;
+    //border: 1px solid $light-brown-gray;
+    background-color: #e6e7e8;
     font-weight: 800;
     padding: 0px 8px;
     line-height: 25px;
@@ -219,7 +221,7 @@ header.top-bar {
       border-radius: 14px;
       color: #000;
       font-size: 13px;
-      
+      border: #989190 1px solid;
       width: 28px;
       height: 28px;
       min-width: 28px;

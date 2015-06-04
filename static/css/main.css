@@ -622,10 +622,10 @@ header.top-bar a.btn {
   font-weight: 800;
   line-height: 17px;
   text-transform: uppercase;
+  color: white;
   padding: 5px 13px;
-  border: 1px solid #989190;
   border-radius: 0px;
-  background-color: #e6e7e8;
+  background-color: #91c3c3;
   transition: all 0.1s;
   -webkit-transition: all 0.1s;
   -moz-transition: all 0.1s;
@@ -664,8 +664,8 @@ header.top-bar .right-bottom-buttons-cnt a {
   display: inline-block;
 }
 header.top-bar a.white-right-button {
-  color: #FFF;
-  background-color: #91c3c3;
+  color: black;
+  background-color: #e6e7e8;
   font-weight: 800;
   padding: 0px 8px;
   line-height: 25px;
@@ -700,6 +700,7 @@ header.top-bar .icon-question-mark, header.top-bar a.icon-question-mark {
   border-radius: 14px;
   color: #000;
   font-size: 13px;
+  border: #989190 1px solid;
   width: 28px;
   height: 28px;
   min-width: 28px;
