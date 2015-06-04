@@ -23,6 +23,7 @@
 
   img {
     width: 100%;
+    max-height: 160px;
 
     @include breakpoint(sm) {
       display:none;
@@ -154,7 +155,7 @@
 }
 
 #how-it-works, #how-it-works-mobile {
-  padding-top: 35px;
+  padding-top: 0px;
 
   @include breakpoint(sm) {
       padding-top: 0px;
@@ -162,7 +163,7 @@
   }
 
   @include breakpoint(md, True) {
-      padding-bottom: 35px;
+      padding-bottom: 0px;
       
   }
 
@@ -276,7 +277,7 @@
 
     header {
       border-bottom: 1px solid #FFF;
-      font-size: 20px;
+      font-size: 16px;
       font-style: italic;
       text-transform: uppercase;
       margin-bottom: 5px;
@@ -293,7 +294,7 @@
 }
 
 #products {
-  padding: 20px 0 0px;
+  padding: 10px 0 0px;
   position: relative;
 
   .row-fluid {

@@ -828,6 +828,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #index-banner img {
   width: 100%;
+  max-height: 160px;
 }
 @media (max-width: 767px) {
   #index-banner img {
@@ -947,7 +948,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 
 #how-it-works, #how-it-works-mobile {
-  padding-top: 35px;
+  padding-top: 0px;
 }
 @media (max-width: 767px) {
   #how-it-works, #how-it-works-mobile {
@@ -956,7 +957,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 @media (min-width: 769px) {
   #how-it-works, #how-it-works-mobile {
-    padding-bottom: 35px;
+    padding-bottom: 0px;
   }
 }
 #how-it-works .info, #how-it-works-mobile .info {
@@ -1059,7 +1060,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 #how-it-works .info header, #how-it-works-mobile .info header {
   border-bottom: 1px solid #FFF;
-  font-size: 20px;
+  font-size: 16px;
   font-style: italic;
   text-transform: uppercase;
   margin-bottom: 5px;
@@ -1072,7 +1073,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 
 #products {
-  padding: 20px 0 0px;
+  padding: 10px 0 0px;
   position: relative;
 }
 #products .row-fluid {
@@ -2291,7 +2292,6 @@ footer {
   letter-spacing: 1px;
   padding-top: 10px;
   overflow: hidden;
-  position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 5;
