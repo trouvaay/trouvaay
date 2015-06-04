@@ -1,8 +1,8 @@
 footer {
-  background: #000;
-  color: #FFF;
+  background: rgb(237, 237, 237);
+  color: black;
   font-family: "Droid Serif";
-  font-size: 15px;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
   padding-top: 10px;
@@ -80,7 +80,7 @@ footer {
   }
 
   a {
-    color: #FFF;
+    color: black;
     &:hover {
       text-decoration: none;
       color: #FFF;

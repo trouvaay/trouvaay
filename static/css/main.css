@@ -2287,10 +2287,10 @@ input#mobile-menu-switch:checked + #mobile-menu {
 }
 
 footer {
-  background: #000;
-  color: #FFF;
+  background: #ededed;
+  color: black;
   font-family: "Droid Serif";
-  font-size: 15px;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
   padding-top: 10px;
@@ -2356,7 +2356,7 @@ footer .copyright {
   }
 }
 footer a {
-  color: #FFF;
+  color: black;
 }
 footer a:hover {
   text-decoration: none;
