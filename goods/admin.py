@@ -76,7 +76,7 @@ class ProductAdmin(ExportMixin, CustomAdmin):
     search_fields = ['short_name', 'id']
     list_filter = ['store', 'is_sold', 'is_published', 'is_featured', 'the_hunt', 'furnituretype']
 
-    list_editable = ['current_price', 'is_published', 'is_featured', 'pub_date', 'description', 'is_sold']
+    list_editable = ['current_price', 'is_published', 'is_featured', 'pub_date', 'description', 'is_reserved', 'is_sold']
     
     prepopulated_fields = {"current_price": ("original_price",)}
 
