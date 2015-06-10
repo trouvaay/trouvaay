@@ -22,14 +22,14 @@ import math
 logger = logging.getLogger(__name__)
 
 
-class Segment(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='new', null=True, blank=True)
+# class Segment(models.Model):
+#     select = models.CharField(unique=True, max_length=55, default='new', null=True, blank=True)
 
-    def __str__(self):
-        return self.select or 'none'
+#     def __str__(self):
+#         return self.select or 'none'
 
-    class Meta:
-        ordering = ['select']
+#     class Meta:
+#         ordering = ['select']
 
 
 class Style(models.Model):
@@ -64,7 +64,25 @@ class ValueTier(models.Model):
 
 
 class Category(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='living', null=True, blank=True)
+    select = models.CharField(unique=True, max_length=55, default='unspecified')
+
+    def __str__(self):
+        return self.select or 'none'
+
+    class Meta:
+        ordering = ['select']
+
+class Group(models.Model):
+    select = models.CharField(unique=True, max_length=55, default='unspecified')
+
+    def __str__(self):
+        return self.select or 'none'
+
+    class Meta:
+        ordering = ['select']
+
+class Room(models.Model):
+    select = models.CharField(unique=True, max_length=55, default='unspecified')
 
     def __str__(self):
         return self.select or 'none'
@@ -103,29 +121,24 @@ class Material(models.Model):
     class Meta:
         ordering = ['select']
 
-def add_img_instance(product_pk, img_url, is_main=False):
-    upload_response = cloudinary.uploader.upload(img_url)
-    cloudinary_image = cloudinary.CloudinaryImage(metadata=upload_response)
-    product = Product.objects.get(pk=product_pk)
-    product_image = ProductImage()
-    product_image.image = cloudinary_image
-    product_image.is_main = is_main
-    product_image.product = product
-    product_image.save()
-    
+
 
 class Product(models.Model):
-    sku = models.CharField(max_length=25, null=True, blank=True)
-    short_name = models.CharField(max_length=100)
+    
+    # The basics
+    long_name = models.CharField(max_length=125, default='tbd')
+    short_name = models.CharField(max_length=50)
     slug = models.SlugField(unique=True, max_length=255)
-    original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
-    current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
-    list_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     description = models.TextField(null=True, blank=True)
     store = models.ForeignKey('merchants.Store')
     manufacturer = models.CharField(max_length=25, null=True, blank=True)
-    units = models.IntegerField(default=1)
     url = models.URLField(null=True, blank=True, max_length=255)
+    md5_order = models.CharField(max_length=32, null=True, blank=True)
+
+    # Pricing
+    original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+    current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+    list_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     minimum_offer_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, default=None)
 
     # Dimensions & Attributes
@@ -137,37 +150,27 @@ class Product(models.Model):
     bed_size = models.CharField(max_length=50, null=True, blank=True)
     weight = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
     color = models.ManyToManyField(Color, null=True, blank=True)
-    color_description = models.CharField(max_length=100, null=True, blank=True)
     material = models.ManyToManyField(Material, null=True, blank=True)
-    material_description = models.CharField(max_length=255, null=True, blank=True)
-    tags = models.TextField(null=True, blank=True)  # list of tag words
-    is_custom = models.BooleanField(default=False)
-    is_floor_model = models.BooleanField(default=False)
 
     # Categorization
-    segment = models.ManyToManyField(Segment, null=True, blank=True)
     style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
     furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
-    subcategory = models.ManyToManyField(Subcategory, null=True, blank=True)  # required for has_trial
 
     # Availability
+    instore_units = models.IntegerField(default=1)
     added_date = models.DateTimeField(auto_now_add=True)
     pub_date = models.DateTimeField(null=True, blank=True)
     sold_date = models.DateTimeField(null=True, blank=True)
     is_sold = models.BooleanField(default=False)
     is_reserved = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
-    is_featured = models.BooleanField(default=False)
     is_recent = models.BooleanField(default=True)
-    hours_left = models.IntegerField(default=settings.SHELF_LIFE, null=True, blank=True)
-    is_landing = models.BooleanField(default=False)
     lat = models.FloatField(null=True, blank=True)
     lng = models.FloatField(null=True, blank=True)
-    md5_order = models.CharField(max_length=32, null=True, blank=True)
+    store_prod_sku = models.CharField(max_length=50, default='0000')
     click_count = models.IntegerField(blank=False, null=False, default=0)
     display_score = models.IntegerField(blank=False, null=False, default=0)
-    the_hunt = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-display_score', 'md5_order']
@@ -183,32 +186,14 @@ class Product(models.Model):
     def calc_display_score(self):
         score = 0
         print (('*****************{}*****************').format(self.short_name))
-        # get price score
-        price_score = 0
-        # if self.current_price < 200.00:
-        #     price_score = 8
-        # elif self.current_price < 400.00:
-        #     price_score = 5
-        # elif self.current_price < 500.00:
-        #     price_score = 3
         
-        print('price score = ', price_score)  
-        score+=price_score
-        print('current score: ', score)
+        #feature score
+        #Need to update such that is feature hangs of product engagement models
+        # feature_score = 0
+        # if self.is_featured:
+        #     feature_score = 30
+        # score+=feature_score
 
-        feature_score = 0
-        if self.is_featured:
-            feature_score = 30
-        # if self.current_price < 200.00:
-        #     price_score = 8
-        # elif self.current_price < 400.00:
-        #     price_score = 5
-        # elif self.current_price < 500.00:
-        #     price_score = 3
-        
-        print('feature score = ', feature_score)  
-        score+=feature_score
-        print('current score: ', score)
         # get date added score
         pub_dt_score = 0
         try:
@@ -223,28 +208,19 @@ class Product(models.Model):
                 pub_dt_score = 3
         except:
             pass
-
-        print('pub_dt_score = ', pub_dt_score)
         score+=pub_dt_score
-        print('current score: ', score)
         
         # get category score - correct overrep of chairs
         category_score = 0
         if self.subcategory.all() and self.subcategory.all()[0].select in ['decor - other', 'decor - table', 'decor - wall']:
             category_score = -10
-
-        print('cat_score = ', category_score)
         score+=category_score
-        print('current score: ', score)
 
         #is_available score
         available_score = 0
         if self.is_sold:
             available_score = -10
-
-        print('avail_score = ', available_score)
         score+=available_score
-        print('current score: ', score)
 
         #add click count
         click_score = 0
@@ -254,11 +230,7 @@ class Product(models.Model):
             click_score = 4
         elif self.click_count > 5:
             click_score = 2
-        
         score+=click_score
-        print('click count = ', self.click_count)
-        
-        print(' final score = ', score)
         
         self.display_score = score
         self.save()
@@ -326,14 +298,6 @@ class Product(models.Model):
     def get_price_in_cents_for_checkout(self):
         """Computes final price for checkout by applying taxes and all discounts"""
         pass
-#
-#         total_in_dollars = Decimal(self.get_price_in_cents_with_tax() / 100)
-#         discounts_in_dollars = 0
-#         offers = PromotionOffer.objects.
-#             # get offers from
-#         for offer in offers:
-#             discounts_in_dollars += offer.get_offer_discount(total_in_dollars)
-#         return int((total_in_dollars - discounts_in_dollars) * 100)
 
     def hours_since_pub(self):
         if self.pub_date:
@@ -342,32 +306,6 @@ class Product(models.Model):
             return int(time_lapse)
         else:
             return None
-
-    def hours_to_delist(self):
-        if self.is_published:
-            delist_date =  self.pub_date + timedelta(seconds=settings.SHELF_LIFE*3600)
-            delta = delist_date - timezone.now()
-            time_lapse = delta.total_seconds() // 3600
-            return int(time_lapse)
-
-    def get_days_left(self):
-        if self.hours_left / 24.0 > 1:
-            return ('{} days left'.format(int(math.ceil(self.hours_left / 24.0))))
-        else:
-            return 'last day'
-
-
-    def has_returns(self):
-        return self.store.has_returns
-
-
-    def is_furniture(self):
-        """ Test whether furnituretypes have furniture set to True """
-        furniture = [str(i) for i in FurnitureType.objects.filter(is_furniture=True)]
-        if [i for i in self.furnituretype.all() if i.select in furniture]:
-            return True
-        else:
-            return False
 
     def has_dimensions(self):
         """Checks to see if any of dimension fields are not null/blank
@@ -389,7 +327,6 @@ class Product(models.Model):
         except:
             pass
 
-
     def get_dimension_str(self):
         dimension_list = ['width', 'height', 'depth']
         dimension_str = ""
@@ -405,6 +342,22 @@ class Product(models.Model):
         else:
             return False
 
+class ProductAttribute(models.Model):
+    product = models.ForeignKey('goods.Product')
+    width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    depth = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    seat_height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    bed_size = models.CharField(max_length=50, null=True, blank=True)
+    color = models.ManyToManyField(Color, null=True, blank=True)
+    material = models.ManyToManyField(Material, null=True, blank=True)
+    weight = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
+    room = models.ManyToManyField(Room, null=True, blank = True)
+    category = models.ForeignKey(Category, null=True, blank = True)
+    group = models.ForeignKey(Group, null=True, blank = True)
+    style = models.ManyToManyField(Style, null=True, blank = True)
+    is_vintage = models.BooleanField(default=True)
+
 
 class ProductImage(AbstractImageModel):
     product = models.ForeignKey('goods.Product')
@@ -416,6 +369,15 @@ class ProductImage(AbstractImageModel):
     def __str__(self):
         return self.product.short_name
 
+def add_img_instance(product_pk, img_url, is_main=False):
+    upload_response = cloudinary.uploader.upload(img_url)
+    cloudinary_image = cloudinary.CloudinaryImage(metadata=upload_response)
+    product = Product.objects.get(pk=product_pk)
+    product_image = ProductImage()
+    product_image.image = cloudinary_image
+    product_image.is_main = is_main
+    product_image.product = product
+    product_image.save()
 
 # FUTURE FEATURES
 # class ProductActivity(models.Model):

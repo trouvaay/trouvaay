@@ -1,6 +1,6 @@
 from django.contrib import admin
 from members.models import AuthOrder
-from goods.models import Product, Color, Segment, Style, FurnitureType, ValueTier, Category, Subcategory, Material, ProductImage
+from goods.models import Product, Color, Style, FurnitureType, ValueTier, Category, Group, Material, ProductImage, ProductAttribute
 from import_export.admin import ExportMixin
 from django.conf import settings
 
@@ -24,30 +24,29 @@ class CustomAdmin(admin.ModelAdmin):
         return True
 
 
-admin.site.register(Segment, CustomAdmin)
 admin.site.register(Style, CustomAdmin)
 admin.site.register(Color, CustomAdmin)
 admin.site.register(FurnitureType, CustomAdmin)
 admin.site.register(ValueTier, CustomAdmin)
 admin.site.register(Category, CustomAdmin)
 admin.site.register(Material, CustomAdmin)
+admin.site.register(Group, CustomAdmin)
+admin.site.register(ProductAttribute, CustomAdmin)
 
 
 class TagAdmin(admin.ModelAdmin):
     pass
 
 
-class SubcategoryAdmin(CustomAdmin):
-    list_display = ['select', 'trial_product']
-    list_editable = ['trial_product']
-
-admin.site.register(Subcategory, SubcategoryAdmin)
-
-
 class ProductImageInline(admin.StackedInline):
     model = ProductImage
     fields = (('image', 'is_main'),)
     verbose_name = 'photo'
+
+
+class ProductAttributeInline(admin.StackedInline):
+    model = ProductAttribute
+    verbose_name = 'product_attributes'
 
 
 class ProductInline(admin.TabularInline):
@@ -66,17 +65,16 @@ class ProductImageAdmin(CustomAdmin):
 class ProductAdmin(ExportMixin, CustomAdmin):
     model = Product
 
-    list_display = ['short_name', 'id', 'first_image', 'description', 'store', 'added_date', 'is_published', 'is_featured', 'pub_date', 'is_reserved', 'is_sold', 'sold_date', 'list_price','current_price', 'hours_left','display_score', 'click_count']
+    list_display = ['short_name', 'id', 'first_image', 'description', 'store', 'added_date', 'is_published', 'pub_date', 'is_reserved', 'is_sold', 'sold_date', 'list_price','current_price','display_score', 'click_count']
 
-    fields = [('short_name', 'is_published', 'is_sold', 'is_featured'), ('store', 'units'),('original_price', 'current_price'), 
-            'description',('color', 'color_description'),('style', 'segment', 'furnituretype', 'category', 'subcategory', 'material'),
-                'width', 'depth', 'height', 'seat_height', 'diameter', 'bed_size']
-    inlines = [ProductImageInline, AuthOrderInline]
+    fields = [('short_name', 'is_published', 'is_sold'), ('store', 'instore_units'),('original_price', 'current_price'), 
+            'description']
+    inlines = [ProductAttributeInline, ProductImageInline, AuthOrderInline]
 
     search_fields = ['short_name', 'id']
-    list_filter = ['store', 'is_sold', 'is_published', 'is_featured', 'the_hunt', 'furnituretype']
+    list_filter = ['store', 'is_sold', 'is_published']
 
-    list_editable = ['current_price', 'is_published', 'is_featured', 'pub_date', 'description', 'is_reserved', 'is_sold']
+    list_editable = ['current_price', 'is_published', 'pub_date', 'description', 'is_reserved', 'is_sold']
     
     prepopulated_fields = {"current_price": ("original_price",)}
 
