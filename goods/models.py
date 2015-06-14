@@ -140,6 +140,7 @@ class Product(models.Model):
     current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     list_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     minimum_offer_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, default=None)
+    reserve_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, default=None)
 
     # Dimensions & Attributes
     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)

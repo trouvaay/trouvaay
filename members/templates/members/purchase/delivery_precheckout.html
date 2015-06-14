@@ -1,0 +1,224 @@
+{% load staticfiles %}
+<div class="modal in" id="delivery_precheckout-modal">
+	<div class="modal-dialog">
+		<div class="modal-content col-xs-12">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+				<div id="precheckout-contents" class="form-group text-center">	
+					<div class="text-center">
+						<fieldset>
+							<legend>
+								<h2>Delivery Order ({{ delivery_type }})</h2>
+							</legend>
+							<div class="row">
+							</div>
+							<div class="row">
+							<div class="col-xs-12">
+								<table class="table">
+							      	<tbody>
+										<tr class="success">
+											<th scope="row"><strong>Total</strong></th>
+											<td align="right">${{ delivery_amount }}</td>
+										</tr>										
+							      	</tbody>
+							    </table>
+							    	<span id="order-buy-or-offer" style="display:none">buy</span>
+							    <button id="button-precheckout-submit" type="button" class="btn btn-success" data-toggle="tooltip" title="{{ TOOLTIP_PURCHASE }}">
+								    Finalize delivery
+	                        	</button>		
+							</div>
+							</div></br>
+							<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+									
+			                        	<p>
+			                            	We'll email you to coordinate delivery.		                            	
+			                            </p>
+			                            <p>
+			                            	<b><a href="mailto:help@raredoor.com">help@raredoor.com</a> or 650.409.1595</b>
+			                            </p>
+	                        	</div>
+							</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+				<div id="precheckout-status" class="form-group text-center" style="display:none">	
+					<div class="text-center">
+						<fieldset>
+							<legend>
+								<h2><span id="status-title"></span></h2>
+							</legend>
+							<div class="row">
+								<div class="col-xs-12">
+		                            <p id="status-message" class="text-center"></p>
+		                        </div>
+		                    </div>
+		                <fieldset>
+		            </div>
+		        </div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.pre-checkout-modal -->
+
+<script>
+$(document).ready(function() {
+	
+
+	var email = "{{ user.email }}";
+	var deliveryAmount = "{{ delivery_amount_in_cents }}";
+	var deliveryType = "{{ delivery_type }}";
+	 
+	// console.log('pre-checkout is loaded');
+	// console.log('productPrice: ' + productPrice);
+	// console.log('total_purchase_price: ' + {{ total.in_cents }});
+	
+	$('.btn.apply-promo-code').on('click', handleBuyButtonClick);
+	
+	$('#button-precheckout-submit').on('click', function(e) {
+		
+		// console.log("clicked on purchase");
+		$('#loader').removeClass('invisible');
+		
+  		var deliveryUrl = "{% url "members:delivery" %}";
+
+  		mixpanel.track(
+                "Delivery Pre-checkout Submitted",
+                 { "deliveryType": deliveryType,
+                 	"deliveryAmount": deliveryAmount,
+		             "email": email,
+		          }
+            );
+  		// ga('send', 'event', 'buy', 'buy-precheckout-submitted', productSlug);
+  		
+			$.ajax({
+				type: "GET",
+				url: "{% url "members:delivery" %}",
+				dataType: "html",
+				data: {
+					delivery_type: deliveryType,
+	                delivery_amount: deliveryAmount,
+				},
+				success: function(response, status){
+					console.log('response from pre-checkout call: '+status );
+					$('#loader').addClass('invisible');
+					$("#pre-checkout-modal-container").html(response);
+					// $("#delivery_precheckout-modal").modal({
+					// 	show: true,
+					// 	keyboard: true
+					// });
+				},
+			});
+
+  		$('#delivery_precheckout-modal').modal('hide');
+  		// console.log('pre-checkout modal hidden');
+  		
+		var handler = StripeCheckout.configure({
+			key: '{{ stripe_publishable_key }}',
+			image: "{% static 'img/logos/RD-logo-small.jpg' %}",
+			name: '{{ site_name }}',
+			description: deliveryType,
+			amount: deliveryAmount,
+			shippingAddress: "true",
+			token: function(token, args) {
+				$.ajax({
+					type: "POST",
+					url: deliveryUrl,
+					data: {
+						token: token,
+						args: args,
+						total_amount: deliveryAmount,
+						delivery_type: deliveryType,
+					},
+					success: function(data){
+
+						$('#loader').addClass('invisible');
+						
+						// console.log('Buy callback returned: ' + data['status']);
+					
+					  	if(data['status'] == "ok"){
+							
+						  	//fire google adwords event
+							window.google_trackConversion({
+							    google_conversion_id: 956335221,
+							    google_conversion_language: "en",
+								google_conversion_format: "3",
+								google_conversion_color: "ffffff",
+								google_conversion_label: "h7XVCP2q5VkQ9YiCyAM",
+							    google_remarketing_only: false,
+							});
+							// console.log('google-conversion fired');
+
+							// fire FB purchase pixel
+							FBPurchaseEvent();
+							// console.log('FBPurchaseEvent fired');
+							
+							var transactionDescription = 'Delivery Completed';
+							ga('send', 'event', 'buy', 'delivery-completed', data['product_name']);
+							
+
+							mixpanel.track(
+					                transactionDescription,
+					                { "product": data['product_name'],
+					                	"email": data['email'],
+					                	"productId": data['product_id']
+					                 }
+					            	);
+
+							
+							// console.log('mixpanel purchaseevent fired');
+					  	
+					  		$("#reserved-product-name").text(data['product_name']);
+					  		$("#reserved-product-store-name").text(data['store_name']);
+					  		var storeAddress = data['store_street'];
+					  		if(data['store_street2'] != ""){
+					  			storeAddress += ("<br>" + data['store_street2']);
+					  		}
+					  		storeAddress += ("<br>" + data['store_city'] + " " + data['store_state'] + " " + data['store_zipcode']);
+							$("#reserved-product-store-address").html(storeAddress);
+							
+							$("#reserved-product-capture-date").hide();
+							$("#product-purchase-try").hide();
+							$("#product-purchase-buy").show();
+
+						
+							$("#delivery-post-checkout-modal").modal({
+								show: true,
+								keyboard: true
+							})	
+					
+							
+							// $("#reserved-product-image").attr('src', (data['image_src']));
+							
+							
+							if(data['ask_phone']){
+								// console.log('We need to ask for phone on post checkout form');
+								$("#id_email").val(data['email']);
+								$("#id_post_checkout_hash").val(data['post_checkout_hash']);
+								$(".post-checkout-form-contents").show();
+								$('#button-id-post-checkout').on('click', handlePostCheckoutClick);
+							}
+							else{
+								$(".post-checkout-form-contents").hide();
+								// console.log('we dont need phone on post checkout form');
+							}
+					  	}
+					},
+					error: function(error) {
+						// console.log(error.responseText);
+					},
+					dataType: "json"
+				});
+			}
+		});				
+	
+	  	handler.open({
+			panelLabel: "Checkout {% verbatim %}{{amount}}{% endverbatim %}"
+		});
+	});
+});
+</script>

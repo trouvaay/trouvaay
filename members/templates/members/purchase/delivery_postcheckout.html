@@ -1,0 +1,31 @@
+<div class="modal" id="delivery-post-checkout-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:5px; padding-bottom:2px">
+                    <span aria-hidden="true">&times;</span>
+                    <!-- <span class="hide">Close</span> -->
+                </button>
+            <div class="alert alert-info" role="alert" style="margin-bottom:5px; height:100%">
+                <h2 style="text-align:center">Delivery Confirmation</span></h2>
+            </div>
+            <div class="text-center">
+                <h5>You'll recieve a email from us shortly to schedule delivery</h5>
+                <div id="post-checkout-form-contents" style="display:none">
+                    <h5>Please enter your phone number</h5>
+                    <form  action="{% url "members:post_checkout_update" %}" id="form-post-checkout" method="post" >{% csrf_token %}
+                        <input id="id_email" name="email" type="hidden" />
+                        <input id="id_post_checkout_hash" name="post_checkout_hash" type="hidden" />
+                        <div id="div_id_phone" class="form-group">
+                            <div class="controls ">
+                                <input class="textinput textInput form-control" id="id_phone" name="phone" placeholder="Phone number" type="text" />
+                            </div>
+                        </div>
+                        <input type="button" name="post-checkout" value="Submit" class="btn btn-success" id="button-id-post-checkout">
+                    </form>
+                </div>
+            </div>
+        </div>  
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /. end Add to Cart modal -->
