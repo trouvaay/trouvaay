@@ -12,4 +12,6 @@ fixtures/orders.json
 fixtures/user.json
 fixtures/dumpdata.json
 .sass-cache/*
+fixtures/trouvaay_dev_new.json
+fixtures/trouvaay_dev_new.out
 

@@ -156,6 +156,7 @@ class Product(models.Model):
     style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
     furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
+    room = models.ManyToManyField(Room, null=True, blank=True)
 
     # Availability
     instore_units = models.IntegerField(default=1)
