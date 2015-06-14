@@ -1,5 +1,5 @@
 from django.views import generic
-from goods.models import Product, Category, FurnitureType, ProductImage, Color, Style
+from goods.models import Product, Category, FurnitureType, Room, Group, ProductImage, Color, Style
 from members.models import AuthUserActivity, OfferType, PromotionOffer
 from django.core.serializers import serialize
 from django.core.paginator import Paginator
