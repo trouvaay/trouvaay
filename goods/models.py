@@ -139,7 +139,7 @@ class Product(models.Model):
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     list_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
-    reserve_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, default=None)
+    reserve_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, default=0.00)
 
     # Dimensions & Attributes
     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
@@ -151,12 +151,13 @@ class Product(models.Model):
     weight = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
     color = models.ManyToManyField(Color, null=True, blank=True)
     material = models.ManyToManyField(Material, null=True, blank=True)
-
-    # Categorization
     style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
+    
+    # Categorization
     furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
     category = models.ManyToManyField(Category, null=True, blank=True)
     room = models.ManyToManyField(Room, null=True, blank=True)
+    group = models.ForeignKey(Group, null=True, blank=True)
 
     # Availability
     instore_units = models.IntegerField(default=1)
