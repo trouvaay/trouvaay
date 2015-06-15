@@ -1,6 +1,6 @@
 from django.contrib import admin
 from members.models import AuthOrder
-from goods.models import Product, Color, Style, FurnitureType, ValueTier, Category, Group, Room, Material, ProductImage, ProductAttribute
+from goods.models import Product, Color, Style, FurnitureType, ValueTier, Category, Group, Room, Material, ProductImage
 from import_export.admin import ExportMixin
 from django.conf import settings
 
@@ -32,7 +32,7 @@ admin.site.register(Category, CustomAdmin)
 admin.site.register(Material, CustomAdmin)
 admin.site.register(Room, CustomAdmin)
 admin.site.register(Group, CustomAdmin)
-admin.site.register(ProductAttribute, CustomAdmin)
+# admin.site.register(ProductAttribute, CustomAdmin)
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -45,11 +45,11 @@ class ProductImageInline(admin.StackedInline):
     verbose_name = 'photo'
 
 
-class ProductAttributeInline(admin.StackedInline):
-    model = ProductAttribute
-    verbose_name = 'product_attributes'
-    fields = ['is_vintage', ('width', 'depth', 'height'), ('weight', 'seat_height', 'bed_size'), ('style', 'color', 'material', ), ('room', 'category', 'group')]
-
+# class ProductAttributeInline(admin.StackedInline):
+#     model = ProductAttribute
+#     verbose_name = 'product_attributes'
+#     fields = ['is_vintage', ('width', 'depth', 'height'), ('weight', 'seat_height', 'bed_size'), ('style', 'color', 'material', ), ('room', 'category', 'group')]
+#     max_num = 1
 
 class ProductInline(admin.TabularInline):
     model = Product
@@ -67,11 +67,11 @@ class ProductImageAdmin(CustomAdmin):
 class ProductAdmin(ExportMixin, CustomAdmin):
     model = Product
 
-    list_display = ['short_name', 'id', 'first_image', 'description', 'category', 'group', 'store', 'added_date', 'is_published', 'pub_date', 'is_reserved', 'is_sold', 'sold_date', 'list_price','current_price','display_score', 'click_count']
+    list_display = ['short_name', 'id', 'first_image', 'description', 'category', 'group', 'store', 'added_date', 'is_published', 'pub_date', 'is_reserved', 'is_sold', 'sold_date', 'list_price','current_price', 'reserve_price', 'display_score', 'click_count']
 
-    fields = [('short_name', 'is_published', 'is_sold'), ('room', 'category', 'group'), ('store', 'instore_units'),('original_price', 'current_price'), 
+    fields = [('short_name', 'is_published', 'is_sold'), ('room', 'category', 'group'), ('store', 'instore_units'),('original_price', 'current_price', 'list_price', 'reserve_price'), 
             'description']
-    inlines = [ProductAttributeInline, ProductImageInline, AuthOrderInline]
+    inlines = [ProductImageInline, AuthOrderInline]
 
     search_fields = ['short_name', 'id']
     list_filter = ['store', 'is_sold', 'is_published']

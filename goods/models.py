@@ -139,7 +139,7 @@ class Product(models.Model):
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     current_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
     list_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
-    reserve_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True, default=0.00)
+    reserve_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
     # Dimensions & Attributes
     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
@@ -158,6 +158,7 @@ class Product(models.Model):
     room = models.ManyToManyField(Room, null=True, blank=True)
     category = models.ForeignKey(Category, null=True, blank=True)
     group = models.ForeignKey(Group, null=True, blank=True)
+    is_vintage = models.BooleanField(default=True)
 
     # Availability
     instore_units = models.IntegerField(default=1)
@@ -271,7 +272,7 @@ class Product(models.Model):
         self.minimum_offer_price = self.current_price * settings.OFFER_THRESHOLD
 
         # create slug once, only if we don't have it yet
-        if(not self.slug):
+        if(not self.slug or self.slug != slugify(self.short_name)):
             self.slug = slugify(self.short_name)
             for x in itertools.count(1):
                 if not Product.objects.filter(slug=self.slug).exists():
@@ -337,28 +338,22 @@ class Product(models.Model):
                 dimension_str += (self.get_dimension(dimension) + ' x ')
         return dimension_str[:-3]
 
-    @property
-    def is_vintage(self):
-        if len(self.segment.filter(select__icontains="vintage")):
-            return True
-        else:
-            return False
 
-class ProductAttribute(models.Model):
-    product = models.ForeignKey('goods.Product')
-    width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
-    depth = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
-    height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
-    seat_height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
-    bed_size = models.CharField(max_length=50, null=True, blank=True)
-    color = models.ManyToManyField(Color, null=True, blank=True)
-    material = models.ManyToManyField(Material, null=True, blank=True)
-    weight = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
-    room = models.ManyToManyField(Room, null=True, blank = True)
-    category = models.ForeignKey(Category, null=True, blank = True)
-    group = models.ForeignKey(Group, null=True, blank = True)
-    style = models.ManyToManyField(Style, null=True, blank = True)
-    is_vintage = models.BooleanField(default=True)
+# class ProductAttribute(models.Model):
+#     product = models.ForeignKey('goods.Product')
+#     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+#     depth = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+#     height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+#     seat_height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+#     bed_size = models.CharField(max_length=50, null=True, blank=True)
+#     color = models.ManyToManyField(Color, null=True, blank=True)
+#     material = models.ManyToManyField(Material, null=True, blank=True)
+#     weight = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
+#     room = models.ManyToManyField(Room, null=True, blank = True)
+#     category = models.ForeignKey(Category, null=True, blank = True)
+#     group = models.ForeignKey(Group, null=True, blank = True)
+#     style = models.ManyToManyField(Style, null=True, blank = True)
+#     is_vintage = models.BooleanField(default=True)
 
 
 class ProductImage(AbstractImageModel):

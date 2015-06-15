@@ -88,21 +88,23 @@
                                 {% elif product.is_reserved %}
                                 {% elif product.current_price %}
                                     <div class="row">
-                                        <div class="col-xs-6 col-md-4" style="margin-bottom: 10px">                      
+                                        <div class="col-xs-6 col-md-6" style="margin-bottom: 10px">                      
                                             <button type="button" class="btn btn-primary buy buy profile" id="buy_{{ product.id }}">
                                                 Buy
                                             </button>
                                         </div>
-                                        <div class="col-xs-6 col-md-4">                      
+                                        <div class="col-xs-6 col-md-6">                      
                                             <button type="button" class="btn btn-primary buy reserve profile" id="reserve_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_REVEAL }}">
                                                 Go See
                                             </button>
                                         </div>
-                                        <div class="col-xs-12 col-md-4">                      
+                                        <div class="col-xs-12 col-md-offset-3 col-md-6">                      
                                             {% if OFFER_IS_ENABLED %}
-                                              <button type="button" class="btn btn-primary buy offer profile" id="offer_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_OFFER }}">
-                                                  Make an Offer
-                                              </button>
+                                              {% if product.reserve_price %}
+                                                <button type="button" class="btn btn-primary buy offer profile" id="offer_{{ product.id }}" data-toggle="tooltip" href="#" title="{{ FEATURE_TOOLTIP_OFFER }}">
+                                                    Make an Offer
+                                                </button>
+                                              {% endif %}
                                             {% endif %}
                                         </div>
                                     </div>

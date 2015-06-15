@@ -277,9 +277,9 @@ class ReturnsView(generic.TemplateView):
 #     template_name = 'goods/copy/contact.html'
 
 
-class BlogView(generic.TemplateView):
-    template_name = 'goods/copy/blog.html'
+# class BlogView(generic.TemplateView):
+#     template_name = 'goods/copy/blog.html'
 
 
-class BlogPostView(generic.TemplateView):
-    template_name = 'goods/copy/blogpost.html'
+# class BlogPostView(generic.TemplateView):
+#     template_name = 'goods/copy/blogpost.html'
