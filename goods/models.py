@@ -345,7 +345,7 @@ class ProductClick(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     def get_recent_clicks(self, days):
-        
+        pass
 
 
 # class ProductAttribute(models.Model):
