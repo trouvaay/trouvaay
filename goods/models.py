@@ -339,6 +339,15 @@ class Product(models.Model):
         return dimension_str[:-3]
 
 
+class ProductClick(models.Model):
+    product = models.ForeignKey('goods.Product')
+    user = models.ForeignKey('members.AuthUser', blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    def get_recent_clicks(self, days):
+        
+
+
 # class ProductAttribute(models.Model):
 #     product = models.ForeignKey('goods.Product')
 #     width = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)

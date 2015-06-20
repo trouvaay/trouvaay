@@ -1,5 +1,5 @@
 from django.views import generic
-from goods.models import Product, Category, FurnitureType, Room, Group, ProductImage, Color, Style
+from goods.models import Product, Category, FurnitureType, Room, Group, ProductImage, Color, Style, ProductClick
 from members.models import AuthUserActivity, OfferType, PromotionOffer
 from django.core.serializers import serialize
 from django.core.paginator import Paginator
@@ -235,11 +235,16 @@ class DetailView(generic.DetailView):
 
         product = self.get_object()
         context['product_slug'] = product.slug
+        product_click = ProductClick()
+        product_click.product = product
+
+
 
         # click counter
         exclude_emails = settings.CLICK_EXCLUSIONS
         if(self.request.user.is_authenticated()):
             if not self.request.user.email in exclude_emails:
+                product_click.user = self.request.user
                 product.click_count += 1
                 product.save()
                 logger.debug('added to click-count')
@@ -247,6 +252,9 @@ class DetailView(generic.DetailView):
             product.click_count += 1
             product.save()
             logger.debug('added to click-count')
+
+        product_click.save()
+        logger.debug('Product Click event saved')
         return context
 
 
