@@ -1813,14 +1813,14 @@ input#mobile-menu-switch:checked + #mobile-menu {
   }
 }
 
-#display-categories {
+#display-categories, #display-rooms, #display-groups {
   display: none;
 }
 @media (max-width: 767px) {
-  #display-categories + ul {
+  #display-categories + ul, #display-rooms + ul, #display-groups + ul {
     display: none;
   }
-  #display-categories:checked + ul {
+  #display-categories:checked + ul, #display-rooms:checked + ul, #display-groups:checked + ul {
     display: block;
   }
 }
@@ -1912,7 +1912,7 @@ input#mobile-menu-switch:checked + #mobile-menu {
     padding-left: 0px;
   }
 }
-#searchfilter-form #filter-container-furnituretype label {
+#searchfilter-form .category label {
   width: 100%;
 }
 @media (max-width: 767px) {

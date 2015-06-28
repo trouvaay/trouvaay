@@ -189,6 +189,37 @@ $(window).scroll(function() {
 
 var searchFilterTimer;
 
+function combineSerialisedFormData(strEscapedSerialisedFormData) {
+        var arrFormData = strEscapedSerialisedFormData.split("&");
+        var dictCombinedKeys = {};
+        for (var i = 0; i < arrFormData.length; i++) {
+            var arrParam = arrFormData[i].split("=");
+            var strKey = arrParam[0];
+            var strValue = arrParam[1];
+
+                         if (strKey !== "" && strValue !== "") {
+            if (typeof (dictCombinedKeys[strKey]) === "undefined") {
+                dictCombinedKeys[strKey] = strValue;
+            }
+            else {
+                dictCombinedKeys[strKey] += "," + strValue;
+            }
+                        }
+        }
+
+        // { name : "help" , rating : "5,4,3,2,1,0", test : "" }
+        // change this object into an array of key value pairs like this
+        // ["name=help","rating=5,4,3,2,1,0","test="]
+        var arrKeyValuePairs = [];
+        for (var key in dictCombinedKeys) {
+            if (dictCombinedKeys.hasOwnProperty(key)) {
+                arrKeyValuePairs.push(key + "=" + dictCombinedKeys[key]);
+            }
+        }
+
+        return arrKeyValuePairs.join("&");
+    }
+
 function reloadItems() {
     
             $('#products').addClass('loading');
@@ -208,14 +239,65 @@ function reloadItems() {
                 // make ajax request to update the products
                 // console.log("ajax request: "+{% url "goods:searchfilter" %});
 
+                var form_serialized = combineSerialisedFormData($("#searchfilter-form :input[value!='']").serialize());
+
+                console.log(form_serialized);
+                /*console.log(combineSerialisedFormData(form_serialized));*/
+
+
+
                 $.ajax({
 type: "GET",
 url: "{% url "goods:searchfilter" %}",
-dataType: "html",
-data: $("#searchfilter-form").serialize(),
+dataType: "json",
+data: form_serialized,
 success: function(response, status){
 // console.log('status from searchfilter call: '+status);
-$("#ajax-product-container").html(response);
+    /*console.log(response);*/
+/*console.log(response.data);*/
+
+var stateObj = {};
+history.pushState(stateObj, "page 2", "?"+form_serialized);
+$("#ajax-product-container").html(response.data);
+
+if (response.categories) {
+    if (response.categories != 'same' &&  response.categories.length > 0) {
+        $('#filter-container-furnituretype ul').remove();
+        if ($('#filter-container-furnituretype ul').length == 0) {
+            $('#filter-container-furnituretype').append('<ul></ul>');
+
+        }
+        for (i in response.categories) {
+            $('#filter-container-furnituretype ul').append('<li><div class="c-checkbox"><input type="checkbox" class="checkbox searchfilter-control" name="filter-category" value="'+response.categories[i].id+'" id="filter-furnituretype-'+i+'" '+ (response.categories[i].checked ? 'checked = checked' : '') +'><label for="filter-furnituretype-'+i+'" class="checkbox-label">'+response.categories[i].name+'</label></div></li>');
+        }
+        $('#filter-container-furnituretype').show();
+
+    }
+}
+else {
+    $('#filter-container-furnituretype ul').remove();
+    $('#filter-container-furnituretype').hide();
+}
+
+if (response.groups) {
+    if (response.groups != 'same' && response.groups.length > 0) {
+        $('#filter-container-group ul').remove();
+        if ($('#filter-container-group ul').length == 0) {
+            $('#filter-container-group').append('<ul></ul>');
+        }
+        for (i in response.groups) {
+            $('#filter-container-group ul').append('<li><div class="c-checkbox"><input type="checkbox" class="checkbox searchfilter-control" name="filter-group" value="'+response.groups[i].id+'" id="filter-group-'+i+'" '+ (response.groups[i].checked ? 'checked = checked' : '') +'><label for="filter-group-'+i+'" class="checkbox-label">'+response.groups[i].name+'</label></div></li>');
+
+        }
+        $('#filter-container-group').show();
+
+    }
+
+} else {
+
+}
+
+
 $('#products').removeClass('loading');
 $('#products-spinner').addClass('invisible');
 },
@@ -233,7 +315,8 @@ $(document).ready(function() {
             $('#searchfilter-form').toggleClass('open');
             });
 
-        $(".searchfilter-control" ).change(function(e) {
+        $(document).on('change', '.searchfilter-control', function(e) {
+        /*$(".searchfilter-control" ).change(function(e) {*/
             reloadItems();
 });
 

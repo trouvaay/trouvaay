@@ -263,7 +263,7 @@
 
 }
 
-#display-categories {
+#display-categories, #display-rooms, #display-groups {
     display: none;
 
     @include breakpoint(sm) {
@@ -401,7 +401,7 @@
 
     }
 
-    #filter-container-furnituretype {
+    .category {
         label {
             width: 100%;
 

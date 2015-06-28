@@ -4,7 +4,33 @@
 
 
   {% if searchfilter.furnituretypes %}
-  <div id="filter-container-furnituretype" class="category">
+  
+  <div id="filter-container-room" class="category">
+      <a href="#" id="close-filter" class="hidden-xs"><span>Close filter</span></a>
+    <header class="header-group"><label for="display-rooms">Room</a> <a href="#" class="reset hidden-xs"><span>Reset</span></a></header>
+
+    <input type="checkbox" id="display-rooms">
+    <ul class="">
+       <div class="c-checkbox visible-xs-block">
+        <li>
+          <label class="checkbox-label _all">All</label>
+        </li>
+       </div>
+      {% for room in searchfilter.rooms %}
+      <li>
+
+      <div class="c-checkbox">
+        <input type="checkbox" class="checkbox searchfilter-control" name="filter-room" value="{{ room.id }}" id="filter-room-{{ room.id }}" {% if room.id in searchfilter.selected_rooms %}checked="checked"{% endif %}>
+        <label for="filter-room-{{ room.id }}" class="checkbox-label">
+            {{ room.select|capfirst }} 
+        </label>
+      </div>
+
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div id="filter-container-furnituretype" class="category" {% if not searchfilter.categories %}style="display: none"{% endif %}>
       <a href="#" id="close-filter" class="hidden-xs"><span>Close filter</span></a>
     <header class="header-group"><label for="display-categories">Categories</a> <a href="#" class="reset hidden-xs"><span>Reset</span></a></header>
 
@@ -15,13 +41,40 @@
           <label class="checkbox-label _all">All</label>
         </li>
        </div>
-      {% for furnituretype in searchfilter.furnituretypes %}
+       
+      {% for category in searchfilter.categories %}
       <li>
 
       <div class="c-checkbox">
-        <input type="checkbox" class="checkbox searchfilter-control" name="filter-furnituretype" value="{{ furnituretype.id }}" id="filter-furnituretype-{{ furnituretype.id }}">
-        <label for="filter-furnituretype-{{ furnituretype.id }}" class="checkbox-label">
-          {{ furnituretype.select|capfirst }}
+        <input type="checkbox" class="checkbox searchfilter-control" name="filter-category" value="{{ category.id }}" id="filter-room-{{ category.id }}" {% if category.id in searchfilter.selected_categories %}checked="checked"{% endif %}>
+        <label for="filter-room-{{ category.id }}" class="checkbox-label">
+            {{ category.select|capfirst }} 
+        </label>
+      </div>
+
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div id="filter-container-group" class="category" {% if not searchfilter.groups %}style="display: none"{% endif %}>
+      <a href="#" id="close-filter" class="hidden-xs"><span>Close filter</span></a>
+    <header class="header-group"><label for="display-group">Groups</a> <a href="#" class="reset hidden-xs"><span>Reset</span></a></header>
+
+    <input type="checkbox" id="display-groups">
+    <ul class="">
+       <div class="c-checkbox visible-xs-block">
+        <li>
+          <label class="checkbox-label _all">All</label>
+        </li>
+       </div>
+       
+      {% for group in searchfilter.groups %}
+      <li>
+
+      <div class="c-checkbox">
+        <input type="checkbox" class="checkbox searchfilter-control" name="filter-group" value="{{ group.id }}" id="filter-group-{{ group.id }}" {% if group.id in searchfilter.selected_groups %}checked="checked"{% endif %}>
+        <label for="filter-group-{{ group.id }}" class="checkbox-label">
+            {{ group.select|capfirst }} 
         </label>
       </div>
 
@@ -80,7 +133,7 @@
         <header><a data-toggle="collapse" href="#collapsePrice" aria-expanded="true" aria-controls="collapsePrice" class="collapsed">Price <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
         <div id="collapsePrice" class="collapse fold" role="tabpanel" aria-labelledby="headingPrice">
           <div class="desktop">
-              <input type="text" id="filter-price" name="filter-price" data-min="{{searchfilter.price_slider_min}}" data-max="{{searchfilter.price_slider_max}}" data-from="0" data-to="5000" data-type="double" data-prefix="$" data-max-postfix="+" class="searchfilter-control slider" value="" />
+              <input type="text" id="filter-price" name="filter-price" data-min="{{searchfilter.price_slider_min}}" data-max="{{searchfilter.price_slider_max}}" data-from="{{searchfilter.price_min_val}}" data-to="{{searchfilter.price_max_val}}" data-type="double" data-prefix="$" data-max-postfix="+" class="searchfilter-control slider" {% if searchfilter.price_min_val or searchfilter.price_max_val %} value="{{searchfilter.price_min_val}};{{searchfilter.price_max_val}}"{% endif %} />
           </div>
           
           <div class="mobile row hidden-xs hidden-md hidden-lg hidden-sm">
@@ -161,24 +214,24 @@
 
           <b>Height</b>
           <div class="desktop">
-            <input type="text" name="filter-height" id="filter-height" class="searchfilter-control slider" data-min="{{ searchfilter.height_slider_min }}" data-max="{{ searchfilter.height_slider_max }}" data-from="{{ searchfilter.height_slider_min }}" data-to="{{ searchfilter.height_slider_max }}" data-type="double" data-postfix='"' value="" />
+            <input type="text" name="filter-height" id="filter-height" class="searchfilter-control slider" data-min="{{ searchfilter.height_slider_min }}" data-max="{{ searchfilter.height_slider_max }}" data-from="{{ searchfilter.height_min_val }}" data-to="{{ searchfilter.height_max_val }}" data-type="double" data-postfix='"' {% if searchfilter.height_min_val or searchfilter.height_max_val %} value="{{searchfilter.height_min_val}};{{searchfilter.height_max_val}}"{% endif %} />
           </div>
 
           <div class="mobile row hidden-xs hidden-md hidden-lg hidden-sm">
             <div class="col-xs-6">
               <label for="filter-height-min">From</label>
-              <input type="number" id="filter-height-min" name="filter-height-min" class="searchfilter-control" value="" placeholder="{{ searchfilter.height_slider_min }} FT" />
+              <input type="number" id="filter-height-min" name="filter-height-min" class="searchfilter-control" placeholder="{{ searchfilter.height_slider_min }} FT" />
             </div>
             <div class="col-xs-6 text-right">
               <label for="filter-height-max">To</label>
-              <input type="number" id="filter-height-max" name="filter-height-max" class="searchfilter-control" value="" placeholder="{{ searchfilter.height_slider_max }} FT" />
+              <input type="number" id="filter-height-max" name="filter-height-max" class="searchfilter-control" placeholder="{{ searchfilter.height_slider_max }} FT" />
             </div>
           </div>
 
 
           {% comment %}
           <span id="filter-height-slider-min" style="margin-right:20px;">{{ searchfilter.height_slider_min }}</span>
-          <input id="filter-height-slider" type="text" class="span2" value="" 
+          <input id="filter-height-slider" type="text" class="span2" 
           data-slider-min="{{ searchfilter.height_slider_min }}" 
           data-slider-max="{{ searchfilter.height_slider_max }}" 
           data-slider-step="5" 
@@ -189,22 +242,22 @@
           <b>Width</b>
 
           <div class="desktop">
-            <input type="text" name="filter-width" id="filter-width" class="searchfilter-control slider" data-min="{{ searchfilter.width_slider_min }}" data-max="{{ searchfilter.width_slider_max }}" data-from="{{ searchfilter.width_slider_min }}" data-to="{{ searchfilter.width_slider_max }}" data-type="double" data-postfix='"' value="" />
+            <input type="text" name="filter-width" id="filter-width" class="searchfilter-control slider" data-min="{{ searchfilter.width_slider_min }}" data-max="{{ searchfilter.width_slider_max }}" data-from="{{ searchfilter.width_min_val }}" data-to="{{ searchfilter.width_max_val }}" data-type="double" data-postfix='"' {% if searchfilter.width_min_val or searchfilter.width_max_val %} value="{{searchfilter.width_min_val}};{{searchfilter.width_max_val}}"{% endif %} />
           </div>
 
           <div class="mobile row hidden-xs hidden-md hidden-lg hidden-sm">
             <div class="col-xs-6">
               <label for="filter-width-min">From</label>
-              <input type="number" id="filter-width-min" name="filter-width-min" class="searchfilter-control" value="" placeholder="{{ searchfilter.width_slider_min }} FT" />
+              <input type="number" id="filter-width-min" name="filter-width-min" class="searchfilter-control" placeholder="{{ searchfilter.width_slider_min }} FT" />
             </div>
             <div class="col-xs-6 text-right">
               <label for="filter-width-max">To</label>
-              <input type="number" id="filter-width-max" name="filter-width-max" class="searchfilter-control" value="" placeholder="{{ searchfilter.width_slider_max }} FT" />
+              <input type="number" id="filter-width-max" name="filter-width-max" class="searchfilter-control" placeholder="{{ searchfilter.width_slider_max }} FT" />
             </div>
           </div>
           {% comment %}
           <span id="filter-width-slider-min" style="margin-right:20px;">{{ searchfilter.width_slider_min }}</span>
-          <input id="filter-width-slider" type="text" class="span2" value="" 
+          <input id="filter-width-slider" type="text" class="span2" 
           data-slider-min="{{ searchfilter.width_slider_min }}" 
           data-slider-max="{{ searchfilter.width_slider_max }}" 
           data-slider-step="5" 
@@ -214,23 +267,23 @@
 
           <b>Depth</b>
           <div class="desktop">
-            <input type="text" name="filter-depth" id="filter-depth" class="searchfilter-control slider" data-min="{{ searchfilter.depth_slider_min }}" data-max="{{ searchfilter.depth_slider_max }}" data-from="{{ searchfilter.depth_slider_min }}" data-to="{{ searchfilter.depth_slider_max }}" data-type="double" data-postfix='"' value="" />
+            <input type="text" name="filter-depth" id="filter-depth" class="searchfilter-control slider" data-min="{{ searchfilter.depth_slider_min }}" data-max="{{ searchfilter.depth_slider_max }}" data-from="{{ searchfilter.depth_min_val }}" data-to="{{ searchfilter.depth_max_val }}" data-type="double" data-postfix='"' {% if searchfilter.depth_min_val or searchfilter.depth_max_val %} value="{{searchfilter.depth_min_val}};{{searchfilter.depth_max_val}}"{% endif %}/>
           </div>
 
           <div class="mobile row hidden-xs hidden-md hidden-lg hidden-sm">
             <div class="col-xs-6">
               <label for="filter-depth-min">From</label>
-              <input type="number" id="filter-depth-min" name="filter-depth-min" class="searchfilter-control" value="" placeholder="{{ searchfilter.depth_slider_min }} FT" />
+              <input type="number" id="filter-depth-min" name="filter-depth-min" class="searchfilter-control" placeholder="{{ searchfilter.depth_slider_min }} FT" />
             </div>
             <div class="col-xs-6 text-right">
               <label for="filter-depth-max">To</label>
-              <input type="number" id="filter-depth-max" name="filter-depth-max" class="searchfilter-control" value="" placeholder="{{ searchfilter.depth_slider_max }} FT" />
+              <input type="number" id="filter-depth-max" name="filter-depth-max" class="searchfilter-control" placeholder="{{ searchfilter.depth_slider_max }} FT" />
             </div>
           </div>
 
           {% comment %}
           <span id="filter-depth-slider-min" style="margin-right:20px;">{{ searchfilter.depth_slider_min }}</span>
-          <input id="filter-depth-slider" type="text" class="span2" value="" 
+          <input id="filter-depth-slider" type="text" class="span2" 
           data-slider-min="{{ searchfilter.depth_slider_min }}" 
           data-slider-max="{{ searchfilter.depth_slider_max }}" 
           data-slider-step="5" 

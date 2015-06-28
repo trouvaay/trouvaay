@@ -62,9 +62,20 @@ class ValueTier(models.Model):
     class Meta:
         ordering = ['select']
 
+class Room(models.Model):
+    select = models.CharField(unique=True, max_length=55, default='unspecified')
+    #categories = models.ManyToManyField(Category, blank=True, null=True)
+
+    def __str__(self):
+        return self.select or 'none'
+
+    class Meta:
+        ordering = ['select']
 
 class Category(models.Model):
     select = models.CharField(unique=True, max_length=55, default='unspecified')
+    #room = models.ManyToManyField(Room)
+    rooms = models.ManyToManyField(Room)
 
     def __str__(self):
         return self.select or 'none'
@@ -74,15 +85,7 @@ class Category(models.Model):
 
 class Group(models.Model):
     select = models.CharField(unique=True, max_length=55, default='unspecified')
-
-    def __str__(self):
-        return self.select or 'none'
-
-    class Meta:
-        ordering = ['select']
-
-class Room(models.Model):
-    select = models.CharField(unique=True, max_length=55, default='unspecified')
+    categories = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.select or 'none'
@@ -124,7 +127,7 @@ class Material(models.Model):
 
 
 class Product(models.Model):
-    
+
     # The basics
     long_name = models.CharField(max_length=125, default='tbd')
     short_name = models.CharField(max_length=50)
@@ -152,11 +155,12 @@ class Product(models.Model):
     color = models.ManyToManyField(Color, null=True, blank=True)
     material = models.ManyToManyField(Material, null=True, blank=True)
     style = models.ManyToManyField(Style, null=True, blank=True, verbose_name='style')
-    
+
     # Categorization
     furnituretype = models.ManyToManyField(FurnitureType, null=True, blank=True)
     room = models.ManyToManyField(Room, null=True, blank=True)
     category = models.ForeignKey(Category, null=True, blank=True)
+    #category = ChainedForeignKey(Category, chained_field="room", chained_model_field="category")
     group = models.ForeignKey(Group, null=True, blank=True)
     is_vintage = models.BooleanField(default=True)
 
@@ -189,7 +193,7 @@ class Product(models.Model):
     def calc_display_score(self):
         score = 0
         print (('*****************{}*****************').format(self.short_name))
-        
+
         #feature score
         #Need to update such that is feature hangs of product engagement models
         # feature_score = 0
@@ -212,7 +216,7 @@ class Product(models.Model):
         except:
             pass
         score+=pub_dt_score
-        
+
         # get category score - correct overrep of chairs
         category_score = 0
         if self.subcategory.all() and self.subcategory.all()[0].select in ['decor - other', 'decor - table', 'decor - wall']:
@@ -234,7 +238,7 @@ class Product(models.Model):
         elif self.click_count > 5:
             click_score = 2
         score+=click_score
-        
+
         self.display_score = score
         self.save()
 
@@ -246,7 +250,7 @@ class Product(models.Model):
         if self.is_published:
             if (not self.pub_date):
                 self.pub_date = timezone.now()
-        
+
         # if item is not published, pub_date should be blank
         elif (not self.is_published):
             self.pub_date = None
@@ -263,7 +267,7 @@ class Product(models.Model):
         if self.is_sold:
             if (not self.sold_date):
                 self.sold_date = timezone.now()
-        
+
         # if item is not published, pub_date should be blank
         else:
             self.sold_date = None
@@ -283,7 +287,7 @@ class Product(models.Model):
         # Create has for unique value for product sorting
         self.add_md5_order()
         super(Product, self).save(*args, **kwargs)
-            
+
     def add_md5_order(self):
         u = hashlib.md5()
         u.update(self.slug)
@@ -320,7 +324,7 @@ class Product(models.Model):
             return True
 
     def get_dimension(self, dimension):
-        """ Appends '"Wx to approapriate dimension for 
+        """ Appends '"Wx to approapriate dimension for
         template rendering.  Ie 10 --> 10"W
         """
         try:
