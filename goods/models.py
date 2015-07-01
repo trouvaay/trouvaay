@@ -34,6 +34,7 @@ logger = logging.getLogger(__name__)
 
 class Style(models.Model):
     select = models.CharField(unique=True, max_length=55, default='modern', null=True, blank=True)
+    slug = models.SlugField()
 
     def __str__(self):
         return self.select or 'none'
@@ -64,6 +65,7 @@ class ValueTier(models.Model):
 
 class Room(models.Model):
     select = models.CharField(unique=True, max_length=55, default='unspecified')
+    slug = models.SlugField()
     #categories = models.ManyToManyField(Category, blank=True, null=True)
 
     def __str__(self):
@@ -74,6 +76,7 @@ class Room(models.Model):
 
 class Category(models.Model):
     select = models.CharField(unique=True, max_length=55, default='unspecified')
+    slug = models.SlugField()
     #room = models.ManyToManyField(Room)
     rooms = models.ManyToManyField(Room)
 

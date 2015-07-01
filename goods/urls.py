@@ -4,6 +4,9 @@ from goods import views
 
 urlpatterns = patterns('',
     url(r'^$', views.ShopView.as_view(), name='landing'),
+    url(r'^style/(?P<slug>[-\w\d]+)$', views.StyleView.as_view(), name='style'),
+    url(r'^room/(?P<slug>[-\w\d]+)$', views.RoomView.as_view(), name='room'),
+    url(r'^category/(?P<slug>[-\w\d]+)$', views.CategoryView.as_view(), name='category'),
     url(r'^piece/(?P<slug>[-\w\d]+)/$', views.DetailView.as_view(), name='detail'),
     url(r'^about/$', views.AboutView.as_view(), name='about'),
     url(r'^returns/$', views.ReturnsView.as_view(), name='returns'),

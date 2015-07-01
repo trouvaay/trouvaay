@@ -5,7 +5,7 @@
 
   {% if searchfilter.furnituretypes %}
   
-  <div id="filter-container-room" class="category">
+  <div id="filter-container-room" class="category" {% if not searchfilter.rooms %}style="display: none"{% endif %}>
       <a href="#" id="close-filter" class="hidden-xs"><span>Close filter</span></a>
     <header class="header-group"><label for="display-rooms">Room</a> <a href="#" class="reset hidden-xs"><span>Reset</span></a></header>
 
@@ -19,12 +19,16 @@
       {% for room in searchfilter.rooms %}
       <li>
 
+          {% if not room_waterfall %}
+     <a href="/room/{{room.slug}}">{{room}}</a>
+     {% else %}
       <div class="c-checkbox">
         <input type="checkbox" class="checkbox searchfilter-control" name="filter-room" value="{{ room.id }}" id="filter-room-{{ room.id }}" {% if room.id in searchfilter.selected_rooms %}checked="checked"{% endif %}>
         <label for="filter-room-{{ room.id }}" class="checkbox-label">
             {{ room.select|capfirst }} 
         </label>
       </div>
+      {% endif %}
 
       </li>
       {% endfor %}
@@ -83,6 +87,33 @@
     </ul>
   </div>
   {% endif %}
+  {% if searchfilter.styles %}
+      <div id="filter-container-room" class="category" {% if not searchfilter.styles %}style="display: none"{% endif %}>
+      <a href="#" id="close-filter" class="hidden-xs"><span>Close filter</span></a>
+    <header class="header-group"><label for="display-styles">Style</a> <a href="#" class="reset hidden-xs"><span>Reset</span></a></header>
+
+    <input type="checkbox" id="display-styles">
+    <ul class="">
+       <div class="c-checkbox visible-xs-block">
+        <li>
+          <label class="checkbox-label _all">All</label>
+        </li>
+       </div>
+      {% for style in searchfilter.styles %}
+      <li>
+
+      <div class="c-checkbox">
+        <input type="checkbox" class="checkbox searchfilter-control" name="filter-styles" value="{{ styles.id }}" id="filter-styles-{{ styles.id }}" {% if styles.id in searchfilter.selected_styles %}checked="checked"{% endif %}>
+        <label for="filter-style-{{ style.id }}" class="checkbox-label">
+            {{ style.select|capfirst }} 
+        </label>
+      </div>
+
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
   {% comment %}
   {% endcomment %}
 
@@ -111,6 +142,8 @@
         </div>
       </div>
       
+      
+
       {% if searchfilter.segments %}
       <div id="filter-segment-segment" class="filter-group hidden">
         <header><a data-toggle="collapse" href="#collapseSegment" aria-expanded="true" aria-controls="collapseSegment" class="collapsed">Segment <i class="fa"></i></a><a href="#" class="reset hidden"><span>Reset</span></a></header>
