@@ -263,7 +263,7 @@
 
 }
 
-#display-categories, #display-rooms, #display-groups {
+#display-categories, #display-rooms, #display-groups, #display-styles {
     display: none;
 
     @include breakpoint(sm) {

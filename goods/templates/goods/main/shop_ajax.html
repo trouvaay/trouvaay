@@ -248,7 +248,7 @@ function reloadItems() {
 
                 $.ajax({
 type: "GET",
-url: "{% url "goods:searchfilter" %}",
+url: '',
 dataType: "json",
 data: form_serialized,
 success: function(response, status){

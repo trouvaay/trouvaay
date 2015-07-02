@@ -59,6 +59,12 @@ class ShopView(AjaxListView):
         if(colors):
             queryset = queryset.filter(color__in=colors)
 
+        styles = None
+        if self.request.GET.get('filter-style'):
+            styles = [int(i.strip()) for i in self.request.GET.get('filter-style').split(',')]
+        if styles:
+            queryset = queryset.filter(style__in=styles)
+
         # TODO: enable styles, styles are for now disabled
         # styles = [int(i) for i in self.request.GET.getlist('filter-style')]
         # if(styles):
@@ -299,6 +305,101 @@ class ShopView(AjaxListView):
         return context
 
 
+    def render_to_response(self, context, **kwargs):
+        if self.request.is_ajax():
+            response = {}
+            context['request'] = self.request
+            response['data'] = render_to_string(context.get('page_template'), context)
+            #response['data'] =  super(SearchFilterView, self).render_to_response(template_name, **kwargs)
+            categories = []
+            context_cat = context.get('categories', [])
+
+
+            categories_ids = []
+            if self.request.GET.get('filter-category'):
+                categories_ids = [int(i.strip()) for i in self.request.GET.get('filter-category').split(',')]
+
+            for i in context_cat:
+                category = {}
+                category['name'] = i.select.capitalize()
+                category['id'] = i.id
+                if (i.id in categories_ids):
+                    category['checked'] = True
+                categories.append(category)
+            if context_cat:
+                response['categories'] = categories
+
+            groups = []
+            context_groups = context.get('groups', [])
+
+
+            groups_ids = []
+            if self.request.GET.get('filter-group'):
+                groups_ids = [int(i.strip()) for i in self.request.GET.get('filter-group').split(',')]
+
+            for i in context_groups:
+                group = {}
+                group['name'] = i.select.capitalize()
+                group['id'] = i.id
+                if (i.id in groups_ids):
+                    group['checked'] = True
+                groups.append(group)
+            if context_cat:
+                response['groups'] = groups
+
+            return HttpResponse(json.dumps(response), content_type="application/json")
+        else:
+            return super(ShopView, self).render_to_response(context, **kwargs)
+       # print context.get('page_template')
+
+        #response = {}
+        #context['request'] = self.request
+        #response['data'] = render_to_string(context.get('page_template'), context)
+        ##response['data'] =  super(SearchFilterView, self).render_to_response(template_name, **kwargs)
+        #categories = []
+        #context_cat = context.get('categories', [])
+
+
+        #categories_ids = []
+        #if self.request.GET.get('filter-category'):
+            #categories_ids = [int(i.strip()) for i in self.request.GET.get('filter-category').split(',')]
+
+        #print "CCContext"
+        #print context_cat
+        #print self.request.GET
+        #for i in context_cat:
+            #category = {}
+            #category['name'] = i.select.capitalize()
+            #category['id'] = i.id
+            #if (i.id in categories_ids):
+                #category['checked'] = True
+            #categories.append(category)
+        #if context_cat:
+            #response['categories'] = categories
+
+        #groups = []
+        #context_groups = context.get('groups', [])
+
+
+        #groups_ids = []
+        #if self.request.GET.get('filter-group'):
+            #groups_ids = [int(i.strip()) for i in self.request.GET.get('filter-group').split(',')]
+
+        #for i in context_groups:
+            #group = {}
+            #group['name'] = i.select.capitalize()
+            #group['id'] = i.id
+            #if (i.id in groups_ids):
+                #group['checked'] = True
+            #groups.append(group)
+        #if context_cat:
+            #response['groups'] = groups
+
+        #return HttpResponse(json.dumps(response), content_type="application/json")
+        #return response
+
+
+
 class StyleView(AjaxListView):
     template_name = 'goods/main/shop_ajax.html'
     page_template = 'goods/main/landing_ajax_page.html'
@@ -431,6 +532,7 @@ class StyleView(AjaxListView):
         context = super(StyleView, self).get_context_data(**kwargs)
         context['BaseUrl'] = BASE_URL
         context['STRIPE_PUBLISHABLE_KEY'] = settings.STRIPE_PUBLISHABLE_KEY
+        context['styles_links'] = True
 
 
 
@@ -579,6 +681,107 @@ class StyleView(AjaxListView):
             hide_modal(self.request, 'login_modal', settings.LOGIN_MODAL_EXP)
 
         return context
+
+    def render_to_response(self, context, **kwargs):
+        if self.request.is_ajax():
+            slug = self.kwargs.get('slug', '')
+            style = Style.objects.get(slug=slug)
+            response = {}
+            context['request'] = self.request
+            response['data'] = render_to_string(context.get('page_template'), context)
+            #response['data'] =  super(SearchFilterView, self).render_to_response(template_name, **kwargs)
+            categories = []
+            context_cat = context.get('categories', [])
+
+
+            categories_ids = []
+            if self.request.GET.get('filter-category'):
+                categories_ids = [int(i.strip()) for i in self.request.GET.get('filter-category').split(',')]
+
+            print "CCContext"
+            print context_cat
+            print self.request.GET
+            for i in context_cat:
+                category = {}
+                category['name'] = i.select.capitalize()
+                category['id'] = i.id
+                if (i.id in categories_ids):
+                    category['checked'] = True
+                categories.append(category)
+            if context_cat:
+                response['categories'] = categories
+
+            groups = []
+            context_groups = context.get('groups', [])
+
+
+            groups_ids = []
+            if self.request.GET.get('filter-group'):
+                groups_ids = [int(i.strip()) for i in self.request.GET.get('filter-group').split(',')]
+
+            for i in context_groups:
+                group = {}
+                group['name'] = i.select.capitalize()
+                group['id'] = i.id
+                if (i.id in groups_ids):
+                    group['checked'] = True
+                groups.append(group)
+            if context_cat:
+                response['groups'] = groups
+
+            return HttpResponse(json.dumps(response), content_type="application/json")
+
+
+            #response = {}
+            #context['request'] = self.request
+            #response['data'] = render_to_string(context.get('page_template'), context)
+            ##response['data'] =  super(SearchFilterView, self).render_to_response(template_name, **kwargs)
+            #categories = []
+            #context_cat = context.get('categories', [])
+
+
+            ##categories_rsp = []
+            ##categories = Category.objects.filter(styles=style)
+
+            ##if categories:
+
+                ##categories_ids = list(set(categories.distinct().values_list('id', flat=True)))
+
+            #for i in context_cat:
+                #category = {}
+                #category['name'] = i.select.capitalize()
+                #category['id'] = i.id
+                #if (i.id in categories_ids):
+                    #category['checked'] = True
+                #categories_rsp.append(category)
+            ##if context_cat:
+                ##response['categories'] = categories
+
+
+            #response['categories'] = categories_rsp
+
+            #groups = []
+            #context_groups = context.get('groups', [])
+
+
+            #groups_ids = []
+            #if self.request.GET.get('filter-group'):
+                #groups_ids = [int(i.strip()) for i in self.request.GET.get('filter-group').split(',')]
+
+            #for i in context_groups:
+                #group = {}
+                #group['name'] = i.select.capitalize()
+                #group['id'] = i.id
+                #if (i.id in groups_ids):
+                    #group['checked'] = True
+                #groups.append(group)
+            #if context_cat:
+                #response['groups'] = groups
+
+            return HttpResponse(json.dumps(response), content_type="application/json")
+        else:
+            return super(StyleView, self).render_to_response(context, **kwargs)
+
 
 
 class RoomView(AjaxListView):
@@ -862,6 +1065,63 @@ class RoomView(AjaxListView):
             hide_modal(self.request, 'login_modal', settings.LOGIN_MODAL_EXP)
 
         return context
+
+    def render_to_response(self, context, **kwargs):
+        if self.request.is_ajax():
+            slug = self.kwargs.get('slug', '')
+            room = Room.objects.get(slug=slug)
+
+            response = {}
+            context['request'] = self.request
+            response['data'] = render_to_string(context.get('page_template'), context)
+            #response['data'] =  super(SearchFilterView, self).render_to_response(template_name, **kwargs)
+            categories = []
+            context_cat = context.get('categories', [])
+
+
+            categories_rsp = []
+            categories = Category.objects.filter(rooms=room)
+
+            #if categories:
+
+                #categories_ids = list(set(categories.distinct().values_list('id', flat=True)))
+
+            for i in context_cat:
+                category = {}
+                category['name'] = i.select.capitalize()
+                category['id'] = i.id
+                if (i.id in categories_ids):
+                    category['checked'] = True
+                categories_rsp.append(category)
+            #if context_cat:
+                #response['categories'] = categories
+
+
+            response['categories'] = categories_rsp
+
+            groups = []
+            context_groups = context.get('groups', [])
+
+
+            groups_ids = []
+            if self.request.GET.get('filter-group'):
+                groups_ids = [int(i.strip()) for i in self.request.GET.get('filter-group').split(',')]
+
+            for i in context_groups:
+                group = {}
+                group['name'] = i.select.capitalize()
+                group['id'] = i.id
+                if (i.id in groups_ids):
+                    group['checked'] = True
+                groups.append(group)
+            if context_cat:
+                response['groups'] = groups
+
+            return HttpResponse(json.dumps(response), content_type="application/json")
+        else:
+            return super(RoomView, self).render_to_response(context, **kwargs)
+
+
 
 class CategoryView(AjaxListView):
     template_name = 'goods/main/shop_ajax.html'
@@ -1159,7 +1419,6 @@ class SearchFilterView(AjaxListView):
     key = 'page'
 
     def get_queryset(self):
-
         queryset = self.model.objects.filter(is_published=True)
         # segments = [int(i) for i in self.request.GET.getlist('filter-segment')]
         # if(segments):
